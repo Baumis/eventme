@@ -7,9 +7,7 @@ const AdderButtons = (props) => {
     return (
       <div className="AdderButtons">
         <button> + </button>
-        <button> + </button>
       </div>
     );
   }
-
 export default AdderButtons;

@@ -16,12 +16,25 @@ class App extends Component {
       components: [
         {
           id: 1,
-          header: "headerTest",
+          header: "headerTest1",
+          content: "This is quality content"
+        },
+        {
+          id: 2,
+          header: "headerTest2",
+          content: "This is quality content"
+        },
+        {
+          id: 3,
+          header: "headerTest3",
           content: "This is quality content"
         }
       ]
     }
   }
+
+add
+
   render() {
     return (
       <div className="App">

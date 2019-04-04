@@ -4,19 +4,17 @@ import './ComponentStyles.css';
 const ComponentRenderer = (props) =>{
 
     return(
-      <div>
-        <ul>
+      <div className="componentContainer">
           {props.components.map(component => {
             return (
-              <li key={component.id}>
-              <div className="Component">
-              <h3>{component.header}</h3>
-              <p>{component.content}</p>
+              <div key={component.id} className="Component">
+                <h3>{component.header}</h3>
+                <div className="content">
+                  <p>{component.content}</p>
+                </div>
               </div>
-              </li>
             )
           })}
-        </ul>
       </div>
     )
 
