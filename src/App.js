@@ -3,6 +3,7 @@ import './styles/App.css'
 import Header from './components/Event-Header.js'
 import AdderButtons from './components/ComponentAdder.js'
 import ComponentRenderer from './components/ComponentContainer.js'
+import componentService from './services/components.js'
 
 class App extends Component {
     constructor(props) {
@@ -13,27 +14,17 @@ class App extends Component {
                 h1: "This is my h1 header",
                 h2: "h2 header"
             },
-            components: [
-                {
-                    id: 1,
-                    header: "headerTest1",
-                    content: "This is quality content"
-                },
-                {
-                    id: 2,
-                    header: "headerTest2",
-                    content: "This is quality content"
-                },
-                {
-                    id: 3,
-                    header: "headerTest3",
-                    content: "This is quality content"
-                }
-            ]
+            components: []
         }
     }
 
-    add
+    async componentDidMount() {
+        const components = await componentService.getAll()
+        this.setState({
+            components
+        })
+        console.log(this.state)
+    }
 
     render() {
         return (
