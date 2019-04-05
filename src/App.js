@@ -6,7 +6,7 @@ import ComponentRenderer from'./components/ComponentContainer.js';
 
 class App extends Component {
   constructor(props){
-    super(props),
+    super(props)
     this.state = {
       userMode: "admin",
       header:{

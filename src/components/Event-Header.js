@@ -1,6 +1,5 @@
 import React from 'react';
 import './HeaderStyles.css';
-import 'font-awesome/css/font-awesome.min.css'; 
 
 const Header = (props) => {
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import './ComponentStyles.css';
-import 'font-awesome/css/font-awesome.min.css'; 
 
 const AdderButtons = (props) => {
 
