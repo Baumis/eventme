@@ -1,5 +1,5 @@
-import React from 'react';
-import './ComponentStyles.css';
+import React from 'react'
+import '../styles/ComponentStyles.css'
 
 const AdderButtons = (props) => {
 
@@ -9,4 +9,4 @@ const AdderButtons = (props) => {
       </div>
     );
   }
-export default AdderButtons;
+export default AdderButtons

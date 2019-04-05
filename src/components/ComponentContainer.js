@@ -1,5 +1,5 @@
-import React from 'react';
-import './ComponentStyles.css';
+import React from 'react'
+import '../styles/ComponentStyles.css'
 
 const ComponentRenderer = (props) =>{
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import './HeaderStyles.css';
+import React from 'react'
+import '../styles/HeaderStyles.css'
 
 const Header = (props) => {
 
@@ -8,7 +8,7 @@ const Header = (props) => {
         <h1>{props.h1}</h1>
         <h2>{props.h2}</h2>
       </div>
-    );
+    )
   }
 
-export default Header;
+export default Header
