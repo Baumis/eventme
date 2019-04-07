@@ -12,7 +12,9 @@ class App extends Component {
             userMode: "admin",
             header: {
                 h1: "This is my h1 header",
-                h2: "h2 header"
+                h2: "h2 header",
+                color: 'blue',
+                url: 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Hurricane_Lester_22_aug_1992_2246Z.jpg'
             },
             components: []
         }
@@ -26,10 +28,22 @@ class App extends Component {
         console.log(this.state)
     }
 
+    saveHeader = (newValues) => {
+        try{
+            this.setState({
+                header:{
+                    color: newValues.color,
+                    url: newValues.url
+            }})
+        }catch{
+            alert("Error");
+        }
+    }
+
     render() {
         return (
             <div className="App">
-                <Header h1={this.state.header.h1} h2={this.state.header.h2} />
+                <Header headerData={this.state.header} save={this.saveHeader}/>
                 <ComponentRenderer components={this.state.components} />
                 <AdderButtons />
             </div>
