@@ -6,7 +6,7 @@ this.state = {
     settings: {
         background: "www.kuva.fi/kuva1",
         theme: "dark",
-        slug: "www.eventme.fi/my_event"
+        slug: "my_event"
     },
     components: [
         {
@@ -33,6 +33,6 @@ this.state = {
                 latitude: 60.169857,
                 longitude: 24.938379
             }
-        },
+        }
     ]
 }
