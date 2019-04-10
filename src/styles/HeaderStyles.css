@@ -4,8 +4,8 @@
     text-align: center;
     background: white;
     color: gray;
-}
-.Header-container i{
-    font-size: 16px;
-    color: white;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }

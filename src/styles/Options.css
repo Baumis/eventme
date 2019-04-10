@@ -1,0 +1,68 @@
+.OptionsContainer{
+    position: absolute;
+    height: 100%;
+    z-index: 2;
+    width: 300px;
+    top: 0px;
+    left: 0px;
+    background: #595F65;
+    transition: left 0.5s;
+}
+
+.OptionsHeader{
+    display: flex;
+    height: 50px;
+    background: #373B3F;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    padding-right: 5px;
+}
+
+.OptionsHeader button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    border: none;
+    background: transparent;
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+    border: 1px solid #2f3337;
+}
+
+.OptionsHeader p{
+    width: 100%;
+    color: white;
+}
+
+.OptionsContent{
+    padding-top: 10px;
+    padding-right: 35px;
+}
+
+.inputBlock{
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    padding-bottom: 1px;
+    color: white;
+}
+
+.inputLabel{
+    display: flex;
+    padding: 10px;
+    color: #B2BFCB;
+}
+
+.inputBlock input{
+    border-radius: 30px;
+    border: none;
+    height: 18px;
+    padding: 3px 10px 3px 10px;
+    background: #7A838C;
+    color:white;
+}

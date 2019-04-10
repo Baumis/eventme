@@ -4,6 +4,7 @@ import Header from './components/Event-Header.js'
 import AdderButtons from './components/ComponentAdder.js'
 import ComponentRenderer from './components/ComponentContainer.js'
 import componentService from './services/components.js'
+import OptionsPanel from './components/OptionsPanel';
 
 class App extends Component {
     constructor(props) {
@@ -13,8 +14,8 @@ class App extends Component {
             header: {
                 h1: "This is my h1 header",
                 h2: "h2 header",
-                color: 'blue',
-                url: 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Hurricane_Lester_22_aug_1992_2246Z.jpg'
+                color: 'White',
+                url: 'https://upload.wikimedia.org/wikipedia/commons/3/31/The_Spitzer_Space_Telescope%27s_view_of_W40.jpg'
             },
             components: []
         }
@@ -28,23 +29,12 @@ class App extends Component {
         console.log(this.state)
     }
 
-    saveHeader = (newValues) => {
-        try{
-            this.setState({
-                header:{
-                    color: newValues.color,
-                    url: newValues.url
-            }})
-        }catch{
-            alert("Error");
-        }
-    }
-
     render() {
         return (
             <div className="App">
-                <Header headerData={this.state.header} save={this.saveHeader}/>
+                <Header headerData={this.state.header} />
                 <ComponentRenderer components={this.state.components} />
+                <OptionsPanel headerData={this.state.header} />
                 <AdderButtons />
             </div>
         )
