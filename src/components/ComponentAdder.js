@@ -1,12 +1,12 @@
 import React from 'react'
 import '../styles/ComponentStyles.css'
 
-const AdderButtons = (props) => {
+const ComponentAdder = ({ add }) => {
 
     return (
-        <div className="AdderButtons">
-            <button> + </button>
+        <div className="ComponentAdder">
+            <button onClick={add}> + </button>
         </div>
     )
 }
-export default AdderButtons
+export default ComponentAdder

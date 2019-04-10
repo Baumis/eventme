@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../styles/Options.css'
-import { FaCog } from 'react-icons/fa';
+import { FaCog } from 'react-icons/fa'
 
 class OptionsPanel extends Component {
     constructor(props) {
@@ -8,7 +8,7 @@ class OptionsPanel extends Component {
         this.state = {
             display: true,
             left: 0,
-            background: props.headerData.url
+            background: props.background
         }
     }
 
@@ -40,7 +40,7 @@ class OptionsPanel extends Component {
                         <div className="inputLabel">
                             <label>Header background</label>
                         </div>
-                        <input value={this.state.background}></input>
+                        <input value={this.state.background} onChange={() => {}}></input>
                     </div>
                     <div className="inputBlock">
                         <div className="inputLabel">
