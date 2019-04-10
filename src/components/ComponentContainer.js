@@ -1,16 +1,16 @@
 import React from 'react'
 import '../styles/ComponentStyles.css'
 
-const ComponentRenderer = (props) => {
+const ComponentContainer = ({ components }) => {
 
     return (
-        <div className="componentContainer">
-            {props.components.map(component => {
+        <div className='componentContainer'>
+            {components.map(component => {
                 return (
-                    <div key={component.id} className="Component">
-                        <h3>{component.header}</h3>
-                        <div className="content">
-                            <p>{component.content}</p>
+                    <div key={component.order} className='Component'>
+                        <h3>{component.type}</h3>
+                        <div className='content'>
+                            <p>{component.data.text}</p>
                         </div>
                     </div>
                 )
@@ -19,4 +19,4 @@ const ComponentRenderer = (props) => {
     )
 
 }
-export default ComponentRenderer
+export default ComponentContainer

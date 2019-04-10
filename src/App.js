@@ -1,51 +1,42 @@
 import React, { Component } from 'react'
 import './styles/App.css'
-import Header from './components/Event-Header.js'
-import AdderButtons from './components/ComponentAdder.js'
-import ComponentRenderer from './components/ComponentContainer.js'
-import componentService from './services/components.js'
+import Header from './components/Header'
+import ComponentAdder from './components/ComponentAdder'
+import ComponentContainer from './components/ComponentContainer'
+import eventService from './services/events'
 
 class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userMode: "admin",
-            header: {
-                h1: "This is my h1 header",
-                h2: "h2 header",
-                color: 'blue',
-                url: 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Hurricane_Lester_22_aug_1992_2246Z.jpg'
-            },
-            components: []
+            loading: true,
+            event: null
         }
     }
 
     async componentDidMount() {
-        const components = await componentService.getAll()
-        this.setState({
-            components
+        const event = await eventService.getOne(0)
+        await this.setState({
+            loading: false,
+            event
         })
         console.log(this.state)
     }
 
-    saveHeader = (newValues) => {
-        try{
-            this.setState({
-                header:{
-                    color: newValues.color,
-                    url: newValues.url
-            }})
-        }catch{
-            alert("Error");
-        }
+    addComponent = async () => {
+        await eventService.addComponent(this.state.event.id, 'Text', {text: 'New component'})
     }
 
     render() {
+        if (this.state.loading) {
+            return null
+        }
+
         return (
-            <div className="App">
-                <Header headerData={this.state.header} save={this.saveHeader}/>
-                <ComponentRenderer components={this.state.components} />
-                <AdderButtons />
+            <div className='App'>
+                <Header label={this.state.event.label} background={this.state.event.settings.background} save={this.saveHeader} />
+                <ComponentContainer components={this.state.event.components} />
+                <ComponentAdder add={this.addComponent}/>
             </div>
         )
     }

@@ -1,11 +1,11 @@
-.AdderButtons{
+.ComponentAdder{
     text-align: center;
     justify-content: center;
     display: flex;
     margin: 0px 10% 0px 10%;
 }
 
-.AdderButtons button {
+.ComponentAdder button {
     height: 150px;
     width: 150px;
     background: transparent;
@@ -19,12 +19,12 @@
     margin: 20px 5% 20px 5%;
 }
 
-.AdderButtons button:hover{
+.ComponentAdder button:hover{
     border: 5px solid rgb(26, 26, 26, 15%);
     color: rgb(26, 26, 26, 15%);
 }
 
-.AdderButtons button:active{
+.ComponentAdder button:active{
     border: 5px solid rgb(26, 26, 26, 20%);
     color: rgb(26, 26, 26, 20%);
 }
