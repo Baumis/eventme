@@ -10,14 +10,14 @@ const events = [
         components: [
             {
                 order: 1,
-                type: 'text',
+                type: 'Text',
                 data: {
                     text: 'this is my event'
                 }
             },
             {
                 order: 2,
-                type: 'text',
+                type: 'Text',
                 data: {
                     text: 'this will be great!'
                 }

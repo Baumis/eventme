@@ -3,6 +3,7 @@ import './styles/App.css'
 import Header from './components/Header'
 import ComponentAdder from './components/ComponentAdder'
 import ComponentContainer from './components/ComponentContainer'
+import OptionsPanel from './components/OptionsPanel'
 import eventService from './services/events'
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
                 <Header label={this.state.event.label} background={this.state.event.settings.background} save={this.saveHeader} />
                 <ComponentContainer components={this.state.event.components} />
                 <ComponentAdder add={this.addComponent}/>
+                <OptionsPanel background={this.state.event.settings.background} />
             </div>
         )
     }
