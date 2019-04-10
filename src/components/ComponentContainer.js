@@ -1,22 +1,24 @@
 import React from 'react'
 import '../styles/ComponentStyles.css'
+import Text from '../contentTypes/Text'
 
 const ComponentRenderer = (props) => {
 
     return (
         <div className="componentContainer">
             {props.components.map(component => {
-                return (
-                    <div key={component.id} className="Component">
-                        <h3>{component.header}</h3>
-                        <div className="content">
-                            <p>{component.content}</p>
-                        </div>
-                    </div>
-                )
+                switch(component.type) {
+                    case "Text":
+                        return (
+                            <div className="Component">
+                                <Text
+                                    header={component.header}
+                                    content={component.content} />
+                            </div>
+                        )
+                  }
             })}
         </div>
     )
-
 }
 export default ComponentRenderer

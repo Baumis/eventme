@@ -1,17 +1,14 @@
 const components = [
     {
+        type: "Text",
         id: 1,
         header: "headerTest1",
         content: "This is quality content"
     },
     {
+        type: "Text",
         id: 2,
         header: "headerTest2",
-        content: "This is quality content"
-    },
-    {
-        id: 3,
-        header: "headerTest3",
         content: "This is quality content"
     }
 ]

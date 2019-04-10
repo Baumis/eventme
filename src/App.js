@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './styles/App.css'
 import Header from './components/Event-Header.js'
-import AdderButtons from './components/ComponentAdder.js'
 import ComponentRenderer from './components/ComponentContainer.js'
 import componentService from './services/components.js'
 import OptionsPanel from './components/OptionsPanel';
@@ -35,7 +34,6 @@ class App extends Component {
                 <Header headerData={this.state.header} />
                 <ComponentRenderer components={this.state.components} />
                 <OptionsPanel headerData={this.state.header} />
-                <AdderButtons />
             </div>
         )
     }
