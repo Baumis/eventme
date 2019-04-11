@@ -25,7 +25,7 @@ class App extends Component {
     }
 
     addComponent = async () => {
-        await eventService.addComponent(this.state.event.id, 'Text', {text: 'New component'})
+        await eventService.addComponent(this.state.event.id, 'Text', { text: 'New component' })
     }
 
     render() {
@@ -37,7 +37,7 @@ class App extends Component {
             <div className='App'>
                 <Header label={this.state.event.label} background={this.state.event.settings.background} save={this.saveHeader} />
                 <ComponentContainer components={this.state.event.components} />
-                <ComponentAdder add={this.addComponent}/>
+                <ComponentAdder add={this.addComponent} />
                 <OptionsPanel background={this.state.event.settings.background} />
             </div>
         )
