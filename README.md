@@ -1,5 +1,35 @@
 # Eventme
 
+## Development
+
+````
+npm install
+npm start
+````
+
+## Code style
+
+- Rules can be found in .eslintrc.js
+
+- To make automatic style check
+````
+npm run lint
+````
+- To make continuous style check add ESLint extension to VSCode
+
+
+## App state structure
+
+````
+this.state = {
+    loading: true,
+    event: {
+        ...
+    }
+}
+````
+
+## Event structure
 ````
 event = {
     id: 1,
@@ -41,3 +71,4 @@ event = {
         }
     ]
 }
+````
