@@ -1,18 +1,14 @@
 import React from 'react'
 import '../styles/ComponentStyles.css'
-import Text from '../contentTypes/Text'
+import MasterComponent from './MasterComponent'
 
 const ComponentContainer = ({ components }) => {
 
     return (
         <div className="componentContainer">
-            {components.map(component => {
-                console.log(component)
-                if (component.type === 'Text')
-                    return <Text key={component.order} data={component.data} />
-                else
-                    return null
-            })}
+            {components.map(component =>  (
+                <MasterComponent key={component.order} component={component} />
+            ))}
         </div>
     )
 }
