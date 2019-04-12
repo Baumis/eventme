@@ -48,11 +48,13 @@ const create = (label) => {
 }
 
 const addComponent = (eventId, type, data) => {
-    events[0].components.push({
+    events[eventId].components.push({
         order: events[eventId].components.length + 1,
         type,
         data
     })
+
+    return events[eventId]
 }
 
 export default { getAll, getOne, create, addComponent }

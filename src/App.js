@@ -25,7 +25,8 @@ class App extends Component {
     }
 
     addComponent = async () => {
-        await eventService.addComponent(this.state.event.id, 'Text', { text: 'New component' })
+        const event = await eventService.addComponent(this.state.event.id, 'Text', { text: 'New component' })
+        this.setState({ event })
     }
 
     render() {
