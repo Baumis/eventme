@@ -9,7 +9,8 @@ class OptionsPanel extends Component {
             display: true,
             left: 0,
             background: props.background,
-            label: props.label
+            label: props.label,
+            slug: props.slug
         }
     }
 
@@ -31,6 +32,11 @@ class OptionsPanel extends Component {
         this.props.changeLabel(event)
     }
 
+    changeSlug = (event) =>{
+        this.setState({ slug: event.target.value })
+        this.props.changeSlug(event)
+    }
+
     render() {
         return (
             <div style={{ left: this.state.left }} className="OptionsContainer">
@@ -43,7 +49,7 @@ class OptionsPanel extends Component {
                         <div className="inputLabel">
                             <label>Slug</label>
                         </div>
-                        <input></input>
+                        <input value={this.state.slug} onChange={this.changeSlug}></input>
                     </div>
                 </div>
                 <div className="OptionsContent">

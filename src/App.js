@@ -41,6 +41,12 @@ class App extends Component {
         this.setState({ event: oldEvent })
     }
 
+    changeSlug = (event) => {
+        const oldEvent = this.state.event
+        oldEvent.settings.slug = event.target.value
+        this.setState({ event: oldEvent })
+    }
+
     render() {
         if (this.state.loading) {
             return null
@@ -51,7 +57,7 @@ class App extends Component {
                 <Header label={this.state.event.label} background={this.state.event.settings.background} save={this.saveHeader} />
                 <ComponentContainer components={this.state.event.components} />
                 <ComponentAdder add={this.addComponent} />
-                <OptionsPanel background={this.state.event.settings.background} label={this.state.event.label} changeLabel={this.changeLabel} changeBackground={this.changeBackground} />
+                <OptionsPanel background={this.state.event.settings.background} label={this.state.event.label} slug={this.state.event.settings.slug} changeLabel={this.changeLabel} changeBackground={this.changeBackground} changeSlug={this.changeSlug} />
             </div>
         )
     }
