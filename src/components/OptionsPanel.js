@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../styles/Options.css'
-import { FaCog } from 'react-icons/fa'
+import { FaCog, FaBars } from 'react-icons/fa'
 
 class OptionsPanel extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class OptionsPanel extends Component {
 
     slidePanel = () => {
         if (this.state.display) {
-            this.setState({ display: false, left: '-255px' })
+            this.setState({ display: false, left: '-300px' })
         } else {
             this.setState({ display: true, left: '0px' })
         }
@@ -42,7 +42,7 @@ class OptionsPanel extends Component {
             <div style={{ left: this.state.left }} className="OptionsContainer">
                 <div className="OptionsHeader">
                     <p>Options</p>
-                    <button onClick={this.slidePanel}><FaCog /></button>
+                    <button onClick={this.slidePanel}><FaBars /></button>
                 </div>
                 <div className="OptionsContent">
                     <div className="inputBlock">
