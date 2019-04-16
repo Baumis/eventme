@@ -20,6 +20,11 @@ class OptionsPanel extends Component {
         }
     }
 
+    changeBackground = (event) => {
+        this.setState({ background: event.target.value })
+        this.props.changeBackground(event)
+    }
+
     render() {
         return (
             <div style={{ left: this.state.left }} className="OptionsContainer">
@@ -40,7 +45,7 @@ class OptionsPanel extends Component {
                         <div className="inputLabel">
                             <label>Header background</label>
                         </div>
-                        <input value={this.state.background} onChange={() => {}}></input>
+                        <input value={this.state.background} onChange={this.changeBackground}></input>
                     </div>
                     <div className="inputBlock">
                         <div className="inputLabel">
