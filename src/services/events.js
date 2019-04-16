@@ -3,7 +3,7 @@ const events = [
         id: 0,
         label: 'My event',
         settings: {
-            background: 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Hurricane_Lester_22_aug_1992_2246Z.jpg',
+            background: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/10_mile_panorama_of_NYC%2C_Feb.%2C_2018.jpg',
             theme: 'dark',
             slug: 'my_event'
         },

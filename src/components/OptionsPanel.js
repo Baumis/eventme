@@ -8,7 +8,8 @@ class OptionsPanel extends Component {
         this.state = {
             display: true,
             left: 0,
-            background: props.background
+            background: props.background,
+            label: props.label
         }
     }
 
@@ -23,6 +24,11 @@ class OptionsPanel extends Component {
     changeBackground = (event) => {
         this.setState({ background: event.target.value })
         this.props.changeBackground(event)
+    }
+
+    changeLabel = (event) => {
+        this.setState({ label: event.target.value })
+        this.props.changeLabel(event)
     }
 
     render() {
@@ -43,13 +49,21 @@ class OptionsPanel extends Component {
                 <div className="OptionsContent">
                     <div className="inputBlock">
                         <div className="inputLabel">
+                            <label>Header</label>
+                        </div>
+                        <input value={this.state.label} onChange={this.changeLabel}></input>
+                    </div>
+                </div>
+                <div className="OptionsContent">
+                    <div className="inputBlock">
+                        <div className="inputLabel">
                             <label>Header background</label>
                         </div>
                         <input value={this.state.background} onChange={this.changeBackground}></input>
                     </div>
                     <div className="inputBlock">
                         <div className="inputLabel">
-                            <label>Color</label>
+                            <label>Theme</label>
                         </div>
                     </div>
                 </div>
