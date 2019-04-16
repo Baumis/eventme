@@ -32,7 +32,7 @@ class OptionsPanel extends Component {
         this.props.changeLabel(event)
     }
 
-    changeSlug = (event) =>{
+    changeSlug = (event) => {
         this.setState({ slug: event.target.value })
         this.props.changeSlug(event)
     }
