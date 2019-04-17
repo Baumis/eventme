@@ -6,7 +6,7 @@ const ComponentContainer = ({ components }) => {
 
     return (
         <div className="componentContainer">
-            {components.map(component =>  (
+            {components.map(component => (
                 <MasterComponent key={component.order} component={component} />
             ))}
         </div>

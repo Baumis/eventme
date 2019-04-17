@@ -5,12 +5,14 @@ import ComponentAdder from './components/ComponentAdder'
 import ComponentContainer from './components/ComponentContainer'
 import OptionsPanel from './components/OptionsPanel'
 import eventService from './services/events'
+import SaveButton from './components/SaveButton';
 
 class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
             loading: true,
+            saved: true,
             event: null
         }
     }
@@ -33,18 +35,27 @@ class App extends Component {
         const oldEvent = this.state.event
         oldEvent.settings.background = event.target.value
         this.setState({ event: oldEvent })
+        this.setState({ saved: false })
     }
 
     changeLabel = (event) => {
         const oldEvent = this.state.event
         oldEvent.label = event.target.value
         this.setState({ event: oldEvent })
+        this.setState({ saved: false })
     }
 
     changeSlug = (event) => {
         const oldEvent = this.state.event
         oldEvent.settings.slug = event.target.value
         this.setState({ event: oldEvent })
+        this.setState({ saved: false })
+    }
+
+    saveState = () => {
+        this.setState({ saved: true })
+        console.log("save state function")
+        //save state to backend
     }
 
     render() {
@@ -58,6 +69,7 @@ class App extends Component {
                 <ComponentContainer components={this.state.event.components} />
                 <ComponentAdder add={this.addComponent} />
                 <OptionsPanel background={this.state.event.settings.background} label={this.state.event.label} slug={this.state.event.settings.slug} changeLabel={this.changeLabel} changeBackground={this.changeBackground} changeSlug={this.changeSlug} />
+                <SaveButton save={this.saveState} saved={this.state.saved}></SaveButton>
             </div>
         )
     }
