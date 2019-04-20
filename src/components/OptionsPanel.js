@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../styles/Options.css'
-import { FaCog, FaBars } from 'react-icons/fa'
+import { FaBars } from 'react-icons/fa'
 
 class OptionsPanel extends Component {
     constructor(props) {

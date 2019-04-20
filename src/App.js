@@ -5,7 +5,7 @@ import ComponentAdder from './components/ComponentAdder'
 import ComponentContainer from './components/ComponentContainer'
 import OptionsPanel from './components/OptionsPanel'
 import eventService from './services/events'
-import SaveButton from './components/SaveButton';
+import SaveButton from './components/SaveButton'
 
 class App extends Component {
     constructor(props) {
@@ -26,8 +26,14 @@ class App extends Component {
         console.log(this.state)
     }
 
-    addComponent = async () => {
-        const event = await eventService.addComponent(this.state.event.id, 'Text', { text: 'New component' })
+    addComponent = async (type, data) => {
+        const event = await eventService.addComponent(this.state.event.id, type, data)
+        console.log(event)
+        this.setState({ event })
+    }
+
+    addGuest = async (name) => {
+        const event = await eventService.addGuest(this.state.event.id, name)
         this.setState({ event })
     }
 
@@ -54,7 +60,7 @@ class App extends Component {
 
     saveState = () => {
         this.setState({ saved: true })
-        console.log("save state function")
+        console.log('save state function')
         //save state to backend
     }
 

@@ -2,11 +2,37 @@ const events = [
     {
         id: 0,
         label: 'My event',
+        creator: {
+            name: 'Jesus'
+        },
         settings: {
             background: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/10_mile_panorama_of_NYC%2C_Feb.%2C_2018.jpg',
             theme: 'dark',
             slug: 'my_event'
         },
+        guests: [
+            {
+                name: 'Allu',
+                status: 'going'
+            },
+            {
+                name: 'Aleksi',
+                status: 'pending'
+            },
+            {
+                name: 'Aerial',
+                status: 'mabye'
+            },
+            {
+                name: 'Sergei',
+                status: 'declined'
+            }
+            ,
+            {
+                name: 'Xseven',
+                status: 'declined'
+            }
+        ],
         components: [
             {
                 order: 1,
@@ -38,11 +64,16 @@ const create = (label) => {
     events.push({
         id: events.length + 1,
         label,
+        creator: {
+            id: '1',
+            name: 'Sami'
+        },
         settings: {
             background: 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Hurricane_Lester_22_aug_1992_2246Z.jpg',
             theme: 'light',
             slug: label.replace(/\s/g, '_')
         },
+        guests: [],
         components: []
     })
 }
@@ -57,4 +88,13 @@ const addComponent = (eventId, type, data) => {
     return events[eventId]
 }
 
-export default { getAll, getOne, create, addComponent }
+const addGuest = (eventId, name) => {
+    events[eventId].guests.push({
+        name,
+        status: 'pending'
+    })
+
+    return events[eventId]
+}
+
+export default { getAll, getOne, create, addComponent, addGuest }
