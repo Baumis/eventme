@@ -3,9 +3,9 @@ import '../styles/SaveButton.css'
 import { FaSave } from 'react-icons/fa'
 
 const SaveButton = (props) => {
-    let bottomCSS = '-40px';
+    let bottomCSS = '-40px'
     if (!props.saved) {
-        bottomCSS = '30px';
+        bottomCSS = '30px'
     }
 
     return (
