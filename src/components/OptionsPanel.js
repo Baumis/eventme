@@ -10,7 +10,8 @@ class OptionsPanel extends Component {
             left: 0,
             background: props.background,
             label: props.label,
-            slug: props.slug
+            slug: props.slug,
+            showInfoBoolean: props.showInfoBoolean
         }
     }
 
@@ -35,6 +36,11 @@ class OptionsPanel extends Component {
     changeSlug = (event) => {
         this.setState({ slug: event.target.value })
         this.props.changeSlug(event)
+    }
+
+    showInfo = () => {
+        this.setState({ showInfoBoolean: !this.state.showInfoBoolean })
+        this.props.showInfoPanel(!this.state.showInfoBoolean)
     }
 
     render() {
@@ -67,9 +73,15 @@ class OptionsPanel extends Component {
                         </div>
                         <input value={this.state.background} onChange={this.changeBackground}></input>
                     </div>
-                    <div className="inputBlock">
-                        <div className="inputLabel">
-                            <label>Theme</label>
+                </div>
+                <div className="OptionsContent">
+                    <div className="toggleBlock">
+                        <div className="toggleLabel">
+                            <label>Info panel</label>
+                            <label className="switch" onChange={this.showInfo}>
+                                <input type="checkbox" defaultChecked={this.state.showInfoBoolean} />
+                                <span className="slider round"></span>
+                            </label>
                         </div>
                     </div>
                 </div>

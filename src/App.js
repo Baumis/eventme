@@ -64,6 +64,13 @@ class App extends Component {
         //save state to backend
     }
 
+    showInfoPanel = (value) => {
+        const oldEvent = this.state.event
+        oldEvent.settings.infoPanel.show = value
+        this.setState({ event: oldEvent })
+        this.setState({ saved: false })
+    }
+
     render() {
         if (this.state.loading) {
             return null
@@ -71,10 +78,29 @@ class App extends Component {
 
         return (
             <div className='App'>
-                <Header label={this.state.event.label} background={this.state.event.settings.background} save={this.saveHeader} />
+                <Header
+                    label={this.state.event.label}
+                    background={this.state.event.settings.background}
+                    save={this.saveHeader}
+                    showInfoBoolean={this.state.event.settings.infoPanel.show}
+                    phone={this.state.event.settings.infoPanel.phone}
+                    address={this.state.event.settings.infoPanel.address}
+                    date={this.state.event.settings.infoPanel.date}
+                    contact={this.state.event.settings.infoPanel.contact}
+                />
                 <ComponentContainer components={this.state.event.components} />
                 <ComponentAdder add={this.addComponent} />
-                <OptionsPanel background={this.state.event.settings.background} label={this.state.event.label} slug={this.state.event.settings.slug} changeLabel={this.changeLabel} changeBackground={this.changeBackground} changeSlug={this.changeSlug} />
+                <OptionsPanel
+                    background={this.state.event.settings.background}
+                    showInfoBoolean={this.state.event.settings.infoPanel.show}
+                    label={this.state.event.label}
+                    slug={this.state.event.settings.slug}
+                    phone={this.state.event.settings.infoPanel.phone}
+                    showInfoPanel={this.showInfoPanel}
+                    changeLabel={this.changeLabel}
+                    changeBackground={this.changeBackground}
+                    changeSlug={this.changeSlug}
+                />
                 <SaveButton save={this.saveState} saved={this.state.saved}></SaveButton>
             </div>
         )

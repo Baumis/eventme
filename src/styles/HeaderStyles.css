@@ -1,6 +1,6 @@
 .Header-container {
     height: 200px;
-    padding: 20px;
+    padding-top: 20px;
     text-align: center;
     background: black;
     color: gray;
@@ -8,4 +8,5 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    position: relative;
 }
