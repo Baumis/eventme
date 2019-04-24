@@ -42,6 +42,13 @@ event = {
         theme: "dark",
         slug: "my_event"
     },
+    infoPanel: {
+        phone: '020202',
+        email: 'mikko@valimaa.fi',
+        contact: 'Mikko "Xarte" Välimaa',
+        address: 'Kylänlahdentie 26',
+        date: '04.06.2020'
+    },
     components: [
         {
             order: 1,
