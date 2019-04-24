@@ -11,7 +11,10 @@ class OptionsPanel extends Component {
             background: props.background,
             label: props.label,
             slug: props.slug,
-            showInfoBoolean: props.showInfoBoolean
+            phone: props.infoPanel.phone,
+            contact: props.infoPanel.contact,
+            date: props.infoPanel.date,
+            address: props.infoPanel.address
         }
     }
 
@@ -38,9 +41,24 @@ class OptionsPanel extends Component {
         this.props.changeSlug(event)
     }
 
-    showInfo = () => {
-        this.setState({ showInfoBoolean: !this.state.showInfoBoolean })
-        this.props.showInfoPanel(!this.state.showInfoBoolean)
+    changePhone = (event) => {
+        this.setState({ phone: event.target.value })
+        this.props.changePhone(event)
+    }
+
+    changeContact = (event) => {
+        this.setState({ contact: event.target.value })
+        this.props.changeContact(event)
+    }
+
+    changeDate = (event) => {
+        this.setState({ date: event.target.value })
+        this.props.changeDate(event)
+    }
+
+    changeAddress = (event) => {
+        this.setState({ address: event.target.value })
+        this.props.changeAddress(event)
     }
 
     render() {
@@ -76,12 +94,24 @@ class OptionsPanel extends Component {
                 </div>
                 <div className="OptionsContent">
                     <div className="toggleBlock">
-                        <div className="toggleLabel">
+                        <div className="sectionDevider">
                             <label>Info panel</label>
-                            <label className="switch" onChange={this.showInfo}>
-                                <input type="checkbox" defaultChecked={this.state.showInfoBoolean} />
-                                <span className="slider round"></span>
-                            </label>
+                        </div>
+                        <div className="infoBlock">
+                            <label>Phone</label>
+                            <input value={this.state.phone} onChange={this.changePhone}></input>
+                        </div>
+                        <div className="infoBlock">
+                            <label>Contatct</label>
+                            <input value={this.state.contact} onChange={this.changeContact}></input>
+                        </div>
+                        <div className="infoBlock">
+                            <label>Date</label>
+                            <input value={this.state.date} onChange={this.changeDate}></input>
+                        </div>
+                        <div className="infoBlock">
+                            <label>Address</label>
+                            <input value={this.state.address} onChange={this.changeAddress}></input>
                         </div>
                     </div>
                 </div>

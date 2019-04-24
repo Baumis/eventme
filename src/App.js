@@ -64,9 +64,30 @@ class App extends Component {
         //save state to backend
     }
 
-    showInfoPanel = (value) => {
+    changePhone = (event) => {
         const oldEvent = this.state.event
-        oldEvent.settings.infoPanel.show = value
+        oldEvent.infoPanel.phone = event.target.value
+        this.setState({ event: oldEvent })
+        this.setState({ saved: false })
+    }
+
+    changeContact = (event) => {
+        const oldEvent = this.state.event
+        oldEvent.infoPanel.contact = event.target.value
+        this.setState({ event: oldEvent })
+        this.setState({ saved: false })
+    }
+
+    changeDate = (event) => {
+        const oldEvent = this.state.event
+        oldEvent.infoPanel.date = event.target.value
+        this.setState({ event: oldEvent })
+        this.setState({ saved: false })
+    }
+
+    changeAddress = (event) => {
+        const oldEvent = this.state.event
+        oldEvent.infoPanel.address = event.target.value
         this.setState({ event: oldEvent })
         this.setState({ saved: false })
     }
@@ -82,24 +103,25 @@ class App extends Component {
                     label={this.state.event.label}
                     background={this.state.event.settings.background}
                     save={this.saveHeader}
-                    showInfoBoolean={this.state.event.settings.infoPanel.show}
-                    phone={this.state.event.settings.infoPanel.phone}
-                    address={this.state.event.settings.infoPanel.address}
-                    date={this.state.event.settings.infoPanel.date}
-                    contact={this.state.event.settings.infoPanel.contact}
+                    phone={this.state.event.infoPanel.phone}
+                    address={this.state.event.infoPanel.address}
+                    date={this.state.event.infoPanel.date}
+                    contact={this.state.event.infoPanel.contact}
                 />
                 <ComponentContainer components={this.state.event.components} />
                 <ComponentAdder add={this.addComponent} />
                 <OptionsPanel
                     background={this.state.event.settings.background}
-                    showInfoBoolean={this.state.event.settings.infoPanel.show}
                     label={this.state.event.label}
+                    infoPanel={this.state.event.infoPanel}
                     slug={this.state.event.settings.slug}
-                    phone={this.state.event.settings.infoPanel.phone}
-                    showInfoPanel={this.showInfoPanel}
                     changeLabel={this.changeLabel}
                     changeBackground={this.changeBackground}
                     changeSlug={this.changeSlug}
+                    changePhone={this.changePhone}
+                    changeContact={this.changeContact}
+                    changeDate={this.changeDate}
+                    changeAddress={this.changeAddress}
                 />
                 <SaveButton save={this.saveState} saved={this.state.saved}></SaveButton>
             </div>
