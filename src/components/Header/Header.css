@@ -10,3 +10,7 @@
     background-size: cover;
     position: relative;
 }
+
+.Header-container h1{
+    padding-top: 50px;
+}
