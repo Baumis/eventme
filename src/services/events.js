@@ -6,7 +6,7 @@ const events = [
             name: 'Jesus'
         },
         settings: {
-            background: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/10_mile_panorama_of_NYC%2C_Feb.%2C_2018.jpg',
+            background: 'https://images.ctfassets.net/kt8yvydomzor/Fk5CbZQwQoKa2GgMiWMqE/fc0c52be85a370a71671906cef37c35d/rapujuhlien_kattaus_header.jpg?w=1440&h=550&fit=fill&f=top',
             theme: 'dark',
             slug: 'my_event',
         },
