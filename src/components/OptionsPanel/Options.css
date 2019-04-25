@@ -7,6 +7,7 @@
     left: 0px;
     background: #595F65;
     transition: left 0.5s;
+    font-family: 'Roboto', sans-serif;
 }
 
 .OptionsHeader{
@@ -70,18 +71,10 @@
     color:white;
 }
 
-.toggleBlock{
-    display: flex;
-    flex-direction: column;
-    padding: 12px;
-    padding-bottom: 1px;
-    color: white;
-}
-
 .infoBlock{
   display: flex;
   justify-content: space-between;
-  padding: 5px 0px 5px 10px;
+  padding: 8px 12px 5px 20px;
   padding-bottom: 1px;
   color: white;
 }
@@ -101,14 +94,14 @@
 
 .sectionDevider{
   border-bottom: 2px solid #373B3F;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin: 40px 8px 20px 8px;
+  padding: 0px 12px 0px 12px;
 }
 
 .sectionDevider label{
   display: block;
-  margin-bottom: -7px;
+  margin-bottom: -8px;
   color: white;
-  width: 80px;
+  width: 90px;
   background: #595F65;
 }

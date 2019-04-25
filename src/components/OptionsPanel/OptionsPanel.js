@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './Options.css'
 import { FaBars } from 'react-icons/fa'
+import InputBlock from './InputBlock'
+import InfoBlock from './InfoBlock'
 
 class OptionsPanel extends Component {
     constructor(props) {
@@ -69,51 +71,22 @@ class OptionsPanel extends Component {
                     <button onClick={this.slidePanel}><FaBars /></button>
                 </div>
                 <div className="OptionsContent">
-                    <div className="inputBlock">
-                        <div className="inputLabel">
-                            <label>Slug</label>
-                        </div>
-                        <input value={this.state.slug} onChange={this.changeSlug}></input>
-                    </div>
+                    <InputBlock label={'Slug'} value={this.state.slug} changeValue={this.changeSlug} />
                 </div>
                 <div className="OptionsContent">
-                    <div className="inputBlock">
-                        <div className="inputLabel">
-                            <label>Header</label>
-                        </div>
-                        <input value={this.state.label} onChange={this.changeLabel}></input>
-                    </div>
+                    <InputBlock label={'Header'} value={this.state.label} changeValue={this.changeLabel} />
                 </div>
                 <div className="OptionsContent">
-                    <div className="inputBlock">
-                        <div className="inputLabel">
-                            <label>Header background</label>
-                        </div>
-                        <input value={this.state.background} onChange={this.changeBackground}></input>
-                    </div>
+                    <InputBlock label={'Header background'} value={this.state.background} changeValue={this.changeBackground} />
+                </div>
+                <div className="sectionDevider">
+                    <label>Info panel</label>
                 </div>
                 <div className="OptionsContent">
-                    <div className="toggleBlock">
-                        <div className="sectionDevider">
-                            <label>Info panel</label>
-                        </div>
-                        <div className="infoBlock">
-                            <label>Phone</label>
-                            <input value={this.state.phone} onChange={this.changePhone}></input>
-                        </div>
-                        <div className="infoBlock">
-                            <label>Contatct</label>
-                            <input value={this.state.contact} onChange={this.changeContact}></input>
-                        </div>
-                        <div className="infoBlock">
-                            <label>Date</label>
-                            <input value={this.state.date} onChange={this.changeDate}></input>
-                        </div>
-                        <div className="infoBlock">
-                            <label>Address</label>
-                            <input value={this.state.address} onChange={this.changeAddress}></input>
-                        </div>
-                    </div>
+                    <InfoBlock label={'Phone'} value={this.state.phone} changeValue={this.changePhone} />
+                    <InfoBlock label={'Contact'} value={this.state.contact} changeValue={this.changeContact} />
+                    <InfoBlock label={'Date'} value={this.state.date} changeValue={this.changeDate} />
+                    <InfoBlock label={'Address'} value={this.state.address} changeValue={this.changeAddress} />
                 </div>
             </div>
         )
