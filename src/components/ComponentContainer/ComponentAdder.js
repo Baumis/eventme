@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/ComponentStyles.css'
+import './ComponentStyles.css'
 
 const ComponentAdder = ({ add }) => {
 

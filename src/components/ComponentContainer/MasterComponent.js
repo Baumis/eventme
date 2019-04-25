@@ -1,5 +1,5 @@
 import React from 'react'
-import Text from './contentTypes/Text'
+import Text from '../contentTypes/Text'
 
 const MasterComponent = ({ component }) => {
     const components = {

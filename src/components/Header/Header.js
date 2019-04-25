@@ -1,6 +1,6 @@
 import React from 'react'
-import InfoPanel from './InfoPanel.js'
-import '../styles/HeaderStyles.css'
+import InfoPanel from '../InfoPanel/InfoPanel.js'
+import './Header.css'
 
 const Header = (props) => {
 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import './styles/App.css'
-import Header from './components/Header'
-import ComponentAdder from './components/ComponentAdder'
-import ComponentContainer from './components/ComponentContainer'
-import OptionsPanel from './components/OptionsPanel'
+import './App.css'
+import Header from './components/Header/Header'
+import ComponentAdder from './components/ComponentContainer/ComponentAdder'
+import ComponentContainer from './components/ComponentContainer/ComponentContainer'
+import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import eventService from './services/events'
-import SaveButton from './components/SaveButton'
+import SaveButton from './components/SaveButton/SaveButton'
 
 class App extends Component {
     constructor(props) {

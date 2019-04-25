@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/SaveButton.css'
+import './SaveButton.css'
 import { FaSave } from 'react-icons/fa'
 
 const SaveButton = (props) => {
