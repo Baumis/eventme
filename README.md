@@ -82,3 +82,8 @@ event = {
     ]
 }
 ````
+## Ideas
+- Samma linkki till alla. Invite sker med delande av länk: www.evemtme.com/28f7h348fh83f028
+- När man anländer till sidan skall inloggning ske för att bli guest
+- Tre olika user types (ADMIN, GUEST, GHOST)
+- 3 sidor: search/login (create), event, profile
