@@ -1,7 +1,7 @@
 import React from 'react'
 import Text from '../contentTypes/Text'
 import './ComponentStyles.css'
-import {FaAngleDown} from 'react-icons/fa'
+import { FaAngleDown } from 'react-icons/fa'
 
 const MasterComponent = ({ component }) => {
     const components = {
