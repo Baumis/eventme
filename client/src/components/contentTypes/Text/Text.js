@@ -1,8 +1,9 @@
 import React from 'react'
+import './Text.css'
 
 const Text = ({ data }) => {
     return (
-        <div>
+        <div className="Container">
             <h3>{data.text}</h3>
         </div>
     )

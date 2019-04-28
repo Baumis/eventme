@@ -1,13 +1,17 @@
 import React from 'react'
 import './ComponentStyles.css'
-import MasterComponent from './MasterComponent'
+import MasterComponent from '../MasterComponent/MasterComponent.js'
 
-const ComponentContainer = ({ components }) => {
+const ComponentContainer = (props) => {
 
     return (
         <div className="componentContainer">
-            {components.map(component => (
-                <MasterComponent key={component.order} component={component} />
+            {props.components.map(component => (
+                <MasterComponent
+                    key={component.order}
+                    component={component}
+                    deleteComponent={props.deleteComponent}
+                />
             ))}
         </div>
     )

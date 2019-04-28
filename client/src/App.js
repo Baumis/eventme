@@ -92,6 +92,13 @@ class App extends Component {
         this.setState({ saved: false })
     }
 
+    deleteComponent = (order) => {
+        const oldEvent = this.state.event
+        oldEvent.components = oldEvent.components.filter(component => component.order !== order)
+        this.setState({ event: oldEvent })
+        this.setState({ saved: false })
+    }
+
     render() {
         if (this.state.loading) {
             return null
@@ -108,7 +115,10 @@ class App extends Component {
                     date={this.state.event.infoPanel.date}
                     contact={this.state.event.infoPanel.contact}
                 />
-                <ComponentContainer components={this.state.event.components} />
+                <ComponentContainer
+                    components={this.state.event.components}
+                    deleteComponent={this.deleteComponent}
+                />
                 <ComponentAdder add={this.addComponent} />
                 <OptionsPanel
                     background={this.state.event.settings.background}
