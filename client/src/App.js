@@ -92,11 +92,10 @@ class App extends Component {
         this.setState({ saved: false })
     }
 
-    deleteComponent = (order) => {
-        const oldEvent = this.state.event
-        oldEvent.components = oldEvent.components.filter(component => component.order !== order)
-        this.setState({ event: oldEvent })
-        this.setState({ saved: false })
+    deleteComponent = async (order) => {
+        const event = await eventService.removeComponent(this.state.event.id, order)
+        console.log(event)
+        this.setState({ event })
     }
 
     render() {

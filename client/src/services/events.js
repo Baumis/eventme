@@ -85,6 +85,16 @@ const create = (label) => {
     })
 }
 
+const removeComponent = (eventId, order) => {
+    const newComponents = events[eventId].components.filter(component => component.order !== order)
+    const orderedComponents = newComponents.map((component, i) => {
+        component.order = i+1
+        return(component)
+    })
+    events[eventId].components = orderedComponents
+    return events[eventId]
+}
+
 const addComponent = (eventId, type, data) => {
     events[eventId].components.push({
         order: events[eventId].components.length + 1,
@@ -104,4 +114,4 @@ const addGuest = (eventId, name) => {
     return events[eventId]
 }
 
-export default { getAll, getOne, create, addComponent, addGuest }
+export default { getAll, getOne, create, addComponent, addGuest, removeComponent }

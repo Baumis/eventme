@@ -6,19 +6,22 @@ class OptionsDropDown extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            display: 'none',
+            display: false,
         }
     }
 
-    displayMenu = () => {
-        let displayCSS = 'block'
-        document.addEventListener('click', this.displayMenu)
+    displayMenu = (event) => {
+        event.preventDefault()
 
-        if (this.state.display === 'block') {
-            displayCSS = 'none'
-            document.removeEventListener('click', this.displayMenu)
-        }
-        this.setState({ display: displayCSS })
+        this.setState({ display: true }, () => {
+            document.addEventListener('click', this.hideMenu)
+        })
+    }
+
+    hideMenu = () => {
+        this.setState({ display: false }, () => {
+            document.removeEventListener('click', this.hideMenu)
+        })
     }
 
     delete = () => {
@@ -31,10 +34,17 @@ class OptionsDropDown extends Component {
                 <div className="OptionsButton" onClick={this.displayMenu}>
                     <FaAngleDown />
                 </div>
-                <div style={{ display: this.state.display }} className="OptionsDropDown">
-                    <div className="MenuItem" >Edit</div>
-                    <div className="MenuItem" onClick={this.delete}>Delete</div>
-                </div>
+                {this.state.display
+                    ? (
+                        <div className="OptionsDropDown">
+                            <div className="MenuItem" >Edit</div>
+                            <div className="MenuItem" onClick={this.delete}>Delete</div>
+                        </div>
+                    )
+                    : (
+                        null
+                    )
+                }
             </div>
         )
     }
