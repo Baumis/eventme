@@ -14,7 +14,7 @@ const TextOptions = () => {
             </div>
             <div className="SettingInput">
                 <label>Content</label>
-                <textarea></textarea>
+                <textarea rows="6"></textarea>
             </div>
         </div>
     )

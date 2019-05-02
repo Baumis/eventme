@@ -11,6 +11,7 @@ const ComponentContainer = (props) => {
                     key={component.order}
                     component={component}
                     deleteComponent={props.deleteComponent}
+                    showEditor={props.showEditor}
                 />
             ))}
         </div>

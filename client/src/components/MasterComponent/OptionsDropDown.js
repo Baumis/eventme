@@ -7,6 +7,7 @@ class OptionsDropDown extends Component {
         super(props)
         this.state = {
             display: false,
+            showEditor: false
         }
     }
 
@@ -28,6 +29,10 @@ class OptionsDropDown extends Component {
         this.props.delete(this.props.order)
     }
 
+    edit = () => {
+        this.props.showEditor(this.props.order)
+    }
+
     render() {
         return (
             <div className="Options">
@@ -37,13 +42,11 @@ class OptionsDropDown extends Component {
                 {this.state.display
                     ? (
                         <div className="OptionsDropDown">
-                            <div className="MenuItem" >Edit</div>
+                            <div className="MenuItem" onClick={this.edit}>Edit</div>
                             <div className="MenuItem" onClick={this.delete}>Delete</div>
                         </div>
                     )
-                    : (
-                        null
-                    )
+                    : (null)
                 }
             </div>
         )

@@ -14,6 +14,7 @@ class App extends Component {
         this.state = {
             loading: true,
             saved: true,
+            showEditor: false,
             event: null
         }
     }
@@ -99,6 +100,14 @@ class App extends Component {
         this.setState({ event })
     }
 
+    showEditor = () => {
+        this.setState({ showEditor: true })
+    }
+
+    closeEditor = () => {
+        this.setState({ showEditor: false })
+    }
+
     render() {
         if (this.state.loading) {
             return null
@@ -118,6 +127,7 @@ class App extends Component {
                 <ComponentContainer
                     components={this.state.event.components}
                     deleteComponent={this.deleteComponent}
+                    showEditor={this.showEditor}
                 />
                 <ComponentAdder add={this.addComponent} />
                 <OptionsPanel
@@ -133,7 +143,10 @@ class App extends Component {
                     changeDate={this.changeDate}
                     changeAddress={this.changeAddress}
                 />
-                <ComponentEditor />
+                {this.state.showEditor
+                    ? (<ComponentEditor close={this.closeEditor} />)
+                    : (null)
+                }
                 <SaveButton save={this.saveState} saved={this.state.saved}></SaveButton>
             </div>
         )
