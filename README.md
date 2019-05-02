@@ -87,3 +87,7 @@ event = {
 - När man anländer till sidan skall inloggning ske för att bli guest
 - Tre olika user types (ADMIN, GUEST, GHOST)
 - 3 sidor: search/login (create), event, profile
+
+## Colors
+Gray (#373B3F, #595F65, #B2BFCB, #7A838C)
+Green (#2eb82e)
