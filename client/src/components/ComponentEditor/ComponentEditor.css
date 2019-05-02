@@ -1,0 +1,109 @@
+.EditorContainer{
+    position: fixed;
+    display: flex;
+    z-index: 30;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    background: #595F65;
+    -webkit-box-shadow: 0px 0px 16px -1px rgb(69, 69, 69, 0.4);
+    -moz-box-shadow: 0px 0px 16px -1px rgba(69,69,69,0.4);
+    box-shadow: 0px 0px 16px -1px rgba(69,69,69,0.4);
+    border-radius: 5px;
+}
+
+.headerRow{
+    color:white;
+}
+
+.headerRow h4{
+    padding: 12px;
+    margin: 0px;
+}
+
+.exitRow{
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+
+}
+
+.TypeRow{
+    display: flex;
+    flex-direction: column;
+    background: #373B3F;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.TypeItem{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 70px;
+    font-size: 14px;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.TypeItem label{
+    padding-top: 5px;
+}
+
+.TypeItem:hover{
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.ButtonRow{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.ButtonRow button{
+    background: transparent;
+    border-radius: 30px;
+    border: 2px solid green;
+    color: green;
+    padding: 8px 20px 8px 20px;
+}
+
+.Content{
+    display:block;
+    padding: 10px 10px 10px 10px;
+}
+
+.Preview{
+    width: 100%;
+}
+
+.DataSettings{
+    width: 100%;
+}
+
+.SettingInput{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #B2BFCB;
+    padding: 20px 10px 15px 10px;
+}
+
+.SettingInput input{
+    border: none;
+    padding-top: 5px;
+    padding-left: 5px;
+    border-bottom: 1px solid #7A838C;
+    background: transparent;
+    color:white;
+}
+
+.SettingInput textarea{
+    background: #7A838C;
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+}

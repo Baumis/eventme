@@ -6,6 +6,7 @@ import ComponentContainer from './components/ComponentContainer/ComponentContain
 import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import eventService from './services/events'
 import SaveButton from './components/SaveButton/SaveButton'
+import ComponentEditor from './components/ComponentEditor/ComponentEditor'
 
 class App extends Component {
     constructor(props) {
@@ -132,6 +133,7 @@ class App extends Component {
                     changeDate={this.changeDate}
                     changeAddress={this.changeAddress}
                 />
+                <ComponentEditor />
                 <SaveButton save={this.saveState} saved={this.state.saved}></SaveButton>
             </div>
         )
