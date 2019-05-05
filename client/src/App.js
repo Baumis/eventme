@@ -14,7 +14,10 @@ class App extends Component {
         this.state = {
             loading: true,
             saved: true,
-            showEditor: false,
+            editor: {
+                show: false,
+                order: null
+            },
             event: null
         }
     }
@@ -100,12 +103,20 @@ class App extends Component {
         this.setState({ event })
     }
 
-    showEditor = () => {
-        this.setState({ showEditor: true })
+    showEditor = (order) => {
+        this.setState({ editor: {
+            show: true,
+            order: order
+        } })
+
+        console.log(this.state.editor)
     }
 
     closeEditor = () => {
-        this.setState({ showEditor: false })
+        this.setState({ editor: {
+            show: false,
+            order: this.state.editor.order
+        } })
     }
 
     render() {
@@ -143,8 +154,11 @@ class App extends Component {
                     changeDate={this.changeDate}
                     changeAddress={this.changeAddress}
                 />
-                {this.state.showEditor
-                    ? (<ComponentEditor close={this.closeEditor} />)
+                {this.state.editor.show
+                    ? (<ComponentEditor 
+                        close={this.closeEditor}
+                        component={this.state.event.components[this.state.editor.order]}
+                        />)
                     : (null)
                 }
                 <SaveButton save={this.saveState} saved={this.state.saved}></SaveButton>
