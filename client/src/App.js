@@ -121,11 +121,10 @@ class App extends Component {
         })
     }
 
-    saveComponentData = (props) => {
+    saveComponentData = (order, data) => {
         let oldEvent = this.state.event
-        oldEvent.components[props.order].data = props.data
+        oldEvent.components[order - 1].data = data
         this.setState({ event: oldEvent })
-        this.setState({ saved: false })
     }
 
     render() {
@@ -167,6 +166,7 @@ class App extends Component {
                     ? (<ComponentEditor
                         close={this.closeEditor}
                         component={this.state.event.components.find(component => component.order === this.state.editor.order)}
+                        saveData={this.saveComponentData}
                     />)
                     : (null)
                 }

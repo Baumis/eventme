@@ -1,6 +1,5 @@
 import React from 'react'
 import '../ComponentEditor.css'
-import SettingsInput from '../ContentBlocks/SettingsInput'
 
 const MapOptions = () => {
 
@@ -9,11 +8,17 @@ const MapOptions = () => {
             <div className="headerRow">
                 <h4>Map</h4>
             </div>
-            <SettingsInput header={'title'} />
-            <SettingsInput header={'longitude'} />
-            <SettingsInput header={'latitude'} />
-            <div className="ButtonRow">
-                <button>Save</button>
+            <div className="SettingInput">
+                <label>title</label>
+                <input ></input>
+            </div>
+            <div className="SettingInput">
+                <label>longitude</label>
+                <input ></input>
+            </div>
+            <div className="SettingInput">
+                <label>latitude</label>
+                <input ></input>
             </div>
         </div>
     )

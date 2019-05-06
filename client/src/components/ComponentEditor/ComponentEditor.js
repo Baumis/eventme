@@ -10,12 +10,13 @@ class ComponentEditor extends Component {
         super(props)
         this.state = {
             component: props.component,
-            order: props.order,
+            order: props.component.order,
             activeType: props.component.type,
             types: {
                 Text: TextOptions,
                 Map: MapOptions
-            }
+            },
+            data: props.component.data
         }
     }
 
@@ -26,6 +27,10 @@ class ComponentEditor extends Component {
 
     changeType = (type) => {
         this.setState({ activeType: type })
+    }
+
+    updateData = (data) => {
+        this.setState({ data: data })
     }
 
     render() {
@@ -45,7 +50,15 @@ class ComponentEditor extends Component {
                     </div>
                     <div className="SettingsContent">
                         <div className="exitRow" onClick={this.props.close}><FaTimes /></div>
-                        <TagName />
+                        <TagName
+                            component={this.state.component}
+                            updateData={this.updateData}
+                        />
+                        <div className="ButtonRow">
+                            <button onClick={() => this.props.saveData(this.state.order, this.state.data)}>
+                            Save
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
