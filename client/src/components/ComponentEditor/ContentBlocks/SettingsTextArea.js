@@ -5,8 +5,8 @@ const SettingsTextArea = (props) => {
 
     return (
         <div className="SettingInput">
-                <label>{props.header}</label>
-                <textarea rows={props.rows}></textarea>
+            <label>{props.header}</label>
+            <textarea rows={props.rows}></textarea>
         </div>
     )
 }

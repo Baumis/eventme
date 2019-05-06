@@ -31,6 +31,7 @@ class OptionsDropDown extends Component {
 
     edit = () => {
         this.props.showEditor(this.props.order)
+        console.log('editor opened in DD, order: ', this.props.order)
     }
 
     render() {

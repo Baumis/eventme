@@ -3,6 +3,7 @@ import '../ComponentEditor.css'
 import SettingsInput from '../ContentBlocks/SettingsInput'
 import SettingsTextArea from '../ContentBlocks/SettingsTextArea'
 
+
 const TextOptions = () => {
 
     return (
@@ -12,6 +13,9 @@ const TextOptions = () => {
             </div>
             <SettingsInput header={'title'} />
             <SettingsTextArea rows={6} header={'content'} />
+            <div className="ButtonRow">
+                <button>Save</button>
+            </div>
         </div>
     )
 }

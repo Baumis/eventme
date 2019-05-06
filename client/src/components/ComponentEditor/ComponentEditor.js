@@ -24,17 +24,21 @@ class ComponentEditor extends Component {
         color: 'white'
     }
 
+    changeType = (type) => {
+        this.setState({ activeType: type })
+    }
+
     render() {
         const TagName = this.state.types[this.state.activeType]
         return (
             <div className="ModalBackground" >
                 <div className="EditorContainer">
                     <div className="TypeRow">
-                        <div className="TypeItem">
+                        <div className="TypeItem" onClick={() => this.changeType('Text')}>
                             <FaPen />
                             <label>Text</label>
                         </div>
-                        <div className="TypeItem">
+                        <div className="TypeItem" onClick={() => this.changeType('Map')}>
                             <FaLocationArrow />
                             <label>Map</label>
                         </div>
@@ -42,9 +46,6 @@ class ComponentEditor extends Component {
                     <div className="SettingsContent">
                         <div className="exitRow" onClick={this.props.close}><FaTimes /></div>
                         <TagName />
-                        <div className="ButtonRow">
-                            <button>Save</button>
-                        </div>
                     </div>
                 </div>
             </div>

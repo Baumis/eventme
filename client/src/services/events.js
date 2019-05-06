@@ -45,14 +45,16 @@ const events = [
                 order: 1,
                 type: 'Text',
                 data: {
-                    text: 'this is my event'
+                    title: 'This is event info',
+                    content: 'syödään juodaan syödään juodaan'
                 }
             },
             {
                 order: 2,
                 type: 'Text',
                 data: {
-                    text: 'this will be great!'
+                    title: 'Good to know',
+                    content: 'pidetään hauskaa jee jee'
                 }
             }
         ]

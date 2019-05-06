@@ -7,11 +7,14 @@ const MapOptions = () => {
     return (
         <div className="DataSettings">
             <div className="headerRow">
-                <h4>Text</h4>
+                <h4>Map</h4>
             </div>
             <SettingsInput header={'title'} />
             <SettingsInput header={'longitude'} />
             <SettingsInput header={'latitude'} />
+            <div className="ButtonRow">
+                <button>Save</button>
+            </div>
         </div>
     )
 }
