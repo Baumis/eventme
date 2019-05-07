@@ -4,7 +4,7 @@ import './Text.css'
 const Text = ({ data }) => {
     return (
         <div className="Container">
-            <h3>{data.title}</h3>
+            <h2>{data.title}</h2>
             <p>{data.content}</p>
         </div>
     )
