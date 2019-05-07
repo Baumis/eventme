@@ -4,8 +4,12 @@ import './Text.css'
 const Text = ({ data }) => {
     return (
         <div className="Container">
-            <h2>{data.title}</h2>
-            <p>{data.content}</p>
+            <div className="Title">
+                <h2>{data.title}</h2>
+            </div>
+            <div className="TextContent">
+                <p>{data.content}</p>
+            </div>
         </div>
     )
 }

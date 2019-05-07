@@ -33,7 +33,7 @@ class GuestsOptions extends Component {
         return (
             <div className="DataSettings">
                 <div className="headerRow">
-                    <h4>Map</h4>
+                    <h4>Guests</h4>
                 </div>
                 <div className="SettingInput">
                     <label>title</label>

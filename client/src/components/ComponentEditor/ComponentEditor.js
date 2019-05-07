@@ -3,7 +3,7 @@ import './ComponentEditor.css'
 import TextOptions from './TypeOptions/TextOptions'
 import MapOptions from './TypeOptions/MapOptions'
 import GuestsOptions from './TypeOptions/GuestsOptions'
-import { FaLocationArrow, FaPen, FaTimes } from 'react-icons/fa'
+import { FaLocationArrow, FaPen, FaTimes, FaList } from 'react-icons/fa'
 
 
 class ComponentEditor extends Component {
@@ -50,7 +50,7 @@ class ComponentEditor extends Component {
                             <label>Map</label>
                         </div>
                         <div className="TypeItem" onClick={() => this.changeType('Guests')}>
-                            <FaLocationArrow />
+                            <FaList />
                             <label>Guests</label>
                         </div>
                     </div>

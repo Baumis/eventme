@@ -46,7 +46,7 @@ const events = [
                 type: 'Text',
                 data: {
                     title: 'This is event info',
-                    content: 'syödään juodaan syödään juodaan'
+                    content: 'Kahvittelu, kahvitarjoilu tai kahvinjuonti (ruots. fika) on erityisesti Suomessa ja Ruotsissa yleinen sosiaalinen instituutio, jossa kokoonnutaan juomaan kahvia sekä syömään makeita ja suolaisia leivonnaisia ja samalla keskustelemaan. Kahvittelu voi olla työnteon tai kotiaskareet keskeyttävä tauko, kotiin kutsutuille vieraille laadittava, ruokailua kevyempi tarjoilu, työpaikan tai järjestöelämän kokoustarjoilu tai pistäytyminen kahvilassa joko yksin tai isommassa seurueessa. Perinteiset tavat tarjoilla kahvia ja leivonnaisia ovat valmiiksi katettu istumapöytä pienemmälle seurueelle tai noutopöytäperiaatteeseen perustuva seisomapöytä isommalle seurueelle esimerkiksi juhlissa.[1] Kahvittelu on enemmänkin yhdessäoloa korostava sosiaalinen tapahtuma ja virkistäytymiseen tarkoitettu tauko kuin varsinainen ruokailuhetki.[2] Pohjoismaisessa kahvikulttuurissa pelkän kahvin juonti ei kuitenkaan yleensä riitä, vaan perinteisesti kahvin kanssa tarjotaan kahvileipää (ruots. fikabröd) eli pullaa, viinereitä, kakkuja, keksejä tai pikkuleipiä. Ruokaisampi kahvitarjoilu syntyy suolaisista leivonnaisista, kuten karjalanpiirakoista, pasteijoista, voileivistä tai voileipäkakusta. '
                 }
             },
             {
