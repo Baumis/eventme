@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './ComponentEditor.css'
 import TextOptions from './TypeOptions/TextOptions'
 import MapOptions from './TypeOptions/MapOptions'
+import GuestsOptions from './TypeOptions/GuestsOptions'
 import { FaLocationArrow, FaPen, FaTimes } from 'react-icons/fa'
 
 
@@ -14,7 +15,8 @@ class ComponentEditor extends Component {
             activeType: props.component.type,
             types: {
                 Text: TextOptions,
-                Map: MapOptions
+                Map: MapOptions,
+                Guests: GuestsOptions
             },
             data: props.component.data
         }
@@ -47,6 +49,10 @@ class ComponentEditor extends Component {
                             <FaLocationArrow />
                             <label>Map</label>
                         </div>
+                        <div className="TypeItem" onClick={() => this.changeType('Guests')}>
+                            <FaLocationArrow />
+                            <label>Guests</label>
+                        </div>
                     </div>
                     <div className="SettingsContent">
                         <div className="exitRow" onClick={this.props.close}><FaTimes /></div>
@@ -55,7 +61,7 @@ class ComponentEditor extends Component {
                             updateData={this.updateData}
                         />
                         <div className="ButtonRow">
-                            <button onClick={() => this.props.saveData(this.state.order, this.state.data)}>
+                            <button onClick={() => this.props.saveData(this.state.order, this.state.data, this.state.activeType)}>
                             Save
                             </button>
                         </div>

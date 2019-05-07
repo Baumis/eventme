@@ -51,10 +51,9 @@ const events = [
             },
             {
                 order: 2,
-                type: 'Text',
+                type: 'Guests',
                 data: {
-                    title: 'Good to know',
-                    content: 'pidetään hauskaa jee jee'
+                    title: 'Guests'
                 }
             }
         ]

@@ -12,6 +12,7 @@ const ComponentContainer = (props) => {
                     component={component}
                     deleteComponent={props.deleteComponent}
                     showEditor={props.showEditor}
+                    guests={props.guests}
                 />
             ))}
         </div>

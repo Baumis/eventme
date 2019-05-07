@@ -35,10 +35,17 @@ class App extends Component {
         const event = await eventService.addComponent(this.state.event.id, type, data)
         console.log(event)
         this.setState({ event })
+        this.showEditor(event.components.length)
     }
 
     addGuest = async (name) => {
         const event = await eventService.addGuest(this.state.event.id, name)
+        this.setState({ event })
+    }
+
+    deleteComponent = async (order) => {
+        const event = await eventService.removeComponent(this.state.event.id, order)
+        console.log(event)
         this.setState({ event })
     }
 
@@ -97,12 +104,6 @@ class App extends Component {
         this.setState({ saved: false })
     }
 
-    deleteComponent = async (order) => {
-        const event = await eventService.removeComponent(this.state.event.id, order)
-        console.log(event)
-        this.setState({ event })
-    }
-
     showEditor = (order) => {
         this.setState({
             editor: {
@@ -121,10 +122,12 @@ class App extends Component {
         })
     }
 
-    saveComponentData = (order, data) => {
+    saveComponentData = (order, data, type) => {
         let oldEvent = this.state.event
         oldEvent.components[order - 1].data = data
+        oldEvent.components[order - 1].type = type
         this.setState({ event: oldEvent })
+        this.closeEditor()
     }
 
     render() {
@@ -145,6 +148,7 @@ class App extends Component {
                 />
                 <ComponentContainer
                     components={this.state.event.components}
+                    guests={this.state.event.guests}
                     deleteComponent={this.deleteComponent}
                     showEditor={this.showEditor}
                 />

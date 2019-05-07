@@ -30,10 +30,11 @@
 }
 
 .componentContainer{
-    margin: 20px 5% 20px 5%;
+    padding: 20px 1% 20px 1%;
     display: grid;
     grid-template-columns: auto auto;
-    grid-gap: 3%;
-    grid-template-columns: repeat( auto-fit, minmax(400px, 20fr) );
+    margin: auto;
+    grid-gap: 2%;
+    /*grid-template-columns: repeat( auto-fit, minmax(400px, 20fr) );*/
     justify-content:center;
 }
