@@ -88,6 +88,9 @@ class OptionsPanel extends Component {
                     <InfoBlock label={'Date'} value={this.state.date} changeValue={this.changeDate} />
                     <InfoBlock label={'Address'} value={this.state.address} changeValue={this.changeAddress} />
                 </div>
+                <div className="sectionDevider">
+                    <label>Guests</label>
+                </div>
             </div>
         )
     }
