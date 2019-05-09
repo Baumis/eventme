@@ -5,7 +5,11 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
+const config = require('./utils/config')
+
 const eventsRouter = require('./controllers/events')
+
+mongoose.connect(config.mongodbUri, { useNewUrlParser: true })
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -14,8 +18,12 @@ app.use('/api/events', eventsRouter)
 
 const server = http.createServer(app)
 
-server.listen(3001, () => {
-    console.log(`Server running on port 3001`)
+server.listen(config.port, () => {
+    console.log(`Server running on port ${config.port}`)
+})
+
+server.on('close', () => {
+    mongoose.connection.close()
 })
 
 module.exports = {
