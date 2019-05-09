@@ -1,6 +1,5 @@
 const eventRouter = require('express').Router()
 const Event = require('../models/event')
-const User = require('../models/user')
 
 eventRouter.get('/', async (request, response) => {
     const events = await Event
@@ -55,7 +54,7 @@ eventRouter.post('/', async (request, response) => {
             components: []
         })
 
-        const savedEvent = newEvent.save()
+        const savedEvent = await newEvent.save()
 
         response.status(201).json(savedEvent)
     } catch (exception) {
@@ -67,8 +66,16 @@ eventRouter.put('/:id', async (request, response) => {
     try {
         const body = request.body
 
-        const updatedEvent = await Event.findByIdAndUpdate(request.params.id, body.event, { new: true })
-        
+        const event = {
+            label: body.label,
+            settings: body.settings,
+            infoPanel: body.infoPanel,
+            guests: body.guests,
+            components: body.components
+        }
+
+        const updatedEvent = await Event.findByIdAndUpdate(request.params.id, event, { new: true })
+
         response.json(updatedEvent)
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
