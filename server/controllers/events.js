@@ -1,9 +1,27 @@
 const eventRouter = require('express').Router()
 const Event = require('../models/event')
+const User = require('../models/user')
 
 eventRouter.get('/', async (request, response) => {
-    const events = await Event.find({})
+    const events = await Event
+        .find({})
+        .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
+        .populate('guests.user', { _id: 1, name: 1 })
+
     response.json(events)
+})
+
+eventRouter.get('/:id', async (request, response) => {
+    try {
+        const event = await Event
+            .findById(request.params.id)
+            .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
+            .populate('guests.user', { _id: 1, name: 1 })
+
+        response.json(event)
+    } catch (exception) {
+        response.status(400).send({ error: 'Malformatted id' })
+    }
 })
 
 eventRouter.post('/', async (request, response) => {
@@ -14,7 +32,7 @@ eventRouter.post('/', async (request, response) => {
             return response.status(400).json({ error: 'label missing' })
         }
 
-        const creator = 'Mr Creator'
+        const creator = '5cd445507c2a502a18cba5ca'
 
         const newEvent = new Event({
             label: body.label,
@@ -30,7 +48,10 @@ eventRouter.post('/', async (request, response) => {
                 address: '',
                 date: Date.now()
             },
-            guests: [creator],
+            guests: [{
+                user: creator,
+                status: 'PENDING'
+            }],
             components: []
         })
 

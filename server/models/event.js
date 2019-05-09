@@ -7,7 +7,18 @@ const componentSchema = new mongoose.Schema({
         enum: ['PLACEHOLDER', 'TEXT', 'VIDEO', 'LOCATION', 'GUESTLIST', 'PICTURE'],
         default: 'PLACEHOLDER'
     },
-    data: Object
+    data: Object,
+    _id: false
+})
+
+const guestSchema = new mongoose.Schema({
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    status: {
+        type: String,
+        enum: ['GOING', 'PENDING', 'NOT GOING', 'MABYE'],
+        default: 'PENDING'
+    },
+    _id: false
 })
 
 const eventSchema = new mongoose.Schema({
@@ -28,14 +39,7 @@ const eventSchema = new mongoose.Schema({
         address: String,
         date: Date
     },
-    guests: [{
-        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-        status: {
-            type: String,
-            enum: ['GOING', 'PENDING', 'NOT GOING', 'MABYE'],
-            default: 'PENDING'
-        }
-    }],
+    guests: [guestSchema],
     components: [componentSchema]
 })
 
