@@ -63,4 +63,27 @@ eventRouter.post('/', async (request, response) => {
     }
 })
 
+eventRouter.put('/:id', async (request, response) => {
+    try {
+        const body = request.body
+
+        const updatedEvent = await Event.findByIdAndUpdate(request.params.id, body.event, { new: true })
+        
+        response.json(updatedEvent)
+    } catch (exception) {
+        response.status(400).send({ error: 'Malformatted id' })
+    }
+})
+
+eventRouter.delete('/:id', async (request, response) => {
+    try {
+        await Event
+            .findByIdAndDelete(request.params.id)
+
+        response.status(204).end()
+    } catch (exception) {
+        response.status(400).send({ error: 'Malformatted id' })
+    }
+})
+
 module.exports = eventRouter
