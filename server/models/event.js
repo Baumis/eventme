@@ -15,8 +15,11 @@ const eventSchema = new mongoose.Schema({
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     settings: {
         background: String,
-        theme: String,
-        slug: String
+        theme: {
+            type: String,
+            enum: ['LIGHT', 'DARK'],
+            default: 'LIGHT'
+        }
     },
     infoPanel: {
         phone: String,
