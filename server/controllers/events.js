@@ -36,7 +36,7 @@ eventRouter.post('/', async (request, response) => {
 
         const savedEvent = newEvent.save()
 
-        response.json(savedEvent)
+        response.status(201).json(savedEvent)
     } catch (exception) {
         response.status(500).json({ error: 'something went wrong...' })
     }

@@ -8,6 +8,7 @@ const mongoose = require('mongoose')
 const config = require('./utils/config')
 
 const eventsRouter = require('./controllers/events')
+const userRouter = require('./controllers/users')
 
 mongoose.connect(config.mongodbUri, { useNewUrlParser: true })
 
