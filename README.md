@@ -17,6 +17,7 @@ Running on localhost:3000
 
 ````
 npm install
+create .env file to root of server folder if
 npm start
 ````
 Running on localhost:3001
