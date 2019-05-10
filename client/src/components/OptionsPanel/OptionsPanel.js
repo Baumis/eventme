@@ -3,6 +3,7 @@ import './Options.css'
 import { FaBars } from 'react-icons/fa'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
+import GuestList from '../GuestList.js/GuestList'
 
 class OptionsPanel extends Component {
     constructor(props) {
@@ -90,6 +91,12 @@ class OptionsPanel extends Component {
                 </div>
                 <div className="sectionDevider">
                     <label>Guests</label>
+                </div>
+                <div className="OptionsContent">
+                    <InputBlock label={'Invite link'} />
+                </div>
+                <div className="OptionsContent">
+                    <GuestList guests={this.props.guests}/>
                 </div>
             </div>
         )

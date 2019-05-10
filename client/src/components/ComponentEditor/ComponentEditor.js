@@ -55,14 +55,16 @@ class ComponentEditor extends Component {
                         </div>
                     </div>
                     <div className="SettingsContent">
-                        <div className="exitRow" onClick={this.props.close}><FaTimes /></div>
+                        <div className="exitRow" onClick={this.props.close}>
+                            <div className="exitIcon"><FaTimes /></div>
+                        </div>
                         <TagName
                             component={this.state.component}
                             updateData={this.updateData}
                         />
                         <div className="ButtonRow">
                             <button onClick={() => this.props.saveData(this.state.order, this.state.data, this.state.activeType)}>
-                            Save
+                                Save
                             </button>
                         </div>
                     </div>

@@ -43,6 +43,11 @@
     font-size: 18px;
 }
 
+.exitIcon{
+    cursor: pointer;
+}
+
+
 .TypeRow{
     display: flex;
     flex-direction: column;
@@ -59,10 +64,12 @@
     font-size: 14px;
     align-items: center;
     color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
 }
 
 .TypeItem label{
     padding-top: 5px;
+    cursor: pointer
 }
 
 .TypeItem:hover{
@@ -85,6 +92,7 @@
     border: 2px solid #2eb82e;
     color:  white;
     padding: 8px 20px 8px 20px;
+    cursor: pointer;
 }
 
 .ButtonRow button:hover{

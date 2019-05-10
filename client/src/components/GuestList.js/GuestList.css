@@ -1,0 +1,54 @@
+.GuestContainer{
+    padding: 12px;
+}
+
+.StatusButtons{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    background: #373B3F;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.StatusButton{
+    color: rgba(255,255,255,0.5);
+    padding: 10px 5px 10px 5px;
+}
+
+#active{
+    color: rgba(46, 184, 46, 0.7);
+    border-bottom: 1px solid rgba(46, 184, 46, 1);
+}
+
+.StatusButton:hover{
+    color: rgba(255,255,255,1);
+    cursor: pointer;
+}
+
+.GuestList{
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: #7A838C;
+    padding: 10px;
+    height: 300px;
+    color: white;
+}
+
+.Guest{
+    display: flex;
+    padding: 12px 0px 12px 0px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.GuestName{
+    padding-left: 10px;
+    width: 80%;
+    text-align: left;
+}
+
+.GuestDelete{
+    cursor: pointer
+}

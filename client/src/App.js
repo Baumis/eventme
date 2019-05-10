@@ -158,6 +158,7 @@ class App extends Component {
                     label={this.state.event.label}
                     infoPanel={this.state.event.infoPanel}
                     slug={this.state.event.settings.slug}
+                    guests={this.state.event.guests}
                     changeLabel={this.changeLabel}
                     changeBackground={this.changeBackground}
                     changeSlug={this.changeSlug}
