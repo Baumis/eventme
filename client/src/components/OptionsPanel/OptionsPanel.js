@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Options.css'
-import { FaBars } from 'react-icons/fa'
+import { FaAngleDoubleLeft } from 'react-icons/fa'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
 import GuestList from '../GuestList.js/GuestList'
@@ -9,8 +9,6 @@ class OptionsPanel extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            display: true,
-            left: 0,
             background: props.background,
             label: props.label,
             slug: props.slug,
@@ -18,14 +16,6 @@ class OptionsPanel extends Component {
             contact: props.infoPanel.contact,
             date: props.infoPanel.date,
             address: props.infoPanel.address
-        }
-    }
-
-    slidePanel = () => {
-        if (this.state.display) {
-            this.setState({ display: false, left: '-300px' })
-        } else {
-            this.setState({ display: true, left: '0px' })
         }
     }
 
@@ -66,10 +56,10 @@ class OptionsPanel extends Component {
 
     render() {
         return (
-            <div style={{ left: this.state.left }} className="OptionsContainer">
+            <div style={{ left: this.props.left }} className="OptionsContainer">
                 <div className="OptionsHeader">
                     <p>Options</p>
-                    <button onClick={this.slidePanel}><FaBars /></button>
+                    <button onClick={this.props.slidePanel}><FaAngleDoubleLeft /></button>
                 </div>
                 <div className="OptionsContent">
                     <InputBlock label={'Slug'} value={this.state.slug} changeValue={this.changeSlug} />
@@ -96,7 +86,10 @@ class OptionsPanel extends Component {
                     <InputBlock label={'Invite link'} />
                 </div>
                 <div className="OptionsContent">
-                    <GuestList guests={this.props.guests}/>
+                    <GuestList
+                        guests={this.props.guests}
+                        mod={true}
+                    />
                 </div>
             </div>
         )

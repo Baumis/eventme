@@ -7,6 +7,7 @@ import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import eventService from './services/events'
 import SaveButton from './components/SaveButton/SaveButton'
 import ComponentEditor from './components/ComponentEditor/ComponentEditor'
+import OptionsButton from './components/OptionsButton/OptionsButton';
 
 class App extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class App extends Component {
         this.state = {
             loading: true,
             saved: true,
+            optionsPanel: '0px',
             editor: {
                 show: false,
                 order: null
@@ -47,6 +49,15 @@ class App extends Component {
         const event = await eventService.removeComponent(this.state.event.id, order)
         console.log(event)
         this.setState({ event })
+    }
+
+    slidePanel = () => {
+        console.log(this.state.optionsPanel)
+        if (this.state.optionsPanel === '0px') {
+            this.setState({ optionsPanel: '-300px' })
+        } else {
+            this.setState({ optionsPanel: '0px' })
+        }
     }
 
     changeBackground = (event) => {
@@ -159,6 +170,8 @@ class App extends Component {
                     infoPanel={this.state.event.infoPanel}
                     slug={this.state.event.settings.slug}
                     guests={this.state.event.guests}
+                    left={this.state.optionsPanel}
+                    slidePanel={this.slidePanel}
                     changeLabel={this.changeLabel}
                     changeBackground={this.changeBackground}
                     changeSlug={this.changeSlug}
@@ -166,6 +179,9 @@ class App extends Component {
                     changeContact={this.changeContact}
                     changeDate={this.changeDate}
                     changeAddress={this.changeAddress}
+                />
+                <OptionsButton 
+                    showPanel={this.slidePanel}
                 />
                 {this.state.editor.show
                     ? (<ComponentEditor

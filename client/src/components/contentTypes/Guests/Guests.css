@@ -1,9 +1,10 @@
-/*.Container{
+.GuestsContainer{
     position: relative;
     z-index: 1;
     overflow: auto;
 }
 
+/*
 .GuestList{
     display: flex;
     flex-direction: column;

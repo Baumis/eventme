@@ -6,7 +6,8 @@ class GuestList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            activeStatus: 'going'
+            activeStatus: 'going',
+            modificationEnabled: props.mod
         }
     }
 
@@ -37,7 +38,10 @@ class GuestList extends Component {
                         Declined
                     </div>
                 </div>
-                <div className="GuestList">
+                <div
+                    className="GuestList"
+                    style={{ background: this.props.background, color: this.props.color }}
+                >
                     {this.props.guests.map((guest, i) => {
 
                         let value = this.state.activeStatus === guest.status ?
@@ -45,7 +49,10 @@ class GuestList extends Component {
                                 <div className="Guest" key={i}>
                                     <div className="GuestUser"><FaUser /></div>
                                     <div className="GuestName">{guest.name}</div>
-                                    <div className="GuestDelete"><FaTimes /></div>
+                                    {this.state.modificationEnabled ?
+                                        <div className="GuestDelete"><FaTimes /></div>
+                                        : null
+                                    }
                                 </div>
                             )
                             : (null)

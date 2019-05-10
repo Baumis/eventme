@@ -1,22 +1,19 @@
 import React from 'react'
 import './Guests.css'
+import GuestList from '../../GuestList.js/GuestList';
 
 const Guests = (props) => {
     return (
-        <div className="Container">
+        <div className="GuestsContainer">
             <div className="Title">
                 <h2>{props.data.title}</h2>
             </div>
-            <div className="GuestList">
-                {props.guests.map((guest, i) => {
-                    return (
-                        <div className="Guest" key={i}>
-                            <div className="GuestName">{guest.name}</div>
-                            <div className="GuestStatus">{guest.status}</div>
-                        </div>
-                    )
-                })}
-            </div>
+            <GuestList
+                guests={props.guests}
+                background={'transparent'}
+                color={'black'}
+                mod={false}
+            />
         </div>
     )
 }

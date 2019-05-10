@@ -8,6 +8,7 @@
     background: #595F65;
     transition: left 0.5s;
     font-family: 'Roboto', sans-serif;
+    overflow:auto;
 }
 
 .OptionsHeader{
@@ -29,18 +30,18 @@
     font-weight: 600;
     font-size: 20px;
     border: none;
-    background: rgb(192, 192, 192, 0.8);
+    background: transparent;
     height: 50px;
     width: 50px;
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
-    /*border: 1px solid #2f3337;*/
-    margin-right: -50px;
+    border: 1px solid #2f3337;
 }
 
 .OptionsHeader p{
     width: 100%;
     color: white;
+    margin-right: -50px;
 }
 
 .OptionsContent{

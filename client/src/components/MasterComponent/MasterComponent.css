@@ -29,6 +29,7 @@
     width: 30px;
     font-size: 25px;
     color: rgba(0,0,0, 0.3);
+    background: transparent;
 }
 
 .OptionsButton{
