@@ -29,7 +29,7 @@ class GuestsOptions extends Component {
                         <FaInfo />
                         <label>Info</label>
                     </div>
-                    <p>{'The guest-component displays the event\'s guest and their status'}</p>
+                    <p>{'The guest-component displays the event\'s guests and their status'}</p>
                 </div>
             </div>
         )

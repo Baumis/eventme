@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
 import './Guests.css'
-import { FaUser } from 'react-icons/fa'
+import { FaUser, FaSearch } from 'react-icons/fa'
 
 class Guests extends Component {
     constructor(props) {
         super(props)
         this.state = {
             activeStatus: 'going',
+            filter: ''
         }
     }
 
     changeActive = (status) => {
         this.setState({ activeStatus: status })
+    }
+
+    changeFilter = (event) => {
+        this.setState({ filter: event.target.value })
     }
 
     render() {
@@ -42,8 +47,7 @@ class Guests extends Component {
                     style={{ background: this.props.background, color: this.props.color }}
                 >
                     {this.props.guests.map((guest, i) => {
-
-                        let value = this.state.activeStatus === guest.status ?
+                        let value = this.state.activeStatus === guest.status && guest.name.toLowerCase().includes(this.state.filter.toLowerCase())?
                             (
                                 <div className="ComponentGuest" key={i}>
                                     <div className="ComponentGuestUser"><FaUser /></div>
@@ -53,6 +57,12 @@ class Guests extends Component {
                             : (null)
                         return value
                     })}
+                </div>
+                <div className="GuestSearch">
+                    <div className="GuestSearchField">
+                        <input value={this.state.filter} onChange={this.changeFilter}></input>
+                        <div id="searchIcon"><FaSearch /></div>
+                    </div>
                 </div>
             </div>
         )

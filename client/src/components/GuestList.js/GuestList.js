@@ -1,18 +1,22 @@
 import React, { Component } from 'react'
 import './GuestList.css'
-import { FaTimes, FaUser } from 'react-icons/fa'
+import { FaTimes, FaUser, FaSearch } from 'react-icons/fa'
 
 class GuestList extends Component {
     constructor(props) {
         super(props)
         this.state = {
             activeStatus: 'going',
-            modificationEnabled: props.mod
+            filter: ''
         }
     }
 
     changeActive = (status) => {
         this.setState({ activeStatus: status })
+    }
+
+    changeFilter = (event) => {
+        this.setState({ filter: event.target.value })
     }
 
     render() {
@@ -38,26 +42,28 @@ class GuestList extends Component {
                         Declined
                     </div>
                 </div>
-                <div
-                    className="GuestList"
-                    style={{ background: this.props.background, color: this.props.color }}
-                >
-                    {this.props.guests.map((guest, i) => {
+                <div className="GuestContent">
+                    <div className="GuestList" style={{ background: this.props.background, color: this.props.color }}>
+                        {this.props.guests.map((guest, i) => {
 
-                        let value = this.state.activeStatus === guest.status ?
-                            (
-                                <div className="Guest" key={i}>
-                                    <div className="GuestUser"><FaUser /></div>
-                                    <div className="GuestName">{guest.name}</div>
-                                    {this.state.modificationEnabled ?
+                            let value = this.state.activeStatus === guest.status && guest.name.toLowerCase().includes(this.state.filter.toLowerCase()) ?
+                                (
+                                    <div className="Guest" key={i}>
+                                        <div className="GuestUser"><FaUser /></div>
+                                        <div className="GuestName">{guest.name}</div>
                                         <div className="GuestDelete"><FaTimes /></div>
-                                        : null
-                                    }
-                                </div>
-                            )
-                            : (null)
-                        return value
-                    })}
+                                    </div>
+                                )
+                                : (null)
+                            return value
+                        })}
+                    </div>
+                    <div className="GuestOptionsSearch">
+                        <div className="GuestOptionsSearchField">
+                            <input value={this.state.filter} onChange={this.changeFilter}></input>
+                            <div id="OptionsSearchIcon"><FaSearch /></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

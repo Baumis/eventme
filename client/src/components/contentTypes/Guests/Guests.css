@@ -66,3 +66,21 @@
 .ComponentGuestDelete:hover{
     color: rgba(255,255,255,1);
 }
+
+.GuestSearchField{
+    display: flex;
+    border: 1px solid gray;
+    margin: 0% 20% 0% 20%;
+    padding: 5px 15px 5px 15px;
+    border-radius: 30px;
+}
+
+.GuestSearchField input{
+    border: none;
+    width: 100%;
+}
+
+#searchIcon{
+    color: rgba(46, 184, 46, 1);
+    cursor: pointer;
+}

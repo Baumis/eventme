@@ -27,12 +27,17 @@
     cursor: pointer;
 }
 
+.GuestContent{
+    background: #7A838C;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-bottom: 10px;
+}
+
 .GuestList{
     display: flex;
     flex-direction: column;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background: #7A838C;
+    background: transparent;
     padding: 10px;
     height: 200px;
     color: white;
@@ -59,4 +64,24 @@
 
 .GuestDelete:hover{
     color: rgba(255,255,255,1);
+}
+
+.GuestOptionsSearchField{
+    display: flex;
+    border: 1px solid #373B3F;
+    margin: 0% 5% 0% 5%;
+    padding: 3px 15px 3px 15px;
+    border-radius: 30px;
+}
+
+.GuestOptionsSearchField input{
+    border: none;
+    width: 100%;
+    background: transparent;
+    color: white;
+}
+
+#OptionsSearchIcon{
+    color: rgba(46, 184, 46, 1);
+    cursor: pointer;
 }
