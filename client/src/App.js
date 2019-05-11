@@ -8,6 +8,7 @@ import eventService from './services/events'
 import SaveButton from './components/SaveButton/SaveButton'
 import ComponentEditor from './components/ComponentEditor/ComponentEditor'
 import OptionsButton from './components/OptionsButton/OptionsButton'
+import User from './components/User/User'
 
 class App extends Component {
     constructor(props) {
@@ -156,6 +157,7 @@ class App extends Component {
                     date={this.state.event.infoPanel.date}
                     contact={this.state.event.infoPanel.contact}
                 />
+                <User />
                 <ComponentContainer
                     components={this.state.event.components}
                     guests={this.state.event.guests}

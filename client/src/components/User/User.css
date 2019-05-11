@@ -1,0 +1,22 @@
+.UserPanel{
+    position: fixed;
+    display: flex;
+    color:white;
+    background: rgb(192, 192, 192, 0.8);
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 200px;
+    top: 0px;
+    right: 0px;
+    z-index: 3;
+}
+
+.UserIcon{
+    padding: 5px;
+}
+
+.UserName:hover{
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}

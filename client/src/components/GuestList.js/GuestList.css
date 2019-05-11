@@ -68,7 +68,7 @@
 
 .GuestOptionsSearchField{
     display: flex;
-    border: 1px solid #373B3F;
+    border: 1px solid rgba(0,0,0,0.2);
     margin: 0% 5% 0% 5%;
     padding: 3px 15px 3px 15px;
     border-radius: 30px;
