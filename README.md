@@ -5,10 +5,46 @@
 
 ## Development
 
+### Client
+
 ````
 npm install
 npm start
 ````
+Running on localhost:3000
+
+### Server
+
+````
+npm install
+create .env file to root of server folder if
+npm start
+````
+Running on localhost:3001
+
+## Api routes
+
+### /api/events
+
+- GET, returns all events
+- POST, creates an event
+
+### /api/events/:id
+
+- GET, returns event with given id
+- PUT, updates event with given id
+- DELETE, removes event with given id
+
+### /api/users
+
+- GET, returns all users
+- POST, creates an user
+
+### /api/users/:id
+
+- GET, returns user with given id
+- PUT, updates user with given id
+- DELETE, removes user with given id
 
 ## Code style
 
@@ -35,12 +71,11 @@ this.state = {
 ## Event structure
 ````
 event = {
-    id: 1,
+    _id: "5cd467bf23c640324cf1ec00",
     label: "My event",
     settings: {
         background: "www.kuva.fi/kuva1",
-        theme: "dark",
-        slug: "my_event"
+        theme: "LIGHT"
     },
     infoPanel: {
         phone: '020202',
@@ -49,6 +84,28 @@ event = {
         address: 'Kylänlahdentie 26',
         date: '04.06.2020'
     },
+    creator: {
+        _id: "5cd445507c2a502a18cba5ca",
+        username: "admin",
+        name: "John Doe",
+        email: "admin@example.com"
+    },
+    guests: [
+        {
+            status: "GOING",
+            user: {
+                _id: "5cd445507c2a502a18cba5ca",
+                name: "John Doe"
+            }
+        },
+        {
+            status: "PENDING",
+            user: {
+                _id: "nv83h48f3h4f87h34nfu",
+                name: "Jane Doe"
+            }
+        }
+    ],
     components: [
         {
             order: 1,
