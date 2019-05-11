@@ -1,5 +1,6 @@
 .GuestContainer{
     padding: 12px;
+    margin-bottom: 0px;
 }
 
 .StatusButtons{
@@ -17,7 +18,7 @@
 }
 
 #active{
-    color: rgba(46, 184, 46, 0.7);
+    color: rgba(46, 184, 46, 1);
     border-bottom: 1px solid rgba(46, 184, 46, 1);
 }
 
@@ -33,13 +34,15 @@
     border-bottom-right-radius: 10px;
     background: #7A838C;
     padding: 10px;
-    height: 300px;
+    height: 200px;
     color: white;
+    font-size: 15px;
+    overflow: auto;
 }
 
 .Guest{
     display: flex;
-    padding: 12px 0px 12px 0px;
+    padding: 12px 10px 12px 10px;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
@@ -50,5 +53,10 @@
 }
 
 .GuestDelete{
-    cursor: pointer
+    cursor: pointer;
+    color: rgba(255,255,255,0.5);
+}
+
+.GuestDelete:hover{
+    color: rgba(255,255,255,1);
 }

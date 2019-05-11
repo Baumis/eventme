@@ -7,7 +7,7 @@ import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import eventService from './services/events'
 import SaveButton from './components/SaveButton/SaveButton'
 import ComponentEditor from './components/ComponentEditor/ComponentEditor'
-import OptionsButton from './components/OptionsButton/OptionsButton';
+import OptionsButton from './components/OptionsButton/OptionsButton'
 
 class App extends Component {
     constructor(props) {
@@ -52,7 +52,6 @@ class App extends Component {
     }
 
     slidePanel = () => {
-        console.log(this.state.optionsPanel)
         if (this.state.optionsPanel === '0px') {
             this.setState({ optionsPanel: '-300px' })
         } else {
@@ -168,19 +167,17 @@ class App extends Component {
                     background={this.state.event.settings.background}
                     label={this.state.event.label}
                     infoPanel={this.state.event.infoPanel}
-                    slug={this.state.event.settings.slug}
                     guests={this.state.event.guests}
                     left={this.state.optionsPanel}
                     slidePanel={this.slidePanel}
                     changeLabel={this.changeLabel}
                     changeBackground={this.changeBackground}
-                    changeSlug={this.changeSlug}
                     changePhone={this.changePhone}
                     changeContact={this.changeContact}
                     changeDate={this.changeDate}
                     changeAddress={this.changeAddress}
                 />
-                <OptionsButton 
+                <OptionsButton
                     showPanel={this.slidePanel}
                 />
                 {this.state.editor.show

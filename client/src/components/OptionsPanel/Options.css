@@ -8,7 +8,11 @@
     background: #595F65;
     transition: left 0.5s;
     font-family: 'Roboto', sans-serif;
-    overflow:auto;
+}
+
+.OptionsCanvas{
+  height: 100%;
+  overflow: auto;
 }
 
 .OptionsHeader{
@@ -35,7 +39,8 @@
     width: 50px;
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
-    border: 1px solid #2f3337;
+    cursor: pointer;
+    /*border: 1px solid #2f3337;*/
 }
 
 .OptionsHeader p{
@@ -84,7 +89,7 @@
   border-radius: 30px;
   border: none;
   height: 18px;
-  width: 150px;
+  width: 120px;
   padding: 3px 10px 3px 10px;
   background: #7A838C;
   color:white;

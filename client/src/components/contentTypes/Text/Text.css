@@ -1,12 +1,18 @@
-.Container{
+.ContentContainer{
     position: relative;
     z-index: 1;
     padding: 10px;
+    margin-bottom: 10px;
+    overflow: auto;
 }
 
-.Title{
+.TextTitle{
     text-align: start;
     padding: 0px 30px 0px 30px;
+}
+
+.TextTitle h2{
+    margin: 0px;
 }
 
 .TextContent{

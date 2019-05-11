@@ -140,3 +140,17 @@
     padding: 5px;
     font-family: 'Roboto', sans-serif;
 }
+
+.SettingInfo{
+    display: flex;
+    flex-direction: column;
+    color: #7A838C;
+    font-size: 16px;
+    padding: 20px 10px 15px 10px;
+    border: 1px solid #7A838C;
+    border-radius: 10px;
+}
+
+.InfoTitleRow{
+    font-size: 18px;
+}

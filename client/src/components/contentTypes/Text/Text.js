@@ -3,8 +3,8 @@ import './Text.css'
 
 const Text = ({ data }) => {
     return (
-        <div className="Container">
-            <div className="Title">
+        <div className="ContentContainer">
+            <div className="TextTitle">
                 <h2>{data.title}</h2>
             </div>
             <div className="TextContent">

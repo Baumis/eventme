@@ -11,7 +11,6 @@ class OptionsPanel extends Component {
         this.state = {
             background: props.background,
             label: props.label,
-            slug: props.slug,
             phone: props.infoPanel.phone,
             contact: props.infoPanel.contact,
             date: props.infoPanel.date,
@@ -27,11 +26,6 @@ class OptionsPanel extends Component {
     changeLabel = (event) => {
         this.setState({ label: event.target.value })
         this.props.changeLabel(event)
-    }
-
-    changeSlug = (event) => {
-        this.setState({ slug: event.target.value })
-        this.props.changeSlug(event)
     }
 
     changePhone = (event) => {
@@ -61,35 +55,34 @@ class OptionsPanel extends Component {
                     <p>Options</p>
                     <button onClick={this.props.slidePanel}><FaAngleDoubleLeft /></button>
                 </div>
-                <div className="OptionsContent">
-                    <InputBlock label={'Slug'} value={this.state.slug} changeValue={this.changeSlug} />
-                </div>
-                <div className="OptionsContent">
-                    <InputBlock label={'Header'} value={this.state.label} changeValue={this.changeLabel} />
-                </div>
-                <div className="OptionsContent">
-                    <InputBlock label={'Header background'} value={this.state.background} changeValue={this.changeBackground} />
-                </div>
-                <div className="sectionDevider">
-                    <label>Info panel</label>
-                </div>
-                <div className="OptionsContent">
-                    <InfoBlock label={'Phone'} value={this.state.phone} changeValue={this.changePhone} />
-                    <InfoBlock label={'Contact'} value={this.state.contact} changeValue={this.changeContact} />
-                    <InfoBlock label={'Date'} value={this.state.date} changeValue={this.changeDate} />
-                    <InfoBlock label={'Address'} value={this.state.address} changeValue={this.changeAddress} />
-                </div>
-                <div className="sectionDevider">
-                    <label>Guests</label>
-                </div>
-                <div className="OptionsContent">
-                    <InputBlock label={'Invite link'} />
-                </div>
-                <div className="OptionsContent">
-                    <GuestList
-                        guests={this.props.guests}
-                        mod={true}
-                    />
+                <div className="OptionsCanvas">
+                    <div className="OptionsContent">
+                        <InputBlock label={'Header'} value={this.state.label} changeValue={this.changeLabel} />
+                    </div>
+                    <div className="OptionsContent">
+                        <InputBlock label={'Header background url'} value={this.state.background} changeValue={this.changeBackground} />
+                    </div>
+                    <div className="sectionDevider">
+                        <label>Info panel</label>
+                    </div>
+                    <div className="OptionsContent">
+                        <InfoBlock label={'Phone'} value={this.state.phone} changeValue={this.changePhone} />
+                        <InfoBlock label={'Contact'} value={this.state.contact} changeValue={this.changeContact} />
+                        <InfoBlock label={'Date'} value={this.state.date} changeValue={this.changeDate} />
+                        <InfoBlock label={'Address'} value={this.state.address} changeValue={this.changeAddress} />
+                    </div>
+                    <div className="sectionDevider">
+                        <label>Guests</label>
+                    </div>
+                    <div className="OptionsContent">
+                        <InputBlock label={'Invite link'} />
+                    </div>
+                    <div className="OptionsContent">
+                        <GuestList
+                            guests={this.props.guests}
+                            mod={true}
+                        />
+                    </div>
                 </div>
             </div>
         )

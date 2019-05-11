@@ -13,9 +13,7 @@ class MapOptions extends Component {
     }
 
     componentDidMount() {
-        if (this.props.component.data.title &&
-            this.props.component.data.longitude &&
-            this.props.component.data.latitude) {
+        if (this.props.component.type === 'Map') {
             this.setState({
                 title: this.props.component.data.title,
                 longitude: this.props.component.data.longitude,

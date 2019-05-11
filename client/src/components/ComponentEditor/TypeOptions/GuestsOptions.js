@@ -1,43 +1,35 @@
 import React, { Component } from 'react'
 import '../ComponentEditor.css'
+import { FaInfo } from 'react-icons/fa'
 
 
 class GuestsOptions extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: '',
         }
     }
 
     componentDidMount() {
-        if (this.props.component.data.title){
+        if (this.props.component.type === 'Guests') {
             this.setState({
                 title: this.props.component.data.title,
             })
         }
     }
 
-    changeTitle = async (event) => {
-        await this.setState({ title: event.target.value })
-        this.sendData()
-    }
-
-    sendData = () => {
-        const data = {
-            title: this.state.title,
-        }
-        this.props.updateData(data)
-    }
     render() {
         return (
             <div className="DataSettings">
                 <div className="headerRow">
                     <h4>Guests</h4>
                 </div>
-                <div className="SettingInput">
-                    <label>title</label>
-                    <input value={this.state.title} onChange={this.changeTitle}></input>
+                <div className="SettingInfo">
+                    <div className="InfoTitleRow">
+                        <FaInfo />
+                        <label>Info</label>
+                    </div>
+                    <p>{'The guest-component displays the event\'s guest and their status'}</p>
                 </div>
             </div>
         )
