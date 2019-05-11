@@ -1,0 +1,30 @@
+.InviteContainer{
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20%;
+    height: 100%;
+}
+
+.InviteTitle{
+    padding: 0px 30px 20px 30px;
+}
+
+.InviteTitle h2{
+    margin: 0px;
+}
+
+.InviteTitle p{
+    margin: 5px;
+}
+
+.InviteContent{
+    border: 10px solid gray;
+    border-radius: 20px;
+    width: 90%;
+}

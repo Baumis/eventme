@@ -3,7 +3,8 @@ import './ComponentEditor.css'
 import TextOptions from './TypeOptions/TextOptions'
 import MapOptions from './TypeOptions/MapOptions'
 import GuestsOptions from './TypeOptions/GuestsOptions'
-import { FaLocationArrow, FaPen, FaTimes, FaList } from 'react-icons/fa'
+import InviteLinkOptions from './TypeOptions/InviteLinkOptions'
+import { FaLocationArrow, FaPen, FaTimes, FaList, FaLink } from 'react-icons/fa'
 
 
 class ComponentEditor extends Component {
@@ -16,7 +17,8 @@ class ComponentEditor extends Component {
             types: {
                 Text: TextOptions,
                 Map: MapOptions,
-                Guests: GuestsOptions
+                Guests: GuestsOptions,
+                InviteLink: InviteLinkOptions
             },
             data: props.component.data
         }
@@ -41,17 +43,21 @@ class ComponentEditor extends Component {
             <div className="ModalBackground" >
                 <div className="EditorContainer">
                     <div className="TypeRow">
-                        <div className="TypeItem" onClick={() => this.changeType('Text')}>
+                        <div className="TypeItem" onClick={() => this.changeType('Text')} id={this.state.activeType === 'Text' ? 'TypeActive' : 'TypeNormal'}>
                             <FaPen />
                             <label>Text</label>
                         </div>
-                        <div className="TypeItem" onClick={() => this.changeType('Map')}>
+                        <div className="TypeItem" onClick={() => this.changeType('Map')} id={this.state.activeType === 'Map' ? 'TypeActive' : 'TypeNormal'}>
                             <FaLocationArrow />
                             <label>Map</label>
                         </div>
-                        <div className="TypeItem" onClick={() => this.changeType('Guests')}>
+                        <div className="TypeItem" onClick={() => this.changeType('Guests')} id={this.state.activeType === 'Guests' ? 'TypeActive' : 'TypeNormal'}>
                             <FaList />
                             <label>Guests</label>
+                        </div>
+                        <div className="TypeItem" onClick={() => this.changeType('InviteLink')} id={this.state.activeType === 'InviteLink' ? 'TypeActive' : 'TypeNormal'}>
+                            <FaLink />
+                            <label>Invite</label>
                         </div>
                     </div>
                     <div className="SettingsContent">
