@@ -7,8 +7,9 @@
     justify-content: center;
     height: 60px;
     width: 200px;
-    top: 0px;
-    right: 0px;
+    top: 5px;
+    right: 5px;
+    border-radius: 10px;
     z-index: 3;
 }
 
