@@ -1,16 +1,16 @@
-.App {
+.Event {
   text-align: center;
   background: white;
 }
 
-.App-header {
+.Event-header {
   background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
 }
 
-.App-intro {
+.Event-intro {
   font-size: large;
 }
 

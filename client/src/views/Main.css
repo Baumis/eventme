@@ -1,0 +1,38 @@
+.Main{
+    text-align: center;
+}
+
+.MainNavbar{
+    height: 60px;
+    background: #595F65;
+}
+
+.MainContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.CreateButton{
+    position: fixed;
+    top: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 80px;
+    border: 2px solid rgba(46, 184, 46, 1);
+    color: rgba(46, 184, 46, 1);
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.CreateButton:hover{
+    -webkit-box-shadow: 0px 0px 6px 1px rgb(69, 69, 69, 0.4);
+    -moz-box-shadow: 0px 0px 6px 1px rgba(69,69,69,0.4);
+    box-shadow: 0px 0px 6px 1px rgba(69,69,69,0.4);
+    font-size: 22.5px;
+    height: 82px;
+    width: 162px;
+}
