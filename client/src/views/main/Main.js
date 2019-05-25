@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Main.css'
 import CreateButton from './components/createButton/CreateButton'
 import Navbar from './components/navbar/Navbar'
-import Login from './components/login/Login'
+import LoginModal from './components/loginModal/LoginModal'
 
 class Main extends Component {
     constructor(props) {
@@ -13,8 +13,9 @@ class Main extends Component {
     }
 
     displayLogin = () => {
+        console.log('moi')
         this.state.displayLogin ?
-            this.setState({ displaylogin: false })
+            this.setState({ displayLogin: false })
             : this.setState({ displayLogin: true })
     }
 
@@ -26,7 +27,7 @@ class Main extends Component {
                     <CreateButton click={this.displayLogin}/>
                 </div>
                 {this.state.displayLogin ?
-                    <Login />
+                    <LoginModal close={this.displayLogin}/>
                     : null
                 }
             </div>
