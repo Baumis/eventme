@@ -1,20 +1,34 @@
 import React, { Component } from 'react'
 import './Main.css'
-import { Link } from 'react-router-dom'
+import CreateButton from './components/createButton/CreateButton'
+import Navbar from './components/navbar/Navbar'
+import Login from './components/login/Login'
 
 class Main extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            displayLogin: false
+        }
+    }
+
+    displayLogin = () => {
+        this.state.displayLogin ?
+            this.setState({ displaylogin: false })
+            : this.setState({ displayLogin: true })
+    }
 
     render() {
         return (
             <div className="Main">
-                <div className="MainNavbar">
-
-                </div>
+                <Navbar />
                 <div className="MainContent">
-                    <Link to="/event">
-                        <div className="CreateButton">Create event</div>
-                    </Link>
+                    <CreateButton click={this.displayLogin}/>
                 </div>
+                {this.state.displayLogin ?
+                    <Login />
+                    : null
+                }
             </div>
         )
     }
