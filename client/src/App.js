@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Main from './views/Main'
-import Event from './views/Event'
+import Main from './views/main/Main'
+import Event from './views/event/Event'
 
 const App = () => {
     return (
