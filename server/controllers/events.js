@@ -7,7 +7,7 @@ eventRouter.get('/', async (request, response) => {
         .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
         .populate('guests.user', { _id: 1, name: 1 })
 
-    response.json(events)
+    response.json(events.map(Event.format))
 })
 
 eventRouter.get('/:id', async (request, response) => {
@@ -17,7 +17,7 @@ eventRouter.get('/:id', async (request, response) => {
             .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
             .populate('guests.user', { _id: 1, name: 1 })
 
-        response.json(event)
+        response.json(Event.format(event))
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
@@ -56,7 +56,7 @@ eventRouter.post('/', async (request, response) => {
 
         const savedEvent = await newEvent.save()
 
-        response.status(201).json(savedEvent)
+        response.status(201).json(Event.format(savedEvent))
     } catch (exception) {
         response.status(500).json({ error: 'something went wrong...' })
     }
@@ -76,7 +76,7 @@ eventRouter.put('/:id', async (request, response) => {
 
         const updatedEvent = await Event.findByIdAndUpdate(request.params.id, event, { new: true })
 
-        response.json(updatedEvent)
+        response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }

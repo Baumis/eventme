@@ -43,6 +43,18 @@ const eventSchema = new mongoose.Schema({
     components: [componentSchema]
 })
 
+eventSchema.statics.format = (event) => {
+    return {
+        _id: event._id,
+        label: event.label,
+        creator: event.creator,
+        settings: event.settings,
+        infoPanel: event.infoPanel,
+        guests: event.guests,
+        components: event.components
+    }
+}
+
 const Event = mongoose.model('Event', eventSchema)
 
 module.exports = Event

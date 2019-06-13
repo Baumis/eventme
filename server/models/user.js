@@ -7,6 +7,15 @@ const userSchema = new mongoose.Schema({
     passwordHash: String
 })
 
-const User = mongoose.model('User', userSchema)
+userSchema.statics.format = (user) => {
+    return {
+        _id: user._id,
+        username: user.username,
+        name: user.name,
+        email: user.email
+    }
+}
+
+const User = mongoose.model('User', userSchema) 
 
 module.exports = User
