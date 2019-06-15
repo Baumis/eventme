@@ -1,0 +1,18 @@
+
+.searchBarContainer{
+    width: 300px;
+    height: 25px;
+    display: flex;
+    border: none;
+    padding: 3px 10px 3px 10px;
+    border-radius: 30px;
+    background: #7A838C;
+    color:white;
+}
+
+.searchBarContainer input{
+    background: transparent;
+    color:white;
+    border: none;
+    width: 100%;
+}
