@@ -1,22 +1,19 @@
-.UserPanel{
-    position: fixed;
+.UserInfo{
     display: flex;
     color:white;
-    background: rgb(192, 192, 192, 0.8);
     align-items: center;
     justify-content: center;
     height: 60px;
-    width: 200px;
     top: 5px;
     right: 5px;
     border-radius: 10px;
 }
 
-.UserIcon{
+.UserInfoIcon{
     padding: 5px;
 }
 
-.UserName:hover{
+.UserInfoName:hover{
     border-bottom: 1px solid white;
     cursor: pointer;
 }

@@ -1,7 +1,7 @@
 .Navbar{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     height: 100px;
     background: #373B3F;
     -webkit-box-shadow: 0px 0px 6px 2px rgb(69, 69, 69, 0.4);
@@ -13,4 +13,9 @@
     font-size: 20px;
     font-weight: 500;
     color: white;
+}
+
+.NavBarItem{
+    flex-grow: 1;
+    width: 33%;
 }

@@ -8,11 +8,11 @@ class Navbar extends Component {
     render() {
         return (
             <div className="Navbar">
-                <div className="companyLogo">
+                <div className="companyLogo NavBarItem">
                     <p>EVENTME.COM</p>
                 </div>
-                <MainSearchbar />
-                <User />
+                <div className="NavBarItem"><MainSearchbar /></div>
+                <div className="NavBarItem"><User /></div>
             </div>
         )
     }

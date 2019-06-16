@@ -2,12 +2,22 @@ import React from 'react'
 import './User.css'
 import { FaUser } from 'react-icons/fa'
 
-const User = () => {
+const User = (props) => {
 
     return (
-        <div className="UserPanel">
-            <div className="UserIcon"><FaUser /></div>
-            <div className="UserName">Simo Häyhä</div>
+        <div className="UserInfo">
+            {props.userLogged
+                ? (
+                    <div>
+                        <div className="UserInfoIcon"><FaUser /></div>
+                        <div className="UserInfoName">Simo Häyhä</div>
+                    </div>
+                ) : (
+                    <div>
+                        <div className="LoginButton">Sign in</div>
+                    </div>
+                )
+            }
         </div>
     )
 }
