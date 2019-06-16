@@ -3,7 +3,7 @@
     z-index: 1;
     padding: 10px;
     margin-bottom: 10px;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .TextTitle{

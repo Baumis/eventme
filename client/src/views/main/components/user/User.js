@@ -1,25 +1,31 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './User.css'
 import { FaUser } from 'react-icons/fa'
 
-const User = (props) => {
+class User extends Component {
 
-    return (
-        <div className="UserInfo">
-            {props.userLogged
-                ? (
-                    <div>
-                        <div className="UserInfoIcon"><FaUser /></div>
-                        <div className="UserInfoName">Simo Häyhä</div>
-                    </div>
-                ) : (
-                    <div>
-                        <div className="LoginButton">Sign in</div>
-                    </div>
-                )
-            }
-        </div>
-    )
+    login = () => {
+        this.props.VisibilityStore.showLoginModal()
+    }
+    render() {
+        return (
+            <div className="UserInfo">
+                {this.props.UserStore.currentUser !== null
+                    ? (
+                        <div>
+                            <div className="UserInfoIcon"><FaUser /></div>
+                            <div className="UserInfoName">{this.props.UserStore.currentUser.username}</div>
+                        </div>
+                    ) : (
+                        <div>
+                            <div className="LoginButton" onClick={this.login}>Sign in</div>
+                        </div>
+                    )
+                }
+            </div>
+        )
+    }
 }
 
-export default User
+export default inject('UserStore', 'VisibilityStore')(observer(User))

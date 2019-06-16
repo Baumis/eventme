@@ -1,22 +1,16 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './Main.css'
 import CreateButton from './components/createButton/CreateButton'
 import Navbar from './components/navbar/Navbar'
 import LoginModal from './components/loginModal/LoginModal'
 
 class Main extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            displayLogin: false
-        }
-    }
 
-    displayLogin = () => {
-        console.log('moi')
-        this.state.displayLogin ?
-            this.setState({ displayLogin: false })
-            : this.setState({ displayLogin: true })
+    createEvent = () => {
+        this.props.UserStore.currentUser === null ?
+            this.props.VisibilityStore.showLoginModal()
+            : this.props.history.push('/event')
     }
 
     render() {
@@ -24,10 +18,10 @@ class Main extends Component {
             <div className="Main">
                 <Navbar />
                 <div className="MainContent">
-                    <CreateButton click={this.displayLogin}/>
+                    <CreateButton click={this.createEvent} />
                 </div>
-                {this.state.displayLogin ?
-                    <LoginModal close={this.displayLogin}/>
+                {this.props.VisibilityStore.loginModal ?
+                    <LoginModal create={this.createEvent}/>
                     : null
                 }
             </div>
@@ -35,4 +29,4 @@ class Main extends Component {
     }
 }
 
-export default Main
+export default inject('UserStore', 'VisibilityStore')(observer(Main))

@@ -1,12 +1,17 @@
 import { Component } from 'react'
-import { observable, decorate } from 'mobx'
+import { observable, decorate, action } from 'mobx'
 
 class UserStore extends Component {
     currentUser = null
+
+    setCurrentUser(user) {
+        this.currentUser = user
+    }
 }
 
 decorate(UserStore, {
-    currentUser: observable
+    currentUser: observable,
+    setCurrentUser: action
 })
 
-export default UserStore
+export default new UserStore()

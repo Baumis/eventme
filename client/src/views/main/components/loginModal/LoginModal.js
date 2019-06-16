@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './LoginModal.css'
 import { Link } from 'react-router-dom'
 import { FaTimes } from 'react-icons/fa'
@@ -23,13 +24,16 @@ class LoginModal extends Component {
         this.setState({ content: tab })
     }
 
+    createUser = () => {
+    }
+
     render() {
         const TagName = this.contents[this.state.content]
         return (
             <div className="LoginBackground" >
                 <div className="Login">
                     <div className="topRow">
-                        <div className="ExitIcon" onClick={this.props.close}>
+                        <div className="ExitIcon" onClick={() => this.props.VisibilityStore.closeLoginModal()}>
                             <FaTimes />
                         </div>
                     </div>
@@ -49,7 +53,7 @@ class LoginModal extends Component {
                             Sing up
                         </div>
                     </div>
-                    <TagName />
+                    <TagName create={this.props.create}/>
                     <div className="SkipRow">
                         <Link style={{ 'textDecoration': 'none', 'color': '#B2BFCB' }} to="/event">
                             {'skip'}
@@ -61,4 +65,4 @@ class LoginModal extends Component {
     }
 }
 
-export default LoginModal
+export default inject('UserStore', 'VisibilityStore')(observer(LoginModal))
