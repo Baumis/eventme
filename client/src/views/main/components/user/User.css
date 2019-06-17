@@ -1,0 +1,19 @@
+.UserInfo{
+    display: flex;
+    color:white;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    top: 5px;
+    right: 5px;
+    border-radius: 10px;
+}
+
+.UserInfoIcon{
+    padding: 5px;
+}
+
+.UserInfoName:hover{
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}

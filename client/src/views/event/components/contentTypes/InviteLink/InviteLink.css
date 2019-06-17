@@ -25,6 +25,7 @@
 
 .InviteContent{
     border: 10px solid gray;
-    border-radius: 20px;
+    border-radius: 50px;
     width: 90%;
+    font-size: 20px;
 }
