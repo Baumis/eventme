@@ -26,7 +26,7 @@ class Event extends Component {
     }
 
     async componentDidMount() {
-        const event = await eventService.getOne(0)
+        const event = await eventService.getOne('5d07dcafa37e6c0904b17423')
         await this.setState({
             loading: false,
             event
@@ -35,21 +35,16 @@ class Event extends Component {
     }
 
     addComponent = async (type, data) => {
-        const event = await eventService.addComponent(this.state.event.id, type, data)
-        console.log(event)
-        this.setState({ event })
-        this.showEditor(event.components.length)
+        console.log('TODO: add component: ' + type)
+        console.log(data)
     }
 
     addGuest = async (name) => {
-        const event = await eventService.addGuest(this.state.event.id, name)
-        this.setState({ event })
+        console.log('TODO: add guest: ' + name)
     }
 
     deleteComponent = async (order) => {
-        const event = await eventService.removeComponent(this.state.event.id, order)
-        console.log(event)
-        this.setState({ event })
+        console.log('TODO: delete component: ' + order)
     }
 
     slidePanel = () => {
