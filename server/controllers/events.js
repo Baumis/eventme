@@ -14,6 +14,7 @@ eventRouter.get('/template', async (request, response) => {
     const eventTemplate = new Event().toObject()
 
     delete eventTemplate['_id']
+    delete eventTemplate['guests']
 
     response.json(Event.format(eventTemplate))
 })
@@ -35,20 +36,17 @@ eventRouter.post('/', async (request, response) => {
     try {
         const body = request.body
 
-        if (!body.label) {
-            return response.status(400).json({ error: 'label missing' })
-        }
-
         const creator = '5cd445507c2a502a18cba5ca'
-
-        body.creator = creator
 
         const newEvent = new Event({
             label: body.label,
             creator: creator,
             settings: body.settings,
             infoPanel: body.infoPanel,
-            guests: body.guests,
+            guests: [{
+                user: creator,
+                status: 'GOING'
+            }],
             components: body.components
         })
 
@@ -73,7 +71,12 @@ eventRouter.put('/:id', async (request, response) => {
             label: body.label,
             settings: body.settings,
             infoPanel: body.infoPanel,
-            guests: body.guests,
+            guests: body.guests.map(guest => {
+                return {
+                    user: guest.user._id,
+                    status: guest.status
+                }
+            }),
             components: body.components
         }
 
