@@ -1,5 +1,6 @@
 const eventRouter = require('express').Router()
 const Event = require('../models/event')
+const User = require('../models/user')
 
 eventRouter.get('/', async (request, response) => {
     const events = await Event
@@ -50,7 +51,32 @@ eventRouter.post('/', async (request, response) => {
             components: body.components
         })
 
-        const savedEvent = await Event.create(newEvent)
+        const savedEvent = await newEvent.save()
+
+        const populatedEvent = await savedEvent
+                .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
+                .populate('guests.user', { _id: 1, name: 1 })
+                .execPopulate()
+
+        response.status(201).json(Event.format(populatedEvent))
+    } catch (exception) {
+        response.status(500).json({ error: 'something went wrong...' })
+    }
+})
+
+eventRouter.post('/:id/guest', async (request, response) => {
+    try {
+        const body = request.body
+
+        const event = await Event.findById(request.params.id)
+        const user = await User.findById(body.userId)
+
+        event.guests = event.guests.concat({
+            user: user._id,
+            status: 'PENDING'
+        })
+
+        const savedEvent = await event.save()
 
         const populatedEvent = await savedEvent
                 .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
@@ -71,12 +97,6 @@ eventRouter.put('/:id', async (request, response) => {
             label: body.label,
             settings: body.settings,
             infoPanel: body.infoPanel,
-            guests: body.guests.map(guest => {
-                return {
-                    user: guest.user._id,
-                    status: guest.status
-                }
-            }),
             components: body.components
         }
 
