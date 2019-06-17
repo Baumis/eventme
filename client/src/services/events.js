@@ -38,4 +38,9 @@ const update = async (updatedObject) => {
     return response.data
 }
 
-export default { getOne, getAll, create, remove, update, setToken }
+const addGuest = async (id, userId) => {
+    const response = await axios.post(`${baseUrl}/${id}/guest`, { userId }, config())
+    return response.data
+}
+
+export default { getOne, getAll, create, remove, update, addGuest, setToken }
