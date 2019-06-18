@@ -38,9 +38,19 @@ const update = async (updatedObject) => {
     return response.data
 }
 
-const addGuest = async (id, userId) => {
-    const response = await axios.post(`${baseUrl}/${id}/guest`, { userId }, config())
+const getTemplate = async () => {
+    const response = await axios.get(`${baseUrl}/template`)
     return response.data
 }
 
-export default { getOne, getAll, create, remove, update, addGuest, setToken }
+const addGuest = async (id, userId) => {
+    const response = await axios.post(`${baseUrl}/${id}/add/${userId}`, config())
+    return response.data
+}
+
+const removeGuest = async (id, userId) => {
+    const response = await axios.post(`${baseUrl}/${id}/remove/${userId}`, config())
+    return response.data
+}
+
+export default { getOne, getAll, create, remove, update, addGuest, removeGuest, getTemplate, setToken }
