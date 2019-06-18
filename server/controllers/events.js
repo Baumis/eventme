@@ -5,26 +5,17 @@ const User = require('../models/user')
 eventRouter.get('/', async (request, response) => {
     const events = await Event
         .find({})
-        .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
+        .populate('creator', { _id: 1, name: 1 })
         .populate('guests.user', { _id: 1, name: 1 })
 
     response.json(events.map(Event.format))
-})
-
-eventRouter.get('/template', async (request, response) => {
-    const eventTemplate = new Event().toObject()
-
-    delete eventTemplate['_id']
-    delete eventTemplate['guests']
-
-    response.json(Event.format(eventTemplate))
 })
 
 eventRouter.get('/:id', async (request, response) => {
     try {
         const event = await Event
             .findById(request.params.id)
-            .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
+            .populate('creator', { _id: 1, name: 1 })
             .populate('guests.user', { _id: 1, name: 1 })
 
         response.json(Event.format(event))
@@ -54,34 +45,9 @@ eventRouter.post('/', async (request, response) => {
         const savedEvent = await newEvent.save()
 
         const populatedEvent = await savedEvent
-                .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
-                .populate('guests.user', { _id: 1, name: 1 })
-                .execPopulate()
-
-        response.status(201).json(Event.format(populatedEvent))
-    } catch (exception) {
-        response.status(500).json({ error: 'something went wrong...' })
-    }
-})
-
-eventRouter.post('/:id/guest', async (request, response) => {
-    try {
-        const body = request.body
-
-        const event = await Event.findById(request.params.id)
-        const user = await User.findById(body.userId)
-
-        event.guests = event.guests.concat({
-            user: user._id,
-            status: 'PENDING'
-        })
-
-        const savedEvent = await event.save()
-
-        const populatedEvent = await savedEvent
-                .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
-                .populate('guests.user', { _id: 1, name: 1 })
-                .execPopulate()
+            .populate('creator', { _id: 1, name: 1 })
+            .populate('guests.user', { _id: 1, name: 1 })
+            .execPopulate()
 
         response.status(201).json(Event.format(populatedEvent))
     } catch (exception) {
@@ -103,9 +69,9 @@ eventRouter.put('/:id', async (request, response) => {
         const updatedEvent = await Event.findByIdAndUpdate(request.params.id, event, { new: true })
 
         const populatedEvent = await updatedEvent
-                .populate('creator', { _id: 1, username: 1, name: 1, email: 1 })
-                .populate('guests.user', { _id: 1, name: 1 })
-                .execPopulate()
+            .populate('creator', { _id: 1, name: 1 })
+            .populate('guests.user', { _id: 1, name: 1 })
+            .execPopulate()
 
         response.json(Event.format(populatedEvent))
     } catch (exception) {
@@ -119,6 +85,57 @@ eventRouter.delete('/:id', async (request, response) => {
             .findByIdAndDelete(request.params.id)
 
         response.status(204).end()
+    } catch (exception) {
+        response.status(400).send({ error: 'Malformatted id' })
+    }
+})
+
+eventRouter.get('/template', async (request, response) => {
+    const eventTemplate = new Event().toObject()
+
+    delete eventTemplate['_id']
+    delete eventTemplate['guests']
+
+    response.json(Event.format(eventTemplate))
+})
+
+eventRouter.post('/:id/add/:guestId', async (request, response) => {
+    try {
+        const event = await Event.findById(request.params.id)
+        const user = await User.findById(request.params.guestId)
+
+        event.guests = event.guests.concat({
+            user: user._id,
+            status: 'PENDING'
+        })
+
+        const savedEvent = await event.save()
+
+        const populatedEvent = await savedEvent
+            .populate('creator', { _id: 1, name: 1 })
+            .populate('guests.user', { _id: 1, name: 1 })
+            .execPopulate()
+
+        response.status(201).json(Event.format(populatedEvent))
+    } catch (exception) {
+        response.status(400).send({ error: 'Malformatted id' })
+    }
+})
+
+eventRouter.post('/:id/remove/:guestId', async (request, response) => {
+    try {
+        const event = await Event.findById(request.params.id)
+
+        event.guests = event.guests.filter(guest => guest.user.toString() !== request.params.guestId)
+
+        const savedEvent = await event.save()
+
+        const populatedEvent = await savedEvent
+            .populate('creator', { _id: 1, name: 1 })
+            .populate('guests.user', { _id: 1, name: 1 })
+            .execPopulate()
+
+        response.status(201).json(Event.format(populatedEvent))
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
