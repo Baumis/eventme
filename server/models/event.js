@@ -21,23 +21,51 @@ const guestSchema = new mongoose.Schema({
     _id: false
 })
 
+const infoPanelSchema = new mongoose.Schema({
+    phone: {
+        type: String,
+        default: ''
+    },
+    email: {
+        type: String,
+        default: ''
+    },
+    contact: {
+        type: String,
+        default: ''
+    },
+    address: {
+        type: String,
+        default: ''
+    },
+    date: {
+        type: Date,
+        default: Date.now()
+    },
+    _id: false
+})
+
+const settingsSchema = new mongoose.Schema({
+    background: {
+        type: String,
+        default: 'https://picsum.photos/1440/550'
+    },
+    _id: false
+})
+
 const eventSchema = new mongoose.Schema({
-    label: String,
+    label: {
+        type: String,
+        default: 'My Event'
+    },
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     settings: {
-        background: String,
-        theme: {
-            type: String,
-            enum: ['LIGHT', 'DARK'],
-            default: 'LIGHT'
-        }
+        type: settingsSchema,
+        default: {}
     },
     infoPanel: {
-        phone: String,
-        email: String,
-        contact: String,
-        address: String,
-        date: Date
+        type: infoPanelSchema,
+        default: {}
     },
     guests: [guestSchema],
     components: [componentSchema]

@@ -17,7 +17,7 @@ Running on localhost:3000
 
 ````
 npm install
-create .env file to root of server folder if
+create .env file to root of server folder if not created
 npm start
 ````
 Running on localhost:3001
@@ -28,6 +28,10 @@ Running on localhost:3001
 
 - GET, returns all events
 - POST, creates an event
+
+### /api/events/template
+
+- GET, returns a event template without guests, creator and id
 
 ### /api/events/:id
 
@@ -45,6 +49,10 @@ Running on localhost:3001
 - GET, returns user with given id
 - PUT, updates user with given id
 - DELETE, removes user with given id
+
+### /api/login
+
+- POST, returns signed in user and token
 
 ## Code style
 
@@ -74,15 +82,14 @@ event = {
     _id: "5cd467bf23c640324cf1ec00",
     label: "My event",
     settings: {
-        background: "www.kuva.fi/kuva1",
-        theme: "LIGHT"
+        background: "www.kuva.fi/kuva1"
     },
     infoPanel: {
         phone: '020202',
         email: 'mikko@valimaa.fi',
         contact: 'Mikko "Xarte" Välimaa',
         address: 'Kylänlahdentie 26',
-        date: '04.06.2020'
+        date: '2019-06-17T18:22:49.820+00:00'
     },
     creator: {
         _id: "5cd445507c2a502a18cba5ca",
