@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './Event.css'
 import Header from './components/Header/Header'
 import ComponentAdder from './components/ComponentContainer/ComponentAdder'
@@ -27,11 +28,11 @@ class Event extends Component {
 
     async componentDidMount() {
         const event = await eventService.getOne('5d07dcafa37e6c0904b17423')
+        await this.props.EventStore.initializeEvent()
         await this.setState({
             loading: false,
             event
         })
-        console.log(this.state)
     }
 
     addComponent = async (type, data) => {
@@ -145,7 +146,7 @@ class Event extends Component {
             <div className='Event'>
                 <Header
                     label={this.state.event.label}
-                    background={this.state.event.settings.background}
+                    background={this.props.EventStore.event.settings.background}
                     save={this.saveHeader}
                     phone={this.state.event.infoPanel.phone}
                     address={this.state.event.infoPanel.address}
@@ -191,4 +192,4 @@ class Event extends Component {
     }
 }
 
-export default Event
+export default inject('EventStore')(observer(Event))

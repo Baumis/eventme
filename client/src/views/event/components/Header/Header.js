@@ -1,4 +1,5 @@
 import React from 'react'
+import { inject, observer } from 'mobx-react'
 import InfoPanel from '../InfoPanel/InfoPanel.js'
 import './Header.css'
 
@@ -23,4 +24,4 @@ const Header = (props) => {
     )
 }
 
-export default Header
+export default inject('EventStore')(observer(Header))
