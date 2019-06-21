@@ -1,27 +1,28 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import InfoPanel from '../InfoPanel/InfoPanel.js'
 import './Header.css'
 
-const Header = (props) => {
+class Header extends Component {
 
-    const headerStyles = {
+    headerStyles = {
         color: 'white',
-        backgroundImage: 'url(' + props.background + ')'
+        backgroundImage: 'url(' + this.props.EventStore.event.settings.background + ')'
     }
-
-    return (
-        <div style={headerStyles} className="Header-container">
-            <h1>{props.label}</h1>
-            <InfoPanel
-                showInfoBoolean={props.showInfoBoolean}
-                date={props.date}
-                contact={props.contact}
-                phone={props.phone}
-                address={props.address}
-            />
-        </div>
-    )
+    render() {
+        return (
+            <div style={this.headerStyles} className="Header-container">
+                <h1>{this.props.EventStore.event.label}</h1>
+                <InfoPanel
+                    showInfoBoolean={this.props.showInfoBoolean}
+                    date={this.props.EventStore.event.infoPanel.date}
+                    contact={this.props.EventStore.event.infoPanel.contact}
+                    phone={this.props.EventStore.event.infoPanel.phone}
+                    address={this.props.EventStore.event.infoPanel.address}
+                />
+            </div>
+        )
+    }
 }
 
 export default inject('EventStore')(observer(Header))

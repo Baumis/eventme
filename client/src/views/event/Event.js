@@ -27,7 +27,8 @@ class Event extends Component {
     }
 
     async componentDidMount() {
-        const event = await eventService.getOne('5d07dcafa37e6c0904b17423')
+        //const event = await eventService.getOne('5d07dcafa37e6c0904b17423')
+        const event = { "_id": "5d07dcafa37e6c0904b17423", "label": "This is me", "creator": { "_id": "5cd445507c2a502a18cba5ca", "name": "John Doe" }, "settings": { "background": "https://picsum.photos/1440/550" }, "infoPanel": { "phone": "", "email": "", "contact": "", "address": "", "date": "2019-06-17T18:22:49.820Z" }, "guests": [], "components": [{"Type": "Text", "data": {"title": "Moi", "content": "Moi taas"}}] }
         await this.props.EventStore.initializeEvent()
         await this.setState({
             loading: false,
@@ -48,67 +49,8 @@ class Event extends Component {
         console.log('TODO: delete component: ' + order)
     }
 
-    slidePanel = () => {
-        if (this.state.optionsPanel === '0px') {
-            this.setState({ optionsPanel: '-300px' })
-        } else {
-            this.setState({ optionsPanel: '0px' })
-        }
-    }
-
-    changeBackground = (event) => {
-        const oldEvent = this.state.event
-        oldEvent.settings.background = event.target.value
-        this.setState({ event: oldEvent })
-        this.setState({ saved: false })
-    }
-
-    changeLabel = (event) => {
-        const oldEvent = this.state.event
-        oldEvent.label = event.target.value
-        this.setState({ event: oldEvent })
-        this.setState({ saved: false })
-    }
-
-    changeSlug = (event) => {
-        const oldEvent = this.state.event
-        oldEvent.settings.slug = event.target.value
-        this.setState({ event: oldEvent })
-        this.setState({ saved: false })
-    }
-
     saveState = () => {
-        this.setState({ saved: true })
-        console.log('save state function')
-        //save state to backend
-    }
-
-    changePhone = (event) => {
-        const oldEvent = this.state.event
-        oldEvent.infoPanel.phone = event.target.value
-        this.setState({ event: oldEvent })
-        this.setState({ saved: false })
-    }
-
-    changeContact = (event) => {
-        const oldEvent = this.state.event
-        oldEvent.infoPanel.contact = event.target.value
-        this.setState({ event: oldEvent })
-        this.setState({ saved: false })
-    }
-
-    changeDate = (event) => {
-        const oldEvent = this.state.event
-        oldEvent.infoPanel.date = event.target.value
-        this.setState({ event: oldEvent })
-        this.setState({ saved: false })
-    }
-
-    changeAddress = (event) => {
-        const oldEvent = this.state.event
-        oldEvent.infoPanel.address = event.target.value
-        this.setState({ event: oldEvent })
-        this.setState({ saved: false })
+        this.props.EventStore.save()
     }
 
     showEditor = (order) => {
@@ -137,6 +79,10 @@ class Event extends Component {
         this.closeEditor()
     }
 
+    slidePanel = () => {
+        this.props.VisibilityStore.slideOptionsPanel()
+    }
+
     render() {
         if (this.state.loading) {
             return null
@@ -144,15 +90,7 @@ class Event extends Component {
 
         return (
             <div className='Event'>
-                <Header
-                    label={this.state.event.label}
-                    background={this.props.EventStore.event.settings.background}
-                    save={this.saveHeader}
-                    phone={this.state.event.infoPanel.phone}
-                    address={this.state.event.infoPanel.address}
-                    date={this.state.event.infoPanel.date}
-                    contact={this.state.event.infoPanel.contact}
-                />
+                <Header />
                 <User />
                 <ComponentContainer
                     components={this.state.event.components}
@@ -161,23 +99,9 @@ class Event extends Component {
                     showEditor={this.showEditor}
                 />
                 <ComponentAdder add={this.addComponent} />
-                <OptionsPanel
-                    background={this.state.event.settings.background}
-                    label={this.state.event.label}
-                    infoPanel={this.state.event.infoPanel}
-                    guests={this.state.event.guests}
-                    left={this.state.optionsPanel}
-                    slidePanel={this.slidePanel}
-                    changeLabel={this.changeLabel}
-                    changeBackground={this.changeBackground}
-                    changePhone={this.changePhone}
-                    changeContact={this.changeContact}
-                    changeDate={this.changeDate}
-                    changeAddress={this.changeAddress}
-                />
-                <OptionsButton
-                    showPanel={this.slidePanel}
-                />
+                <OptionsPanel />
+                <OptionsButton showPanel={this.slidePanel} />
+
                 {this.state.editor.show
                     ? (<ComponentEditor
                         close={this.closeEditor}
@@ -186,10 +110,11 @@ class Event extends Component {
                     />)
                     : (null)
                 }
-                <SaveButton save={this.saveState} saved={this.state.saved}></SaveButton>
+
+                <SaveButton save={this.saveState} saved={this.props.EventStore.saved} />
             </div>
         )
     }
 }
 
-export default inject('EventStore')(observer(Event))
+export default inject('EventStore', 'VisibilityStore')(observer(Event))
