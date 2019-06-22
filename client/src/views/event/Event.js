@@ -28,7 +28,7 @@ class Event extends Component {
 
     async componentDidMount() {
         //const event = await eventService.getOne('5d07dcafa37e6c0904b17423')
-        const event = { "_id": "5d07dcafa37e6c0904b17423", "label": "This is me", "creator": { "_id": "5cd445507c2a502a18cba5ca", "name": "John Doe" }, "settings": { "background": "https://picsum.photos/1440/550" }, "infoPanel": { "phone": "", "email": "", "contact": "", "address": "", "date": "2019-06-17T18:22:49.820Z" }, "guests": [], "components": [{"Type": "Text", "data": {"title": "Moi", "content": "Moi taas"}}] }
+        const event = { "_id": "5d07dcafa37e6c0904b17423", "label": "This is me", "creator": { "_id": "5cd445507c2a502a18cba5ca", "name": "John Doe" }, "settings": { "background": "https://picsum.photos/1440/550" }, "infoPanel": { "phone": "", "email": "", "contact": "", "address": "", "date": "2019-06-17T18:22:49.820Z" }, "guests": [], "components": [{"order": 1, "type": "Text", "data": {"title": "Moi", "content": "Moi taas"}}] }
         await this.props.EventStore.initializeEvent()
         await this.setState({
             loading: false,
@@ -49,26 +49,23 @@ class Event extends Component {
         console.log('TODO: delete component: ' + order)
     }
 
-    saveState = () => {
+    save = () => {
         this.props.EventStore.save()
     }
 
     showEditor = (order) => {
-        this.setState({
+        this.props.VisibilityStore.showComponentEditor()
+        /*this.setState({
             editor: {
                 show: true,
                 order: order
             }
-        })
+        })*/
+
     }
 
     closeEditor = () => {
-        this.setState({
-            editor: {
-                show: false,
-                order: this.state.editor.order
-            }
-        })
+        this.props.VisibilityStore.closeComponentEditor()
     }
 
     saveComponentData = (order, data, type) => {
@@ -102,16 +99,16 @@ class Event extends Component {
                 <OptionsPanel />
                 <OptionsButton showPanel={this.slidePanel} />
 
-                {this.state.editor.show
+                {this.props.VisibilityStore.componentEditor
                     ? (<ComponentEditor
                         close={this.closeEditor}
-                        component={this.state.event.components.find(component => component.order === this.state.editor.order)}
+                        component={this.props.EventStore.getComponent(this.props.VisibilityStore.currentComponent)}
                         saveData={this.saveComponentData}
                     />)
                     : (null)
                 }
 
-                <SaveButton save={this.saveState} saved={this.props.EventStore.saved} />
+                <SaveButton save={this.save} saved={this.props.EventStore.saved} />
             </div>
         )
     }

@@ -1,21 +1,23 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './ComponentStyles.css'
 import MasterComponent from '../MasterComponent/MasterComponent.js'
 
-const ComponentContainer = (props) => {
+class ComponentContainer extends Component {
 
-    return (
-        <div className="componentContainer">
-            {props.components.map(component => (
-                <MasterComponent
-                    key={component.order}
-                    component={component}
-                    deleteComponent={props.deleteComponent}
-                    showEditor={props.showEditor}
-                    guests={props.guests}
-                />
-            ))}
-        </div>
-    )
+    render() {
+        return (
+            <div className="componentContainer">
+                {this.props.EventStore.event.components.map(component => (
+                    <MasterComponent
+                        key={component.order}
+                        component={component}
+                        //deleteComponent={props.deleteComponent}}
+                        //guests={props.guests}
+                    />
+                ))}
+            </div>
+        )
+    }
 }
-export default ComponentContainer
+export default inject('EventStore', 'VisibilityStore')(observer(ComponentContainer))

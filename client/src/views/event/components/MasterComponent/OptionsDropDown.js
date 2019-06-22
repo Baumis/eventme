@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './MasterComponent.css'
 import { FaAngleDown } from 'react-icons/fa'
 
@@ -6,8 +7,7 @@ class OptionsDropDown extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            display: false,
-            showEditor: false
+            display: false
         }
     }
 
@@ -26,11 +26,11 @@ class OptionsDropDown extends Component {
     }
 
     delete = () => {
-        this.props.delete(this.props.order)
+        this.props.EventStore.removeComponent(this.props.order)
     }
 
     edit = () => {
-        this.props.showEditor(this.props.order)
+        this.props.VisibilityStore.showComponentEditor(this.props.order)
         console.log('editor opened in DD, order: ', this.props.order)
     }
 
@@ -53,5 +53,4 @@ class OptionsDropDown extends Component {
         )
     }
 }
-
-export default OptionsDropDown
+export default inject('EventStore', 'VisibilityStore')(observer(OptionsDropDown))

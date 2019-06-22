@@ -19,9 +19,10 @@ const MasterComponent = (props) => {
     return (
         <div className="Component">
             <div className="OptionsRow">
-                <OptionsDropDown delete={props.deleteComponent}
-                    showEditor={props.showEditor}
-                    order={props.component.order} />
+                <OptionsDropDown
+                    delete={props.deleteComponent}
+                    order={props.component.order}
+                />
             </div>
             <TagName data={props.component.data} guests={props.guests} />
         </div>

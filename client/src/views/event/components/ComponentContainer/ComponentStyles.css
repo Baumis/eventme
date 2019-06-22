@@ -17,6 +17,7 @@
     transition: color 0s;
     transition: border 0s;
     margin: 20px 5% 20px 5%;
+    cursor: pointer;
 }
 
 .ComponentAdder button:hover{
