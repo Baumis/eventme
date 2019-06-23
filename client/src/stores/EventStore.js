@@ -67,6 +67,15 @@ class EventStore {
             this.event.components = components
         })
     }
+
+    saveComponentData(order, data, type) {
+        let components = this.event.components
+        components[order - 1].data = data
+        components[order - 1].type = type
+        runInAction(() => {
+            this.event.components = components
+        })
+    }
 }
 
 decorate(EventStore, {
@@ -79,6 +88,7 @@ decorate(EventStore, {
     setSettingsValue: action,
     getComponent: action,
     addComponent: action,
+    saveComponentData: action,
     save: action
 })
 

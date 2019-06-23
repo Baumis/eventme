@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './ComponentEditor.css'
 import TextOptions from './TypeOptions/TextOptions'
 import MapOptions from './TypeOptions/MapOptions'
@@ -37,6 +38,12 @@ class ComponentEditor extends Component {
         this.setState({ data: data })
     }
 
+    saveData = () => {
+        this.props.EventStore.saveComponentData(this.state.order, this.state.data, this.state.activeType)
+        this.props.VisibilityStore.closeComponentEditor()
+        console.log(this.props.EventStore.event.components)
+    }
+
     render() {
         const TagName = this.state.types[this.state.activeType]
         return (
@@ -69,7 +76,7 @@ class ComponentEditor extends Component {
                             updateData={this.updateData}
                         />
                         <div className="ButtonRow">
-                            <button onClick={() => this.props.saveData(this.state.order, this.state.data, this.state.activeType)}>
+                            <button onClick={() => this.saveData()}>
                                 Save
                             </button>
                         </div>
@@ -80,4 +87,4 @@ class ComponentEditor extends Component {
     }
 }
 
-export default ComponentEditor
+export default inject('EventStore', 'VisibilityStore')(observer(ComponentEditor))

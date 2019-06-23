@@ -36,17 +36,14 @@ class Event extends Component {
         })
     }
 
-    addComponent = async (type, data) => {
-        console.log('TODO: add component: ' + type)
-        console.log(data)
+    addComponent = () => {
+        this.props.EventStore.addComponent('Text', 'New')
+        this.props.VisibilityStore.showComponentEditor(this.props.EventStore.event.components.length)
+        console.log(this.props.EventStore.event.components)
     }
 
     addGuest = async (name) => {
         console.log('TODO: add guest: ' + name)
-    }
-
-    deleteComponent = async (order) => {
-        console.log('TODO: delete component: ' + order)
     }
 
     save = () => {
@@ -66,14 +63,6 @@ class Event extends Component {
 
     closeEditor = () => {
         this.props.VisibilityStore.closeComponentEditor()
-    }
-
-    saveComponentData = (order, data, type) => {
-        let oldEvent = this.state.event
-        oldEvent.components[order - 1].data = data
-        oldEvent.components[order - 1].type = type
-        this.setState({ event: oldEvent })
-        this.closeEditor()
     }
 
     slidePanel = () => {
@@ -103,7 +92,6 @@ class Event extends Component {
                     ? (<ComponentEditor
                         close={this.closeEditor}
                         component={this.props.EventStore.getComponent(this.props.VisibilityStore.currentComponent)}
-                        saveData={this.saveComponentData}
                     />)
                     : (null)
                 }

@@ -12,7 +12,6 @@ class ComponentContainer extends Component {
                     <MasterComponent
                         key={component.order}
                         component={component}
-                        //deleteComponent={props.deleteComponent}}
                         //guests={props.guests}
                     />
                 ))}
