@@ -5,6 +5,7 @@
     width: 85px;
     height: 45px;
     position: fixed;
+    z-index: 3;
     right: 40px;
     bottom: 30px;
     background: rgba(46, 184, 46, 0.8);

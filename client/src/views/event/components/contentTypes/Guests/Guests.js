@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './Guests.css'
 import { FaUser, FaSearch } from 'react-icons/fa'
 
@@ -6,6 +7,7 @@ class Guests extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            guests: this.props.EventStore.event.guests,
             activeStatus: 'going',
             filter: ''
         }
@@ -46,7 +48,7 @@ class Guests extends Component {
                     className="ComponentGuestList"
                     style={{ background: this.props.background, color: this.props.color }}
                 >
-                    {this.props.guests.map((guest, i) => {
+                    {this.state.guests.map((guest, i) => {
                         let value = this.state.activeStatus === guest.status && guest.name.toLowerCase().includes(this.state.filter.toLowerCase())?
                             (
                                 <div className="ComponentGuest" key={i}>
@@ -69,4 +71,4 @@ class Guests extends Component {
     }
 }
 
-export default Guests
+export default inject('EventStore')(observer(Guests))

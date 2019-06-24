@@ -69,11 +69,13 @@ class EventStore {
     }
 
     saveComponentData(order, data, type) {
-        let components = this.event.components
-        components[order - 1].data = data
-        components[order - 1].type = type
+        const newValues = {
+            order: order,
+            type: type,
+            data: data
+        }
         runInAction(() => {
-            this.event.components = components
+            this.event.components[order - 1] = newValues
         })
     }
 }

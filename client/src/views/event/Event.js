@@ -52,13 +52,6 @@ class Event extends Component {
 
     showEditor = (order) => {
         this.props.VisibilityStore.showComponentEditor()
-        /*this.setState({
-            editor: {
-                show: true,
-                order: order
-            }
-        })*/
-
     }
 
     closeEditor = () => {
