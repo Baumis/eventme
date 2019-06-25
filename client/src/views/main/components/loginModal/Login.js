@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import userService from '../../../../services/users'
+import loginService from '../../../../services/login'
 
 class Login extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ class Login extends Component {
     }
 
     login = (username, password) => {
-        let user = userService.getOne(username, password)
+        let user = loginService.login(username, password)
         if (user) {
             this.props.UserStore.setCurrentUser(user)
             this.setState({ password: '', username: '' })

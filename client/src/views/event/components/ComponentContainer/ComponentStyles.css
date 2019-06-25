@@ -39,3 +39,12 @@
     /*grid-template-columns: repeat( auto-fit, minmax(400px, 20fr) );*/
     justify-content:center;
 }
+
+@media only screen and (max-width: 600px) {
+    .componentContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
