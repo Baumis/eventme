@@ -2,7 +2,7 @@ import { observable, decorate, action } from 'mobx'
 
 class VisibilityStore {
     loginModal = false
-    optionsPanelPosition = '0px'
+    optionsPanelPosition = '-300px'
     componentEditor = false
     currentComponent = null
 

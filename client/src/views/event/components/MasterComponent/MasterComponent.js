@@ -24,7 +24,7 @@ const MasterComponent = (props) => {
                     order={props.component.order}
                 />
             </div>
-            <TagName data={props.component.data} guests={props.guests} />
+            <TagName data={props.component.data} />
         </div>
     )
 }

@@ -28,28 +28,21 @@ class Guests extends Component {
                     <div id={this.state.activeStatus === 'going' ? 'TabActive' : 'normal'}
                         onClick={() => this.changeActive('going')}
                         className="ComponentStatusButton"
-                    >
-                        Going
-                    </div>
+                    > Going </div>
                     <div id={this.state.activeStatus === 'pending' ? 'TabActive' : 'normal'}
                         onClick={() => this.changeActive('pending')}
                         className="ComponentStatusButton"
-                    >
-                        Pending
-                    </div>
+                    > Pending </div>
                     <div id={this.state.activeStatus === 'declined' ? 'TabActive' : 'normal'}
                         onClick={() => this.changeActive('declined')}
                         className="ComponentStatusButton"
-                    >
-                        Declined
-                    </div>
+                    > Declined </div>
                 </div>
-                <div
-                    className="ComponentGuestList"
+                <div className="ComponentGuestList"
                     style={{ background: this.props.background, color: this.props.color }}
                 >
                     {this.state.guests.map((guest, i) => {
-                        let value = this.state.activeStatus === guest.status && guest.name.toLowerCase().includes(this.state.filter.toLowerCase())?
+                        let value = this.state.activeStatus === guest.status && guest.name.toLowerCase().includes(this.state.filter.toLowerCase()) ?
                             (
                                 <div className="ComponentGuest" key={i}>
                                     <div className="ComponentGuestUser"><FaUser /></div>
@@ -60,11 +53,9 @@ class Guests extends Component {
                         return value
                     })}
                 </div>
-                <div className="GuestSearch">
-                    <div className="GuestSearchField">
-                        <input value={this.state.filter} onChange={this.changeFilter}></input>
-                        <div id="searchIcon"><FaSearch /></div>
-                    </div>
+                <div className="GuestSearchField">
+                    <input value={this.state.filter} onChange={this.changeFilter}></input>
+                    <div id="searchIcon"><FaSearch /></div>
                 </div>
             </div>
         )
