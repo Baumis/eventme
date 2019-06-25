@@ -45,11 +45,11 @@ class TextOptions extends Component {
                     <h4>Text</h4>
                 </div>
                 <div className="SettingInput">
-                    <label>title</label>
+                    <label>Title</label>
                     <input value={this.state.title} onChange={this.changeTitle}></input>
                 </div>
                 <div className="SettingInput">
-                    <label>content</label>
+                    <label>Content</label>
                     <textarea value={this.state.content} rows={6} onChange={this.changeContent}></textarea>
                 </div>
             </div>
