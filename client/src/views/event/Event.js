@@ -16,23 +16,13 @@ class Event extends Component {
         super(props)
         this.state = {
             loading: true,
-            saved: true,
-            optionsPanel: '0px',
-            editor: {
-                show: false,
-                order: null
-            },
-            event: null
         }
     }
 
     async componentDidMount() {
-        //const event = await eventService.getOne('5d07dcafa37e6c0904b17423')
-        const event = { "_id": "5d07dcafa37e6c0904b17423", "label": "This is me", "creator": { "_id": "5cd445507c2a502a18cba5ca", "name": "John Doe" }, "settings": { "background": "https://picsum.photos/1440/550" }, "infoPanel": { "phone": "", "email": "", "contact": "", "address": "", "date": "2019-06-17T18:22:49.820Z" }, "guests": [], "components": [{"order": 1, "type": "Text", "data": {"title": "Moi", "content": "Moi taas"}}] }
         await this.props.EventStore.initializeEvent()
         await this.setState({
             loading: false,
-            event
         })
     }
 
@@ -71,12 +61,7 @@ class Event extends Component {
             <div className='Event'>
                 <Header />
                 <User />
-                <ComponentContainer
-                    components={this.state.event.components}
-                    guests={this.state.event.guests}
-                    deleteComponent={this.deleteComponent}
-                    showEditor={this.showEditor}
-                />
+                <ComponentContainer />
                 <ComponentAdder add={this.addComponent} />
                 <OptionsPanel />
                 <OptionsButton showPanel={this.slidePanel} />
