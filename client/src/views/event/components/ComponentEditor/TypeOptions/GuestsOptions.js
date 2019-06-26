@@ -11,7 +11,7 @@ class GuestsOptions extends Component {
     }
 
     componentDidMount() {
-        if (this.props.component.type === 'Guests') {
+        if (this.props.component.type === 'GUESTS') {
             this.setState({
                 title: this.props.component.data.title,
             })

@@ -12,7 +12,7 @@ class TextOptions extends Component {
     }
 
     componentDidMount() {
-        if (this.props.component.type === 'Text') {
+        if (this.props.component.type === 'TEXT') {
             this.setState({
                 title: this.props.component.data.title,
                 content: this.props.component.data.content

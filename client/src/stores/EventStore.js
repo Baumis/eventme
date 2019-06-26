@@ -10,7 +10,7 @@ class EventStore {
         let event = null
         if (this.id !== null) {
             //const event = await eventService.getOne('5d07dcafa37e6c0904b17423')
-            event = { "_id": "5d07dcafa37e6c0904b17423", "label": "This is me", "creator": { "_id": "5cd445507c2a502a18cba5ca", "name": "John Doe" }, "settings": { "background": "https://picsum.photos/1440/550" }, "infoPanel": { "phone": "", "email": "", "contact": "", "address": "", "date": "2019-06-17T18:22:49.820Z" }, "guests": [], "components": [{ "order": 1, "type": "Guests", "data": { "title": "Moi", "content": "Moi taas" } }, { "order": 2, "type": "Text", "data": { "title": "Moi", "content": "ajkdnkajwdka  wndkjawdnkjawndkj awjdnjkawndkjanwkjdn ajdnajkwdkndkjan jwdnkajdna adnawjkd  dwad  dwd  njn  dhebf  eab jhbef jab dwjd uwdhuwaidh h duwh wudhfr surf efsuefh ish siefuhesif is siufhsuifh isuhfseun iushf isufheif is sfe fisufh " } }] }
+            event = { "_id": "5d07dcafa37e6c0904b17423", "label": "This is me", "creator": { "_id": "5cd445507c2a502a18cba5ca", "name": "John Doe" }, "settings": { "background": "https://picsum.photos/1440/550" }, "infoPanel": { "phone": "", "email": "", "contact": "", "address": "", "date": "2019-06-17T18:22:49.820Z" }, "guests": [], "components": [{ "order": 1, "type": "Guests", "data": { "title": "Moi", "content": "Moi taas" } }, { "order": 2, "type": "TEXT", "data": { "title": "Moi", "content": "ajkdnkajwdka  wndkjawdnkjawndkj awjdnjkawndkjanwkjdn ajdnajkwdkndkjan jwdnkajdna adnawjkd  dwad  dwd  njn  dhebf  eab jhbef jab dwjd uwdhuwaidh h duwh wudhfr surf efsuefh ish siefuhesif is siufhsuifh isuhfseun iushf isufheif is sfe fisufh " } }] }
             console.log('event initialized: ', event)
         } else {
             //event = await eventService.getTemplate()
@@ -24,7 +24,7 @@ class EventStore {
                 {name: 'Terho', status: 'going'},
                 {name: 'Kimmo', status: 'going'},
             ]
-            event = { "_id": "5d07dcafa37e6c0904b17423", "label": "This is me", "creator": { "_id": "5cd445507c2a502a18cba5ca", "name": "John Doe" }, "settings": { "background": "https://picsum.photos/1440/550" }, "infoPanel": { "phone": "", "email": "", "contact": "", "address": "", "date": "2019-06-17T18:22:49.820Z" }, "guests": demoGuests, "components": [{ "order": 1, "type": "Guests", "data": { "title": "Moi", "content": "Moi taas" } }, { "order": 2, "type": "Text", "data": { "title": "Moi", "content": "ajkdnkajwdka  wndkjawdnkjawndkj awjdnjkawndkjanwkjdn ajdnajkwdkndkjan jwdnkajdna adnawjkd  dwad  dwd  njn  dhebf  eab jhbef jab dwjd uwdhuwaidh h duwh wudhfr surf efsuefh ish siefuhesif is siufhsuifh isuhfseun iushf isufheif is sfe fisufh " } }] }
+            event = { "_id": "5d07dcafa37e6c0904b17423", "label": "This is me", "creator": { "_id": "5cd445507c2a502a18cba5ca", "name": "John Doe" }, "settings": { "background": "https://picsum.photos/1440/550" }, "infoPanel": { "phone": "", "email": "", "contact": "", "address": "", "date": "2019-06-17T18:22:49.820Z" }, "guests": demoGuests, "components": [{ "order": 1, "type": "GUESTS", "data": { "title": "Moi", "content": "Moi taas" } }, { "order": 2, "type": "TEXT", "data": { "title": "Moi", "content": "ajkdnkajwdka  wndkjawdnkjawndkj awjdnjkawndkjanwkjdn ajdnajkwdkndkjan jwdnkajdna adnawjkd  dwad  dwd  njn  dhebf  eab jhbef jab dwjd uwdhuwaidh h duwh wudhfr surf efsuefh ish siefuhesif is siufhsuifh isuhfseun iushf isufheif is sfe fisufh " } }] }
             console.log('event initialized: ', event)
         }
         runInAction(() => {

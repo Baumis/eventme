@@ -1,7 +1,7 @@
 import React from 'react'
-import './Map.css'
+import './Location.css'
 
-const Map = ({ data }) => {
+const Location = ({ data }) => {
     return (
         <div className="ContentContainer">
             <h2>{data.title}</h2>
@@ -13,4 +13,4 @@ const Map = ({ data }) => {
     )
 }
 
-export default Map
+export default Location

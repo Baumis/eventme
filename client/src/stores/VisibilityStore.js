@@ -1,10 +1,19 @@
 import { observable, decorate, action } from 'mobx'
 
 class VisibilityStore {
+    loading = true
     loginModal = false
     optionsPanelPosition = '-300px'
     componentEditor = false
     currentComponent = null
+
+    loadingOn() {
+        this.loading = true
+    }
+
+    loadingOff() {
+        this.loading = false
+    }
 
     showLoginModal() {
         this.loginModal = true
@@ -28,10 +37,13 @@ class VisibilityStore {
 }
 
 decorate(VisibilityStore, {
+    loading: observable,
     loginModal: observable,
     optionsPanelPosition: observable,
     componentEditor: observable,
 
+    loadingOn: action,
+    loadingOff: action,
     showLoginModal: action,
     closeLoginModal: action,
     showComponentEditor: action,

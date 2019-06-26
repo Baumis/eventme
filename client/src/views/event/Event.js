@@ -5,29 +5,20 @@ import Header from './components/Header/Header'
 import ComponentAdder from './components/ComponentContainer/ComponentAdder'
 import ComponentContainer from './components/ComponentContainer/ComponentContainer'
 import OptionsPanel from './components/OptionsPanel/OptionsPanel'
-import eventService from '../../services/events'
 import SaveButton from './components/SaveButton/SaveButton'
 import ComponentEditor from './components/ComponentEditor/ComponentEditor'
 import OptionsButton from './components/OptionsButton/OptionsButton'
 import User from './components/User/User'
 
 class Event extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            loading: true,
-        }
-    }
 
     async componentDidMount() {
         await this.props.EventStore.initializeEvent()
-        await this.setState({
-            loading: false,
-        })
+        await this.props.VisibilityStore.loadingOff()
     }
 
     addComponent = () => {
-        this.props.EventStore.addComponent('Text', 'New')
+        this.props.EventStore.addComponent('TEXT', 'New')
         this.props.VisibilityStore.showComponentEditor(this.props.EventStore.event.components.length)
         console.log(this.props.EventStore.event.components)
     }
@@ -53,7 +44,7 @@ class Event extends Component {
     }
 
     render() {
-        if (this.state.loading) {
+        if (this.props.VisibilityStore.loading) {
             return null
         }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../ComponentEditor.css'
 
 
-class MapOptions extends Component {
+class LocationOptions extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -13,7 +13,7 @@ class MapOptions extends Component {
     }
 
     componentDidMount() {
-        if (this.props.component.type === 'Map') {
+        if (this.props.component.type === 'LOCATION') {
             this.setState({
                 title: this.props.component.data.title,
                 longitude: this.props.component.data.longitude,
@@ -49,7 +49,7 @@ class MapOptions extends Component {
         return (
             <div className="DataSettings">
                 <div className="headerRow">
-                    <h4>Map</h4>
+                    <h4>Location</h4>
                 </div>
                 <div className="SettingInput">
                     <label>title</label>
@@ -67,4 +67,4 @@ class MapOptions extends Component {
         )
     }
 }
-export default MapOptions
+export default LocationOptions

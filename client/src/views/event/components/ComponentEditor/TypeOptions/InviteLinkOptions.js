@@ -4,11 +4,6 @@ import { FaInfo } from 'react-icons/fa'
 
 
 class GuestsOptions extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-        }
-    }
 
     render() {
         return (
