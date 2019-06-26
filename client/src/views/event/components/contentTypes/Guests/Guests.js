@@ -7,7 +7,6 @@ class Guests extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            guests: this.props.EventStore.event.guests,
             activeStatus: 'going',
             filter: ''
         }
@@ -22,6 +21,11 @@ class Guests extends Component {
     }
 
     render() {
+
+        const guestsToShow = this.props.EventStore.event.guests.filter((guest, i) =>
+            guest.status === this.state.activeStatus && guest.name.toLowerCase().includes(this.state.filter.toLowerCase())
+        )
+
         return (
             <div className="GuestComponent">
                 <div className="ComponentStatusButtons">
@@ -38,20 +42,13 @@ class Guests extends Component {
                         className="ComponentStatusButton"
                     > Declined </div>
                 </div>
-                <div className="ComponentGuestList"
-                    style={{ background: this.props.background, color: this.props.color }}
-                >
-                    {this.state.guests.map((guest, i) => {
-                        let value = this.state.activeStatus === guest.status && guest.name.toLowerCase().includes(this.state.filter.toLowerCase()) ?
-                            (
-                                <div className="ComponentGuest" key={i}>
-                                    <div className="ComponentGuestUser"><FaUser /></div>
-                                    <div className="ComponentGuestName">{guest.name}</div>
-                                </div>
-                            )
-                            : (null)
-                        return value
-                    })}
+                <div className="ComponentGuestList">
+                    {guestsToShow.map((guest, i) =>
+                        <div className="ComponentGuest" key={i}>
+                            <div className="ComponentGuestUser"><FaUser /></div>
+                            <div className="ComponentGuestName">{guest.name}</div>
+                        </div>
+                    )}
                 </div>
                 <div className="GuestSearchField">
                     <input value={this.state.filter} onChange={this.changeFilter}></input>
