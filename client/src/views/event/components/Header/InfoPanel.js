@@ -1,13 +1,15 @@
 import React from 'react'
-import './InfoPanel.css'
+import './Header.css'
 import { FaPhone, FaCalendar, FaUser, FaMapMarker } from 'react-icons/fa'
 
-const InfoPanel = (props) => {
-    let displayCSS = (props.phone === '' && props.contact === '' && props.date === '' && props.address === '') ? 'none' : 'flex'
-    let displayPhone = (props.phone === '') ? 'none' : 'flex'
-    let displayContact = (props.contact === '') ? 'none' : 'flex'
-    let displayDate = (props.date === '') ? 'none' : 'flex'
-    let displayAddress = (props.address === '') ? 'none' : 'flex'
+const InfoPanel = ({ data }) => {
+
+    const { phone, contact, address, date } = data
+    let displayCSS = (phone === '' && contact === '' && date === '' && address === '') ? 'none' : 'flex'
+    let displayPhone = (phone === '') ? 'none' : 'flex'
+    let displayContact = (contact === '') ? 'none' : 'flex'
+    let displayDate = (date === '') ? 'none' : 'flex'
+    let displayAddress = (address === '') ? 'none' : 'flex'
 
     const panelStyles = { display: displayCSS }
     const phoneStyles = { display: displayPhone }
@@ -19,19 +21,19 @@ const InfoPanel = (props) => {
         <div style={panelStyles} className="InfoPanel">
             <div style={phoneStyles} className="InfoField">
                 <FaPhone />
-                <p>{props.phone}</p>
+                <p>{phone}</p>
             </div>
             <div style={contactStyles} className="InfoField">
                 <FaUser />
-                <p>{props.contact}</p>
+                <p>{contact}</p>
             </div>
             <div style={dateStyles} className="InfoField">
                 <FaCalendar />
-                <p>{props.date}</p>
+                <p>{date}</p>
             </div>
             <div style={addressStyles} className="InfoField">
                 <FaMapMarker />
-                <p>{props.address}</p>
+                <p>{address}</p>
             </div>
         </div>
     )

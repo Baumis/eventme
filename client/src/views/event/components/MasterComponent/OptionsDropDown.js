@@ -25,7 +25,7 @@ class OptionsDropDown extends Component {
         })
     }
 
-    delete = () => {
+    remove = () => {
         this.props.EventStore.removeComponent(this.props.order)
     }
 
@@ -44,7 +44,7 @@ class OptionsDropDown extends Component {
                     ? (
                         <div className="OptionsDropDown">
                             <div className="MenuItem" onClick={this.edit}>Edit</div>
-                            <div className="MenuItem" onClick={this.delete}>Delete</div>
+                            <div className="MenuItem" onClick={this.remove}>Delete</div>
                         </div>
                     )
                     : (null)

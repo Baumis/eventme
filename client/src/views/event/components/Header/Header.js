@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import InfoPanel from '../InfoPanel/InfoPanel.js'
+import InfoPanel from './InfoPanel.js'
 import './Header.css'
 
 class Header extends Component {
@@ -13,13 +13,7 @@ class Header extends Component {
         return (
             <div style={this.headerStyles} className="Header-container">
                 <h1>{this.props.EventStore.event.label}</h1>
-                <InfoPanel
-                    showInfoBoolean={this.props.showInfoBoolean}
-                    date={this.props.EventStore.event.infoPanel.date}
-                    contact={this.props.EventStore.event.infoPanel.contact}
-                    phone={this.props.EventStore.event.infoPanel.phone}
-                    address={this.props.EventStore.event.infoPanel.address}
-                />
+                <InfoPanel data={this.props.EventStore.event.infoPanel} />
             </div>
         )
     }

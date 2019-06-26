@@ -33,15 +33,23 @@ class EventStore {
     }
 
     setValue(value, field) {
+        const newEvent = {
+            ...this.event,
+            [field]: value
+        }
         runInAction(() => {
-            this.event[field] = value
+            this.event = newEvent
             this.saved = false
         })
     }
 
     setInfoPanelValue(value, field) {
+        const newInfoPanel = {
+            ...this.event.infoPanel,
+            [field]: value
+        }
         runInAction(() => {
-            this.event.infoPanel[field] = value
+            this.event.infoPanel = newInfoPanel
             this.saved = false
         })
     }

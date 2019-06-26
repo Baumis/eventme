@@ -20,7 +20,6 @@ const MasterComponent = (props) => {
         <div className="Component">
             <div className="OptionsRow">
                 <OptionsDropDown
-                    delete={props.deleteComponent}
                     order={props.component.order}
                 />
             </div>
