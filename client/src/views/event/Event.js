@@ -13,7 +13,7 @@ import User from './components/User/User'
 class Event extends Component {
 
     async componentDidMount() {
-        await this.props.EventStore.initializeEvent()
+        await this.props.EventStore.initializeEvent(this.props.eventId)
         await this.props.VisibilityStore.loadingOff()
     }
 
@@ -31,7 +31,7 @@ class Event extends Component {
         this.props.EventStore.save()
     }
 
-    showEditor = (order) => {
+    showEditor = () => {
         this.props.VisibilityStore.showComponentEditor()
     }
 

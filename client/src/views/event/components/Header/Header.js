@@ -5,13 +5,13 @@ import './Header.css'
 
 class Header extends Component {
 
-    headerStyles = {
-        color: 'white',
-        backgroundImage: 'url(' + this.props.EventStore.event.settings.background + ')'
-    }
     render() {
+        const headerStyles = {
+            color: 'white',
+            backgroundImage: 'url(' + this.props.EventStore.event.settings.background + ')'
+        }
         return (
-            <div style={this.headerStyles} className="Header-container">
+            <div style={headerStyles} className="Header-container">
                 <h1>{this.props.EventStore.event.label}</h1>
                 <InfoPanel data={this.props.EventStore.event.infoPanel} />
             </div>
