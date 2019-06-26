@@ -93,9 +93,7 @@ event = {
     },
     creator: {
         _id: "5cd445507c2a502a18cba5ca",
-        username: "admin",
-        name: "John Doe",
-        email: "admin@example.com"
+        name: "John Doe"
     },
     guests: [
         {

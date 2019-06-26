@@ -11,6 +11,15 @@ eventRouter.get('/', async (request, response) => {
     response.json(events.map(Event.format))
 })
 
+eventRouter.get('/template', async (request, response) => {
+    const eventTemplate = new Event().toObject()
+
+    delete eventTemplate['_id']
+    delete eventTemplate['guests']
+
+    response.json(Event.format(eventTemplate))
+})
+
 eventRouter.get('/:id', async (request, response) => {
     try {
         const event = await Event
@@ -88,15 +97,6 @@ eventRouter.delete('/:id', async (request, response) => {
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
-})
-
-eventRouter.get('/template', async (request, response) => {
-    const eventTemplate = new Event().toObject()
-
-    delete eventTemplate['_id']
-    delete eventTemplate['guests']
-
-    response.json(Event.format(eventTemplate))
 })
 
 eventRouter.post('/:id/add/:guestId', async (request, response) => {
