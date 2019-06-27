@@ -1,5 +1,7 @@
 .OptionsContainer{
     position: fixed;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     z-index: 4;
     width: 300px;
@@ -100,7 +102,7 @@
 }
 
 .sectionDevider{
-  border-bottom: 2px solid #373B3F;
+  border-bottom: 1px solid #373B3F;
   margin: 40px 8px 20px 8px;
   padding: 0px 12px 0px 12px;
 }

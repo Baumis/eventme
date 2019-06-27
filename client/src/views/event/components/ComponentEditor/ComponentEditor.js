@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './ComponentEditor.css'
 import TextOptions from './TypeOptions/TextOptions'
-import MapOptions from './TypeOptions/MapOptions'
+import LocationOptions from './TypeOptions/LocationOptions'
 import GuestsOptions from './TypeOptions/GuestsOptions'
 import InviteLinkOptions from './TypeOptions/InviteLinkOptions'
 import { FaLocationArrow, FaPen, FaTimes, FaList, FaLink } from 'react-icons/fa'
@@ -15,10 +16,10 @@ class ComponentEditor extends Component {
             order: props.component.order,
             activeType: props.component.type,
             types: {
-                Text: TextOptions,
-                Map: MapOptions,
-                Guests: GuestsOptions,
-                InviteLink: InviteLinkOptions
+                TEXT: TextOptions,
+                LOCATION: LocationOptions,
+                GUESTS: GuestsOptions,
+                INVITE_LINK: InviteLinkOptions
             },
             data: props.component.data
         }
@@ -37,25 +38,31 @@ class ComponentEditor extends Component {
         this.setState({ data: data })
     }
 
+    saveData = () => {
+        this.props.EventStore.saveComponentData(this.state.order, this.state.data, this.state.activeType)
+        this.props.VisibilityStore.closeComponentEditor()
+        console.log(this.props.EventStore.event.components)
+    }
+
     render() {
         const TagName = this.state.types[this.state.activeType]
         return (
             <div className="ModalBackground" >
                 <div className="EditorContainer">
                     <div className="TypeRow">
-                        <div className="TypeItem" onClick={() => this.changeType('Text')} id={this.state.activeType === 'Text' ? 'TypeActive' : 'TypeNormal'}>
+                        <div className="TypeItem" onClick={() => this.changeType('TEXT')} id={this.state.activeType === 'TEXT' ? 'TypeActive' : 'TypeNormal'}>
                             <FaPen />
                             <label>Text</label>
                         </div>
-                        <div className="TypeItem" onClick={() => this.changeType('Map')} id={this.state.activeType === 'Map' ? 'TypeActive' : 'TypeNormal'}>
+                        <div className="TypeItem" onClick={() => this.changeType('LOCATION')} id={this.state.activeType === 'LOCATION' ? 'TypeActive' : 'TypeNormal'}>
                             <FaLocationArrow />
-                            <label>Map</label>
+                            <label>Location</label>
                         </div>
-                        <div className="TypeItem" onClick={() => this.changeType('Guests')} id={this.state.activeType === 'Guests' ? 'TypeActive' : 'TypeNormal'}>
+                        <div className="TypeItem" onClick={() => this.changeType('GUESTS')} id={this.state.activeType === 'GUESTS' ? 'TypeActive' : 'TypeNormal'}>
                             <FaList />
                             <label>Guests</label>
                         </div>
-                        <div className="TypeItem" onClick={() => this.changeType('InviteLink')} id={this.state.activeType === 'InviteLink' ? 'TypeActive' : 'TypeNormal'}>
+                        <div className="TypeItem" onClick={() => this.changeType('INVITE_LINK')} id={this.state.activeType === 'INVITE_LINK' ? 'TypeActive' : 'TypeNormal'}>
                             <FaLink />
                             <label>Invite</label>
                         </div>
@@ -69,7 +76,7 @@ class ComponentEditor extends Component {
                             updateData={this.updateData}
                         />
                         <div className="ButtonRow">
-                            <button onClick={() => this.props.saveData(this.state.order, this.state.data, this.state.activeType)}>
+                            <button onClick={() => this.saveData()}>
                                 Save
                             </button>
                         </div>
@@ -80,4 +87,4 @@ class ComponentEditor extends Component {
     }
 }
 
-export default ComponentEditor
+export default inject('EventStore', 'VisibilityStore')(observer(ComponentEditor))

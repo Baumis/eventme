@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './Guests.css'
 import { FaUser, FaSearch } from 'react-icons/fa'
 
@@ -20,53 +21,42 @@ class Guests extends Component {
     }
 
     render() {
+
+        const guestsToShow = this.props.EventStore.event.guests.filter((guest, i) =>
+            guest.status === this.state.activeStatus && guest.name.toLowerCase().includes(this.state.filter.toLowerCase())
+        )
+
         return (
             <div className="GuestComponent">
                 <div className="ComponentStatusButtons">
                     <div id={this.state.activeStatus === 'going' ? 'TabActive' : 'normal'}
                         onClick={() => this.changeActive('going')}
                         className="ComponentStatusButton"
-                    >
-                        Going
-                    </div>
+                    > Going </div>
                     <div id={this.state.activeStatus === 'pending' ? 'TabActive' : 'normal'}
                         onClick={() => this.changeActive('pending')}
                         className="ComponentStatusButton"
-                    >
-                        Pending
-                    </div>
+                    > Pending </div>
                     <div id={this.state.activeStatus === 'declined' ? 'TabActive' : 'normal'}
                         onClick={() => this.changeActive('declined')}
                         className="ComponentStatusButton"
-                    >
-                        Declined
-                    </div>
+                    > Declined </div>
                 </div>
-                <div
-                    className="ComponentGuestList"
-                    style={{ background: this.props.background, color: this.props.color }}
-                >
-                    {this.props.guests.map((guest, i) => {
-                        let value = this.state.activeStatus === guest.status && guest.name.toLowerCase().includes(this.state.filter.toLowerCase())?
-                            (
-                                <div className="ComponentGuest" key={i}>
-                                    <div className="ComponentGuestUser"><FaUser /></div>
-                                    <div className="ComponentGuestName">{guest.name}</div>
-                                </div>
-                            )
-                            : (null)
-                        return value
-                    })}
+                <div className="ComponentGuestList">
+                    {guestsToShow.map((guest, i) =>
+                        <div className="ComponentGuest" key={i}>
+                            <div className="ComponentGuestUser"><FaUser /></div>
+                            <div className="ComponentGuestName">{guest.name}</div>
+                        </div>
+                    )}
                 </div>
-                <div className="GuestSearch">
-                    <div className="GuestSearchField">
-                        <input value={this.state.filter} onChange={this.changeFilter}></input>
-                        <div id="searchIcon"><FaSearch /></div>
-                    </div>
+                <div className="GuestSearchField">
+                    <input value={this.state.filter} onChange={this.changeFilter}></input>
+                    <div id="searchIcon"><FaSearch /></div>
                 </div>
             </div>
         )
     }
 }
 
-export default Guests
+export default inject('EventStore')(observer(Guests))

@@ -5,8 +5,9 @@ import './index.css'
 import { Provider } from 'mobx-react'
 import UserStore from './stores/UserStore'
 import VisibilityStore from './stores/VisibilityStore'
+import EventStore from './stores/EventStore'
 
-const stores = { UserStore, VisibilityStore }
+const stores = { UserStore, VisibilityStore, EventStore }
 
 ReactDOM.render(
     <Provider {...stores}>

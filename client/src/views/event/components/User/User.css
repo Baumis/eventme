@@ -2,12 +2,13 @@
     position: fixed;
     display: flex;
     color:white;
-    background: rgb(192, 192, 192, 0.8);
+    background: rgb(192, 192, 192, 0);
+    border-radius: 30px;
     align-items: center;
     justify-content: center;
-    height: 60px;
+    height: 40px;
     width: 200px;
-    top: 5px;
+    top: 10px;
     right: 5px;
     z-index: 3;
 }

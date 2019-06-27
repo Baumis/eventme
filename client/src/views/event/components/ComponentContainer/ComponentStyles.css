@@ -17,6 +17,7 @@
     transition: color 0s;
     transition: border 0s;
     margin: 20px 5% 20px 5%;
+    cursor: pointer;
 }
 
 .ComponentAdder button:hover{
@@ -37,4 +38,13 @@
     grid-gap: 2%;
     /*grid-template-columns: repeat( auto-fit, minmax(400px, 20fr) );*/
     justify-content:center;
+}
+
+@media only screen and (max-width: 600px) {
+    .componentContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }

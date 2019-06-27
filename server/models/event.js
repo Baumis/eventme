@@ -4,7 +4,7 @@ const componentSchema = new mongoose.Schema({
     order: Number,
     type: {
         type: String,
-        enum: ['PLACEHOLDER', 'TEXT', 'VIDEO', 'LOCATION', 'GUESTLIST', 'PICTURE'],
+        enum: ['PLACEHOLDER', 'TEXT', 'VIDEO', 'LOCATION', 'GUESTS', 'PICTURE', 'INVITE_LINK'],
         default: 'PLACEHOLDER'
     },
     data: Object,
