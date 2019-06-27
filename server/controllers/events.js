@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const eventRouter = require('express').Router()
 const Event = require('../models/event')
 const User = require('../models/user')
@@ -15,7 +16,6 @@ eventRouter.get('/template', async (request, response) => {
     const eventTemplate = new Event().toObject()
 
     delete eventTemplate['_id']
-    delete eventTemplate['guests']
 
     response.json(Event.format(eventTemplate))
 })
@@ -36,8 +36,16 @@ eventRouter.get('/:id', async (request, response) => {
 eventRouter.post('/', async (request, response) => {
     try {
         const body = request.body
+        
+        const token = request.token
 
-        const creator = '5cd445507c2a502a18cba5ca'
+        const decodedToken = jwt.verify(token, process.env.SECRET)
+
+        if (!token || !decodedToken.id) {
+            return response.status(401).json({ error: 'token missing or invalid' })
+        }
+
+        const creator = decodedToken.id //'5cd445507c2a502a18cba5ca'
 
         const newEvent = new Event({
             label: body.label,
@@ -60,7 +68,11 @@ eventRouter.post('/', async (request, response) => {
 
         response.status(201).json(Event.format(populatedEvent))
     } catch (exception) {
-        response.status(500).json({ error: 'something went wrong...' })
+        if (exception.name === 'JsonWebTokenError') {
+            response.status(401).json({ error: exception.message })
+        } else {
+            response.status(500).json({ error: 'something went wrong...' })
+        }
     }
 })
 

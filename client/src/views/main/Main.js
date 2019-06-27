@@ -10,7 +10,7 @@ class Main extends Component {
     createEvent = () => {
         this.props.UserStore.currentUser === null ?
             this.props.VisibilityStore.showLoginModal()
-            : this.props.history.push('/events')
+            : this.props.history.push('/events/template')
     }
 
     render() {

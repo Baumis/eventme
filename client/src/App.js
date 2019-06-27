@@ -8,7 +8,6 @@ const App = () => {
         <div>
             <Router>
                 <Route exact path="/" component={Main} />
-                <Route exact path="/events" component={Event} />
                 <Route exact path="/events/:id" render={({ match }) => <Event eventId={match.params.id}/>} />
             </Router>
         </div>

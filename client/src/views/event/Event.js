@@ -27,8 +27,16 @@ class Event extends Component {
         console.log('TODO: add guest: ' + name)
     }
 
-    save = () => {
-        this.props.EventStore.save()
+    save = async () => {
+        if (this.props.EventStore.event._id) {
+            const event = await this.props.EventStore.update()
+            console.log(event)
+        } else {
+            const event = await this.props.EventStore.create()
+            if (event) {
+                this.props.history.push(`/events/${event._id}`)
+            }
+        }
     }
 
     showEditor = () => {

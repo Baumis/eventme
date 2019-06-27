@@ -19,14 +19,15 @@ class Login extends Component {
         this.setState({ password: event.target.value })
     }
 
-    login = (username, password) => {
-        let user = loginService.login(username, password)
-        if (user) {
+    login = async (username, password) => {
+        try {
+            const user = await loginService.login({username, password})
             this.props.UserStore.setCurrentUser(user)
             this.setState({ password: '', username: '' })
             this.props.VisibilityStore.closeLoginModal()
             this.props.create()
-        } else {
+            
+        } catch (error) {
             alert('Wrong username or password!')
             this.setState({ password: '' })
         }
