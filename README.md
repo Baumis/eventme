@@ -150,6 +150,21 @@ event = {
 - Tre olika user types (ADMIN, GUEST, GHOST)
 - 3 sidor: search/login (create), event, profile
 
+ADD
+
+Trycker på + för att lägga till en komponent
+Det frågas vad för komponent vi vill lägga till med en liten förklaring vad komponenten gör (ingen data ges här ennu)
+Välj komponent
+Tryck på "add" elr dylikt
+Komponenten visas med någon placeholder data elr inget alls
+
+EDIT
+
+tryck på edit som nu också
+editeringen sker inline, dvs inne i själva componenten. Med t.ex. contenteditable="true" i TEXT komponenten
+Edit mode går att stoppa med t.ex. nån knapp som dyker upp "OK"
+Save för att ändringarna skall sparas
+
 ## Colors
 Gray (#373B3F, #595F65, #B2BFCB, #7A838C)
 Green (#2eb82e)
