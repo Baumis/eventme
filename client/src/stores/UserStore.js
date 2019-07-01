@@ -14,6 +14,7 @@ class UserStore {
 
 decorate(UserStore, {
     currentUser: observable,
+
     setCurrentUser: action
 })
 

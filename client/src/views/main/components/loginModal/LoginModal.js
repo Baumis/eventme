@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import './LoginModal.css'
 import { Link } from 'react-router-dom'
 import { FaTimes } from 'react-icons/fa'
-import Login from './Login'
+import SignIn from './SignIn'
 import SignUp from './SignUp'
 
 
@@ -11,12 +11,12 @@ class LoginModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            content: 'Login'
+            content: 'SignIn'
         }
     }
 
     contents = {
-        Login: Login,
+        SignIn: SignIn,
         SignUp: SignUp
     }
 
@@ -40,17 +40,17 @@ class LoginModal extends Component {
                     <div className="Tabs">
                         <div
                             className="Tab"
-                            id={this.state.content === 'Login' ? 'ActiveTab' : 'Normal'}
-                            onClick={() => this.changeTab('Login')}
+                            id={this.state.content === 'SignIn' ? 'ActiveTab' : 'Normal'}
+                            onClick={() => this.changeTab('SignIn')}
                         >
-                            Login
+                            Sign in
                         </div>
                         <div
                             className="Tab"
                             id={this.state.content === 'SignUp' ? 'ActiveTab' : 'Normal'}
                             onClick={() => this.changeTab('SignUp')}
                         >
-                            Sing up
+                            Sign up
                         </div>
                     </div>
                     <TagName create={this.props.create}/>
