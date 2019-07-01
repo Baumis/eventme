@@ -73,7 +73,7 @@ class EventStore {
             this.event = await eventService.create(this.event)
             this.saved = true
             return this.event
-        } catch(error) {
+        } catch (error) {
             return null
         }
     }
@@ -83,7 +83,7 @@ class EventStore {
             this.event = await eventService.update(this.event)
             this.saved = true
             return this.event
-        } catch(error) {
+        } catch (error) {
             return null
         }
     }

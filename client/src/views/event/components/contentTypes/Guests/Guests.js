@@ -22,7 +22,7 @@ class Guests extends Component {
 
     render() {
 
-        const guestsToShow = this.props.EventStore.event.guests.filter((guest, i) =>
+        const guestsToShow = this.props.EventStore.event.guests.filter((guest) =>
             guest.status === this.state.activeStatus && guest.name.toLowerCase().includes(this.state.filter.toLowerCase())
         )
 
