@@ -22,7 +22,7 @@ class VisibilityStore {
         this.loginModal = false
     }
     showComponentEditor(order) {
-        this.currentComponent = order 
+        this.currentComponent = order
         this.componentEditor = true
     }
     closeComponentEditor() {

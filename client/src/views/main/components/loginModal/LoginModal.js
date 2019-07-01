@@ -55,8 +55,8 @@ class LoginModal extends Component {
                     </div>
                     <TagName create={this.props.create}/>
                     <div className="SkipRow">
-                        <Link style={{ 'textDecoration': 'none', 'color': '#B2BFCB' }} to="/events">
-                            {'skip'}
+                        <Link style={{ 'textDecoration': 'none', 'color': '#B2BFCB' }} to="/events/template">
+                            skip
                         </Link>
                     </div>
                 </div>
