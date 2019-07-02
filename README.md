@@ -39,6 +39,15 @@ Running on localhost:3001
 - PUT, updates event with given id
 - DELETE, removes event with given id
 
+### /api/events/:id/remove/:guestId
+- POST, removes given guest from event
+
+### /api/events/:id/add/:guestId
+- POST, adds given guest to event
+
+### /api/events/user/:userId
+- GET, returns events of given userId
+
 ### /api/users
 
 - GET, returns all users
