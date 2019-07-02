@@ -8,7 +8,7 @@ import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import SaveButton from './components/SaveButton/SaveButton'
 import ComponentEditor from './components/ComponentEditor/ComponentEditor'
 import OptionsButton from './components/OptionsButton/OptionsButton'
-import User from './components/User/User'
+import User from '../../commonComponents/User/User'
 
 class Event extends Component {
 
@@ -59,12 +59,11 @@ class Event extends Component {
         return (
             <div className='Event'>
                 <Header />
-                <User />
                 <ComponentContainer />
                 <ComponentAdder add={this.addComponent} />
                 <OptionsPanel />
                 <OptionsButton showPanel={this.slidePanel} />
-
+                <div className="UserControl"><User /></div>
                 {this.props.VisibilityStore.componentEditor
                     ? (<ComponentEditor
                         close={this.closeEditor}

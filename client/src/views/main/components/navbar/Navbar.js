@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Navbar.css'
 import MainSearchbar from '../mainSearchBar/MainSearchBar'
-import User from '../user/User'
+import User from '../../../../commonComponents/User/User'
 
 class Navbar extends Component {
 
