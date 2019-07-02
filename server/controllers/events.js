@@ -1,3 +1,4 @@
+const ObjectId = require('mongoose').Types.ObjectId
 const jwt = require('jsonwebtoken')
 const eventRouter = require('express').Router()
 const Event = require('../models/event')
@@ -36,7 +37,7 @@ eventRouter.get('/:id', async (request, response) => {
 eventRouter.post('/', async (request, response) => {
     try {
         const body = request.body
-        
+
         const token = request.token
 
         const decodedToken = jwt.verify(token, process.env.SECRET)
@@ -148,6 +149,20 @@ eventRouter.post('/:id/remove/:guestId', async (request, response) => {
             .execPopulate()
 
         response.status(201).json(Event.format(populatedEvent))
+    } catch (exception) {
+        response.status(400).send({ error: 'Malformatted id' })
+    }
+})
+
+eventRouter.get('/user/:userId', async (request, response) => {
+    try {
+
+        const events = await Event
+            .find({ creator: ObjectId(request.params.userId) })
+            .populate('creator', { _id: 1, name: 1 })
+            .populate('guests.user', { _id: 1, name: 1 })
+
+        response.json(events.map(Event.format))
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
