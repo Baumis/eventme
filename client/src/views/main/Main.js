@@ -21,7 +21,7 @@ class Main extends Component {
                     <CreateButton click={this.createEvent} />
                 </div>
                 {this.props.VisibilityStore.loginModal ?
-                    <LoginModal create={this.createEvent}/>
+                    <LoginModal afterSignIn={this.createEvent}/>
                     : null
                 }
             </div>
