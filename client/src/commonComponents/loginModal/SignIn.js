@@ -25,14 +25,19 @@ class Login extends Component {
             this.props.UserStore.setCurrentUser(user)
             this.setState({ password: '', username: '' })
 
-            if(this.props.afterSingIn){
-                await this.props.afterSingIn()
+            try {
+                if (this.props.VisibilityStore.redirectTo) {
+                    const route = this.props.VisibilityStore.redirectTo
+                    this.props.history.push('/events/' + route)
+                }
+            } catch (error) {
+                console.log(error)
             }
 
             this.props.VisibilityStore.closeLoginModal()
 
         } catch (error) {
-            alert('Wrong username or password!')
+            alert('Something went wrong, check your username and password!')
             this.setState({ password: '' })
         }
     }
