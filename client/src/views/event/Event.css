@@ -14,3 +14,10 @@
   font-size: large;
 }
 
+.UserControl{
+  position: fixed;
+  top: 10px;
+  right: 5px;
+  z-index: 3;
+}
+

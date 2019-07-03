@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import loginService from '../../../../services/login'
+import loginService from '../../services/login'
 
 class Login extends Component {
     constructor(props) {
@@ -24,11 +24,20 @@ class Login extends Component {
             const user = await loginService.login({ username, password })
             this.props.UserStore.setCurrentUser(user)
             this.setState({ password: '', username: '' })
+
+            try {
+                if (this.props.VisibilityStore.redirectTo) {
+                    const route = this.props.VisibilityStore.redirectTo
+                    this.props.history.push('/events/' + route)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
             this.props.VisibilityStore.closeLoginModal()
-            this.props.create()
 
         } catch (error) {
-            alert('Wrong username or password!')
+            alert('Something went wrong, check your username and password!')
             this.setState({ password: '' })
         }
     }
@@ -48,6 +57,7 @@ class Login extends Component {
                 <div className="LoginInput">
                     <label>Password</label>
                     <input
+                        type={'password'}
                         onChange={this.changePassword}
                         value={this.state.password}
                         placeholder={'****'}
