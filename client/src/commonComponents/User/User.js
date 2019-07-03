@@ -5,12 +5,8 @@ import { FaUser } from 'react-icons/fa'
 
 class User extends Component {
 
-    clickAction = () => {
-        if (!this.props.VisibilityStore.loginModal) {
-            this.props.VisibilityStore.showLoginModal()
-        } else {
-
-        }
+    openLoginModal = () => {
+        this.props.VisibilityStore.showLoginModal()
     }
 
     render() {
@@ -25,7 +21,7 @@ class User extends Component {
                     </div>
                     :
                     <div>
-                        <div className="LoginButton" onClick={this.clickAction}>{'Sign In'}</div>
+                        <div className="LoginButton" onClick={this.openLoginModal}>{'Sign In'}</div>
                     </div>
                 }
             </div>
