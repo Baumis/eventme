@@ -9,13 +9,17 @@ class User extends Component {
         this.props.VisibilityStore.showLoginModal()
     }
 
+    openProfile = () => {
+        this.props.history.push('/profile')
+    }
+
     render() {
         return (
             <div className="UserPanel">
                 {this.props.UserStore.currentUser ?
                     <div>
                         <div className="UserIcon"><FaUser /></div>
-                        <div className="UserName">
+                        <div onClick={this.openProfile} className="UserName">
                             {this.props.UserStore.currentUser.username}
                         </div>
                     </div>

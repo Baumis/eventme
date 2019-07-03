@@ -24,16 +24,6 @@ class Login extends Component {
             const user = await loginService.login({ username, password })
             this.props.UserStore.setCurrentUser(user)
             this.setState({ password: '', username: '' })
-
-            try {
-                if (this.props.VisibilityStore.redirectTo) {
-                    const route = this.props.VisibilityStore.redirectTo
-                    this.props.history.push('/events/' + route)
-                }
-            } catch (error) {
-                console.log(error)
-            }
-
             this.props.VisibilityStore.closeLoginModal()
 
         } catch (error) {

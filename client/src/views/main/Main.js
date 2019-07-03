@@ -19,12 +19,12 @@ class Main extends Component {
     render() {
         return (
             <div className="Main">
-                <Navbar />
+                <Navbar history={this.props.history} />
                 <div className="MainContent">
                     <CreateButton click={this.createEvent} />
                 </div>
                 {this.props.VisibilityStore.loginModal ?
-                    <LoginModal afterSignIn={this.createEvent} />
+                    <LoginModal history={this.props.history} />
                     : null
                 }
             </div>

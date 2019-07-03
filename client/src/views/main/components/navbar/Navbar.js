@@ -12,7 +12,7 @@ class Navbar extends Component {
                     <p>EVENTME.COM</p>
                 </div>
                 <div className="NavBarItem"><MainSearchbar /></div>
-                <div className="NavBarItem"><User /></div>
+                <div className="NavBarItem"><User history={this.props.history}/></div>
             </div>
         )
     }

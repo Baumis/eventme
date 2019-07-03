@@ -64,7 +64,9 @@ class Event extends Component {
                 <ComponentAdder add={this.addComponent} />
                 <OptionsPanel />
                 <OptionsButton showPanel={this.slidePanel} />
-                <div className="UserControl"><User /></div>
+                <div className="UserControl">
+                    <User history={this.props.history} />
+                </div>
                 {this.props.VisibilityStore.componentEditor ?
                     <ComponentEditor
                         close={this.closeEditor}
@@ -73,7 +75,7 @@ class Event extends Component {
                     : null
                 }
                 {this.props.VisibilityStore.loginModal ?
-                    <LoginModal />
+                    <LoginModal history={this.props.history} />
                     : null
                 }
                 <SaveButton save={this.save} saved={this.props.EventStore.saved} />
