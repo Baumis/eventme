@@ -9,7 +9,6 @@ class Main extends Component {
 
     createEvent = () => {
         if (this.props.UserStore.currentUser === null) {
-            this.props.VisibilityStore.changeRedirectTo('template')
             this.props.VisibilityStore.showLoginModal()
         } else {
             this.props.history.push('/events/template')

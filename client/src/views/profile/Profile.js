@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import ProfileHeader from './components/profileHeader/profileHeader'
 
 class Profile extends Component {
 
     render() {
         return (
-            <div>
-                <div>
-                    <h1>{this.props.UserStore.currentUser.username}</h1>
-                </div>
+            <div className="profileViewContainer">
+                <ProfileHeader />
             </div>
         )
     }

@@ -3,7 +3,8 @@ import eventService from '../services/events'
 import userService from '../services/users'
 
 class UserStore {
-    currentUser = null
+    //currentUser = null
+    currentUser = { name: 'Teuvo Hakkarainen', username: 'Teuppa78', email: 'teuppa@gmail.com' }
 
     setCurrentUser(user) {
         this.currentUser = user
