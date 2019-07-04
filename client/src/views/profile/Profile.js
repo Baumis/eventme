@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import ProfileHeader from './components/profileHeader/profileHeader'
+import ProfileHeader from './components/profileHeader/ProfileHeader'
+import EventContainer from './components/eventContainer/EventContainer'
 
 class Profile extends Component {
 
@@ -8,6 +9,7 @@ class Profile extends Component {
         return (
             <div className="profileViewContainer">
                 <ProfileHeader />
+                <EventContainer />
             </div>
         )
     }
