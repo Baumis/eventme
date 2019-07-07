@@ -7,7 +7,7 @@ import Event from './views/event/Event'
 class App extends Component {
 
     componentDidMount() {
-        const loggedUserJSON = window.localStorage.getItem('loggedUser')
+        const loggedUserJSON = window.localStorage.getItem('loggedEventAppUser')
         if (loggedUserJSON) {
             const user = JSON.parse(loggedUserJSON)
             this.props.UserStore.setCurrentUser(user)
