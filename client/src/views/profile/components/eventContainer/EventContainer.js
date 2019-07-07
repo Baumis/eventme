@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EventContainer.css'
+import EventCard from './EventCard'
 
 class EventContainer extends Component {
 
@@ -9,12 +10,16 @@ class EventContainer extends Component {
             <div className="eventContainer">
                 <div className="myEventsContainer">
                     {this.props.UserStore.myEvents.map((event, i) => (
-                        <div key={i}> {event.title} </div>
+                        <div key={i}>
+                            <EventCard title={event.title} background={event.background} />
+                        </div>
                     ))}
                 </div>
                 <div className="myInvitesContainer">
                     {this.props.UserStore.myInvites.map((event, i) => (
-                        <div key={i}> {event.title} </div>
+                        <div key={i}>
+                            <EventCard title={event.title} background={event.background} />
+                        </div>
                     ))}
                 </div>
             </div>

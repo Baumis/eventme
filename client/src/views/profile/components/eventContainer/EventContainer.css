@@ -1,6 +1,6 @@
 .eventContainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     padding-top: 40px;
 }
 
@@ -16,4 +16,39 @@
     flex-direction: column;
     align-items: center;
     width: 100px;
+}
+
+.eventCard {
+    display: flex;
+    flex-direction: column-reverse;
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.4);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position:center center;
+    width:20vw;
+    height:20vw;
+    max-width: 300px;
+    max-height: 300px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+.titlePanel{
+    display: flex;
+    justify-content: center;
+    background: rgba(0,17,26,0.7);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.titlePanel p {
+    margin: 0px;
+    padding: 10px;
+    color: white;
 }
