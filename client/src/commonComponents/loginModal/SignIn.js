@@ -23,6 +23,7 @@ class Login extends Component {
         try {
             const user = await loginService.login({ username, password })
             this.props.UserStore.setCurrentUser(user)
+            window.localStorage.setItem('loggedUser', JSON.stringify(user))
             this.setState({ password: '', username: '' })
 
             try {
