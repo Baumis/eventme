@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import './ProfileHeader.css'
 import ProfileCard from './ProfileCard'
 
-class profileHeader extends Component {
+class ProfileHeader extends Component {
 
     render() {
         console.log(this.props.UserStore.currentUser)
@@ -15,4 +15,4 @@ class profileHeader extends Component {
     }
 }
 
-export default inject('UserStore')(observer(profileHeader))
+export default inject('UserStore')(observer(ProfileHeader))

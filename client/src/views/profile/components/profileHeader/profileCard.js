@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaUser, FaEnvelope, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'
 
-const profileCard = ({ user }) => {
+const ProfileCard = ({ user }) => {
     return (
         <div className="profileCard">
             <div className="profileInfo">
@@ -30,4 +30,4 @@ const profileCard = ({ user }) => {
     )
 }
 
-export default profileCard
+export default ProfileCard

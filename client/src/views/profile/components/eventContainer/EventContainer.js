@@ -16,7 +16,7 @@ class EventContainer extends Component {
                         </div>
                     ))}
                 </div>
-                <div className="sectionHeader">invites</div>
+                <div className="sectionHeader">Invites</div>
                 <div className="eventsContainer">
                     {this.props.UserStore.myInvites.map((event, i) => (
                         <div key={i}>
