@@ -8,14 +8,16 @@ class EventContainer extends Component {
     render() {
         return (
             <div className="eventContainer">
-                <div className="myEventsContainer">
+                <div className="sectionHeader">My events</div>
+                <div className="eventsContainer">
                     {this.props.UserStore.myEvents.map((event, i) => (
                         <div key={i}>
                             <EventCard title={event.title} background={event.background} />
                         </div>
                     ))}
                 </div>
-                <div className="myInvitesContainer">
+                <div className="sectionHeader">invites</div>
+                <div className="eventsContainer">
                     {this.props.UserStore.myInvites.map((event, i) => (
                         <div key={i}>
                             <EventCard title={event.title} background={event.background} />
