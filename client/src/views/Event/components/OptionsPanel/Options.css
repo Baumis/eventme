@@ -1,0 +1,116 @@
+.OptionsContainer{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    z-index: 4;
+    width: 300px;
+    top: 0px;
+    left: 0px;
+    background: #595F65;
+    transition: left 0.5s;
+    font-family: 'Roboto', sans-serif;
+}
+
+.OptionsCanvas{
+  height: 100%;
+  overflow: auto;
+}
+
+.OptionsHeader{
+    display: flex;
+    height: 50px;
+    background: #373B3F;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    padding-right: 0px;
+}
+
+.OptionsHeader button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    border: none;
+    background: transparent;
+    height: 50px;
+    width: 50px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+    /*border: 1px solid #2f3337;*/
+}
+
+.OptionsHeader p{
+    width: 100%;
+    color: white;
+    margin-right: -50px;
+}
+
+.OptionsContent{
+    padding-top: 10px;
+    padding-right: 35px;
+}
+
+.inputBlock{
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    padding-bottom: 1px;
+    color: white;
+}
+
+.inputLabel{
+    display: flex;
+    padding: 10px;
+    color: #B2BFCB;
+}
+
+.inputBlock input{
+    border-radius: 30px;
+    border: none;
+    height: 18px;
+    padding: 3px 10px 3px 10px;
+    background: #7A838C;
+    color:white;
+}
+
+.infoBlock{
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px 5px 20px;
+  padding-bottom: 1px;
+  color: white;
+}
+
+.infoBlock input{
+  border-radius: 30px;
+  border: none;
+  height: 18px;
+  width: 120px;
+  padding: 3px 10px 3px 10px;
+  background: #7A838C;
+  color:white;
+}
+
+.infoBlock label{
+  color: #B2BFCB;
+}
+
+.sectionDevider{
+  border-bottom: 1px solid #373B3F;
+  margin: 40px 8px 20px 8px;
+  padding: 0px 12px 0px 12px;
+}
+
+.sectionDevider label{
+  display: block;
+  margin-bottom: -8px;
+  color: white;
+  width: 90px;
+  background: #595F65;
+}

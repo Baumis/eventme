@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Main from './views/main/Main'
-import Event from './views/event/Event'
-import Profile from './views/profile/Profile'
+import Main from './views/Main/Main'
+import Event from './views/Event/Event'
+import Profile from './views/Profile/Profile'
 
 const App = () => {
     return (

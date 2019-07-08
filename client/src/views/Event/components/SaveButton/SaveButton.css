@@ -1,0 +1,21 @@
+.SaveButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85px;
+    height: 45px;
+    position: fixed;
+    z-index: 3;
+    right: 40px;
+    bottom: 30px;
+    background: rgba(46, 184, 46, 0.8);
+    border-radius: 6px;
+    color:white;
+    border: 1px solid #f2f2f2;
+    transition: bottom 0.2s;
+    cursor: pointer;
+}
+
+.SaveButton p{
+    padding-right: 3px;
+}

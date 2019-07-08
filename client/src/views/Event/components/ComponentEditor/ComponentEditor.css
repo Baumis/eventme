@@ -1,0 +1,163 @@
+.ModalBackground{
+    position: fixed; /* Stay in place */
+    display:flex;
+    justify-content: center;
+    z-index: 2; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.EditorContainer{
+    position: fixed;
+    display: flex;
+    top: 20%;
+    background: #595F65;
+    -webkit-box-shadow: 0px 0px 16px -1px rgb(69, 69, 69, 0.4);
+    -moz-box-shadow: 0px 0px 16px -1px rgba(69,69,69,0.4);
+    box-shadow: 0px 0px 16px -1px rgba(69,69,69,0.4);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    width: 400px;
+    height: 400px;
+}
+
+.headerRow{
+    color:white;
+}
+
+.headerRow h4{
+    padding: 12px;
+    font-size: 20px;
+    margin: 0px;
+}
+
+.exitRow{
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    font-size: 18px;
+}
+
+.exitIcon{
+    cursor: pointer;
+}
+
+
+.TypeRow{
+    display: flex;
+    flex-direction: column;
+    background: #373B3F;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.TypeItem{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 65px;
+    font-size: 14px;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+}
+
+.TypeItem label{
+    padding-top: 5px;
+    cursor: pointer
+}
+
+.TypeItem:hover{
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+#TypeActive{
+    color: rgba(255,255,255);
+    border-right: 1px solid white;
+}
+
+.ButtonRow{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 1px;
+    right: 10px;
+}
+
+.ButtonRow button{
+    background: transparent;
+    border-radius: 30px;
+    border: 2px solid #2eb82e;
+    color:  white;
+    padding: 8px 20px 8px 20px;
+    cursor: pointer;
+}
+
+.ButtonRow button:hover{
+    background: rgba(255,255,255,0.1);
+}
+
+.SettingsContent{
+    display:block;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+}
+
+.Preview{
+    width: 100%;
+}
+
+.DataSettings{
+    width: 100%;
+}
+
+.SettingInput{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #B2BFCB;
+    font-size: 16px;
+    padding: 20px 10px 15px 10px;
+}
+
+.SettingInput input{
+    border: none;
+    padding-top: 8px;
+    padding-left: 5px;
+    border-bottom: 1px solid #7A838C;
+    background: transparent;
+    color:white;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.SettingInput textarea{
+    background: #7A838C;
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.SettingInfo{
+    display: flex;
+    flex-direction: column;
+    color: #7A838C;
+    font-size: 16px;
+    padding: 20px 10px 15px 10px;
+    border: 1px solid #7A838C;
+    border-radius: 10px;
+}
+
+.InfoTitleRow{
+    font-size: 18px;
+}
