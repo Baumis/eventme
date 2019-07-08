@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Navbar.css'
-import MainSearchbar from '../mainSearchBar/MainSearchBar'
+import MainSearchbar from '../MainSearchBar/MainSearchBar'
 import User from '../../../../commonComponents/User/User'
 
 class Navbar extends Component {
@@ -12,7 +12,7 @@ class Navbar extends Component {
                     <p>EVENTME.COM</p>
                 </div>
                 <div className="NavBarItem"><MainSearchbar /></div>
-                <div className="NavBarItem"><User /></div>
+                <div className="NavBarItem"><User history={this.props.history}/></div>
             </div>
         )
     }

@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Main.css'
-import CreateButton from './components/createButton/CreateButton'
-import Navbar from './components/navbar/Navbar'
-import LoginModal from '../../commonComponents/loginModal/LoginModal'
+import CreateButton from './components/CreateButton/CreateButton'
+import Navbar from './components/Navbar/Navbar'
+import LoginModal from '../../commonComponents/LoginModal/LoginModal'
 
 class Main extends Component {
 
     createEvent = () => {
         if (this.props.UserStore.currentUser === null) {
-            this.props.VisibilityStore.changeRedirectTo('template')
             this.props.VisibilityStore.showLoginModal()
         } else {
             this.props.history.push('/events/template')
@@ -19,12 +18,12 @@ class Main extends Component {
     render() {
         return (
             <div className="Main">
-                <Navbar />
+                <Navbar history={this.props.history} />
                 <div className="MainContent">
                     <CreateButton click={this.createEvent} />
                 </div>
                 {this.props.VisibilityStore.loginModal ?
-                    <LoginModal afterSignIn={this.createEvent} />
+                    <LoginModal history={this.props.history} />
                     : null
                 }
             </div>

@@ -6,7 +6,6 @@ class VisibilityStore {
     optionsPanelPosition = '-300px'
     componentEditor = false
     currentComponent = null
-    redirectTo = null
 
     loadingOn() {
         this.loading = true
@@ -35,9 +34,6 @@ class VisibilityStore {
             :
             this.optionsPanelPosition = '0px'
     }
-    changeRedirectTo(route) {
-        this.redirectTo = route
-    }
 }
 
 decorate(VisibilityStore, {
@@ -45,7 +41,6 @@ decorate(VisibilityStore, {
     loginModal: observable,
     optionsPanelPosition: observable,
     componentEditor: observable,
-    redirectTo: observable,
 
     loadingOn: action,
     loadingOff: action,
@@ -54,7 +49,6 @@ decorate(VisibilityStore, {
     showComponentEditor: action,
     closeComponentEditor: action,
     slideOptionsPanel: action,
-    changeRedirectTo: action
 })
 
 export default new VisibilityStore()
