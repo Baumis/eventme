@@ -10,11 +10,14 @@ class EventContainer extends Component {
             <div className="eventContainer">
                 <div className="sectionHeader">My events</div>
                 <div className="eventsContainer">
-                    {this.props.UserStore.myEvents.map((event, i) => (
-                        <div key={i}>
-                            <EventCard title={event.title} background={event.background} />
-                        </div>
-                    ))}
+                    {!this.props.loading ?
+                        this.props.UserStore.myEvents.map((event, i) => (
+                            <div key={i}>
+                                <EventCard title={event.label} background={event.settings.background} />
+                            </div>
+                        ))
+                        : null
+                    }
                 </div>
                 <div className="sectionHeader">Invites</div>
                 <div className="eventsContainer">
