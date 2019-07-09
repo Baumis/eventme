@@ -53,9 +53,14 @@ const removeGuest = async (id, userId) => {
     return response.data
 }
 
-const getAllByUser = async (userId) => {
+const getAllCreatedByUser = async (userId) => {
     const response = await axios.get(`${baseUrl}/creator/${userId}`)
     return response.data
 }
 
-export default { getOne, getAll, create, remove, update, addGuest, removeGuest, getTemplate, setToken, getAllByUser }
+const getAllOfUser = async (userId) => {
+    const response = await axios.get(`${baseUrl}/guest/${userId}`)
+    return response.data
+}
+
+export default { getOne, getAll, create, remove, update, addGuest, removeGuest, getTemplate, setToken, getAllCreatedByUser, getAllOfUser }
