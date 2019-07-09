@@ -22,7 +22,7 @@ class Profile extends Component {
         return (
             <div className="profileViewContainer">
                 <ProfileHeader />
-                <EventContainer loading={this.state.loading} />
+                <EventContainer loading={this.state.loading} history={this.props.history} />
             </div>
         )
     }
