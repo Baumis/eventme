@@ -1,17 +1,20 @@
-.UserPanel{
+.UserPanel {
     display: flex;
     color:white;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    width: 200px;
 }
 
-.UserIcon{
+.UserIcon {
     padding: 5px;
 }
 
-.UserName:hover{
+.UserName:hover {
     border-bottom: 1px solid white;
     cursor: pointer;
+}
+
+.SignedIn {
+    display: flex;
+    align-items: center;
 }

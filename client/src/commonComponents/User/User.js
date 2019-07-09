@@ -13,15 +13,22 @@ class User extends Component {
         this.props.history.push('/profile')
     }
 
+    signOut = () => {
+        this.props.UserStore.signOut()
+    }
+
     render() {
         return (
             <div className="UserPanel">
                 {this.props.UserStore.currentUser ?
-                    <div>
-                        <div className="UserIcon"><FaUser /></div>
-                        <div onClick={this.openProfile} className="UserName">
-                            {this.props.UserStore.currentUser.username}
+                    <div className="SignedIn">
+                        <div>
+                            <div className="UserIcon"><FaUser /></div>
+                            <div onClick={this.openProfile} className="UserName">
+                                {this.props.UserStore.currentUser.username}
+                            </div>
                         </div>
+                        <div className="LoginButton" onClick={this.signOut} >{'Sign Out'}</div>
                     </div>
                     :
                     <div>
