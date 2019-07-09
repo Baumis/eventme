@@ -10,7 +10,7 @@ eventRouter.get('/', async (request, response) => {
         .populate('creator', { _id: 1, name: 1 })
         .populate('guests.user', { _id: 1, name: 1 })
 
-    response.json(events.map(Event.format))
+    response.json(events)
 })
 
 eventRouter.get('/template', async (request, response) => {
@@ -37,7 +37,6 @@ eventRouter.get('/:id', async (request, response) => {
 eventRouter.post('/', async (request, response) => {
     try {
         const body = request.body
-
         const token = request.token
 
         const decodedToken = jwt.verify(token, process.env.SECRET)
@@ -46,21 +45,24 @@ eventRouter.post('/', async (request, response) => {
             return response.status(401).json({ error: 'token missing or invalid' })
         }
 
-        const creator = decodedToken.id //'5cd445507c2a502a18cba5ca'
+        const user = await User.findById(decodedToken.id)
 
         const newEvent = new Event({
             label: body.label,
-            creator: creator,
+            creator: user._id,
             settings: body.settings,
             infoPanel: body.infoPanel,
             guests: [{
-                user: creator,
+                user: user._id,
                 status: 'GOING'
             }],
             components: body.components
         })
 
+        user.createdEvents = user.createdEvents.concat(newEvent._id)
+
         const savedEvent = await newEvent.save()
+        await user.save()
 
         const populatedEvent = await savedEvent
             .populate('creator', { _id: 1, name: 1 })
@@ -112,7 +114,7 @@ eventRouter.delete('/:id', async (request, response) => {
     }
 })
 
-eventRouter.post('/:id/add/:guestId', async (request, response) => {
+eventRouter.post('/:id/addguest/:guestId', async (request, response) => {
     try {
         const event = await Event.findById(request.params.id)
         const user = await User.findById(request.params.guestId)
@@ -122,7 +124,10 @@ eventRouter.post('/:id/add/:guestId', async (request, response) => {
             status: 'PENDING'
         })
 
+        user.events = user.events.concat(event._id)
+
         const savedEvent = await event.save()
+        await user.save()
 
         const populatedEvent = await savedEvent
             .populate('creator', { _id: 1, name: 1 })
@@ -135,13 +140,16 @@ eventRouter.post('/:id/add/:guestId', async (request, response) => {
     }
 })
 
-eventRouter.post('/:id/remove/:guestId', async (request, response) => {
+eventRouter.post('/:id/removeguest/:guestId', async (request, response) => {
     try {
         const event = await Event.findById(request.params.id)
+        const user = await User.findById(request.params.guestId)
 
         event.guests = event.guests.filter(guest => guest.user.toString() !== request.params.guestId)
+        user.events = user.events.filter(event => event.toString() !== request.params.id)
 
         const savedEvent = await event.save()
+        await user.save()
 
         const populatedEvent = await savedEvent
             .populate('creator', { _id: 1, name: 1 })
@@ -154,15 +162,23 @@ eventRouter.post('/:id/remove/:guestId', async (request, response) => {
     }
 })
 
-eventRouter.get('/user/:userId', async (request, response) => {
+eventRouter.get('/creator/:userId', async (request, response) => {
     try {
+        const userEvents = await User
+            .findById(request.params.userId, 'createdEvents')
+            .populate('createdEvents', { _id: 1, label: 1, settings: 1 })
+        response.json(userEvents.createdEvents)
+    } catch (exception) {
+        response.status(400).send({ error: 'Malformatted id' })
+    }
+})
 
-        const events = await Event
-            .find({ creator: ObjectId(request.params.userId) })
-            .populate('creator', { _id: 1, name: 1 })
-            .populate('guests.user', { _id: 1, name: 1 })
-
-        response.json(events.map(Event.format))
+eventRouter.get('/guest/:userId', async (request, response) => {
+    try {
+        const userEvents = await User
+            .findById(request.params.userId, 'events')
+            .populate('events', { _id: 1, label: 1, settings: 1 })
+        response.json(userEvents.events)
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }

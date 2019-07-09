@@ -44,17 +44,17 @@ const getTemplate = async () => {
 }
 
 const addGuest = async (id, userId) => {
-    const response = await axios.post(`${baseUrl}/${id}/add/${userId}`, config())
+    const response = await axios.post(`${baseUrl}/${id}/addguest/${userId}`, config())
     return response.data
 }
 
 const removeGuest = async (id, userId) => {
-    const response = await axios.post(`${baseUrl}/${id}/remove/${userId}`, config())
+    const response = await axios.post(`${baseUrl}/${id}/removeguest/${userId}`, config())
     return response.data
 }
 
 const getAllByUser = async (userId) => {
-    const response = await axios.get(`${baseUrl}/user/${userId}`)
+    const response = await axios.get(`${baseUrl}/creator/${userId}`)
     return response.data
 }
 

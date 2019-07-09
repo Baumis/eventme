@@ -8,15 +8,26 @@ import Profile from './views/Profile/Profile'
 
 class App extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: true
+        }
+    }
+
     componentDidMount() {
         const loggedUserJSON = window.localStorage.getItem('loggedEventAppUser')
         if (loggedUserJSON) {
             const user = JSON.parse(loggedUserJSON)
             this.props.UserStore.setCurrentUser(user)
         }
+        this.setState({ loading: false })
     }
 
     render() {
+        if (this.state.loading) {
+            return null
+        }
         return (
             <div>
                 <Router>

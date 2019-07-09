@@ -5,8 +5,8 @@ const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     passwordHash: String,
-    createdEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
-    events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
+    events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+    createdEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
 })
 
 userSchema.statics.format = (user) => {

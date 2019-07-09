@@ -5,7 +5,7 @@ const User = require('../models/user')
 userRouter.get('/', async (request, response) => {
     const users = await User.find({})
 
-    response.json(users.map(User.format))
+    response.json(users)
 })
 
 userRouter.get('/:id', async (request, response) => {
@@ -48,8 +48,9 @@ userRouter.post('/', async (request, response) => {
 
         const savedUser = await user.save()
 
-        response.status(201).json(user.format(savedUser))
+        response.status(201).json(User.format(savedUser))
     } catch (exception) {
+        console.log(exception)
         response.status(500).json({ error: 'something went wrong...' })
     }
 })
@@ -83,7 +84,7 @@ userRouter.put('/:id', async (request, response) => {
 
         const updatedUser = await User.findByIdAndUpdate(request.params.id, user, { new: true })
 
-        response.json(user.format(updatedUser))
+        response.json(User.format(updatedUser))
     } catch (exception) {
         response.status(500).json({ error: 'something went wrong...' })
     }
