@@ -4,8 +4,6 @@ import userService from '../services/users'
 
 class UserStore {
     currentUser = null
-    myEvents = []
-    myInvites = []
 
     setCurrentUser(user) {
         this.currentUser = user

@@ -17,8 +17,24 @@ class SignUp extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
-    signUp = () => {
-
+    signUp = async () => {
+        const userObject = {
+            name: this.state.name,
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
+        }
+        if (this.state.password === this.state.password2) {
+            try {
+                await this.props.UserStore.signUp(userObject)
+                alert('You have been signed ')
+                this.props.VisibilityStore.closeLoginModal()
+            }catch(error){
+                alert('Something went wrong...')
+            }
+        }else{
+            alert('Passwords didn\'t match.')
+        }
     }
 
     render() {
@@ -82,7 +98,7 @@ class SignUp extends Component {
                 <div className="signButtonRow">
                     <div
                         className="signButton"
-                        onClick={() => this.login(this.state.username, this.state.password)}>
+                        onClick={() => this.signUp()}>
                         Sign Up
                     </div>
                 </div>
