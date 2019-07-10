@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import './LoginModal.css'
+import './SignModal.css'
 import { Link } from 'react-router-dom'
 import { FaTimes } from 'react-icons/fa'
 import SignIn from './SignIn'
@@ -30,8 +30,8 @@ class LoginModal extends Component {
     render() {
         const TagName = this.contents[this.state.content]
         return (
-            <div className="LoginBackground" >
-                <div className="Login">
+            <div className="signBackground" >
+                <div className="sign">
                     <div className="topRow">
                         <div className="ExitIcon" onClick={() => this.props.VisibilityStore.closeLoginModal()}>
                             <FaTimes />

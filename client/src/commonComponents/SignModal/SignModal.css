@@ -1,4 +1,4 @@
-.LoginBackground{
+.signBackground{
     position: fixed; /* Stay in place */
     display:flex;
     justify-content: center;
@@ -10,7 +10,7 @@
     overflow: auto; /* Enable scroll if needed */
 }
 
-.Login{
+.sign{
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -23,6 +23,10 @@
     font-family: 'Roboto', sans-serif;
     width: 400px;
     height: 400px;
+}
+
+.signDetails{
+    overflow-y: auto;
 }
 
 .TopRow{
@@ -65,14 +69,14 @@
     border-bottom: 1px solid #2eb82e;
 }
 
-.LoginButtonRow{
+.signButtonRow{
     width: 100%;
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
-.LoginInput{
+.signInput{
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -81,7 +85,7 @@
     padding: 20px 40px 15px 40px;
 }
 
-.LoginInput input{
+.signInput input{
     border: none;
     padding-top: 15px;
     padding-left: 5px;
@@ -91,7 +95,7 @@
     font-size: 16px;
 }
 
-.LoginButton{
+.signButton{
     padding: 8px;
     border: 1px solid white;
     color: white;
@@ -100,6 +104,6 @@
     cursor: pointer;
 }
 
-.LoginButton:hover{
+.signButton:hover{
     background: rgba(255,255,255,0.1);
 }

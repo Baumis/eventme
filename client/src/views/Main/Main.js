@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import './Main.css'
 import CreateButton from './components/CreateButton/CreateButton'
 import Navbar from './components/Navbar/Navbar'
-import LoginModal from '../../commonComponents/LoginModal/LoginModal'
+import LoginModal from '../../commonComponents/SignModal/SignModal'
 
 class Main extends Component {
 

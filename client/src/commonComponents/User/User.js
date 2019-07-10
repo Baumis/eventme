@@ -28,11 +28,11 @@ class User extends Component {
                                 {this.props.UserStore.currentUser.username}
                             </div>
                         </div>
-                        <div className="LoginButton" onClick={this.signOut} >{'Sign Out'}</div>
+                        <div className="signButton" onClick={this.signOut} >{'Sign Out'}</div>
                     </div>
                     :
                     <div>
-                        <div className="LoginButton" onClick={this.openLoginModal}>{'Sign In'}</div>
+                        <div className="signButton" onClick={this.openLoginModal}>{'Sign In'}</div>
                     </div>
                 }
             </div>

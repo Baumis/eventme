@@ -9,7 +9,7 @@ import SaveButton from './components/SaveButton/SaveButton'
 import ComponentEditor from './components/ComponentEditor/ComponentEditor'
 import OptionsButton from './components/OptionsButton/OptionsButton'
 import User from '../../commonComponents/User/User'
-import LoginModal from '../../commonComponents/LoginModal/LoginModal'
+import LoginModal from '../../commonComponents/SignModal/SignModal'
 
 class Event extends Component {
 
