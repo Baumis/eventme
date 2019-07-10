@@ -30,8 +30,8 @@ class LoginModal extends Component {
     render() {
         const TagName = this.contents[this.state.content]
         return (
-            <div className="signBackground" >
-                <div className="sign">
+            <div className="signModalBackground" >
+                <div className="signModal">
                     <div className="topRow">
                         <div className="ExitIcon" onClick={() => this.props.VisibilityStore.closeLoginModal()}>
                             <FaTimes />

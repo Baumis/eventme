@@ -1,4 +1,4 @@
-.signBackground{
+.signModalBackground{
     position: fixed; /* Stay in place */
     display:flex;
     justify-content: center;
@@ -10,10 +10,11 @@
     overflow: auto; /* Enable scroll if needed */
 }
 
-.sign{
+.signModal{
     position: fixed;
     display: flex;
     flex-direction: column;
+    padding-bottom: 25px;
     top: 20%;
     background: #595F65;
     -webkit-box-shadow: 0px 0px 16px -1px rgb(69, 69, 69, 0.4);
@@ -25,8 +26,18 @@
     height: 400px;
 }
 
+.signModalContent{
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+}
+
 .signDetails{
-    overflow-y: auto;
+    overflow: auto;
+    -webkit-box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
+    box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
 }
 
 .TopRow{

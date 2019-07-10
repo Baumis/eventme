@@ -4,17 +4,16 @@ class SignUp extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            name: '',
             username: '',
-            password: ''
+            email: '',
+            password: '',
+            password2: ''
         }
     }
 
-    changeUsername = (event) => {
-        this.setState({ username: event.target.value })
-    }
-
-    changePassword = (event) => {
-        this.setState({ password: event.target.value })
+    changeStateValue = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     render() {
@@ -24,16 +23,18 @@ class SignUp extends Component {
                     <div className="signInput">
                         <label>Name</label>
                         <input
-                            onChange={this.changeUsername}
-                            value={this.state.username}
-                            placeholder={'user'}
+                            name={'name'}
+                            onChange={this.changeStateValue}
+                            value={this.state.name}
+                            placeholder={'Fredrik Miller'}
                         >
                         </input>
                     </div>
                     <div className="signInput">
                         <label>Username</label>
                         <input
-                            onChange={this.changeUsername}
+                            name={'username'}
+                            onChange={this.changeStateValue}
                             value={this.state.username}
                             placeholder={'user'}
                         >
@@ -42,17 +43,20 @@ class SignUp extends Component {
                     <div className="signInput">
                         <label>Email</label>
                         <input
-                            onChange={this.changePassword}
-                            value={this.state.password}
-                            placeholder={'****'}
+                            name={'email'}
+                            type={'email'}
+                            onChange={this.changeStateValue}
+                            value={this.state.email}
+                            placeholder={'miller@email.com'}
                         >
                         </input>
                     </div>
                     <div className="signInput">
                         <label>Password</label>
                         <input
+                            name={'password'}
                             type={'password'}
-                            onChange={this.changePassword}
+                            onChange={this.changeStateValue}
                             value={this.state.password}
                             placeholder={'****'}
                         >
@@ -61,9 +65,10 @@ class SignUp extends Component {
                     <div className="signInput">
                         <label>Password again</label>
                         <input
+                            name={'password2'}
                             type={'password'}
-                            onChange={this.changePassword}
-                            value={this.state.password}
+                            onChange={this.changeStateValue}
+                            value={this.state.password2}
                             placeholder={'****'}
                         >
                         </input>
