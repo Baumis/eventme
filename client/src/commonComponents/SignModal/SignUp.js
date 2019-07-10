@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 
 class SignUp extends Component {
     constructor(props) {
@@ -14,6 +15,10 @@ class SignUp extends Component {
 
     changeStateValue = (event) => {
         this.setState({ [event.target.name]: event.target.value })
+    }
+
+    signUp = () => {
+
     }
 
     render() {
@@ -86,4 +91,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp
+export default inject('UserStore', 'VisibilityStore')(observer(SignUp))
