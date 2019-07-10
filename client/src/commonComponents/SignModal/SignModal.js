@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import './LoginModal.css'
+import './SignModal.css'
 import { Link } from 'react-router-dom'
 import { FaTimes } from 'react-icons/fa'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 
 
-class LoginModal extends Component {
+class SignModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -30,10 +30,10 @@ class LoginModal extends Component {
     render() {
         const TagName = this.contents[this.state.content]
         return (
-            <div className="LoginBackground" >
-                <div className="Login">
+            <div className="signModalBackground" >
+                <div className="signModal">
                     <div className="topRow">
-                        <div className="ExitIcon" onClick={() => this.props.VisibilityStore.closeLoginModal()}>
+                        <div className="ExitIcon" onClick={() => this.props.VisibilityStore.closeSignModal()}>
                             <FaTimes />
                         </div>
                     </div>
@@ -65,4 +65,4 @@ class LoginModal extends Component {
     }
 }
 
-export default inject('UserStore', 'VisibilityStore')(observer(LoginModal))
+export default inject('UserStore', 'VisibilityStore')(observer(SignModal))

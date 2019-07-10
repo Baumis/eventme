@@ -5,27 +5,34 @@ import { FaUser } from 'react-icons/fa'
 
 class User extends Component {
 
-    openLoginModal = () => {
-        this.props.VisibilityStore.showLoginModal()
+    openSignModal = () => {
+        this.props.VisibilityStore.showSignModal()
     }
 
     openProfile = () => {
         this.props.history.push('/profile')
     }
 
+    signOut = () => {
+        this.props.UserStore.signOut()
+    }
+
     render() {
         return (
             <div className="UserPanel">
                 {this.props.UserStore.currentUser ?
-                    <div>
-                        <div className="UserIcon"><FaUser /></div>
-                        <div onClick={this.openProfile} className="UserName">
-                            {this.props.UserStore.currentUser.username}
+                    <div className="SignedIn">
+                        <div>
+                            <div className="UserIcon"><FaUser /></div>
+                            <div onClick={this.openProfile} className="UserName">
+                                {this.props.UserStore.currentUser.username}
+                            </div>
                         </div>
+                        <div className="signButton" onClick={this.signOut} >{'Sign Out'}</div>
                     </div>
                     :
                     <div>
-                        <div className="LoginButton" onClick={this.openLoginModal}>{'Sign In'}</div>
+                        <div className="signButton" onClick={this.openSignModal}>{'Sign In'}</div>
                     </div>
                 }
             </div>

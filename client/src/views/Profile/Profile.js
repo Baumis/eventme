@@ -9,7 +9,7 @@ class Profile extends Component {
         return (
             <div className="profileViewContainer">
                 <ProfileHeader />
-                <EventContainer />
+                <EventContainer history={this.props.history} />
             </div>
         )
     }

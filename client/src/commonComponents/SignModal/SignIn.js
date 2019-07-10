@@ -25,7 +25,7 @@ class Login extends Component {
             this.props.UserStore.setCurrentUser(user)
             window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
             this.setState({ password: '', username: '' })
-            this.props.VisibilityStore.closeLoginModal()
+            this.props.VisibilityStore.closeSignModal()
 
         } catch (error) {
             alert('Something went wrong, check your username and password!')
@@ -35,31 +35,33 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="LoginModalContent">
-                <div className="LoginInput">
-                    <label>Username</label>
-                    <input
-                        onChange={this.changeUsername}
-                        value={this.state.username}
-                        placeholder={'user'}
-                    >
-                    </input>
+            <div className="signModalContent">
+                <div className="signDetails">
+                    <div className="signInput">
+                        <label>Username</label>
+                        <input
+                            onChange={this.changeUsername}
+                            value={this.state.username}
+                            placeholder={'user'}
+                        >
+                        </input>
+                    </div>
+                    <div className="signInput">
+                        <label>Password</label>
+                        <input
+                            type={'password'}
+                            onChange={this.changePassword}
+                            value={this.state.password}
+                            placeholder={'****'}
+                        >
+                        </input>
+                    </div>
                 </div>
-                <div className="LoginInput">
-                    <label>Password</label>
-                    <input
-                        type={'password'}
-                        onChange={this.changePassword}
-                        value={this.state.password}
-                        placeholder={'****'}
-                    >
-                    </input>
-                </div>
-                <div className="LoginButtonRow">
+                <div className="signButtonRow">
                     <div
-                        className="LoginButton"
-                        onClick={() => this.login(this.state.username, this.state.password)}
-                    >login
+                        className="signButton"
+                        onClick={() => this.login(this.state.username, this.state.password)}>
+                        Sign In
                     </div>
                 </div>
             </div>

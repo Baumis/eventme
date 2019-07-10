@@ -3,13 +3,13 @@ import { inject, observer } from 'mobx-react'
 import './Main.css'
 import CreateButton from './components/CreateButton/CreateButton'
 import Navbar from './components/Navbar/Navbar'
-import LoginModal from '../../commonComponents/LoginModal/LoginModal'
+import SignModal from '../../commonComponents/SignModal/SignModal'
 
 class Main extends Component {
 
     createEvent = () => {
         if (this.props.UserStore.currentUser === null) {
-            this.props.VisibilityStore.showLoginModal()
+            this.props.VisibilityStore.showSignModal()
         } else {
             this.props.history.push('/events/template')
         }
@@ -22,8 +22,8 @@ class Main extends Component {
                 <div className="MainContent">
                     <CreateButton click={this.createEvent} />
                 </div>
-                {this.props.VisibilityStore.loginModal ?
-                    <LoginModal history={this.props.history} />
+                {this.props.VisibilityStore.signModal ?
+                    <SignModal history={this.props.history} />
                     : null
                 }
             </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import { FaUser, FaEnvelope, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'
 
 const ProfileCard = ({ user }) => {
+
     return (
         <div className="profileCard">
             <div className="profileInfo">
