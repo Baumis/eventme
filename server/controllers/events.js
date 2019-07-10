@@ -115,10 +115,10 @@ eventRouter.delete('/:id', async (request, response) => {
     }
 })
 
-eventRouter.post('/:id/addguest/:guestId', async (request, response) => {
+eventRouter.post('/:id/addguest/:userId', async (request, response) => {
     try {
         const event = await Event.findById(request.params.id)
-        const user = await User.findById(request.params.guestId)
+        const user = await User.findById(request.params.userId)
 
         event.guests = event.guests.concat({
             user: user._id,
@@ -141,12 +141,12 @@ eventRouter.post('/:id/addguest/:guestId', async (request, response) => {
     }
 })
 
-eventRouter.post('/:id/removeguest/:guestId', async (request, response) => {
+eventRouter.post('/:id/removeguest/:userId', async (request, response) => {
     try {
         const event = await Event.findById(request.params.id)
-        const user = await User.findById(request.params.guestId)
+        const user = await User.findById(request.params.userId)
 
-        event.guests = event.guests.filter(guest => guest.user.toString() !== request.params.guestId)
+        event.guests = event.guests.filter(guest => guest.user.toString() !== request.params.userId)
         user.myInvites = user.myInvites.filter(event => event.toString() !== request.params.id)
 
         const savedEvent = await event.save()
@@ -163,7 +163,7 @@ eventRouter.post('/:id/removeguest/:guestId', async (request, response) => {
     }
 })
 
-eventRouter.get('/:id/:invitekey', async (request, response) => {
+eventRouter.post('/:id/validatekey/:invitekey', async (request, response) => {
     try {
         const event = await Event
             .findById(request.params.id)
@@ -172,7 +172,37 @@ eventRouter.get('/:id/:invitekey', async (request, response) => {
             return response.status(400).send({ error: 'Malformatted inviteKey' })
         }
 
-        response.json('you can join')
+        response.json({ inviteKey: request.params.invitekey })
+    } catch (exception) {
+        response.status(400).send({ error: 'Malformatted id' })
+    }
+})
+
+eventRouter.post('/:id/addguest/:userId/:invitekey', async (request, response) => {
+    try {
+        const event = await Event.findById(request.params.id)
+        const user = await User.findById(request.params.userId)
+
+        if (event.inviteKey !== request.params.invitekey) {
+            return response.status(400).send({ error: 'Malformatted inviteKey' })
+        }
+
+        event.guests = event.guests.concat({
+            user: user._id,
+            status: 'PENDING'
+        })
+
+        user.myInvites = user.myInvites.concat(event._id)
+
+        const savedEvent = await event.save()
+        await user.save()
+
+        const populatedEvent = await savedEvent
+            .populate('creator', { _id: 1, name: 1 })
+            .populate('guests.user', { _id: 1, name: 1 })
+            .execPopulate()
+
+        response.status(201).json(Event.format(populatedEvent))
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
