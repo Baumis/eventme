@@ -28,11 +28,11 @@ class SignUp extends Component {
             try {
                 await this.props.UserStore.signUp(userObject)
                 alert('You have been signed ')
-                this.props.VisibilityStore.closeLoginModal()
-            }catch(error){
+                this.props.VisibilityStore.closeSignModal()
+            } catch (error) {
                 alert('Something went wrong...')
             }
-        }else{
+        } else {
             alert('Passwords didn\'t match.')
         }
     }

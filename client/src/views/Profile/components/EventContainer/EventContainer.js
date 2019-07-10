@@ -11,17 +11,13 @@ class EventContainer extends Component {
                 <div className="sectionHeader">My events</div>
                 <div className="eventsContainer">
                     {this.props.UserStore.currentUser.myEvents.map((event, i) => (
-                        <div key={i}>
-                            <EventCard event={event} history={this.props.history} />
-                        </div>
+                        <EventCard key={i} event={event} history={this.props.history} />
                     ))}
                 </div>
                 <div className="sectionHeader">Invites</div>
                 <div className="eventsContainer">
                     {this.props.UserStore.currentUser.myInvites.map((event, i) => (
-                        <div key={i}>
-                            <EventCard event={event} history={this.props.history} />
-                        </div>
+                        <EventCard key={i} event={event} history={this.props.history} />
                     ))}
                 </div>
             </div>

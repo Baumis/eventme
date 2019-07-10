@@ -9,7 +9,7 @@ import SaveButton from './components/SaveButton/SaveButton'
 import ComponentEditor from './components/ComponentEditor/ComponentEditor'
 import OptionsButton from './components/OptionsButton/OptionsButton'
 import User from '../../commonComponents/User/User'
-import LoginModal from '../../commonComponents/SignModal/SignModal'
+import SignModal from '../../commonComponents/SignModal/SignModal'
 
 class Event extends Component {
 
@@ -74,8 +74,8 @@ class Event extends Component {
                     />
                     : null
                 }
-                {this.props.VisibilityStore.loginModal ?
-                    <LoginModal history={this.props.history} />
+                {this.props.VisibilityStore.signModal ?
+                    <SignModal history={this.props.history} />
                     : null
                 }
                 <SaveButton save={this.save} saved={this.props.EventStore.saved} />
