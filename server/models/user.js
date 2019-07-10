@@ -5,8 +5,8 @@ const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     passwordHash: String,
-    events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
-    createdEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
+    myEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+    myInvites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
 })
 
 userSchema.statics.format = (user) => {
@@ -14,7 +14,9 @@ userSchema.statics.format = (user) => {
         _id: user._id,
         username: user.username,
         name: user.name,
-        email: user.email
+        email: user.email,
+        myEvents: user.myEvents,
+        myInvites: user.myInvites
     }
 }
 
