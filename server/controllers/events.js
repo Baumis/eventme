@@ -1,4 +1,3 @@
-const ObjectId = require('mongoose').Types.ObjectId
 const jwt = require('jsonwebtoken')
 const eventRouter = require('express').Router()
 const Event = require('../models/event')
@@ -59,7 +58,7 @@ eventRouter.post('/', async (request, response) => {
             components: body.components
         })
 
-        user.createdEvents = user.createdEvents.concat(newEvent._id)
+        user.myEvents = user.myEvents.concat(newEvent._id)
 
         const savedEvent = await newEvent.save()
         await user.save()
@@ -124,7 +123,7 @@ eventRouter.post('/:id/addguest/:guestId', async (request, response) => {
             status: 'PENDING'
         })
 
-        user.events = user.events.concat(event._id)
+        user.myInvites = user.myInvites.concat(event._id)
 
         const savedEvent = await event.save()
         await user.save()
@@ -146,7 +145,7 @@ eventRouter.post('/:id/removeguest/:guestId', async (request, response) => {
         const user = await User.findById(request.params.guestId)
 
         event.guests = event.guests.filter(guest => guest.user.toString() !== request.params.guestId)
-        user.events = user.events.filter(event => event.toString() !== request.params.id)
+        user.myInvites = user.myInvites.filter(event => event.toString() !== request.params.id)
 
         const savedEvent = await event.save()
         await user.save()
@@ -157,28 +156,6 @@ eventRouter.post('/:id/removeguest/:guestId', async (request, response) => {
             .execPopulate()
 
         response.status(201).json(Event.format(populatedEvent))
-    } catch (exception) {
-        response.status(400).send({ error: 'Malformatted id' })
-    }
-})
-
-eventRouter.get('/creator/:userId', async (request, response) => {
-    try {
-        const userEvents = await User
-            .findById(request.params.userId, 'createdEvents')
-            .populate('createdEvents', { _id: 1, label: 1, settings: 1 })
-        response.json(userEvents.createdEvents)
-    } catch (exception) {
-        response.status(400).send({ error: 'Malformatted id' })
-    }
-})
-
-eventRouter.get('/guest/:userId', async (request, response) => {
-    try {
-        const userEvents = await User
-            .findById(request.params.userId, 'events')
-            .populate('events', { _id: 1, label: 1, settings: 1 })
-        response.json(userEvents.events)
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
