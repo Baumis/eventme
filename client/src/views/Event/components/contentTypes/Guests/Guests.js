@@ -7,7 +7,7 @@ class Guests extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            activeStatus: 'going',
+            activeStatus: 'GOING',
             filter: ''
         }
     }
@@ -23,22 +23,22 @@ class Guests extends Component {
     render() {
 
         const guestsToShow = this.props.EventStore.event.guests.filter((guest) =>
-            guest.status === this.state.activeStatus && guest.name.toLowerCase().includes(this.state.filter.toLowerCase())
+            guest.status === this.state.activeStatus && guest.user.name.toLowerCase().includes(this.state.filter.toLowerCase())
         )
 
         return (
             <div className="GuestComponent">
                 <div className="ComponentStatusButtons">
-                    <div id={this.state.activeStatus === 'going' ? 'TabActive' : 'normal'}
-                        onClick={() => this.changeActive('going')}
+                    <div id={this.state.activeStatus === 'GOING' ? 'TabActive' : 'normal'}
+                        onClick={() => this.changeActive('GOING')}
                         className="ComponentStatusButton"
                     > Going </div>
-                    <div id={this.state.activeStatus === 'pending' ? 'TabActive' : 'normal'}
-                        onClick={() => this.changeActive('pending')}
+                    <div id={this.state.activeStatus === 'PENDING' ? 'TabActive' : 'normal'}
+                        onClick={() => this.changeActive('PENDING')}
                         className="ComponentStatusButton"
                     > Pending </div>
-                    <div id={this.state.activeStatus === 'declined' ? 'TabActive' : 'normal'}
-                        onClick={() => this.changeActive('declined')}
+                    <div id={this.state.activeStatus === 'DECLINED' ? 'TabActive' : 'normal'}
+                        onClick={() => this.changeActive('DECLINED')}
                         className="ComponentStatusButton"
                     > Declined </div>
                 </div>
@@ -46,7 +46,7 @@ class Guests extends Component {
                     {guestsToShow.map((guest, i) =>
                         <div className="ComponentGuest" key={i}>
                             <div className="ComponentGuestUser"><FaUser /></div>
-                            <div className="ComponentGuestName">{guest.name}</div>
+                            <div className="ComponentGuestName">{guest.user.name}</div>
                         </div>
                     )}
                 </div>

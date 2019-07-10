@@ -15,7 +15,7 @@ const guestSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     status: {
         type: String,
-        enum: ['GOING', 'PENDING', 'NOT GOING', 'MABYE'],
+        enum: ['GOING', 'PENDING', 'DECLINED', 'MABYE'],
         default: 'PENDING'
     },
     _id: false
