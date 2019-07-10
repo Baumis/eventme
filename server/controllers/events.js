@@ -163,4 +163,19 @@ eventRouter.post('/:id/removeguest/:guestId', async (request, response) => {
     }
 })
 
+eventRouter.get('/:id/:invitekey', async (request, response) => {
+    try {
+        const event = await Event
+            .findById(request.params.id)
+
+        if (event.inviteKey !== request.params.invitekey) {
+            return response.status(400).send({ error: 'Malformatted inviteKey' })
+        }
+
+        response.json('you can join')
+    } catch (exception) {
+        response.status(400).send({ error: 'Malformatted id' })
+    }
+})
+
 module.exports = eventRouter
