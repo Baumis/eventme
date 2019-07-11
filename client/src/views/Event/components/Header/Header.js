@@ -8,7 +8,7 @@ class Header extends Component {
     render() {
         const headerStyles = {
             color: 'white',
-            backgroundImage: 'url(' + this.props.EventStore.event.settings.background + ')'
+            backgroundImage: 'url(' + this.props.EventStore.event.background + ')'
         }
         return (
             <div style={headerStyles} className="Header-container">

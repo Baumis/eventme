@@ -9,7 +9,7 @@ import GuestList from '../GuestList.js/GuestList'
 class OptionsPanel extends Component {
 
     changeBackground = (event) => {
-        this.props.EventStore.setSettingsValue(event.target.value, 'background')
+        this.props.EventStore.setValue(event.target.value, 'background')
     }
 
     changeLabel = (event) => {
@@ -53,7 +53,7 @@ class OptionsPanel extends Component {
                     <div className="OptionsContent">
                         <InputBlock
                             label={'Header background url'}
-                            value={this.props.EventStore.event.settings.background}
+                            value={this.props.EventStore.event.background}
                             changeValue={this.changeBackground}
                         />
                     </div>
