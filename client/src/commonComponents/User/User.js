@@ -19,14 +19,14 @@ class User extends Component {
 
     render() {
         return (
-            <div className="UserPanel">
+            <div className="userPanel">
                 {this.props.UserStore.currentUser ?
-                    <div className="SignedIn">
+                    <div className="signedIn">
                         <div>
-                            <div className="UserIcon"><FaUser /></div>
-                            <div onClick={this.openProfile} className="UserName">
+                            <div className="userIcon"><FaUser /></div>
+                            <a href='/profile' className="username">
                                 {this.props.UserStore.currentUser.username}
-                            </div>
+                            </a>
                         </div>
                         <div className="signButton" onClick={this.signOut} >{'Sign Out'}</div>
                     </div>
