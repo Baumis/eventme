@@ -4,7 +4,7 @@ import './EventContainer.css'
 const EventCard = ({ event, history }) => {
 
     const background = {
-        backgroundImage: 'url(' + event.settings.background + ')'
+        backgroundImage: 'url(' + event.background + ')'
     }
 
     const goToEvent = () => {

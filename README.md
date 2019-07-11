@@ -90,9 +90,7 @@ this.state = {
 event = {
     _id: "5cd467bf23c640324cf1ec00",
     label: "My event",
-    settings: {
-        background: "www.kuva.fi/kuva1"
-    },
+    background: "www.kuva.fi/kuva1",
     infoPanel: {
         phone: '020202',
         email: 'mikko@valimaa.fi',

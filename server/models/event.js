@@ -45,14 +45,6 @@ const infoPanelSchema = new mongoose.Schema({
     _id: false
 })
 
-const settingsSchema = new mongoose.Schema({
-    background: {
-        type: String,
-        default: 'https://picsum.photos/1440/550'
-    },
-    _id: false
-})
-
 const eventSchema = new mongoose.Schema({
     label: {
         type: String,
@@ -63,9 +55,9 @@ const eventSchema = new mongoose.Schema({
         type: String,
         default: mongoose.Types.ObjectId().toHexString()
     },
-    settings: {
-        type: settingsSchema,
-        default: {}
+    background: {
+        type: String,
+        default: 'https://picsum.photos/1440/550'
     },
     infoPanel: {
         type: infoPanelSchema,
@@ -81,7 +73,7 @@ eventSchema.statics.format = (event) => {
         label: event.label,
         creator: event.creator,
         inviteKey: event.inviteKey,
-        settings: event.settings,
+        background: event.background,
         infoPanel: event.infoPanel,
         guests: event.guests,
         components: event.components

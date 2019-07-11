@@ -50,7 +50,7 @@ eventRouter.post('/', async (request, response) => {
             label: body.label,
             creator: user._id,
             inviteKey: body.inviteKey,
-            settings: body.settings,
+            background: body.background,
             infoPanel: body.infoPanel,
             guests: [{
                 user: user._id,
@@ -86,7 +86,7 @@ eventRouter.put('/:id', async (request, response) => {
         const event = {
             label: body.label,
             inviteKey: body.inviteKey,
-            settings: body.settings,
+            background: body.background,
             infoPanel: body.infoPanel,
             components: body.components
         }
