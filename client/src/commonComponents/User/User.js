@@ -9,10 +9,6 @@ class User extends Component {
         this.props.VisibilityStore.showSignModal()
     }
 
-    openProfile = () => {
-        this.props.history.push('/profile')
-    }
-
     signOut = () => {
         this.props.UserStore.signOut()
     }
