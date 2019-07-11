@@ -51,6 +51,10 @@ const eventSchema = new mongoose.Schema({
         default: 'My Event'
     },
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    inviteKey: {
+        type: String,
+        default: mongoose.Types.ObjectId().toHexString()
+    },
     background: {
         type: String,
         default: 'https://picsum.photos/1440/550'
@@ -68,6 +72,7 @@ eventSchema.statics.format = (event) => {
         _id: event._id,
         label: event.label,
         creator: event.creator,
+        inviteKey: event.inviteKey,
         background: event.background,
         infoPanel: event.infoPanel,
         guests: event.guests,
