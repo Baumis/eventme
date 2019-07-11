@@ -26,6 +26,7 @@ class Login extends Component {
             window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
             this.setState({ password: '', username: '' })
             this.props.VisibilityStore.closeSignModal()
+            window.location.reload()
 
         } catch (error) {
             alert('Something went wrong, check your username and password!')
