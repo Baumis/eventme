@@ -172,7 +172,7 @@ eventRouter.post('/:id/validatekey/:invitekey', async (request, response) => {
             return response.status(400).send({ error: 'Malformatted inviteKey' })
         }
 
-        response.json({ inviteKey: request.params.invitekey })
+        response.json(request.params.invitekey)
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
