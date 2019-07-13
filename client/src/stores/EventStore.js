@@ -41,17 +41,6 @@ class EventStore {
         })
     }
 
-    setSettingsValue(value, field) {
-        const newSettings = {
-            ...this.event.settings,
-            [field]: value
-        }
-        runInAction(() => {
-            this.event.settings = newSettings
-            this.saved = false
-        })
-    }
-
     async create() {
         try {
             this.event = await eventService.create(this.event)
@@ -121,7 +110,6 @@ decorate(EventStore, {
     setCurrentEvent: action,
     setValue: action,
     setInfoPanelValue: action,
-    setSettingsValue: action,
     getComponent: action,
     addComponent: action,
     saveComponentData: action,
