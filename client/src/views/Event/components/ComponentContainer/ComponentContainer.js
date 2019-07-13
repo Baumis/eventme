@@ -12,6 +12,7 @@ class ComponentContainer extends Component {
                     <MasterComponent
                         key={component.order}
                         component={component}
+                        creator={this.props.VisibilityStore.creator}
                     />
                 ))}
             </div>

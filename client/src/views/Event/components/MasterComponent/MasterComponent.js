@@ -18,11 +18,14 @@ const MasterComponent = (props) => {
 
     return (
         <div className="Component">
-            <div className="OptionsRow">
-                <OptionsDropDown
-                    order={props.component.order}
-                />
-            </div>
+            {props.creator ?
+                <div className="OptionsRow">
+                    <OptionsDropDown
+                        order={props.component.order}
+                    />
+                </div>
+                : null
+            }
             <TagName data={props.component.data} />
         </div>
     )

@@ -12,7 +12,6 @@ class Main extends Component {
             this.props.VisibilityStore.showSignModal(true)
         } else {
             this.props.history.push('/events/template')
-            this.props.VisibilityStore.closeSignModal()
         }
     }
 

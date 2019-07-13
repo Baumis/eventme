@@ -90,4 +90,4 @@ class Event extends Component {
     }
 }
 
-export default inject('EventStore', 'VisibilityStore', 'UserStore')(observer(Event))
+export default inject('EventStore', 'VisibilityStore')(observer(Event))
