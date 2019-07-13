@@ -5,6 +5,7 @@ import { observable, decorate, action } from 'mobx'
 class VisibilityStore {
     loading = true
     signModal = false
+    skipOptions = true
     optionsPanelPosition = '-300px'
     componentEditor = false
     currentComponent = null
@@ -18,8 +19,11 @@ class VisibilityStore {
         this.loading = false
     }
 
-    showSignModal() {
+    showSignModal(skipOptions) {
         this.signModal = true
+        skipOptions ?
+            this.skipOptions = true
+            : this.skipOptions = false
     }
     closeSignModal() {
         this.signModal = false

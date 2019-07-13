@@ -11,6 +11,7 @@ class User extends Component {
 
     signOut = () => {
         this.props.UserStore.signOut()
+        window.location.reload()
     }
 
     render() {

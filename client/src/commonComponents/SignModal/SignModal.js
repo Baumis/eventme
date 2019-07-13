@@ -53,12 +53,15 @@ class SignModal extends Component {
                             Sign up
                         </div>
                     </div>
-                    <TagName history={this.props.history} />
-                    <div className="SkipRow">
-                        <Link style={{ 'textDecoration': 'none', 'color': '#B2BFCB' }} to="/events/template">
-                            skip
-                        </Link>
-                    </div>
+                    <TagName />
+                    {this.props.VisibilityStore.skipOptions ?
+                        <div className="SkipRow">
+                            <Link style={{ 'textDecoration': 'none', 'color': '#B2BFCB' }} to="/events/template">
+                                skip
+                            </Link>
+                        </div>
+                        : null
+                    }
                 </div>
             </div>
         )

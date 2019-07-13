@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import loginService from '../../services/login'
 
-class Login extends Component {
+class SignIn extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -70,4 +70,4 @@ class Login extends Component {
     }
 }
 
-export default inject('UserStore', 'VisibilityStore')(observer(Login))
+export default inject('UserStore', 'VisibilityStore')(observer(SignIn))
