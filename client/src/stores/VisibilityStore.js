@@ -42,11 +42,15 @@ class VisibilityStore {
             this.optionsPanelPosition = '0px'
     }
     checkForRole = () => {
-        if (UserStore.currentUser) {
+        if (UserStore.currentUser && EventStore.event.creator) {
             if (UserStore.currentUser._id === EventStore.event.creator._id) {
                 this.creator = true
             } else {
                 this.creator = false
+            }
+        } else {
+            if(UserStore.currentUser && !EventStore.event.creator){
+                this.creator = true
             }
         }
     }

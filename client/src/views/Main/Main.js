@@ -9,7 +9,7 @@ class Main extends Component {
 
     createEvent = () => {
         if (this.props.UserStore.currentUser === null) {
-            this.props.VisibilityStore.showSignModal(true)
+            this.props.VisibilityStore.showSignModal()
         } else {
             this.props.history.push('/events/template')
         }
