@@ -216,7 +216,7 @@ eventRouter.post('/:id/setstatus/:userId', async (request, response) => {
         const user = await User.findById(request.params.userId)
 
         event.guests = event.guests.map(guest => {
-            guest.status = guest.user.toString() == user._id.toString() ? body.status : guest.status
+            guest.status = guest.user.toString() === user._id.toString() ? body.status : guest.status
             return guest
         })
 
