@@ -56,9 +56,9 @@ class SignModal extends Component {
                     <TagName />
                     {this.props.VisibilityStore.skipOptions ?
                         <div className="SkipRow">
-                            <Link style={{ 'textDecoration': 'none', 'color': '#B2BFCB' }} to="/events/template">
+                            <a href="/events/template">
                                 skip
-                            </Link>
+                            </a>
                         </div>
                         : null
                     }
