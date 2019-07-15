@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './SignModal.css'
-import { Link } from 'react-router-dom'
 import { FaTimes } from 'react-icons/fa'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
-
 
 class SignModal extends Component {
     constructor(props) {
@@ -53,12 +51,15 @@ class SignModal extends Component {
                             Sign up
                         </div>
                     </div>
-                    <TagName history={this.props.history} />
-                    <div className="SkipRow">
-                        <Link style={{ 'textDecoration': 'none', 'color': '#B2BFCB' }} to="/events/template">
-                            skip
-                        </Link>
-                    </div>
+                    <TagName />
+                    {this.props.VisibilityStore.skipOptions ?
+                        <div className="SkipRow">
+                            <a href="/events/template">
+                                skip
+                            </a>
+                        </div>
+                        : null
+                    }
                 </div>
             </div>
         )

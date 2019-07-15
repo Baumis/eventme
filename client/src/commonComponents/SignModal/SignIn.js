@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import loginService from '../../services/login'
 
-class Login extends Component {
+class SignIn extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -24,8 +24,7 @@ class Login extends Component {
             const user = await loginService.login({ username, password })
             this.props.UserStore.setCurrentUser(user)
             window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
-            this.setState({ password: '', username: '' })
-            this.props.VisibilityStore.closeSignModal()
+            window.location.reload()
 
         } catch (error) {
             alert('Something went wrong, check your username and password!')
@@ -69,4 +68,4 @@ class Login extends Component {
     }
 }
 
-export default inject('UserStore', 'VisibilityStore')(observer(Login))
+export default inject('UserStore', 'VisibilityStore')(observer(SignIn))

@@ -15,7 +15,8 @@ class Event extends Component {
 
     async componentDidMount() {
         await this.props.EventStore.initializeEvent(this.props.eventId)
-        await this.props.VisibilityStore.loadingOff()
+        this.props.VisibilityStore.checkForRole()
+        this.props.VisibilityStore.loadingOff()
     }
 
     addComponent = () => {
@@ -61,24 +62,29 @@ class Event extends Component {
             <div className='Event'>
                 <Header />
                 <ComponentContainer />
-                <ComponentAdder add={this.addComponent} />
-                <OptionsPanel />
-                <OptionsButton showPanel={this.slidePanel} />
-                <div className="UserControl">
-                    <User history={this.props.history} />
-                </div>
-                {this.props.VisibilityStore.componentEditor ?
-                    <ComponentEditor
-                        close={this.closeEditor}
-                        component={this.props.EventStore.getComponent(this.props.VisibilityStore.currentComponent)}
-                    />
+                {this.props.VisibilityStore.creator ?
+                    <div>
+                        <ComponentAdder add={this.addComponent} />
+                        <OptionsPanel />
+                        <OptionsButton showPanel={this.slidePanel} />
+                        <SaveButton save={this.save} saved={this.props.EventStore.saved} />
+                        {this.props.VisibilityStore.componentEditor ?
+                            <ComponentEditor
+                                close={this.closeEditor}
+                                component={this.props.EventStore.getComponent(this.props.VisibilityStore.currentComponent)}
+                            />
+                            : null
+                        }
+                    </div>
                     : null
                 }
+                <div className="UserControl">
+                    <User />
+                </div>
                 {this.props.VisibilityStore.signModal ?
                     <SignModal history={this.props.history} />
                     : null
                 }
-                <SaveButton save={this.save} saved={this.props.EventStore.saved} />
             </div>
         )
     }

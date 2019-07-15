@@ -1,11 +1,15 @@
+import UserStore from './UserStore'
+import EventStore from './EventStore'
 import { observable, decorate, action } from 'mobx'
 
 class VisibilityStore {
     loading = true
     signModal = false
+    skipOptions = true
     optionsPanelPosition = '-300px'
     componentEditor = false
     currentComponent = null
+    creator = false
 
     loadingOn() {
         this.loading = true
@@ -15,8 +19,11 @@ class VisibilityStore {
         this.loading = false
     }
 
-    showSignModal() {
+    showSignModal(skipOptions) {
         this.signModal = true
+        skipOptions ?
+            this.skipOptions = true
+            : this.skipOptions = false
     }
     closeSignModal() {
         this.signModal = false
@@ -34,6 +41,19 @@ class VisibilityStore {
             :
             this.optionsPanelPosition = '0px'
     }
+    checkForRole = () => {
+        if (UserStore.currentUser && EventStore.event.creator) {
+            if (UserStore.currentUser._id === EventStore.event.creator._id) {
+                this.creator = true
+            } else {
+                this.creator = false
+            }
+        } else {
+            if(UserStore.currentUser && !EventStore.event.creator){
+                this.creator = true
+            }
+        }
+    }
 }
 
 decorate(VisibilityStore, {
@@ -41,6 +61,7 @@ decorate(VisibilityStore, {
     signModal: observable,
     optionsPanelPosition: observable,
     componentEditor: observable,
+    creator: observable,
 
     loadingOn: action,
     loadingOff: action,
@@ -49,6 +70,7 @@ decorate(VisibilityStore, {
     showComponentEditor: action,
     closeComponentEditor: action,
     slideOptionsPanel: action,
+    checkForRole: action,
 })
 
 export default new VisibilityStore()
