@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './SignModal.css'
-import { Link } from 'react-router-dom'
 import { FaTimes } from 'react-icons/fa'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
-
 
 class SignModal extends Component {
     constructor(props) {
