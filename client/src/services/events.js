@@ -53,4 +53,26 @@ const removeGuest = async (id, userId) => {
     return response.data
 }
 
-export default { getOne, getAll, create, remove, update, addGuest, removeGuest, getTemplate, setToken }
+const joinEvent = async (id, userId, inviteKey) => {
+    const response = await axios.post(`/${id}/addguest/${userId}/${inviteKey}`)
+    return response.data
+}
+
+const validateKey = async (id, inviteKey) => {
+    const response = await axios.post(`/${id}/validatekey/${inviteKey}`)
+    return response.data
+}
+
+export default {
+    getOne,
+    getAll,
+    create,
+    remove,
+    update,
+    addGuest,
+    removeGuest,
+    joinEvent,
+    getTemplate,
+    validateKey,
+    setToken
+}
