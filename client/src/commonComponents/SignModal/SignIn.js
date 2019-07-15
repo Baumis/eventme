@@ -24,8 +24,6 @@ class SignIn extends Component {
             const user = await loginService.login({ username, password })
             this.props.UserStore.setCurrentUser(user)
             window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
-            this.setState({ password: '', username: '' })
-            this.props.VisibilityStore.closeSignModal()
             window.location.reload()
 
         } catch (error) {
