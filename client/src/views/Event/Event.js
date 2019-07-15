@@ -15,8 +15,8 @@ class Event extends Component {
 
     async componentDidMount() {
         await this.props.EventStore.initializeEvent(this.props.eventId)
-        await this.props.VisibilityStore.loadingOff()
         this.props.VisibilityStore.checkForRole()
+        this.props.VisibilityStore.loadingOff()
     }
 
     addComponent = () => {
