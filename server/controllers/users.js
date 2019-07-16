@@ -12,7 +12,7 @@ userRouter.get('/', async (request, response) => {
     response.json(users)
 })
 
-userRouter.get('/:id', middleware.verifyToken, async (request, response) => {
+userRouter.get('/:id', async (request, response) => {
     try {
         const user = await User
             .findById(request.params.id)
