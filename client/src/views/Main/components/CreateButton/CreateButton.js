@@ -4,7 +4,7 @@ import './CreateButton.css'
 const CreateButton = (props) => {
 
     return (
-        <div onClick={props.click} className="CreateButton">Create event</div>
+        <div onClick={props.click} className="createButton">Create event</div>
     )
 }
 
