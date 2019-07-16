@@ -45,7 +45,7 @@ class Main extends Component {
                     : null
                 }
                 {this.state.displayEventOptions ?
-                    <EventOptions hide={this.hideOptions}/>
+                    <EventOptions history={this.props.history} hide={this.hideOptions}/>
                     : null
                 }
             </div>

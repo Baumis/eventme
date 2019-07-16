@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './EventOptions.css'
 import { FaTimes } from 'react-icons/fa'
 
@@ -12,6 +13,13 @@ class EventOptions extends Component {
 
     changeStateValue = (event) => {
         this.setState({ [event.target.name]: event.target.value })
+    }
+
+    create = async () => {
+        const event = await this.props.EventStore.create({ label: this.state.eventName })
+        event ?
+            this.props.history.push(`/events/${event._id}`)
+            : alert('The event could not be created')
     }
 
     render() {
@@ -33,7 +41,7 @@ class EventOptions extends Component {
                         ></input>
                     </div>
                     <div className="event-options-button-row">
-                        <div className="event-options-button">
+                        <div onClick={() => this.create()} className="event-options-button">
                             {'Create'}
                         </div>
                     </div>
@@ -43,4 +51,4 @@ class EventOptions extends Component {
     }
 }
 
-export default EventOptions
+export default inject('EventStore')(observer(EventOptions))
