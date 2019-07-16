@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const userRouter = require('express').Router()
+const middleware = require('../utils/middleware')
 const User = require('../models/user')
 
 userRouter.get('/', async (request, response) => {
@@ -11,7 +12,7 @@ userRouter.get('/', async (request, response) => {
     response.json(users)
 })
 
-userRouter.get('/:id', async (request, response) => {
+userRouter.get('/:id', middleware.verifyToken, async (request, response) => {
     try {
         const user = await User
             .findById(request.params.id)
@@ -66,7 +67,7 @@ userRouter.post('/', async (request, response) => {
     }
 })
 
-userRouter.put('/:id', async (request, response) => {
+userRouter.put('/:id', middleware.verifyToken, async (request, response) => {
     try {
         const body = request.body
 
@@ -106,7 +107,7 @@ userRouter.put('/:id', async (request, response) => {
     }
 })
 
-userRouter.delete('/:id', async (request, response) => {
+userRouter.delete('/:id', middleware.verifyToken, async (request, response) => {
     try {
         await User.findByIdAndDelete(request.params.id)
         
