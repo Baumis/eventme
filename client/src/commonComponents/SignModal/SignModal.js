@@ -52,14 +52,6 @@ class SignModal extends Component {
                         </div>
                     </div>
                     <TagName />
-                    {this.props.VisibilityStore.skipOptions ?
-                        <div className="SkipRow">
-                            <a href="/events/template">
-                                skip
-                            </a>
-                        </div>
-                        : null
-                    }
                 </div>
             </div>
         )

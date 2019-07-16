@@ -22,7 +22,7 @@ class Event extends Component {
 
     async componentDidMount() {
         await this.props.EventStore.initializeEvent(this.props.eventId)
-        this.props.VisibilityStore.checkForRole()
+        this.props.VisibilityStore.isCreator()
         this.setState({loading: false})
     }
 

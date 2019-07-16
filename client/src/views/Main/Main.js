@@ -20,7 +20,6 @@ class Main extends Component {
             this.props.VisibilityStore.showSignModal()
         } else {
             this.displayOptions()
-            //this.props.history.push('/events/template')
         }
     }
 
@@ -31,7 +30,7 @@ class Main extends Component {
     hideOptions = () => {
         this.setState({ displayEventOptions: false })
     }
-    
+
 
     render() {
         return (
@@ -45,7 +44,7 @@ class Main extends Component {
                     : null
                 }
                 {this.state.displayEventOptions ?
-                    <EventOptions history={this.props.history} hide={this.hideOptions}/>
+                    <EventOptions history={this.props.history} hide={this.hideOptions} />
                     : null
                 }
             </div>
