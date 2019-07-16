@@ -210,15 +210,25 @@ eventRouter.post('/:id/addguest/:userId/:inviteKey', async (request, response) =
 
 eventRouter.post('/:id/setstatus/:userId', async (request, response) => {
     try {
-        const body = request.body
+        const status = request.body.status
+
+        if (!status) {
+            return response.status(400).send({ error: 'Status missing' })
+        }
 
         const event = await Event.findById(request.params.id)
         const user = await User.findById(request.params.userId)
 
         event.guests = event.guests.map(guest => {
-            guest.status = guest.user.toString() === user._id.toString() ? body.status : guest.status
+            guest.status = guest.user.toString() === user._id.toString() ? status : guest.status
             return guest
         })
+
+        const error = event.validateSync()
+
+        if (error) {
+            return response.status(400).send({ error: 'Malformatted status' })
+        }
 
         const savedEvent = await event.save()
 
