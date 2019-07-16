@@ -3,21 +3,12 @@ import EventStore from './EventStore'
 import { observable, decorate, action } from 'mobx'
 
 class VisibilityStore {
-    loading = true
     signModal = false
     skipOptions = true
     optionsPanelPosition = '-300px'
     componentEditor = false
     currentComponent = null
     creator = false
-
-    loadingOn() {
-        this.loading = true
-    }
-
-    loadingOff() {
-        this.loading = false
-    }
 
     showSignModal(skipOptions) {
         this.signModal = true
@@ -49,7 +40,7 @@ class VisibilityStore {
                 this.creator = false
             }
         } else {
-            if(UserStore.currentUser && !EventStore.event.creator){
+            if (UserStore.currentUser && !EventStore.event.creator) {
                 this.creator = true
             }
         }
@@ -57,14 +48,11 @@ class VisibilityStore {
 }
 
 decorate(VisibilityStore, {
-    loading: observable,
     signModal: observable,
     optionsPanelPosition: observable,
     componentEditor: observable,
     creator: observable,
 
-    loadingOn: action,
-    loadingOff: action,
     showSignModal: action,
     closeSignModal: action,
     showComponentEditor: action,
