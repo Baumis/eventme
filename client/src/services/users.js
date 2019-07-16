@@ -1,13 +1,12 @@
 import axios from 'axios'
 const baseUrl = '/api/users'
 
-let token = null
+axios.interceptors.request.use(config => {
+    config.headers.Authorization = token
+    return config
+})
 
-const config = () => {
-    return {
-        headers: { 'Authorization': token }
-    }
-}
+let token = null
 
 const setToken = (newToken) => {
     token = `bearer ${newToken}`
@@ -24,17 +23,17 @@ const getAll = async () => {
 }
 
 const create = async (newObject) => {
-    const response = await axios.post(baseUrl, newObject, config())
+    const response = await axios.post(baseUrl, newObject)
     return response.data
 }
 
 const remove = async (id) => {
-    const response = await axios.delete(`${baseUrl}/${id}`, config())
+    const response = await axios.delete(`${baseUrl}/${id}`)
     return response.data
 }
 
 const update = async (updatedObject) => {
-    const response = await axios.put(`${baseUrl}/${updatedObject._id}`, updatedObject, config())
+    const response = await axios.put(`${baseUrl}/${updatedObject._id}`, updatedObject)
     return response.data
 }
 
