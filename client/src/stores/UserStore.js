@@ -11,10 +11,15 @@ class UserStore {
         userService.setToken(user.token)
     }
 
+    async refreshUser() {
+        this.currentUser = await userService.getOne(this.currentUser._id)
+    }
+
     signOut() {
         this.currentUser = null
         window.localStorage.removeItem('loggedEventAppUser')
     }
+
 
     async signUp(newUser) {
         return await userService.create(newUser)
