@@ -12,14 +12,6 @@ eventRouter.get('/', async (request, response) => {
     response.json(events)
 })
 
-eventRouter.get('/template', async (request, response) => {
-    const eventTemplate = new Event().toObject()
-
-    delete eventTemplate['_id']
-
-    response.json(Event.format(eventTemplate))
-})
-
 eventRouter.get('/:id', async (request, response) => {
     try {
         const event = await Event
