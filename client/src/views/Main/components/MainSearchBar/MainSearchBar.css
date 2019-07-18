@@ -1,5 +1,5 @@
 
-.searchBarContainer{
+.search-bar-container{
     height: 25px;
     display: flex;
     align-items: center;
@@ -10,14 +10,18 @@
     color:white;
 }
 
-.searchBarContainer input{
+.search-bar-container input{
     background: transparent;
     color:white;
     border: none;
     width: 100%;
 }
 
-#NavBarSearchIcon{
+.search-bar-container input::placeholder{
+    color: rgba(255,255,255,0.5)
+}
+
+#nav-bar-search-icon{
     color: 'white';
     align-items: center;
     cursor: pointer;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import loginService from '../../services/login'
 
 class SignIn extends Component {
     constructor(props) {
@@ -19,13 +18,9 @@ class SignIn extends Component {
         this.setState({ password: event.target.value })
     }
 
-    login = async (username, password) => {
+    signIn = async (username, password) => {
         try {
-            const user = await loginService.login({ username, password })
-            this.props.UserStore.setCurrentUser(user)
-            window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
-            window.location.reload()
-
+            await this.props.UserStore.signIn(username, password)
         } catch (error) {
             alert('Something went wrong, check your username and password!')
             this.setState({ password: '' })
@@ -59,7 +54,7 @@ class SignIn extends Component {
                 <div className="signButtonRow">
                     <div
                         className="signButton"
-                        onClick={() => this.login(this.state.username, this.state.password)}>
+                        onClick={() => this.signIn(this.state.username, this.state.password)}>
                         Sign In
                     </div>
                 </div>
