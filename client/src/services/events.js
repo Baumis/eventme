@@ -63,6 +63,15 @@ const validateKey = async (id, inviteKey) => {
     return response.data
 }
 
+const changeStatus = async (id, userId, newStatus) => {
+    const body = {
+        status: newStatus
+    }
+
+    const response = await axios.post(`/${id}/setstatus/${userId}`, body)
+    return response.data
+}
+
 export default {
     getOne,
     getAll,
@@ -72,6 +81,7 @@ export default {
     addGuest,
     removeGuest,
     joinEvent,
+    changeStatus,
     getTemplate,
     validateKey,
     setToken
