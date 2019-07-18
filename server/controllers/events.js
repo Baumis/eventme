@@ -25,10 +25,10 @@ eventRouter.get('/:id', async (request, response) => {
     }
 })
 
-eventRouter.post('/', middleware.verifyToken, async (request, response) => {
+eventRouter.post('/', middleware.requireAuthentication, async (request, response) => {
     try {
         const body = request.body
-        const userId = request.user
+        const userId = request.senderId
 
         const user = await User.findById(userId)
 
@@ -61,7 +61,7 @@ eventRouter.post('/', middleware.verifyToken, async (request, response) => {
     }
 })
 
-eventRouter.put('/:id', middleware.verifyToken, async (request, response) => {
+eventRouter.put('/:id', middleware.requireAuthentication, async (request, response) => {
     try {
         const body = request.body
 
@@ -86,7 +86,7 @@ eventRouter.put('/:id', middleware.verifyToken, async (request, response) => {
     }
 })
 
-eventRouter.delete('/:id', middleware.verifyToken, async (request, response) => {
+eventRouter.delete('/:id', middleware.requireAuthentication, async (request, response) => {
     try {
         await Event
             .findByIdAndDelete(request.params.id)
@@ -97,7 +97,7 @@ eventRouter.delete('/:id', middleware.verifyToken, async (request, response) => 
     }
 })
 
-eventRouter.post('/:id/addguest/:userId', middleware.verifyToken, async (request, response) => {
+eventRouter.post('/:id/addguest/:userId', middleware.requireAuthentication, async (request, response) => {
     try {
         const event = await Event.findById(request.params.id)
         const user = await User.findById(request.params.userId)
@@ -123,7 +123,7 @@ eventRouter.post('/:id/addguest/:userId', middleware.verifyToken, async (request
     }
 })
 
-eventRouter.post('/:id/removeguest/:userId', middleware.verifyToken, async (request, response) => {
+eventRouter.post('/:id/removeguest/:userId', middleware.requireAuthentication, async (request, response) => {
     try {
         const event = await Event.findById(request.params.id)
         const user = await User.findById(request.params.userId)
@@ -160,10 +160,12 @@ eventRouter.post('/:id/validatekey/:inviteKey', async (request, response) => {
     }
 })
 
-eventRouter.post('/:id/addguest/:userId/:inviteKey', async (request, response) => {
+eventRouter.post('/:id/join/:inviteKey', middleware.requireAuthentication, async (request, response) => {
     try {
+        const userId = request.senderId
+
         const event = await Event.findById(request.params.id)
-        const user = await User.findById(request.params.userId)
+        const user = await User.findById(userId)
 
         if (event.inviteKey !== request.params.inviteKey) {
             return response.status(400).send({ error: 'Malformatted inviteKey' })
@@ -190,7 +192,7 @@ eventRouter.post('/:id/addguest/:userId/:inviteKey', async (request, response) =
     }
 })
 
-eventRouter.post('/:id/setstatus/:userId', async (request, response) => {
+eventRouter.post('/:id/setstatus/:userId', middleware.requireAuthentication, async (request, response) => {
     try {
         const status = request.body.status
 

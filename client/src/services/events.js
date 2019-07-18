@@ -52,8 +52,8 @@ const removeGuest = async (id, userId) => {
     return response.data
 }
 
-const joinEvent = async (id, userId, inviteKey) => {
-    const response = await axios.post(`/${id}/addguest/${userId}/${inviteKey}`)
+const joinEvent = async (id, inviteKey) => {
+    const response = await axios.post(`/${id}/join/${inviteKey}`)
     return response.data
 }
 

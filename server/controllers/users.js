@@ -67,7 +67,7 @@ userRouter.post('/', async (request, response) => {
     }
 })
 
-userRouter.put('/:id', middleware.verifyToken, async (request, response) => {
+userRouter.put('/:id', middleware.requireAuthentication, async (request, response) => {
     try {
         const body = request.body
 
@@ -107,7 +107,7 @@ userRouter.put('/:id', middleware.verifyToken, async (request, response) => {
     }
 })
 
-userRouter.delete('/:id', middleware.verifyToken, async (request, response) => {
+userRouter.delete('/:id', middleware.requireAuthentication, async (request, response) => {
     try {
         await User.findByIdAndDelete(request.params.id)
         

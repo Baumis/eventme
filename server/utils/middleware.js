@@ -1,31 +1,35 @@
 const jwt = require('jsonwebtoken')
 
 const extractToken = (request, response, next) => {
+    delete request['senderId'] // Make sure request does not contain senderId
+
+    let token = null
+
     const authorization = request.get('authorization')
     if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-        request.token = authorization.substring(7)
+        token = authorization.substring(7)
     }
-    next()
-}
 
-const verifyToken = (request, response, next) => {
     try {
-        const token = request.token
-
         const decodedToken = jwt.verify(token, process.env.SECRET)
 
         if (!token || !decodedToken.id) {
-            return response.status(401).json({ error: 'token missing or invalid' })
+            return next()
         }
 
-        request.user = decodedToken.id
+        request.senderId = decodedToken.id
+
         next()
     } catch (exception) {
-        if (exception.name === 'JsonWebTokenError') {
-            response.status(401).json({ error: exception.message })
-        } else {
-            response.status(500).json({ error: 'something went wrong...' })
-        }
+        next()
+    }
+}
+
+const requireAuthentication = (request, response, next) => {
+    if (request.senderId && request.senderId.length !== 0) {
+        next()
+    } else {
+        return response.status(401).json({ error: 'token missing or invalid' })
     }
 }
 
@@ -43,5 +47,5 @@ const logger = (request, response, next) => {
 module.exports = {
     logger,
     extractToken,
-    verifyToken
+    requireAuthentication
 }
