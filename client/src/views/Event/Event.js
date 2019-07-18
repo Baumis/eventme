@@ -13,10 +13,17 @@ import SignModal from '../../commonComponents/SignModal/SignModal'
 
 class Event extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: true
+        }
+    }
+
     async componentDidMount() {
         await this.props.EventStore.initializeEvent(this.props.eventId)
-        this.props.VisibilityStore.checkForRole()
-        this.props.VisibilityStore.loadingOff()
+        this.props.VisibilityStore.isCreator()
+        this.setState({loading: false})
     }
 
     addComponent = () => {
@@ -30,15 +37,8 @@ class Event extends Component {
     }
 
     save = async () => {
-        if (this.props.EventStore.event._id) {
-            const event = await this.props.EventStore.update()
-            console.log(event)
-        } else {
-            const event = await this.props.EventStore.create()
-            if (event) {
-                this.props.history.push(`/events/${event._id}`)
-            }
-        }
+        const event = await this.props.EventStore.update()
+        console.log(event)
     }
 
     showEditor = () => {
@@ -54,7 +54,7 @@ class Event extends Component {
     }
 
     render() {
-        if (this.props.VisibilityStore.loading) {
+        if (this.state.loading) {
             return null
         }
 

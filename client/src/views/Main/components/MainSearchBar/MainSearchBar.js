@@ -17,13 +17,13 @@ class MainSearchBar extends Component {
 
     render() {
         return (
-            <div className="searchBarContainer">
+            <div className="search-bar-container">
                 <input
                     value={this.state.inputValue}
                     onChange={this.changeValue}
                     placeholder={'search'}
                 ></input>
-                <div id="NavBarSearchIcon"><FaSearch /></div>
+                <div id="nav-bar-search-icon"><FaSearch /></div>
             </div>
         )
     }

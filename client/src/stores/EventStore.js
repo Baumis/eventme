@@ -41,9 +41,9 @@ class EventStore {
         })
     }
 
-    async create() {
+    async create(event) {
         try {
-            this.event = await eventService.create(this.event)
+            this.event = await eventService.create(event)
             this.saved = true
             return this.event
         } catch (error) {

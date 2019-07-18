@@ -22,13 +22,8 @@ loginRouter.post('/', async (request, response) => {
 
     const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1d' })
 
-    const populatedUser = await user
-            .populate('myEvents', { _id: 1, label: 1, background: 1 })
-            .populate('myInvites', { _id: 1, label: 1, background: 1 })
-            .execPopulate()
-    
     response.status(200).send({
-        ...User.format(populatedUser),
+        _id: user._id,
         token
     })
 })

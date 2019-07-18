@@ -117,7 +117,7 @@ eventRouter.post('/:id/addguest/:userId', middleware.verifyToken, async (request
             .populate('guests.user', { _id: 1, name: 1 })
             .execPopulate()
 
-        response.status(201).json(Event.format(populatedEvent))
+        response.json(Event.format(populatedEvent))
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
@@ -139,7 +139,7 @@ eventRouter.post('/:id/removeguest/:userId', middleware.verifyToken, async (requ
             .populate('guests.user', { _id: 1, name: 1 })
             .execPopulate()
 
-        response.status(201).json(Event.format(populatedEvent))
+        response.json(Event.format(populatedEvent))
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
@@ -178,6 +178,41 @@ eventRouter.post('/:id/addguest/:userId/:inviteKey', async (request, response) =
 
         const savedEvent = await event.save()
         await user.save()
+
+        const populatedEvent = await savedEvent
+            .populate('creator', { _id: 1, name: 1 })
+            .populate('guests.user', { _id: 1, name: 1 })
+            .execPopulate()
+
+        response.json(Event.format(populatedEvent))
+    } catch (exception) {
+        response.status(400).send({ error: 'Malformatted id' })
+    }
+})
+
+eventRouter.post('/:id/setstatus/:userId', async (request, response) => {
+    try {
+        const status = request.body.status
+
+        if (!status) {
+            return response.status(400).send({ error: 'Status missing' })
+        }
+
+        const event = await Event.findById(request.params.id)
+        const user = await User.findById(request.params.userId)
+
+        event.guests = event.guests.map(guest => {
+            guest.status = guest.user.toString() === user._id.toString() ? status : guest.status
+            return guest
+        })
+
+        const error = event.validateSync()
+
+        if (error) {
+            return response.status(400).send({ error: 'Malformatted status' })
+        }
+
+        const savedEvent = await event.save()
 
         const populatedEvent = await savedEvent
             .populate('creator', { _id: 1, name: 1 })

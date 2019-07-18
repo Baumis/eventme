@@ -4,16 +4,33 @@ import './Main.css'
 import CreateButton from './components/CreateButton/CreateButton'
 import Navbar from './components/Navbar/Navbar'
 import SignModal from '../../commonComponents/SignModal/SignModal'
+import EventOptions from './components/NewEventModal/NewEventModal';
 
 class Main extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            newEventModal: false
+        }
+    }
 
     createEvent = () => {
         if (this.props.UserStore.currentUser === null) {
             this.props.VisibilityStore.showSignModal()
         } else {
-            this.props.history.push('/events/template')
+            this.displayEventModal()
         }
     }
+
+    displayEventModal = () => {
+        this.setState({ newEventModal: true })
+    }
+
+    hideEventModal = () => {
+        this.setState({ newEventModal: false })
+    }
+
 
     render() {
         return (
@@ -24,6 +41,10 @@ class Main extends Component {
                 </div>
                 {this.props.VisibilityStore.signModal ?
                     <SignModal history={this.props.history} />
+                    : null
+                }
+                {this.state.newEventModal ?
+                    <EventOptions history={this.props.history} hide={this.hideEventModal} />
                     : null
                 }
             </div>
