@@ -5,10 +5,6 @@ import EventContainer from './components/EventContainer/EventContainer'
 
 class Profile extends Component {
 
-    async componentDidMount() {
-        await this.props.UserStore.refreshUser()
-    }
-
     render() {
         return (
             <div className="profileViewContainer">

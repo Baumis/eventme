@@ -15,11 +15,11 @@ class App extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const loggedUserJSON = window.localStorage.getItem('loggedEventAppUser')
         if (loggedUserJSON) {
             const user = JSON.parse(loggedUserJSON)
-            this.props.UserStore.setCurrentUser(user)
+            await this.props.UserStore.refreshUser(user)
         }
         this.setState({ loading: false })
     }

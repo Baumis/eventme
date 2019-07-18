@@ -1,18 +1,22 @@
 import { observable, decorate, action } from 'mobx'
 import eventService from '../services/events'
 import userService from '../services/users'
+import loginService from '../services/login'
 
 class UserStore {
     currentUser = null
 
-    setCurrentUser(user) {
-        this.currentUser = user
+    async signIn(username, password) {
+        const user = await loginService.login({ username, password })
+        window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
         eventService.setToken(user.token)
         userService.setToken(user.token)
     }
 
-    async refreshUser() {
-        this.currentUser = await userService.getOne(this.currentUser._id)
+    async refreshUser(user) {
+        this.currentUser = await userService.getOne(user._id)
+        eventService.setToken(user.token)
+        userService.setToken(user.token)
     }
 
     signOut() {
