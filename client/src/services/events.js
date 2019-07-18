@@ -37,11 +37,6 @@ const update = async (updatedObject) => {
     return response.data
 }
 
-const getTemplate = async () => {
-    const response = await axios.get(`${baseUrl}/template`)
-    return response.data
-}
-
 const addGuest = async (id, userId) => {
     const response = await axios.post(`${baseUrl}/${id}/addguest/${userId}`)
     return response.data
@@ -81,7 +76,6 @@ export default {
     removeGuest,
     joinEvent,
     changeStatus,
-    getTemplate,
     validateKey,
     setToken
 }

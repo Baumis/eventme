@@ -7,11 +7,8 @@ class EventStore {
 
     async initializeEvent(eventId) {
         let event = null
-        if (eventId && eventId !== 'template') {
+        if (eventId) {
             event = await eventService.getOne(eventId)
-            console.log('event initialized: ', event)
-        } else {
-            event = await eventService.getTemplate()
             console.log('event initialized: ', event)
         }
         runInAction(() => {
