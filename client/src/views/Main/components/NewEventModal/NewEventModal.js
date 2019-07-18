@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import './EventOptions.css'
+import './NewEventModal.css'
 import { FaTimes } from 'react-icons/fa'
 
-class EventOptions extends Component {
+class NewEventModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -51,4 +51,4 @@ class EventOptions extends Component {
     }
 }
 
-export default inject('EventStore')(observer(EventOptions))
+export default inject('EventStore')(observer(NewEventModal))

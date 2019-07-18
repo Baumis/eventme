@@ -9,8 +9,7 @@ class UserStore {
     async signIn(username, password) {
         const user = await loginService.login({ username, password })
         window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
-        eventService.setToken(user.token)
-        userService.setToken(user.token)
+        window.location.reload()
     }
 
     async refreshUser(user) {
@@ -22,11 +21,12 @@ class UserStore {
     signOut() {
         this.currentUser = null
         window.localStorage.removeItem('loggedEventAppUser')
+        window.location.reload()
     }
 
 
     async signUp(newUser) {
-        return await userService.create(newUser)
+        await userService.create(newUser)
     }
 }
 
