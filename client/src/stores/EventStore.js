@@ -41,6 +41,16 @@ class EventStore {
         })
     }
 
+    async joinEvent(userId, eventId, inviteKey) {
+        try {
+            this.event = await eventService.joinEvent(userId, eventId, inviteKey)
+            console.log('success')
+        }catch (error){
+            console.log(error)
+            return null
+        }
+    }
+
     async create(event) {
         try {
             this.event = await eventService.create(event)
@@ -56,6 +66,14 @@ class EventStore {
             this.event = await eventService.update(this.event)
             this.saved = true
             return this.event
+        } catch (error) {
+            return null
+        }
+    }
+
+    async validateKey(eventId, inviteKey) {
+        try {
+            return await eventService.validateKey(eventId, inviteKey)
         } catch (error) {
             return null
         }

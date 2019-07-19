@@ -54,12 +54,12 @@ const removeGuest = async (id, userId) => {
 }
 
 const joinEvent = async (id, userId, inviteKey) => {
-    const response = await axios.post(`/${id}/addguest/${userId}/${inviteKey}`)
+    const response = await axios.post(`${baseUrl}/${id}/addguest/${userId}/${inviteKey}`)
     return response.data
 }
 
 const validateKey = async (id, inviteKey) => {
-    const response = await axios.post(`/${id}/validatekey/${inviteKey}`)
+    const response = await axios.post(`${baseUrl}/${id}/validatekey/${inviteKey}`)
     return response.data
 }
 
@@ -68,7 +68,7 @@ const changeStatus = async (id, userId, newStatus) => {
         status: newStatus
     }
 
-    const response = await axios.post(`/${id}/setstatus/${userId}`, body)
+    const response = await axios.post(`${baseUrl}/${id}/setstatus/${userId}`, body)
     return response.data
 }
 

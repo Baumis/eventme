@@ -4,7 +4,7 @@ import './Options.css'
 import { FaAngleDoubleLeft } from 'react-icons/fa'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
-import GuestList from '../GuestList.js/GuestList'
+import GuestList from '../GuestList/GuestList'
 
 class OptionsPanel extends Component {
 
