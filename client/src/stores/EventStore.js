@@ -41,11 +41,11 @@ class EventStore {
         })
     }
 
-    async joinEvent(userId, eventId, inviteKey) {
+    async joinEvent(eventId, userId, inviteKey) {
         try {
-            this.event = await eventService.joinEvent(userId, eventId, inviteKey)
+            this.event = await eventService.joinEvent(eventId, userId, inviteKey)
             console.log('success')
-        }catch (error){
+        } catch (error) {
             console.log(error)
             return null
         }
