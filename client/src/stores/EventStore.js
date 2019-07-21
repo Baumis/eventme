@@ -44,9 +44,15 @@ class EventStore {
     async joinEvent(eventId, userId, inviteKey) {
         try {
             this.event = await eventService.joinEvent(eventId, userId, inviteKey)
-            console.log('success')
         } catch (error) {
-            console.log(error)
+            return null
+        }
+    }
+
+    async removeGuest(eventId, userId) {
+        try {
+            this.event = await eventService.removeGuest(eventId, userId)
+        } catch (error) {
             return null
         }
     }

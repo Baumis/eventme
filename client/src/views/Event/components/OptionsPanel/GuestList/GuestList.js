@@ -20,6 +20,13 @@ class GuestList extends Component {
         this.setState({ filter: event.target.value })
     }
 
+    removeGuest = (guest) => {
+        const confirmation = window.confirm(`Do you want to delete user ${guest.name}?`)
+        if (confirmation) {
+            this.props.EventStore.removeGuest(this.props.EventStore.event._id, guest._id)
+        }
+    }
+
     render() {
 
         const guestsToShow = this.props.EventStore.event.guests.filter((guest) =>
@@ -45,11 +52,12 @@ class GuestList extends Component {
                 <div className="GuestContent">
                     <div className="GuestList" style={{ background: this.props.background, color: this.props.color }}>
                         {guestsToShow.map((guest, i) => {
+                            console.log(guest)
                             return (
                                 <div className="Guest" key={i}>
                                     <div className="GuestUser"><FaUser /></div>
                                     <div className="GuestName">{guest.user.name}</div>
-                                    <div className="GuestDelete"><FaTimes /></div>
+                                    <div className="GuestDelete" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
                                 </div>
                             )
                         })}
