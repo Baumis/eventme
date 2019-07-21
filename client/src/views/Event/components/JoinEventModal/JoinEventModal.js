@@ -16,8 +16,8 @@ class JoinEventModal extends Component {
         this.props.VisibilityStore.showSignModal()
     }
 
-    join = () => {
-        this.props.EventStore.joinEvent(
+    join = async () => {
+        await this.props.EventStore.joinEvent(
             this.props.EventStore.event._id,
             this.props.UserStore.currentUser._id,
             this.props.inviteKey

@@ -27,7 +27,6 @@ class Event extends Component {
             const inviteKey = await this.props.EventStore.validateKey(this.props.eventId, this.props.inviteKey)
             if (inviteKey) {
                 this.setState({ invite: true })
-                console.log(this.state.invite)
             }
         }
 
