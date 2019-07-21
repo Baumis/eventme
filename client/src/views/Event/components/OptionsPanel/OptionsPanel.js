@@ -4,7 +4,7 @@ import './Options.css'
 import { FaAngleDoubleLeft } from 'react-icons/fa'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
-import GuestList from '../GuestList/GuestList'
+import GuestList from './GuestList/GuestList'
 
 class OptionsPanel extends Component {
 
@@ -86,7 +86,10 @@ class OptionsPanel extends Component {
                         <label>Guests</label>
                     </div>
                     <div className="OptionsContent">
-                        <InputBlock label={'Invite link'} />
+                        <InputBlock
+                            label={'Invite link'}
+                            value={`localhost:3000/events/${this.props.EventStore.event._id}/invite/${this.props.EventStore.event.inviteKey}`}
+                        />
                     </div>
                     <div className="OptionsContent">
                         <GuestList

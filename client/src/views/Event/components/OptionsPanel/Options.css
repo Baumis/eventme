@@ -42,7 +42,6 @@
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     cursor: pointer;
-    /*border: 1px solid #2f3337;*/
 }
 
 .OptionsHeader p{
@@ -53,7 +52,7 @@
 
 .OptionsContent{
     padding-top: 10px;
-    padding-right: 35px;
+    padding-right: 0px;
 }
 
 .inputBlock{
@@ -91,7 +90,7 @@
   border-radius: 30px;
   border: none;
   height: 18px;
-  width: 120px;
+  width: 150px;
   padding: 3px 10px 3px 10px;
   background: #7A838C;
   color:white;
