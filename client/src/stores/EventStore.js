@@ -57,6 +57,15 @@ class EventStore {
         }
     }
 
+    async deleteEvent() {
+        try {
+            await eventService.remove(this.event._id)
+            return true
+        }catch(error){
+            return null
+        }
+    }
+
     async create(event) {
         try {
             this.event = await eventService.create(event)

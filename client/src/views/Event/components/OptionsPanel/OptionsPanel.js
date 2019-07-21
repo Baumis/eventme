@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { Redirect } from 'react-router-dom'
 import './Options.css'
 import { FaAngleDoubleLeft } from 'react-icons/fa'
 import InputBlock from './InputBlock'
@@ -7,6 +8,13 @@ import InfoBlock from './InfoBlock'
 import GuestList from './GuestList/GuestList'
 
 class OptionsPanel extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            deleted: false
+        }
+    }
 
     changeBackground = (event) => {
         this.props.EventStore.setValue(event.target.value, 'background')
@@ -31,11 +39,27 @@ class OptionsPanel extends Component {
     changeAddress = (event) => {
         this.props.EventStore.setInfoPanelValue(event.target.value, 'address')
     }
+
     slidePanel = () => {
         this.props.VisibilityStore.slideOptionsPanel()
     }
 
+    deleteEvent = async () => {
+        const confirmation = window.confirm(`Do you want to delete this event?`)
+        if (confirmation) {
+            const response = await this.props.EventStore.deleteEvent()
+            if (response) {
+                this.setState({ deleted: true })
+            }
+        }
+    }
+
     render() {
+
+        if (this.state.deleted) {
+            return <Redirect to={`/profile`} />
+        }
+
         return (
             <div style={{ left: this.props.VisibilityStore.optionsPanelPosition }} className="OptionsContainer">
                 <div className="OptionsHeader">
@@ -43,7 +67,7 @@ class OptionsPanel extends Component {
                     <button onClick={this.slidePanel}><FaAngleDoubleLeft /></button>
                 </div>
                 <div className="OptionsCanvas">
-                    <div className="DeleteEventButton">
+                    <div className="DeleteEventButton" onClick={() => this.deleteEvent()}>
                         {'Delete event'}
                     </div>
                     <div className="OptionsContent">

@@ -52,7 +52,6 @@ class GuestList extends Component {
                 <div className="GuestContent">
                     <div className="GuestList" style={{ background: this.props.background, color: this.props.color }}>
                         {guestsToShow.map((guest, i) => {
-                            console.log(guest)
                             return (
                                 <div className="Guest" key={i}>
                                     <div className="GuestUser"><FaUser /></div>

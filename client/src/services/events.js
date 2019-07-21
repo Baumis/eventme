@@ -30,6 +30,7 @@ const create = async (newObject) => {
 
 const remove = async (id) => {
     const response = await axios.delete(`${baseUrl}/${id}`, config())
+    console.log(response)
     return response.data
 }
 
