@@ -8,7 +8,7 @@ const InputBlock = (props) => {
             <div className="inputLabel">
                 <label>{props.label}</label>
             </div>
-            <input name={props.name} value={props.value} onChange={props.changeValue}></input>
+            <input value={props.value} onChange={props.changeValue}></input>
         </div>
     )
 }

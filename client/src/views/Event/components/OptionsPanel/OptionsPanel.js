@@ -86,10 +86,16 @@ class OptionsPanel extends Component {
                         <label>Guests</label>
                     </div>
                     <div className="OptionsContent">
-                        <InputBlock
-                            label={'Invite link'}
-                            value={`localhost:3000/events/${this.props.EventStore.event._id}/invite/${this.props.EventStore.event.inviteKey}`}
-                        />
+                        <div className="inputBlock">
+                            <div className="inputLabel">
+                                <label>{'Invite link'}</label>
+                            </div>
+                            <input
+                                id="readOnly"
+                                value={`localhost:3000/events/${this.props.EventStore.event._id}/invite/${this.props.EventStore.event.inviteKey}`}
+                                readOnly
+                            />
+                        </div>
                     </div>
                     <div className="OptionsContent">
                         <GuestList
