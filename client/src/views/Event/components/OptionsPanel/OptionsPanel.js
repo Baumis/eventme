@@ -43,6 +43,9 @@ class OptionsPanel extends Component {
                     <button onClick={this.slidePanel}><FaAngleDoubleLeft /></button>
                 </div>
                 <div className="OptionsCanvas">
+                    <div className="DeleteEventButton">
+                        {'Delete event'}
+                    </div>
                     <div className="OptionsContent">
                         <InputBlock
                             label={'Header'}

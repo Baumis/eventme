@@ -55,6 +55,15 @@
     padding-right: 0px;
 }
 
+.DeleteEventButton{
+  border: 1px solid #fc5a03;
+  color: #fc5a03;
+  margin: 15px 15px 0px 15px;
+  padding: 10px;
+  background: rgba(255,255,255,0.1);
+  cursor: pointer;
+}
+
 .inputBlock{
     display: flex;
     flex-direction: column;
