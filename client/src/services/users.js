@@ -1,40 +1,29 @@
-import axios from 'axios'
+import http from './http'
 const baseUrl = '/api/users'
 
-axios.interceptors.request.use(config => {
-    config.headers.Authorization = token
-    return config
-})
-
-let token = null
-
-const setToken = (newToken) => {
-    token = `bearer ${newToken}`
-}
-
 const getOne = async (id) => {
-    const response = await axios.get(`${baseUrl}/${id}`)
+    const response = await http.get(`${baseUrl}/${id}`)
     return response.data
 }
 
 const getAll = async () => {
-    const response = await axios.get(baseUrl)
+    const response = await http.get(baseUrl)
     return response.data
 }
 
 const create = async (newObject) => {
-    const response = await axios.post(baseUrl, newObject)
+    const response = await http.post(baseUrl, newObject)
     return response.data
 }
 
 const remove = async (id) => {
-    const response = await axios.delete(`${baseUrl}/${id}`)
+    const response = await http.delete(`${baseUrl}/${id}`)
     return response.data
 }
 
 const update = async (updatedObject) => {
-    const response = await axios.put(`${baseUrl}/${updatedObject._id}`, updatedObject)
+    const response = await http.put(`${baseUrl}/${updatedObject._id}`, updatedObject)
     return response.data
 }
 
-export default { getOne, getAll, create, remove, update, setToken }
+export default { getOne, getAll, create, remove, update }
