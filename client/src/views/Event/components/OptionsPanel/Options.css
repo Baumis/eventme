@@ -42,7 +42,6 @@
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     cursor: pointer;
-    /*border: 1px solid #2f3337;*/
 }
 
 .OptionsHeader p{
@@ -53,7 +52,16 @@
 
 .OptionsContent{
     padding-top: 10px;
-    padding-right: 35px;
+    padding-right: 0px;
+}
+
+.DeleteEventButton{
+  border: 1px solid #fc5a03;
+  color: #fc5a03;
+  margin: 15px 15px 0px 15px;
+  padding: 10px;
+  background: rgba(255,255,255,0.1);
+  cursor: pointer;
 }
 
 .inputBlock{
@@ -79,6 +87,10 @@
     color:white;
 }
 
+#readOnly {
+  color: rgba(255,255,255,0.6)
+}
+
 .infoBlock{
   display: flex;
   justify-content: space-between;
@@ -91,7 +103,7 @@
   border-radius: 30px;
   border: none;
   height: 18px;
-  width: 120px;
+  width: 150px;
   padding: 3px 10px 3px 10px;
   background: #7A838C;
   color:white;

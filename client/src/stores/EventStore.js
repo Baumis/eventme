@@ -38,6 +38,31 @@ class EventStore {
         })
     }
 
+    async joinEvent(eventId, inviteKey) {
+        try {
+            this.event = await eventService.joinEvent(eventId, inviteKey)
+        } catch (error) {
+            return null
+        }
+    }
+
+    async removeGuest(eventId, userId) {
+        try {
+            this.event = await eventService.removeGuest(eventId, userId)
+        } catch (error) {
+            return null
+        }
+    }
+
+    async deleteEvent() {
+        try {
+            await eventService.remove(this.event._id)
+            return true
+        }catch(error){
+            return null
+        }
+    }
+
     async create(event) {
         try {
             this.event = await eventService.create(event)
@@ -53,6 +78,14 @@ class EventStore {
             this.event = await eventService.update(this.event)
             this.saved = true
             return this.event
+        } catch (error) {
+            return null
+        }
+    }
+
+    async validateKey(eventId, inviteKey) {
+        try {
+            return await eventService.validateKey(eventId, inviteKey)
         } catch (error) {
             return null
         }

@@ -10,20 +10,29 @@ import ComponentEditor from './components/ComponentEditor/ComponentEditor'
 import OptionsButton from './components/OptionsButton/OptionsButton'
 import User from '../../commonComponents/User/User'
 import SignModal from '../../commonComponents/SignModal/SignModal'
+import JoinEventModal from './components/JoinEventModal/JoinEventModal'
 
 class Event extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            loading: true
+            loading: true,
+            invite: false
         }
     }
 
     async componentDidMount() {
+        if (this.props.inviteKey) {
+            const inviteKey = await this.props.EventStore.validateKey(this.props.eventId, this.props.inviteKey)
+            if (inviteKey) {
+                this.setState({ invite: true })
+            }
+        }
+
         await this.props.EventStore.initializeEvent(this.props.eventId)
         this.props.VisibilityStore.isCreator()
-        this.setState({loading: false})
+        this.setState({ loading: false })
     }
 
     addComponent = () => {
@@ -85,9 +94,13 @@ class Event extends Component {
                     <SignModal history={this.props.history} />
                     : null
                 }
+                {this.state.invite ?
+                    <JoinEventModal inviteKey={this.props.inviteKey} />
+                    : null
+                }
             </div>
         )
     }
 }
 
-export default inject('EventStore', 'VisibilityStore')(observer(Event))
+export default inject('EventStore', 'VisibilityStore', 'UserStore')(observer(Event))
