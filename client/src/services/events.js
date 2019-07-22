@@ -1,59 +1,48 @@
-import axios from 'axios'
+import http from './http'
 const baseUrl = '/api/events'
 
-axios.interceptors.request.use(config => {
-    config.headers.Authorization = token
-    return config
-})
-
-let token = null
-
-const setToken = (newToken) => {
-    token = `bearer ${newToken}`
-}
-
 const getOne = async (id) => {
-    const response = await axios.get(`${baseUrl}/${id}`)
+    const response = await http.get(`${baseUrl}/${id}`)
     return response.data
 }
 
 const getAll = async () => {
-    const response = await axios.get(baseUrl)
+    const response = await http.get(baseUrl)
     return response.data
 }
 
 const create = async (newObject) => {
-    const response = await axios.post(baseUrl, newObject)
+    const response = await http.post(baseUrl, newObject)
     return response.data
 }
 
 const remove = async (id) => {
-    const response = await axios.delete(`${baseUrl}/${id}`)
+    const response = await http.delete(`${baseUrl}/${id}`)
     return response.data
 }
 
 const update = async (updatedObject) => {
-    const response = await axios.put(`${baseUrl}/${updatedObject._id}`, updatedObject)
+    const response = await http.put(`${baseUrl}/${updatedObject._id}`, updatedObject)
     return response.data
 }
 
 const addGuest = async (id, userId) => {
-    const response = await axios.post(`${baseUrl}/${id}/addguest/${userId}`)
+    const response = await http.post(`${baseUrl}/${id}/addguest/${userId}`)
     return response.data
 }
 
 const removeGuest = async (id, userId) => {
-    const response = await axios.post(`${baseUrl}/${id}/removeguest/${userId}`)
+    const response = await http.post(`${baseUrl}/${id}/removeguest/${userId}`)
     return response.data
 }
 
 const joinEvent = async (id, inviteKey) => {
-    const response = await axios.post(`${baseUrl}/${id}/join/${inviteKey}`)
+    const response = await http.post(`${baseUrl}/${id}/join/${inviteKey}`)
     return response.data
 }
 
 const validateKey = async (id, inviteKey) => {
-    const response = await axios.post(`${baseUrl}/${id}/validatekey/${inviteKey}`)
+    const response = await http.post(`${baseUrl}/${id}/validatekey/${inviteKey}`)
     return response.data
 }
 
@@ -62,7 +51,7 @@ const changeStatus = async (id, userId, newStatus) => {
         status: newStatus
     }
 
-    const response = await axios.post(`${baseUrl}/${id}/setstatus/${userId}`, body)
+    const response = await http.post(`${baseUrl}/${id}/setstatus/${userId}`, body)
     return response.data
 }
 
@@ -76,6 +65,5 @@ export default {
     removeGuest,
     joinEvent,
     changeStatus,
-    validateKey,
-    setToken
+    validateKey
 }

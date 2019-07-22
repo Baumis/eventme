@@ -1,5 +1,4 @@
 import { observable, decorate, action } from 'mobx'
-import eventService from '../services/events'
 import userService from '../services/users'
 import loginService from '../services/login'
 
@@ -14,8 +13,6 @@ class UserStore {
 
     async refreshUser(user) {
         this.currentUser = await userService.getOne(user._id)
-        eventService.setToken(user.token)
-        userService.setToken(user.token)
     }
 
     signOut() {
