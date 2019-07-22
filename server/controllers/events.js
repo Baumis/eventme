@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken')
 const eventRouter = require('express').Router()
+const middleware = require('../utils/middleware')
 const Event = require('../models/event')
 const User = require('../models/user')
 
@@ -10,14 +10,6 @@ eventRouter.get('/', async (request, response) => {
         .populate('guests.user', { _id: 1, name: 1 })
 
     response.json(events)
-})
-
-eventRouter.get('/template', async (request, response) => {
-    const eventTemplate = new Event().toObject()
-
-    delete eventTemplate['_id']
-
-    response.json(Event.format(eventTemplate))
 })
 
 eventRouter.get('/:id', async (request, response) => {
@@ -33,18 +25,12 @@ eventRouter.get('/:id', async (request, response) => {
     }
 })
 
-eventRouter.post('/', async (request, response) => {
+eventRouter.post('/', middleware.requireAuthentication, async (request, response) => {
     try {
         const body = request.body
-        const token = request.token
+        const userId = request.senderId
 
-        const decodedToken = jwt.verify(token, process.env.SECRET)
-
-        if (!token || !decodedToken.id) {
-            return response.status(401).json({ error: 'token missing or invalid' })
-        }
-
-        const user = await User.findById(decodedToken.id)
+        const user = await User.findById(userId)
 
         const newEvent = new Event({
             label: body.label,
@@ -71,15 +57,11 @@ eventRouter.post('/', async (request, response) => {
 
         response.status(201).json(Event.format(populatedEvent))
     } catch (exception) {
-        if (exception.name === 'JsonWebTokenError') {
-            response.status(401).json({ error: exception.message })
-        } else {
-            response.status(500).json({ error: 'something went wrong...' })
-        }
+        response.status(500).json({ error: 'something went wrong...' })
     }
 })
 
-eventRouter.put('/:id', async (request, response) => {
+eventRouter.put('/:id', middleware.requireAuthentication, async (request, response) => {
     try {
         const body = request.body
 
@@ -104,7 +86,7 @@ eventRouter.put('/:id', async (request, response) => {
     }
 })
 
-eventRouter.delete('/:id', async (request, response) => {
+eventRouter.delete('/:id', middleware.requireAuthentication, async (request, response) => {
     try {
         await Event
             .findByIdAndDelete(request.params.id)
@@ -115,7 +97,7 @@ eventRouter.delete('/:id', async (request, response) => {
     }
 })
 
-eventRouter.post('/:id/addguest/:userId', async (request, response) => {
+eventRouter.post('/:id/addguest/:userId', middleware.requireAuthentication, async (request, response) => {
     try {
         const event = await Event.findById(request.params.id)
         const user = await User.findById(request.params.userId)
@@ -141,7 +123,7 @@ eventRouter.post('/:id/addguest/:userId', async (request, response) => {
     }
 })
 
-eventRouter.post('/:id/removeguest/:userId', async (request, response) => {
+eventRouter.post('/:id/removeguest/:userId', middleware.requireAuthentication, async (request, response) => {
     try {
         const event = await Event.findById(request.params.id)
         const user = await User.findById(request.params.userId)
@@ -178,10 +160,12 @@ eventRouter.post('/:id/validatekey/:inviteKey', async (request, response) => {
     }
 })
 
-eventRouter.post('/:id/addguest/:userId/:inviteKey', async (request, response) => {
+eventRouter.post('/:id/join/:inviteKey', middleware.requireAuthentication, async (request, response) => {
     try {
+        const userId = request.senderId
+
         const event = await Event.findById(request.params.id)
-        const user = await User.findById(request.params.userId)
+        const user = await User.findById(userId)
 
         if (event.inviteKey !== request.params.inviteKey) {
             return response.status(400).send({ error: 'Malformatted inviteKey' })
@@ -208,7 +192,7 @@ eventRouter.post('/:id/addguest/:userId/:inviteKey', async (request, response) =
     }
 })
 
-eventRouter.post('/:id/setstatus/:userId', async (request, response) => {
+eventRouter.post('/:id/setstatus/:userId', middleware.requireAuthentication, async (request, response) => {
     try {
         const status = request.body.status
 
