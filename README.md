@@ -29,24 +29,26 @@ Running on localhost:3001
 - GET, returns all events
 - POST, creates an event
 
-### /api/events/template
-
-- GET, returns a event template without guests, creator and id
-
 ### /api/events/:id
 
 - GET, returns event with given id
-- PUT, updates event with given id
+- PUT, updates event with given id and returns updated event
 - DELETE, removes event with given id
 
-### /api/events/:id/remove/:guestId
-- POST, removes given guest from event
+### /api/events/:id/removeguest/:guestId
+- POST, removes given guest from event and returns updated event
 
-### /api/events/:id/add/:guestId
-- POST, adds given guest to event
+### /api/events/:id/addguest/:guestId
+- POST, adds given guest to event and returns updated event
 
-### /api/events/user/:userId
-- GET, returns events of given userId
+### /api/events/:id/join/:inviteKey
+- POST, adds signed in guest to event and returns updated event
+
+### /api/events/:id/validatekey/:inviteKey
+- POST, validates inviteKey and returns inviteKey if correct
+
+### /api/events/:id/setstatus/:userId
+- POST, changes status of guest in event
 
 ### /api/users
 

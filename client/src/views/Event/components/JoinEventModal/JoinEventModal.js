@@ -19,7 +19,6 @@ class JoinEventModal extends Component {
     join = async () => {
         await this.props.EventStore.joinEvent(
             this.props.EventStore.event._id,
-            this.props.UserStore.currentUser._id,
             this.props.inviteKey
         )
         this.setState({ redirectToEvent: true })

@@ -7,11 +7,8 @@ class EventStore {
 
     async initializeEvent(eventId) {
         let event = null
-        if (eventId && eventId !== 'template') {
+        if (eventId) {
             event = await eventService.getOne(eventId)
-            console.log('event initialized: ', event)
-        } else {
-            event = await eventService.getTemplate()
             console.log('event initialized: ', event)
         }
         runInAction(() => {
@@ -41,9 +38,9 @@ class EventStore {
         })
     }
 
-    async joinEvent(eventId, userId, inviteKey) {
+    async joinEvent(eventId, inviteKey) {
         try {
-            this.event = await eventService.joinEvent(eventId, userId, inviteKey)
+            this.event = await eventService.joinEvent(eventId, inviteKey)
         } catch (error) {
             return null
         }
