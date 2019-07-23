@@ -9,7 +9,7 @@ userRouter.get('/', async (request, response) => {
         .populate('myEvents', { _id: 1, label: 1, background: 1 })
         .populate('myInvites', { _id: 1, label: 1, background: 1 })
 
-    response.json(users)
+    response.json(users.map(User.format))
 })
 
 userRouter.get('/:id', async (request, response) => {

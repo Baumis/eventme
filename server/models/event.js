@@ -67,18 +67,34 @@ const eventSchema = new mongoose.Schema({
     components: [componentSchema]
 })
 
-eventSchema.statics.format = (event) => {
-    return {
-        _id: event._id,
-        label: event.label,
-        creator: event.creator,
-        inviteKey: event.inviteKey,
-        background: event.background,
-        infoPanel: event.infoPanel,
-        guests: event.guests,
-        components: event.components
-    }
-}
+eventSchema.statics.format = (event) => ({
+    _id: event._id,
+    label: event.label,
+    creator: event.creator,
+    inviteKey: event.inviteKey,
+    background: event.background,
+    infoPanel: event.infoPanel,
+    guests: event.guests,
+    components: event.components
+})
+
+eventSchema.statics.formatForGuest = (event) => ({
+    _id: event._id,
+    label: event.label,
+    creator: event.creator,
+    background: event.background,
+    infoPanel: event.infoPanel,
+    guests: event.guests,
+    components: event.components
+})
+
+eventSchema.statics.formatForGhost = (event) => ({
+    _id: event._id,
+    label: event.label,
+    creator: event.creator,
+    background: event.background,
+    infoPanel: event.infoPanel
+})
 
 const Event = mongoose.model('Event', eventSchema)
 

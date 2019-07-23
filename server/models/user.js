@@ -9,16 +9,14 @@ const userSchema = new mongoose.Schema({
     myInvites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
 })
 
-userSchema.statics.format = (user) => {
-    return {
-        _id: user._id,
-        username: user.username,
-        name: user.name,
-        email: user.email,
-        myEvents: user.myEvents,
-        myInvites: user.myInvites
-    }
-}
+userSchema.statics.format = (user) => ({
+    _id: user._id,
+    username: user.username,
+    name: user.name,
+    email: user.email,
+    myEvents: user.myEvents,
+    myInvites: user.myInvites
+})
 
 const User = mongoose.model('User', userSchema) 
 
