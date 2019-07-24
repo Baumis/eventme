@@ -6,10 +6,9 @@ import ProfileCard from './ProfileCard'
 class ProfileHeader extends Component {
 
     render() {
-        console.log(this.props.UserStore.currentUser)
         return (
             <div className="profileHeaderContainer">
-                <ProfileCard user={this.props.UserStore.currentUser} />
+                <ProfileCard user={this.props.user} />
             </div>
         )
     }
