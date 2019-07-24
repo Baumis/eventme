@@ -18,12 +18,10 @@ class Profile extends Component {
     async componentDidMount() {
         try {
             const user = await UserServices.getOne(this.props.profileId)
-            console.log(user)
             if (user) {
                 this.setState({ user: user })
             }
         } catch (error) {
-            console.log(error)
             this.setState({ idValid: false })
         }
         this.setState({ loading: false })
