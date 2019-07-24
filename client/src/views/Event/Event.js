@@ -18,21 +18,26 @@ class Event extends Component {
         super(props)
         this.state = {
             loading: true,
-            invite: false
+            showInviteModal: false
         }
     }
 
     async componentDidMount() {
         if (this.props.inviteKey) {
-            const inviteKey = await this.props.EventStore.validateKey(this.props.eventId, this.props.inviteKey)
-            if (inviteKey) {
-                this.setState({ invite: true })
-            }
+            await this.props.EventStore.validateKey(this.props.eventId, this.props.inviteKey)
+            this.setState({ showInviteModal: true })
+        } else {
+            await this.props.EventStore.initializeEvent(this.props.eventId)
         }
 
-        await this.props.EventStore.initializeEvent(this.props.eventId)
-        this.props.VisibilityStore.isCreator()
         this.setState({ loading: false })
+    }
+
+    isCreator = () => {
+        if (!this.props.UserStore.currentUser) {
+            return false
+        }
+        return this.props.UserStore.currentUser._id === this.props.EventStore.event.creator._id
     }
 
     addComponent = () => {
@@ -62,8 +67,12 @@ class Event extends Component {
         this.props.VisibilityStore.slideOptionsPanel()
     }
 
+    closeInviteModal = () => {
+        this.setState({ showInviteModal: false })
+    }
+
     render() {
-        if (this.state.loading) {
+        if (this.state.loading || !this.props.EventStore.event) {
             return null
         }
 
@@ -71,7 +80,7 @@ class Event extends Component {
             <div className='Event'>
                 <Header />
                 <ComponentContainer />
-                {this.props.VisibilityStore.creator ?
+                {this.isCreator() ?
                     <div>
                         <ComponentAdder add={this.addComponent} />
                         <OptionsPanel />
@@ -94,8 +103,8 @@ class Event extends Component {
                     <SignModal history={this.props.history} />
                     : null
                 }
-                {this.state.invite ?
-                    <JoinEventModal inviteKey={this.props.inviteKey} />
+                {this.state.showInviteModal ?
+                    <JoinEventModal inviteKey={this.props.inviteKey} closeInviteModal={this.closeInviteModal} />
                     : null
                 }
             </div>

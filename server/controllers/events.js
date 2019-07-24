@@ -26,7 +26,7 @@ eventRouter.get('/:id', async (request, response) => {
         } else if (event.guests.find(guest => guest.user._id.toString() === userId)) {
             response.json(Event.formatForGuest(event))
         } else {
-            response.json(Event.formatForGhost(event))
+            response.status(403).send({ error: 'Event is private' })
         }
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
@@ -196,7 +196,12 @@ eventRouter.post('/:id/validatekey/:inviteKey', async (request, response) => {
             return response.status(400).send({ error: 'Malformatted inviteKey' })
         }
 
-        response.json(request.params.inviteKey)
+        const populatedEvent = await event
+            .populate('creator', { _id: 1, name: 1 })
+            .populate('guests.user', { _id: 1, name: 1 })
+            .execPopulate()
+
+        response.json(Event.formatForGuest(populatedEvent))
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }

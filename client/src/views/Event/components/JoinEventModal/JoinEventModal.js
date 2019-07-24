@@ -24,10 +24,6 @@ class JoinEventModal extends Component {
         this.setState({ redirectToEvent: true })
     }
 
-    continue = () => {
-        this.setState({ redirectToEvent: true })
-    }
-
     render() {
         if (this.state.redirectToEvent) {
             return <Redirect to={`/events/${this.props.EventStore.event._id}`} />
@@ -56,7 +52,7 @@ class JoinEventModal extends Component {
                             </div>
                             : null
                         }
-                        <div className="join-event-button" id="join-event-button-continue" onClick={() => this.continue()}>
+                        <div className="join-event-button" id="join-event-button-continue" onClick={this.props.closeInviteModal}>
                             {'Continue without joining'}
                         </div>
                     </div>
