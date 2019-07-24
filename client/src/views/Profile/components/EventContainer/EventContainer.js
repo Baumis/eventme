@@ -10,13 +10,13 @@ class EventContainer extends Component {
             <div className="eventContainer">
                 <div className="sectionHeader">Created events</div>
                 <div className="eventsContainer">
-                    {this.props.UserStore.currentUser.myEvents.map((event, i) => (
+                    {this.props.user.myEvents.map((event, i) => (
                         <EventCard key={i} event={event} />
                     ))}
                 </div>
                 <div className="sectionHeader">Invites</div>
                 <div className="eventsContainer">
-                    {this.props.UserStore.currentUser.myInvites.map((event, i) => (
+                    {this.props.user.myInvites.map((event, i) => (
                         <EventCard key={i} event={event} />
                     ))}
                 </div>
