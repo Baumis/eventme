@@ -12,7 +12,7 @@ eventRouter.get('/', async (request, response) => {
     response.json(events.map(Event.format))
 })
 
-eventRouter.get('/:id', async (request, response) => {
+eventRouter.get('/:id', middleware.requireAuthentication, async (request, response) => {
     try {
         const event = await Event
             .findById(request.params.id)

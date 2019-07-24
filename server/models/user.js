@@ -18,6 +18,20 @@ userSchema.statics.format = (user) => ({
     myInvites: user.myInvites
 })
 
+userSchema.statics.formatForVisitor = (user) => ({
+    _id: user._id,
+    username: user.username,
+    name: user.name,
+    myEvents: user.myEvents,
+    myInvites: user.myInvites
+})
+
+userSchema.statics.formatForGhost = (user) => ({
+    _id: user._id,
+    username: user.username,
+    name: user.name
+})
+
 const User = mongoose.model('User', userSchema) 
 
 module.exports = User

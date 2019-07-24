@@ -12,7 +12,7 @@ userRouter.get('/', async (request, response) => {
     response.json(users.map(User.format))
 })
 
-userRouter.get('/:id', async (request, response) => {
+userRouter.get('/:id', middleware.requireAuthentication, async (request, response) => {
     try {
         const user = await User
             .findById(request.params.id)
@@ -71,6 +71,12 @@ userRouter.put('/:id', middleware.requireAuthentication, async (request, respons
     try {
         const body = request.body
 
+        const userId = request.senderId
+
+        if (userId !== request.params.id) {
+            return response.status(403).send({ error: 'only user itself can update' })
+        }
+
         const existingUser = await User.find({ username: body.username })
         if (existingUser.length > 0) {
             return response.status(400).json({ error: 'username must be unique' })
@@ -109,6 +115,12 @@ userRouter.put('/:id', middleware.requireAuthentication, async (request, respons
 
 userRouter.delete('/:id', middleware.requireAuthentication, async (request, response) => {
     try {
+        const userId = request.senderId
+
+        if (userId !== request.params.id) {
+            return response.status(403).send({ error: 'only user itself can update' })
+        }
+
         await User.findByIdAndDelete(request.params.id)
         
         response.status(204).end()
