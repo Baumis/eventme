@@ -1,22 +1,18 @@
 import React from 'react'
 import './EventContainer.css'
 
-const EventCard = ({ event, history }) => {
+const EventCard = ({ event }) => {
 
     const background = {
         backgroundImage: 'url(' + event.background + ')'
     }
 
-    const goToEvent = () => {
-        history.push(`/events/${event._id}`)
-    }
-
     return (
-        <div style={background} className="eventCard" onClick={() => goToEvent()}>
+        <a href={`/events/${event._id}`} style={background} className="eventCard">
             <div className="titlePanel">
                 <p>{event.label}</p>
             </div>
-        </div>
+        </a>
     )
 }
 
