@@ -1,11 +1,11 @@
-.userPanel {
+.user {
     display: flex;
-    color:white;
+    color: #FBFFFE;
     align-items: center;
     justify-content: center;
 }
 
-.userIcon {
+.user-icon {
     padding: 5px;
 }
 
@@ -14,12 +14,24 @@ a {
     color: white;
 }
 
-.userName:hover {
+.user-username:hover {
     border-bottom: 1px solid white;
     cursor: pointer;
 }
 
-.signedIn {
+.user-signed-in {
     display: flex;
     align-items: center;
+}
+
+.user-sign-button{
+    padding: 8px;
+    /*border: 1px solid #1E4D29;*/
+    color: #FBFFFE;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.user-sign-button:hover{
+    background: rgba(255,255,255,0.1);
 }

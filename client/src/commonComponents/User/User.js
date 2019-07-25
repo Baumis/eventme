@@ -16,20 +16,20 @@ class User extends Component {
 
     render() {
         return (
-            <div className="userPanel">
+            <div className="user">
                 {this.props.UserStore.currentUser ?
-                    <div className="signedIn">
+                    <div className="user-signed-in">
                         <div>
-                            <div className="userIcon"><FaUser /></div>
-                            <a href={`/profile/${this.props.UserStore.currentUser._id}`} className="username">
+                            <div className="user-icon"><FaUser /></div>
+                            <a href={`/profile/${this.props.UserStore.currentUser._id}`} className="user-username">
                                 {this.props.UserStore.currentUser.username}
                             </a>
                         </div>
-                        <div className="signButton" onClick={this.signOut} >{'Sign Out'}</div>
+                        <div className="user-sign-button" onClick={this.signOut} >{'Sign out'}</div>
                     </div>
                     :
                     <div>
-                        <div className="signButton" onClick={this.openSignModal}>{'Sign In'}</div>
+                        <div className="user-sign-button" onClick={this.openSignModal}>{'Sign in'}</div>
                     </div>
                 }
             </div>
