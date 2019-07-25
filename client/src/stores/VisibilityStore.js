@@ -1,5 +1,3 @@
-import UserStore from './UserStore'
-import EventStore from './EventStore'
 import { observable, decorate, action } from 'mobx'
 
 class VisibilityStore {
@@ -27,15 +25,6 @@ class VisibilityStore {
             this.optionsPanelPosition = '-300px'
             :
             this.optionsPanelPosition = '0px'
-    }
-    isCreator = () => {
-        if (UserStore.currentUser && EventStore.event.creator) {
-            if (UserStore.currentUser._id === EventStore.event.creator._id) {
-                this.creator = true
-            } else {
-                this.creator = false
-            }
-        }
     }
 }
 

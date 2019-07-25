@@ -36,7 +36,7 @@ class App extends Component {
                     <Route exact path="/events/:id/invite/:inviteKey" render={({ match }) =>
                         <Event eventId={match.params.id} inviteKey={match.params.inviteKey} />
                     } />
-                    <Route exact path="/profile" component={Profile} />
+                    <Route exact path="/profile/:id" render={({ match }) => <Profile profileId={match.params.id} />} />
                 </Router>
             </div>
         )

@@ -6,14 +6,13 @@ class EventStore {
     saved = true
 
     async initializeEvent(eventId) {
-        let event = null
-        if (eventId) {
-            event = await eventService.getOne(eventId)
-            console.log('event initialized: ', event)
+        try {
+            this.event = await eventService.getOne(eventId)
+            console.log('event initialized: ', this.event)
+            return this.event
+        } catch(error) {
+            return null
         }
-        runInAction(() => {
-            this.event = event
-        })
     }
 
     setValue(value, field) {
@@ -41,6 +40,7 @@ class EventStore {
     async joinEvent(eventId, inviteKey) {
         try {
             this.event = await eventService.joinEvent(eventId, inviteKey)
+            return this.event
         } catch (error) {
             return null
         }
@@ -49,6 +49,7 @@ class EventStore {
     async removeGuest(eventId, userId) {
         try {
             this.event = await eventService.removeGuest(eventId, userId)
+            return this.event
         } catch (error) {
             return null
         }
@@ -59,14 +60,13 @@ class EventStore {
             await eventService.remove(this.event._id)
             return true
         }catch(error){
-            return null
+            return false
         }
     }
 
     async create(event) {
         try {
             this.event = await eventService.create(event)
-            this.saved = true
             return this.event
         } catch (error) {
             return null
@@ -85,7 +85,8 @@ class EventStore {
 
     async validateKey(eventId, inviteKey) {
         try {
-            return await eventService.validateKey(eventId, inviteKey)
+            this.event = await eventService.validateKey(eventId, inviteKey)
+            return this.event
         } catch (error) {
             return null
         }
