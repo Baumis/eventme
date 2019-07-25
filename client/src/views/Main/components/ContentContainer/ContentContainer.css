@@ -40,6 +40,12 @@
     padding-top: 20%;
 }
 
+.content-container-event-panel{
+    background: rgba(0,0,0,0.5);
+    padding: 40px;
+    border-radius: 10px;
+}
+
 .content-container-left-column h1 {
     font-size: 30px;
 }
