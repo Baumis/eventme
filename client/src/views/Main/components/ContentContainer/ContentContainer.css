@@ -12,7 +12,7 @@
     grid-gap: 2%;
     justify-content:center;
     background: #F4EFED;
-    background-image: url(https://images.unsplash.com/photo-1469321589923-e19da1f4bfdc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+    background-image: url(https://images.unsplash.com/photo-1467810563316-b5476525c0f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1949&q=80);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -41,7 +41,7 @@
 }
 
 .content-container-event-panel{
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.8);
     padding: 40px;
     border-radius: 10px;
 }
