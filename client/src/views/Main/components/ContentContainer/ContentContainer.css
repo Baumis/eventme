@@ -1,5 +1,5 @@
 .content-container{
-    padding: 30px 1% 20px 1%;
+    padding: 120px 1% 20px 1%;
     position: absolute;
     z-index: 1;
     bottom: 0px;
@@ -20,30 +20,25 @@
     background-position:center center;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 750px) {
     .content-container{
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        overflow: auto;
     }
 }
 
-.content-container-left-column{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.content-container-event-panel{
     text-align: left;
     color:#FBFFFE;
-    font-family: 'Roboto', sans-serif;
-    width: 50%;
-    padding-top: 20%;
-}
-
-.content-container-event-panel{
     background: rgba(0,0,0,0.8);
+    height: 260px;
+    width: 300px;
     padding: 40px;
     border-radius: 10px;
+    margin: 10px;
 }
 
 .content-container-left-column h1 {
