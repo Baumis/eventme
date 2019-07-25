@@ -18,7 +18,7 @@ userSchema.statics.format = (user) => ({
     myInvites: user.myInvites
 })
 
-userSchema.statics.formatForVisitor = (user) => ({
+userSchema.statics.formatForGuest = (user) => ({
     _id: user._id,
     username: user.username,
     name: user.name,

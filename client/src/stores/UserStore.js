@@ -12,7 +12,11 @@ class UserStore {
     }
 
     async refreshUser(user) {
-        this.currentUser = await userService.getOne(user._id)
+        try {
+            this.currentUser = await userService.getOne(user._id)
+        } catch(error) {
+            this.signOut()
+        }
     }
 
     signOut() {

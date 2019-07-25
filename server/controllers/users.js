@@ -19,7 +19,13 @@ userRouter.get('/:id', middleware.requireAuthentication, async (request, respons
             .populate('myEvents', { _id: 1, label: 1, background: 1 })
             .populate('myInvites', { _id: 1, label: 1, background: 1 })
 
-        response.json(User.format(user))
+        const userId = request.senderId
+
+        if (userId === request.params.id) {
+            response.json(User.format(user))
+        } else {
+            response.json(User.formatForGuest(user))
+        }
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
@@ -118,7 +124,7 @@ userRouter.delete('/:id', middleware.requireAuthentication, async (request, resp
         const userId = request.senderId
 
         if (userId !== request.params.id) {
-            return response.status(403).send({ error: 'only user itself can update' })
+            return response.status(403).send({ error: 'only user itself can delete' })
         }
 
         await User.findByIdAndDelete(request.params.id)
