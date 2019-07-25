@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Main.css'
-import CreateButton from './components/CreateButton/CreateButton'
 import Navbar from './components/Navbar/Navbar'
 import SignModal from '../../commonComponents/SignModal/SignModal'
-import EventOptions from './components/NewEventModal/NewEventModal';
+import EventOptions from './components/NewEventModal/NewEventModal'
+import ContentContainer from './components/ContentContainer/ContentContainer'
 
 class Main extends Component {
 
@@ -36,9 +36,7 @@ class Main extends Component {
         return (
             <div className="Main">
                 <Navbar history={this.props.history} />
-                <div className="MainContent">
-                    <CreateButton click={this.createEvent} />
-                </div>
+                <ContentContainer click={this.createEvent} />
                 {this.props.VisibilityStore.signModal ?
                     <SignModal history={this.props.history} />
                     : null

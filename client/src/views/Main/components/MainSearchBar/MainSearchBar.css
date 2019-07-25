@@ -6,7 +6,7 @@
     border: none;
     padding: 3px 10px 3px 10px;
     border-radius: 30px;
-    background: #7A838C;
+    background: #E8E7EC;
     color:white;
 }
 
@@ -18,11 +18,11 @@
 }
 
 .search-bar-container input::placeholder{
-    color: rgba(255,255,255,0.5)
+    color: rgba(77, 110, 81,0.5)
 }
 
 #nav-bar-search-icon{
-    color: 'white';
+    color: rgb(77, 110, 81);
     align-items: center;
     cursor: pointer;
     padding: 3px;
