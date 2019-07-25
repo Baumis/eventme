@@ -9,7 +9,7 @@ class ContentContainer extends Component {
             <div className="content-container">
                 <div className="content-container-event-panel">
                     <h1>{'Let\'s create your event!'}</h1>
-                    <p>{'Get things started by clicking the button below and use your creativity!'}</p>
+                    <p>{'Get things started by clicking the button below!'}</p>
                     <CreateButton click={this.props.click} />
                 </div>
                 <div className="content-container-event-panel">
