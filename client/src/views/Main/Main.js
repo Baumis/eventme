@@ -38,7 +38,7 @@ class Main extends Component {
                 <Navbar history={this.props.history} />
                 <ContentContainer click={this.createEvent} />
                 {this.props.VisibilityStore.signModal ?
-                    <SignModal history={this.props.history} />
+                    <SignModal />
                     : null
                 }
                 {this.state.newEventModal ?

@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import UserServices from '../../services/users'
 import ProfileHeader from './components/ProfileHeader/ProfileHeader'
 import EventContainer from './components/EventContainer/EventContainer'
+import Navbar from '../Main/components/Navbar/Navbar'
 
 class Profile extends Component {
 
@@ -39,6 +40,7 @@ class Profile extends Component {
 
         return (
             <div className="profileViewContainer">
+                <Navbar />
                 <ProfileHeader user={this.state.user} />
                 <EventContainer user={this.state.user} />
             </div>

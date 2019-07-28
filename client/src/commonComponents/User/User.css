@@ -6,12 +6,12 @@
 }
 
 .user-icon {
-    padding: 5px;
+    padding: 0px;
 }
 
 a {
     text-decoration: none;
-    color: white;
+    color: #FBFFFE;
 }
 
 .user-username:hover {

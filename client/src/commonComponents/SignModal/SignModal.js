@@ -22,14 +22,11 @@ class SignModal extends Component {
         this.setState({ content: tab })
     }
 
-    createUser = () => {
-    }
-
     render() {
         const TagName = this.contents[this.state.content]
         return (
-            <div className="signModalBackground" >
-                <div className="signModal">
+            <div className="sign-modal-surface">
+                <div className="sign-modal">
                     <div className="topRow">
                         <div className="ExitIcon" onClick={() => this.props.VisibilityStore.closeSignModal()}>
                             <FaTimes />
