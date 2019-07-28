@@ -42,7 +42,7 @@ class Main extends Component {
                     : null
                 }
                 {this.state.newEventModal ?
-                    <NewEventModal history={this.props.history} hide={this.hideEventModal} />
+                    <NewEventModal hide={this.hideEventModal} />
                     : null
                 }
             </div>

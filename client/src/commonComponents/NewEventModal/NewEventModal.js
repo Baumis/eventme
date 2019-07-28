@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { withRouter } from 'react-router-dom'
 import './NewEventModal.css'
 import { FaTimes } from 'react-icons/fa'
 
@@ -51,4 +52,4 @@ class NewEventModal extends Component {
     }
 }
 
-export default inject('EventStore')(observer(NewEventModal))
+export default withRouter(inject('EventStore')(observer(NewEventModal)))

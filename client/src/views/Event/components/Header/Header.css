@@ -1,5 +1,5 @@
-.Header-container {
-    height: 300px;
+.header-container {
+    height: 320px;
     padding-top: 20px;
     text-align: center;
     background: black;
@@ -12,15 +12,15 @@
     position: relative;
 }
 
-.Header-container h1{
+.header-container h1{
     padding-top: 50px;
 }
 
 .InfoPanel{
-    height: 40px;
     width: 100%;
     background: rgba(0,17,26,0.7);
     position: absolute;
+    min-height: 40px;
     bottom: 0px;
     display: flex;
     justify-content: center;
@@ -37,5 +37,6 @@
 }
 
 .InfoField p{
-    padding-left: 5px;
+    padding: 5px 0px 5px 5px;
+    margin: 0px;
 }

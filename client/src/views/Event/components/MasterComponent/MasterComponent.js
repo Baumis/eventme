@@ -19,7 +19,7 @@ class MasterComponent extends Component {
         const TagName = components[this.props.component.type || 'TEXT']
         return (
             <div className="Component">
-                {this.props.VisibilityStore.creator ?
+                {this.props.isCreator() ?
                     <div className="OptionsRow">
                         <OptionsDropDown
                             order={this.props.component.order}

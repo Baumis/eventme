@@ -80,7 +80,7 @@ class Event extends Component {
             <div className='Event'>
                 <Navbar />
                 <Header />
-                <ComponentContainer />
+                <ComponentContainer isCreator={this.isCreator}/>
                 {this.isCreator() ?
                     <div>
                         <ComponentAdder add={this.addComponent} />
