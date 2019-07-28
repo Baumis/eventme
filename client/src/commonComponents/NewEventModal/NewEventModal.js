@@ -26,24 +26,26 @@ class NewEventModal extends Component {
     render() {
         return (
             <div className="event-options-modal-bg">
-                <div className="event-options-modal">
-                    <div className="event-options-top">
-                        <div className="event-options-exit" onClick={() => this.props.hide()}>
-                            <FaTimes />
+                <div className="event-options-surface">
+                    <div className="event-options-content">
+                        <div className="event-options-top">
+                            <div className="event-options-exit" onClick={() => this.props.hide()}>
+                                <FaTimes />
+                            </div>
                         </div>
-                    </div>
-                    <div className="event-options-input">
-                        <p>{'Event name'}</p>
-                        <input
-                            name={'eventName'}
-                            onChange={this.changeStateValue}
-                            value={this.state.eventName}
-                            placeholder={'my event'}
-                        ></input>
-                    </div>
-                    <div className="event-options-button-row">
-                        <div onClick={() => this.create()} className="event-options-button">
-                            {'Create'}
+                        <div className="event-options-input">
+                            <p>{'Event title'}</p>
+                            <input
+                                name={'eventName'}
+                                onChange={this.changeStateValue}
+                                value={this.state.eventName}
+                                placeholder={'my event'}
+                            ></input>
+                        </div>
+                        <div className="event-options-button-row">
+                            <div onClick={() => this.create()} className="event-options-button">
+                                {'Create'}
+                            </div>
                         </div>
                     </div>
                 </div>
