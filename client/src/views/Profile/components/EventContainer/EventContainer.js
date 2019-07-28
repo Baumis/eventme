@@ -7,20 +7,27 @@ class EventContainer extends Component {
 
     render() {
         return (
-            <div className="eventContainer">
-                <div className="sectionHeader">Created events</div>
-                <div className="eventsContainer">
+            <div className="event-container">
+                <div className="event-container-header">
+                    <h3>Created events</h3>
+                </div >
+                <div className="event-container-row">
+                    <div className="eventCard event-container-new-button">
+                        {'+'}
+                    </div>
                     {this.props.user.myEvents.map((event, i) => (
                         <EventCard key={i} event={event} />
                     ))}
                 </div>
-                <div className="sectionHeader">Invites</div>
-                <div className="eventsContainer">
+                <div className="event-container-header">
+                    <h3>Invites</h3>
+                </div>
+                <div className="event-container-row">
                     {this.props.user.myInvites.map((event, i) => (
                         <EventCard key={i} event={event} />
                     ))}
                 </div>
-            </div>
+            </div >
         )
     }
 }

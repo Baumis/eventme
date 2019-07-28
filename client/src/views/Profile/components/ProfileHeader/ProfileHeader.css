@@ -3,10 +3,9 @@
     flex-direction: column-reverse;
     align-items: center;
     background-color: gray;
-    background: rgb(174,186,238);
-    background: radial-gradient(circle, rgba(174,186,238,1) 0%, rgba(161,233,148,1) 100%);
+    background: rgb(0,0,0);
     background-image: url(https://picsum.photos/1440/550);
-    background-attachment: fixed;
+    /*background-attachment: fixed*/
     height: 250px;
     padding-top: 60px;
     -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.4);
@@ -33,7 +32,7 @@
     box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
     color: white;
     overflow: hidden;
-    margin: 30px;
+    margin-top: -22px;
 }
 
 .profileCard:after {
