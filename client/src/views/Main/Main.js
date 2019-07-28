@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import './Main.css'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import SignModal from '../../commonComponents/SignModal/SignModal'
-import EventOptions from './components/NewEventModal/NewEventModal'
+import NewEventModal from '../../commonComponents/NewEventModal/NewEventModal'
 import ContentContainer from './components/ContentContainer/ContentContainer'
 
 class Main extends Component {
@@ -42,7 +42,7 @@ class Main extends Component {
                     : null
                 }
                 {this.state.newEventModal ?
-                    <EventOptions history={this.props.history} hide={this.hideEventModal} />
+                    <NewEventModal history={this.props.history} hide={this.hideEventModal} />
                     : null
                 }
             </div>

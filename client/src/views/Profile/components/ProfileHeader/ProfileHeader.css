@@ -5,6 +5,11 @@
     background-color: gray;
     background: rgb(0,0,0);
     background-image: url(https://picsum.photos/1440/550);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position:center center;
     /*background-attachment: fixed*/
     height: 250px;
     padding-top: 60px;

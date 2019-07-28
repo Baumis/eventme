@@ -1,7 +1,7 @@
 .event-container {
     display: flex;
     flex-direction: column;
-    padding-top: 30px;
+    padding-top: 20px;
     align-items: center;
 }
 
@@ -21,15 +21,15 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 25vw;
+    height: 220px;;
     max-height: 230px;
-    min-height: 190px;
-    width: 90vw;
+    min-height: 220px;
+    width: 90%;
     max-width: 900px;
     margin-top: 10px;
     margin-bottom: 30px;
     border-top: 1px solid rgba(0,0,0,0.15);
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .eventCard {
@@ -43,13 +43,13 @@
     -o-background-size: cover;
     background-size: cover;
     background-position:center center;
-    width:20vw;
-    height:20vw;
+    width:180px;
+    height:180px;
     margin: 10px;
-    max-width: 200px;
-    max-height: 200px;
-    min-height: 150px;
-    min-width: 150px;
+    max-width: 180px;
+    max-height: 180px;
+    min-height: 180px;
+    min-width: 180px;
     border-radius: 10px;
     cursor: pointer;
 

@@ -12,7 +12,9 @@ class EventContainer extends Component {
                     <h3>Created events</h3>
                 </div >
                 <div className="event-container-row">
-                    <div className="eventCard event-container-new-button">
+                    <div className="eventCard event-container-new-button"
+                        onClick={() => this.props.newEvent()}
+                    >
                         {'+'}
                     </div>
                     {this.props.user.myEvents.map((event, i) => (
