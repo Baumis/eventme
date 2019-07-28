@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-    background-color: gray;
     background: rgb(0,0,0);
     background-image: url(https://picsum.photos/1440/550);
     -webkit-background-size: cover;
@@ -10,16 +9,11 @@
     -o-background-size: cover;
     background-size: cover;
     background-position:center center;
-    /*background-attachment: fixed*/
     height: 250px;
     padding-top: 60px;
     -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.4);
     -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
     box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
-}
-
-.profile-card-surface {
-    background: inherit;
 }
 
 .profileCard {
