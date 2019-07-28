@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import UserServices from '../../services/users'
 import ProfileHeader from './components/ProfileHeader/ProfileHeader'
 import EventContainer from './components/EventContainer/EventContainer'
-import Navbar from '../Main/components/Navbar/Navbar'
+import Navbar from '../../commonComponents/Navbar/Navbar'
 
 class Profile extends Component {
 

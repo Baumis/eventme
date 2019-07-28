@@ -14,6 +14,12 @@ a {
     color: #FBFFFE;
 }
 
+.user-username{
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+}
+
 .user-username:hover {
     border-bottom: 1px solid white;
     cursor: pointer;
@@ -26,7 +32,6 @@ a {
 
 .user-sign-button{
     padding: 8px;
-    /*border: 1px solid #1E4D29;*/
     color: #FBFFFE;
     margin: 10px;
     cursor: pointer;
