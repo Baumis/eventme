@@ -19,16 +19,17 @@ eventRouter.get('/:id', middleware.requireAuthentication, async (request, respon
             .populate('creator', { _id: 1, name: 1 })
             .populate('guests.user', { _id: 1, name: 1 })
 
-        const userId = request.senderId
+        const senderId = request.senderId
 
-        if (userId === event.creator._id.toString()) {
+        if (senderId === event.creator._id.toString()) {
             response.json(Event.format(event))
-        } else if (event.guests.find(guest => guest.user._id.toString() === userId)) {
+        } else if (event.guests.find(guest => guest.user._id.toString() === senderId)) {
             response.json(Event.formatForGuest(event))
         } else {
             response.status(403).send({ error: 'Event is private' })
         }
     } catch (exception) {
+        console.log(exception)
         response.status(400).send({ error: 'Malformatted id' })
     }
 })
@@ -36,9 +37,9 @@ eventRouter.get('/:id', middleware.requireAuthentication, async (request, respon
 eventRouter.post('/', middleware.requireAuthentication, async (request, response) => {
     try {
         const body = request.body
-        const userId = request.senderId
+        const senderId = request.senderId
 
-        const user = await User.findById(userId)
+        const user = await User.findById(senderId)
 
         const newEvent = new Event({
             label: body.label,
@@ -75,9 +76,9 @@ eventRouter.put('/:id', middleware.requireAuthentication, async (request, respon
 
         const event = await Event.findById(request.params.id)
 
-        const userId = request.senderId
+        const senderId = request.senderId
 
-        if (userId !== event.creator._id.toString()) {
+        if (senderId !== event.creator._id.toString()) {
             return response.status(403).send({ error: 'only creator can update event' })
         }
 
@@ -111,10 +112,24 @@ eventRouter.delete('/:id', middleware.requireAuthentication, async (request, res
 
         const event = await Event.findById(request.params.id)
 
-        const userId = request.senderId
+        const senderId = request.senderId
 
-        if (userId !== event.creator._id.toString()) {
+        if (senderId !== event.creator._id.toString()) {
             return response.status(403).send({ error: 'only creator can remove event' })
+        }
+
+        const creator = await User.findById(event.creator._id)
+
+        creator.myEvents = creator.myEvents.filter(eventId => eventId !== event._id)
+
+        await creator.save()
+
+        const guestsPromises = event.guests.map(guest => User.findById(guest.user))
+        const guests = await Promise.all(guestsPromises)
+
+        for (guest of guests) {
+            guest.myInvites = guest.myInvites.filter(eventId => eventId !== event._id)
+            await guest.save()
         }
 
         await event.remove()
@@ -129,9 +144,9 @@ eventRouter.post('/:id/addguest/:userId', middleware.requireAuthentication, asyn
     try {
         const event = await Event.findById(request.params.id)
 
-        const userId = request.senderId
+        const senderId = request.senderId
 
-        if (userId !== event.creator._id.toString()) {
+        if (senderId !== event.creator._id.toString()) {
             return response.status(403).send({ error: 'only creator can add guests' })
         }
 
@@ -162,9 +177,9 @@ eventRouter.post('/:id/removeguest/:userId', middleware.requireAuthentication, a
     try {
         const event = await Event.findById(request.params.id)
 
-        const userId = request.senderId
+        const senderId = request.senderId
 
-        if (userId !== event.creator._id.toString() && userId !== request.params.userId) {
+        if (senderId !== event.creator._id.toString() && senderId !== request.params.userId) {
             return response.status(403).send({ error: 'only creator or guest itself can remove guest' })
         }
 
@@ -209,10 +224,10 @@ eventRouter.post('/:id/validatekey/:inviteKey', async (request, response) => {
 
 eventRouter.post('/:id/join/:inviteKey', middleware.requireAuthentication, async (request, response) => {
     try {
-        const userId = request.senderId
+        const senderId = request.senderId
 
         const event = await Event.findById(request.params.id)
-        const user = await User.findById(userId)
+        const user = await User.findById(senderId)
 
         if (event.inviteKey !== request.params.inviteKey) {
             return response.status(400).send({ error: 'Malformatted inviteKey' })
@@ -249,9 +264,9 @@ eventRouter.post('/:id/setstatus/:userId', middleware.requireAuthentication, asy
 
         const event = await Event.findById(request.params.id)
 
-        const userId = request.senderId
+        const senderId = request.senderId
 
-        if (userId !== event.creator._id.toString() && userId !== request.params.userId) {
+        if (senderId !== event.creator._id.toString() && senderId !== request.params.userId) {
             return response.status(403).send({ error: 'only creator or guest itself can change status' })
         }
 
@@ -275,7 +290,7 @@ eventRouter.post('/:id/setstatus/:userId', middleware.requireAuthentication, asy
             .populate('guests.user', { _id: 1, name: 1 })
             .execPopulate()
 
-        if (userId === event.creator._id.toString()) {
+        if (senderId === event.creator._id.toString()) {
             response.json(Event.format(populatedEvent))
         } else {
             response.json(Event.formatForGuest(populatedEvent))

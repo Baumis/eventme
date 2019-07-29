@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const userRouter = require('express').Router()
 const middleware = require('../utils/middleware')
 const User = require('../models/user')
+const Event = require('../models/event')
 
 userRouter.get('/', async (request, response) => {
     const users = await User
@@ -19,9 +20,9 @@ userRouter.get('/:id', middleware.requireAuthentication, async (request, respons
             .populate('myEvents', { _id: 1, label: 1, background: 1 })
             .populate('myInvites', { _id: 1, label: 1, background: 1 })
 
-        const userId = request.senderId
+        const senderId = request.senderId
 
-        if (userId === request.params.id) {
+        if (senderId === request.params.id) {
             response.json(User.format(user))
         } else {
             response.json(User.formatForGuest(user))
@@ -77,9 +78,9 @@ userRouter.put('/:id', middleware.requireAuthentication, async (request, respons
     try {
         const body = request.body
 
-        const userId = request.senderId
+        const senderId = request.senderId
 
-        if (userId !== request.params.id) {
+        if (senderId !== request.params.id) {
             return response.status(403).send({ error: 'only user itself can update' })
         }
 
@@ -121,16 +122,43 @@ userRouter.put('/:id', middleware.requireAuthentication, async (request, respons
 
 userRouter.delete('/:id', middleware.requireAuthentication, async (request, response) => {
     try {
-        const userId = request.senderId
+        const senderId = request.senderId
+        const userId = request.params.id
 
-        if (userId !== request.params.id) {
+        if (senderId !== userId) {
             return response.status(403).send({ error: 'only user itself can delete' })
         }
 
-        await User.findByIdAndDelete(request.params.id)
+        const user = await User.findById(userId)
+
+        const myEventsPromises = user.myEvents.map(eventId => Event.findById(eventId))
+        const myEvents = await Promise.all(myEventsPromises)
+
+        for (let myEvent of myEvents) {
+            const myEventGuestsPromises = myEvent.guests.map(guest => User.findById(guest.user))
+            const myEventGuests = await Promise.all(myEventGuestsPromises)
+
+            for (let myEventGuest of myEventGuests) {
+                myEventGuest.myInvites = myEventGuest.myInvites.filter(eventId => eventId !== myEvent._id)
+                await myEventGuest.save()
+            }
+        }
+
+        await Event.deleteMany({creator: user._id})
+
+        const myInvitesPromises = user.myInvites.map(eventId => Event.findById(eventId))
+        const myInvites = await Promise.all(myInvitesPromises)
+
+        for (let myInvite of myInvites) {
+            myInvite.guests = myInvite.guests.filter(guest => guest.user.toString() !== user._id.toString())
+            await myInvite.save()
+        }
+
+        await user.remove()
         
         response.status(204).end()
     } catch (exception) {
+        console.log(exception)
         response.status(400).send({ error: 'Malformatted id' })
     }
 })
