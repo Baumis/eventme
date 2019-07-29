@@ -20,7 +20,8 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: 180px;
     background: rgba(255,255,255, 0.05);
     background: inherit;

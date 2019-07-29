@@ -2,7 +2,7 @@
     height: 320px;
     padding-top: 20px;
     text-align: center;
-    background: black;
+    background: rgba(0,0,0);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -17,11 +17,11 @@
 
 .InfoPanel{
     width: 100%;
-    background: rgba(0,17,26,0.7);
-    background: inherit;
+    background: rgba(0,17,26,0.01);
+    /*background: inherit;*/
     position: absolute;
-    bottom: 0px;
     min-height: 40px;
+    bottom: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,8 +34,8 @@
     position: absolute;
     right: -20px;
     bottom: -20px;
-    box-shadow: inset 0 0 0 600px rgba(0, 0, 0, 0.6);
-    filter: blur(10px);
+    box-shadow: inset 0 0 0 600px rgba(0, 0, 0, 0.4);
+    filter: blur(0px);
     width: calc(100% + 100px);
     height: 100px;
 }
