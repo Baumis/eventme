@@ -9,8 +9,8 @@
     padding: 0px 0px 0px 0px;
     width:45vw;
     height:45vw;
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 400px;
+    max-height: 400px;
     position: relative;
     z-index: 2;
     overflow: hidden;
@@ -19,6 +19,7 @@
     .Component {
         width: 85vw;
         height: 85vw;
+        margin-bottom: 20px;
     }
 }
 

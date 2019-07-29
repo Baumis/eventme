@@ -57,7 +57,7 @@ class OptionsPanel extends Component {
     render() {
 
         if (this.state.deleted) {
-            return <Redirect to={`/profile`} />
+            return <Redirect to={`/profile/${this.props.UserStore.currentUser._id}`} />
         }
 
         return (
@@ -136,4 +136,4 @@ class OptionsPanel extends Component {
     }
 }
 
-export default inject('EventStore', 'VisibilityStore')(observer(OptionsPanel))
+export default inject('EventStore', 'VisibilityStore', 'UserStore')(observer(OptionsPanel))

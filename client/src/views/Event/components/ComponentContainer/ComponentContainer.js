@@ -12,6 +12,7 @@ class ComponentContainer extends Component {
                     <MasterComponent
                         key={component.order}
                         component={component}
+                        isCreator={this.props.isCreator}
                     />
                 ))}
             </div>

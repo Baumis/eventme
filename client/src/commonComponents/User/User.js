@@ -19,12 +19,10 @@ class User extends Component {
             <div className="user">
                 {this.props.UserStore.currentUser ?
                     <div className="user-signed-in">
-                        <div>
+                        <a href={`/profile/${this.props.UserStore.currentUser._id}`} className="user-username">
                             <div className="user-icon"><FaUser /></div>
-                            <a href={`/profile/${this.props.UserStore.currentUser._id}`} className="user-username">
-                                {this.props.UserStore.currentUser.username}
-                            </a>
-                        </div>
+                            {this.props.UserStore.currentUser.username}
+                        </a>
                         <div className="user-sign-button" onClick={this.signOut} >{'Sign out'}</div>
                     </div>
                     :

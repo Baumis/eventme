@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './ContentContainer.css'
 import CreateButton from '../CreateButton/CreateButton'
 
 class ContentContainer extends Component {
 
     render() {
+        if (this.props.VisibilityStore.signModal) {
+            return <div className="content-container"></div>
+        }
+
         return (
             <div className="content-container">
                 <div className="content-container-event-panel">
@@ -21,4 +26,4 @@ class ContentContainer extends Component {
     }
 }
 
-export default ContentContainer
+export default inject('VisibilityStore')(observer(ContentContainer))

@@ -11,7 +11,7 @@ class Header extends Component {
             backgroundImage: 'url(' + this.props.EventStore.event.background + ')'
         }
         return (
-            <div style={headerStyles} className="Header-container">
+            <div style={headerStyles} className="header-container">
                 <h1>{this.props.EventStore.event.label}</h1>
                 <InfoPanel data={this.props.EventStore.event.infoPanel} />
             </div>

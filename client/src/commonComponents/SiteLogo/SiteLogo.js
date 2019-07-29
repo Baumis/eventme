@@ -6,9 +6,9 @@ class SiteLogo extends Component {
     render() {
         return (
             <div className="site-logo">
-                <div className="site-logo-content">
+                <a href="/" className="site-logo-content">
                     <p>EVENTME</p>
-                </div>
+                </a>
             </div>
         )
     }
