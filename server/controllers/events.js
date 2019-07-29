@@ -118,6 +118,20 @@ eventRouter.delete('/:id', middleware.requireAuthentication, async (request, res
             return response.status(403).send({ error: 'only creator can remove event' })
         }
 
+        const creator = await User.findById(event.creator._id)
+
+        creator.myEvents = creator.myEvents.filter(eventId => eventId !== event._id)
+
+        await creator.save()
+
+        const guestsPromises = event.guests.map(guest => User.findById(guest.user))
+        const guests = await Promise.all(guestsPromises)
+
+        for (guest of guests) {
+            guest.myInvites = guest.myInvites.filter(eventId => eventId !== event._id)
+            await guest.save()
+        }
+
         await event.remove()
 
         response.status(204).end()
