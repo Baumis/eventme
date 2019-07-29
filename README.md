@@ -93,13 +93,19 @@ event = {
     _id: "5cd467bf23c640324cf1ec00",
     label: "My event",
     background: "www.kuva.fi/kuva1",
-    infoPanel: {
-        phone: '020202',
-        email: 'mikko@valimaa.fi',
-        contact: 'Mikko "Xarte" Välimaa',
-        address: 'Kylänlahdentie 26',
-        date: '2019-06-17T18:22:49.820+00:00'
-    },
+    inviteKey: "asdasdasdasdasd",
+    startDate: "2019-07-25T19:02:52.178Z",
+    endDate: "2019-07-25T19:02:52.178Z",
+    infoPanel: [
+        {
+            icon: "email",
+            text: "perseenreikä@email.com"
+        },
+        {
+            icon: "phone",
+            text: "0400-534234243"  
+        }
+    ],
     creator: {
         _id: "5cd445507c2a502a18cba5ca",
         name: "John Doe"
@@ -158,6 +164,7 @@ event = {
 - När man anländer till sidan skall inloggning ske för att bli guest
 - Tre olika user types (ADMIN, GUEST, GHOST)
 - 3 sidor: search/login (create), event, profile
+- INFOPANEL types: PHONE, EMAIL, LOCATION, INFO, TIME, DATE, CONTACT, EMPTY
 
 ADD
 
