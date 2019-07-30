@@ -1,10 +1,34 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-    username: String,
-    name: String,
-    email: String,
-    passwordHash: String,
+    username: {
+        type: String,
+        trim: true,
+        required: [true, 'Username required'],
+        minlength: [3, 'Username too short'],
+        maxlength: [70, 'Username too long']
+    },
+    name: {
+        type: String,
+        trim: true,
+        required: [true, 'Name required'],
+        minlength: [3, 'Name too short'],
+        maxlength: [70, 'Name too long']
+    },
+    email: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        unique: true,
+        required: [true, 'Email required'],
+        minlength: [3, 'Email too short'],
+        maxlength: [255, 'Email too long'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Email not valid']
+    },
+    passwordHash: {
+        type: String,
+        required: [true, 'Password required']
+    },
     myEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     myInvites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
 })
