@@ -1,18 +1,16 @@
-const eventRouter = require('express').Router()
-const middleware = require('../utils/middleware')
 const Event = require('../models/event')
 const User = require('../models/user')
 
-eventRouter.get('/', async (request, response) => {
+exports.getAll = async (request, response) => {
     const events = await Event
         .find({})
         .populate('creator', { _id: 1, name: 1 })
         .populate('guests.user', { _id: 1, name: 1 })
 
     response.json(events.map(Event.format))
-})
+}
 
-eventRouter.get('/:id', middleware.requireAuthentication, async (request, response) => {
+exports.getOne = async (request, response) => {
     try {
         const event = await Event
             .findById(request.params.id)
@@ -32,9 +30,9 @@ eventRouter.get('/:id', middleware.requireAuthentication, async (request, respon
         console.log(exception)
         response.status(400).send({ error: 'Malformatted id' })
     }
-})
+}
 
-eventRouter.post('/', middleware.requireAuthentication, async (request, response) => {
+exports.create = async (request, response) => {
     try {
         const body = request.body
         const senderId = request.senderId
@@ -68,9 +66,9 @@ eventRouter.post('/', middleware.requireAuthentication, async (request, response
     } catch (exception) {
         response.status(500).json({ error: 'something went wrong...' })
     }
-})
+}
 
-eventRouter.put('/:id', middleware.requireAuthentication, async (request, response) => {
+exports.update = async (request, response) => {
     try {
         const body = request.body
 
@@ -105,9 +103,9 @@ eventRouter.put('/:id', middleware.requireAuthentication, async (request, respon
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
-})
+}
 
-eventRouter.delete('/:id', middleware.requireAuthentication, async (request, response) => {
+exports.delete = async (request, response) => {
     try {
 
         const event = await Event.findById(request.params.id)
@@ -138,9 +136,9 @@ eventRouter.delete('/:id', middleware.requireAuthentication, async (request, res
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
-})
+}
 
-eventRouter.post('/:id/addguest/:userId', middleware.requireAuthentication, async (request, response) => {
+exports.addGuest = async (request, response) => {
     try {
         const event = await Event.findById(request.params.id)
 
@@ -171,9 +169,9 @@ eventRouter.post('/:id/addguest/:userId', middleware.requireAuthentication, asyn
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
-})
+}
 
-eventRouter.post('/:id/removeguest/:userId', middleware.requireAuthentication, async (request, response) => {
+exports.removeGuest = async (request, response) => {
     try {
         const event = await Event.findById(request.params.id)
 
@@ -200,9 +198,9 @@ eventRouter.post('/:id/removeguest/:userId', middleware.requireAuthentication, a
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
-})
+}
 
-eventRouter.post('/:id/validatekey/:inviteKey', async (request, response) => {
+exports.validateInviteKey = async (request, response) => {
     try {
         const event = await Event
             .findById(request.params.id)
@@ -220,9 +218,9 @@ eventRouter.post('/:id/validatekey/:inviteKey', async (request, response) => {
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
-})
+}
 
-eventRouter.post('/:id/join/:inviteKey', middleware.requireAuthentication, async (request, response) => {
+exports.joinEvent =  async (request, response) => {
     try {
         const senderId = request.senderId
 
@@ -252,9 +250,9 @@ eventRouter.post('/:id/join/:inviteKey', middleware.requireAuthentication, async
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
-})
+}
 
-eventRouter.post('/:id/setstatus/:userId', middleware.requireAuthentication, async (request, response) => {
+exports.setStatus = async (request, response) => {
     try {
         const status = request.body.status
 
@@ -298,6 +296,4 @@ eventRouter.post('/:id/setstatus/:userId', middleware.requireAuthentication, asy
     } catch (exception) {
         response.status(400).send({ error: 'Malformatted id' })
     }
-})
-
-module.exports = eventRouter
+}
