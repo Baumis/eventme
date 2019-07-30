@@ -26,7 +26,7 @@ exports.create = async (userObject) => {
         throw new Error('Email must be unique')
     }
 
-    if (userObject.password.length < 3) {
+    if (!userObject.password || userObject.password.length < 3) {
         throw new Error('Password too short')
     }
 
