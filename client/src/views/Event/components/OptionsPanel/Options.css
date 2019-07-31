@@ -7,20 +7,36 @@
     width: 300px;
     top: 0px;
     left: 0px;
-    background: #595F65;
+    background-image: url('../../../../assets/sprakaBG.jpg');
+    overflow: hidden;
     transition: left 0.5s;
     font-family: 'Roboto', sans-serif;
+    border-right: 1px solid white;
+}
+
+.OptionsContainer:after{
+  content: '';
+  background: inherit; 
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  box-shadow: inset 0 0 0 600px rgba(0,0,0,0.5);
+  filter: blur(10px);
+  width: 400px;
+  height: calc(100% + 50px);
 }
 
 .OptionsCanvas{
+  z-index: 5;
   height: 100%;
   overflow: auto;
 }
 
 .OptionsHeader{
+  z-index: 5;
     display: flex;
     height: 50px;
-    background: #373B3F;
+    background: black;
     align-items: center;
     color: white;
     justify-content: center;
@@ -60,10 +76,12 @@
   color: #fc5a03;
   margin: 15px 15px 0px 15px;
   padding: 10px;
-  background: rgba(255,255,255,0.1);
   cursor: pointer;
 }
 
+.DeleteEventButton:hover{
+  background: rgba(255,255,255, 0.1)
+}  
 .inputBlock{
     display: flex;
     flex-direction: column;
@@ -83,7 +101,7 @@
     border: none;
     height: 18px;
     padding: 3px 10px 3px 10px;
-    background: #7A838C;
+    background: rgba(255,255,255, 0.1);
     color:white;
 }
 
@@ -105,7 +123,7 @@
   height: 18px;
   width: 150px;
   padding: 3px 10px 3px 10px;
-  background: #7A838C;
+  background: rgba(255,255,255, 0.1);
   color:white;
 }
 
@@ -121,8 +139,8 @@
 
 .sectionDevider label{
   display: block;
-  margin-bottom: -8px;
+  margin-bottom: 1px;
   color: white;
   width: 90px;
-  background: #595F65;
+  background: transparent;
 }

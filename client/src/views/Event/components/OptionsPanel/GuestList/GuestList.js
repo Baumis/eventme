@@ -54,8 +54,10 @@ class GuestList extends Component {
                         {guestsToShow.map((guest, i) => {
                             return (
                                 <div className="Guest" key={i}>
-                                    <div className="GuestUser"><FaUser /></div>
-                                    <div className="GuestName">{guest.user.name}</div>
+                                    <a href={`/profile/${guest.user._id}`}>
+                                        <div className="GuestUser"><FaUser /></div>
+                                        <div className="GuestName">{guest.user.name}</div>
+                                    </a>
                                     <div className="GuestDelete" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
                                 </div>
                             )
