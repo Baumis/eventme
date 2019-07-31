@@ -22,7 +22,6 @@ class UserStore {
     signOut() {
         this.currentUser = null
         window.localStorage.removeItem('loggedEventAppUser')
-        window.location.reload()
     }
 
 
