@@ -11,11 +11,28 @@
     -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
     box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .status-bar-content{
     display: flex;
     color: black;
     align-items: center;
+    justify-content: center;
 }
 
+.status-bar-menu{
+    margin-top: -135px;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 10px;
+}
+.status-bar-menu-item{
+    color: black;
+    padding: 10px;
+}
+
+.status-bar-menu-item:hover{
+    background: rgba(0,0,0,0.1);
+}

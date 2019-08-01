@@ -100,6 +100,15 @@ class EventStore {
         return null
     }
 
+    async changeUserStatus(userId, status) {
+        try {
+            this.event = await eventService.changeStatus(this.event._id, userId, status)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
     getComponent(order) {
         return this.event.components.find(component => component.order === order)
     }
