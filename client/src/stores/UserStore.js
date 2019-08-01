@@ -5,8 +5,8 @@ import loginService from '../services/login'
 class UserStore {
     currentUser = null
 
-    async signIn(username, password) {
-        const user = await loginService.login({ username, password })
+    async signIn(email, password) {
+        const user = await loginService.login({ email, password })
         window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
         window.location.reload()
     }
