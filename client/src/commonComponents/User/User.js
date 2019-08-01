@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { withRouter } from 'react-router-dom'
 import './User.css'
 import { FaUser } from 'react-icons/fa'
 
@@ -11,6 +12,7 @@ class User extends Component {
 
     signOut = () => {
         this.props.UserStore.signOut()
+        this.props.history.push('/')
         window.location.reload()
     }
 
@@ -21,7 +23,7 @@ class User extends Component {
                     <div className="user-signed-in">
                         <a href={`/profile/${this.props.UserStore.currentUser._id}`} className="user-username">
                             <div className="user-icon"><FaUser /></div>
-                            {this.props.UserStore.currentUser.username}
+                            {this.props.UserStore.currentUser.name}
                         </a>
                         <div className="user-sign-button" onClick={this.signOut} >{'Sign out'}</div>
                     </div>
@@ -35,4 +37,4 @@ class User extends Component {
     }
 }
 
-export default inject('UserStore', 'VisibilityStore')(observer(User))
+export default withRouter(inject('UserStore', 'VisibilityStore')(observer(User)))

@@ -12,6 +12,7 @@
     top: calc(50% - 250px);
     left: calc(50% - 200px);
     background: inherit;
+    border: 2px solid white;
 }
 
 .sign-modal-surface:after{

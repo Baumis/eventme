@@ -10,7 +10,7 @@ class EventStore {
             this.event = await eventService.getOne(eventId)
             console.log('event initialized: ', this.event)
             return this.event
-        } catch(error) {
+        } catch (error) {
             return null
         }
     }
@@ -59,7 +59,7 @@ class EventStore {
         try {
             await eventService.remove(this.event._id)
             return true
-        }catch(error){
+        } catch (error) {
             return false
         }
     }
@@ -88,6 +88,23 @@ class EventStore {
             this.event = await eventService.validateKey(eventId, inviteKey)
             return this.event
         } catch (error) {
+            return null
+        }
+    }
+
+    getUserStatus(id) {
+        const guest = this.event.guests.find(guest => guest.user._id === id)
+        if (guest) {
+            return guest.status
+        }
+        return null
+    }
+
+    async changeUserStatus(userId, status) {
+        try {
+            this.event = await eventService.changeStatus(this.event._id, userId, status)
+            return this.event
+        } catch {
             return null
         }
     }

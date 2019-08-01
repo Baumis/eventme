@@ -53,8 +53,8 @@ exports.update = async (id, userObject) => {
         throw new Error('Malformatted id')
     }
 
-    user.name = userObject.name || user.name
-    user.email = userObject.email || user.email
+    user.name = userObject.name
+    user.email = userObject.email
 
     const error = user.validateSync()
 
