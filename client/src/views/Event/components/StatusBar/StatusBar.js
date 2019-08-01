@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './StatusBar.css'
-import { FaPhone } from 'react-icons/fa'
+import Spinner from '../Spinner/Spinner'
 
 class StatusBar extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            displayMenu: false
+            displayMenu: false,
+            loading: false
         }
     }
 
@@ -24,8 +25,10 @@ class StatusBar extends Component {
         })
     }
 
-    changeStatus = (status) => {
-        this.props.EventStore.changeUserStatus(this.props.UserStore.currentUser._id, status)
+    changeStatus = async (status) => {
+        this.setState({ loading: true })
+        const response = await this.props.EventStore.changeUserStatus(this.props.UserStore.currentUser._id, status)
+        this.setState({ loading: false })
     }
 
     checkUserStatus = () => {
@@ -44,6 +47,15 @@ class StatusBar extends Component {
     render() {
 
         const status = this.checkUserStatus()
+        if (this.state.loading) {
+            return (
+                <div className="status-bar">
+                    <div className="status-bar-content">
+                        <Spinner />
+                    </div>
+                </div>
+            )
+        }
         return (
             <div className="status-bar" onClick={() => this.openMenu()}>
                 {this.state.displayMenu ?

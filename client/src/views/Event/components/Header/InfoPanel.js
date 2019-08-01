@@ -1,6 +1,5 @@
 import React from 'react'
 import './Header.css'
-import { FaPhone, FaCalendar, FaUser, FaMapMarker } from 'react-icons/fa'
 
 const InfoPanel = ({ data }) => {
 
