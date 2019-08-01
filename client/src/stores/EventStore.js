@@ -10,7 +10,7 @@ class EventStore {
             this.event = await eventService.getOne(eventId)
             console.log('event initialized: ', this.event)
             return this.event
-        } catch(error) {
+        } catch (error) {
             return null
         }
     }
@@ -59,7 +59,7 @@ class EventStore {
         try {
             await eventService.remove(this.event._id)
             return true
-        }catch(error){
+        } catch (error) {
             return false
         }
     }
@@ -90,6 +90,14 @@ class EventStore {
         } catch (error) {
             return null
         }
+    }
+
+    getUserStatus(id) {
+        const guest = this.event.guests.find(guest => guest.user._id === id)
+        if (guest) {
+            return guest.status
+        }
+        return null
     }
 
     getComponent(order) {

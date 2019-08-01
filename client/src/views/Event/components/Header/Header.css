@@ -1,5 +1,7 @@
-.header-container {
-    height: 320px;
+.event-header {
+    display: flex;
+    justify-content: center;
+    height: 350px;
     padding-top: 20px;
     text-align: center;
     background: rgba(0,0,0);
@@ -11,14 +13,26 @@
     position: relative;
 }
 
-.header-container h1{
-    padding-top: 50px;
+.event-header h1{
+    padding-bottom: 50px;
 }
 
-.InfoPanel{
+.event-header-content{
+    width: 100%;
+    height: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.event-header-status-row{
+    width: 100%;
+}
+
+.info-panel{
     width: 100%;
     background: rgba(0,17,26,0.01);
-    /*background: inherit;*/
     position: absolute;
     min-height: 40px;
     bottom: 0px;
@@ -28,7 +42,7 @@
     overflow: hidden;
 }
 
-.InfoPanel:after{
+.info-panel:after{
     content: '';
     background: inherit; 
     position: absolute;
@@ -40,17 +54,25 @@
     height: 100px;
 }
 
-.InfoField{
+.info-panel-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+.info-panel-content-field{
     display: flex;
     z-index: 1;
     justify-content: center;
     align-items: center;
     padding: 0px 2% 0px 2%;
-    color: rgba(255,255,255, 0.8);
+    color: rgba(255,255,255, 0.9);
     font-size: 15px;
 }
 
-.InfoField p{
+.Iinfo-panel-content-field p{
     padding: 5px 0px 5px 5px;
     margin: 0px;
 }

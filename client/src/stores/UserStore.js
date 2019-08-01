@@ -1,4 +1,5 @@
 import { observable, decorate, action } from 'mobx'
+import { withRouter } from 'react-router-dom'
 import userService from '../services/users'
 import loginService from '../services/login'
 
@@ -14,7 +15,7 @@ class UserStore {
     async refreshUser(user) {
         try {
             this.currentUser = await userService.getOne(user._id)
-        } catch(error) {
+        } catch (error) {
             this.signOut()
         }
     }

@@ -13,6 +13,7 @@ class User extends Component {
     signOut = () => {
         this.props.UserStore.signOut()
         this.props.history.push('/')
+        window.location.reload()
     }
 
     render() {

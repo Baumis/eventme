@@ -18,22 +18,20 @@ const InfoPanel = ({ data }) => {
     const addressStyles = { display: displayAddress }
 
     return (
-        <div style={panelStyles} className="InfoPanel">
-            <div style={phoneStyles} className="InfoField">
-                <FaPhone />
-                <p>{phone}</p>
-            </div>
-            <div style={contactStyles} className="InfoField">
-                <FaUser />
-                <p>{contact}</p>
-            </div>
-            <div style={dateStyles} className="InfoField">
-                <FaCalendar />
-                <p>{date}</p>
-            </div>
-            <div style={addressStyles} className="InfoField">
-                <FaMapMarker />
-                <p>{address}</p>
+        <div style={panelStyles} className="info-panel">
+            <div className="info-panel-content">
+                <div style={phoneStyles} className="info-panel-content-field">
+                    <p>{phone}</p>
+                </div>
+                <div style={contactStyles} className="info-panel-content-field">
+                    <p>{contact}</p>
+                </div>
+                <div style={dateStyles} className="info-panel-content-field">
+                    <p>{date}</p>
+                </div>
+                <div style={addressStyles} className="info-panel-content-field">
+                    <p>{address}</p>
+                </div>
             </div>
         </div>
     )
