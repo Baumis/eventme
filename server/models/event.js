@@ -1,22 +1,30 @@
 const mongoose = require('mongoose')
 
 const componentSchema = new mongoose.Schema({
-    order: Number,
+    order: {
+        type: Number,
+        required: [true, 'Order required']
+    },
     type: {
         type: String,
         enum: ['PLACEHOLDER', 'TEXT', 'VIDEO', 'LOCATION', 'GUESTS', 'PICTURE', 'INVITE_LINK'],
-        default: 'PLACEHOLDER'
+        default: 'PLACEHOLDER',
+        required: [true, 'Type required']
     },
     data: Object,
     _id: false
 })
 
 const guestSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    user: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'User',
+        required: true
+    },
     status: {
         type: String,
         enum: ['GOING', 'PENDING', 'DECLINED', 'MABYE'],
-        default: 'PENDING'
+        default: 'PENDING',
+        required: [true, 'Status required']
     },
     _id: false
 })
@@ -48,7 +56,11 @@ const infoPanelSchema = new mongoose.Schema({
 const eventSchema = new mongoose.Schema({
     label: {
         type: String,
-        default: 'My Event'
+        default: 'My Event',
+        trim: true,
+        required: [true, 'Label required'],
+        minlength: [3, 'Label too short'],
+        maxlength: [144, 'Label too long']
     },
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     inviteKey: {
