@@ -23,7 +23,7 @@ class User extends Component {
                     <div className="user-signed-in">
                         <a href={`/profile/${this.props.UserStore.currentUser._id}`} className="user-username">
                             <div className="user-icon"><FaUser /></div>
-                            {this.props.UserStore.currentUser.username}
+                            {this.props.UserStore.currentUser.name}
                         </a>
                         <div className="user-sign-button" onClick={this.signOut} >{'Sign out'}</div>
                     </div>

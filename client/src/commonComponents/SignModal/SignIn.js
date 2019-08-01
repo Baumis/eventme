@@ -32,11 +32,11 @@ class SignIn extends Component {
             <div className="signModalContent">
                 <div className="signDetails">
                     <div className="signInput">
-                        <label>Username</label>
+                        <label>Email</label>
                         <input
                             onChange={this.changeUsername}
                             value={this.state.username}
-                            placeholder={'user'}
+                            placeholder={'user@email.com'}
                         >
                         </input>
                     </div>
