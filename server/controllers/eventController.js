@@ -47,7 +47,7 @@ exports.update = async (request, response) => {
 
 exports.delete = async (request, response) => {
     try {
-        await eventService.delete()
+        await eventService.delete(request.params.id, request.senderId)
 
         response.status(204).end()
     } catch (exception) {
@@ -57,7 +57,7 @@ exports.delete = async (request, response) => {
 
 exports.addGuest = async (request, response) => {
     try {
-        const updatedEvent = await eventService.addGuest()
+        const updatedEvent = await eventService.addGuest(request.params.id, request.params.userId, request.senderId)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).send({ error: exception.message })
@@ -95,7 +95,7 @@ exports.setStatus = async (request, response) => {
     try {
         const updatedEvent = await eventService.setStatus(request.params.id, request.params.userId, request.body.status, request.senderId)
 
-        if (senderId === updatedEvent.creator._id.toString()) {
+        if (request.senderId === updatedEvent.creator._id.toString()) {
             response.json(Event.format(updatedEvent))
         } else {
             response.json(Event.formatForGuest(updatedEvent))

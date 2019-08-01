@@ -55,11 +55,10 @@ exports.update = async (id, eventObject, senderId) => {
         throw new Error('Only creator can update event')
     }
 
-    event.label = eventObject.label || event.label
-    event.inviteKey = eventObject.inviteKey || event.inviteKey,
-        event.background = eventObject.background || event.background,
-        event.infoPanel = eventObject.infoPanel || event.infoPanel,
-        event.components = eventObject.components || event.components
+    event.label = eventObject.label
+    event.background = eventObject.background
+    event.infoPanel = eventObject.infoPanel
+    event.components = eventObject.components
 
     const error = event.validateSync()
 
