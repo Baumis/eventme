@@ -16,12 +16,8 @@ exports.getOnePopulated = async (id) => {
         .populate('myInvites', { _id: 1, label: 1, background: 1 })
 }
 
-exports.getOneByEmail = async (email) => {
-    return await User.findOne({ email })
-}
-
 exports.create = async (userObject) => {
-    const existingUser = await this.getOneByEmail(userObject.email)
+    const existingUser = await User.findOne({ email: userObject.email })
 
     if (existingUser) {
         throw new Error('Email must be unique')
