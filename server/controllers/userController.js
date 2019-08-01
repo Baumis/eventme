@@ -1,26 +1,17 @@
-const bcrypt = require('bcrypt')
 const User = require('../models/user')
-const Event = require('../models/event')
+const userService = require('../services/userService')
 
 exports.getAll = async (request, response) => {
-    const users = await User
-        .find({})
-        .populate('myEvents', { _id: 1, label: 1, background: 1 })
-        .populate('myInvites', { _id: 1, label: 1, background: 1 })
+    const users = await userService.getAllPopulated()
 
     response.json(users.map(User.format))
 }
 
 exports.getOne = async (request, response) => {
     try {
-        const user = await User
-            .findById(request.params.id)
-            .populate('myEvents', { _id: 1, label: 1, background: 1 })
-            .populate('myInvites', { _id: 1, label: 1, background: 1 })
+        const user = await userService.getOnePopulated(request.params.id)
 
-        const senderId = request.senderId
-
-        if (senderId === request.params.id) {
+        if (request.senderId === request.params.id) {
             response.json(User.format(user))
         } else {
             response.json(User.formatForGuest(user))
@@ -32,130 +23,37 @@ exports.getOne = async (request, response) => {
 
 exports.create = async (request, response) => {
     try {
-        const body = request.body
-
-        const existingUser = await User.find({ username: body.username })
-        if (existingUser.length > 0) {
-            return response.status(400).json({ error: 'username must be unique' })
-        }
-
-        if (!body.username || !body.name || !body.email) {
-            return response.status(400).json({ error: 'you must enter a username, name and email' })
-        }
-
-        if (body.password.length < 3) {
-            return response.status(400).json({ error: 'password must have a length of at least 3' })
-        }
-
-        const saltRounds = 10
-        const passwordHash = await bcrypt.hash(body.password, saltRounds)
-
-        const user = new User({
-            username: body.username,
-            name: body.name,
-            email: body.email,
-            passwordHash
-        })
-
-        const savedUser = await user.save()
-
-        const populatedUser = await savedUser
-            .populate('myEvents', { _id: 1, label: 1, background: 1 })
-            .populate('myInvites', { _id: 1, label: 1, background: 1 })
-            .execPopulate()
-
-        response.status(201).json(User.format(populatedUser))
+        const createdUser = await userService.create(request.body)
+        response.status(201).json(User.format(createdUser))
     } catch (exception) {
-        console.log(exception)
-        response.status(500).json({ error: 'something went wrong...' })
+        response.status(400).json({ error: exception.message })
     }
 }
 
 exports.update = async (request, response) => {
     try {
-        const body = request.body
-
-        const senderId = request.senderId
-
-        if (senderId !== request.params.id) {
-            return response.status(403).send({ error: 'only user itself can update' })
+        if (request.senderId !== request.params.id) {
+            return response.status(403).json({ error: 'Only user itself can update' })
         }
 
-        const existingUser = await User.find({ username: body.username })
-        if (existingUser.length > 0) {
-            return response.status(400).json({ error: 'username must be unique' })
-        }
+        const updatedUser = await userService.update(request.params.id, request.body)
 
-        if (!body.username || !body.name || !body.email) {
-            return response.status(400).json({ error: 'you must enter a username, name and email' })
-        }
-
-        if (body.password.length < 3) {
-            return response.status(400).json({ error: 'password must have a length of at least 3' })
-        }
-
-        const saltRounds = 10
-        const passwordHash = await bcrypt.hash(body.password, saltRounds)
-
-        const user = {
-            username: body.username,
-            name: body.name,
-            email: body.email,
-            passwordHash
-        }
-
-        const updatedUser = await User.findByIdAndUpdate(request.params.id, user, { new: true })
-
-        const populatedUser = await updatedUser
-            .populate('myEvents', { _id: 1, label: 1, background: 1 })
-            .populate('myInvites', { _id: 1, label: 1, background: 1 })
-            .execPopulate()
-
-        response.json(User.format(populatedUser))
+        response.json(User.format(updatedUser))
     } catch (exception) {
-        response.status(500).json({ error: 'something went wrong...' })
+        response.status(400).json({ error: exception.message })
     }
 }
 
 exports.delete = async (request, response) => {
     try {
-        const senderId = request.senderId
-        const userId = request.params.id
-
-        if (senderId !== userId) {
-            return response.status(403).send({ error: 'only user itself can delete' })
+        if (request.senderId !== request.params.id) {
+            return response.status(403).json({ error: 'Only user itself can delete' })
         }
 
-        const user = await User.findById(userId)
+        await userService.delete(request.params.id)
 
-        const myEventsPromises = user.myEvents.map(eventId => Event.findById(eventId))
-        const myEvents = await Promise.all(myEventsPromises)
-
-        for (let myEvent of myEvents) {
-            const myEventGuestsPromises = myEvent.guests.map(guest => User.findById(guest.user))
-            const myEventGuests = await Promise.all(myEventGuestsPromises)
-
-            for (let myEventGuest of myEventGuests) {
-                myEventGuest.myInvites = myEventGuest.myInvites.filter(eventId => eventId !== myEvent._id)
-                await myEventGuest.save()
-            }
-        }
-
-        await Event.deleteMany({creator: user._id})
-
-        const myInvitesPromises = user.myInvites.map(eventId => Event.findById(eventId))
-        const myInvites = await Promise.all(myInvitesPromises)
-
-        for (let myInvite of myInvites) {
-            myInvite.guests = myInvite.guests.filter(guest => guest.user.toString() !== user._id.toString())
-            await myInvite.save()
-        }
-
-        await user.remove()
-        
         response.status(204).end()
     } catch (exception) {
-        console.log(exception)
-        response.status(400).send({ error: 'Malformatted id' })
+        response.status(400).json({ error: exception.message })
     }
 }

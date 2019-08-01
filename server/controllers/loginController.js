@@ -1,28 +1,11 @@
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
-const User = require('../models/user')
+const loginService = require('../services/loginService')
 
 exports.login = async (request, response) => {
-    const body = request.body
+    try {
+        const loginObject = await loginService.login(request.body.email, request.body.password)
 
-    const user = await User.findOne({ username: body.username })
-    const passwordCorrect = user === null ?
-        false :
-        await bcrypt.compare(body.password, user.passwordHash)
-
-    if (!(user && passwordCorrect)) {
-        return response.status(401).send({ error: 'invalid username or password' })
+        response.status(200).send(loginObject)
+    } catch(exception) {
+        response.status(401).json({ error: exception.message })
     }
-
-    const userForToken = {
-        username: user.username,
-        id: user._id
-    }
-
-    const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1d' })
-
-    response.status(200).send({
-        _id: user._id,
-        token
-    })
 }
