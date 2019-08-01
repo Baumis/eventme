@@ -1,13 +1,6 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        trim: true,
-        required: [true, 'Username required'],
-        minlength: [3, 'Username too short'],
-        maxlength: [70, 'Username too long']
-    },
     name: {
         type: String,
         trim: true,
@@ -35,7 +28,6 @@ const userSchema = new mongoose.Schema({
 
 userSchema.statics.format = (user) => ({
     _id: user._id,
-    username: user.username,
     name: user.name,
     email: user.email,
     myEvents: user.myEvents,
@@ -44,7 +36,6 @@ userSchema.statics.format = (user) => ({
 
 userSchema.statics.formatForGuest = (user) => ({
     _id: user._id,
-    username: user.username,
     name: user.name,
     myEvents: user.myEvents,
     myInvites: user.myInvites
@@ -52,7 +43,6 @@ userSchema.statics.formatForGuest = (user) => ({
 
 userSchema.statics.formatForGhost = (user) => ({
     _id: user._id,
-    username: user.username,
     name: user.name
 })
 

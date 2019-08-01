@@ -10,11 +10,11 @@ exports.login = async (email, password) => {
         await bcrypt.compare(password, user.passwordHash)
 
     if (!user || !passwordCorrect) {
-        throw new Error('Invalid username or password')
+        throw new Error('Invalid email or password')
     }
 
     const userForToken = {
-        username: user.username,
+        email: user.email,
         id: user._id
     }
 

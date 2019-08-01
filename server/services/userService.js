@@ -31,7 +31,6 @@ exports.create = async (userObject) => {
     const passwordHash = await bcrypt.hash(userObject.password, saltRounds)
 
     const user = new User({
-        username: userObject.username,
         name: userObject.name,
         email: userObject.email,
         passwordHash
@@ -54,7 +53,6 @@ exports.update = async (id, userObject) => {
         throw new Error('Malformatted id')
     }
 
-    user.username = userObject.username || user.username
     user.name = userObject.name || user.name
     user.email = userObject.email || user.email
 
