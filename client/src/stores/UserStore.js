@@ -1,5 +1,4 @@
 import { observable, decorate, action } from 'mobx'
-import { withRouter } from 'react-router-dom'
 import userService from '../services/users'
 import loginService from '../services/login'
 
