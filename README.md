@@ -98,12 +98,12 @@ event = {
     endDate: "2019-07-25T19:02:52.178Z",
     infoPanel: [
         {
-            icon: "email",
+            icon: "EMAIL",
             text: "perseenreikä@email.com"
         },
         {
-            icon: "phone",
-            text: "0400-534234243"  
+            icon: "PHONE",
+            text: "0400-534234243"
         }
     ],
     creator: {
