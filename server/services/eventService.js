@@ -20,6 +20,8 @@ exports.create = async (creatorId, eventObject) => {
 
     const newEvent = new Event({
         label: eventObject.label,
+        startDate: eventObject.startDate,
+        endDate: eventObject.endDate,
         creator: user._id,
         background: eventObject.background,
         infoPanel: eventObject.infoPanel,
@@ -56,6 +58,8 @@ exports.update = async (id, eventObject, senderId) => {
     }
 
     event.label = eventObject.label
+    event.startDate = eventObject.startDate
+    event.endDate = eventObject.endDate
     event.background = eventObject.background
     event.infoPanel = eventObject.infoPanel
     event.components = eventObject.components

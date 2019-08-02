@@ -29,26 +29,18 @@ const guestSchema = new mongoose.Schema({
     _id: false
 })
 
-const infoPanelSchema = new mongoose.Schema({
-    phone: {
+const infoPanelEntrySchema = new mongoose.Schema({
+    logo: {
         type: String,
-        default: ''
+        enum: ['PHONE', 'EMAIL', 'LOCATION', 'INFO', 'TIME', 'DATE', 'CONTACT', 'EMPTY'],
+        default: 'EMPTY',
+        required: [true, 'Infopanel entry logo required']
     },
-    email: {
+    text: {
         type: String,
-        default: ''
-    },
-    contact: {
-        type: String,
-        default: ''
-    },
-    address: {
-        type: String,
-        default: ''
-    },
-    date: {
-        type: Date,
-        default: Date.now()
+        default: '',
+        required: [true, 'Infopanel entry text required'],
+        maxlength: [144, 'Infopanel entry text too long']
     },
     _id: false
 })
@@ -62,6 +54,16 @@ const eventSchema = new mongoose.Schema({
         minlength: [3, 'Label too short'],
         maxlength: [144, 'Label too long']
     },
+    startDate: {
+        type: Date,
+        default: Date.now,
+        required: [true, 'Startdate required']
+    },
+    endDate: {
+        type: Date,
+        default: Date.now() + 24*60*60*1000,
+        required: [true, 'Enddate required']
+    },
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     inviteKey: {
         type: String,
@@ -71,10 +73,7 @@ const eventSchema = new mongoose.Schema({
         type: String,
         default: 'https://picsum.photos/1440/550'
     },
-    infoPanel: {
-        type: infoPanelSchema,
-        default: {}
-    },
+    infoPanel: [infoPanelEntrySchema],
     guests: [guestSchema],
     components: [componentSchema]
 })
@@ -82,6 +81,8 @@ const eventSchema = new mongoose.Schema({
 eventSchema.statics.format = (event) => ({
     _id: event._id,
     label: event.label,
+    startDate: event.startDate,
+    endDate: event.endDate,
     creator: event.creator,
     inviteKey: event.inviteKey,
     background: event.background,
@@ -93,6 +94,8 @@ eventSchema.statics.format = (event) => ({
 eventSchema.statics.formatForGuest = (event) => ({
     _id: event._id,
     label: event.label,
+    startDate: event.startDate,
+    endDate: event.endDate,
     creator: event.creator,
     background: event.background,
     infoPanel: event.infoPanel,
@@ -103,6 +106,8 @@ eventSchema.statics.formatForGuest = (event) => ({
 eventSchema.statics.formatForGhost = (event) => ({
     _id: event._id,
     label: event.label,
+    startDate: event.startDate,
+    endDate: event.endDate,
     creator: event.creator,
     background: event.background,
     infoPanel: event.infoPanel
