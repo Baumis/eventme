@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 import './Options.css'
-import { FaAngleDoubleLeft } from 'react-icons/fa'
+import { FaAngleDoubleLeft, FaPlusCircle } from 'react-icons/fa'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
 import GuestList from './GuestList/GuestList'
@@ -40,6 +40,15 @@ class OptionsPanel extends Component {
         this.props.EventStore.setInfoPanelValue(event.target.value, 'address')
     }
 
+    addInfoField = () => {
+        this.props.EventStore.addInfoPanelValue()
+    }
+
+    changeFieldText = (event) => {
+        console.log(event)
+        this.props.EventStore.changeInfoPanelText(event.target.value, event.target.name)
+    }
+
     slidePanel = () => {
         this.props.VisibilityStore.slideOptionsPanel()
     }
@@ -61,58 +70,53 @@ class OptionsPanel extends Component {
         }
 
         return (
-            <div style={{ left: this.props.VisibilityStore.optionsPanelPosition }} className="OptionsContainer">
-                <div className="OptionsHeader">
+            <div style={{ left: this.props.VisibilityStore.optionsPanelPosition }} className="options-panel-container">
+                <div className="options-panel-header">
                     <p>Options</p>
                     <button onClick={this.slidePanel}><FaAngleDoubleLeft /></button>
                 </div>
-                <div className="OptionsCanvas">
+                <div className="options-panel-canvas">
                     <div className="DeleteEventButton" onClick={() => this.deleteEvent()}>
                         {'Delete event'}
                     </div>
-                    <div className="OptionsContent">
+                    <div className="options-panel-content">
                         <InputBlock
                             label={'Header'}
                             value={this.props.EventStore.event.label}
                             changeValue={this.changeLabel}
                         />
                     </div>
-                    <div className="OptionsContent">
+                    <div className="options-panel-content">
                         <InputBlock
                             label={'Header background url'}
                             value={this.props.EventStore.event.background}
                             changeValue={this.changeBackground}
                         />
                     </div>
-                    <div className="sectionDevider">
+                    <div className="options-panel-section-devider">
                         <label>Info panel</label>
                     </div>
-                    <div className="OptionsContent">
-                        <InfoBlock
-                            label={'Phone'}
-                            value={this.props.EventStore.event.infoPanel.phone}
-                            changeValue={this.changePhone}
-                        />
-                        <InfoBlock
-                            label={'Contact'}
-                            value={this.props.EventStore.event.infoPanel.contact}
-                            changeValue={this.changeContact}
-                        />
-                        <InfoBlock
-                            label={'Date'}
-                            value={this.props.EventStore.event.infoPanel.date}
-                            changeValue={this.changeDate}
-                        />
-                        <InfoBlock
-                            label={'Address'}
-                            value={this.props.EventStore.event.infoPanel.address}
-                            changeValue={this.changeAddress}
-                        />
+                    <div className="options-panel-content">
+                        {this.props.EventStore.event.infoPanel.map( (info, i) =>
+                            <InfoBlock
+                                label={'Example'}
+                                index={i}
+                                key={i}
+                                value={info.text}
+                                changeValue={this.changeFieldText}
+                            />
+                        )}
                     </div>
-                    <div className="sectionDevider">
+                    <div className="options-panel-add-field-row">
+                        <div className="options-panel-add-field-button" onClick={() => this.addInfoField()}>
+                            <p>add field</p>
+                            <FaPlusCircle />
+                        </div>
+                    </div>
+                    <div className="options-panel-section-devider">
                         <label>Guests</label>
                     </div>
-                    <div className="OptionsContent">
+                    <div className="options-panel-content">
                         <div className="inputBlock">
                             <div className="inputLabel">
                                 <label>{'Invite link'}</label>
@@ -124,7 +128,7 @@ class OptionsPanel extends Component {
                             />
                         </div>
                     </div>
-                    <div className="OptionsContent">
+                    <div className="options-panel-content">
                         <GuestList
                             guests={this.props.EventStore.event.guests}
                             mod={true}

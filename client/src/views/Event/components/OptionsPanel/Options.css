@@ -1,4 +1,4 @@
-.OptionsContainer{
+.options-panel-container{
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
     border-right: 1px solid white;
 }
 
-.OptionsContainer:after{
+.options-panel-container:after{
   content: '';
   background: inherit; 
   position: absolute;
@@ -26,13 +26,13 @@
   height: calc(100% + 50px);
 }
 
-.OptionsCanvas{
+.options-panel-canvas{
   z-index: 5;
   height: 100%;
   overflow: auto;
 }
 
-.OptionsHeader{
+.options-panel-header{
   z-index: 5;
     display: flex;
     height: 50px;
@@ -43,7 +43,7 @@
     padding-right: 0px;
 }
 
-.OptionsHeader button{
+.options-panel-header button{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,14 +60,15 @@
     cursor: pointer;
 }
 
-.OptionsHeader p{
+.options-panel-header p{
     width: 100%;
     color: white;
     margin-right: -50px;
 }
 
-.OptionsContent{
+.options-panel-content{
     padding-top: 10px;
+    padding-bottom: 10px;
     padding-right: 0px;
 }
 
@@ -109,15 +110,14 @@
   color: rgba(255,255,255,0.6)
 }
 
-.infoBlock{
+.options-panel-info-block{
   display: flex;
-  justify-content: space-between;
   padding: 8px 12px 5px 20px;
   padding-bottom: 1px;
   color: white;
 }
 
-.infoBlock input{
+.options-panel-info-block input{
   border-radius: 30px;
   border: none;
   height: 18px;
@@ -127,17 +127,56 @@
   color:white;
 }
 
-.infoBlock label{
-  color: #B2BFCB;
+.options-panel-add-field-row{
+  display: flex;
+  padding: 5px 10px 5px 20px;
 }
 
-.sectionDevider{
+.options-panel-add-field-button{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: rgba(46, 184, 46, 1);
+  cursor: pointer;
+  border: 1px solid rgba(46, 184, 46, 1);
+  border-radius: 30px;
+  padding: 5px;
+}
+
+.options-panel-info-icon{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 0px 0px 0px 10px;
+}
+
+.options-panel-info-delete{
+  padding: 0px 5px 0px 17px;
+  color: rgba(255,255,255, 0.5);
+  cursor: pointer;
+}
+
+.options-panel-info-delete:hover {
+  color: white;
+}
+
+.options-panel-add-field-button:hover{
+  background: rgba(255,255,255,0.1)
+}
+
+.options-panel-add-field-button p{
+  padding: 0px 5px 0px 5px;
+  margin: 0px;
+  font-size: 14px;
+}
+
+.options-panel-section-devider{
   border-bottom: 1px solid #373B3F;
-  margin: 40px 8px 20px 8px;
+  margin: 30px 8px 10px 8px;
   padding: 0px 12px 0px 12px;
 }
 
-.sectionDevider label{
+.options-panel-section-devider label{
   display: block;
   margin-bottom: 1px;
   color: white;

@@ -37,6 +37,17 @@ class EventStore {
         })
     }
 
+    addInfoPanelValue() {
+        const newInfo = { icon: 'EMPTY', text: '' }
+        this.event.infoPanel.push(newInfo)
+        this.saved = false
+    }
+
+    changeInfoPanelText(text, index) {
+        this.event.infoPanel[index].text = text
+        this.saved = false
+    }
+
     async joinEvent(eventId, inviteKey) {
         try {
             this.event = await eventService.joinEvent(eventId, inviteKey)
