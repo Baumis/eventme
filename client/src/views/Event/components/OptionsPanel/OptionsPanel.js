@@ -84,12 +84,13 @@ class OptionsPanel extends Component {
                         <label>Info panel</label>
                     </div>
                     <div className="options-panel-content">
-                        {this.props.EventStore.event.infoPanel.map( (info, i) =>
+                        {this.props.EventStore.event.infoPanel.map((info, i) =>
                             <InfoBlock
                                 label={'Example'}
                                 index={i}
                                 key={i}
                                 value={info.text}
+                                icon={info.icon}
                                 changeValue={this.changeFieldText}
                                 deleteInfoField={() => this.deleteInfoField(i)}
                             />
