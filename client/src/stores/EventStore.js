@@ -26,17 +26,6 @@ class EventStore {
         })
     }
 
-    setInfoPanelValue(value, field) {
-        const newInfoPanel = {
-            ...this.event.infoPanel,
-            [field]: value
-        }
-        runInAction(() => {
-            this.event.infoPanel = newInfoPanel
-            this.saved = false
-        })
-    }
-
     addInfoPanelValue() {
         const newInfo = { icon: 'EMPTY', text: '' }
         this.event.infoPanel.push(newInfo)
@@ -44,12 +33,16 @@ class EventStore {
     }
 
     deleteInfoPanelValue(index) {
-        this.event.infoPanel.splice(index, 1)
+        const newInfoPanel = this.event.infoPanel.slice()
+        newInfoPanel.splice(index, 1)
+        this.event.infoPanel = newInfoPanel
         this.saved = false
     }
 
     changeInfoPanelText(text, index) {
-        this.event.infoPanel[index].text = text
+        const newInfoPanel = this.event.infoPanel.slice()
+        newInfoPanel[index].text = text
+        this.event.infoPanel = newInfoPanel
         this.saved = false
     }
 

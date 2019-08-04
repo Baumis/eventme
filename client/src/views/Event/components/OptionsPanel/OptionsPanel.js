@@ -24,22 +24,6 @@ class OptionsPanel extends Component {
         this.props.EventStore.setValue(event.target.value, 'label')
     }
 
-    changePhone = (event) => {
-        this.props.EventStore.setInfoPanelValue(event.target.value, 'phone')
-    }
-
-    changeContact = (event) => {
-        this.props.EventStore.setInfoPanelValue(event.target.value, 'contact')
-    }
-
-    changeDate = (event) => {
-        this.props.EventStore.setInfoPanelValue(event.target.value, 'date')
-    }
-
-    changeAddress = (event) => {
-        this.props.EventStore.setInfoPanelValue(event.target.value, 'address')
-    }
-
     addInfoField = () => {
         this.props.EventStore.addInfoPanelValue()
     }
@@ -49,7 +33,6 @@ class OptionsPanel extends Component {
     }
 
     changeFieldText = (event) => {
-        console.log(event)
         this.props.EventStore.changeInfoPanelText(event.target.value, event.target.name)
     }
 
