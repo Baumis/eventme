@@ -43,6 +43,11 @@ class EventStore {
         this.saved = false
     }
 
+    deleteInfoPanelValue(index) {
+        this.event.infoPanel.splice(index, 1)
+        this.saved = false
+    }
+
     changeInfoPanelText(text, index) {
         this.event.infoPanel[index].text = text
         this.saved = false

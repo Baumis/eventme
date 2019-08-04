@@ -44,6 +44,10 @@ class OptionsPanel extends Component {
         this.props.EventStore.addInfoPanelValue()
     }
 
+    deleteInfoField = (index) => {
+        this.props.EventStore.deleteInfoPanelValue(index)
+    }
+
     changeFieldText = (event) => {
         console.log(event)
         this.props.EventStore.changeInfoPanelText(event.target.value, event.target.name)
@@ -104,6 +108,7 @@ class OptionsPanel extends Component {
                                 key={i}
                                 value={info.text}
                                 changeValue={this.changeFieldText}
+                                deleteInfoField={() => this.deleteInfoField(i)}
                             />
                         )}
                     </div>
