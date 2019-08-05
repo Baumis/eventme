@@ -1,35 +1,45 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './Header.css'
-import { FaPhone, FaAt, FaInfo, FaCalendar, FaLocationArrow, FaClock, FaUser, FaEmptySet } from 'react-icons/fa'
+import { FaPhone, FaAt, FaInfo, FaCalendar, FaLocationArrow, FaClock, FaUser } from 'react-icons/fa'
 
-const InfoPanel = ({ data }) => {
+class InfoPanel extends Component {
 
-    const icons = {
-        PHONE: FaPhone,
-        EMAIL: FaAt,
-        INFO: FaInfo,
-        DATE: FaCalendar,
-        LOCATION: FaLocationArrow,
-        TIME: FaClock,
-        CONTACT: FaUser,
+    constructor(props) {
+        super(props)
+        this.state = {
+            icons: {
+                PHONE: FaPhone,
+                EMAIL: FaAt,
+                INFO: FaInfo,
+                DATE: FaCalendar,
+                LOCATION: FaLocationArrow,
+                TIME: FaClock,
+                CONTACT: FaUser,
+            }
+        }
     }
 
-    const Icon = icons[data.icon || null]
+    identifyIcon = (icon) => {
+        const Match = this.state.icons[icon || null]
+        return <Match />
+    }
 
-    return (
-        <div className="info-panel">
-            <div className="info-panel-content">
-                {data.map((info, i) =>
-                    <div className="info-panel-content-field" key={i}>
-                        {Icon ?
-                            <Icon />
-                            : null}
-                        <p>{info.text}</p>
-                    </div>
-                )}
+    render() {
+        return (
+            <div className="info-panel">
+                <div className="info-panel-content">
+                    {this.props.data.map((info, i) =>
+                        <div className="info-panel-content-field" key={i}>
+                            {this.identifyIcon(info.icon) ?
+                                this.identifyIcon(info.icon)
+                                : null}
+                            <p>{info.text}</p>
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default InfoPanel
