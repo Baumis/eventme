@@ -15,13 +15,14 @@ class InfoPanel extends Component {
                 LOCATION: FaLocationArrow,
                 TIME: FaClock,
                 CONTACT: FaUser,
+                EMPTY: null
             }
         }
     }
 
     identifyIcon = (icon) => {
         const Match = this.state.icons[icon || null]
-        return <Match />
+        return Match ? <Match /> : ''
     }
 
     render() {
