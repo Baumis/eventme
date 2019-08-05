@@ -30,7 +30,7 @@ const guestSchema = new mongoose.Schema({
 })
 
 const infoPanelEntrySchema = new mongoose.Schema({
-    logo: {
+    icon: {
         type: String,
         enum: ['PHONE', 'EMAIL', 'LOCATION', 'INFO', 'TIME', 'DATE', 'CONTACT', 'EMPTY'],
         default: 'EMPTY',
@@ -39,7 +39,6 @@ const infoPanelEntrySchema = new mongoose.Schema({
     text: {
         type: String,
         default: '',
-        required: [true, 'Infopanel entry text required'],
         maxlength: [144, 'Infopanel entry text too long']
     },
     _id: false

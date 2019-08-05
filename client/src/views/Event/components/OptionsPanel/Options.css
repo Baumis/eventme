@@ -156,8 +156,9 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: -135px;
-  margin-right: -122px;
+  margin-right: -132px;
   margin-bottom: 20px;
+  padding: 5px;
   width: 120px;
   background: rgba(0,0,0,0.9);
   border: 1px solid white;

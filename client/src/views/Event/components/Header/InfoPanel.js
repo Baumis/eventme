@@ -19,8 +19,8 @@ const InfoPanel = ({ data }) => {
     return (
         <div className="info-panel">
             <div className="info-panel-content">
-                {data.map(info =>
-                    <div className="info-panel-content-field">
+                {data.map((info, i) =>
+                    <div className="info-panel-content-field" key={i}>
                         {Icon ?
                             <Icon />
                             : null}

@@ -38,12 +38,14 @@ class InfoBlock extends Component {
             <div className="options-panel-info-block">
                 {this.state.displayMenu ?
                     <div className="options-panel-icon-menu">
-                        <div className="options-panel-icon-menu-item" >a</div>
-                        <div className="options-panel-icon-menu-item" >b</div>
-                        <div className="options-panel-icon-menu-item" >c</div>
-                        <div className="options-panel-icon-menu-item" >d</div>
-                        <div className="options-panel-icon-menu-item" >e</div>
-                        <div className="options-panel-icon-menu-item" >f</div>
+                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('EMAIL', this.props.index)}><FaAt /></div>
+                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('CALENDAR', this.props.index)}><FaCalendar /></div>
+                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('CONTACT', this.props.index)}><FaUser /></div>
+                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('INFO', this.props.index)}><FaInfo /></div>
+                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('LOCATION', this.props.index)}><FaLocationArrow /></div>
+                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('PHONE', this.props.index)}><FaPhone /></div>
+                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('TIME', this.props.index)}><FaClock /></div>
+                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('EMPTY', this.props.index)}> none </div>
                     </div>
                     : null
                 }

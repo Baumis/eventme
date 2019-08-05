@@ -36,6 +36,11 @@ class OptionsPanel extends Component {
         this.props.EventStore.changeInfoPanelText(event.target.value, event.target.name)
     }
 
+    changeIcon = (icon, index) => {
+        console.log(icon, index)
+        this.props.EventStore.changeInfoPanelIcon(icon, index)
+    }
+
     slidePanel = () => {
         this.props.VisibilityStore.slideOptionsPanel()
     }
@@ -93,6 +98,7 @@ class OptionsPanel extends Component {
                                 icon={info.icon}
                                 changeValue={this.changeFieldText}
                                 deleteInfoField={() => this.deleteInfoField(i)}
+                                changeIcon={this.changeIcon}
                             />
                         )}
                     </div>

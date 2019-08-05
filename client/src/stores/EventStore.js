@@ -46,6 +46,13 @@ class EventStore {
         this.saved = false
     }
 
+    changeInfoPanelIcon(icon, index) {
+        const newInfoPanel = this.event.infoPanel.slice()
+        newInfoPanel[index].icon = icon
+        this.event.infoPanel = newInfoPanel
+        this.saved = false
+    }
+
     async joinEvent(eventId, inviteKey) {
         try {
             this.event = await eventService.joinEvent(eventId, inviteKey)
@@ -167,6 +174,10 @@ decorate(EventStore, {
     setCurrentEvent: action,
     setValue: action,
     setInfoPanelValue: action,
+    changeInfoPanelText: action,
+    deleteInfoPanelValue: action,
+    addInfoPanelValue: action,
+    changeInfoPanelIcon: action,
     getComponent: action,
     addComponent: action,
     saveComponentData: action,
