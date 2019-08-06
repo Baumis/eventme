@@ -37,7 +37,6 @@ class OptionsPanel extends Component {
     }
 
     changeIcon = (icon, index) => {
-        console.log(icon, index)
         this.props.EventStore.changeInfoPanelIcon(icon, index)
     }
 

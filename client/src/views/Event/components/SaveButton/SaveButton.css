@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 85px;
-    height: 45px;
+    width: 95px;
+    height: 55px;
     position: fixed;
     z-index: 3;
     right: 40px;
     bottom: 30px;
-    background: rgba(46, 184, 46, 0.8);
+    background: rgba(46, 184, 46, 1);
     border-radius: 6px;
     color:white;
     border: 1px solid #f2f2f2;
