@@ -31,9 +31,7 @@ class InfoPanel extends Component {
                 <div className="info-panel-content">
                     {this.props.data.map((info, i) =>
                         <div className="info-panel-content-field" key={i}>
-                            {this.identifyIcon(info.icon) ?
-                                this.identifyIcon(info.icon)
-                                : null}
+                            {this.identifyIcon(info.icon)}
                             <p>{info.text}</p>
                         </div>
                     )}
