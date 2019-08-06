@@ -161,7 +161,7 @@ exports.removeGuest = async (id, guestId, senderId) => {
         .execPopulate()
 }
 
-exports.validateInviteKeyAndGetEvent = async (id, inviteKey) => {
+exports.getOneWithInviteKey = async (id, inviteKey) => {
     const event = await Event.findById(id)
 
     if (event.inviteKey !== inviteKey) {

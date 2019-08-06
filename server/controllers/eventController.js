@@ -54,7 +54,7 @@ exports.delete = async (request, response) => {
 
 exports.addGuest = async (request, response) => {
     try {
-        const updatedEvent = await eventService.addGuest(request.params.id, request.params.userId, request.senderId)
+        const updatedEvent = await eventService.addGuest(request.params.id, request.body.userId, request.senderId)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).send({ error: exception.message })
@@ -70,18 +70,18 @@ exports.removeGuest = async (request, response) => {
     }
 }
 
-exports.validateInviteKey = async (request, response) => {
+exports.getOneWithInviteKey = async (request, response) => {
     try {
-        const event = await eventService.validateInviteKeyAndGetEvent(request.params.id, request.params.inviteKey)
+        const event = await eventService.getOneWithInviteKey(request.params.id, request.params.inviteKey)
         response.json(Event.formatForGuest(event))
     } catch (exception) {
         response.status(400).send({ error: exception.message })
     }
 }
 
-exports.joinEvent =  async (request, response) => {
+exports.addGuestWithInviteKey =  async (request, response) => {
     try {
-        const updatedEvent = await eventService.addGuestWithInviteKey(request.params.id, request.params.inviteKey, request.senderId)
+        const updatedEvent = await eventService.addGuestWithInviteKey(request.params.id, request.body.inviteKey, request.senderId)
         response.json(Event.formatForGuest(updatedEvent))
     } catch (exception) {
         response.status(400).send({ error: exception.message })
@@ -99,7 +99,7 @@ exports.changeInviteKey = async (request, response) => {
 
 exports.setStatus = async (request, response) => {
     try {
-        const updatedEvent = await eventService.setStatus(request.params.id, request.params.userId, request.body.status, request.senderId)
+        const updatedEvent = await eventService.setStatus(request.params.id, request.params.userId, request.body.newStatus, request.senderId)
 
         if (request.senderId === updatedEvent.creator._id.toString()) {
             response.json(Event.format(updatedEvent))

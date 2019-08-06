@@ -101,7 +101,7 @@ class EventStore {
 
     async validateKey(eventId, inviteKey) {
         try {
-            this.event = await eventService.validateKey(eventId, inviteKey)
+            this.event = await eventService.getOneWithKey(eventId, inviteKey)
             return this.event
         } catch (error) {
             return null
