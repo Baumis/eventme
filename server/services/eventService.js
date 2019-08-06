@@ -116,6 +116,12 @@ exports.addGuest = async (id, guestId, senderId) => {
         throw new Error('Only creator can add guests')
     }
 
+    const guest = event.guests.find(guest => guest.user.toString() === guestId)
+
+    if (guest) {
+        throw new Error('User is already a guest')
+    }
+
     const user = await User.findById(guestId)
 
     event.guests = event.guests.concat({
@@ -170,11 +176,18 @@ exports.validateInviteKeyAndGetEvent = async (id, inviteKey) => {
 
 exports.addGuestWithInviteKey = async (id, inviteKey, guestId) => {
     const event = await Event.findById(id)
-    const user = await User.findById(guestId)
 
     if (event.inviteKey !== inviteKey) {
         throw new Error('Malformatted inviteKey')
     }
+
+    const guest = event.guests.find(guest => guest.user.toString() === guestId)
+
+    if (guest) {
+        throw new Error('User is already a guest')
+    }
+
+    const user = await User.findById(guestId)
 
     event.guests = event.guests.concat({
         user: user._id,
