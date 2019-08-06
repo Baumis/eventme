@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 const Event = require('../models/event')
 const User = require('../models/user')
 
@@ -185,6 +187,23 @@ exports.addGuestWithInviteKey = async (id, inviteKey, guestId) => {
     await user.save()
 
     return await savedEvent
+        .populate('creator', { _id: 1, name: 1 })
+        .populate('guests.user', { _id: 1, name: 1 })
+        .execPopulate()
+}
+
+exports.changeInviteKey = async (id, senderId) => {
+    const event = await Event.findById(id)
+
+    if (senderId !== event.creator._id.toString()) {
+        throw new Error('Only creator can change invite key')
+    }
+
+    event.inviteKey = mongoose.Types.ObjectId().toHexString()
+
+    const updatedEvent = await event.save()
+
+    return await updatedEvent
         .populate('creator', { _id: 1, name: 1 })
         .populate('guests.user', { _id: 1, name: 1 })
         .execPopulate()

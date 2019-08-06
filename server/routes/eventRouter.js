@@ -20,6 +20,8 @@ eventRouter.post('/:id/validatekey/:inviteKey', eventController.validateInviteKe
 
 eventRouter.post('/:id/join/:inviteKey', middleware.requireAuthentication, eventController.joinEvent)
 
+eventRouter.put('/:id/invitekey', middleware.requireAuthentication, eventController.changeInviteKey)
+
 eventRouter.post('/:id/setstatus/:userId', middleware.requireAuthentication, eventController.setStatus)
 
 module.exports = eventRouter

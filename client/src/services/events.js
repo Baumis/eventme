@@ -46,6 +46,11 @@ const validateKey = async (id, inviteKey) => {
     return response.data
 }
 
+const updateKey = async (id) => {
+    const response = await http.put(`${baseUrl}/${id}/invitekey`)
+    return response.data
+}
+
 const changeStatus = async (id, userId, newStatus) => {
     const body = {
         status: newStatus
@@ -65,5 +70,6 @@ export default {
     removeGuest,
     joinEvent,
     changeStatus,
-    validateKey
+    validateKey,
+    updateKey
 }
