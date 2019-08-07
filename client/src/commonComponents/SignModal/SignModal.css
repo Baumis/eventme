@@ -15,18 +15,6 @@
     border: 2px solid white;
 }
 
-/*.sign-modal-surface:after{
-    content: '';
-    background: inherit; 
-    position: absolute;
-    right: -20px;
-    bottom: -20px;
-    box-shadow: inset 0 0 0 600px rgba(0,0,0,0.5);
-    filter: blur(10px);
-    width: 440px;
-    height: 460px;
-}*/
-
 .sign-modal{
     display: flex;
     flex-direction: column;

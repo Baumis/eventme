@@ -8,7 +8,10 @@ class ProfileHeader extends Component {
     render() {
         return (
             <div className="profileHeaderContainer">
-                <ProfileCard user={this.props.user} />
+                <ProfileCard
+                    user={this.props.user}
+                    isOwner={this.props.isOwner}
+                />
             </div>
         )
     }
