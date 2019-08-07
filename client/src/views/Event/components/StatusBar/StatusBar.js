@@ -81,4 +81,4 @@ class StatusBar extends Component {
     }
 }
 
-export default inject("UserStore", "EventStore")(observer(StatusBar))
+export default inject('UserStore', 'EventStore')(observer(StatusBar))

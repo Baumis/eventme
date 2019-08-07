@@ -45,7 +45,7 @@ class OptionsPanel extends Component {
     }
 
     deleteEvent = async () => {
-        const confirmation = window.confirm(`Do you want to delete this event?`)
+        const confirmation = window.confirm('Do you want to delete this event?')
         if (confirmation) {
             const response = await this.props.EventStore.deleteEvent()
             if (response) {
