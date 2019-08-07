@@ -40,6 +40,13 @@ class Event extends Component {
         return this.props.UserStore.currentUser._id === this.props.EventStore.event.creator._id
     }
 
+    isGuest = () => {
+        if (!this.props.UserStore.currentUser) {
+            return false
+        }
+        return this.props.EventStore.event.guests.some(guest => guest.user._id === this.props.UserStore.currentUser._id)
+    }
+
     addComponent = () => {
         this.props.EventStore.addComponent('TEXT', 'New')
         this.props.VisibilityStore.showComponentEditor(this.props.EventStore.event.components.length)
@@ -79,8 +86,8 @@ class Event extends Component {
         return (
             <div className='Event'>
                 <Navbar />
-                <Header />
-                <ComponentContainer isCreator={this.isCreator}/>
+                <Header isGuest={this.isGuest()} />
+                <ComponentContainer isCreator={this.isCreator} />
                 {this.isCreator() ?
                     <div>
                         <ComponentAdder add={this.addComponent} />
