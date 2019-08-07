@@ -4,7 +4,6 @@ const eventService = require('../services/eventService')
 
 exports.getAll = async (request, response) => {
     const events = await eventService.getAllPopulated()
-
     response.json(events.map(Event.format))
 }
 
