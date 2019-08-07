@@ -20,13 +20,17 @@ exports.getOnePopulated = async (id) => {
 exports.create = async (creatorId, eventObject) => {
     const user = await User.findById(creatorId)
 
-    const endDate = new Date(eventObject.startDate)
-    endDate.setDate(endDate.getDate() + 1)
+    const startDate = eventObject.startDate ? new Date(eventObject.startDate) : new Date()
+    const endDate = eventObject.endDate ? new Date(eventObject.endDate) : new Date(startDate.getDate() + 1)
+
+    if (startDate > endDate) {
+        throw new Error('End Date must be greater than Start Date')
+    }
 
     const newEvent = new Event({
         label: eventObject.label,
-        startDate: eventObject.startDate,
-        endDate: eventObject.endDate || endDate,
+        startDate: startDate,
+        endDate: endDate,
         creator: user._id,
         background: eventObject.background,
         infoPanel: eventObject.infoPanel,
@@ -62,9 +66,16 @@ exports.update = async (id, eventObject, senderId) => {
         throw new Error('Only creator can update event')
     }
 
+    const startDate = new Date(eventObject.startDate)
+    const endDate = new Date(eventObject.endDate)
+
+    if (startDate > endDate) {
+        throw new Error('End Date must be greater than Start Date')
+    }
+
     event.label = eventObject.label
-    event.startDate = eventObject.startDate
-    event.endDate = eventObject.endDate
+    event.startDate = startDate
+    event.endDate = endDate
     event.background = eventObject.background
     event.infoPanel = eventObject.infoPanel
     event.components = eventObject.components
