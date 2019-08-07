@@ -16,6 +16,7 @@ class InfoBlock extends Component {
                 LOCATION: FaLocationArrow,
                 TIME: FaClock,
                 CONTACT: FaUser,
+                EMPTY: null
             }
         }
     }
@@ -32,20 +33,22 @@ class InfoBlock extends Component {
         })
     }
 
+    identifyIcon = (icon) => {
+        const Match = this.state.icons[icon]
+        return Match ? <Match /> : 'none'
+    }
+
     render() {
-        const Icon = this.state.icons[this.props.icon || null]
+        const Icon = this.state.icons[this.props.icon]
         return (
             <div className="options-panel-info-block">
                 {this.state.displayMenu ?
                     <div className="options-panel-icon-menu">
-                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('EMAIL', this.props.index)}><FaAt /></div>
-                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('DATE', this.props.index)}><FaCalendar /></div>
-                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('CONTACT', this.props.index)}><FaUser /></div>
-                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('INFO', this.props.index)}><FaInfo /></div>
-                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('LOCATION', this.props.index)}><FaLocationArrow /></div>
-                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('PHONE', this.props.index)}><FaPhone /></div>
-                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('TIME', this.props.index)}><FaClock /></div>
-                        <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon('EMPTY', this.props.index)}> none </div>
+                        {Object.keys(this.state.icons).map(iconName => 
+                            <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon(iconName, this.props.index)}>
+                                {this.identifyIcon(iconName)}
+                            </div>
+                        )}
                     </div>
                     : null
                 }
