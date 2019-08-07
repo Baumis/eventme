@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 const Event = require('../models/event')
 const User = require('../models/user')
 
@@ -18,8 +20,13 @@ exports.getOnePopulated = async (id) => {
 exports.create = async (creatorId, eventObject) => {
     const user = await User.findById(creatorId)
 
+    const endDate = new Date(eventObject.startDate)
+    endDate.setDate(endDate.getDate() + 1)
+
     const newEvent = new Event({
         label: eventObject.label,
+        startDate: eventObject.startDate,
+        endDate: eventObject.endDate || endDate,
         creator: user._id,
         background: eventObject.background,
         infoPanel: eventObject.infoPanel,
@@ -56,6 +63,8 @@ exports.update = async (id, eventObject, senderId) => {
     }
 
     event.label = eventObject.label
+    event.startDate = eventObject.startDate
+    event.endDate = eventObject.endDate
     event.background = eventObject.background
     event.infoPanel = eventObject.infoPanel
     event.components = eventObject.components
@@ -110,6 +119,12 @@ exports.addGuest = async (id, guestId, senderId) => {
         throw new Error('Only creator can add guests')
     }
 
+    const guest = event.guests.find(guest => guest.user.toString() === guestId)
+
+    if (guest) {
+        throw new Error('User is already a guest')
+    }
+
     const user = await User.findById(guestId)
 
     event.guests = event.guests.concat({
@@ -149,7 +164,7 @@ exports.removeGuest = async (id, guestId, senderId) => {
         .execPopulate()
 }
 
-exports.validateInviteKeyAndGetEvent = async (id, inviteKey) => {
+exports.getOneWithInviteKey = async (id, inviteKey) => {
     const event = await Event.findById(id)
 
     if (event.inviteKey !== inviteKey) {
@@ -164,11 +179,18 @@ exports.validateInviteKeyAndGetEvent = async (id, inviteKey) => {
 
 exports.addGuestWithInviteKey = async (id, inviteKey, guestId) => {
     const event = await Event.findById(id)
-    const user = await User.findById(guestId)
 
     if (event.inviteKey !== inviteKey) {
         throw new Error('Malformatted inviteKey')
     }
+
+    const guest = event.guests.find(guest => guest.user.toString() === guestId)
+
+    if (guest) {
+        throw new Error('User is already a guest')
+    }
+
+    const user = await User.findById(guestId)
 
     event.guests = event.guests.concat({
         user: user._id,
@@ -181,6 +203,23 @@ exports.addGuestWithInviteKey = async (id, inviteKey, guestId) => {
     await user.save()
 
     return await savedEvent
+        .populate('creator', { _id: 1, name: 1 })
+        .populate('guests.user', { _id: 1, name: 1 })
+        .execPopulate()
+}
+
+exports.changeInviteKey = async (id, senderId) => {
+    const event = await Event.findById(id)
+
+    if (senderId !== event.creator._id.toString()) {
+        throw new Error('Only creator can change invite key')
+    }
+
+    event.inviteKey = mongoose.Types.ObjectId().toHexString()
+
+    const updatedEvent = await event.save()
+
+    return await updatedEvent
         .populate('creator', { _id: 1, name: 1 })
         .populate('guests.user', { _id: 1, name: 1 })
         .execPopulate()

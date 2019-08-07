@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './StatusBar.css'
+import { FaSortUp } from 'react-icons/fa'
 import Spinner from '../Spinner/Spinner'
 
 class StatusBar extends Component {
@@ -29,7 +30,7 @@ class StatusBar extends Component {
         this.setState({ loading: true })
         const response = await this.props.EventStore.changeUserStatus(this.props.UserStore.currentUser._id, status)
         this.setState({ loading: false })
-        if(!response){
+        if (!response) {
             alert('Status could not be changed.')
         }
     }
@@ -70,8 +71,9 @@ class StatusBar extends Component {
                     : null
                 }
                 <div className="status-bar-content">
-                    <div>
-                        {this.styledStaus(status)}
+                    {this.styledStaus(status)}
+                    <div className="status-bar-menu-icon">
+                        <FaSortUp />
                     </div>
                 </div>
             </div>
@@ -79,4 +81,4 @@ class StatusBar extends Component {
     }
 }
 
-export default inject("UserStore", "EventStore")(observer(StatusBar))
+export default inject('UserStore', 'EventStore')(observer(StatusBar))

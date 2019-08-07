@@ -27,31 +27,33 @@ const update = async (updatedObject) => {
 }
 
 const addGuest = async (id, userId) => {
-    const response = await http.post(`${baseUrl}/${id}/addguest/${userId}`)
+    const response = await http.post(`${baseUrl}/${id}/guests`, { userId })
     return response.data
 }
 
 const removeGuest = async (id, userId) => {
-    const response = await http.post(`${baseUrl}/${id}/removeguest/${userId}`)
+    const response = await http.delete(`${baseUrl}/${id}/guests/${userId}`)
     return response.data
 }
 
 const joinEvent = async (id, inviteKey) => {
-    const response = await http.post(`${baseUrl}/${id}/join/${inviteKey}`)
+    const response = await http.post(`${baseUrl}/${id}/guests/invitekey`, { inviteKey })
     return response.data
 }
 
-const validateKey = async (id, inviteKey) => {
-    const response = await http.post(`${baseUrl}/${id}/validatekey/${inviteKey}`)
+const getOneWithKey = async (id, inviteKey) => {
+    const response = await http.get(`${baseUrl}/${id}/invitekey/${inviteKey}`)
+    console.log(response.data)
+    return response.data
+}
+
+const updateKey = async (id) => {
+    const response = await http.put(`${baseUrl}/${id}/invitekey`)
     return response.data
 }
 
 const changeStatus = async (id, userId, newStatus) => {
-    const body = {
-        status: newStatus
-    }
-
-    const response = await http.post(`${baseUrl}/${id}/setstatus/${userId}`, body)
+    const response = await http.put(`${baseUrl}/${id}/guests/${userId}`, { newStatus })
     return response.data
 }
 
@@ -65,5 +67,6 @@ export default {
     removeGuest,
     joinEvent,
     changeStatus,
-    validateKey
+    getOneWithKey,
+    updateKey
 }

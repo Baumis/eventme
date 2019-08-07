@@ -26,15 +26,31 @@ class EventStore {
         })
     }
 
-    setInfoPanelValue(value, field) {
-        const newInfoPanel = {
-            ...this.event.infoPanel,
-            [field]: value
-        }
-        runInAction(() => {
-            this.event.infoPanel = newInfoPanel
-            this.saved = false
-        })
+    addInfoPanelValue() {
+        const newInfo = { icon: 'EMPTY', text: '' }
+        this.event.infoPanel.push(newInfo)
+        this.saved = false
+    }
+
+    deleteInfoPanelValue(index) {
+        const newInfoPanel = this.event.infoPanel.slice()
+        newInfoPanel.splice(index, 1)
+        this.event.infoPanel = newInfoPanel
+        this.saved = false
+    }
+
+    changeInfoPanelText(text, index) {
+        const newInfoPanel = this.event.infoPanel.slice()
+        newInfoPanel[index].text = text
+        this.event.infoPanel = newInfoPanel
+        this.saved = false
+    }
+
+    changeInfoPanelIcon(icon, index) {
+        const newInfoPanel = this.event.infoPanel.slice()
+        newInfoPanel[index].icon = icon
+        this.event.infoPanel = newInfoPanel
+        this.saved = false
     }
 
     async joinEvent(eventId, inviteKey) {
@@ -85,7 +101,7 @@ class EventStore {
 
     async validateKey(eventId, inviteKey) {
         try {
-            this.event = await eventService.validateKey(eventId, inviteKey)
+            this.event = await eventService.getOneWithKey(eventId, inviteKey)
             return this.event
         } catch (error) {
             return null
@@ -158,6 +174,10 @@ decorate(EventStore, {
     setCurrentEvent: action,
     setValue: action,
     setInfoPanelValue: action,
+    changeInfoPanelText: action,
+    deleteInfoPanelValue: action,
+    addInfoPanelValue: action,
+    changeInfoPanelIcon: action,
     getComponent: action,
     addComponent: action,
     saveComponentData: action,

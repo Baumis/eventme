@@ -28,7 +28,6 @@ exports.getOne = async (request, response) => {
 exports.create = async (request, response) => {
     try {
         const createdEvent = await eventService.create(request.senderId, request.body)
-
         response.status(201).json(Event.format(createdEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -38,7 +37,6 @@ exports.create = async (request, response) => {
 exports.update = async (request, response) => {
     try {
         const updatedEvent = await eventService.update(request.params.id, request.body, request.senderId)
-
         response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).send({ error: exception.message })
@@ -48,7 +46,6 @@ exports.update = async (request, response) => {
 exports.delete = async (request, response) => {
     try {
         await eventService.delete(request.params.id, request.senderId)
-
         response.status(204).end()
     } catch (exception) {
         response.status(400).send({ error: exception.message })
@@ -57,7 +54,7 @@ exports.delete = async (request, response) => {
 
 exports.addGuest = async (request, response) => {
     try {
-        const updatedEvent = await eventService.addGuest(request.params.id, request.params.userId, request.senderId)
+        const updatedEvent = await eventService.addGuest(request.params.id, request.body.userId, request.senderId)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).send({ error: exception.message })
@@ -73,19 +70,28 @@ exports.removeGuest = async (request, response) => {
     }
 }
 
-exports.validateInviteKey = async (request, response) => {
+exports.getOneWithInviteKey = async (request, response) => {
     try {
-        const event = await eventService.validateInviteKeyAndGetEvent(request.params.id, request.params.inviteKey)
+        const event = await eventService.getOneWithInviteKey(request.params.id, request.params.inviteKey)
         response.json(Event.formatForGuest(event))
     } catch (exception) {
         response.status(400).send({ error: exception.message })
     }
 }
 
-exports.joinEvent =  async (request, response) => {
+exports.addGuestWithInviteKey =  async (request, response) => {
     try {
-        const updatedEvent = await eventService.addGuestWithInviteKey(request.params.id, request.params.inviteKey, request.senderId)
+        const updatedEvent = await eventService.addGuestWithInviteKey(request.params.id, request.body.inviteKey, request.senderId)
         response.json(Event.formatForGuest(updatedEvent))
+    } catch (exception) {
+        response.status(400).send({ error: exception.message })
+    }
+}
+
+exports.changeInviteKey = async (request, response) => {
+    try {
+        const updatedEvent = await eventService.changeInviteKey(request.params.id, request.senderId)
+        response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).send({ error: exception.message })
     }
@@ -93,7 +99,7 @@ exports.joinEvent =  async (request, response) => {
 
 exports.setStatus = async (request, response) => {
     try {
-        const updatedEvent = await eventService.setStatus(request.params.id, request.params.userId, request.body.status, request.senderId)
+        const updatedEvent = await eventService.setStatus(request.params.id, request.params.userId, request.body.newStatus, request.senderId)
 
         if (request.senderId === updatedEvent.creator._id.toString()) {
             response.json(Event.format(updatedEvent))

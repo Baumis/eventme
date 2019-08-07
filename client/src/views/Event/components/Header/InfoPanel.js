@@ -1,39 +1,44 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './Header.css'
+import { FaPhone, FaAt, FaInfo, FaCalendar, FaLocationArrow, FaClock, FaUser } from 'react-icons/fa'
 
-const InfoPanel = ({ data }) => {
+class InfoPanel extends Component {
 
-    const { phone, contact, address, date } = data
-    let displayCSS = (phone === '' && contact === '' && date === '' && address === '') ? 'none' : 'flex'
-    let displayPhone = (phone === '') ? 'none' : 'flex'
-    let displayContact = (contact === '') ? 'none' : 'flex'
-    let displayDate = (date === '') ? 'none' : 'flex'
-    let displayAddress = (address === '') ? 'none' : 'flex'
+    constructor(props) {
+        super(props)
+        this.state = {
+            icons: {
+                PHONE: FaPhone,
+                EMAIL: FaAt,
+                INFO: FaInfo,
+                DATE: FaCalendar,
+                LOCATION: FaLocationArrow,
+                TIME: FaClock,
+                CONTACT: FaUser,
+                EMPTY: null
+            }
+        }
+    }
 
-    const panelStyles = { display: displayCSS }
-    const phoneStyles = { display: displayPhone }
-    const contactStyles = { display: displayContact }
-    const dateStyles = { display: displayDate }
-    const addressStyles = { display: displayAddress }
+    identifyIcon = (icon) => {
+        const Match = this.state.icons[icon]
+        return Match ? <Match /> : ''
+    }
 
-    return (
-        <div style={panelStyles} className="info-panel">
-            <div className="info-panel-content">
-                <div style={phoneStyles} className="info-panel-content-field">
-                    <p>{phone}</p>
-                </div>
-                <div style={contactStyles} className="info-panel-content-field">
-                    <p>{contact}</p>
-                </div>
-                <div style={dateStyles} className="info-panel-content-field">
-                    <p>{date}</p>
-                </div>
-                <div style={addressStyles} className="info-panel-content-field">
-                    <p>{address}</p>
+    render() {
+        return (
+            <div className="info-panel">
+                <div className="info-panel-content">
+                    {this.props.data.map((info, i) =>
+                        <div className="info-panel-content-field" key={i}>
+                            {this.identifyIcon(info.icon)}
+                            <p>{info.text}</p>
+                        </div>
+                    )}
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default InfoPanel

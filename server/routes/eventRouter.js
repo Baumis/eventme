@@ -12,14 +12,16 @@ eventRouter.put('/:id', middleware.requireAuthentication, eventController.update
 
 eventRouter.delete('/:id', middleware.requireAuthentication, eventController.delete)
 
-eventRouter.post('/:id/addguest/:userId', middleware.requireAuthentication, eventController.addGuest)
+eventRouter.post('/:id/guests', middleware.requireAuthentication, eventController.addGuest)
 
-eventRouter.post('/:id/removeguest/:userId', middleware.requireAuthentication, eventController.removeGuest)
+eventRouter.put('/:id/guests/:userId', middleware.requireAuthentication, eventController.setStatus)
 
-eventRouter.post('/:id/validatekey/:inviteKey', eventController.validateInviteKey)
+eventRouter.delete('/:id/guests/:userId', middleware.requireAuthentication, eventController.removeGuest)
 
-eventRouter.post('/:id/join/:inviteKey', middleware.requireAuthentication, eventController.joinEvent)
+eventRouter.get('/:id/invitekey/:inviteKey', eventController.getOneWithInviteKey)
 
-eventRouter.post('/:id/setstatus/:userId', middleware.requireAuthentication, eventController.setStatus)
+eventRouter.post('/:id/guests/invitekey', middleware.requireAuthentication, eventController.addGuestWithInviteKey)
+
+eventRouter.put('/:id/invitekey', middleware.requireAuthentication, eventController.changeInviteKey)
 
 module.exports = eventRouter
