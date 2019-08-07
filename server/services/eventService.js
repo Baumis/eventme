@@ -20,10 +20,13 @@ exports.getOnePopulated = async (id) => {
 exports.create = async (creatorId, eventObject) => {
     const user = await User.findById(creatorId)
 
+    const endDate = new Date(eventObject.startDate)
+    endDate.setDate(endDate.getDate() + 1)
+
     const newEvent = new Event({
         label: eventObject.label,
         startDate: eventObject.startDate,
-        endDate: eventObject.endDate,
+        endDate: eventObject.endDate || endDate,
         creator: user._id,
         background: eventObject.background,
         infoPanel: eventObject.infoPanel,
