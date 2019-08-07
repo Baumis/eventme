@@ -21,7 +21,7 @@ class InfoPanel extends Component {
     }
 
     identifyIcon = (icon) => {
-        const Match = this.state.icons[icon || null]
+        const Match = this.state.icons[icon]
         return Match ? <Match /> : ''
     }
 
