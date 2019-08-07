@@ -25,7 +25,6 @@ class NewEventModal extends Component {
 
     changeStateValue = (event) => {
         this.setState({ [event.target.name]: event.target.value })
-        console.log(this.state)
     }
 
     create = async () => {
