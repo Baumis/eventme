@@ -7,8 +7,8 @@ class UserStore {
 
     async signIn(email, password) {
         const user = await loginService.login({ email, password })
+        this.currentUser = user
         window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
-        window.location.reload()
     }
 
     async refreshUser(user) {
