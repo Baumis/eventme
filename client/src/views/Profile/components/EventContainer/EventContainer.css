@@ -64,6 +64,10 @@
     font-weight: 500;
     color: rgba(26, 26, 26, 0.2);
     box-sizing: border-box;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
 }
 
 .event-container-new-button:hover{

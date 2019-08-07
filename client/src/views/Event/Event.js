@@ -57,11 +57,6 @@ class Event extends Component {
         console.log('TODO: add guest: ' + name)
     }
 
-    save = async () => {
-        const event = await this.props.EventStore.update()
-        console.log(event)
-    }
-
     showEditor = () => {
         this.props.VisibilityStore.showComponentEditor()
     }

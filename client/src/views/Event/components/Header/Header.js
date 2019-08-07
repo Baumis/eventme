@@ -14,13 +14,13 @@ class Header extends Component {
         return (
             <div style={headerStyles} className="event-header">
                 <div className="event-header-content">
-                    {this.props.isGuest ?
-                        <div className="event-header-status-row">
-                            <StatusBar />
-                        </div>
-                        : null}
                     <h1>{this.props.EventStore.event.label}</h1>
                 </div>
+                {this.props.isGuest ?
+                    <div className="event-header-status-row">
+                        <StatusBar />
+                    </div>
+                    : null}
                 <InfoPanel data={this.props.EventStore.event.infoPanel} />
             </div>
         )
