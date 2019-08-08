@@ -55,7 +55,7 @@ class OptionsPanel extends Component {
     }
 
     render() {
-
+        
         if (this.state.deleted) {
             return <Redirect to={`/profile/${this.props.UserStore.currentUser._id}`} />
         }
@@ -70,17 +70,29 @@ class OptionsPanel extends Component {
                     <div className="DeleteEventButton" onClick={() => this.deleteEvent()}>
                         {'Delete event'}
                     </div>
-                    <div className="options-panel-content">
+                    <InputBlock
+                        type={'text'}
+                        label={'Header'}
+                        value={this.props.EventStore.event.label}
+                        changeValue={this.changeLabel}
+                    />
+                    <InputBlock
+                        type={'text'}
+                        label={'Header background url'}
+                        value={this.props.EventStore.event.background}
+                        changeValue={this.changeBackground}
+                    />
+                    <div className="dateBlock">
                         <InputBlock
-                            label={'Header'}
-                            value={this.props.EventStore.event.label}
-                            changeValue={this.changeLabel}
+                            type={'date'}
+                            label={'Start date'}
+                            value={this.props.EventStore.event.startDate}
+                            changeValue={this.changeBackground}
                         />
-                    </div>
-                    <div className="options-panel-content">
                         <InputBlock
-                            label={'Header background url'}
-                            value={this.props.EventStore.event.background}
+                            type={'date'}
+                            label={'End date'}
+                            value={this.props.EventStore.event.endDate}
                             changeValue={this.changeBackground}
                         />
                     </div>

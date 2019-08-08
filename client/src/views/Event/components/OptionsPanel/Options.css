@@ -83,18 +83,32 @@
 .DeleteEventButton:hover{
   background: rgba(255,255,255, 0.1)
 }  
+
 .inputBlock{
-    display: flex;
-    flex-direction: column;
-    padding: 12px;
-    padding-bottom: 1px;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  padding-bottom: 1px;
+  color: white;
+}
+
+.dateBlock{
+  display: flex;
 }
 
 .inputLabel{
-    display: flex;
-    padding: 10px;
-    color: #B2BFCB;
+  display: flex;
+  padding: 10px;
+  color: #B2BFCB;
+}
+
+.inputBlock input[type=date]{
+  border: 1px solid white;
+  width: 80px;
+}
+
+.inputBlock input[type=date]::-webkit-clear-button {
+  display: none;
 }
 
 .inputBlock input{

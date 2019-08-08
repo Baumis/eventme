@@ -4,11 +4,13 @@ import './Options.css'
 const InputBlock = (props) => {
 
     return (
-        <div className="inputBlock">
-            <div className="inputLabel">
-                <label>{props.label}</label>
+        <div className="options-panel-content">
+            <div className="inputBlock">
+                <div className="inputLabel">
+                    <label>{props.label}</label>
+                </div>
+                <input type={props.type} value={props.value} onChange={props.changeValue}></input>
             </div>
-            <input value={props.value} onChange={props.changeValue}></input>
         </div>
     )
 }
