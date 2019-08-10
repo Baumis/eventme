@@ -262,3 +262,22 @@ exports.setStatus = async (id, guestId, status, senderId) => {
         .populate('guests.user', { _id: 1, name: 1 })
         .execPopulate()
 }
+
+exports.getRole = async (id, userId) => {
+    const role = {
+        GHOST: 'GHOST',
+        GUEST: 'GUEST',
+        CREATOR: 'CREATOR'
+    }
+
+    const event = await Event.findById(id, { creator: 1, guests: 1})
+    
+    if (event.creator.toString() === userId) {
+        return role.CREATOR
+    } else if (event.guests.find(guest => guest.user.toString() === userId)) {
+        return role.GUEST
+    } else {
+        return role.GHOST
+    }
+    
+}

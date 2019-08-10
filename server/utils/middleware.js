@@ -26,21 +26,6 @@ const extractToken = (request, response, next) => {
     }
 }
 
-const extractEvent = async (request, response, next) => {
-    try {
-        const event = await Event.findById(request.params.id)
-
-        if (event === null) {
-            return response.status(404).json({ error: 'Event not found' })
-        }
-        
-        request.event = event
-        next()
-    } catch (exception) {
-        return response.status(400).json({ error: 'Malformatted id' })
-    }
-}
-
 const requireAuthentication = (request, response, next) => {
     if (request.senderId && request.senderId.length !== 0) {
         next()
@@ -63,6 +48,5 @@ const logger = (request, response, next) => {
 module.exports = {
     logger,
     extractToken,
-    requireAuthentication,
-    extractEvent
+    requireAuthentication
 }

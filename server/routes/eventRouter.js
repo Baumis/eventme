@@ -4,7 +4,7 @@ const eventController = require('../controllers/eventController')
 
 eventRouter.get('/', eventController.getAll)
 
-eventRouter.get('/:id', middleware.requireAuthentication, middleware.extractEvent, eventController.getOne)
+eventRouter.get('/:id', middleware.requireAuthentication, eventController.getOne)
 
 eventRouter.post('/', middleware.requireAuthentication, eventController.create)
 
