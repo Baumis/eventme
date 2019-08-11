@@ -10,13 +10,6 @@ exports.getAllPopulated = async () => {
         .populate('guests.user', { _id: 1, name: 1 })
 }
 
-exports.getOnePopulated = async (id) => {
-    return await Event
-        .findById(id)
-        .populate('creator', { _id: 1, name: 1 })
-        .populate('guests.user', { _id: 1, name: 1 })
-}
-
 exports.populate = async (event) => {
     return await event
         .populate('creator', { _id: 1, name: 1 })
