@@ -18,10 +18,10 @@ exports.getOne = async (request, response) => {
         } else if (senderRole === roles.GUEST) {
             response.json(Event.formatForGuest(event))
         } else {
-            response.status(403).send({ error: 'Event is private' })
+            response.status(403).json({ error: 'Event is private' })
         }
     } catch (exception) {
-        response.status(400).send({ error: 'Malformatted id' })
+        response.status(400).json({ error: 'Malformatted id' })
     }
 }
 
@@ -39,7 +39,7 @@ exports.update = async (request, response) => {
         const updatedEvent = await eventService.update(request.event, request.body)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
@@ -48,7 +48,7 @@ exports.delete = async (request, response) => {
         await eventService.delete(request.event)
         response.status(204).end()
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
@@ -57,7 +57,7 @@ exports.addGuest = async (request, response) => {
         const updatedEvent = await eventService.addGuest(request.event, request.body.userId)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
@@ -72,7 +72,7 @@ exports.removeGuest = async (request, response) => {
         const updatedEvent = await eventService.removeGuest(request.event, userId)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
@@ -85,7 +85,7 @@ exports.getOneWithInviteKey = async (request, response) => {
         const event = await eventService.populate(request.event)
         response.json(Event.formatForGuest(event))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
@@ -98,7 +98,7 @@ exports.addGuestWithInviteKey = async (request, response) => {
         const updatedEvent = await eventService.addGuest(request.event, request.senderId)
         response.json(Event.formatForGuest(updatedEvent))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
@@ -107,7 +107,7 @@ exports.changeInviteKey = async (request, response) => {
         const updatedEvent = await eventService.changeInviteKey(request.event)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
@@ -127,6 +127,6 @@ exports.setStatus = async (request, response) => {
             response.json(Event.formatForGuest(updatedEvent))
         }
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
