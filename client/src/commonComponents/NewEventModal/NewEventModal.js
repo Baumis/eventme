@@ -59,24 +59,26 @@ class NewEventModal extends Component {
                                 placeholder={'my event'}
                             ></input>
                         </div>
-                        <div className="event-options-input">
-                            <p>Start date</p>
-                            <input
-                                name={'startDate'}
-                                type={'date'}
-                                value={this.state.startDate}
-                                onChange={this.changeStateValue}
-                                min={this.state.today}
-                            ></input>
-                        </div>
-                        <div className="event-options-input">
-                            <p>End date</p>
-                            <input
-                                name={'endDate'}
-                                type={'date'}
-                                onChange={this.changeStateValue}
-                                min={this.state.today}
-                            ></input>
+                        <div className="event-options-date-section">
+                            <div className="event-options-input event-options-date-input">
+                                <p>Start date</p>
+                                <input
+                                    name={'startDate'}
+                                    type={'date'}
+                                    value={this.state.startDate}
+                                    onChange={this.changeStateValue}
+                                    min={this.state.today}
+                                ></input>
+                            </div>
+                            <div className="event-options-input event-options-date-input">
+                                <p>End date</p>
+                                <input
+                                    name={'endDate'}
+                                    type={'date'}
+                                    onChange={this.changeStateValue}
+                                    min={this.state.today}
+                                ></input>
+                            </div>
                         </div>
                         <div className="event-options-button-row">
                             <div onClick={() => this.create()} className="event-options-button">

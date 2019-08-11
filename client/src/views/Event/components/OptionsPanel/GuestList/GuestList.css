@@ -7,18 +7,18 @@
     display: flex;
     width: 100%;
     justify-content: space-evenly;
-    background: rgba(0,0,0,0.5);
+    background: #4c5c68;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
 .StatusButton{
-    color: rgba(255,255,255,0.8);
+    color: #dddddd;
     padding: 10px 5px 10px 5px;
 }
 
 #active{
-    color: rgba(46, 184, 46, 1);
+    color: #1985a1;
     border-bottom: 1px solid rgba(46, 184, 46, 1);
 }
 
@@ -28,7 +28,8 @@
 }
 
 .GuestContent{
-    background: rgba(255,255,255, 0.08);
+    background: white;
+    border: 1px solid #dddddd;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding-bottom: 10px;
@@ -40,7 +41,7 @@
     background: transparent;
     padding: 10px;
     height: 200px;
-    color: white;
+    color: rgba(0,0,0);
     font-size: 15px;
     overflow: auto;
 }
@@ -49,11 +50,12 @@
     display: flex;
     justify-content: space-between;
     padding: 12px 10px 12px 10px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
 .Guest a{
     display: flex;
+    color: #46494c;
 }
 
 .GuestName{
@@ -64,11 +66,11 @@
 
 .GuestDelete{
     cursor: pointer;
-    color: rgba(255,255,255,0.5);
+    color: rgba(0,0,0,0.5);
 }
 
 .GuestDelete:hover{
-    color: rgba(255,255,255,1);
+    color: rgba(0,0,0);
 }
 
 .GuestOptionsSearchField{
@@ -83,10 +85,10 @@
     border: none;
     width: 100%;
     background: transparent;
-    color: white;
+    color: rgba(0,0,0);
 }
 
 #OptionsSearchIcon{
-    color: rgba(46, 184, 46, 1);
+    color: #4c5c68;
     cursor: pointer;
 }

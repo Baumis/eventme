@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaUser, FaEnvelope, FaFacebook, FaTwitter, FaInstagram, FaCog } from 'react-icons/fa'
+import { FaUser, FaFacebook, FaTwitter, FaInstagram, FaCog } from 'react-icons/fa'
 
 const ProfileCard = ({ user, isOwner }) => {
 
