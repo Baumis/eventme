@@ -17,6 +17,13 @@ exports.getOnePopulated = async (id) => {
         .populate('guests.user', { _id: 1, name: 1 })
 }
 
+exports.populate = async (event) => {
+    return await event
+        .populate('creator', { _id: 1, name: 1 })
+        .populate('guests.user', { _id: 1, name: 1 })
+        .execPopulate()
+}
+
 exports.create = async (creatorId, eventObject) => {
     const user = await User.findById(creatorId)
 
@@ -59,12 +66,7 @@ exports.create = async (creatorId, eventObject) => {
         .execPopulate()
 }
 
-exports.update = async (id, eventObject, senderId) => {
-    const event = await Event.findById(id)
-
-    if (senderId !== event.creator._id.toString()) {
-        throw new Error('Only creator can update event')
-    }
+exports.update = async (event, eventObject) => {
 
     const startDate = new Date(eventObject.startDate)
     const endDate = new Date(eventObject.endDate)
@@ -95,17 +97,7 @@ exports.update = async (id, eventObject, senderId) => {
         .execPopulate()
 }
 
-exports.delete = async (id, senderId) => {
-    const event = await Event.findById(id)
-
-    if (!event) {
-        throw new Error('Malformatted id')
-    }
-
-    if (senderId !== event.creator._id.toString()) {
-        throw new Error('Only creator can remove event')
-    }
-
+exports.delete = async (event) => {
     const creator = await User.findById(event.creator._id)
 
     creator.myEvents = creator.myEvents.filter(eventId => eventId !== event._id)
@@ -123,13 +115,7 @@ exports.delete = async (id, senderId) => {
     await event.remove()
 }
 
-exports.addGuest = async (id, guestId, senderId) => {
-    const event = await Event.findById(id)
-
-    if (senderId !== event.creator._id.toString()) {
-        throw new Error('Only creator can add guests')
-    }
-
+exports.addGuest = async (event, guestId) => {
     const guest = event.guests.find(guest => guest.user.toString() === guestId)
 
     if (guest) {
@@ -154,17 +140,11 @@ exports.addGuest = async (id, guestId, senderId) => {
         .execPopulate()
 }
 
-exports.removeGuest = async (id, guestId, senderId) => {
-    const event = await Event.findById(id)
-
-    if (senderId !== event.creator._id.toString() && senderId !== guestId) {
-        throw new Error('Only creator or guest itself can remove guest')
-    }
-
+exports.removeGuest = async (event, guestId) => {
     const user = await User.findById(guestId)
 
     event.guests = event.guests.filter(guest => guest.user.toString() !== guestId)
-    user.myInvites = user.myInvites.filter(event => event.toString() !== id)
+    user.myInvites = user.myInvites.filter(event => event !== user._id)
 
     const savedEvent = await event.save()
     await user.save()
@@ -175,57 +155,7 @@ exports.removeGuest = async (id, guestId, senderId) => {
         .execPopulate()
 }
 
-exports.getOneWithInviteKey = async (id, inviteKey) => {
-    const event = await Event.findById(id)
-
-    if (event.inviteKey !== inviteKey) {
-        throw new Error('Malformatted inviteKey')
-    }
-
-    return await event
-        .populate('creator', { _id: 1, name: 1 })
-        .populate('guests.user', { _id: 1, name: 1 })
-        .execPopulate()
-}
-
-exports.addGuestWithInviteKey = async (id, inviteKey, guestId) => {
-    const event = await Event.findById(id)
-
-    if (event.inviteKey !== inviteKey) {
-        throw new Error('Malformatted inviteKey')
-    }
-
-    const guest = event.guests.find(guest => guest.user.toString() === guestId)
-
-    if (guest) {
-        throw new Error('User is already a guest')
-    }
-
-    const user = await User.findById(guestId)
-
-    event.guests = event.guests.concat({
-        user: user._id,
-        status: 'PENDING'
-    })
-
-    user.myInvites = user.myInvites.concat(event._id)
-
-    const savedEvent = await event.save()
-    await user.save()
-
-    return await savedEvent
-        .populate('creator', { _id: 1, name: 1 })
-        .populate('guests.user', { _id: 1, name: 1 })
-        .execPopulate()
-}
-
-exports.changeInviteKey = async (id, senderId) => {
-    const event = await Event.findById(id)
-
-    if (senderId !== event.creator._id.toString()) {
-        throw new Error('Only creator can change invite key')
-    }
-
+exports.changeInviteKey = async (event) => {
     event.inviteKey = mongoose.Types.ObjectId().toHexString()
 
     const updatedEvent = await event.save()
@@ -236,13 +166,7 @@ exports.changeInviteKey = async (id, senderId) => {
         .execPopulate()
 }
 
-exports.setStatus = async (id, guestId, status, senderId) => {
-    const event = await Event.findById(id)
-
-    if (senderId !== event.creator._id.toString() && senderId !== guestId) {
-        throw new Error('Only creator or guest itself can change status')
-    }
-
+exports.setStatus = async (event, guestId, status) => {
     event.guests = event.guests.map(guest => {
         guest.status = guest.user.toString() === guestId.toString() ? status : guest.status
         return guest
@@ -261,23 +185,4 @@ exports.setStatus = async (id, guestId, status, senderId) => {
         .populate('creator', { _id: 1, name: 1 })
         .populate('guests.user', { _id: 1, name: 1 })
         .execPopulate()
-}
-
-exports.getRole = async (id, userId) => {
-    const role = {
-        GHOST: 'GHOST',
-        GUEST: 'GUEST',
-        CREATOR: 'CREATOR'
-    }
-
-    const event = await Event.findById(id, { creator: 1, guests: 1})
-    
-    if (event.creator.toString() === userId) {
-        return role.CREATOR
-    } else if (event.guests.find(guest => guest.user.toString() === userId)) {
-        return role.GUEST
-    } else {
-        return role.GHOST
-    }
-    
 }
