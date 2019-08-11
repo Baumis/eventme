@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 import './Options.css'
 import { FaAngleDoubleLeft, FaPlusCircle } from 'react-icons/fa'
+import moment from 'moment'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
 import GuestList from './GuestList/GuestList'
@@ -55,7 +56,6 @@ class OptionsPanel extends Component {
     }
 
     render() {
-        
         if (this.state.deleted) {
             return <Redirect to={`/profile/${this.props.UserStore.currentUser._id}`} />
         }
@@ -86,13 +86,13 @@ class OptionsPanel extends Component {
                         <InputBlock
                             type={'date'}
                             label={'Start date'}
-                            value={this.props.EventStore.event.startDate}
+                            value={moment(this.props.EventStore.event.startDate).format('YYYY-MM-DD')}
                             changeValue={this.changeBackground}
                         />
                         <InputBlock
                             type={'date'}
                             label={'End date'}
-                            value={this.props.EventStore.event.endDate}
+                            value={moment(this.props.EventStore.event.endDate).format('YYYY-MM-DD')}
                             changeValue={this.changeBackground}
                         />
                     </div>

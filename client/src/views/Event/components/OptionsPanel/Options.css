@@ -75,13 +75,17 @@
 .inputBlock{
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  padding: 12px 12px 12px 12px;
   padding-bottom: 1px;
   color: #46494c;
 }
 
 .dateBlock{
   display: flex;
+}
+
+.dateBlock .inputBlock{
+  padding-right: 0px;
 }
 
 .inputLabel{
@@ -91,7 +95,7 @@
 }
 
 .inputBlock input[type=date]{
-  width: 94px;
+  width: 96px;
 }
 
 .inputBlock input[type=date]::-webkit-clear-button {

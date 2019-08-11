@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './NewEventModal.css'
 import { FaTimes } from 'react-icons/fa'
+import moment from 'moment'
 
 class NewEventModal extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class NewEventModal extends Component {
     }
 
     componentDidMount() {
-        const today = new Date()
+        const today = moment(new Date()).format('YYYY-MM-DD')
         this.setState({
             startDate: today,
             today: today
