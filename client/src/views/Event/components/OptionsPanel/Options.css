@@ -91,7 +91,7 @@
 }
 
 .inputBlock input[type=date]{
-  width: 80px;
+  width: 94px;
 }
 
 .inputBlock input[type=date]::-webkit-clear-button {

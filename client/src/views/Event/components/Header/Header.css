@@ -17,6 +17,11 @@
 
 .event-header h1{
     padding-top: 90px;
+    text-shadow: 1px 1px rgba(0,0,0,0.2);
+}
+.event-header h3{
+    margin-top: 0px;
+    text-shadow: 1px 1px rgba(0,0,0,0.2);
 }
 
 .event-header-content{
