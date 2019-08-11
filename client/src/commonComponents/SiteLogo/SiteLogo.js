@@ -7,7 +7,7 @@ class SiteLogo extends Component {
         return (
             <div className="site-logo">
                 <a href="/" className="site-logo-content">
-                    <p>EVENME</p>
+                    <p>EventKey</p>
                 </a>
             </div>
         )

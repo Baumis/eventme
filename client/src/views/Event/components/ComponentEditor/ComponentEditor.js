@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './ComponentEditor.css'
 import TextOptions from './TypeOptions/TextOptions'
-import LocationOptions from './TypeOptions/LocationOptions'
 import GuestsOptions from './TypeOptions/GuestsOptions'
 import InviteLinkOptions from './TypeOptions/InviteLinkOptions'
 import { FaLocationArrow, FaPen, FaTimes, FaList, FaLink } from 'react-icons/fa'
@@ -17,7 +16,6 @@ class ComponentEditor extends Component {
             activeType: props.component.type,
             types: {
                 TEXT: TextOptions,
-                LOCATION: LocationOptions,
                 GUESTS: GuestsOptions,
                 INVITE_LINK: InviteLinkOptions
             },
@@ -53,10 +51,6 @@ class ComponentEditor extends Component {
                         <div className="TypeItem" onClick={() => this.changeType('TEXT')} id={this.state.activeType === 'TEXT' ? 'TypeActive' : 'TypeNormal'}>
                             <FaPen />
                             <label>Text</label>
-                        </div>
-                        <div className="TypeItem" onClick={() => this.changeType('LOCATION')} id={this.state.activeType === 'LOCATION' ? 'TypeActive' : 'TypeNormal'}>
-                            <FaLocationArrow />
-                            <label>Location</label>
                         </div>
                         <div className="TypeItem" onClick={() => this.changeType('GUESTS')} id={this.state.activeType === 'GUESTS' ? 'TypeActive' : 'TypeNormal'}>
                             <FaList />
