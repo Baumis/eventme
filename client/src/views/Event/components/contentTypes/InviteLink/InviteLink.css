@@ -3,7 +3,7 @@
     z-index: 1;
     padding: 10px;
     margin-bottom: 10px;
-    overflow: auto;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,6 +13,7 @@
 
 .InviteTitle{
     padding: 0px 30px 20px 30px;
+    color: #4c5c68;
 }
 
 .InviteTitle h2{
@@ -24,8 +25,10 @@
 }
 
 .InviteContent{
-    border: 10px solid gray;
+    border: 10px solid #c5c3c6;
     border-radius: 50px;
     width: 90%;
     font-size: 20px;
+    overflow: hidden;
+    padding: 5px;
 }
