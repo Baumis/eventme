@@ -25,10 +25,8 @@
 }
 
 .InviteContent{
-    border: 10px solid #c5c3c6;
-    border-radius: 50px;
     width: 90%;
     font-size: 20px;
-    overflow: hidden;
+    overflow: auto;
     padding: 5px;
 }

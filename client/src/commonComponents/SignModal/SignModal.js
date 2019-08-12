@@ -25,7 +25,7 @@ class SignModal extends Component {
     render() {
         const TagName = this.contents[this.state.content]
         return (
-            <div className="sign-modal-surface">
+            <div className="sign-modal-bg">
                 <div className="sign-modal">
                     <div className="sign-modal-top-row">
                         <div className="sign-modal-exit-icon" onClick={() => this.props.VisibilityStore.closeSignModal()}>
