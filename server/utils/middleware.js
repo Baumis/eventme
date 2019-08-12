@@ -71,7 +71,7 @@ exports.extractRole = async (request, response, next) => {
 }
 
 exports.requireRole = (...roles) => {
-    const isAllowed = role => roles.indexOf(role) > -1;
+    const isAllowed = role => roles.indexOf(role) > -1
 
     return (request, response, next) => {
         if (request.senderRole && isAllowed(request.senderRole))
