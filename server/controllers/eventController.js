@@ -1,27 +1,27 @@
 const Event = require('../models/event')
 
 const eventService = require('../services/eventService')
+const roles = require('../utils/roles')
 
 exports.getAll = async (request, response) => {
     const events = await eventService.getAllPopulated()
-
     response.json(events.map(Event.format))
 }
 
 exports.getOne = async (request, response) => {
     try {
-        const event = await eventService.getOnePopulated(request.params.id)
-        const senderId = request.senderId
+        const event = await eventService.populate(request.event)
+        const senderRole = request.senderRole
 
-        if (senderId === event.creator._id.toString()) {
+        if (senderRole === roles.CREATOR) {
             response.json(Event.format(event))
-        } else if (event.guests.find(guest => guest.user._id.toString() === senderId)) {
+        } else if (senderRole === roles.GUEST) {
             response.json(Event.formatForGuest(event))
         } else {
-            response.status(403).send({ error: 'Event is private' })
+            response.status(403).json({ error: 'Event is private' })
         }
     } catch (exception) {
-        response.status(400).send({ error: 'Malformatted id' })
+        response.status(400).json({ error: 'Malformatted id' })
     }
 }
 
@@ -36,77 +36,97 @@ exports.create = async (request, response) => {
 
 exports.update = async (request, response) => {
     try {
-        const updatedEvent = await eventService.update(request.params.id, request.body, request.senderId)
+        const updatedEvent = await eventService.update(request.event, request.body)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
 exports.delete = async (request, response) => {
     try {
-        await eventService.delete(request.params.id, request.senderId)
+        await eventService.delete(request.event)
         response.status(204).end()
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
 exports.addGuest = async (request, response) => {
     try {
-        const updatedEvent = await eventService.addGuest(request.params.id, request.body.userId, request.senderId)
+        const updatedEvent = await eventService.addGuest(request.event, request.body.userId)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
 exports.removeGuest = async (request, response) => {
     try {
-        const updatedEvent = await eventService.removeGuest(request.params.id, request.params.userId, request.senderId)
+        const userId = request.params.userId
+
+        if (request.senderRole !== roles.CREATOR && request.senderId !== userId) {
+            return response.status(403).json({ error: 'User does not have required permission' })
+        }
+
+        const updatedEvent = await eventService.removeGuest(request.event, userId)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
 exports.getOneWithInviteKey = async (request, response) => {
     try {
-        const event = await eventService.getOneWithInviteKey(request.params.id, request.params.inviteKey)
+        if (request.event.inviteKey !== request.params.inviteKey) {
+            return response.status(400).json({ error: 'Malformatted inviteKey' })
+        }
+
+        const event = await eventService.populate(request.event)
         response.json(Event.formatForGuest(event))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
-exports.addGuestWithInviteKey =  async (request, response) => {
+exports.addGuestWithInviteKey = async (request, response) => {
     try {
-        const updatedEvent = await eventService.addGuestWithInviteKey(request.params.id, request.body.inviteKey, request.senderId)
+        if (request.event.inviteKey !== request.body.inviteKey) {
+            return response.status(400).json({ error: 'Malformatted inviteKey' })
+        }
+
+        const updatedEvent = await eventService.addGuest(request.event, request.senderId)
         response.json(Event.formatForGuest(updatedEvent))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
 exports.changeInviteKey = async (request, response) => {
     try {
-        const updatedEvent = await eventService.changeInviteKey(request.params.id, request.senderId)
+        const updatedEvent = await eventService.changeInviteKey(request.event)
         response.json(Event.format(updatedEvent))
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }
 
 exports.setStatus = async (request, response) => {
     try {
-        const updatedEvent = await eventService.setStatus(request.params.id, request.params.userId, request.body.newStatus, request.senderId)
+        const userId = request.params.userId
 
-        if (request.senderId === updatedEvent.creator._id.toString()) {
+        if (request.senderRole !== roles.CREATOR && request.senderId !== userId) {
+            return response.status(403).json({ error: 'User does not have required permission' })
+        }
+
+        const updatedEvent = await eventService.setStatus(request.event, userId, request.body.newStatus)
+
+        if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
             response.json(Event.formatForGuest(updatedEvent))
         }
     } catch (exception) {
-        response.status(400).send({ error: exception.message })
+        response.status(400).json({ error: exception.message })
     }
 }

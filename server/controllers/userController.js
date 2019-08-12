@@ -17,7 +17,7 @@ exports.getOne = async (request, response) => {
             response.json(User.formatForGuest(user))
         }
     } catch (exception) {
-        response.status(400).send({ error: 'Malformatted id' })
+        response.status(400).json({ error: 'Malformatted id' })
     }
 }
 

@@ -72,34 +72,47 @@ exports.update = async (id, userObject) => {
 }
 
 exports.delete = async (id) => {
-    const user = await User.findById(id)
+    const session = await User.startSession()
+    session.startTransaction()
+    const options = { session }
 
-    if (!user) {
-        throw new Error('Malformatted id')
-    }
+    try {
+        const user = await User.findById(id)
 
-    const myEventsPromises = user.myEvents.map(eventId => Event.findById(eventId))
-    const myEvents = await Promise.all(myEventsPromises)
-
-    for (let myEvent of myEvents) {
-        const myEventGuestsPromises = myEvent.guests.map(guest => User.findById(guest.user))
-        const myEventGuests = await Promise.all(myEventGuestsPromises)
-
-        for (let myEventGuest of myEventGuests) {
-            myEventGuest.myInvites = myEventGuest.myInvites.filter(eventId => eventId !== myEvent._id)
-            await myEventGuest.save()
+        if (!user) {
+            throw new Error('Malformatted id')
         }
+
+        const myEventsPromises = user.myEvents.map(eventId => Event.findById(eventId))
+        const myEvents = await Promise.all(myEventsPromises)
+
+        for (let myEvent of myEvents) {
+            const myEventGuestsPromises = myEvent.guests.map(guest => User.findById(guest.user))
+            const myEventGuests = await Promise.all(myEventGuestsPromises)
+
+            for (let myEventGuest of myEventGuests) {
+                myEventGuest.myInvites = myEventGuest.myInvites.filter(eventId => eventId !== myEvent._id)
+                await myEventGuest.save(options)
+            }
+        }
+
+        await Event.deleteMany({creator: user._id}, options)
+
+        const myInvitesPromises = user.myInvites.map(eventId => Event.findById(eventId))
+        const myInvites = await Promise.all(myInvitesPromises)
+
+        for (let myInvite of myInvites) {
+            myInvite.guests = myInvite.guests.filter(guest => guest.user.toString() !== user._id.toString())
+            await myInvite.save(options)
+        }
+        
+        await user.remove(options)
+
+        await session.commitTransaction()
+        session.endSession()
+    } catch (exception) {
+        await session.abortTransaction()
+        session.endSession()
+        throw new Error('Could not remove user')
     }
-
-    await Event.deleteMany({creator: user._id})
-
-    const myInvitesPromises = user.myInvites.map(eventId => Event.findById(eventId))
-    const myInvites = await Promise.all(myInvitesPromises)
-
-    for (let myInvite of myInvites) {
-        myInvite.guests = myInvite.guests.filter(guest => guest.user.toString() !== user._id.toString())
-        await myInvite.save()
-    }
-
-    await user.remove()
 }
