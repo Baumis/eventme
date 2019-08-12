@@ -92,3 +92,7 @@ exports.logger = (request, response, next) => {
     console.log('---')
     next()
 }
+
+exports.error = (request, response) => {
+    response.status(404).json({ error: 'unknown endpoint' })
+}
