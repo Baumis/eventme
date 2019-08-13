@@ -77,6 +77,7 @@ class Profile extends Component {
                 {this.state.userOptionsModal ?
                     <UserOptions
                         toggleOptions={this.toggleUserOptionsModal}
+                        user={this.state.user}
                     />
                     : null}
             </div>

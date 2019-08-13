@@ -29,6 +29,15 @@ class UserStore {
     async signUp(newUser) {
         await userService.create(newUser)
     }
+
+    async saveUser(user) {
+        try {
+            const savedUser = await userService.update(user)
+            return savedUser
+        } catch (error) {
+            return null
+        }
+    }
 }
 
 decorate(UserStore, {
