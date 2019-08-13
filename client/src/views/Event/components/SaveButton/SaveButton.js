@@ -1,19 +1,49 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './SaveButton.css'
+import Spinner from '../Spinner/Spinner'
 import { FaSave } from 'react-icons/fa'
 
-const SaveButton = (props) => {
-    let bottomCSS = '-57px'
-    if (!props.saved) {
-        bottomCSS = '30px'
+class SaveButton extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: false
+        }
     }
 
-    return (
-        <div style={{ bottom: bottomCSS }} className="SaveButton" onClick={props.save}>
-            <p>Save</p>
-            <FaSave />
-        </div>
-    )
+    saveEvent = async () => {
+        this.setState({ loading: true })
+        const response = await this.props.EventStore.update()
+
+        this.setState({ loading: false })
+        if (!response) {
+            alert('Event could not be changed.')
+        }
+    }
+
+    render() {
+
+        if (this.state.loading) {
+            return (
+                <div className="SaveButton">
+                    <Spinner />
+                </div>
+            )
+        }
+
+        let bottomCSS = '-57px'
+        if (!this.props.saved) {
+            bottomCSS = '30px'
+        }
+        return (
+            <div style={{ bottom: bottomCSS }} className="SaveButton" onClick={this.saveEvent}>
+                <p>Save</p>
+                <FaSave />
+            </div>
+        )
+    }
 }
 
-export default SaveButton
+export default inject('EventStore')(observer(SaveButton))

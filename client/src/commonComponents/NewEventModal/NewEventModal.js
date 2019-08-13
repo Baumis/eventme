@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './NewEventModal.css'
 import { FaTimes } from 'react-icons/fa'
+import moment from 'moment'
 
 class NewEventModal extends Component {
     constructor(props) {
@@ -16,11 +17,26 @@ class NewEventModal extends Component {
     }
 
     componentDidMount() {
-        const today = new Date()
+        const today = moment(new Date()).format('YYYY-MM-DD')
         this.setState({
             startDate: today,
+            endDate: today,
             today: today
         })
+    }
+
+    changeStartdate = (event) => {
+        this.setState({ startDate: event.target.value })
+        if (moment(event.target.value).isAfter(this.state.endDate)) {
+            this.setState({ endDate: event.target.value })
+        }
+    }
+
+    changeEndDate = (event) => {
+        this.setState({ endDate: event.target.value })
+        if (moment(event.target.value).isBefore(this.state.startDate)) {
+            this.setState({ startDate: event.target.value })
+        }
     }
 
     changeStateValue = (event) => {
@@ -58,24 +74,27 @@ class NewEventModal extends Component {
                                 placeholder={'my event'}
                             ></input>
                         </div>
-                        <div className="event-options-input">
-                            <p>Start date</p>
-                            <input
-                                name={'startDate'}
-                                type={'date'}
-                                value={this.state.startDate}
-                                onChange={this.changeStateValue}
-                                min={this.state.today}
-                            ></input>
-                        </div>
-                        <div className="event-options-input">
-                            <p>End date</p>
-                            <input
-                                name={'endDate'}
-                                type={'date'}
-                                onChange={this.changeStateValue}
-                                min={this.state.today}
-                            ></input>
+                        <div className="event-options-date-section">
+                            <div className="event-options-input event-options-date-input">
+                                <p>Start date</p>
+                                <input
+                                    name={'startDate'}
+                                    type={'date'}
+                                    value={this.state.startDate}
+                                    onChange={this.changeStartdate}
+                                    min={this.state.today}
+                                ></input>
+                            </div>
+                            <div className="event-options-input event-options-date-input">
+                                <p>End date</p>
+                                <input
+                                    name={'endDate'}
+                                    type={'date'}
+                                    value={this.state.endDate}
+                                    onChange={this.changeEndDate}
+                                    min={this.state.startDate}
+                                ></input>
+                            </div>
                         </div>
                         <div className="event-options-button-row">
                             <div onClick={() => this.create()} className="event-options-button">

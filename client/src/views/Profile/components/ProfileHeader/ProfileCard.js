@@ -1,14 +1,17 @@
 import React from 'react'
-import { FaUser, FaEnvelope, FaFacebook, FaTwitter, FaInstagram, FaCog } from 'react-icons/fa'
+import { FaUser, FaFacebook, FaTwitter, FaInstagram, FaCog } from 'react-icons/fa'
 
-const ProfileCard = ({ user }) => {
+const ProfileCard = ({ user, isOwner }) => {
 
     return (
         <div className="profileCard">
-            <div className="profile-card-options-button">
-                <FaCog />
-            </div>
-            <div className="profileInfo">
+            {isOwner ?
+                <div className="profile-card-options-button">
+                    <FaCog />
+                </div>
+                : null
+            }
+            < div className="profileInfo">
                 <div>
                     <div className="profileCircle"><FaUser /></div>
                 </div>
@@ -17,7 +20,6 @@ const ProfileCard = ({ user }) => {
                         <h1>{user.name}</h1>
                     </div>
                     <div className="cardInfoRow">
-                        <FaEnvelope />
                         <p>{user.email}</p>
                     </div>
                 </div>
@@ -27,7 +29,7 @@ const ProfileCard = ({ user }) => {
                 <FaInstagram />
                 <FaTwitter />
             </div>
-        </div>
+        </div >
     )
 }
 

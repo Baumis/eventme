@@ -21,6 +21,7 @@ class SignIn extends Component {
     signIn = async (username, password) => {
         try {
             await this.props.UserStore.signIn(username, password)
+            this.props.VisibilityStore.closeSignModal()
         } catch (error) {
             alert('Something went wrong, check your username and password!')
             this.setState({ password: '' })

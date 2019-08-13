@@ -19,48 +19,37 @@
     padding: 25px;
     background: rgba(255,255,255);
     border-radius: 5px;
-    background-image: url('../../assets/sprakaBG.jpg');
     overflow: hidden;
     border: 2px solid white;
 }
 
-.event-options-surface:after{
-    content: '';
-    background: inherit; 
-    position: absolute;
-    right: -20px;
-    bottom: -20px;
-    box-shadow: inset 0 0 0 600px rgba(0,0,0,0.5);
-    filter: blur(10px);
-    width: 300px;
-    height: 300px;
-}
-
-.event-options-content {
-    z-index: 1;
+.event-options-date-section{
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .event-options-input{
     padding: 0px 0px 10px 0px;
+    margin: 5px;
 }
 
 .event-options-input input{
-    border: none;
-    padding-top: 15px;
-    padding-left: 5px;
-    border-bottom: 1px solid #7A838C;
-    background: transparent;
-    color:white;
-    font-size: 16px;
+    border-radius: 30px;
+    height: 18px;
+    width: 150px;
+    padding: 3px 12px 3px 10px;
+    background: white;
+    border: 1px solid #dddddd;
+    color:#46494c;
 }
 
 .event-options-input input::placeholder{
-    color: rgba(255,255,255,0.5)
+    color: #c5c3c6
 }
 
 .event-options-input p{
-    color: white;
-    margin: 10px 0px 5px 0px;
+    color: #1985a1;
+    margin: 10px 0px 10px 10px;
 }
 
 input[type=date]::-webkit-clear-button {
@@ -75,17 +64,30 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
     background: transparent;
 }
 
+input[type=date]{
+    width: 110px;
+}
+
+.event-options-button-row{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px 0px 0px;
+}
+
 .event-options-button {
     padding: 8px;
-    border: 1px solid #2eb82e;
-    color: #2eb82e;
+    width: 100px;
+    border: 1px solid #4c5c68;
+    border-radius: 8px;
+    background: #4c5c68;
+    color: #dddddd;
     text-align: center;
     margin: 10px;
     cursor: pointer;
 }
 
 .event-options-button:hover{
-    background: rgba(255,255,255,0.1);
+    color: white;
 }
 
 .event-options-top{
@@ -98,10 +100,10 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
 .event-options-exit{
     float: right;
     padding: 10px;
-    color: #B2BFCB;
+    color: #c5c3c6;
     cursor: pointer;
 }
 
 .event-options-exit{
-    color: white;
+    color: #c5c3c6;
 }
