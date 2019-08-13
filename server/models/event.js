@@ -70,7 +70,8 @@ const eventSchema = new mongoose.Schema({
     },
     background: {
         type: String,
-        default: 'https://picsum.photos/1440/550'
+        default: 'https://picsum.photos/1440/550',
+        maxlength: [2048, 'Url too long']
     },
     infoPanel: [infoPanelEntrySchema],
     guests: [guestSchema],

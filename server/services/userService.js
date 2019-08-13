@@ -55,6 +55,8 @@ exports.update = async (id, userObject) => {
 
     user.name = userObject.name
     user.email = userObject.email
+    user.avatar = userObject.avatar
+    user.cover = userObject.cover
 
     const error = user.validateSync()
 
