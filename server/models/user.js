@@ -18,6 +18,15 @@ const userSchema = new mongoose.Schema({
         maxlength: [255, 'Email too long'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Email not valid']
     },
+    avatar: {
+        type: String,
+        maxlength: [2048, 'Url too long']
+    },
+    cover: {
+        type: String,
+        default: 'https://picsum.photos/1440/550',
+        maxlength: [2048, 'Url too long']
+    },
     passwordHash: {
         type: String,
         required: [true, 'Password required']
@@ -30,6 +39,8 @@ userSchema.statics.format = (user) => ({
     _id: user._id,
     name: user.name,
     email: user.email,
+    avatar: user.avatar,
+    cover: user.cover,
     myEvents: user.myEvents,
     myInvites: user.myInvites
 })
@@ -37,13 +48,17 @@ userSchema.statics.format = (user) => ({
 userSchema.statics.formatForGuest = (user) => ({
     _id: user._id,
     name: user.name,
+    avatar: user.avatar,
+    cover: user.cover,
     myEvents: user.myEvents,
     myInvites: user.myInvites
 })
 
 userSchema.statics.formatForGhost = (user) => ({
     _id: user._id,
-    name: user.name
+    name: user.name,
+    avatar: user.avatar,
+    cover: user.cover,
 })
 
 const User = mongoose.model('User', userSchema) 
