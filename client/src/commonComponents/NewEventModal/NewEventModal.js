@@ -27,16 +27,20 @@ class NewEventModal extends Component {
 
     changeStartdate = (event) => {
         this.setState({ startDate: event.target.value })
-        if(moment(event.target.value).isAfter(this.state.endDate)){
+        if (moment(event.target.value).isAfter(this.state.endDate)) {
             this.setState({ endDate: event.target.value })
         }
     }
 
     changeEndDate = (event) => {
         this.setState({ endDate: event.target.value })
-        if(moment(event.target.value).isBefore(this.state.startDate)){
+        if (moment(event.target.value).isBefore(this.state.startDate)) {
             this.setState({ startDate: event.target.value })
         }
+    }
+
+    changeStateValue = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     create = async () => {
