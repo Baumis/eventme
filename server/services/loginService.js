@@ -22,6 +22,8 @@ exports.login = async (email, password) => {
 
     return {
         _id: user._id,
+        email: user.email,
+        name: user.name,
         token
     }
 }
