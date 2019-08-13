@@ -34,7 +34,7 @@
 
 .content-container-event-panel{
     text-align: left;
-    color: white;
+    color: #1985a1;
     background: rgb(179, 177, 179, 0);
     height: 260px;
     width: 300px;
@@ -42,6 +42,15 @@
     border-radius: 10px;
     margin: 10px;
 }
+
+.content-container-event-panel h1 {
+    color:#1985a1 
+}
+
+.content-container-event-panel p  {
+    color: #4c5c68;
+}
+
 
 .content-container-left-column h1 {
     font-size: 30px;

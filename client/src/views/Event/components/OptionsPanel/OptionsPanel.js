@@ -25,6 +25,20 @@ class OptionsPanel extends Component {
         this.props.EventStore.setValue(event.target.value, 'label')
     }
 
+    changeStartDate = (event) => {
+        this.props.EventStore.setValue(event.target.value, 'startDate')
+        if(moment(event.target.value).isAfter(this.props.EventStore.event.endDate)){
+            this.props.EventStore.setValue(event.target.value, 'endDate')
+        }
+    }
+
+    changeEndDate = (event) => {
+        this.props.EventStore.setValue(event.target.value, 'endDate')
+        if(moment(event.target.value).isBefore(this.props.EventStore.event.startDate)){
+            this.props.EventStore.setValue(event.target.value, 'startDate')
+        }
+    }
+
     addInfoField = () => {
         this.props.EventStore.addInfoPanelValue()
     }
@@ -87,13 +101,13 @@ class OptionsPanel extends Component {
                             type={'date'}
                             label={'Start date'}
                             value={moment(this.props.EventStore.event.startDate).format('YYYY-MM-DD')}
-                            changeValue={this.changeBackground}
+                            changeValue={this.changeStartDate}
                         />
                         <InputBlock
                             type={'date'}
                             label={'End date'}
                             value={moment(this.props.EventStore.event.endDate).format('YYYY-MM-DD')}
-                            changeValue={this.changeBackground}
+                            changeValue={this.changeEndDate}
                         />
                     </div>
                     <div className="options-panel-section-devider">
