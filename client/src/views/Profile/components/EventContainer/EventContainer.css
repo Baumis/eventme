@@ -12,9 +12,10 @@
     color: rgba(69,69,69,0.9);
 }
 
-.event-container-header h3{
+.event-container-header p{
     margin: 0px;
-    font-size: 21px;
+    font-size: 20px;
+    color: #1985a1;
 }
 
 .event-container-row {

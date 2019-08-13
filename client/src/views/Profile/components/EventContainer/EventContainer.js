@@ -9,7 +9,7 @@ class EventContainer extends Component {
         return (
             <div className="event-container">
                 <div className="event-container-header">
-                    <h3>Created events</h3>
+                    <p>Created events</p>
                 </div >
                 <div className="event-container-row">
                     <div className="eventCard event-container-new-button"
@@ -22,7 +22,7 @@ class EventContainer extends Component {
                     ))}
                 </div>
                 <div className="event-container-header">
-                    <h3>Invites</h3>
+                    <p>Invites</p>
                 </div>
                 <div className="event-container-row">
                     {this.props.user.myInvites.map((event, i) => (
