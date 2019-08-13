@@ -11,6 +11,7 @@ class ProfileHeader extends Component {
                 <ProfileCard
                     user={this.props.user}
                     isOwner={this.props.isOwner}
+                    toggleOptions={this.props.toggleOptions}
                 />
             </div>
         )

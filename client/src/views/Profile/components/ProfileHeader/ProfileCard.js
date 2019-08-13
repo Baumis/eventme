@@ -1,12 +1,13 @@
 import React from 'react'
 import { FaUser, FaFacebook, FaTwitter, FaInstagram, FaCog } from 'react-icons/fa'
+import { propTypes } from 'mobx-react';
 
-const ProfileCard = ({ user, isOwner }) => {
+const ProfileCard = (props) => {
 
     return (
         <div className="profileCard">
-            {isOwner ?
-                <div className="profile-card-options-button">
+            {props.isOwner ?
+                <div className="profile-card-options-button" onClick={() => props.toggleOptions()}>
                     <FaCog />
                 </div>
                 : null
@@ -17,10 +18,10 @@ const ProfileCard = ({ user, isOwner }) => {
                 </div>
                 <div className="cardInfo">
                     <div className="cardInfoRow">
-                        <h1>{user.name}</h1>
+                        <h1>{props.user.name}</h1>
                     </div>
                     <div className="cardInfoRow">
-                        <p>{user.email}</p>
+                        <p>{props.user.email}</p>
                     </div>
                 </div>
             </div>

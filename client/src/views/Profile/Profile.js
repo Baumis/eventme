@@ -5,6 +5,7 @@ import ProfileHeader from './components/ProfileHeader/ProfileHeader'
 import EventContainer from './components/EventContainer/EventContainer'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewEventModal from '../../commonComponents/NewEventModal/NewEventModal'
+import UserOptions from './components/UserOptions/UserOptions'
 
 class Profile extends Component {
 
@@ -14,7 +15,8 @@ class Profile extends Component {
             user: null,
             loading: true,
             idValid: true,
-            newEventModal: false
+            newEventModal: false,
+            userOptionsModal: false
         }
     }
 
@@ -37,8 +39,12 @@ class Profile extends Component {
         return this.props.UserStore.currentUser._id === this.state.user._id
     }
 
-    toggleEventModal = () => {
+    toggleNewEventModal = () => {
         this.setState({ newEventModal: !this.state.newEventModal })
+    }
+
+    toggleUserOptionsModal = () => {
+        this.setState({ userOptionsModal: !this.state.userOptionsModal })
     }
 
     render() {
@@ -57,13 +63,21 @@ class Profile extends Component {
                 <ProfileHeader
                     user={this.state.user}
                     isOwner={this.isOwner()}
+                    toggleOptions={this.toggleUserOptionsModal}
                 />
                 <EventContainer
                     user={this.state.user}
-                    newEvent={this.toggleEventModal}
+                    newEvent={this.toggleNewEventModal}
                 />
                 {this.state.newEventModal ?
-                    <NewEventModal hide={this.toggleEventModal} />
+                    <NewEventModal
+                        hide={this.toggleNewEventModal}
+                    />
+                    : null}
+                {this.state.userOptionsModal ?
+                    <UserOptions
+                        toggleOptions={this.toggleUserOptionsModal}
+                    />
                     : null}
             </div>
         )
