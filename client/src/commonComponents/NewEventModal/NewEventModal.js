@@ -20,13 +20,23 @@ class NewEventModal extends Component {
         const today = moment(new Date()).format('YYYY-MM-DD')
         this.setState({
             startDate: today,
+            endDate: today,
             today: today
         })
     }
 
-    changeStateValue = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
-        console.log(this.state)
+    changeStartdate = (event) => {
+        this.setState({ startDate: event.target.value })
+        if(moment(event.target.value).isAfter(this.state.endDate)){
+            this.setState({ endDate: event.target.value })
+        }
+    }
+
+    changeEndDate = (event) => {
+        this.setState({ endDate: event.target.value })
+        if(moment(event.target.value).isBefore(this.state.startDate)){
+            this.setState({ startDate: event.target.value })
+        }
     }
 
     create = async () => {
@@ -67,7 +77,7 @@ class NewEventModal extends Component {
                                     name={'startDate'}
                                     type={'date'}
                                     value={this.state.startDate}
-                                    onChange={this.changeStateValue}
+                                    onChange={this.changeStartdate}
                                     min={this.state.today}
                                 ></input>
                             </div>
@@ -76,8 +86,9 @@ class NewEventModal extends Component {
                                 <input
                                     name={'endDate'}
                                     type={'date'}
-                                    onChange={this.changeStateValue}
-                                    min={this.state.today}
+                                    value={this.state.endDate}
+                                    onChange={this.changeEndDate}
+                                    min={this.state.startDate}
                                 ></input>
                             </div>
                         </div>
