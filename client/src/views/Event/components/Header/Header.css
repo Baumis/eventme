@@ -1,6 +1,8 @@
 .event-header {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 350px;
     padding-top: 20px;
     text-align: center;
@@ -14,7 +16,12 @@
 }
 
 .event-header h1{
-    padding-bottom: 50px;
+    padding-top: 90px;
+    text-shadow: 1px 1px rgba(0,0,0,0.2);
+}
+.event-header h3{
+    margin-top: 0px;
+    text-shadow: 1px 1px rgba(0,0,0,0.2);
 }
 
 .event-header-content{
@@ -22,12 +29,13 @@
     height: 100%;
     max-width: 900px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
 }
 
 .event-header-status-row{
     width: 100%;
+    max-width: 900px;
 }
 
 .info-panel{

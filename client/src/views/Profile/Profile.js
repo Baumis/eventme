@@ -30,6 +30,13 @@ class Profile extends Component {
         this.setState({ loading: false })
     }
 
+    isOwner = () => {
+        if (!this.props.UserStore.currentUser) {
+            return false
+        }
+        return this.props.UserStore.currentUser._id === this.state.user._id
+    }
+
     toggleEventModal = () => {
         this.setState({ newEventModal: !this.state.newEventModal })
     }
@@ -47,7 +54,10 @@ class Profile extends Component {
         return (
             <div className="profileViewContainer">
                 <Navbar />
-                <ProfileHeader user={this.state.user} />
+                <ProfileHeader
+                    user={this.state.user}
+                    isOwner={this.isOwner()}
+                />
                 <EventContainer
                     user={this.state.user}
                     newEvent={this.toggleEventModal}

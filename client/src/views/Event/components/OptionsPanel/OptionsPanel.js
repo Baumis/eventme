@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 import './Options.css'
 import { FaAngleDoubleLeft, FaPlusCircle } from 'react-icons/fa'
+import moment from 'moment'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
 import GuestList from './GuestList/GuestList'
@@ -22,6 +23,20 @@ class OptionsPanel extends Component {
 
     changeLabel = (event) => {
         this.props.EventStore.setValue(event.target.value, 'label')
+    }
+
+    changeStartDate = (event) => {
+        this.props.EventStore.setValue(event.target.value, 'startDate')
+        if(moment(event.target.value).isAfter(this.props.EventStore.event.endDate)){
+            this.props.EventStore.setValue(event.target.value, 'endDate')
+        }
+    }
+
+    changeEndDate = (event) => {
+        this.props.EventStore.setValue(event.target.value, 'endDate')
+        if(moment(event.target.value).isBefore(this.props.EventStore.event.startDate)){
+            this.props.EventStore.setValue(event.target.value, 'startDate')
+        }
     }
 
     addInfoField = () => {
@@ -55,7 +70,6 @@ class OptionsPanel extends Component {
     }
 
     render() {
-
         if (this.state.deleted) {
             return <Redirect to={`/profile/${this.props.UserStore.currentUser._id}`} />
         }
@@ -70,18 +84,30 @@ class OptionsPanel extends Component {
                     <div className="DeleteEventButton" onClick={() => this.deleteEvent()}>
                         {'Delete event'}
                     </div>
-                    <div className="options-panel-content">
+                    <InputBlock
+                        type={'text'}
+                        label={'Header'}
+                        value={this.props.EventStore.event.label}
+                        changeValue={this.changeLabel}
+                    />
+                    <InputBlock
+                        type={'text'}
+                        label={'Header background url'}
+                        value={this.props.EventStore.event.background}
+                        changeValue={this.changeBackground}
+                    />
+                    <div className="dateBlock">
                         <InputBlock
-                            label={'Header'}
-                            value={this.props.EventStore.event.label}
-                            changeValue={this.changeLabel}
+                            type={'date'}
+                            label={'Start date'}
+                            value={moment(this.props.EventStore.event.startDate).format('YYYY-MM-DD')}
+                            changeValue={this.changeStartDate}
                         />
-                    </div>
-                    <div className="options-panel-content">
                         <InputBlock
-                            label={'Header background url'}
-                            value={this.props.EventStore.event.background}
-                            changeValue={this.changeBackground}
+                            type={'date'}
+                            label={'End date'}
+                            value={moment(this.props.EventStore.event.endDate).format('YYYY-MM-DD')}
+                            changeValue={this.changeEndDate}
                         />
                     </div>
                     <div className="options-panel-section-devider">

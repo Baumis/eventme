@@ -6,7 +6,7 @@
 }
 
 .user-icon {
-    padding: 0px;
+    padding: 0px 3px 0px 0px;
 }
 
 a {
@@ -16,12 +16,12 @@ a {
 
 .user-username{
     display: flex;
-    flex-direction: column;
-   align-items: center;
+    align-items: center;
+    border-right: 1px solid rgba(255,255,255,0.5);
+    padding: 5px 10px 5px 5px;
 }
 
 .user-username:hover {
-    border-bottom: 1px solid white;
     cursor: pointer;
 }
 
@@ -31,9 +31,9 @@ a {
 }
 
 .user-sign-button{
-    padding: 8px;
+    padding: 5px;
     color: #FBFFFE;
-    margin: 10px;
+    margin: 5px;
     cursor: pointer;
 }
 

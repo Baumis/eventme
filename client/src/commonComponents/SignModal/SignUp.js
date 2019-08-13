@@ -8,8 +8,7 @@ class SignUp extends Component {
             name: '',
             username: '',
             email: '',
-            password: '',
-            password2: ''
+            password: ''
         }
     }
 
@@ -24,17 +23,14 @@ class SignUp extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        if (this.state.password === this.state.password2) {
-            try {
-                await this.props.UserStore.signUp(userObject)
-                alert('You have been signed ')
-                this.props.VisibilityStore.closeSignModal()
-            } catch (error) {
-                alert('Something went wrong...')
-            }
-        } else {
-            alert('Passwords didn\'t match.')
+        try {
+            await this.props.UserStore.signUp(userObject)
+            alert('You have been signed ')
+            this.props.VisibilityStore.closeSignModal()
+        } catch (error) {
+            alert('Something went wrong...')
         }
+
     }
 
     render() {
@@ -69,17 +65,6 @@ class SignUp extends Component {
                             type={'password'}
                             onChange={this.changeStateValue}
                             value={this.state.password}
-                            placeholder={'****'}
-                        >
-                        </input>
-                    </div>
-                    <div className="signInput">
-                        <label>Password again</label>
-                        <input
-                            name={'password2'}
-                            type={'password'}
-                            onChange={this.changeStateValue}
-                            value={this.state.password2}
                             placeholder={'****'}
                         >
                         </input>

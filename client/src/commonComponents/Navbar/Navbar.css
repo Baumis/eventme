@@ -1,13 +1,15 @@
 .Navbar{
     display: flex;
-    position: absolute;
+    position: fixed;
     z-index: 2;
     width: 100%;
     align-items: center;
     justify-content: space-around;
     height: 50px;
-    background: rgba(0, 0, 0, 0.8);
-    border-bottom: 1px solid #FBFFFE;
+    background: rgba(70, 73, 76, 0.95);
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.7);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
 }
 
 .companyLogo{
