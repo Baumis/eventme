@@ -15,13 +15,17 @@ class User extends Component {
         this.props.history.push('/')
     }
 
+    avatar = {
+        backgroundImage: `url(${this.props.UserStore.currentUser.avatar})`
+    }
+
     render() {
         return (
             <div className="user">
                 {this.props.UserStore.currentUser ?
                     <div className="user-signed-in">
                         <a href={`/profile/${this.props.UserStore.currentUser._id}`} className="user-username">
-                            <div className="user-icon"><FaUser /></div>
+                            <div style={this.avatar} className="user-avatar"> </div>
                             {this.props.UserStore.currentUser.name}
                         </a>
                         <div className="user-sign-button" onClick={this.signOut} >{'Sign out'}</div>

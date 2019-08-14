@@ -3,7 +3,9 @@ import { FaUser, FaFacebook, FaTwitter, FaInstagram, FaCog } from 'react-icons/f
 import { propTypes } from 'mobx-react';
 
 const ProfileCard = (props) => {
-
+    const avatar = {
+        backgroundImage: `url(${props.user.avatar})`
+    }
     return (
         <div className="profileCard">
             {props.isOwner ?
@@ -14,7 +16,7 @@ const ProfileCard = (props) => {
             }
             < div className="profileInfo">
                 <div>
-                    <div className="profileCircle"><FaUser /></div>
+                    <div style={avatar} className="profileCircle"></div>
                 </div>
                 <div className="cardInfo">
                     <div className="cardInfoRow">
