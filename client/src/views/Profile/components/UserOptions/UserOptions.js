@@ -2,24 +2,35 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './UserOptions.css'
 import { FaTimes } from 'react-icons/fa'
+import Spinner from '../../../Event/components/Spinner/Spinner'
 
 class UserOptions extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            userValues: { ... this.props.user }
+            userValues: { ... this.props.user },
+            saved: true,
+            loading: false
         }
     }
 
     changeUserValue = (event) => {
         const values = this.state.userValues
         values[event.target.name] = event.target.value
-        this.setState({ userValues: values })
+        this.setState({ userValues: values, saved: false })
     }
 
-    saveUserValues = () => {
-        this.props.UserStore.saveUser(this.state.userValues)
+    saveOptions = async () => {
+        this.setState({ loading: true })
+        const user = await this.props.save(this.state.userValues)
+        this.setState({ loading: false })
+
+        if (user) {
+            this.setState({ saved: true })
+        } else {
+            alert('options could not be saved')
+        }
     }
 
     render() {
@@ -64,9 +75,18 @@ class UserOptions extends Component {
                         />
                     </div>
                     <div className="user-options-button-row">
-                        <div className="user-options-save-button" onClick={() => this.saveUserValues()}>
-                            Save
-                    </div>
+                        {this.state.saved ?
+                            <div className="user-options-save-button" id="disabled">
+                                Save
+                            </div>
+                            :
+                            <div className="user-options-save-button" onClick={() => this.saveOptions()}>
+                                {this.state.loading ?
+                                    <Spinner />
+                                    :
+                                    <div>Save</div>
+                                }
+                            </div>}
                     </div>
                 </div>
             </div>

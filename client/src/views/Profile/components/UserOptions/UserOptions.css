@@ -34,6 +34,10 @@
     cursor: pointer;
 }
 
+.user-options-exit-icon:hover{
+    color: #46494c;
+}
+
 .user-options-input{
     display: flex;
     flex-direction: column;
@@ -64,13 +68,22 @@
 }
 
 .user-options-save-button{
+    display: flex;
+    justify-content: center;
     padding: 12px;
-    border: 1px solid #4c5c68;
+    height: 20px;
+    width: 40px;
     border-radius: 5px;
     background: #4c5c68;
     color: #dddddd;
     margin: 10px;
     cursor: pointer;
+}
+
+#disabled {
+    background: rgb(76, 92, 104, 0.3);
+    border: none;
+    color: white;
 }
 
 .user-options-save-button:hover{

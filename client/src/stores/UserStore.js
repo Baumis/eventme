@@ -33,6 +33,7 @@ class UserStore {
     async saveUser(user) {
         try {
             const savedUser = await userService.update(user)
+            this.currentUser = savedUser
             return savedUser
         } catch (error) {
             return null

@@ -47,6 +47,14 @@ class Profile extends Component {
         this.setState({ userOptionsModal: !this.state.userOptionsModal })
     }
 
+    saveUserValues = async (userValues) => {
+        const user = await this.props.UserStore.saveUser(userValues)
+        if (user) {
+            this.setState({ user: user })
+        }
+        return user
+    }
+
     render() {
 
         if (this.state.loading) {
@@ -78,6 +86,7 @@ class Profile extends Component {
                     <UserOptions
                         toggleOptions={this.toggleUserOptionsModal}
                         user={this.state.user}
+                        save={this.saveUserValues}
                     />
                     : null}
             </div>
