@@ -46,13 +46,22 @@
 
 .ComponentGuest{
     display: flex;
+    align-items: center;
     padding: 12px 22px 12px 22px;
     border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.ComponentGuestIcon {
+    background: darkgray;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
 
 .ComponentGuest a{
     color: black;
     display: flex;
+    align-items: center;
 }
 
 .ComponentGuestName{

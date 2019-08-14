@@ -28,6 +28,7 @@ class User extends Component {
                             <div style={this.avatar} className="user-avatar"> </div>
                             {this.props.UserStore.currentUser.name}
                         </a>
+                        <div className="user-section-devider"> </div>
                         <div className="user-sign-button" onClick={this.signOut} >{'Sign out'}</div>
                     </div>
                     :

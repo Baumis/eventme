@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './SaveButton.css'
-import Spinner from '../Spinner/Spinner'
+import Spinner from '../../../../commonComponents/Spinner/Spinner'
 import { FaSave } from 'react-icons/fa'
 
 class SaveButton extends Component {

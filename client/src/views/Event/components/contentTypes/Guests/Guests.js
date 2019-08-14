@@ -46,7 +46,7 @@ class Guests extends Component {
                     {guestsToShow.map((guest, i) =>
                         <div className="ComponentGuest" key={i}>
                             <a href={`/profile/${guest.user._id}`}>
-                                <div className="ComponentGuestUser"><FaUser /></div>
+                                <div className="ComponentGuestIcon"></div>
                                 <div className="ComponentGuestName">{guest.user.name}</div>
                             </a>
                         </div>
