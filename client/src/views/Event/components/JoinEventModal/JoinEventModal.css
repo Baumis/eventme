@@ -16,7 +16,7 @@
     flex-direction: column;
     top: 30%;
     padding: 25px;
-    background: #595F65;
+    background: white ;
     -webkit-box-shadow: 0px 0px 16px -1px rgb(69, 69, 69, 0.4);
     -moz-box-shadow: 0px 0px 16px -1px rgba(69,69,69,0.4);
     box-shadow: 0px 0px 16px -1px rgba(69,69,69,0.4);
@@ -26,7 +26,7 @@
 }
 
 .join-event-message p{
-    color: white;
+    color: #1985a1;
     font-size: 20px;
 }
 
@@ -37,29 +37,35 @@
 }
 
 .join-event-signin p {
-    color: rgba(255,255,255,0.7);
+    color: #4c5c68;
     padding: 0px;
-    margin: 0px;
+    margin: 2px;
 }
 
 #join-event-signin-button{
-    padding: 12px;
     cursor: pointer;
+    padding: 8px;
+    margin: 10px;
+    background: transparent;
+    border-radius: 10px;
 }
 
 .join-event-button{
     padding: 8px;
     border: 1px solid #2eb82e;
-    color: white;
+    color: #dddddd;
     margin: 10px;
     cursor: pointer;
-    background: rgba(255,255,255,0.1);
+    background: #2eb82e;
+    border-radius: 10px;
 }
 
 .join-event-button:hover{
-    background: rgba(255,255,255,0.1);
+    color: white;
 }
 
 #join-event-button-continue{
-    border-color: #fc5a03;
+    border-color: #4c5c68;
+    background: #4c5c68;
+    border-radius: 10px;
 }

@@ -1,6 +1,6 @@
 .user {
     display: flex;
-    color: #FBFFFE;
+    color: #4c5c68;
     align-items: center;
     justify-content: center;
 }
@@ -11,13 +11,13 @@
 
 a {
     text-decoration: none;
-    color: #FBFFFE;
+    color: #4c5c68;
 }
 
 .user-username{
     display: flex;
     align-items: center;
-    border-right: 1px solid rgba(255,255,255,0.5);
+    border-right: 1px solid #4c5c68;
     padding: 5px 10px 5px 5px;
 }
 
@@ -32,7 +32,7 @@ a {
 
 .user-sign-button{
     padding: 5px;
-    color: #FBFFFE;
+    color: #4c5c68;
     margin: 5px;
     cursor: pointer;
 }
