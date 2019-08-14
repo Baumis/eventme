@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './UserOptions.css'
 import { FaTimes } from 'react-icons/fa'
-import Spinner from '../../../Event/components/Spinner/Spinner'
+import Spinner from '../../../../commonComponents/Spinner/Spinner'
 
 class UserOptions extends Component {
 

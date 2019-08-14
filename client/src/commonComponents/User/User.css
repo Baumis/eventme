@@ -17,7 +17,7 @@ a {
 .user-username{
     display: flex;
     align-items: center;
-    border-right: 1px solid #4c5c68;
+    border-right: 1px solid rgb(76, 92, 104, 0.2);
     padding: 5px 10px 5px 5px;
 }
 

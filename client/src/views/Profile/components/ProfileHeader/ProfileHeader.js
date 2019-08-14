@@ -5,9 +5,13 @@ import ProfileCard from './ProfileCard'
 
 class ProfileHeader extends Component {
 
+    cover = {
+        backgroundImage: `url(${this.props.UserStore.currentUser.cover})`
+    }
+
     render() {
         return (
-            <div className="profileHeaderContainer">
+            <div style={this.cover} className="profileHeaderContainer">
                 <ProfileCard
                     user={this.props.user}
                     isOwner={this.props.isOwner}

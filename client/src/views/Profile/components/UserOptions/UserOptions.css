@@ -70,6 +70,7 @@
 .user-options-save-button{
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 12px;
     height: 20px;
     width: 40px;
@@ -84,6 +85,7 @@
     background: rgb(76, 92, 104, 0.3);
     border: none;
     color: white;
+    cursor: default;
 }
 
 .user-options-save-button:hover{
