@@ -23,10 +23,14 @@ a {
     color: #4c5c68;
 }
 
+.user-section-devider{
+    border-right: 1px solid rgb(76, 92, 104, 0.2);
+    height: 20px;
+}
+
 .user-username{
     display: flex;
     align-items: center;
-    border-right: 1px solid rgb(76, 92, 104, 0.2);
     padding: 5px 10px 5px 5px;
 }
 
