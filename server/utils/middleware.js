@@ -96,6 +96,7 @@ exports.logger = (request, response, next) => {
         console.log('Method: ', request.method)
         console.log('Path:   ', request.path)
         console.log('Sender: ', request.senderId)
+        console.log('---')
         next()
     }
 }

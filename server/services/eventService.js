@@ -6,14 +6,14 @@ const User = require('../models/user')
 exports.getAllPopulated = async () => {
     return await Event
         .find({})
-        .populate('creator', { _id: 1, name: 1 })
-        .populate('guests.user', { _id: 1, name: 1 })
+        .populate('creator', { _id: 1, name: 1, avatar: 1 })
+        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
 }
 
 exports.populate = async (event) => {
     return await event
-        .populate('creator', { _id: 1, name: 1 })
-        .populate('guests.user', { _id: 1, name: 1 })
+        .populate('creator', { _id: 1, name: 1, avatar: 1 })
+        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 }
 
@@ -98,8 +98,8 @@ exports.update = async (event, eventObject) => {
     const updatedEvent = await event.save()
 
     return await updatedEvent
-        .populate('creator', { _id: 1, name: 1 })
-        .populate('guests.user', { _id: 1, name: 1 })
+        .populate('creator', { _id: 1, name: 1, avatar: 1 })
+        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 }
 
@@ -207,8 +207,8 @@ exports.changeInviteKey = async (event) => {
     const updatedEvent = await event.save()
 
     return await updatedEvent
-        .populate('creator', { _id: 1, name: 1 })
-        .populate('guests.user', { _id: 1, name: 1 })
+        .populate('creator', { _id: 1, name: 1, avatar: 1 })
+        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 }
 
@@ -228,7 +228,7 @@ exports.setStatus = async (event, guestId, status) => {
     const savedEvent = await event.save()
 
     return await savedEvent
-        .populate('creator', { _id: 1, name: 1 })
-        .populate('guests.user', { _id: 1, name: 1 })
+        .populate('creator', { _id: 1, name: 1, avatar: 1 })
+        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 }
