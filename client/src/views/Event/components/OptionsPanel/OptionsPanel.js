@@ -143,7 +143,7 @@ class OptionsPanel extends Component {
                             </div>
                             <input
                                 id="readOnly"
-                                value={`localhost:3000/events/${this.props.EventStore.event._id}/invite/${this.props.EventStore.event.inviteKey}`}
+                                value={`${window.location.origin}/events/${this.props.EventStore.event._id}/invite/${this.props.EventStore.event.inviteKey}`}
                                 readOnly
                             />
                         </div>

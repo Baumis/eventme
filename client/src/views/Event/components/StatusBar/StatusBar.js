@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './StatusBar.css'
 import { FaSortUp } from 'react-icons/fa'
-import Spinner from '../Spinner/Spinner'
+import Spinner from '../../../../commonComponents/Spinner/Spinner'
 
 class StatusBar extends Component {
 

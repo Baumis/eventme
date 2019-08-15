@@ -18,8 +18,8 @@ class ContentContainer extends Component {
                     <CreateButton click={this.props.click} />
                 </div>
                 <div className="content-container-event-panel">
-                    <h1>{'What is EventOwl?'}</h1>
-                    <p>{'Eventme is a great tool for creating homes for your events. Share your events and invite your friends!'}</p>
+                    <h1>{'What is InviteOwl?'}</h1>
+                    <p>{'InviteOwl is a great tool for creating homes for your events. Share your events and invite your friends!'}</p>
                 </div>
             </div>
         )

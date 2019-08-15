@@ -1,26 +1,29 @@
 import React from 'react'
 import { FaUser, FaFacebook, FaTwitter, FaInstagram, FaCog } from 'react-icons/fa'
+import { propTypes } from 'mobx-react';
 
-const ProfileCard = ({ user, isOwner }) => {
-
+const ProfileCard = (props) => {
+    const avatar = {
+        backgroundImage: `url(${props.user.avatar})`
+    }
     return (
         <div className="profileCard">
-            {isOwner ?
-                <div className="profile-card-options-button">
+            {props.isOwner ?
+                <div className="profile-card-options-button" onClick={() => props.toggleOptions()}>
                     <FaCog />
                 </div>
                 : null
             }
             < div className="profileInfo">
                 <div>
-                    <div className="profileCircle"><FaUser /></div>
+                    <div style={avatar} className="profileCircle"></div>
                 </div>
                 <div className="cardInfo">
                     <div className="cardInfoRow">
-                        <h1>{user.name}</h1>
+                        <h1>{props.user.name}</h1>
                     </div>
                     <div className="cardInfoRow">
-                        <p>{user.email}</p>
+                        <p>{props.user.email}</p>
                     </div>
                 </div>
             </div>

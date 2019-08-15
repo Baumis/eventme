@@ -12,7 +12,7 @@ class InviteLink extends Component {
                     <p>Share this link to invite friends</p>
                 </div>
                 <div className="InviteContent">
-                    <p>{`localhost:3000/events/${this.props.EventStore.event._id}/invite/${this.props.EventStore.event.inviteKey}`}</p>
+                    <p>{`${window.location.origin}/events/${this.props.EventStore.event._id}/invite/${this.props.EventStore.event.inviteKey}`}</p>
                 </div>
             </div>
         )

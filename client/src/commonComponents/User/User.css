@@ -1,23 +1,36 @@
 .user {
     display: flex;
-    color: #FBFFFE;
+    color: #4c5c68;
     align-items: center;
     justify-content: center;
 }
 
-.user-icon {
-    padding: 0px 3px 0px 0px;
+.user-avatar {
+    margin: 0px 3px 0px 0px;
+    background: darkgrey;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position:center center;
 }
 
-a {
+.user a {
     text-decoration: none;
-    color: #FBFFFE;
+    color: #4c5c68;
+}
+
+.user-section-devider{
+    border-right: 1px solid rgb(76, 92, 104, 0.2);
+    height: 20px;
 }
 
 .user-username{
     display: flex;
     align-items: center;
-    border-right: 1px solid rgba(255,255,255,0.5);
     padding: 5px 10px 5px 5px;
 }
 
@@ -32,7 +45,7 @@ a {
 
 .user-sign-button{
     padding: 5px;
-    color: #FBFFFE;
+    color: #4c5c68;
     margin: 5px;
     cursor: pointer;
 }
