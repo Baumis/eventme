@@ -53,11 +53,11 @@
 .join-event-button{
     padding: 8px;
     border: 1px solid #2eb82e;
-    color: #dddddd;
+    color: white;
     margin: 10px;
     cursor: pointer;
     background: #2eb82e;
-    border-radius: 10px;
+    border-radius: 30px;
 }
 
 .join-event-button:hover{
@@ -67,5 +67,5 @@
 #join-event-button-continue{
     border-color: #4c5c68;
     background: #4c5c68;
-    border-radius: 10px;
+    border-radius: 30px;
 }

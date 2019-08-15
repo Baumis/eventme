@@ -19,7 +19,7 @@ class ContentContainer extends Component {
                 </div>
                 <div className="content-container-event-panel">
                     <h1>{'What is InviteOwl?'}</h1>
-                    <p>{'Eventme is a great tool for creating homes for your events. Share your events and invite your friends!'}</p>
+                    <p>{'InviteOwl is a great tool for creating homes for your events. Share your events and invite your friends!'}</p>
                 </div>
             </div>
         )

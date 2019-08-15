@@ -15,7 +15,7 @@
 .event-container-header p{
     margin: 0px;
     font-size: 20px;
-    color: #1985a1;
+    color: #46494c;
 }
 
 .event-container-row {
@@ -27,7 +27,7 @@
     min-height: 220px;
     width: 90%;
     max-width: 900px;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 10px;
     border-top: 1px solid rgba(0,0,0,0.15);
     overflow-y: auto;

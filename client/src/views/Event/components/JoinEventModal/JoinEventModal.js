@@ -33,7 +33,7 @@ class JoinEventModal extends Component {
             <div className="join-event-modal-bg">
                 <div className="join-event-modal">
                     <div className="join-event-message">
-                        <p>This is your invite!</p>
+                        <p>You have been invited to this event!</p>
                     </div>
                     {!this.props.UserStore.currentUser ?
                         <div className="join-event-signin">

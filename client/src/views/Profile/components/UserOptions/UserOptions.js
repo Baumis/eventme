@@ -59,7 +59,7 @@ class UserOptions extends Component {
                         />
                     </div>
                     <div className="user-options-input">
-                        <label>Profile background</label>
+                        <label>Profile cover url</label>
                         <input
                             name={'cover'}
                             value={this.state.userValues.cover}
@@ -67,7 +67,7 @@ class UserOptions extends Component {
                         />
                     </div>
                     <div className="user-options-input">
-                        <label>Avatar</label>
+                        <label>Avatar url</label>
                         <input
                             name={'avatar'}
                             value={this.state.userValues.avatar}

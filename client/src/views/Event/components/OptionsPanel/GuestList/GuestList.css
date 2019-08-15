@@ -1,6 +1,7 @@
 .GuestContainer{
     padding: 12px;
     margin-bottom: 0px;
+    
 }
 
 .StatusButtons{
@@ -10,6 +11,9 @@
     background: #4c5c68;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.4);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
 }
 
 .StatusButton{
@@ -28,11 +32,14 @@
 }
 
 .GuestContent{
-    background: white;
+    background: rgb(76, 92, 104, 0.07);
     border: 1px solid #dddddd;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding-bottom: 10px;
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.4);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
 }
 
 .GuestList{
