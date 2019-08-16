@@ -15,7 +15,7 @@ const loginRouter = require('./routes/loginRouter')
 mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: true })
 
 // Static files from react app
-app.use(express.static(path.join(__dirname, '../client/build')))
+app.use(express.static(path.join(__dirname, './client/build')))
 
 // Middlewares
 app.use(cors())
@@ -29,7 +29,7 @@ app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
 
 app.get('*', (request, response) => {
-    response.sendFile(path.join(__dirname, '../client/build/index.html'))
+    response.sendFile(path.join(__dirname, './client/build/index.html'))
 })
 
 // Catches unknown endpoints

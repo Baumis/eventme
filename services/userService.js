@@ -2,13 +2,6 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const Event = require('../models/event')
 
-exports.getAllPopulated = async () => {
-    return await User
-        .find({})
-        .populate('myEvents', { _id: 1, label: 1, background: 1 })
-        .populate('myInvites', { _id: 1, label: 1, background: 1 })
-}
-
 exports.getOnePopulated = async (id) => {
     return await User
         .findById(id)
@@ -93,7 +86,7 @@ exports.delete = async (id) => {
             const myEventGuests = await Promise.all(myEventGuestsPromises)
 
             for (let myEventGuest of myEventGuests) {
-                myEventGuest.myInvites = myEventGuest.myInvites.filter(eventId => eventId !== myEvent._id)
+                myEventGuest.myInvites = myEventGuest.myInvites.filter(eventId => eventId.toString() !== myEvent._id.toString())
                 await myEventGuest.save(options)
             }
         }

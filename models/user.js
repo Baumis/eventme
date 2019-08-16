@@ -61,6 +61,6 @@ userSchema.statics.formatForGhost = (user) => ({
     cover: user.cover,
 })
 
-const User = mongoose.model('User', userSchema) 
+const User = mongoose.model('User', userSchema)
 
 module.exports = User
