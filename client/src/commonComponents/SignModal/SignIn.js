@@ -11,10 +11,6 @@ class SignIn extends Component {
         }
     }
 
-    responseGoogle = (response) => {
-        console.log(response)
-    }
-
     changeUsername = (event) => {
         this.setState({ username: event.target.value })
     }
@@ -23,13 +19,26 @@ class SignIn extends Component {
         this.setState({ password: event.target.value })
     }
 
+    onSignInFail = (message) => {
+        alert(message)
+        this.setState({ password: '' })
+    }
+
     signIn = async (username, password) => {
         try {
             await this.props.UserStore.signIn(username, password)
             this.props.VisibilityStore.closeSignModal()
         } catch (error) {
-            alert('Something went wrong, check your username and password!')
-            this.setState({ password: '' })
+            this.onSignInFail('Could not sign in, check your username and password!')
+        }
+    }
+
+    googleSignIn = async (response) => {
+        try {
+            await this.props.UserStore.googleSignIn(response.tokenId)
+            this.props.VisibilityStore.closeSignModal()
+        } catch (error) {
+            this.onSignInFail('Could not sign in')
         }
     }
 
@@ -66,8 +75,8 @@ class SignIn extends Component {
                     <GoogleLogin
                         clientId="911838998946-ofev1jb8srpg1qjaak4st5j6huablfvl.apps.googleusercontent.com"
                         buttonText="Login with google"
-                        onSuccess={this.responseGoogle}
-                        onFailure={this.responseGoogle}
+                        onSuccess={this.googleSignIn}
+                        onFailure={()  => this.onSignInFail('Could not sign in')}
                     />
                 </div>
             </div>

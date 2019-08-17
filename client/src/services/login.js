@@ -6,4 +6,9 @@ const login = async (credentials) => {
     return response.data
 }
 
-export default { login }
+const googleLogin = async (googleToken) => {
+    const response = await http.post(`${baseUrl}/google`, { googleToken })
+    return response.data
+}
+
+export default { login, googleLogin }
