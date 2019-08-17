@@ -1,0 +1,22 @@
+.refresh-key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: #46494c;
+    width: 135px;
+    height: 30px;
+    margin: 10px 0px 0px 12px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.refresh-key-content{
+    display: flex;
+}
+
+.refresh-key-content p {
+    padding: 0px;
+    margin: 0px;
+    padding-right: 10px;
+}

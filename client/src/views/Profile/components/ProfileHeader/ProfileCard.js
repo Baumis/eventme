@@ -1,6 +1,5 @@
 import React from 'react'
-import { FaUser, FaFacebook, FaTwitter, FaInstagram, FaCog } from 'react-icons/fa'
-import { propTypes } from 'mobx-react';
+import { FaCog } from 'react-icons/fa'
 
 const ProfileCard = (props) => {
     const avatar = {
@@ -28,9 +27,6 @@ const ProfileCard = (props) => {
                 </div>
             </div>
             <div className="socialRow">
-                <FaFacebook />
-                <FaInstagram />
-                <FaTwitter />
             </div>
         </div >
     )

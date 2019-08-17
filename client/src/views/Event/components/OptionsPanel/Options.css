@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    z-index: 4;
+    z-index: 6;
     width: 300px;
     top: 0px;
     left: 0px;
@@ -70,10 +70,6 @@
   cursor: pointer;
 }
 
-.DeleteEventButton:hover{
-  background: rgba(0,0,0,0.05);
-}  
-
 .inputBlock{
   display: flex;
   flex-direction: column;
@@ -93,7 +89,7 @@
 .inputLabel{
   display: flex;
   padding: 10px;
-  color: #1985a1;
+  color: #46494c;
 }
 
 .inputBlock input[type=date]{
@@ -151,7 +147,7 @@
   border: 1px solid #1985a1;
   border-radius: 30px;
   padding: 3px;
-  margin-left: 32px;
+  margin-left: 0px;
 }
 
 .options-panel-info-icon{
@@ -204,10 +200,6 @@
   color: #b4b2b4;
 }
 
-.options-panel-add-field-button:hover{
-  background: rgba(0,0,0,0.05);
-}
-
 .options-panel-add-field-button p{
   padding: 0px 5px 0px 5px;
   margin: 0px;
@@ -223,7 +215,7 @@
 .options-panel-section-devider label{
   display: block;
   margin-bottom: 1px;
-  color: #4c5c68;
+  color: #1985a1;
   width: 90px;
   background: transparent;
 }

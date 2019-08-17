@@ -108,6 +108,15 @@ class EventStore {
         }
     }
 
+    async updateKey() {
+        try {
+            this.event = await eventService.updateKey(this.event._id)
+            return this.event
+        } catch (error) {
+            return null
+        }
+    }
+    
     getUserStatus(id) {
         const guest = this.event.guests.find(guest => guest.user._id === id)
         if (guest) {

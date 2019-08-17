@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import Spinner from '../Spinner/Spinner'
 
 class SignUp extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            loading: false,
             name: '',
             username: '',
             email: '',
@@ -23,11 +25,14 @@ class SignUp extends Component {
             email: this.state.email,
             password: this.state.password
         }
+        this.setState({ loading: true })
         try {
             await this.props.UserStore.signUp(userObject)
+            this.setState({ loading: false })
             alert('You have been signed ')
             this.props.VisibilityStore.closeSignModal()
         } catch (error) {
+            this.setState({ loading: false })
             alert('Something went wrong...')
         }
 
@@ -74,7 +79,13 @@ class SignUp extends Component {
                     <div
                         className="signButton"
                         onClick={() => this.signUp()}>
-                        Sign Up
+                        {this.state.loading ?
+                            <Spinner />
+                            :
+                            <div>
+                                Sign Up
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
