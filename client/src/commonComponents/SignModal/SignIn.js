@@ -73,8 +73,9 @@ class SignIn extends Component {
                         Sign In
                     </div>
                     <GoogleLogin
+                        className="googleSignButton"
                         clientId="911838998946-ofev1jb8srpg1qjaak4st5j6huablfvl.apps.googleusercontent.com"
-                        buttonText="Login with google"
+                        buttonText="Google sign in"
                         onSuccess={this.googleSignIn}
                         onFailure={()  => this.onSignInFail('Could not sign in')}
                     />
