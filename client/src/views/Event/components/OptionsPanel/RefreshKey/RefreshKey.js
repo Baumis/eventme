@@ -17,10 +17,10 @@ class RefreshKey extends Component {
         const confirmation = window.confirm('The current invite-link will not work after this operation. Do you still want to get a new one?')
         if (confirmation) {
             this.setState({ loading: true })
-            const key = await this.props.EventStore.updateKey()
+            const success = await this.props.EventStore.updateKey()
             this.setState({ loading: false })
 
-            if (!key) {
+            if (!success) {
                 alert('Key could not be changed.')
             }
         }
