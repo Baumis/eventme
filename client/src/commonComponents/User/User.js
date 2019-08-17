@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './User.css'
-import { FaUser } from 'react-icons/fa'
 
 class User extends Component {
 

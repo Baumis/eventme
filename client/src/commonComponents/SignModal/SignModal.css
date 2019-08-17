@@ -37,7 +37,7 @@
     top: 20%;
     border-radius: 10px;
     max-width: 400px;
-    max-height: 400px;
+    max-height: 450px;
     width: 100%;
     z-index: 3;
     top: calc(50% - 250px);
@@ -120,7 +120,12 @@
 }
 
 .signButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 12px;
+    width: 62px;
+    height: 20px;
     border: 1px solid #4c5c68;
     border-radius: 5px;
     background: #4c5c68;

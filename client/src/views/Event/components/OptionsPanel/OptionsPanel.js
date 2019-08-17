@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 import './Options.css'
-import { FaAngleDoubleLeft, FaPlusCircle } from 'react-icons/fa'
+import { FaAngleDoubleLeft, FaPlus} from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
@@ -130,8 +130,7 @@ class OptionsPanel extends Component {
                     </div>
                     <div className="options-panel-add-field-row">
                         <div className="options-panel-add-field-button" onClick={() => this.addInfoField()}>
-                            <p>add field</p>
-                            <FaPlusCircle />
+                            <p>New field</p>
                         </div>
                     </div>
                     <div className="options-panel-section-devider">

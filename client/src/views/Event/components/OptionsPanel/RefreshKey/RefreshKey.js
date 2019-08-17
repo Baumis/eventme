@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './RefreshKey.css'
-import { FaKey } from 'react-icons/fa'
+import { FaSyncAlt } from 'react-icons/fa'
 import Spinner from '../../../../.././commonComponents/Spinner/Spinner'
 
 class RefreshKey extends Component {
@@ -14,12 +14,15 @@ class RefreshKey extends Component {
     }
 
     refreshKey = async () => {
-        this.setState({ loading: true })
-        const key = await this.props.EventStore.updateKey()
-        this.setState({ loading: false })
+        const confirmation = window.confirm('The current invite-link will not work after this operation. Do you still want to get a new one?')
+        if (confirmation) {
+            this.setState({ loading: true })
+            const key = await this.props.EventStore.updateKey()
+            this.setState({ loading: false })
 
-        if (!key) {
-            alert('Key could not be changed.')
+            if (!key) {
+                alert('Key could not be changed.')
+            }
         }
     }
 
@@ -29,9 +32,9 @@ class RefreshKey extends Component {
                 {this.state.loading ?
                     <Spinner />
                     :
-                    <div>
-                        <p>Get new Key</p>
-                        <FaKey />
+                    <div className="refresh-key-content">
+                        <p>Renew key</p>
+                        <FaSyncAlt />
                     </div>
                 }
             </div>
