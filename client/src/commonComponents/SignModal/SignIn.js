@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import GoogleLogin from 'react-google-login'
 
 class SignIn extends Component {
     constructor(props) {
@@ -8,6 +9,10 @@ class SignIn extends Component {
             username: '',
             password: ''
         }
+    }
+
+    responseGoogle = (response) => {
+        console.log(response)
     }
 
     changeUsername = (event) => {
@@ -58,6 +63,12 @@ class SignIn extends Component {
                         onClick={() => this.signIn(this.state.username, this.state.password)}>
                         Sign In
                     </div>
+                    <GoogleLogin
+                        clientId="911838998946-ofev1jb8srpg1qjaak4st5j6huablfvl.apps.googleusercontent.com"
+                        buttonText="Login with google"
+                        onSuccess={this.responseGoogle}
+                        onFailure={this.responseGoogle}
+                    />
                 </div>
             </div>
         )
