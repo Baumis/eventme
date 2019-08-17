@@ -18,8 +18,9 @@
     padding-bottom: 25px;
     top: 20%;
     border-radius: 10px;
-    width: 400px;
+    max-width: 400px;
     max-height: 400px;
+    width: 100%;
     overflow: hidden;
     z-index: 3;
     top: calc(50% - 250px);
@@ -35,8 +36,9 @@
     padding-bottom: 25px;
     top: 20%;
     border-radius: 10px;
-    width: 400px;
+    max-width: 400px;
     max-height: 400px;
+    width: 100%;
     z-index: 3;
     top: calc(50% - 250px);
     left: calc(50% - 200px);

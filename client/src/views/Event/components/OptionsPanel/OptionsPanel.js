@@ -7,6 +7,7 @@ import moment from 'moment'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
 import GuestList from './GuestList/GuestList'
+import RefreshKey from './RefreshKey/RefreshKey'
 
 class OptionsPanel extends Component {
 
@@ -147,6 +148,7 @@ class OptionsPanel extends Component {
                                 readOnly
                             />
                         </div>
+                        <RefreshKey />
                     </div>
                     <div className="options-panel-content">
                         <GuestList

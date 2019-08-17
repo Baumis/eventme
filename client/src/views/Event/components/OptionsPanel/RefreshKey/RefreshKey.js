@@ -13,9 +13,9 @@ class RefreshKey extends Component {
         }
     }
 
-    refreshKey = () => {
+    refreshKey = async () => {
         this.setState({ loading: true })
-        const key = await this.props.EventStore.getNewKey()
+        const key = await this.props.EventStore.updateKey()
         this.setState({ loading: false })
 
         if (!key) {
@@ -24,14 +24,13 @@ class RefreshKey extends Component {
     }
 
     render() {
-        const Icon = this.state.icons[this.props.icon]
         return (
             <div className="refresh-key" onClick={() => this.refreshKey()}>
                 {this.state.loading ?
                     <Spinner />
                     :
                     <div>
-                        Get new Key
+                        <p>Get new Key</p>
                         <FaKey />
                     </div>
                 }
