@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const { OAuth2Client } = require('google-auth-library')
 const User = require('../models/user')
 const Event = require('../models/event')
 
@@ -10,7 +11,7 @@ exports.getOnePopulated = async (id) => {
 }
 
 exports.create = async (userObject) => {
-    const existingUser = await User.findOne({ email: userObject.email })
+    const existingUser = await User.findOne({ userType: 'LOCAL', email: userObject.email })
 
     if (existingUser) {
         throw new Error('Email must be unique')
@@ -24,6 +25,7 @@ exports.create = async (userObject) => {
     const passwordHash = await bcrypt.hash(userObject.password, saltRounds)
 
     const user = new User({
+        userType: 'LOCAL',
         name: userObject.name,
         email: userObject.email,
         passwordHash
@@ -91,7 +93,7 @@ exports.delete = async (id) => {
             }
         }
 
-        await Event.deleteMany({creator: user._id}, options)
+        await Event.deleteMany({ creator: user._id }, options)
 
         const myInvitesPromises = user.myInvites.map(eventId => Event.findById(eventId))
         const myInvites = await Promise.all(myInvitesPromises)
@@ -100,7 +102,7 @@ exports.delete = async (id) => {
             myInvite.guests = myInvite.guests.filter(guest => guest.user.toString() !== user._id.toString())
             await myInvite.save(options)
         }
-        
+
         await user.remove(options)
 
         await session.commitTransaction()
@@ -110,4 +112,49 @@ exports.delete = async (id) => {
         session.endSession()
         throw new Error('Could not remove user')
     }
+}
+
+exports.findByEmailAndPassword = async (email, password) => {
+    const user = await User.findOne({ userType: 'LOCAL', email })
+    const passwordCorrect = user === null ?
+        false :
+        await bcrypt.compare(password, user.passwordHash)
+
+    if (!user || !passwordCorrect) {
+        throw new Error('Invalid email or password')
+    }
+
+    return user
+}
+
+exports.findOrCreateGoogleUser = async (googleToken) => {
+    const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+    const ticket = await client.verifyIdToken({
+        idToken: googleToken
+    })
+
+    const googleUser = ticket.getPayload()
+
+    const existingUser = await User.findOne({ userType: 'GOOGLE', externalId: googleUser.sub })
+
+    if (existingUser) {
+        return existingUser
+    }
+
+    const user = new User({
+        userType: 'GOOGLE',
+        externalId: googleUser.sub,
+        name: googleUser.name,
+        email: googleUser.email,
+        avatar: googleUser.picture
+    })
+
+    const error = user.validateSync()
+
+    if (error) {
+        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
+        throw new Error(errorMessages.join(', '))
+    }
+
+    return await user.save()
 }
