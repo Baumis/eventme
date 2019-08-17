@@ -6,11 +6,6 @@ const getOne = async (id) => {
     return response.data
 }
 
-const getAll = async () => {
-    const response = await http.get(baseUrl)
-    return response.data
-}
-
 const create = async (newObject) => {
     const response = await http.post(baseUrl, newObject)
     return response.data
@@ -26,4 +21,4 @@ const update = async (updatedObject) => {
     return response.data
 }
 
-export default { getOne, getAll, create, remove, update }
+export default { getOne, create, remove, update }

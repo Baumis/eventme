@@ -83,22 +83,14 @@ exports.requireRole = (...roles) => {
 }
 
 exports.logger = (request, response, next) => {
-    if (process.env.NODE_ENV === 'test') {
-        return next()
-    } else if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development') {
         console.log('Method: ', request.method)
         console.log('Path:   ', request.path)
         console.log('Sender: ', request.senderId)
         console.log('Body:   ', request.body)
         console.log('---')
-        next()
-    } else {
-        console.log('Method: ', request.method)
-        console.log('Path:   ', request.path)
-        console.log('Sender: ', request.senderId)
-        console.log('---')
-        next()
     }
+    next()
 }
 
 exports.error = (request, response) => {

@@ -9,8 +9,6 @@ eventRouter.use('/:id', middleware.extractEvent, middleware.extractRole)
 
 // Routes
 
-eventRouter.get('/', eventController.getAll)
-
 eventRouter.get('/:id', middleware.requireAuthentication, eventController.getOne)
 
 eventRouter.post('/', middleware.requireAuthentication, eventController.create)

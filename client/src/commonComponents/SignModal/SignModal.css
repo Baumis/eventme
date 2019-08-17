@@ -137,3 +137,7 @@
 .signButton:hover{
     color: white;
 }
+
+.googleSignButton {
+    margin: 10px;
+}

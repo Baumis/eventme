@@ -1,12 +1,6 @@
 const User = require('../models/user')
 const userService = require('../services/userService')
 
-exports.getAll = async (request, response) => {
-    const users = await userService.getAllPopulated()
-
-    response.json(users.map(User.format))
-}
-
 exports.getOne = async (request, response) => {
     try {
         const user = await userService.getOnePopulated(request.params.id)

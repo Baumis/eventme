@@ -3,13 +3,6 @@ const mongoose = require('mongoose')
 const Event = require('../models/event')
 const User = require('../models/user')
 
-exports.getAllPopulated = async () => {
-    return await Event
-        .find({})
-        .populate('creator', { _id: 1, name: 1, avatar: 1 })
-        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
-}
-
 exports.populate = async (event) => {
     return await event
         .populate('creator', { _id: 1, name: 1, avatar: 1 })
@@ -18,6 +11,7 @@ exports.populate = async (event) => {
 }
 
 exports.create = async (creatorId, eventObject) => {
+    await Event.createCollection()
     const session = await Event.startSession()
     session.startTransaction()
     const options = { session }
@@ -111,7 +105,7 @@ exports.delete = async (event) => {
     try {
         const creator = await User.findById(event.creator._id)
 
-        creator.myEvents = creator.myEvents.filter(eventId => eventId !== event._id)
+        creator.myEvents = creator.myEvents.filter(eventId => eventId.toString() !== event._id.toString())
 
         await creator.save(options)
 
@@ -119,7 +113,7 @@ exports.delete = async (event) => {
         const guests = await Promise.all(guestsPromises)
 
         for (guest of guests) {
-            guest.myInvites = guest.myInvites.filter(eventId => eventId !== event._id)
+            guest.myInvites = guest.myInvites.filter(eventId => eventId.toString() !== event._id.toString())
             await guest.save(options)
         }
 
@@ -214,7 +208,7 @@ exports.changeInviteKey = async (event) => {
 
 exports.setStatus = async (event, guestId, status) => {
     event.guests = event.guests.map(guest => {
-        guest.status = guest.user.toString() === guestId.toString() ? status : guest.status
+        guest.status = guest.user.toString() === guestId ? status : guest.status
         return guest
     })
 

@@ -1,6 +1,16 @@
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 
 const userSchema = new mongoose.Schema({
+    userType: {
+        type: String,
+        enum: ['LOCAL', 'GOOGLE'],
+        default: 'LOCAL',
+        required: [true, 'User type required']
+    },
+    externalId: {
+        type: String
+    },
     name: {
         type: String,
         trim: true,
@@ -12,7 +22,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         lowercase: true,
-        unique: true,
         required: [true, 'Email required'],
         minlength: [3, 'Email too short'],
         maxlength: [255, 'Email too long'],
@@ -28,8 +37,7 @@ const userSchema = new mongoose.Schema({
         maxlength: [2048, 'Url too long']
     },
     passwordHash: {
-        type: String,
-        required: [true, 'Password required']
+        type: String
     },
     myEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     myInvites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
@@ -61,6 +69,24 @@ userSchema.statics.formatForGhost = (user) => ({
     cover: user.cover,
 })
 
-const User = mongoose.model('User', userSchema) 
+userSchema.statics.withToken = (user) => {
+    const userForToken = {
+        email: user.email,
+        id: user._id
+    }
+
+    const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1d' })
+
+    return {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        cover: user.cover,
+        avatar: user.avatar,
+        token
+    }
+}
+
+const User = mongoose.model('User', userSchema)
 
 module.exports = User

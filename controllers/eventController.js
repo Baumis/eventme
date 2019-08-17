@@ -3,11 +3,6 @@ const Event = require('../models/event')
 const eventService = require('../services/eventService')
 const roles = require('../utils/roles')
 
-exports.getAll = async (request, response) => {
-    const events = await eventService.getAllPopulated()
-    response.json(events.map(Event.format))
-}
-
 exports.getOne = async (request, response) => {
     try {
         const event = await eventService.populate(request.event)
