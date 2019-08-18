@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 import './Options.css'
-import { FaAngleDoubleLeft, FaPlus} from 'react-icons/fa'
+import { FaAngleDoubleLeft } from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
@@ -28,14 +28,14 @@ class OptionsPanel extends Component {
 
     changeStartDate = (event) => {
         this.props.EventStore.setValue(event.target.value, 'startDate')
-        if(moment(event.target.value).isAfter(this.props.EventStore.event.endDate)){
+        if (moment(event.target.value).isAfter(this.props.EventStore.event.endDate)) {
             this.props.EventStore.setValue(event.target.value, 'endDate')
         }
     }
 
     changeEndDate = (event) => {
         this.props.EventStore.setValue(event.target.value, 'endDate')
-        if(moment(event.target.value).isBefore(this.props.EventStore.event.startDate)){
+        if (moment(event.target.value).isBefore(this.props.EventStore.event.startDate)) {
             this.props.EventStore.setValue(event.target.value, 'startDate')
         }
     }

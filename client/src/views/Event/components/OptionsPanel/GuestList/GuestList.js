@@ -20,6 +20,10 @@ class GuestList extends Component {
         this.setState({ filter: event.target.value })
     }
 
+    getAvatar = (avatar) => {
+        return { backgroundImage: `url(${avatar})` }
+    }
+
     removeGuest = (guest) => {
         const confirmation = window.confirm(`Do you want to delete user ${guest.name}?`)
         if (confirmation) {
@@ -55,10 +59,12 @@ class GuestList extends Component {
                             return (
                                 <div className="Guest" key={i}>
                                     <a href={`/profile/${guest.user._id}`}>
-                                        <div className="GuestUser"><FaUser /></div>
+                                        <div style={this.getAvatar(guest.user.avatar)} className="GuestAvatar"> </div>
                                         <div className="GuestName">{guest.user.name}</div>
                                     </a>
-                                    <div className="GuestDelete" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
+                                    {this.props.EventStore.event.creator._id !== guest.user._id ?
+                                        <div className="GuestDelete" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
+                                        : null}
                                 </div>
                             )
                         })}

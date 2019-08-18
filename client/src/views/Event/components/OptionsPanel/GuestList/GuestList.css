@@ -56,12 +56,14 @@
 .Guest{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 12px 10px 12px 10px;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
 .Guest a{
     display: flex;
+    align-items: center;
     color: #46494c;
 }
 
@@ -69,6 +71,18 @@
     padding-left: 10px;
     width: 80%;
     text-align: left;
+}
+
+.GuestAvatar {
+    background: darkgray;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position:center center;
 }
 
 .GuestDelete{

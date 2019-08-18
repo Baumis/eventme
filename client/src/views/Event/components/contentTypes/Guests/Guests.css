@@ -53,8 +53,13 @@
 
 .ComponentGuestIcon {
     background: darkgray;
-    width: 30px;
+    min-width: 30px;
     height: 30px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position:center center;
     border-radius: 50%;
 }
 
