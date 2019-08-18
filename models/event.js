@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const messageSchema = require('./messageSchema')
 
 const componentSchema = new mongoose.Schema({
     order: {
@@ -60,7 +61,7 @@ const eventSchema = new mongoose.Schema({
     },
     endDate: {
         type: Date,
-        default: Date.now() + 24*60*60*1000,
+        default: Date.now,
         required: [true, 'Enddate required']
     },
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
@@ -75,7 +76,8 @@ const eventSchema = new mongoose.Schema({
     },
     infoPanel: [infoPanelEntrySchema],
     guests: [guestSchema],
-    components: [componentSchema]
+    components: [componentSchema],
+    discussion: [messageSchema]
 })
 
 eventSchema.statics.format = (event) => ({
@@ -88,7 +90,8 @@ eventSchema.statics.format = (event) => ({
     background: event.background,
     infoPanel: event.infoPanel,
     guests: event.guests,
-    components: event.components
+    components: event.components,
+    discussion: event.discussion
 })
 
 eventSchema.statics.formatForGuest = (event) => ({
@@ -100,7 +103,8 @@ eventSchema.statics.formatForGuest = (event) => ({
     background: event.background,
     infoPanel: event.infoPanel,
     guests: event.guests,
-    components: event.components
+    components: event.components,
+    discussion: event.discussion
 })
 
 eventSchema.statics.formatForGhost = (event) => ({

@@ -38,7 +38,6 @@ const joinEvent = async (id, inviteKey) => {
 
 const getOneWithKey = async (id, inviteKey) => {
     const response = await http.get(`${baseUrl}/${id}/invitekey/${inviteKey}`)
-    console.log(response.data)
     return response.data
 }
 
@@ -52,6 +51,26 @@ const changeStatus = async (id, userId, newStatus) => {
     return response.data
 }
 
+const addMessage = async (id, message) => {
+    const response = await http.post(`${baseUrl}/${id}/discussion`, { message })
+    return response.data
+}
+
+const addComment = async (id, messageId, comment) => {
+    const response = await http.post(`${baseUrl}/${id}/discussion/${messageId}/comments`, { comment })
+    return response.data
+}
+
+const removeMessage = async (id, messageId) => {
+    const response = await http.delete(`${baseUrl}/${id}/discussion/${messageId}`)
+    return response.data
+}
+
+const removeComment = async (id, messageId, commentId) => {
+    const response = await http.delete(`${baseUrl}/${id}/discussion/${messageId}/comments/${commentId}`)
+    return response.data
+}
+
 export default {
     getOne,
     create,
@@ -62,5 +81,9 @@ export default {
     joinEvent,
     changeStatus,
     getOneWithKey,
-    updateKey
+    updateKey,
+    addMessage,
+    addComment,
+    removeMessage,
+    removeComment
 }
