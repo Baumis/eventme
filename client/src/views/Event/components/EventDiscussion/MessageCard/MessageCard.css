@@ -1,7 +1,9 @@
 .message-card {
-    border: 1px solid darkgray;
-    padding: 10px;
+    border: 1px solid #c5c3c6;
+    border-radius: 6px;
+    padding: 20px;
     margin: 5px;
+    background: white;
 }
 
 .message-card-header {
@@ -11,11 +13,14 @@
 
 .message-card-time {
     display: flex;
+    width: 60px;
+    justify-content: center;
 }
 
 .message-card-author {
     display: flex;
     font-weight: 600;
+    color: #4c5c68;
 }
 
 .message-card-delete {
@@ -27,4 +32,6 @@
 
 .message-card-content {
     display: flex;
+    color: #46494c;
+    margin-left: 60px;
 }
