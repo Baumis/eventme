@@ -164,3 +164,57 @@ exports.addComment = async (request, response) => {
         response.status(400).json({ error: exception.message })
     }
 }
+
+exports.removeMessage = async (request, response) => {
+    try {
+        const message = request.event.discussion.find(message => message._id.toString() === request.params.messageId)
+
+        if (!message) {
+            return response.status(400).json({ error: 'Malformatted message id' })
+        }
+        
+        if (request.senderRole !== roles.CREATOR && request.senderId !== message.author.toString()) {
+            return response.status(403).json({ error: 'User does not have required permission' })
+        }
+
+        const updatedEvent = await eventService.removeMessage(request.event, request.params.messageId)
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(updatedEvent))
+        } else {
+            response.json(Event.formatForGuest(updatedEvent))
+        }
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
+exports.removeComment = async (request, response) => {
+    try {
+        const message = request.event.discussion.find(message => message._id.toString() === request.params.messageId)
+
+        if (!message) {
+            return response.status(400).json({ error: 'Malformatted message id' })
+        }
+
+        const comment = message.comments.find(comment => comment._id.toString() === request.params.commentId)
+
+        if (!comment) {
+            return response.status(400).json({ error: 'Malformatted comment id' })
+        }
+        
+        if (request.senderRole !== roles.CREATOR && request.senderId !== comment.author.toString()) {
+            return response.status(403).json({ error: 'User does not have required permission' })
+        }
+
+        const updatedEvent = await eventService.removeComment(request.event, request.params.messageId, request.params.commentId)
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(updatedEvent))
+        } else {
+            response.json(Event.formatForGuest(updatedEvent))
+        }
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}

@@ -10,6 +10,9 @@ exports.populate = async (event) => {
         .execPopulate()
 
     const getUser = async userId => {
+        if (userId === null) {
+            return null
+        }
         const guest = populatedEvent.guests.find(guest => guest.user._id.toString() === userId.toString())
         return guest ? guest.user : await User.findOne({ _id: userId }, { _id: 1, name: 1, avatar: 1 })
     }
@@ -301,6 +304,39 @@ exports.addComment = async (event, author, messageId, comment) => {
         const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
         throw new Error(errorMessages.join(', '))
     }
+
+    const savedEvent = await event.save()
+
+    return await this.populate(savedEvent)
+}
+
+exports.removeMessage = async (event, messageId) => {
+    event.discussion = event.discussion.map(message => {
+        if (message._id.toString() === messageId) {
+            message.author = null
+            message.content = null
+        }
+        return message
+    })
+
+    const savedEvent = await event.save()
+
+    return await this.populate(savedEvent)
+}
+
+exports.removeComment = async (event, messageId, commentId) => {
+    event.discussion = event.discussion.map(message => {
+        if (message._id.toString() === messageId) {
+            message.comments = message.comments.map(comment => {
+                if (comment._id.toString() === commentId) {
+                    comment.author = null
+                    comment.content = null
+                }
+                return comment
+            })
+        }
+        return message
+    })
 
     const savedEvent = await event.save()
 
