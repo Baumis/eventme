@@ -1,0 +1,9 @@
+.discussion-container{
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.7);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
