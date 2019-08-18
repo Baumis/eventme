@@ -3,6 +3,7 @@
     -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
     box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
     min-height: 400px;
+    max-height: 810px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -59,6 +60,4 @@
     -webkit-box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
     -moz-box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
     box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
-    height: 100%;
-    overflow-y: auto;
 }
