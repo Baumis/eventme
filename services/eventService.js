@@ -6,20 +6,34 @@ const User = require('../models/user')
 exports.populate = async (event) => {
 
     const populatedEvent = await event
-        .populate('creator', { _id: 1, name: 1, avatar: 1 })
         .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 
-    const getUser = userId => populatedEvent.guests.find(guest => guest.user._id.toString() === userId.toString()).user
+    const getUser = async userId => {
+        const guest = populatedEvent.guests.find(guest => guest.user._id.toString() === userId.toString())
+        return guest ? guest.user : await User.findOne({ _id: userId }, { _id: 1, name: 1, avatar: 1 })
+    }
 
-    populatedEvent.discussion = populatedEvent.discussion.map(message => {
-        message.author = getUser(message.author)
-        message.comments = message.comments.map(comment => {
-            comment.author = getUser(comment.author)
+    populatedEvent.creator = await getUser(populatedEvent.creator)
+
+    const discussionPromises = populatedEvent.discussion.map(async message => {
+        message.author = await getUser(message.author)
+        if (message.author === null) {
+            message.content = null
+        }
+        const commentPromises = message.comments.map(async comment => {
+            comment.author = await getUser(comment.author)
+            if (comment.author === null) {
+                comment.content = null
+            }
             return comment
         })
+
+        message.comments = await Promise.all(commentPromises)
         return message
     })
+
+    populatedEvent.discussion = await Promise.all(discussionPromises)
 
     return populatedEvent
 }
@@ -103,12 +117,11 @@ exports.update = async (event, eventObject) => {
         throw new Error(errorMessages.join(', '))
     }
 
-    const updatedEvent = await event.save()
+    const savedEvent = await event.save()
 
-    return await updatedEvent
-        .populate('creator', { _id: 1, name: 1, avatar: 1 })
-        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
-        .execPopulate()
+    const populatedEvent = await this.populate(savedEvent)
+
+    return populatedEvent
 }
 
 exports.delete = async (event) => {
@@ -164,8 +177,8 @@ exports.addGuest = async (event, guestId) => {
 
         user.myInvites = user.myInvites.concat(event._id)
 
-        const savedEvent = await event.save(options)
         await user.save(options)
+        const savedEvent = await event.save(options)
 
         const populatedEvent = await this.populate(savedEvent)
 
@@ -197,8 +210,8 @@ exports.removeGuest = async (event, guestId) => {
         event.guests = event.guests.filter(guest => guest.user.toString() !== guestId)
         user.myInvites = user.myInvites.filter(event => event !== user._id)
 
-        const savedEvent = await event.save(options)
         await user.save(options)
+        const savedEvent = await event.save(options)
 
         const populatedEvent = await this.populate(savedEvent)
 
@@ -217,12 +230,9 @@ exports.removeGuest = async (event, guestId) => {
 exports.changeInviteKey = async (event) => {
     event.inviteKey = mongoose.Types.ObjectId().toHexString()
 
-    const updatedEvent = await event.save()
+    const savedEvent = await event.save()
 
-    return await updatedEvent
-        .populate('creator', { _id: 1, name: 1, avatar: 1 })
-        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
-        .execPopulate()
+    return await this.populate(savedEvent)
 }
 
 exports.setStatus = async (event, guestId, status) => {
@@ -240,13 +250,15 @@ exports.setStatus = async (event, guestId, status) => {
 
     const savedEvent = await event.save()
 
-    return await savedEvent
-        .populate('creator', { _id: 1, name: 1, avatar: 1 })
-        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
-        .execPopulate()
+    return await this.populate(savedEvent)
 }
 
 exports.addMessage = async (event, author, message) => {
+
+    if (!message) {
+        throw new Error('Message required')
+    }
+
     const newMessage = {
         content: message,
         author: author
@@ -262,13 +274,15 @@ exports.addMessage = async (event, author, message) => {
 
     const savedEvent = await event.save()
 
-    return await savedEvent
-        .populate('creator', { _id: 1, name: 1, avatar: 1 })
-        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
-        .execPopulate()
+    return await this.populate(savedEvent)
 }
 
 exports.addComment = async (event, author, messageId, comment) => {
+    
+    if (!comment) {
+        throw new Error('Comment required')
+    }
+
     const newComment = {
         content: comment,
         author: author
@@ -290,8 +304,5 @@ exports.addComment = async (event, author, messageId, comment) => {
 
     const savedEvent = await event.save()
 
-    return await savedEvent
-        .populate('creator', { _id: 1, name: 1, avatar: 1 })
-        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
-        .execPopulate()
+    return await this.populate(savedEvent)
 }

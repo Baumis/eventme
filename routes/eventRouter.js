@@ -29,8 +29,8 @@ eventRouter.post('/:id/guests/invitekey', middleware.requireAuthentication, even
 
 eventRouter.put('/:id/invitekey', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR), eventController.changeInviteKey)
 
-eventRouter.post('/:id/discussion', eventController.addMessage)
+eventRouter.post('/:id/discussion', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addMessage)
 
-eventRouter.post('/:id/discussion/:messageId/comments', eventController.addComment)
+eventRouter.post('/:id/discussion/:messageId/comments', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addComment)
 
 module.exports = eventRouter

@@ -6,6 +6,7 @@ const roles = require('../utils/roles')
 exports.getOne = async (request, response) => {
     try {
         const event = await eventService.populate(request.event)
+
         const senderRole = request.senderRole
 
         if (senderRole === roles.CREATOR) {
@@ -23,6 +24,7 @@ exports.getOne = async (request, response) => {
 exports.create = async (request, response) => {
     try {
         const createdEvent = await eventService.create(request.senderId, request.body)
+
         response.status(201).json(Event.format(createdEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -32,6 +34,7 @@ exports.create = async (request, response) => {
 exports.update = async (request, response) => {
     try {
         const updatedEvent = await eventService.update(request.event, request.body)
+
         response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -41,6 +44,7 @@ exports.update = async (request, response) => {
 exports.delete = async (request, response) => {
     try {
         await eventService.delete(request.event)
+
         response.status(204).end()
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -50,6 +54,7 @@ exports.delete = async (request, response) => {
 exports.addGuest = async (request, response) => {
     try {
         const updatedEvent = await eventService.addGuest(request.event, request.body.userId)
+
         response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -65,7 +70,12 @@ exports.removeGuest = async (request, response) => {
         }
 
         const updatedEvent = await eventService.removeGuest(request.event, userId)
-        response.json(Event.format(updatedEvent))
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(updatedEvent))
+        } else {
+            response.json(Event.formatForGuest(updatedEvent))
+        }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
     }
@@ -100,6 +110,7 @@ exports.addGuestWithInviteKey = async (request, response) => {
 exports.changeInviteKey = async (request, response) => {
     try {
         const updatedEvent = await eventService.changeInviteKey(request.event)
+        
         response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
