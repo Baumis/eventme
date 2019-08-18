@@ -19,7 +19,9 @@ class ComponentContainer extends Component {
                     ))}
                 </div>
                 <div className="component-container-discussion">
-                    <EventDiscussion/>
+                    <EventDiscussion
+                        isCreator={this.props.isCreator}
+                    />
                 </div>
             </div>
         )
