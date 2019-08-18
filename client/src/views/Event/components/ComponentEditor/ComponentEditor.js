@@ -4,7 +4,7 @@ import './ComponentEditor.css'
 import TextOptions from './TypeOptions/TextOptions'
 import GuestsOptions from './TypeOptions/GuestsOptions'
 import InviteLinkOptions from './TypeOptions/InviteLinkOptions'
-import { FaLocationArrow, FaPen, FaTimes, FaList, FaLink } from 'react-icons/fa'
+import { FaPen, FaTimes, FaList, FaLink } from 'react-icons/fa'
 
 
 class ComponentEditor extends Component {

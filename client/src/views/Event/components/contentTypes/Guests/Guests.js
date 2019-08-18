@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Guests.css'
-import { FaUser, FaSearch } from 'react-icons/fa'
+import { FaSearch } from 'react-icons/fa'
 
 class Guests extends Component {
     constructor(props) {
@@ -18,6 +18,10 @@ class Guests extends Component {
 
     changeFilter = (event) => {
         this.setState({ filter: event.target.value })
+    }
+
+    getAvatar = (avatar) => {
+        return { backgroundImage: `url(${avatar})` }
     }
 
     render() {
@@ -46,7 +50,7 @@ class Guests extends Component {
                     {guestsToShow.map((guest, i) =>
                         <div className="ComponentGuest" key={i}>
                             <a href={`/profile/${guest.user._id}`}>
-                                <div className="ComponentGuestIcon"></div>
+                                <div style={this.getAvatar(guest.user.avatar)} className="ComponentGuestIcon"> </div>
                                 <div className="ComponentGuestName">{guest.user.name}</div>
                             </a>
                         </div>
