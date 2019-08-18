@@ -8,7 +8,7 @@
 .user-avatar {
     margin: 0px 3px 0px 0px;
     background: darkgrey;
-    width: 28px;
+    min-width: 28px;
     height: 28px;
     border-radius: 50%;
     -webkit-background-size: cover;
