@@ -62,7 +62,9 @@ class GuestList extends Component {
                                         <div style={this.getAvatar(guest.user.avatar)} className="GuestAvatar"> </div>
                                         <div className="GuestName">{guest.user.name}</div>
                                     </a>
-                                    <div className="GuestDelete" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
+                                    {this.props.EventStore.event.creator._id !== guest.user._id ?
+                                        <div className="GuestDelete" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
+                                        : null}
                                 </div>
                             )
                         })}
