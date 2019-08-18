@@ -4,10 +4,24 @@ const Event = require('../models/event')
 const User = require('../models/user')
 
 exports.populate = async (event) => {
-    return await event
+
+    const populatedEvent = await event
         .populate('creator', { _id: 1, name: 1, avatar: 1 })
         .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
+
+    const getUser = userId => populatedEvent.guests.find(guest => guest.user._id.toString() === userId.toString()).user
+
+    populatedEvent.discussion = populatedEvent.discussion.map(message => {
+        message.author = getUser(message.author)
+        message.comments = message.comments.map(comment => {
+            comment.author = getUser(comment.author)
+            return comment
+        })
+        return message
+    })
+
+    return populatedEvent
 }
 
 exports.create = async (creatorId, eventObject) => {
@@ -130,17 +144,17 @@ exports.delete = async (event) => {
 }
 
 exports.addGuest = async (event, guestId) => {
+    const guest = event.guests.find(guest => guest.user.toString() === guestId)
+
+    if (guest) {
+        throw new Error('User is already a guest')
+    }
+
     const session = await Event.startSession()
     session.startTransaction()
     const options = { session }
 
     try {
-        const guest = event.guests.find(guest => guest.user.toString() === guestId)
-
-        if (guest) {
-            throw new Error('User is already a guest')
-        }
-
         const user = await User.findById(guestId)
 
         event.guests = event.guests.concat({
@@ -168,6 +182,11 @@ exports.addGuest = async (event, guestId) => {
 }
 
 exports.removeGuest = async (event, guestId) => {
+
+    if (event.creator.toString() === guestId) {
+        throw new Error('Creator can not be removed')
+    }
+
     const session = await Event.startSession()
     session.startTransaction()
     const options = { session }
@@ -210,6 +229,56 @@ exports.setStatus = async (event, guestId, status) => {
     event.guests = event.guests.map(guest => {
         guest.status = guest.user.toString() === guestId ? status : guest.status
         return guest
+    })
+
+    const error = event.validateSync()
+
+    if (error) {
+        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
+        throw new Error(errorMessages.join(', '))
+    }
+
+    const savedEvent = await event.save()
+
+    return await savedEvent
+        .populate('creator', { _id: 1, name: 1, avatar: 1 })
+        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
+        .execPopulate()
+}
+
+exports.addMessage = async (event, author, message) => {
+    const newMessage = {
+        content: message,
+        author: author
+    }
+    event.discussion = event.discussion.concat(newMessage)
+
+    const error = event.validateSync()
+
+    if (error) {
+        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
+        throw new Error(errorMessages.join(', '))
+    }
+
+    const savedEvent = await event.save()
+
+    return await savedEvent
+        .populate('creator', { _id: 1, name: 1, avatar: 1 })
+        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
+        .execPopulate()
+}
+
+exports.addComment = async (event, author, messageId, comment) => {
+    const newComment = {
+        content: comment,
+        author: author
+    }
+
+    event.discussion = event.discussion.map(message => {
+        if (message._id.toString() === messageId) {
+            message.comments = message.comments.concat(newComment)
+        }
+        return message
     })
 
     const error = event.validateSync()

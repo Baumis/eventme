@@ -125,3 +125,31 @@ exports.setStatus = async (request, response) => {
         response.status(400).json({ error: exception.message })
     }
 }
+
+exports.addMessage = async (request, response) => {
+    try {
+        const updatedEvent = await eventService.addMessage(request.event, request.senderId, request.body.message)
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(updatedEvent))
+        } else {
+            response.json(Event.formatForGuest(updatedEvent))
+        }
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
+exports.addComment = async (request, response) => {
+    try {
+        const updatedEvent = await eventService.addComment(request.event, request.senderId, request.params.messageId, request.body.comment)
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(updatedEvent))
+        } else {
+            response.json(Event.formatForGuest(updatedEvent))
+        }
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}

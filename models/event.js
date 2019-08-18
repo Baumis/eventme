@@ -61,7 +61,7 @@ const eventSchema = new mongoose.Schema({
     },
     endDate: {
         type: Date,
-        default: Date.now() + 24*60*60*1000,
+        default: Date.now,
         required: [true, 'Enddate required']
     },
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
