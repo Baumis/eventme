@@ -266,7 +266,7 @@ exports.addMessage = async (event, author, message) => {
         content: message,
         author: author
     }
-    event.discussion = event.discussion.concat(newMessage)
+    event.discussion.unshift(newMessage)
 
     const error = event.validateSync()
 
@@ -293,7 +293,7 @@ exports.addComment = async (event, author, messageId, comment) => {
 
     event.discussion = event.discussion.map(message => {
         if (message._id.toString() === messageId) {
-            message.comments = message.comments.concat(newComment)
+            message.comments.push(newComment)
         }
         return message
     })
