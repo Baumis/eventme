@@ -2,22 +2,32 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EventDiscussion.css'
 import MessageCard from './MessageCard/MessageCard'
+import Spinner from '../../../../commonComponents/Spinner/Spinner'
 
 class EventDiscussion extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-            messageInput: ''
+        this.state = {
+            messageInput: '',
+            sending: false
         }
     }
 
-    post = () => {
-        this.props.EventStore.postMessage(this.state.messageInput)
+    post = async () => {
+        this.setState({ sending: true })
+        const event = await this.props.EventStore.postMessage(this.state.messageInput)
+        this.setState({ sending: false })
+
+        if (!event) {
+            alert('The post could not be sent.')
+        } else{
+            this.setState({messageInput: ''})
+        }
     }
 
     changeInputValue = (event) => {
-        this.setState({[event.target.name]: event.target.value})
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     isAuthor = (id) => {
@@ -39,7 +49,11 @@ class EventDiscussion extends Component {
                             placeholder={'your message'}
                         />
                         <div className="discussion-send-button" onClick={() => this.post()}>
-                            Post
+                            {this.state.sending ?
+                                <Spinner />
+                                :
+                                <div>post</div>
+                            }
                         </div>
                     </div>
                 </div>

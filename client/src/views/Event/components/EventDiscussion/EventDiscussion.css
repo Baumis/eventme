@@ -11,8 +11,15 @@
 
 @media only screen and (max-width: 840px) {
     .discussion-container {
+        width: 400px;
+        margin: 0px 0px 10px 0px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .discussion-container {
         width: 90vw;
-        margin: 10px;
+        margin: 0px 0px 10px 0px;
     }
 }
 
@@ -51,8 +58,8 @@
     justify-content: center;
     align-items: center;
     width: 60px;
-    background : #1985a1;
-    border: 1px solid #1985a1;
+    background : #4c5c68;
+    border: 1px solid #4c5c68;
     color: white;
     border-radius: 5px;
     height: 33px;
@@ -66,6 +73,7 @@
     height: 100%;
     overflow-y:auto;
     margin-bottom: 10px;
+    padding-top: 10px;
     -webkit-box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
     -moz-box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
     box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
