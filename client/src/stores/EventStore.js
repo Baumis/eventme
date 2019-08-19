@@ -134,6 +134,15 @@ class EventStore {
         }
     }
 
+    async postMessage(message) {
+        try {
+            this.event = await eventService.addMessage(this.event._id, message)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
     getComponent(order) {
         return this.event.components.find(component => component.order === order)
     }

@@ -30,18 +30,46 @@
     color: rgb(26, 26, 26, 20%);
 }
 
-.componentContainer{
-    padding: 20px 1% 20px 1%;
+.component-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.component-container-grid{
+    padding: 20px 5px 20px 5px;
     display: grid;
     grid-template-columns: auto auto;
-    margin: auto;
     grid-gap: 2%;
-    /*grid-template-columns: repeat( auto-fit, minmax(400px, 20fr) );*/
     justify-content:center;
 }
 
-@media only screen and (max-width: 600px) {
-    .componentContainer{
+.component-container-discussion {
+    padding: 20px 15px 20px 15px;
+    max-width: 400px;
+    min-width: 400px;
+    width: 100%;
+    max-height: 800px;
+}
+
+@media only screen and (max-width: 1258px) {
+    .component-container-discussion {
+        max-width: 815px;
+        padding-top: 12px;
+    }
+}
+
+@media only screen and (max-width: 840px) {
+    .component-container-grid{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 8px 8px 8px;
+    }
+
+    .component-container-discussion {
+        padding: 0px 8px 0px 8px;
         display: flex;
         flex-direction: column;
         justify-content: center;

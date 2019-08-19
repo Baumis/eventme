@@ -4,16 +4,19 @@
     justify-content: center;
     align-items: center;
     color: #4c5c68;
+    background: white;
     font-weight: 600;
     font-size: 25px;
     border: none;
-    background: rgb(192, 192, 192, 0);
     height: 45px;
-    width: 50px;
+    width: 45px;
     position: fixed;
-    top: 0px;
+    top: 50px;
     left: 5px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 5;
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.7);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
 }

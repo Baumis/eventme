@@ -27,6 +27,7 @@
 .InviteContent{
     width: 90%;
     font-size: 20px;
-    overflow: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
     padding: 5px;
 }

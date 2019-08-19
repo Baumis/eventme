@@ -1,0 +1,80 @@
+.discussion-container{
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.7);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.7);
+    min-height: 400px;
+    max-height: 815px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 840px) {
+    .discussion-container {
+        width: 400px;
+        margin: 0px 0px 10px 0px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .discussion-container {
+        width: 90vw;
+        margin: 0px 0px 10px 0px;
+    }
+}
+
+.discussion-header{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px 5px 10px;
+}
+
+.discussion-header-title {
+    display: flex;
+    padding-left: 10px;
+}
+
+.discussion-header-title h3 {
+    font-weight: 500;
+    color: #46494c;
+}
+
+.discussion-input-row {
+    display: flex;
+    align-items: center;
+}
+
+.discussion-input-row input {
+    width: 100%;
+    padding-left: 10px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #c5c3c6;
+    background: #dddddd;
+}
+
+.discussion-send-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    background : #4c5c68;
+    border: 1px solid #4c5c68;
+    color: white;
+    border-radius: 5px;
+    height: 33px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.discussion-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y:auto;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    -webkit-box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
+    box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0.5);
+}
