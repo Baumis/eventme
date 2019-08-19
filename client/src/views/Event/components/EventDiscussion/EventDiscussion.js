@@ -18,7 +18,7 @@ class EventDiscussion extends Component {
         if(this.state.messageInput.length < 1){
             return
         }
-        
+
         this.setState({ sending: true })
         const event = await this.props.EventStore.postMessage(this.state.messageInput)
         this.setState({ sending: false })
@@ -62,8 +62,9 @@ class EventDiscussion extends Component {
                     </div>
                 </div>
                 <div className="discussion-content">
-                    {this.props.EventStore.event.discussion.map(message =>
+                    {this.props.EventStore.event.discussion.map((message, i) =>
                         <MessageCard
+                            key={i}
                             message={message}
                             isAuthor={this.isAuthor(message.author._id)}
                         />
