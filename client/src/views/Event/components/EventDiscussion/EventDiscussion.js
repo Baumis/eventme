@@ -15,6 +15,10 @@ class EventDiscussion extends Component {
     }
 
     post = async () => {
+        if(this.state.messageInput.length < 1){
+            return
+        }
+        
         this.setState({ sending: true })
         const event = await this.props.EventStore.postMessage(this.state.messageInput)
         this.setState({ sending: false })
