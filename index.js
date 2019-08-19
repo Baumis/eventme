@@ -1,5 +1,6 @@
 const http = require('http')
 const express = require('express')
+const cookieParser = require('cookie-parser')
 const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -14,10 +15,8 @@ const loginRouter = require('./routes/loginRouter')
 
 mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: true })
 
-// Static files from react app
-app.use(express.static(path.join(__dirname, './client/build')))
-
 // Middlewares
+app.use(cookieParser())
 app.use(cors())
 app.use(bodyParser.json())
 app.use(middleware.extractToken)
@@ -27,6 +26,9 @@ app.use(middleware.logger)
 app.use('/api/events', eventRouter)
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
+
+// Static files from react app
+app.use(express.static(path.join(__dirname, './client/build')))
 
 app.get('*', (request, response) => {
     response.sendFile(path.join(__dirname, './client/build/index.html'))
