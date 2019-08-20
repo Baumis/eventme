@@ -8,6 +8,7 @@
 }
 
 .message-card-avatar-section {
+    display: flex;
     margin: 0px 15px 0px 5px;
 }
 
@@ -23,10 +24,34 @@
     background-position:center center;
 }
 
+.message-card-wrapper {
+    display: flex;
+    flex: 1;
+}
+
+#deleted {
+    color: rgba(0,0,0,0.3);
+    padding-left: 10px;
+    height: 30px;
+    align-items: center;
+}
+
+.message-card-info-section {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
 .message-card-header {
     display: flex;
+    justify-content: space-between;
     padding: 3px;
-    height: 25px;
+    height: 20px;
+    align-items: center;
+}
+
+.message-card-time-author {
+    display: flex;
 }
 
 .message-card-time {
@@ -41,13 +66,19 @@
     display: flex;
     font-weight: 500;
     color: #1985a1;
+    cursor: pointer;
 }
 
 .message-card-delete {
     display: flex;
     justify-content: center;
     align-items: center;
-    float: right;
+    cursor: pointer;
+    color: rgba(0,0,0,0.2)
+}
+
+.message-card-delete:hover {
+    color: rgba(0,0,0,0.5)
 }
 
 .message-card-content {

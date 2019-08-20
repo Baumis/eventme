@@ -143,6 +143,15 @@ class EventStore {
         }
     }
 
+    async deleteMessage(messageId) {
+        try {
+            this.event = await eventService.removeMessage(this.event._id, messageId)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
     getComponent(order) {
         return this.event.components.find(component => component.order === order)
     }

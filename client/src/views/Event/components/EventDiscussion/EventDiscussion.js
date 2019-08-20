@@ -15,7 +15,7 @@ class EventDiscussion extends Component {
     }
 
     post = async () => {
-        if(this.state.messageInput.length < 1){
+        if (this.state.messageInput.length < 1) {
             return
         }
 
@@ -25,8 +25,18 @@ class EventDiscussion extends Component {
 
         if (!event) {
             alert('The post could not be sent.')
-        } else{
-            this.setState({messageInput: ''})
+        } else {
+            this.setState({ messageInput: '' })
+        }
+    }
+
+    delete = async (id) => {
+        const confirmation = window.confirm('Do you want to delete this message?')
+        if (confirmation) {
+            const event = await this.props.EventStore.deleteMessage(id)
+            if (!event) {
+                alert('The message could not be deleted right now.')
+            }
         }
     }
 
@@ -35,7 +45,7 @@ class EventDiscussion extends Component {
     }
 
     isAuthor = (id) => {
-        return this.props.isCreator || this.props.UserStore.currentUser._id === id
+        return this.props.isCreator() || this.props.UserStore.currentUser._id === id
     }
 
     render() {
@@ -66,8 +76,10 @@ class EventDiscussion extends Component {
                         <MessageCard
                             key={i}
                             message={message}
-                            isAuthor={this.isAuthor(message.author._id)}
+                            isAuthor={this.isAuthor}
+                            delete={this.delete}
                         />
+
                     )}
                 </div>
             </div>
