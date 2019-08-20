@@ -51,6 +51,7 @@
 }
 
 .options-panel-header p{
+  text-align: center;
     width: 100%;
     color: white;
     margin-right: -50px;
@@ -63,6 +64,8 @@
 }
 
 .DeleteEventButton{
+  display: flex;
+  justify-content: center;
   border: 1px solid #fc5a03;
   color: #fc5a03;
   margin: 15px 15px 0px 15px;

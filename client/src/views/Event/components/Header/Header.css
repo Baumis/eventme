@@ -39,7 +39,7 @@
 
 .info-panel{
     width: 100%;
-    background: rgba(0,17,26,0.01);
+    background: rgba(0,0,0,0.5);
     position: absolute;
     min-height: 40px;
     bottom: 0px;
@@ -47,18 +47,6 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-}
-
-.info-panel:after{
-    content: '';
-    background: inherit; 
-    position: absolute;
-    right: -20px;
-    bottom: -20px;
-    box-shadow: inset 0 0 0 600px rgba(0, 0, 0, 0.4);
-    filter: blur(0px);
-    width: calc(100% + 100px);
-    height: 100px;
 }
 
 .info-panel-content{
