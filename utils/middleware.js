@@ -5,12 +5,7 @@ const roles = require('./roles')
 exports.extractToken = (request, response, next) => {
     delete request['senderId'] // Make sure request does not contain senderId
 
-    let token = null
-
-    const authorization = request.get('authorization')
-    if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-        token = authorization.substring(7)
-    }
+    const token = request.cookies['jwt']
 
     try {
         const decodedToken = jwt.verify(token, process.env.SECRET)
@@ -31,6 +26,7 @@ exports.requireAuthentication = (request, response, next) => {
     if (request.senderId && request.senderId.length !== 0) {
         next()
     } else {
+        response.clearCookie('jwt')
         return response.status(401).json({ error: 'token missing or invalid' })
     }
 }

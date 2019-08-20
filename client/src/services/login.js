@@ -11,4 +11,9 @@ const googleLogin = async (googleToken) => {
     return response.data
 }
 
-export default { login, googleLogin }
+const logout = async () => {
+    const response = await http.post(`${baseUrl}/logout`)
+    return response.data
+}
+
+export default { login, googleLogin, logout }
