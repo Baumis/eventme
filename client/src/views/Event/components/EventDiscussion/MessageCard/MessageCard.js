@@ -27,11 +27,13 @@ const MessageCard = (props) => {
                     </div>
                     <div className="message-card-info-section">
                         <div className="message-card-header">
-                            <div className="message-card-author" onClick={() => toProfile(props.message.author._id)}>
-                                {props.message.author.name}
-                            </div>
-                            <div className="message-card-time">
-                                {Moment(props.message.time).format(' D MM YYYY hh:mm')}
+                            <div className="message-card-time-author">
+                                <div className="message-card-author" onClick={() => toProfile(props.message.author._id)}>
+                                    {props.message.author.name}
+                                </div>
+                                <div className="message-card-time">
+                                    {Moment(props.message.time).format(' D MM YYYY hh:mm')}
+                                </div>
                             </div>
                             {props.isAuthor(props.message.author._id) ?
                                 <div className="message-card-delete" onClick={() => props.delete(props.message._id)}>

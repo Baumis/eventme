@@ -26,6 +26,7 @@
 
 .message-card-wrapper {
     display: flex;
+    flex: 1;
 }
 
 #deleted {
@@ -37,14 +38,20 @@
 
 .message-card-info-section {
     display: flex;
+    flex: 1;
     flex-direction: column;
 }
 
 .message-card-header {
     display: flex;
+    justify-content: space-between;
     padding: 3px;
     height: 20px;
     align-items: center;
+}
+
+.message-card-time-author {
+    display: flex;
 }
 
 .message-card-time {
