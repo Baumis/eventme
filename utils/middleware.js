@@ -26,6 +26,7 @@ exports.requireAuthentication = (request, response, next) => {
     if (request.senderId && request.senderId.length !== 0) {
         next()
     } else {
+        response.clearCookie('jwt')
         return response.status(401).json({ error: 'token missing or invalid' })
     }
 }

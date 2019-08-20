@@ -18,8 +18,16 @@ exports.googleLogin = async (request, response) => {
     try {
         const user = await userService.findOrCreateGoogleUser(request.body.googleToken)
 
-        response.status(200).json(User.withToken(user))
+        const token = User.generateToken(user)
+
+        response.cookie('jwt', token, { httpOnly: true })
+        response.status(200).json(User.formatForLogin(user))
     } catch (exception) {
         response.status(401).json({ error: exception.message })
     }
+}
+
+exports.logout = (request, response) => {
+    response.clearCookie('jwt')
+    response.status(204).end()
 }

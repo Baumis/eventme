@@ -21,11 +21,12 @@ class UserStore {
         try {
             this.currentUser = await userService.getOne(user._id)
         } catch (error) {
-            this.signOut()
+            window.localStorage.removeItem('loggedEventAppUser')
         }
     }
 
-    signOut() {
+    async signOut() {
+        await loginService.logout()
         this.currentUser = null
         window.localStorage.removeItem('loggedEventAppUser')
     }
