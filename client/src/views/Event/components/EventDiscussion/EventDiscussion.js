@@ -45,6 +45,9 @@ class EventDiscussion extends Component {
     }
 
     isAuthor = (id) => {
+        if (!this.props.UserStore.currentUser) {
+            return false
+        }
         return this.props.isCreator() || this.props.UserStore.currentUser._id === id
     }
 
