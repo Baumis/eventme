@@ -2,7 +2,6 @@ const User = require('../models/user')
 const userService = require('../services/userService')
 
 exports.getOne = async (request, response) => {
-    console.log(request.cookies)
     try {
         const user = await userService.getOnePopulated(request.params.id)
 

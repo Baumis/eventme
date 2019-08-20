@@ -7,14 +7,12 @@ class UserStore {
 
     async signIn(email, password) {
         const user = await loginService.login({ email, password })
-        console.log(user)
         this.currentUser = user
         window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
     }
 
     async googleSignIn(googleToken) {
         const user = await loginService.googleLogin(googleToken)
-        console.log(user)
         this.currentUser = user
         window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
     }

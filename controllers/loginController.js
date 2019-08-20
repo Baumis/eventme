@@ -5,11 +5,10 @@ exports.login = async (request, response) => {
     try {
         const user = await userService.findByEmailAndPassword(request.body.email, request.body.password)
 
-        const userWithToken = User.withToken(user)
-        const token = userWithToken.token
+        const token = User.generateToken(user)
 
-        response.cookie('jwt', token, { httpOnly: true, secure: true })
-        response.status(200).json(User.withToken(user))
+        response.cookie('jwt', token, { httpOnly: true })
+        response.status(200).json(User.formatForLogin(user))
     } catch(exception) {
         response.status(401).json({ error: exception.message })
     }

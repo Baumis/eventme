@@ -69,22 +69,21 @@ userSchema.statics.formatForGhost = (user) => ({
     cover: user.cover,
 })
 
-userSchema.statics.withToken = (user) => {
+userSchema.statics.formatForLogin = (user) => ({
+    _id: user._id,
+    email: user.email,
+    name: user.name,
+    cover: user.cover,
+    avatar: user.avatar
+})
+
+userSchema.statics.generateToken = (user) => {
     const userForToken = {
         email: user.email,
         id: user._id
     }
 
-    const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1d' })
-
-    return {
-        _id: user._id,
-        email: user.email,
-        name: user.name,
-        cover: user.cover,
-        avatar: user.avatar,
-        token
-    }
+    return jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1d' })
 }
 
 const User = mongoose.model('User', userSchema)
