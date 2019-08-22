@@ -116,6 +116,7 @@
 #readOnly {
   color: rgba(0,0,0);
   border: 1px solid #1985a1;
+  font-size: 16px;
 }
 
 .options-panel-info-block{

@@ -1,6 +1,6 @@
 .message-card {
     display: flex;
-    border: 1px solid #c5c3c6;
+    border: 1px solid rgb(197, 195, 198, 0.5);
     border-radius: 6px;
     padding: 15px;
     margin: 5px;
@@ -87,4 +87,13 @@
     text-align: start;
     color: #46494c;
     padding-left: 10px;
+}
+
+@media only screen and (max-width: 450px) {
+    .message-card-content {
+        padding: 20px 10px 20px 10px;
+    }
+    .message-card-time {
+        font-size: 14px;
+    }
 }
