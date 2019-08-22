@@ -1,9 +1,8 @@
 const mongoose = require('mongoose')
-
 const Event = require('../models/event')
 const User = require('../models/user')
-
 const userService = require('./userService')
+const validators = require('../utils/validators')
 
 exports.populate = async (event) => {
 
@@ -47,7 +46,7 @@ exports.create = async (creatorId, eventObject) => {
     const startDate = eventObject.startDate ? new Date(eventObject.startDate) : new Date()
     const endDate = eventObject.endDate ? new Date(eventObject.endDate) : new Date(startDate.getTime() + 1000 * 60 * 60 * 24)
 
-    if (startDate > endDate) {
+    if (!validators.validateDates(startDate, endDate)) {
         throw new Error('End Date must be greater than Start Date')
     }
 
@@ -97,26 +96,11 @@ exports.create = async (creatorId, eventObject) => {
 }
 
 exports.update = async (event, eventObject) => {
-
     const startDate = new Date(eventObject.startDate)
     const endDate = new Date(eventObject.endDate)
 
-    if (startDate > endDate) {
+    if (!validators.validateDates(startDate, endDate)) {
         throw new Error('End Date must be greater than Start Date')
-    }
-
-    event.label = eventObject.label
-    event.startDate = startDate
-    event.endDate = endDate
-    event.background = eventObject.background
-    event.infoPanel = eventObject.infoPanel
-    event.components = eventObject.components
-
-    const error = event.validateSync()
-
-    if (error) {
-        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-        throw new Error(errorMessages.join(', '))
     }
 
     const updateObject = {
@@ -128,7 +112,7 @@ exports.update = async (event, eventObject) => {
         components: eventObject.components
     }
 
-    const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true })
+    const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })
 
     const populatedEvent = await this.populate(savedEvent)
 
@@ -229,30 +213,17 @@ exports.changeInviteKey = async (event) => {
 }
 
 exports.setStatus = async (event, guestId, status) => {
-    event.guests = event.guests.map(guest => {
-        guest.status = guest.user.toString() === guestId ? status : guest.status
-        return guest
-    })
-
-    const error = event.validateSync()
-
-    if (error) {
-        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-        throw new Error(errorMessages.join(', '))
-    }
-
     const savedEvent = await Event.findOneAndUpdate(
         { _id: event._id, 'guests.user': guestId },
         { $set: { 'guests.$.status': status } },
-        { new: true })
+        { new: true, runValidators: true})
 
     return await this.populate(savedEvent)
 }
 
 exports.addMessage = async (event, author, message) => {
-
-    if (!message) {
-        throw new Error('Message required')
+    if (!message || !author) {
+        throw new Error('Message and author required')
     }
 
     const newMessage = {
@@ -260,27 +231,17 @@ exports.addMessage = async (event, author, message) => {
         author: author
     }
 
-    event.discussion.unshift(newMessage)
-
-    const error = event.validateSync()
-
-    if (error) {
-        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-        throw new Error(errorMessages.join(', '))
-    }
-
     const savedEvent = await Event.findByIdAndUpdate(
         event._id,
         { $push: { discussion: { $each: [newMessage], $position: 0 } } },
-        { new: true })
+        { new: true, runValidators: true })
 
     return await this.populate(savedEvent)
 }
 
 exports.addComment = async (event, author, messageId, comment) => {
-
-    if (!comment) {
-        throw new Error('Comment required')
+    if (!comment || !author) {
+        throw new Error('Comment and author required')
     }
 
     const newComment = {
@@ -288,24 +249,10 @@ exports.addComment = async (event, author, messageId, comment) => {
         author: author
     }
 
-    event.discussion = event.discussion.map(message => {
-        if (message._id.toString() === messageId) {
-            message.comments.push(newComment)
-        }
-        return message
-    })
-
-    const error = event.validateSync()
-
-    if (error) {
-        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-        throw new Error(errorMessages.join(', '))
-    }
-
     const savedEvent = await Event.findOneAndUpdate(
         { _id: event._id, 'discussion._id': messageId },
         { $push: { 'discussion.$.comments': newComment } },
-        { new: true })
+        { new: true, runValidators: true })
 
     return await this.populate(savedEvent)
 }

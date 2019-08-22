@@ -51,7 +51,7 @@ const eventSchema = new mongoose.Schema({
         default: 'My Event',
         trim: true,
         required: [true, 'Label required'],
-        minlength: [3, 'Label too short'],
+        minlength: [1, 'Label too short'],
         maxlength: [144, 'Label too long']
     },
     startDate: {

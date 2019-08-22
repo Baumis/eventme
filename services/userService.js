@@ -49,18 +49,6 @@ exports.update = async (id, userObject) => {
         throw new Error('Malformatted id')
     }
 
-    user.name = userObject.name
-    user.email = userObject.email
-    user.avatar = userObject.avatar
-    user.cover = userObject.cover
-
-    const error = user.validateSync()
-
-    if (error) {
-        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-        throw new Error(errorMessages.join(', '))
-    }
-
     const updateObject = {
         name: userObject.name,
         email: userObject.email,
@@ -68,7 +56,7 @@ exports.update = async (id, userObject) => {
         cover: userObject.cover
     }
 
-    const savedUser = await User.findByIdAndUpdate(id, updateObject)
+    const savedUser = await User.findByIdAndUpdate(id, updateObject, { new: true, runValidators: true })
 
     return await savedUser
         .populate('myEvents', { _id: 1, label: 1, background: 1 })
