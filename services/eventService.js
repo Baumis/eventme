@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
-
 const Event = require('../models/event')
 const User = require('../models/user')
+const userService = require('./userService')
+const validators = require('../utils/validators')
 
 exports.populate = async (event) => {
 
@@ -42,45 +43,42 @@ exports.populate = async (event) => {
 }
 
 exports.create = async (creatorId, eventObject) => {
+    const startDate = eventObject.startDate ? new Date(eventObject.startDate) : new Date()
+    const endDate = eventObject.endDate ? new Date(eventObject.endDate) : new Date(startDate.getTime() + 1000 * 60 * 60 * 24)
+
+    if (!validators.validateDates(startDate, endDate)) {
+        throw new Error('End Date must be greater than Start Date')
+    }
+
+    const newEvent = new Event({
+        label: eventObject.label,
+        startDate: startDate,
+        endDate: endDate,
+        creator: creatorId,
+        background: eventObject.background,
+        infoPanel: eventObject.infoPanel,
+        guests: [{
+            user: creatorId,
+            status: 'GOING'
+        }],
+        components: eventObject.components
+    })
+
+    const error = newEvent.validateSync()
+
+    if (error) {
+        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
+        throw new Error(errorMessages.join(', '))
+    }
+
     await Event.createCollection()
     const session = await Event.startSession()
     session.startTransaction()
     const options = { session }
 
     try {
-        const user = await User.findById(creatorId)
+        await userService.addToMyEvents(creatorId, newEvent._id, options)
 
-        const startDate = eventObject.startDate ? new Date(eventObject.startDate) : new Date()
-        const endDate = eventObject.endDate ? new Date(eventObject.endDate) : new Date(startDate.getTime() + 1000 * 60 * 60 * 24)
-
-        if (startDate > endDate) {
-            throw new Error('End Date must be greater than Start Date')
-        }
-
-        const newEvent = new Event({
-            label: eventObject.label,
-            startDate: startDate,
-            endDate: endDate,
-            creator: user._id,
-            background: eventObject.background,
-            infoPanel: eventObject.infoPanel,
-            guests: [{
-                user: user._id,
-                status: 'GOING'
-            }],
-            components: eventObject.components
-        })
-
-        const error = newEvent.validateSync()
-
-        if (error) {
-            const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-            throw new Error(errorMessages.join(', '))
-        }
-
-        user.myEvents = user.myEvents.concat(newEvent._id)
-
-        await user.save(options)
         const savedEvent = await newEvent.save(options)
 
         const populatedEvent = await this.populate(savedEvent)
@@ -98,29 +96,23 @@ exports.create = async (creatorId, eventObject) => {
 }
 
 exports.update = async (event, eventObject) => {
-
     const startDate = new Date(eventObject.startDate)
     const endDate = new Date(eventObject.endDate)
 
-    if (startDate > endDate) {
+    if (!validators.validateDates(startDate, endDate)) {
         throw new Error('End Date must be greater than Start Date')
     }
 
-    event.label = eventObject.label
-    event.startDate = startDate
-    event.endDate = endDate
-    event.background = eventObject.background
-    event.infoPanel = eventObject.infoPanel
-    event.components = eventObject.components
-
-    const error = event.validateSync()
-
-    if (error) {
-        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-        throw new Error(errorMessages.join(', '))
+    const updateObject = {
+        label: eventObject.label,
+        startDate: startDate,
+        endDate: endDate,
+        background: eventObject.background,
+        infoPanel: eventObject.infoPanel,
+        components: eventObject.components
     }
 
-    const savedEvent = await event.save()
+    const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })
 
     const populatedEvent = await this.populate(savedEvent)
 
@@ -133,21 +125,13 @@ exports.delete = async (event) => {
     const options = { session }
 
     try {
-        const creator = await User.findById(event.creator._id)
+        await Event.findByIdAndDelete(event._id, options)
 
-        creator.myEvents = creator.myEvents.filter(eventId => eventId.toString() !== event._id.toString())
+        await userService.removeFromMyEvents(event.creator._id, event._id, options)
 
-        await creator.save(options)
-
-        const guestsPromises = event.guests.map(guest => User.findById(guest.user))
-        const guests = await Promise.all(guestsPromises)
-
-        for (guest of guests) {
-            guest.myInvites = guest.myInvites.filter(eventId => eventId.toString() !== event._id.toString())
-            await guest.save(options)
+        for (guest of event.guests) {
+            await userService.removeFromMyInvites(guest.user, event._id, options)
         }
-
-        await event.remove(options)
 
         await session.commitTransaction()
         session.endSession()
@@ -171,17 +155,9 @@ exports.addGuest = async (event, guestId) => {
     const options = { session }
 
     try {
-        const user = await User.findById(guestId)
+        await userService.addToMyInvites(guestId, event._id, options)
 
-        event.guests = event.guests.concat({
-            user: user._id,
-            status: 'PENDING'
-        })
-
-        user.myInvites = user.myInvites.concat(event._id)
-
-        await user.save(options)
-        const savedEvent = await event.save(options)
+        const savedEvent = await this.addToGuests(event._id, guestId, options)
 
         const populatedEvent = await this.populate(savedEvent)
 
@@ -208,13 +184,9 @@ exports.removeGuest = async (event, guestId) => {
     const options = { session }
 
     try {
-        const user = await User.findById(guestId)
+        await userService.removeFromMyInvites(guestId, event._id, options)
 
-        event.guests = event.guests.filter(guest => guest.user.toString() !== guestId)
-        user.myInvites = user.myInvites.filter(event => event !== user._id)
-
-        await user.save(options)
-        const savedEvent = await event.save(options)
+        const savedEvent = await this.removeFromGuests(event._id, guestId, options)
 
         const populatedEvent = await this.populate(savedEvent)
 
@@ -231,59 +203,45 @@ exports.removeGuest = async (event, guestId) => {
 }
 
 exports.changeInviteKey = async (event) => {
-    event.inviteKey = mongoose.Types.ObjectId().toHexString()
+    const updateObject = {
+        inviteKey: mongoose.Types.ObjectId().toHexString()
+    }
 
-    const savedEvent = await event.save()
+    const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true })
 
     return await this.populate(savedEvent)
 }
 
 exports.setStatus = async (event, guestId, status) => {
-    event.guests = event.guests.map(guest => {
-        guest.status = guest.user.toString() === guestId ? status : guest.status
-        return guest
-    })
-
-    const error = event.validateSync()
-
-    if (error) {
-        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-        throw new Error(errorMessages.join(', '))
-    }
-
-    const savedEvent = await event.save()
+    const savedEvent = await Event.findOneAndUpdate(
+        { _id: event._id, 'guests.user': guestId },
+        { $set: { 'guests.$.status': status } },
+        { new: true, runValidators: true})
 
     return await this.populate(savedEvent)
 }
 
 exports.addMessage = async (event, author, message) => {
-
-    if (!message) {
-        throw new Error('Message required')
+    if (!message || !author) {
+        throw new Error('Message and author required')
     }
 
     const newMessage = {
         content: message,
         author: author
     }
-    event.discussion.unshift(newMessage)
 
-    const error = event.validateSync()
-
-    if (error) {
-        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-        throw new Error(errorMessages.join(', '))
-    }
-
-    const savedEvent = await event.save()
+    const savedEvent = await Event.findByIdAndUpdate(
+        event._id,
+        { $push: { discussion: { $each: [newMessage], $position: 0 } } },
+        { new: true, runValidators: true })
 
     return await this.populate(savedEvent)
 }
 
 exports.addComment = async (event, author, messageId, comment) => {
-    
-    if (!comment) {
-        throw new Error('Comment required')
+    if (!comment || !author) {
+        throw new Error('Comment and author required')
     }
 
     const newComment = {
@@ -291,54 +249,45 @@ exports.addComment = async (event, author, messageId, comment) => {
         author: author
     }
 
-    event.discussion = event.discussion.map(message => {
-        if (message._id.toString() === messageId) {
-            message.comments.push(newComment)
-        }
-        return message
-    })
-
-    const error = event.validateSync()
-
-    if (error) {
-        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-        throw new Error(errorMessages.join(', '))
-    }
-
-    const savedEvent = await event.save()
+    const savedEvent = await Event.findOneAndUpdate(
+        { _id: event._id, 'discussion._id': messageId },
+        { $push: { 'discussion.$.comments': newComment } },
+        { new: true, runValidators: true })
 
     return await this.populate(savedEvent)
 }
 
 exports.removeMessage = async (event, messageId) => {
-    event.discussion = event.discussion.map(message => {
-        if (message._id.toString() === messageId) {
-            message.author = null
-            message.content = null
-        }
-        return message
-    })
-
-    const savedEvent = await event.save()
+    const savedEvent = await Event.findOneAndUpdate(
+        { _id: event._id, 'discussion._id': messageId },
+        { $set: { 'discussion.$.author': null, 'discussion.$.content': null } },
+        { new: true })
 
     return await this.populate(savedEvent)
 }
 
 exports.removeComment = async (event, messageId, commentId) => {
-    event.discussion = event.discussion.map(message => {
-        if (message._id.toString() === messageId) {
-            message.comments = message.comments.map(comment => {
-                if (comment._id.toString() === commentId) {
-                    comment.author = null
-                    comment.content = null
-                }
-                return comment
-            })
-        }
-        return message
-    })
-
-    const savedEvent = await event.save()
+    const savedEvent = await Event.findOneAndUpdate(
+        { _id: event._id, 'discussion._id': messageId },
+        { $set: { 'discussion.$.comments.$[comment].author': null, 'discussion.$.comments.$[comment].content': null } },
+        { arrayFilters: [{ 'comment._id': commentId }], new: true })
 
     return await this.populate(savedEvent)
+}
+
+exports.addToGuests = async (id, userId, options = {}) => {
+    const guest = {
+        user: userId,
+        status: 'PENDING'
+    }
+
+    options.new = true
+
+    return await Event.findByIdAndUpdate(id, { $addToSet: { guests: guest } }, options)
+}
+
+exports.removeFromGuests = async (id, userId, options = {}) => {
+    options.new = true
+
+    return await Event.findByIdAndUpdate(id, { $pull: { guests: { user: userId } } }, options)
 }
