@@ -78,7 +78,7 @@ class OptionsPanel extends Component {
         return (
             <div style={{ left: this.props.VisibilityStore.optionsPanelPosition }} className="options-panel-container">
                 <div className="options-panel-header">
-                    <p>Options</p>
+                    <p>Editor</p>
                     <button onClick={this.slidePanel}><FaAngleDoubleLeft /></button>
                 </div>
                 <div className="options-panel-canvas">

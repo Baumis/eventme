@@ -29,8 +29,8 @@ class SignUp extends Component {
         try {
             await this.props.UserStore.signUp(userObject)
             this.setState({ loading: false })
-            alert('You have been signed ')
-            this.props.VisibilityStore.closeSignModal()
+            alert('Your account has been saved. Continue by signing in.')
+            this.props.changeTab('SignIn')
         } catch (error) {
             this.setState({ loading: false })
             alert('Something went wrong...')

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import './NewEventModal.css'
 import { FaTimes } from 'react-icons/fa'
 import moment from 'moment'
+import Spinner from '../Spinner/Spinner'
 
 class NewEventModal extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ class NewEventModal extends Component {
             eventName: '',
             startDate: '',
             endDate: '',
-            today: ''
+            today: '',
+            loading: false
         }
     }
 
@@ -44,11 +46,13 @@ class NewEventModal extends Component {
     }
 
     create = async () => {
+        this.setState({ loading: true })
         const event = await this.props.EventStore.create({
             label: this.state.eventName,
             startDate: this.state.startDate,
             endDate: this.state.endDate
         })
+        this.setState({ loading: false })
         event ?
             this.props.history.push(`/events/${event._id}`)
             : alert('The event could not be created')
@@ -98,7 +102,11 @@ class NewEventModal extends Component {
                         </div>
                         <div className="event-options-button-row">
                             <div onClick={() => this.create()} className="event-options-button">
-                                {'Create'}
+                                {this.state.loading ?
+                                    <Spinner />
+                                    :
+                                    <div>create</div>
+                                }
                             </div>
                         </div>
                     </div>
