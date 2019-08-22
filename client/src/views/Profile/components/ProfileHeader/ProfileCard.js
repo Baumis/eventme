@@ -8,8 +8,8 @@ const ProfileCard = (props) => {
     return (
         <div className="profileCard">
             {props.isOwner ?
-                <div className="profile-card-options-button" onClick={() => props.toggleOptions()}>
-                    <FaCog />
+                <div className="profile-card-options-button">
+                    <div onClick={() => props.toggleOptions()}> <FaCog /> </div>
                 </div>
                 : null
             }

@@ -48,7 +48,7 @@ class SignModal extends Component {
                             Sign up
                         </div>
                     </div>
-                    <TagName />
+                    <TagName changeTab={this.changeTab}/>
                 </div>
             </div>
         )
