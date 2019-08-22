@@ -13,7 +13,7 @@ const eventRouter = require('./routes/eventRouter')
 const userRouter = require('./routes/userRouter')
 const loginRouter = require('./routes/loginRouter')
 
-mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
 
 // Middlewares
 app.use(cookieParser())
