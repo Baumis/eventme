@@ -116,7 +116,7 @@ class EventStore {
             return null
         }
     }
-    
+
     getUserStatus(id) {
         const guest = this.event.guests.find(guest => guest.user._id === id)
         if (guest) {

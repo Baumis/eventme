@@ -44,8 +44,8 @@ class InfoBlock extends Component {
             <div className="options-panel-info-block">
                 {this.state.displayMenu ?
                     <div className="options-panel-icon-menu">
-                        {Object.keys(this.state.icons).map(iconName => 
-                            <div className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon(iconName, this.props.index)}>
+                        {Object.keys(this.state.icons).map(iconName =>
+                            <div key={iconName} className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon(iconName, this.props.index)}>
                                 {this.identifyIcon(iconName)}
                             </div>
                         )}
