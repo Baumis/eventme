@@ -1,34 +1,3 @@
-.ComponentAdder{
-    text-align: center;
-    justify-content: center;
-    display: flex;
-}
-
-.ComponentAdder button {
-    height: 150px;
-    width: 150px;
-    background: transparent;
-    border: 5px solid rgb(26, 26, 26, 8%);
-    border-radius: 30px;
-    font-size: 50px;
-    font-weight: 500;
-    color: rgb(26, 26, 26, 8%);
-    transition: color 0s;
-    transition: border 0s;
-    margin: 20px 5% 20px 5%;
-    cursor: pointer;
-}
-
-.ComponentAdder button:hover{
-    border: 5px solid rgb(26, 26, 26, 15%);
-    color: rgb(26, 26, 26, 15%);
-}
-
-.ComponentAdder button:active{
-    border: 5px solid rgb(26, 26, 26, 20%);
-    color: rgb(26, 26, 26, 20%);
-}
-
 .component-container{
     display: flex;
     justify-content: center;

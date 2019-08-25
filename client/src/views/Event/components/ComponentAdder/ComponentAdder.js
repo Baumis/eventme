@@ -1,10 +1,10 @@
 import React from 'react'
-import './ComponentStyles.css'
+import './ComponentAdder.css'
 
 const ComponentAdder = ({ add }) => {
 
     return (
-        <div className="ComponentAdder">
+        <div className="component-adder">
             <button onClick={() => add('Text', { text: 'This is a new component' })}> + </button>
         </div>
     )
