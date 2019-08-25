@@ -18,9 +18,9 @@ class MasterComponent extends Component {
         }
         const TagName = components[this.props.component.type || 'TEXT']
         return (
-            <div className="Component">
+            <div className="master-component">
                 {this.props.isCreator() ?
-                    <div className="OptionsRow">
+                    <div className="master-options-row">
                         <OptionsDropDown
                             order={this.props.component.order}
                         />
