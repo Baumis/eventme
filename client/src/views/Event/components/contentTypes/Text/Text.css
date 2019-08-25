@@ -1,24 +1,28 @@
-.TextComponent{
-    position: relative;
+.text-component{
     display: flex;
     flex-direction: column;
-    z-index: 1;
     margin: 10px;
     overflow-y: hidden;
 }
 
-.TextTitle{
+.text-component-title{
     text-align: start;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
-.TextTitle h2{
+.text-component-title h2{
     margin: 0px;
     padding: 5px 30px 5px 30px;
 }
 
-.TextContent{
-    padding: 0px 30px 0px 30px;
+.text-component-content{
+    margin: 10px 0px 0px 0px;
+    padding: 10px 30px 10px 30px;
     text-align: start;
     overflow-y: auto;
+}
+
+.text-editable-mode {
+    text-decoration: none;
+    border: 1px solid rgb(25, 133, 161);
 }

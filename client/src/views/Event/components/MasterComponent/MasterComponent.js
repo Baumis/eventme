@@ -36,7 +36,7 @@ class MasterComponent extends Component {
                     </div>
                     : null
                 }
-                <TagName data={this.props.component.data} />
+                <TagName data={this.props.component.data} edit={this.state.editMode}/>
             </div>
         )
     }
