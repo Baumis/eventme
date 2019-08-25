@@ -28,9 +28,43 @@
 }
 
 .master-options-row{
+    display: flex;
+    justify-content: flex-end;
+    height: 40px;
+    margin-bottom: -40px;
     background: transparent;
     position: relative;
+    top: 0px;
+}
+
+.master-options-edit-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    font-size: 18px;
+    margin: 5px;
     z-index: 2;
+    color: darkgray;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.3);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.3);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.3);
+}
+
+.editButtonActive {
+    color: rgb(25, 133, 161);
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(25, 133, 161, 0.9);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(25, 133, 161,0.9);
+    box-shadow: 0px 0px 6px -1px rgba(25, 133, 161, 0.9);
+}
+
+.editMasterActive {
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(25, 133, 161, 0.9);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(25, 133, 161,0.9);
+    box-shadow: 0px 0px 6px -1px rgba(25, 133, 161, 0.9);
 }
 
 .Options{

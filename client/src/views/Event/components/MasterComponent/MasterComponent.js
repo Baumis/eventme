@@ -1,29 +1,38 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Text from '../contentTypes/Text/Text'
-import Location from '../contentTypes/Location/Location'
 import Guests from '../contentTypes/Guests/Guests'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
-import OptionsDropDown from './OptionsDropDown'
 import './MasterComponent.css'
+import { FaEdit } from 'react-icons/fa'
 
 class MasterComponent extends Component {
 
-    render() {
-        const components = {
+    state = {
+        editMode: false,
+        components: {
             TEXT: Text,
-            LOCATION: Location,
             GUESTS: Guests,
             INVITE_LINK: InviteLink
         }
-        const TagName = components[this.props.component.type || 'TEXT']
+    }
+
+    toggleEditMode = () => {
+        this.setState({ editMode: !this.state.editMode })
+    }
+
+    render() {
+        const buttonMode = this.state.editMode ? 'editButtonActive' : ''
+        const masterMode = this.state.editMode ? 'editMasterActive' : ''
+        const TagName = this.state.components[this.props.component.type || 'TEXT']
         return (
-            <div className="master-component">
+            <div className={"master-component " + masterMode}>
                 {this.props.isCreator() ?
                     <div className="master-options-row">
-                        <OptionsDropDown
-                            order={this.props.component.order}
-                        />
+                        <div className={"master-options-edit-button " + buttonMode}
+                            onClick={this.toggleEditMode}>
+                            <FaEdit />
+                        </div>
                     </div>
                     : null
                 }
