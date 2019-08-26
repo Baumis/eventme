@@ -1,6 +1,8 @@
 const Event = require('../models/event')
 
 const eventService = require('../services/eventService')
+const logService = require('../services/logService')
+
 const roles = require('../utils/roles')
 
 exports.getOne = async (request, response) => {
@@ -24,6 +26,8 @@ exports.getOne = async (request, response) => {
 exports.create = async (request, response) => {
     try {
         const createdEvent = await eventService.create(request.senderId, request.body)
+        
+        await logService.createdEvent(request.senderId, createdEvent._id)
 
         response.status(201).json(Event.format(createdEvent))
     } catch (exception) {
@@ -35,6 +39,8 @@ exports.update = async (request, response) => {
     try {
         const updatedEvent = await eventService.update(request.event, request.body)
 
+        await logService.updatedEvent(request.senderId, updatedEvent._id)
+
         response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -45,6 +51,8 @@ exports.delete = async (request, response) => {
     try {
         await eventService.delete(request.event)
 
+        await logService.deletedEvent(request.senderId, request.event._id)
+
         response.status(204).end()
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -53,7 +61,11 @@ exports.delete = async (request, response) => {
 
 exports.addGuest = async (request, response) => {
     try {
-        const updatedEvent = await eventService.addGuest(request.event, request.body.userId)
+        const userId = request.params.userId
+
+        const updatedEvent = await eventService.addGuest(request.event, userId)
+
+        await logService.joinedEvent(userId, updatedEvent._id)
 
         response.json(Event.format(updatedEvent))
     } catch (exception) {
@@ -70,6 +82,8 @@ exports.removeGuest = async (request, response) => {
         }
 
         const updatedEvent = await eventService.removeGuest(request.event, userId)
+
+        await logService.leftEvent(userId, updatedEvent._id)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
@@ -101,6 +115,9 @@ exports.addGuestWithInviteKey = async (request, response) => {
         }
 
         const updatedEvent = await eventService.addGuest(request.event, request.senderId)
+
+        await logService.joinedEvent(request.senderId, updatedEvent._id)
+
         response.json(Event.formatForGuest(updatedEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -110,6 +127,8 @@ exports.addGuestWithInviteKey = async (request, response) => {
 exports.changeInviteKey = async (request, response) => {
     try {
         const updatedEvent = await eventService.changeInviteKey(request.event)
+
+        await logService.changedInviteKey(request.senderId, updatedEvent._id)
         
         response.json(Event.format(updatedEvent))
     } catch (exception) {
@@ -127,6 +146,8 @@ exports.setStatus = async (request, response) => {
 
         const updatedEvent = await eventService.setStatus(request.event, userId, request.body.newStatus)
 
+        await logService.changedStatus(userId, updatedEvent._id)
+
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
@@ -141,6 +162,10 @@ exports.addMessage = async (request, response) => {
     try {
         const updatedEvent = await eventService.addMessage(request.event, request.senderId, request.body.message)
 
+        const message = updatedEvent.discussion.find(message => message.author._id === request.senderId && message.content === request.body.message)
+
+        await logService.wroteMessage(request.senderId, updatedEvent._id, message._id)
+
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
@@ -154,6 +179,12 @@ exports.addMessage = async (request, response) => {
 exports.addComment = async (request, response) => {
     try {
         const updatedEvent = await eventService.addComment(request.event, request.senderId, request.params.messageId, request.body.comment)
+
+        const message = updatedEvent.discussion.find(message => message._id === request.params.messageId)
+
+        const comment = message.comments.slice().reverse().find(comment => comment.author._id === request.senderId && comment.content === request.body.comment)
+
+        await logService.wroteComment(request.senderId, updatedEvent._id, message._id, comment._id)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
@@ -178,6 +209,8 @@ exports.removeMessage = async (request, response) => {
         }
 
         const updatedEvent = await eventService.removeMessage(request.event, request.params.messageId)
+
+        await logService.deletedMessage(message.author, updatedEvent._id, request.params.messageId)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
@@ -208,6 +241,8 @@ exports.removeComment = async (request, response) => {
         }
 
         const updatedEvent = await eventService.removeComment(request.event, request.params.messageId, request.params.commentId)
+
+        await logService.deletedComment(comment.author, updatedEvent._id, request.params.messageId, request.params.commentId)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))

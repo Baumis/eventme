@@ -82,7 +82,7 @@ exports.create = async (creatorId, eventObject) => {
         const savedEvent = await newEvent.save(options)
 
         const populatedEvent = await this.populate(savedEvent)
-
+        
         await session.commitTransaction()
         session.endSession()
 

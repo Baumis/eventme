@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const userService = require('../services/userService')
+const logService = require('../services/logService')
 
 exports.getOne = async (request, response) => {
     try {
@@ -18,6 +19,9 @@ exports.getOne = async (request, response) => {
 exports.create = async (request, response) => {
     try {
         const createdUser = await userService.create(request.body)
+
+        await logService.createdUser(createdUser._id)
+
         response.status(201).json(User.format(createdUser))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -32,6 +36,8 @@ exports.update = async (request, response) => {
 
         const updatedUser = await userService.update(request.params.id, request.body)
 
+        await logService.updatedUser(updatedUser._id)
+
         response.json(User.format(updatedUser))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -45,6 +51,8 @@ exports.delete = async (request, response) => {
         }
 
         await userService.delete(request.params.id)
+
+        await logService.delete(request.params.id)
 
         response.status(204).end()
     } catch (exception) {

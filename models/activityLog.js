@@ -3,17 +3,15 @@ const mongoose = require('mongoose')
 const logEntry = new mongoose.Schema({
     type: {
         type: String,
-        enum: ['MESSAGE', 'COMMENT', 'CREATE', 'JOIN'],
+        enum: ['JOINED_EVENT', 'LEFT_EVENT', 'CREATED_EVENT', 'UPDATED_EVENT', 'CHANGED_INVITEKEY', 'CHANGED_STATUS', 'DELETED_EVENT', 'WROTE_MESSAGE', 'DELETED_MESSAGE', 'WROTE_COMMENT', 'DELETED_COMMENT', 'CREATED_USER', 'UPDATED_USER'],
         required: true
     },
-    description: {
-        type: String,
-        required: true,
-        minlength: 1,
-        maxlength: 300
-    },
     data: Object,
-    _id: false
+    time: {
+        type: Date,
+        default: Date.now,
+        required: true
+    }
 })
 
 const activityLogSchema = new mongoose.Schema({
