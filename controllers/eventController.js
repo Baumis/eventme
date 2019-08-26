@@ -162,7 +162,7 @@ exports.addMessage = async (request, response) => {
     try {
         const updatedEvent = await eventService.addMessage(request.event, request.senderId, request.body.message)
 
-        const message = updatedEvent.discussion.find(message => message.author._id === request.senderId && message.content === request.body.message)
+        const message = updatedEvent.discussion.find(message => message.author._id.toString() === request.senderId && message.content === request.body.message)
 
         await logService.wroteMessage(request.senderId, updatedEvent._id, message._id)
 
@@ -180,9 +180,9 @@ exports.addComment = async (request, response) => {
     try {
         const updatedEvent = await eventService.addComment(request.event, request.senderId, request.params.messageId, request.body.comment)
 
-        const message = updatedEvent.discussion.find(message => message._id === request.params.messageId)
+        const message = updatedEvent.discussion.find(message => message._id.toString() === request.params.messageId)
 
-        const comment = message.comments.slice().reverse().find(comment => comment.author._id === request.senderId && comment.content === request.body.comment)
+        const comment = message.comments.slice().reverse().find(comment => comment.author._id.toString() === request.senderId && comment.content === request.body.comment)
 
         await logService.wroteComment(request.senderId, updatedEvent._id, message._id, comment._id)
 
