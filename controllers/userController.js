@@ -20,7 +20,7 @@ exports.create = async (request, response) => {
     try {
         const createdUser = await userService.create(request.body)
 
-        logService.createdUser(createdUser._id)
+        logService.create(createdUser._id)
 
         response.status(201).json(User.format(createdUser))
     } catch (exception) {
@@ -35,8 +35,6 @@ exports.update = async (request, response) => {
         }
 
         const updatedUser = await userService.update(request.params.id, request.body)
-
-        logService.updatedUser(updatedUser._id)
 
         response.json(User.format(updatedUser))
     } catch (exception) {

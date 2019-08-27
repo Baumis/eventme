@@ -27,7 +27,7 @@ exports.create = async (request, response) => {
     try {
         const createdEvent = await eventService.create(request.senderId, request.body)
 
-        logService.createdEvent(request.senderId, createdEvent._id)
+        logService.createdEvent(request.senderId, createdEvent._id, createdEvent.label)
 
         response.status(201).json(Event.format(createdEvent))
     } catch (exception) {
@@ -39,8 +39,6 @@ exports.update = async (request, response) => {
     try {
         const updatedEvent = await eventService.update(request.event, request.body)
 
-        logService.updatedEvent(request.senderId, updatedEvent._id)
-
         response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -50,8 +48,6 @@ exports.update = async (request, response) => {
 exports.delete = async (request, response) => {
     try {
         await eventService.delete(request.event)
-
-        logService.deletedEvent(request.senderId, request.event._id)
 
         response.status(204).end()
     } catch (exception) {
@@ -65,7 +61,7 @@ exports.addGuest = async (request, response) => {
 
         const updatedEvent = await eventService.addGuest(request.event, userId)
 
-        logService.joinedEvent(userId, updatedEvent._id)
+        logService.joinedEvent(userId, updatedEvent._id, updatedEvent.label)
 
         response.json(Event.format(updatedEvent))
     } catch (exception) {
@@ -82,8 +78,6 @@ exports.removeGuest = async (request, response) => {
         }
 
         const updatedEvent = await eventService.removeGuest(request.event, userId)
-
-        logService.leftEvent(userId, updatedEvent._id)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
@@ -116,7 +110,7 @@ exports.addGuestWithInviteKey = async (request, response) => {
 
         const updatedEvent = await eventService.addGuest(request.event, request.senderId)
 
-        logService.joinedEvent(request.senderId, updatedEvent._id)
+        logService.joinedEvent(request.senderId, updatedEvent._id, updatedEvent.label)
 
         response.json(Event.formatForGuest(updatedEvent))
     } catch (exception) {
@@ -127,8 +121,6 @@ exports.addGuestWithInviteKey = async (request, response) => {
 exports.changeInviteKey = async (request, response) => {
     try {
         const updatedEvent = await eventService.changeInviteKey(request.event)
-
-        logService.changedInviteKey(request.senderId, updatedEvent._id)
 
         response.json(Event.format(updatedEvent))
     } catch (exception) {
@@ -146,8 +138,6 @@ exports.setStatus = async (request, response) => {
 
         const updatedEvent = await eventService.setStatus(request.event, userId, request.body.newStatus)
 
-        logService.changedStatus(userId, updatedEvent._id)
-
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
@@ -164,7 +154,7 @@ exports.addMessage = async (request, response) => {
 
         const message = updatedEvent.discussion.find(message => message.author._id.toString() === request.senderId && message.content === request.body.message)
 
-        logService.wroteMessage(request.senderId, updatedEvent._id, message._id)
+        logService.wroteMessage(request.senderId, updatedEvent._id, updatedEvent.label, message._id, message.content)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
@@ -184,7 +174,7 @@ exports.addComment = async (request, response) => {
 
         const comment = message.comments.slice().reverse().find(comment => comment.author._id.toString() === request.senderId && comment.content === request.body.comment)
 
-        logService.wroteComment(request.senderId, updatedEvent._id, message._id, comment._id)
+        logService.wroteComment(request.senderId, updatedEvent._id, updatedEvent.label, message._id, comment._id, comment.content)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
@@ -209,8 +199,6 @@ exports.removeMessage = async (request, response) => {
         }
 
         const updatedEvent = await eventService.removeMessage(request.event, request.params.messageId)
-
-        logService.deletedMessage(message.author, updatedEvent._id, request.params.messageId)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
@@ -241,8 +229,6 @@ exports.removeComment = async (request, response) => {
         }
 
         const updatedEvent = await eventService.removeComment(request.event, request.params.messageId, request.params.commentId)
-
-        logService.deletedComment(comment.author, updatedEvent._id, request.params.messageId, request.params.commentId)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))

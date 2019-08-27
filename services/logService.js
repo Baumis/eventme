@@ -1,7 +1,9 @@
 const ActivityLog = require('../models/activityLog')
 
 exports.getAll = async (userId) => {
-    return await ActivityLog.findOne({ user: userId })
+    const log = await ActivityLog.findOne({ user: userId })
+
+    return log.entries.reverse()
 }
 
 exports.delete = async (userId) => {
@@ -9,71 +11,65 @@ exports.delete = async (userId) => {
 }
 
 exports.removeAll = async (userId) => {
-    return await ActivityLog.findOneAndUpdate({ user: userId }, { entries: [] }, { new: true })
+    const log = await ActivityLog.findOneAndUpdate({ user: userId }, { entries: [] }, { new: true })
+
+    return log.entries.reverse()
 }
 
 exports.removeOne = async (userId, entryId) => {
-    return await ActivityLog.findOneAndUpdate({ user: userId }, { $pull: { entries: { _id: entryId } } }, { new: true })
+    const log = await ActivityLog.findOneAndUpdate({ user: userId }, { $pull: { entries: { _id: entryId } } }, { new: true })
+
+    return log.entries.reverse()
 }
 
-exports.joinedEvent = async (userId, eventId) => {
-    await this.write(userId, 'JOINED_EVENT', { event: eventId })
-}
-
-exports.leftEvent = async (userId, eventId) => {
-    await this.write(userId, 'LEFT_EVENT', { event: eventId })
-}
-
-exports.createdEvent = async (userId, eventId) => {
-    await this.write(userId, 'CREATED_EVENT', { event: eventId })
-}
-
-exports.updatedEvent = async (userId, eventId) => {
-    await this.write(userId, 'UPDATED_EVENT', { event: eventId })
-}
-
-exports.changedInviteKey = async (userId, eventId) => {
-    await this.write(userId, 'CHANGED_INVITEKEY', { event: eventId })
-}
-
-exports.changedStatus = async (userId, eventId) => {
-    await this.write(userId, 'CHANGED_STATUS', { event: eventId })
-}
-
-exports.deletedEvent = async (userId, eventId) => {
-    await this.write(userId, 'DELETED_EVENT', { event: eventId })
-}
-
-exports.wroteMessage = async (userId, eventId, messageId) => {
-    await this.write(userId, 'WROTE_MESSAGE', { event: eventId, message: messageId })
-}
-
-exports.deletedMessage = async (userId, eventId, messageId) => {
-    await this.write(userId, 'DELETED_MESSAGE', { event: eventId, message: messageId })
-}
-
-exports.wroteComment = async (userId, eventId, messageId, commentId) => {
-    await this.write(userId, 'WROTE_COMMENT', { event: eventId, message: messageId, comment: commentId })
-}
-
-exports.deletedComment = async (userId, eventId, messageId, commentId) => {
-    await this.write(userId, 'DELETED_COMMENT', { event: eventId, message: messageId, comment: commentId })
-}
-
-exports.updatedUser = async (userId) => {
-    await this.write(userId, 'UPDATED_USER', {})
-}
-
-exports.createdUser = async (userId) => {
-    const logEntry = {
-        type: 'CREATED_USER',
-        data: {},
-        time: new Date()
+exports.joinedEvent = async (userId, eventId, eventName) => {
+    const event = {
+        _id: eventId,
+        label: eventName
     }
+    await this.write(userId, 'JOINED_EVENT', { event })
+}
 
+exports.createdEvent = async (userId, eventId, eventName) => {
+    const event = {
+        _id: eventId,
+        label: eventName
+    }
+    await this.write(userId, 'CREATED_EVENT', { event })
+}
+
+exports.wroteMessage = async (userId, eventId, eventName, messageId, content) => {
+    const event = {
+        _id: eventId,
+        label: eventName
+    }
+    const message = {
+        _id: messageId,
+        content
+    }
+    await this.write(userId, 'WROTE_MESSAGE', { event, message })
+}
+
+exports.wroteComment = async (userId, eventId, eventName, messageId, commentId, content) => {
+    const event = {
+        _id: eventId,
+        label: eventName
+    }
+    const message = {
+        _id: messageId,
+        content: ''
+    }
+    const comment = {
+        _id: commentId,
+        content
+    }
+    await this.write(userId, 'WROTE_COMMENT', { event, message, comment })
+}
+
+exports.create = async (userId) => {
     const newActivityLog = new ActivityLog({
         user: userId,
-        entries: [logEntry]
+        entries: []
     })
 
     await newActivityLog.save()
