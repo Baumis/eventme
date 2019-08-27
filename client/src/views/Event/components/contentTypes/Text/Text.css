@@ -8,6 +8,7 @@
 .text-component-title{
     text-align: start;
     border-bottom: 1px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
 }
 
 .text-component-title h2{
@@ -16,13 +17,20 @@
 }
 
 .text-component-content{
-    margin: 10px 0px 0px 0px;
-    padding: 10px 30px 10px 30px;
+    margin: 10px 30px 10px 30px;
     text-align: start;
     overflow-y: auto;
+    border-radius: 5px;
+}
+
+.text-component-content {
+    padding: 10px;
 }
 
 .text-editable-mode {
-    text-decoration: none;
+    outline: none;
     border: 1px solid rgb(25, 133, 161);
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.5);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.5);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.5);
 }

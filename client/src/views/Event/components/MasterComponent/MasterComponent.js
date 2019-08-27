@@ -17,6 +17,10 @@ class MasterComponent extends Component {
         }
     }
 
+    changeComponentData = (data) => {
+        this.props.EventStore.editComponentData(this.props.component.order, data)
+    }
+
     toggleEditMode = () => {
         this.setState({ editMode: !this.state.editMode })
     }
@@ -36,9 +40,13 @@ class MasterComponent extends Component {
                     </div>
                     : null
                 }
-                <TagName data={this.props.component.data} edit={this.state.editMode}/>
+                <TagName
+                    data={this.props.component.data}
+                    edit={this.state.editMode}
+                    changeData={this.changeComponentData}
+                />
             </div>
         )
     }
 }
-export default inject('VisibilityStore')(observer(MasterComponent))
+export default inject('VisibilityStore', 'EventStore')(observer(MasterComponent))

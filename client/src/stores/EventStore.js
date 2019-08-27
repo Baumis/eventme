@@ -116,7 +116,7 @@ class EventStore {
             return null
         }
     }
-    
+
     getUserStatus(id) {
         const guest = this.event.guests.find(guest => guest.user._id === id)
         if (guest) {
@@ -181,16 +181,11 @@ class EventStore {
         })
     }
 
-    saveComponentData(order, data, type) {
-        const newValues = {
-            order: order,
-            type: type,
-            data: data
-        }
-        runInAction(() => {
-            this.event.components[order - 1] = newValues
-            this.saved = false
-        })
+    editComponentData(order, data) {
+        const event = { ...this.event }
+        event.components.find(comp => comp.order === order).data = data
+        this.event = event
+        this.saved = false
     }
 }
 
