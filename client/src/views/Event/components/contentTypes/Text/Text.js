@@ -1,6 +1,6 @@
 import React from 'react'
 import './Text.css'
-import ContentEditable from 'react-contenteditable'
+import EditableWrapper from '../../EditableWrapper/EditableWrapper'
 
 const Text = (props) => {
 
@@ -24,16 +24,16 @@ const Text = (props) => {
     return (
         <div className="text-component">
             <div className={"text-component-title " + borderStyle}>
-                <ContentEditable
+                <EditableWrapper
                     html={props.data.title}
                     disabled={!props.edit}
                     onChange={changeTitle}
                 />
             </div>
             <div className={"text-component-content " + borderStyle}>
-                <ContentEditable
+                <EditableWrapper
                     html={props.data.content}
-                    disabled={!props.edit}
+                    editable={!props.edit}
                     onChange={changeContent}
                 />
             </div>

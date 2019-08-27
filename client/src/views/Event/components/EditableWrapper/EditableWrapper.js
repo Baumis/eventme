@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import ContentEditable from 'react-contenteditable'
 
 class EditableWrapper extends Component {
 
-    render() {
-        return(
-            <div>
+    handlePaste = (event) => {
+        event.preventDefault()
+        const content = event.clipboardData.getData('text/plain')
+        document.execCommand('insertHTML', false, content)
+    }
 
-            </div>
+    render() {
+        return (
+            <ContentEditable
+                html={this.props.html}
+                onPaste={this.handlePaste}
+                disabled={this.props.editable}
+                onChange={this.props.onChange}
+            />
         )
     }
 }
+
+export default EditableWrapper
