@@ -9,7 +9,7 @@ exports.login = async (request, response) => {
 
         response.cookie('jwt', token, { httpOnly: true })
         response.status(200).json(User.formatForLogin(user))
-    } catch(exception) {
+    } catch (exception) {
         response.status(401).json({ error: exception.message })
     }
 }
