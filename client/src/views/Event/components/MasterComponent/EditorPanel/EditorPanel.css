@@ -1,0 +1,26 @@
+.editor-panel {
+    top: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.8);
+    border-top-right-radius: 10px;
+}
+
+.editor-panel-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.7);
+    padding: 5px 10px 5px 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.editor-panel-button:hover {
+    color: white;
+}
+
+.editor-panel-arrows {
+    display: flex;
+}

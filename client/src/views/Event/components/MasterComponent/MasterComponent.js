@@ -4,7 +4,8 @@ import Text from '../contentTypes/Text/Text'
 import Guests from '../contentTypes/Guests/Guests'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
 import './MasterComponent.css'
-import { FaEdit } from 'react-icons/fa'
+import { FaCog } from 'react-icons/fa'
+import EditorPanel from './EditorPanel/EditorPanel'
 
 class MasterComponent extends Component {
 
@@ -31,11 +32,15 @@ class MasterComponent extends Component {
         const TagName = this.state.components[this.props.component.type || 'TEXT']
         return (
             <div className={"master-component " + masterMode}>
+                {this.state.editMode ?
+                    <EditorPanel />
+                    : null
+                }
                 {this.props.isCreator() ?
                     <div className="master-options-row">
                         <div className={"master-options-edit-button " + buttonMode}
                             onClick={this.toggleEditMode}>
-                            <FaEdit />
+                            <FaCog />
                         </div>
                     </div>
                     : null
