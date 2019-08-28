@@ -1,6 +1,8 @@
 const Event = require('../models/event')
 
 const eventService = require('../services/eventService')
+const logService = require('../services/logService')
+
 const roles = require('../utils/roles')
 
 exports.getOne = async (request, response) => {
@@ -24,6 +26,8 @@ exports.getOne = async (request, response) => {
 exports.create = async (request, response) => {
     try {
         const createdEvent = await eventService.create(request.senderId, request.body)
+
+        logService.createdEvent(request.senderId, createdEvent._id, createdEvent.label)
 
         response.status(201).json(Event.format(createdEvent))
     } catch (exception) {
@@ -53,7 +57,11 @@ exports.delete = async (request, response) => {
 
 exports.addGuest = async (request, response) => {
     try {
-        const updatedEvent = await eventService.addGuest(request.event, request.body.userId)
+        const userId = request.params.userId
+
+        const updatedEvent = await eventService.addGuest(request.event, userId)
+
+        logService.joinedEvent(userId, updatedEvent._id, updatedEvent.label)
 
         response.json(Event.format(updatedEvent))
     } catch (exception) {
@@ -101,6 +109,9 @@ exports.addGuestWithInviteKey = async (request, response) => {
         }
 
         const updatedEvent = await eventService.addGuest(request.event, request.senderId)
+
+        logService.joinedEvent(request.senderId, updatedEvent._id, updatedEvent.label)
+
         response.json(Event.formatForGuest(updatedEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -110,7 +121,7 @@ exports.addGuestWithInviteKey = async (request, response) => {
 exports.changeInviteKey = async (request, response) => {
     try {
         const updatedEvent = await eventService.changeInviteKey(request.event)
-        
+
         response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -141,6 +152,10 @@ exports.addMessage = async (request, response) => {
     try {
         const updatedEvent = await eventService.addMessage(request.event, request.senderId, request.body.message)
 
+        const message = updatedEvent.discussion.find(message => message.author._id.toString() === request.senderId && message.content === request.body.message)
+
+        logService.wroteMessage(request.senderId, updatedEvent._id, updatedEvent.label, message._id, message.content)
+
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
@@ -154,6 +169,12 @@ exports.addMessage = async (request, response) => {
 exports.addComment = async (request, response) => {
     try {
         const updatedEvent = await eventService.addComment(request.event, request.senderId, request.params.messageId, request.body.comment)
+
+        const message = updatedEvent.discussion.find(message => message._id.toString() === request.params.messageId)
+
+        const comment = message.comments.slice().reverse().find(comment => comment.author._id.toString() === request.senderId && comment.content === request.body.comment)
+
+        logService.wroteComment(request.senderId, updatedEvent._id, updatedEvent.label, message._id, comment._id, comment.content)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
@@ -172,7 +193,7 @@ exports.removeMessage = async (request, response) => {
         if (!message) {
             return response.status(400).json({ error: 'Malformatted message id' })
         }
-        
+
         if (request.senderRole !== roles.CREATOR && request.senderId !== message.author.toString()) {
             return response.status(403).json({ error: 'User does not have required permission' })
         }
@@ -202,7 +223,7 @@ exports.removeComment = async (request, response) => {
         if (!comment) {
             return response.status(400).json({ error: 'Malformatted comment id' })
         }
-        
+
         if (request.senderRole !== roles.CREATOR && request.senderId !== comment.author.toString()) {
             return response.status(403).json({ error: 'User does not have required permission' })
         }

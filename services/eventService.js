@@ -216,7 +216,7 @@ exports.setStatus = async (event, guestId, status) => {
     const savedEvent = await Event.findOneAndUpdate(
         { _id: event._id, 'guests.user': guestId },
         { $set: { 'guests.$.status': status } },
-        { new: true, runValidators: true})
+        { new: true, runValidators: true })
 
     return await this.populate(savedEvent)
 }
