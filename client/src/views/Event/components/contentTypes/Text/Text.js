@@ -24,11 +24,13 @@ const Text = (props) => {
     return (
         <div className="text-component">
             <div className={"text-component-title " + borderStyle}>
-                <EditableWrapper
-                    html={props.data.title}
-                    disabled={!props.edit}
-                    onChange={changeTitle}
-                />
+                <h2>
+                    <EditableWrapper
+                        html={props.data.title}
+                        disabled={!props.edit}
+                        onChange={changeTitle}
+                    />
+                </h2>
             </div>
             <div className={"text-component-content " + borderStyle}>
                 <EditableWrapper
