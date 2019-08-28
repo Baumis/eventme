@@ -27,7 +27,7 @@ const Text = (props) => {
                 <h2>
                     <EditableWrapper
                         html={props.data.title}
-                        disabled={!props.edit}
+                        editable={!props.edit}
                         onChange={changeTitle}
                     />
                 </h2>
