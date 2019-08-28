@@ -14,7 +14,7 @@ class EditorPanel extends Component {
 
     render() {
         return (
-            <div className="editor-panel">
+            <div className="editor-panel" style={{marginTop: this.props.style}}>
                 <div className="editor-panel-arrows">
                     <div className="editor-panel-button">
                         <FaArrowCircleLeft />

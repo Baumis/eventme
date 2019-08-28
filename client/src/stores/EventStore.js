@@ -162,10 +162,10 @@ class EventStore {
             component.order = i + 1
             return (component)
         })
-        runInAction(() => {
-            this.event.components = orderedComponents
-            this.saved = false
-        })
+        const event = { ...this.event }
+        event.components = orderedComponents
+        this.event = event
+        this.saved = false
     }
 
     createComponent(type, data) {

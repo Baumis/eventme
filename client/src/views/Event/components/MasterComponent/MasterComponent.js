@@ -29,15 +29,10 @@ class MasterComponent extends Component {
     render() {
         const buttonMode = this.state.editMode ? 'editButtonActive' : ''
         const masterMode = this.state.editMode ? 'editMasterActive' : ''
+        const panelMarginTop = this.state.editMode ? '0px' : '-40px'
         const TagName = this.state.components[this.props.component.type || 'TEXT']
         return (
             <div className={"master-component " + masterMode}>
-                {this.state.editMode ?
-                    <EditorPanel 
-                        order={this.props.component.order}
-                    />
-                    : null
-                }
                 {this.props.isCreator() ?
                     <div className="master-options-row">
                         <div className={"master-options-edit-button " + buttonMode}
@@ -47,6 +42,11 @@ class MasterComponent extends Component {
                     </div>
                     : null
                 }
+                <EditorPanel
+                    style={panelMarginTop}
+                    order={this.props.component.order}
+                />
+
                 <TagName
                     data={this.props.component.data}
                     edit={this.state.editMode}

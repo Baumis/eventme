@@ -42,9 +42,9 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    height: 35px;
-    width: 35px;
-    font-size: 18px;
+    height: 25px;
+    width: 25px;
+    font-size: 20px;
     margin: 5px;
     z-index: 2;
     color: darkgray;
@@ -55,6 +55,4 @@
 }
 
 .editButtonActive {
-    color: rgb(25, 133, 161);
-    border: 1px solid rgb(25, 133, 161);
 }
