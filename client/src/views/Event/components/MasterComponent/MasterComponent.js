@@ -4,7 +4,7 @@ import Text from '../contentTypes/Text/Text'
 import Guests from '../contentTypes/Guests/Guests'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
 import './MasterComponent.css'
-import { FaCog } from 'react-icons/fa'
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import EditorPanel from './EditorPanel/EditorPanel'
 
 class MasterComponent extends Component {
@@ -37,7 +37,11 @@ class MasterComponent extends Component {
                     <div className="master-options-row">
                         <div className={"master-options-edit-button " + buttonMode}
                             onClick={this.toggleEditMode}>
-                            <FaCog />
+                            {this.state.editMode ?
+                                <FaChevronUp />
+                                :
+                                <FaChevronDown />
+                            }
                         </div>
                     </div>
                     : null
