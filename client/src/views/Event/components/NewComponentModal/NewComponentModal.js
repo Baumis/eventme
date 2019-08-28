@@ -8,16 +8,17 @@ class NewComponentModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            /*types: {
-                'TEXT',
-                'GUESTS',
-                'INVITE_LINK'
-            },*/
+            typeData: {
+                TEXT: {title: 'Your title', content: 'excellent content'},
+                GUESTS: {},
+                INVITE_LINK: {}   
+            }
         }
     }
 
-    saveData = () => {
-        this.props.EventStore.saveComponentData(this.state.order, this.state.data, this.state.activeType)
+    createComponent = (type) => {
+        this.props.EventStore.createComponent(type, this.state.typeData[type])
+        this.props.close()
     }
 
     render() {
@@ -25,19 +26,18 @@ class NewComponentModal extends Component {
             <div className="component-modal-background" >
                 <div className="component-modal-container">
                     <div className="component-modal-top-row">
-                        <div className="component-modal-title">New component</div>
                         <div className="component-modal-exit-icon" onClick={this.props.close} ><FaTimes /></div>
                     </div>
                     <div className="component-modal-button-row">
-                        <div className="component-modal-button" >
+                        <div className="component-modal-button" onClick={() => this.createComponent('TEXT')}>
                             <FaPen />
                             <label>Text</label>
                         </div>
-                        <div className="component-modal-button" >
+                        <div className="component-modal-button" onClick={() => this.createComponent('GUESTS')}>
                             <FaList />
                             <label>Guests</label>
                         </div>
-                        <div className="component-modal-button" >
+                        <div className="component-modal-button" onClick={() => this.createComponent('INVITE_LINK')}>
                             <FaLink />
                             <label>Invite</label>
                         </div>

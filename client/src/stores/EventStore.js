@@ -168,17 +168,15 @@ class EventStore {
         })
     }
 
-    addComponent(type, data) {
-        const components = this.event.components
-        components.push({
-            order: components.length + 1,
+    createComponent(type, data) {
+        const event = { ...this.event }
+        event.components.push({
+            order: event.components.length + 1,
             type: type,
             data: data
         })
-        runInAction(() => {
-            this.event.components = components
+            this.event = event
             this.saved = false
-        })
     }
 
     editComponentData(order, data) {

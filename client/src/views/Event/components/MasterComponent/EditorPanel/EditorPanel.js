@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './EditorPanel.css'
-import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa'
+import { FaArrowCircleLeft, FaArrowCircleRight, FaTrashAlt } from 'react-icons/fa'
 
 class EditorPanel extends Component {
+
+    removeComponent = () => {
+        const confirmation = window.confirm('Delete component?')
+        if (confirmation) {
+            this.props.EventStore.removeComponent(this.props.order)
+        }
+    }
 
     render() {
         return (
@@ -15,9 +23,12 @@ class EditorPanel extends Component {
                         <FaArrowCircleRight />
                     </div>
                 </div>
+                <div className="editor-panel-button" onClick={this.removeComponent}>
+                    <FaTrashAlt />
+                </div>
             </div>
         )
     }
 }
 
-export default EditorPanel
+export default inject('EventStore')(observer(EditorPanel))

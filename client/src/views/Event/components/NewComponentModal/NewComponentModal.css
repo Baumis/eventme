@@ -51,7 +51,7 @@
 
 .component-modal-top-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 10px;
     color: rgb(70, 73, 76, 0.5);
 }

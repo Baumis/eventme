@@ -33,7 +33,9 @@ class MasterComponent extends Component {
         return (
             <div className={"master-component " + masterMode}>
                 {this.state.editMode ?
-                    <EditorPanel />
+                    <EditorPanel 
+                        order={this.props.component.order}
+                    />
                     : null
                 }
                 {this.props.isCreator() ?
