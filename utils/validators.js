@@ -54,7 +54,10 @@ exports.componentValidator = (component) => {
             return true
         case 'INVITE_LINK':
             if (Object.keys(component.data).length === 1 && component.data.inviteKey) {
-                return true
+                if (component.data.inviteKey instanceof String && component.data.inviteKey.length < 100) {
+                    return true
+                }
+                return false
             }
             if (Object.keys(component.data).length !== 0) {
                 return false
