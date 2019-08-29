@@ -12,8 +12,9 @@ const middleware = require('./utils/middleware')
 const eventRouter = require('./routes/eventRouter')
 const userRouter = require('./routes/userRouter')
 const loginRouter = require('./routes/loginRouter')
+const logRouter = require('./routes/logRouter')
 
-mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
 
 // Middlewares
 app.use(cookieParser())
@@ -26,6 +27,7 @@ app.use(middleware.logger)
 app.use('/api/events', eventRouter)
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/log', logRouter)
 
 // Static files from react app
 app.use(express.static(path.join(__dirname, './client/build')))

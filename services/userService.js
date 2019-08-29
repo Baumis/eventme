@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const { OAuth2Client } = require('google-auth-library')
 const User = require('../models/user')
 const Event = require('../models/event')
+const eventService = require('./eventService')
 
 exports.getOnePopulated = async (id) => {
     return await User
@@ -48,19 +49,14 @@ exports.update = async (id, userObject) => {
         throw new Error('Malformatted id')
     }
 
-    user.name = userObject.name
-    user.email = userObject.email
-    user.avatar = userObject.avatar
-    user.cover = userObject.cover
-
-    const error = user.validateSync()
-
-    if (error) {
-        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
-        throw new Error(errorMessages.join(', '))
+    const updateObject = {
+        name: userObject.name,
+        email: userObject.email,
+        avatar: userObject.avatar,
+        cover: userObject.cover
     }
 
-    const savedUser = await user.save()
+    const savedUser = await User.findByIdAndUpdate(id, updateObject, { new: true, runValidators: true })
 
     return await savedUser
         .populate('myEvents', { _id: 1, label: 1, background: 1 })
@@ -84,26 +80,17 @@ exports.delete = async (id) => {
         const myEvents = await Promise.all(myEventsPromises)
 
         for (let myEvent of myEvents) {
-            const myEventGuestsPromises = myEvent.guests.map(guest => User.findById(guest.user))
-            const myEventGuests = await Promise.all(myEventGuestsPromises)
-
-            for (let myEventGuest of myEventGuests) {
-                myEventGuest.myInvites = myEventGuest.myInvites.filter(eventId => eventId.toString() !== myEvent._id.toString())
-                await myEventGuest.save(options)
+            for (let myEventGuest of myEvent.guests) {
+                await this.removeFromMyInvites(myEventGuest.user, myEvent._id, options)
             }
+            await Event.findByIdAndDelete(myEvent._id, options)
         }
 
-        await Event.deleteMany({ creator: user._id }, options)
-
-        const myInvitesPromises = user.myInvites.map(eventId => Event.findById(eventId))
-        const myInvites = await Promise.all(myInvitesPromises)
-
-        for (let myInvite of myInvites) {
-            myInvite.guests = myInvite.guests.filter(guest => guest.user.toString() !== user._id.toString())
-            await myInvite.save(options)
+        for (let myInvite of user.myInvites) {
+            await eventService.removeFromGuests(myInvite, user._id, options)
         }
 
-        await user.remove(options)
+        await User.findByIdAndDelete(user._id, options)
 
         await session.commitTransaction()
         session.endSession()
@@ -157,4 +144,20 @@ exports.findOrCreateGoogleUser = async (googleToken) => {
     }
 
     return await user.save()
+}
+
+exports.addToMyEvents = async (id, eventId, options = {}) => {
+    await User.findByIdAndUpdate(id, { $addToSet: { myEvents: eventId } }, options)
+}
+
+exports.removeFromMyEvents = async (id, eventId, options = {}) => {
+    await User.findByIdAndUpdate(id, { $pull: { myEvents: eventId } }, options)
+}
+
+exports.addToMyInvites = async (id, eventId, options = {}) => {
+    await User.findByIdAndUpdate(id, { $addToSet: { myInvites: eventId } }, options)
+}
+
+exports.removeFromMyInvites = async (id, eventId, options = {}) => {
+    await User.findByIdAndUpdate(id, { $pull: { myInvites: eventId } }, options)
 }
