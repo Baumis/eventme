@@ -152,18 +152,9 @@ class EventStore {
         }
     }
 
-    getComponent(order) {
-        return this.event.components.find(component => component.order === order)
-    }
-
-    removeComponent(order) {
-        const newComponents = this.event.components.filter(component => component.order !== order)
-        const orderedComponents = newComponents.map((component, i) => {
-            component.order = i + 1
-            return (component)
-        })
+    removeComponent(index) {
         const event = { ...this.event }
-        event.components = orderedComponents
+        event.components.splice(index, 1)
         this.event = event
         this.saved = false
     }
@@ -171,17 +162,23 @@ class EventStore {
     createComponent(type, data) {
         const event = { ...this.event }
         event.components.push({
-            order: event.components.length + 1,
             type: type,
             data: data
         })
-            this.event = event
-            this.saved = false
+        this.event = event
+        this.saved = false
     }
 
-    editComponentData(order, data) {
+    editComponentData(index, data) {
         const event = { ...this.event }
-        event.components.find(comp => comp.order === order).data = data
+        event.components[index].data = data
+        this.event = event
+        this.saved = false
+    }
+
+    moveComponentForward(index) {
+        const event = { ...this.event }
+
         this.event = event
         this.saved = false
     }

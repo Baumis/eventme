@@ -8,8 +8,12 @@ class EditorPanel extends Component {
     removeComponent = () => {
         const confirmation = window.confirm('Delete component?')
         if (confirmation) {
-            this.props.EventStore.removeComponent(this.props.order)
+            this.props.EventStore.removeComponent(this.props.key)
         }
+    }
+
+    moveForward = () => {
+        this.props.EventStore.moveComponentForward(this.props.key)
     }
 
     render() {
@@ -19,7 +23,7 @@ class EditorPanel extends Component {
                     <div className="editor-panel-button">
                         <FaArrowCircleLeft />
                     </div>
-                    <div className="editor-panel-button">
+                    <div className="editor-panel-button" onClick={this.moveForward}>
                         <FaArrowCircleRight />
                     </div>
                 </div>

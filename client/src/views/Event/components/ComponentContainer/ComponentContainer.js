@@ -9,9 +9,9 @@ class ComponentContainer extends Component {
         return (
             <div className="component-container">
                 <div className="component-container-grid">
-                    {this.props.EventStore.event.components.map(component => (
+                    {this.props.EventStore.event.components.map((component, i) => (
                         <MasterComponent
-                            key={component.order}
+                            key={i}
                             component={component}
                             isCreator={this.props.isCreator}
                         />

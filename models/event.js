@@ -4,7 +4,6 @@ const messageSchema = require('./messageSchema')
 const componentSchema = new mongoose.Schema({
     order: {
         type: Number,
-        required: [true, 'Order required']
     },
     type: {
         type: String,
