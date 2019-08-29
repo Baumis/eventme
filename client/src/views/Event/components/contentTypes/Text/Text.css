@@ -1,24 +1,35 @@
-.TextComponent{
-    position: relative;
+.text-component{
     display: flex;
     flex-direction: column;
-    z-index: 1;
     margin: 10px;
     overflow-y: hidden;
 }
 
-.TextTitle{
+.text-component-title{
     text-align: start;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
-.TextTitle h2{
+.text-component-title h2{
     margin: 0px;
     padding: 5px 30px 5px 30px;
 }
 
-.TextContent{
-    padding: 0px 30px 0px 30px;
+.text-component-content{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 30px 10px 30px;
+    padding: 10px;
     text-align: start;
     overflow-y: auto;
+    word-wrap: break-word;
+}
+
+.text-editable-mode {
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid rgb(25, 133, 161);
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.5);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.5);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.5);
 }

@@ -1,35 +1,63 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Text from '../contentTypes/Text/Text'
-import Location from '../contentTypes/Location/Location'
 import Guests from '../contentTypes/Guests/Guests'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
-import OptionsDropDown from './OptionsDropDown'
 import './MasterComponent.css'
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import EditorPanel from './EditorPanel/EditorPanel'
 
 class MasterComponent extends Component {
 
-    render() {
-        const components = {
+    state = {
+        editMode: false,
+        components: {
             TEXT: Text,
-            LOCATION: Location,
             GUESTS: Guests,
             INVITE_LINK: InviteLink
         }
-        const TagName = components[this.props.component.type || 'TEXT']
+    }
+
+    changeComponentData = (data) => {
+        this.props.EventStore.editComponentData(this.props.index, data)
+    }
+
+    toggleEditMode = () => {
+        this.setState({ editMode: !this.state.editMode })
+    }
+
+    render() {
+        const buttonMode = this.state.editMode ? 'editButtonActive' : ''
+        const masterMode = this.state.editMode ? 'editMasterActive' : ''
+        const panelMarginTop = this.state.editMode ? '0px' : '-40px'
+        const TagName = this.state.components[this.props.component.type || 'TEXT']
         return (
-            <div className="Component">
+            <div className={"master-component " + masterMode}>
                 {this.props.isCreator() ?
-                    <div className="OptionsRow">
-                        <OptionsDropDown
-                            order={this.props.component.order}
-                        />
+                    <div className="master-options-row">
+                        <div className={"master-options-edit-button " + buttonMode}
+                            onClick={this.toggleEditMode}>
+                            {this.state.editMode ?
+                                <FaChevronUp />
+                                :
+                                <FaChevronDown />
+                            }
+                        </div>
                     </div>
                     : null
                 }
-                <TagName data={this.props.component.data} />
+                <EditorPanel
+                    style={panelMarginTop}
+                    index={this.props.index}
+                />
+
+                <TagName
+                    data={this.props.component.data}
+                    edit={this.state.editMode}
+                    changeData={this.changeComponentData}
+                />
             </div>
         )
     }
 }
-export default inject('VisibilityStore')(observer(MasterComponent))
+export default inject('VisibilityStore', 'EventStore')(observer(MasterComponent))

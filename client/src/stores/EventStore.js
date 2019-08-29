@@ -152,45 +152,63 @@ class EventStore {
         }
     }
 
-    getComponent(order) {
-        return this.event.components.find(component => component.order === order)
+    removeComponent(index) {
+        const event = { ...this.event }
+        event.components.splice(index, 1)
+
+        this.event = event
+        this.saved = false
     }
 
-    removeComponent(order) {
-        const newComponents = this.event.components.filter(component => component.order !== order)
-        const orderedComponents = newComponents.map((component, i) => {
-            component.order = i + 1
-            return (component)
-        })
-        runInAction(() => {
-            this.event.components = orderedComponents
-            this.saved = false
-        })
-    }
-
-    addComponent(type, data) {
-        const components = this.event.components
-        components.push({
-            order: components.length + 1,
+    createComponent(type, data) {
+        const event = { ...this.event }
+        event.components.push({
             type: type,
             data: data
         })
-        runInAction(() => {
-            this.event.components = components
-            this.saved = false
-        })
+
+        this.event = event
+        this.saved = false
     }
 
-    saveComponentData(order, data, type) {
-        const newValues = {
-            order: order,
-            type: type,
-            data: data
+    editComponentData(index, data) {
+        const event = { ...this.event }
+        event.components[index].data = data
+
+        this.event = event
+        this.saved = false
+    }
+
+    moveComponentForward(index) {
+        const event = { ...this.event }
+        const copy = event.components[index]
+
+        if (event.components.length !== index + 1) {
+            event.components[index] = event.components[index + 1]
+            event.components[index + 1] = copy
+        } else{
+            event.components[index] = event.components[0]
+            event.components[0] = copy
         }
-        runInAction(() => {
-            this.event.components[order - 1] = newValues
-            this.saved = false
-        })
+
+        this.event = event
+        this.saved = false
+    }
+
+    moveComponentBackward(index) {
+        const event = { ...this.event }
+        const copy = event.components[index]
+
+        if (index - 1 > -1) {
+            event.components[index] = event.components[index - 1]
+            event.components[index - 1] = copy
+        } else{
+            event.components[index] = event.components[event.components.length -1]
+            event.components[event.components.length -1] = copy
+        }
+
+        this.event = event
+        this.saved = false
     }
 }
 

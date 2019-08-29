@@ -1,14 +1,43 @@
 import React from 'react'
 import './Text.css'
+import EditableWrapper from '../../EditableWrapper/EditableWrapper'
 
-const Text = ({ data }) => {
+const Text = (props) => {
+
+    const changeTitle = (event) => {
+        const dataObject = {
+            title: event.target.value,
+            content: props.data.content
+        }
+        props.changeData(dataObject)
+    }
+
+    const changeContent = (event) => {
+        const dataObject = {
+            title: props.data.title,
+            content: event.target.value
+        }
+        props.changeData(dataObject)
+    }
+
+    const borderStyle = props.edit ? 'text-editable-mode' : ''
     return (
-        <div className="TextComponent">
-            <div className="TextTitle">
-                <h2>{data.title}</h2>
+        <div className="text-component">
+            <div className={"text-component-title " + borderStyle}>
+                <h2>
+                    <EditableWrapper
+                        html={props.data.title}
+                        editable={!props.edit}
+                        onChange={changeTitle}
+                    />
+                </h2>
             </div>
-            <div className="TextContent">
-                <p>{data.content}</p>
+            <div className={"text-component-content " + borderStyle}>
+                <EditableWrapper
+                    html={props.data.content}
+                    editable={!props.edit}
+                    onChange={changeContent}
+                />
             </div>
         </div>
     )

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import './ComponentStyles.css'
+import './ComponentContainer.css'
 import MasterComponent from '../MasterComponent/MasterComponent.js'
-import EventDiscussion from '../EventDiscussion/EventDiscussion'
 
 class ComponentContainer extends Component {
 
@@ -10,18 +9,14 @@ class ComponentContainer extends Component {
         return (
             <div className="component-container">
                 <div className="component-container-grid">
-                    {this.props.EventStore.event.components.map(component => (
+                    {this.props.EventStore.event.components.map((component, i) => (
                         <MasterComponent
-                            key={component.order}
+                            key={i}
+                            index={i}
                             component={component}
                             isCreator={this.props.isCreator}
                         />
                     ))}
-                </div>
-                <div className="component-container-discussion">
-                    <EventDiscussion
-                        isCreator={this.props.isCreator}
-                    />
                 </div>
             </div>
         )

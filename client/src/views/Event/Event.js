@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Event.css'
 import Header from './components/Header/Header'
-import ComponentAdder from './components/ComponentContainer/ComponentAdder'
+import ComponentAdder from './components/ComponentAdder/ComponentAdder'
 import ComponentContainer from './components/ComponentContainer/ComponentContainer'
 import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import SaveButton from './components/SaveButton/SaveButton'
-import ComponentEditor from './components/ComponentEditor/ComponentEditor'
 import OptionsButton from './components/OptionsButton/OptionsButton'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import JoinEventModal from './components/JoinEventModal/JoinEventModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
+import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 
 class Event extends Component {
 
@@ -18,7 +18,8 @@ class Event extends Component {
         super(props)
         this.state = {
             loading: true,
-            showInviteModal: false
+            showInviteModal: false,
+            showNewComponentModal: false
         }
     }
 
@@ -47,22 +48,12 @@ class Event extends Component {
         return this.props.EventStore.event.guests.some(guest => guest.user._id === this.props.UserStore.currentUser._id)
     }
 
-    addComponent = () => {
-        this.props.EventStore.addComponent('TEXT', 'New')
-        this.props.VisibilityStore.showComponentEditor(this.props.EventStore.event.components.length)
-        console.log(this.props.EventStore.event.components)
-    }
-
     addGuest = async (name) => {
         console.log('TODO: add guest: ' + name)
     }
 
-    showEditor = () => {
-        this.props.VisibilityStore.showComponentEditor()
-    }
-
-    closeEditor = () => {
-        this.props.VisibilityStore.closeComponentEditor()
+    toggleNewComponentModal = () => {
+        this.setState({ showNewComponentModal: !this.state.showNewComponentModal})
     }
 
     slidePanel = () => {
@@ -85,14 +76,13 @@ class Event extends Component {
                 <ComponentContainer isCreator={this.isCreator} />
                 {this.isCreator() ?
                     <div>
-                        <ComponentAdder add={this.addComponent} />
+                        <ComponentAdder add={this.toggleNewComponentModal} />
                         <OptionsPanel />
                         <OptionsButton showPanel={this.slidePanel} />
                         <SaveButton save={this.save} saved={this.props.EventStore.saved} />
-                        {this.props.VisibilityStore.componentEditor ?
-                            <ComponentEditor
-                                close={this.closeEditor}
-                                component={this.props.EventStore.getComponent(this.props.VisibilityStore.currentComponent)}
+                        {this.state.showNewComponentModal ?
+                            <NewComponentModal
+                                close={this.toggleNewComponentModal}
                             />
                             : null
                         }
