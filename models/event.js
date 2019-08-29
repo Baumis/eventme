@@ -1,20 +1,7 @@
 const mongoose = require('mongoose')
 const messageSchema = require('./messageSchema')
-
-const componentSchema = new mongoose.Schema({
-    order: {
-        type: Number,
-        required: [true, 'Order required']
-    },
-    type: {
-        type: String,
-        enum: ['PLACEHOLDER', 'TEXT', 'VIDEO', 'LOCATION', 'GUESTS', 'PICTURE', 'INVITE_LINK'],
-        default: 'PLACEHOLDER',
-        required: [true, 'Type required']
-    },
-    data: Object,
-    _id: false
-})
+const componentSchema = require('./componentSchema')
+const validators = require('../utils/validators')
 
 const guestSchema = new mongoose.Schema({
     user: {
@@ -76,7 +63,7 @@ const eventSchema = new mongoose.Schema({
     },
     infoPanel: [infoPanelEntrySchema],
     guests: [guestSchema],
-    components: [componentSchema],
+    components: [{ type: componentSchema, validate: validators.componentValidator }],
     discussion: [messageSchema]
 })
 
