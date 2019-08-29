@@ -20,6 +20,13 @@ mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: tru
 app.use(cookieParser())
 app.use(cors())
 app.use(bodyParser.json())
+
+// Static files from react app
+if ( process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, './client/build')))
+}
+
+// More middlewares
 app.use(middleware.extractToken)
 app.use(middleware.logger)
 
@@ -29,12 +36,12 @@ app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/log', logRouter)
 
-// Static files from react app
-app.use(express.static(path.join(__dirname, './client/build')))
-
-app.get('*', (request, response) => {
-    response.sendFile(path.join(__dirname, './client/build/index.html'))
-})
+// Rest of endpoints to react
+if ( process.env.NODE_ENV === 'production') {
+    app.get('*', (request, response) => {
+        response.sendFile(path.join(__dirname, './client/build/index.html'))
+    })
+}
 
 // Catches unknown endpoints
 app.use(middleware.error)
