@@ -8,19 +8,23 @@ class EditorPanel extends Component {
     removeComponent = () => {
         const confirmation = window.confirm('Delete component?')
         if (confirmation) {
-            this.props.EventStore.removeComponent(this.props.key)
+            this.props.EventStore.removeComponent(this.props.index)
         }
     }
 
     moveForward = () => {
-        this.props.EventStore.moveComponentForward(this.props.key)
+        this.props.EventStore.moveComponentForward(this.props.index)
+    }
+
+    moveBackward = () => {
+        this.props.EventStore.moveComponentBackward(this.props.index)
     }
 
     render() {
         return (
             <div className="editor-panel" style={{marginTop: this.props.style}}>
                 <div className="editor-panel-arrows">
-                    <div className="editor-panel-button">
+                    <div className="editor-panel-button" onClick={this.moveBackward}>
                         <FaArrowCircleLeft />
                     </div>
                     <div className="editor-panel-button" onClick={this.moveForward}>

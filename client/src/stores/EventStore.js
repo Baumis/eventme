@@ -155,6 +155,7 @@ class EventStore {
     removeComponent(index) {
         const event = { ...this.event }
         event.components.splice(index, 1)
+
         this.event = event
         this.saved = false
     }
@@ -165,6 +166,7 @@ class EventStore {
             type: type,
             data: data
         })
+
         this.event = event
         this.saved = false
     }
@@ -172,12 +174,38 @@ class EventStore {
     editComponentData(index, data) {
         const event = { ...this.event }
         event.components[index].data = data
+
         this.event = event
         this.saved = false
     }
 
     moveComponentForward(index) {
         const event = { ...this.event }
+        const copy = event.components[index]
+
+        if (event.components.length !== index + 1) {
+            event.components[index] = event.components[index + 1]
+            event.components[index + 1] = copy
+        } else{
+            event.components[index] = event.components[0]
+            event.components[0] = copy
+        }
+
+        this.event = event
+        this.saved = false
+    }
+
+    moveComponentBackward(index) {
+        const event = { ...this.event }
+        const copy = event.components[index]
+
+        if (index - 1 > -1) {
+            event.components[index] = event.components[index - 1]
+            event.components[index - 1] = copy
+        } else{
+            event.components[index] = event.components[event.components.length -1]
+            event.components[event.components.length -1] = copy
+        }
 
         this.event = event
         this.saved = false

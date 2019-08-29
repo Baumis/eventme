@@ -19,7 +19,7 @@ class MasterComponent extends Component {
     }
 
     changeComponentData = (data) => {
-        this.props.EventStore.editComponentData(this.props.key, data)
+        this.props.EventStore.editComponentData(this.props.index, data)
     }
 
     toggleEditMode = () => {
@@ -48,7 +48,7 @@ class MasterComponent extends Component {
                 }
                 <EditorPanel
                     style={panelMarginTop}
-                    key={this.props.key}
+                    index={this.props.index}
                 />
 
                 <TagName

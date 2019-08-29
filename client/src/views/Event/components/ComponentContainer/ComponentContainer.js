@@ -12,6 +12,7 @@ class ComponentContainer extends Component {
                     {this.props.EventStore.event.components.map((component, i) => (
                         <MasterComponent
                             key={i}
+                            index={i}
                             component={component}
                             isCreator={this.props.isCreator}
                         />
