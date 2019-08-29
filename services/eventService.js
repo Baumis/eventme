@@ -10,6 +10,13 @@ exports.populate = async (event) => {
         .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 
+    populatedEvent.components.forEach(component => {
+        if (component.type === 'INVITE_LINK') {
+            component.data = {}
+            component.data.inviteKey = populatedEvent.inviteKey
+        }
+    })
+
     const getUser = async userId => {
         if (userId === null) {
             return null
