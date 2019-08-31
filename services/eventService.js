@@ -110,6 +110,10 @@ exports.update = async (event, eventObject) => {
         throw new Error('End Date must be greater than Start Date')
     }
 
+    if (!validators.validateComponents(eventObject.components)) {
+        throw new Error('Components are not valid')
+    }
+
     const updateObject = {
         label: eventObject.label,
         startDate: startDate,

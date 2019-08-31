@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const messageSchema = require('./messageSchema')
 const componentSchema = require('./componentSchema')
-const validators = require('../utils/validators')
 
 const guestSchema = new mongoose.Schema({
     user: {
@@ -63,7 +62,7 @@ const eventSchema = new mongoose.Schema({
     },
     infoPanel: [infoPanelEntrySchema],
     guests: [guestSchema],
-    components: [{ type: componentSchema, validate: validators.componentValidator }],
+    components: [componentSchema],
     discussion: [messageSchema]
 })
 

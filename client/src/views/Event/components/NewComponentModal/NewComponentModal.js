@@ -9,7 +9,7 @@ class NewComponentModal extends Component {
         super(props)
         this.state = {
             typeData: {
-                TEXT: {title: 'Your title', content: 'excellent content'},
+                TEXT: { title: 'Your title', content: 'excellent content' },
                 GUESTS: {},
                 INVITE_LINK: {},
                 DISCUSSION: {}
