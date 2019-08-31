@@ -8,7 +8,8 @@ const componentSchema = new mongoose.Schema({
     },
     data: {
         type: Object,
-        default: {}
+        default: {},
+        required: true
     },
     _id: false
 })

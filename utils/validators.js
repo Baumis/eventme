@@ -22,8 +22,19 @@ exports.validateDates = (startDate, endDate) => {
     return true
 }
 
-exports.componentValidator = (component) => {
+exports.validateComponents = (components) => {
+    for (let component of components) {
+        const valid = this.validateComponent(component)
 
+        if (!valid) {
+            return false
+        }
+    }
+
+    return true
+}
+
+exports.validateComponent = (component) => {
     if (!component || !component.type) {
         return false
     }
@@ -59,6 +70,11 @@ exports.componentValidator = (component) => {
                 }
                 return false
             }
+            if (Object.keys(component.data).length !== 0) {
+                return false
+            }
+            return true
+        case 'DISCUSSION':
             if (Object.keys(component.data).length !== 0) {
                 return false
             }
