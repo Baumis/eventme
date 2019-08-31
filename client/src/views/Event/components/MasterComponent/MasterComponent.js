@@ -4,6 +4,7 @@ import Text from '../contentTypes/Text/Text'
 import Guests from '../contentTypes/Guests/Guests'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
 import Discussion from '../contentTypes/Discussion/EventDiscussion'
+import Picture from '../contentTypes/Picture/Picture'
 import './MasterComponent.css'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import EditorPanel from './EditorPanel/EditorPanel'
@@ -16,7 +17,8 @@ class MasterComponent extends Component {
             TEXT: Text,
             GUESTS: Guests,
             INVITE_LINK: InviteLink,
-            DISCUSSION: Discussion
+            DISCUSSION: Discussion,
+            PICTURE: Picture
         }
     }
 
