@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import Text from '../contentTypes/Text/Text'
 import Guests from '../contentTypes/Guests/Guests'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
+import Discussion from '../contentTypes/Discussion/EventDiscussion'
 import './MasterComponent.css'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import EditorPanel from './EditorPanel/EditorPanel'
@@ -14,7 +15,8 @@ class MasterComponent extends Component {
         components: {
             TEXT: Text,
             GUESTS: Guests,
-            INVITE_LINK: InviteLink
+            INVITE_LINK: InviteLink,
+            DISCUSSION: Discussion
         }
     }
 
@@ -55,6 +57,7 @@ class MasterComponent extends Component {
                     data={this.props.component.data}
                     edit={this.state.editMode}
                     changeData={this.changeComponentData}
+                    isCreator={this.props.isCreator}
                 />
             </div>
         )

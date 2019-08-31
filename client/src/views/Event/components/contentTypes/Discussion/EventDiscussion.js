@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EventDiscussion.css'
 import MessageCard from './MessageCard/MessageCard'
-import Spinner from '../../../../commonComponents/Spinner/Spinner'
+import Spinner from '../../../../../commonComponents/Spinner/Spinner'
 
 class EventDiscussion extends Component {
 

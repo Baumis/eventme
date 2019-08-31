@@ -28,9 +28,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     margin: 10px;
+    font-size: 18px;
     color: #1985a1;
     cursor: pointer;
     border: 1px solid white;
