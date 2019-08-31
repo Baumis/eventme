@@ -57,6 +57,7 @@ class MasterComponent extends Component {
                     data={this.props.component.data}
                     edit={this.state.editMode}
                     changeData={this.changeComponentData}
+                    isCreator={this.props.isCreator}
                 />
             </div>
         )
