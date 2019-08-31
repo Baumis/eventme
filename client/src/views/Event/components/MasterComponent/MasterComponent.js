@@ -32,10 +32,10 @@ class MasterComponent extends Component {
         const panelMarginTop = this.state.editMode ? '0px' : '-40px'
         const TagName = this.state.components[this.props.component.type || 'TEXT']
         return (
-            <div className={"master-component " + masterMode}>
+            <div className={'master-component ' + masterMode}>
                 {this.props.isCreator() ?
                     <div className="master-options-row">
-                        <div className={"master-options-edit-button " + buttonMode}
+                        <div className={'master-options-edit-button ' + buttonMode}
                             onClick={this.toggleEditMode}>
                             {this.state.editMode ?
                                 <FaChevronUp />
