@@ -6,6 +6,7 @@ import EventContainer from './components/EventContainer/EventContainer'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewEventModal from '../../commonComponents/NewEventModal/NewEventModal'
 import UserOptions from './components/UserOptions/UserOptions'
+import NotFound from '../NotFound/NotFound'
 
 class Profile extends Component {
 
@@ -62,7 +63,12 @@ class Profile extends Component {
         }
 
         if (!this.state.idValid) {
-            return null
+            return (
+                <NotFound
+                    title={'Profile not found'}
+                    message={'The profile you are looking for is removed or you don\'t have a permission to view it.'}
+                />
+            )
         }
 
         return (
