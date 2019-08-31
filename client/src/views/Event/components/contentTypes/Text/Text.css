@@ -7,12 +7,15 @@
 
 .text-component-title{
     text-align: start;
+    border: 1px solid transparent;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
 .text-component-title h2{
     margin: 0px;
     padding: 5px 30px 5px 30px;
+    word-wrap: break-word;
+    overflow-y: auto;
 }
 
 .text-component-content{
@@ -23,6 +26,7 @@
     text-align: start;
     overflow-y: auto;
     word-wrap: break-word;
+    border: 1px solid transparent;
 }
 
 .text-editable-mode {

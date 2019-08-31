@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './NewComponentModal.css'
-import { FaPen, FaTimes, FaList, FaLink } from 'react-icons/fa'
+import { FaPen, FaTimes, FaComments, FaLink, FaUsers } from 'react-icons/fa'
 
 
 class NewComponentModal extends Component {
@@ -11,7 +11,8 @@ class NewComponentModal extends Component {
             typeData: {
                 TEXT: {title: 'Your title', content: 'excellent content'},
                 GUESTS: {},
-                INVITE_LINK: {}   
+                INVITE_LINK: {},
+                DISCUSSION: {}
             }
         }
     }
@@ -34,12 +35,16 @@ class NewComponentModal extends Component {
                             <label>Text</label>
                         </div>
                         <div className="component-modal-button" onClick={() => this.createComponent('GUESTS')}>
-                            <FaList />
+                            <FaUsers />
                             <label>Guests</label>
                         </div>
                         <div className="component-modal-button" onClick={() => this.createComponent('INVITE_LINK')}>
                             <FaLink />
                             <label>Invite</label>
+                        </div>
+                        <div className="component-modal-button" onClick={() => this.createComponent('DISCUSSION')}>
+                            <FaComments />
+                            <label>Discussion</label>
                         </div>
                     </div>
                 </div>
