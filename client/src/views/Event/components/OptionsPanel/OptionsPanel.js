@@ -130,7 +130,7 @@ class OptionsPanel extends Component {
                     </div>
                     <div className="options-panel-add-field-row">
                         <div className="options-panel-add-field-button" onClick={() => this.addInfoField()}>
-                            <p>New field</p>
+                            <p>new field</p>
                         </div>
                     </div>
                     <div className="options-panel-section-devider">

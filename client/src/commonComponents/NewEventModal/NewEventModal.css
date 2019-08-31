@@ -47,6 +47,7 @@
     background: rgb(76, 92, 104, 0.0);
     border: 1px solid #dddddd;
     color:#46494c;
+    transition: border 0.2s;
 }
 
 .event-options-input input:focus{
@@ -91,7 +92,7 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
     border-radius: 5px;
     background: #4c5c68;
     color: #dddddd;
-    margin: 2px;
+    margin: 0px 5px 0px 5px;
     cursor: pointer;
 }
 
@@ -107,7 +108,7 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
 }
 
 .event-options-top h2{
-    margin: 5px 0px 10px 0px;
+    margin: 0px 0px 10px 0px;
     color: #4c5c68;
 }
 

@@ -32,7 +32,7 @@ const MessageCard = (props) => {
                                     {props.message.author.name}
                                 </div>
                                 <div className="message-card-time">
-                                    {Moment(props.message.time).format(' D.MM.YYYY hh:mm')}
+                                    {Moment(props.message.time).format(' D.MM.YY HH:mm')}
                                 </div>
                             </div>
                             {props.isAuthor(props.message.author._id) ?

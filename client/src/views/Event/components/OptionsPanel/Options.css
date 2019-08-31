@@ -92,7 +92,7 @@
 .inputLabel{
   display: flex;
   padding: 10px;
-  color: #46494c;
+  color: #1985a1;
 }
 
 .inputBlock input[type=date]{
@@ -104,19 +104,24 @@
 }
 
 .inputBlock input{
-    border-radius: 30px;
+    border-radius: 5px;
     border: none;
-    height: 18px;
+    height: 25px;
+    font-size: 14px;
     padding: 3px 10px 3px 10px;
-    background: rgb(76, 92, 104, 0.07);
+    background: white;
     border: 1px solid #dddddd;
     color:rgba(0,0,0);
 }
 
 #readOnly {
-  color: rgba(0,0,0);
-  border: 2px solid #1985a1;
+  color: #1985a1;
+  border: 2px solid #4c5c68;
   font-size: 16px;
+  background: rgb(76, 92, 104, 0.07);
+  -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.4);
+  -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
+  box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
 }
 
 .options-panel-info-block{
@@ -128,7 +133,7 @@
 }
 
 .options-panel-info-block input{
-  border-radius: 30px;
+  border-radius: 5px;
   height: 18px;
   width: 150px;
   padding: 3px 12px 3px 10px;
@@ -147,10 +152,10 @@
   justify-content: center;
   align-content: center;
   color: white;
-  background: #1985a1; 
+  background: #46494c; 
   cursor: pointer;
-  border: 1px solid #1985a1;
-  border-radius: 30px;
+  border: 1px solid #46494c;
+  border-radius: 5px;
   padding: 3px;
   margin-left: 0px;
 }
@@ -220,7 +225,7 @@
 .options-panel-section-devider label{
   display: block;
   margin-bottom: 1px;
-  color: #1985a1;
+  color: #46494c;
   width: 90px;
   background: transparent;
 }
