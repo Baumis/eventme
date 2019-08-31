@@ -1,6 +1,6 @@
 .event-options-modal-bg{
     position: fixed;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2;
@@ -8,11 +8,9 @@
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background: rgba(0,0,0,0.3);
 }
 .event-options-surface{
-    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -35,18 +33,24 @@
 }
 
 .event-options-input{
+    display: flex;
+    flex-direction: column;
     padding: 0px 0px 10px 0px;
     margin: 5px;
 }
 
 .event-options-input input{
-    border-radius: 30px;
-    height: 18px;
-    max-width: 150px;
+    border-radius: 5px;
+    height: 25px;
+    font-size: 14px;
     padding: 3px 12px 3px 10px;
-    background: rgb(76, 92, 104, 0.07);
+    background: rgb(76, 92, 104, 0.0);
     border: 1px solid #dddddd;
     color:#46494c;
+}
+
+.event-options-input input:focus{
+    border: 1px solid #1985a1;
 }
 
 .event-options-input input::placeholder{
@@ -54,8 +58,8 @@
 }
 
 .event-options-input p{
-    color: #1985a1;
-    margin: 10px 0px 10px 10px;
+    color: #46494c;
+    margin: 10px 0px 10px 5px;
 }
 
 input[type=date]::-webkit-clear-button {
@@ -70,14 +74,10 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
     background: transparent;
 }
 
-input[type=date]{
-    max-width: 110px;
-}
-
 .event-options-button-row{
     display: flex;
     justify-content: center;
-    padding: 10px 0px 0px 0px;
+    padding: 20px 0px 0px 0px;
 }
 
 .event-options-button {
@@ -85,33 +85,30 @@ input[type=date]{
     justify-content: center;
     align-items: center;
     padding: 8px;
-    width: 100px;
+    width: 80px;
     height: 20px;
     border: 1px solid #4c5c68;
-    border-radius: 8px;
+    border-radius: 5px;
     background: #4c5c68;
     color: #dddddd;
-    text-align: center;
-    margin: 10px;
+    margin: 2px;
     cursor: pointer;
 }
 
-.event-options-button:hover{
-    color: white;
+.event-options-close {
+    color: #c74C3C;
+    background: transparent;
+    border: 1px solid #c74C3C;
 }
 
 .event-options-top{
-    width: 100%;
-    position: absolute;
-    top: 0px;
-    margin-left: -25px;
+    padding: 5px 10px 5px 10px;
+    color: #4c5c68;
 }
 
-.event-options-exit{
-    float: right;
-    padding: 10px;
-    color: #c5c3c6;
-    cursor: pointer;
+.event-options-top h2{
+    margin: 5px 0px 10px 0px;
+    color: #4c5c68;
 }
 
 @media only screen and (max-width: 450px) {
@@ -132,37 +129,8 @@ input[type=date]{
         z-index: 10;
     }
 
-    .event-options-top {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-    }
-
-    .event-options-exit{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        margin: 0px 10px 0px 10px;
-        width: 15px;
-        height: 15px;
-        background: white;
-        -webkit-box-shadow: 0px 0px 4px -1px rgb(69, 69, 69, 0.5);
-        -moz-box-shadow: 0px 0px 4px -1px rgba(69,69,69,0.5);
-        box-shadow: 0px 0px 4px -1px rgba(69,69,69,0.5);
-    }
-
-    .event-options-input input{
-        border: 1px solid #c5c3c6;
-        border-radius: 5px;
-        padding: 8px 5px 8px 5px;
+    /*input[type=date]{
         max-width: 200px;
         width: 200px;
-        font-size: 15px;
-    }
-
-    input[type=date]{
-        max-width: 200px;
-        width: 200px;
-    }
+    } */
 }

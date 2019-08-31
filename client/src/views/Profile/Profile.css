@@ -1,3 +1,4 @@
 .profileViewContainer {
     display: flex;
+    flex-direction: column;
 }

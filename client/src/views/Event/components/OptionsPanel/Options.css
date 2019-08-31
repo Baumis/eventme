@@ -66,8 +66,8 @@
 .DeleteEventButton{
   display: flex;
   justify-content: center;
-  border: 1px solid #fc5a03;
-  color: #fc5a03;
+  border: 1px solid #c74C3C;
+  color: #c74C3C;
   margin: 15px 15px 0px 15px;
   padding: 10px;
   cursor: pointer;
