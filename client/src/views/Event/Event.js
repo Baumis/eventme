@@ -71,12 +71,10 @@ class Event extends Component {
         }
         if (!this.props.EventStore.event) {
             return (
-                <div>
-                    <NotFound
-                        title={'Event not found'}
-                        message={'The event you are looking for is removed or you don\'t have a permission to view it.'}
-                    />
-                </div>
+                <NotFound
+                    title={'Event not found'}
+                    message={'The event you are looking for is removed or you don\'t have a permission to view it.'}
+                />
             )
         }
         return (
