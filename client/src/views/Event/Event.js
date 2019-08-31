@@ -11,6 +11,7 @@ import SignModal from '../../commonComponents/SignModal/SignModal'
 import JoinEventModal from './components/JoinEventModal/JoinEventModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
+import NotFound from '../NotFound/NotFound'
 
 class Event extends Component {
 
@@ -53,7 +54,7 @@ class Event extends Component {
     }
 
     toggleNewComponentModal = () => {
-        this.setState({ showNewComponentModal: !this.state.showNewComponentModal})
+        this.setState({ showNewComponentModal: !this.state.showNewComponentModal })
     }
 
     slidePanel = () => {
@@ -65,10 +66,19 @@ class Event extends Component {
     }
 
     render() {
-        if (this.state.loading || !this.props.EventStore.event) {
+        if (this.state.loading) {
             return null
         }
-
+        if (!this.props.EventStore.event) {
+            return (
+                <div>
+                    <NotFound
+                        title={'Event not found'}
+                        message={'The event you are looking for is removed or you don\'t have a permission to view it.'}
+                    />
+                </div>
+            )
+        }
         return (
             <div className='Event'>
                 <Navbar />
