@@ -13,6 +13,7 @@
     -o-background-size: cover;
     background-size: cover;
     background-position:center center;
+    overflow: auto;
 }
 
 .content-container-info-row {
@@ -24,12 +25,13 @@
 .content-container-info-block {
     display: flex;
     flex-direction: column;
+    width: 350px;
 }
 
 .content-container-info-panel{
     display: flex;
     flex-direction: column;
-    width: 350px;
+    margin: 20px;
 }
 
 .content-container-info-panel h1 {
@@ -44,15 +46,22 @@
 
 @media only screen and (max-width: 620px) {
     .content-container-info-row {
-        margin-right: 0px;
+        margin-right: 5%;
+        justify-content: flex-end;
     }
-}
 
+    .content-container-info-block{
+        padding: 40px 0px 20px 0px;
+        width: 250px;
+    }
 
-.content-container-left-column h1 {
-    font-size: 30px;
-}
-
-.content-container-right-column{
-    color:white;
+    .content-container-info-panel h1 {
+        font-size: 30px;
+        margin: 10px;
+    }
+    
+    .content-container-info-panel p  {
+        font-size: 16px;
+        margin: 10px;
+    }
 }
