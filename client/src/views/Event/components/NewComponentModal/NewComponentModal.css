@@ -17,10 +17,12 @@
     flex-direction: column;
     background: white;
     border-radius: 10px;
+    max-width: 400px;
 }
 
 .component-modal-button-row{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .component-modal-button {
@@ -28,7 +30,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90px;
+    min-width: 90px;
     height: 90px;
     margin: 10px;
     font-size: 18px;
@@ -67,4 +69,10 @@
 
 .component-modal-exit-icon:hover {
     color: rgb(70, 73, 76, 0.9);
+}
+
+@media only screen and (max-width: 450px) {
+    .component-modal-container {
+        width: 300px;
+    }
 }

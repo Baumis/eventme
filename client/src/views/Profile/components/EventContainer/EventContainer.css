@@ -6,14 +6,15 @@
 }
 
 .event-container-header {
-    width: 90vw;
+    display: flex;
     max-width: 900px;
     padding-left: 40px;
     color: rgba(69,69,69,0.9);
 }
 
 .event-container-header p{
-    margin: 0px 20px 0px 20px;
+    margin: 0px;
+    padding: 0px 10px 0px 10px;
     font-size: 20px;
     color: #46494c;
 }
@@ -22,11 +23,11 @@
     display: flex;
     align-items: center;
     height: 220px;
-    width: 90%;
+    width: 100%;
     max-width: 900px;
     margin-top: 0px;
     margin-bottom: 10px;
-    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .eventCard {
