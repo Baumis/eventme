@@ -1,4 +1,6 @@
 .picture-container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     -webkit-background-size: contain;
@@ -7,4 +9,18 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.picture-url-row {
+    display: flex;
+    padding: 5px;
+}
+
+.picture-url-row input{
+    height: 25px;
+    padding: 5px;
+    width: 100%;
+    font-size: 15px;
+    border-radius: 5px;
+    border: 1px solid rgb(25, 133, 161);
 }
