@@ -53,7 +53,7 @@ class SignIn extends Component {
             <div className="signModalContent">
                 <div className="signDetails">
                     <div className="signInput">
-                        <label>Email</label>
+                        <label>Username</label>
                         <input
                             onChange={this.changeUsername}
                             value={this.state.username}
