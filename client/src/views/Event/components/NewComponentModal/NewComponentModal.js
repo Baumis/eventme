@@ -9,11 +9,11 @@ class NewComponentModal extends Component {
         super(props)
         this.state = {
             typeData: {
-                TEXT: {title: 'Your title', content: 'excellent content'},
+                TEXT: { title: 'Your title', content: 'excellent content' },
                 GUESTS: {},
                 INVITE_LINK: {},
                 DISCUSSION: {},
-                PICTURE:{url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Krebse_2000b.jpg/1024px-Krebse_2000b.jpg'}
+                PICTURE: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Krebse_2000b.jpg/1024px-Krebse_2000b.jpg' }
             }
         }
     }
