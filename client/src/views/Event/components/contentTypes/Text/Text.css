@@ -1,7 +1,7 @@
 .text-component{
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin: 5px;
     overflow-y: hidden;
 }
 
@@ -13,7 +13,7 @@
 
 .text-component-title h2{
     margin: 0px;
-    padding: 5px 30px 5px 30px;
+    padding: 5px 10px 5px 10px;
     word-wrap: break-word;
     overflow-y: auto;
 }
@@ -21,7 +21,7 @@
 .text-component-content{
     display: flex;
     flex-direction: column;
-    margin: 10px 30px 10px 30px;
+    margin: 10px 0px 0px 0px;
     padding: 10px;
     text-align: start;
     overflow-y: auto;

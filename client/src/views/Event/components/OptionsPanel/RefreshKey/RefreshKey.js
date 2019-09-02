@@ -33,7 +33,7 @@ class RefreshKey extends Component {
                     <Spinner />
                     :
                     <div className="refresh-key-content">
-                        <p>Renew key</p>
+                        <p>renew</p>
                         <FaSyncAlt />
                     </div>
                 }

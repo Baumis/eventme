@@ -1,36 +1,33 @@
 .event-container {
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
     align-items: center;
+    padding-top: 20px;
 }
 
 .event-container-header {
-    width: 90vw;
+    display: flex;
     max-width: 900px;
-    padding-left: 20px;
+    padding-left: 40px;
     color: rgba(69,69,69,0.9);
 }
 
 .event-container-header p{
     margin: 0px;
+    padding: 0px 10px 0px 10px;
     font-size: 20px;
     color: #46494c;
 }
 
 .event-container-row {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    height: 220px;;
-    max-height: 230px;
-    min-height: 220px;
-    width: 90%;
+    height: 220px;
+    width: 100%;
     max-width: 900px;
     margin-top: 0px;
     margin-bottom: 10px;
-    border-top: 1px solid rgba(0,0,0,0.15);
-    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .eventCard {

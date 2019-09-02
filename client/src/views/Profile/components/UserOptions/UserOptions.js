@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './UserOptions.css'
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes, FaUserCog } from 'react-icons/fa'
 import Spinner from '../../../../commonComponents/Spinner/Spinner'
 
 class UserOptions extends Component {
@@ -38,6 +38,10 @@ class UserOptions extends Component {
             <div className="user-options-background">
                 <div className="user-options-container">
                     <div className="user-options-top-row">
+                        <div className="user-options-title">
+                            <h2>Settings</h2>
+                            <FaUserCog />
+                        </div>
                         <div className="user-options-exit-icon" onClick={() => this.props.toggleOptions()}>
                             <FaTimes />
                         </div>

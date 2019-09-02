@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './NewEventModal.css'
-import { FaTimes } from 'react-icons/fa'
 import moment from 'moment'
 import Spinner from '../Spinner/Spinner'
 
@@ -65,9 +64,7 @@ class NewEventModal extends Component {
                 <div className="event-options-surface">
                     <div className="event-options-content">
                         <div className="event-options-top">
-                            <div className="event-options-exit" onClick={() => this.props.hide()}>
-                                <FaTimes />
-                            </div>
+                            <h2>New event</h2>
                         </div>
                         <div className="event-options-input">
                             <p>Event title</p>
@@ -101,6 +98,9 @@ class NewEventModal extends Component {
                             </div>
                         </div>
                         <div className="event-options-button-row">
+                            <div onClick={() => this.props.hide()} className="event-options-button event-options-close">
+                                close
+                            </div>
                             <div onClick={() => this.create()} className="event-options-button">
                                 {this.state.loading ?
                                     <Spinner />
