@@ -79,6 +79,17 @@ exports.validateComponent = (component) => {
                 return false
             }
             return true
+        case 'PICTURE':
+            if (component.data.url !== '' && !component.data.url) {
+                return false
+            }
+            if (component.data.url.length > 1000) {
+                return false
+            }
+            if (Object.keys(component.data).length !== 1) {
+                return false
+            }
+            return true
         default:
             return false
     }
