@@ -13,7 +13,7 @@ class NewComponentModal extends Component {
                 GUESTS: {},
                 INVITE_LINK: {},
                 DISCUSSION: {},
-                PICTURE: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Krebse_2000b.jpg/1024px-Krebse_2000b.jpg' }
+                PICTURE: { url: '' }
             }
         }
     }
