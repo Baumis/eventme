@@ -11,6 +11,13 @@ const userSchema = new mongoose.Schema({
     externalId: {
         type: String
     },
+    username: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        minlength: [3, 'Username too short'],
+        maxlength: [30, 'Username too long']
+    },
     name: {
         type: String,
         trim: true,
@@ -26,6 +33,10 @@ const userSchema = new mongoose.Schema({
         minlength: [3, 'Email too short'],
         maxlength: [255, 'Email too long'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Email not valid']
+    },
+    emailVerified: {
+        type: Boolean,
+        required: [true, 'Email verification status required']
     },
     avatar: {
         type: String,
@@ -46,6 +57,7 @@ const userSchema = new mongoose.Schema({
 userSchema.statics.format = (user) => ({
     _id: user._id,
     name: user.name,
+    username: user.username,
     email: user.email,
     avatar: user.avatar,
     cover: user.cover,

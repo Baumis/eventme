@@ -3,7 +3,7 @@ const userService = require('../services/userService')
 
 exports.login = async (request, response) => {
     try {
-        const user = await userService.findByEmailAndPassword(request.body.email, request.body.password)
+        const user = await userService.findByUsernameAndPassword(request.body.username, request.body.password)
 
         const token = User.generateToken(user)
 

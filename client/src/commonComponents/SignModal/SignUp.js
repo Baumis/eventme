@@ -64,6 +64,16 @@ class SignUp extends Component {
                         </input>
                     </div>
                     <div className="signInput">
+                        <label>Username</label>
+                        <input
+                            name={'username'}
+                            onChange={this.changeStateValue}
+                            value={this.state.username}
+                            placeholder={'freda'}
+                        >
+                        </input>
+                    </div>
+                    <div className="signInput">
                         <label>Password</label>
                         <input
                             name={'password'}

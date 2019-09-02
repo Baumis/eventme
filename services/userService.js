@@ -12,10 +12,14 @@ exports.getOnePopulated = async (id) => {
 }
 
 exports.create = async (userObject) => {
-    const existingUser = await User.findOne({ userType: 'LOCAL', email: userObject.email })
+    const existingUser = await User.findOne({ userType: 'LOCAL', username: userObject.username })
 
     if (existingUser) {
-        throw new Error('Email must be unique')
+        throw new Error('Username must be unique')
+    }
+
+    if (!userObject.username) {
+        throw new Error('Username must be defined')
     }
 
     if (!userObject.password || userObject.password.length < 3) {
@@ -28,7 +32,9 @@ exports.create = async (userObject) => {
     const user = new User({
         userType: 'LOCAL',
         name: userObject.name,
+        username: userObject.username,
         email: userObject.email,
+        emailVerified: false,
         passwordHash
     })
 
@@ -101,8 +107,8 @@ exports.delete = async (id) => {
     }
 }
 
-exports.findByEmailAndPassword = async (email, password) => {
-    const user = await User.findOne({ userType: 'LOCAL', email })
+exports.findByUsernameAndPassword = async (username, password) => {
+    const user = await User.findOne({ userType: 'LOCAL', username })
     const passwordCorrect = user === null ?
         false :
         await bcrypt.compare(password, user.passwordHash)
@@ -133,6 +139,7 @@ exports.findOrCreateGoogleUser = async (googleToken) => {
         externalId: googleUser.sub,
         name: googleUser.name,
         email: googleUser.email,
+        emailVerified: true,
         avatar: googleUser.picture
     })
 
