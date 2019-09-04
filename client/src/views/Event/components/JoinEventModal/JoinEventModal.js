@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './JoinEventModal.css'
-import { Redirect } from 'react-router-dom'
 
 class JoinEventModal extends Component {
 

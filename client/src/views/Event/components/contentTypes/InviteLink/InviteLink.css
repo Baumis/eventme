@@ -1,4 +1,4 @@
-.InviteContainer{
+.invite-component{
     position: relative;
     z-index: 1;
     padding: 10px;
@@ -11,7 +11,7 @@
     height: 100%;
 }
 
-.InviteTitle{
+.invite-component-title{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,18 +19,30 @@
     color: #4c5c68;
 }
 
-.InviteTitle h2{
+.invite-component h2{
     margin: 0px;
 }
 
-.InviteTitle p{
+.invite-component p{
     margin: 5px;
 }
 
-.InviteContent{
-    width: 90%;
-    font-size: 20px;
-    overflow-y: hidden;
-    overflow-x: auto;
-    padding: 5px;
+.invite-component-copy{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    color: white;
+    background: #46494c;
+    border-radius: 5px;
+    padding: 8px; 
+    cursor: pointer;
+}
+
+.invite-component-url-field input{
+    display: flex;
+    padding: 8px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #46494c;
+    font-size: 15px;
 }
