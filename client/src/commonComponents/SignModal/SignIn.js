@@ -13,6 +13,21 @@ class SignIn extends Component {
         }
     }
 
+    
+    componentDidMount(){
+        document.addEventListener('keydown', this.handleKey)
+    }
+
+    componentWillUnmount(){
+        document.removeEventListener('keydown', this.handleKey)
+    }
+
+    handleKey = (event) => {
+        if(event.keyCode === 13){
+            this.signIn()
+        }
+    }
+
     changeUsername = (event) => {
         this.setState({ username: event.target.value })
     }
@@ -26,10 +41,10 @@ class SignIn extends Component {
         this.setState({ password: '' })
     }
 
-    signIn = async (username, password) => {
+    signIn = async () => {
         try {
             this.setState({ loading: true })
-            await this.props.UserStore.signIn(username, password)
+            await this.props.UserStore.signIn(this.state.username, this.state.password)
             this.setState({ loading: false })
             this.props.VisibilityStore.closeSignModal()
         } catch (error) {
@@ -73,7 +88,7 @@ class SignIn extends Component {
                 <div className="signButtonRow">
                     <div
                         className="signButton"
-                        onClick={() => this.signIn(this.state.username, this.state.password)}>
+                        onClick={() => this.signIn()}>
                         {this.state.loading ?
                             <Spinner />
                             :

@@ -21,6 +21,7 @@ const Picture = (props) => {
                     <input
                         value={props.data.url}
                         onChange={changeUrl}
+                        placeholder={'picture url'}
                     />
                 </div>
                 : null}

@@ -5,13 +5,6 @@ import { Redirect } from 'react-router-dom'
 
 class JoinEventModal extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            redirectToEvent: false
-        }
-    }
-
     signIn = () => {
         this.props.VisibilityStore.showSignModal()
     }
@@ -21,14 +14,10 @@ class JoinEventModal extends Component {
             this.props.EventStore.event._id,
             this.props.inviteKey
         )
-        this.setState({ redirectToEvent: true })
+        this.props.closeInviteModal()
     }
 
     render() {
-        if (this.state.redirectToEvent) {
-            return <Redirect to={`/events/${this.props.EventStore.event._id}`} />
-        }
-
         return (
             <div className="join-event-modal-bg">
                 <div className="join-event-modal">
