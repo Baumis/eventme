@@ -45,13 +45,14 @@ exports.validateComponent = (component) => {
 
     switch(component.type) {
         case 'TEXT':
+            console.log(component)
             if (!component.data.title || !component.data.content) {
                 return false
             }
             if (Object.keys(component.data).length > 2) {
                 return false
             }
-            if (!(component.data.title instanceof String) || !(component.data.content instanceof String)) {
+            if (!(typeof component.data.title === 'string') || !(typeof component.data.content === 'string')) {
                 return false
             }
             if (component.data.title.length > 100 || component.data.content.length > 2000) {
@@ -65,7 +66,7 @@ exports.validateComponent = (component) => {
             return true
         case 'INVITE_LINK':
             if (Object.keys(component.data).length === 1 && component.data.inviteKey) {
-                if (component.data.inviteKey instanceof String && component.data.inviteKey.length < 100) {
+                if (typeof component.data.inviteKey === 'string' && component.data.inviteKey.length < 100) {
                     return true
                 }
                 return false
