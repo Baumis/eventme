@@ -13,6 +13,7 @@ import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
 import Tabs from './components/Tabs/Tabs'
+import EventContent from './components/EventContent/EventContent'
 
 class Event extends Component {
 
@@ -38,7 +39,7 @@ class Event extends Component {
     }
 
     changeActive = (cathegory) => {
-        this.setState({activeTab: cathegory})
+        this.setState({ activeTab: cathegory })
     }
 
     isCreator = () => {
@@ -83,11 +84,16 @@ class Event extends Component {
             <div className='Event'>
                 <Navbar />
                 <Header isGuest={this.isGuest()} />
-                <Tabs 
+                <Tabs
                     active={this.state.activeTab}
                     changeActive={this.changeActive}
                 />
-                <ComponentContainer isCreator={this.isCreator} />
+
+                {/*<ComponentContainer isCreator={this.isCreator} />*/}
+                <EventContent
+                    isCreator={this.isCreator}
+                    activeTab={this.state.activeTab}
+                />
                 {this.isCreator() ?
                     <div>
                         <ComponentAdder add={this.toggleNewComponentModal} />
