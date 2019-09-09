@@ -12,6 +12,7 @@ import JoinEventModal from './components/JoinEventModal/JoinEventModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
+import Tabs from './components/Tabs/Tabs'
 
 class Event extends Component {
 
@@ -20,7 +21,8 @@ class Event extends Component {
         this.state = {
             loading: true,
             showInviteModal: false,
-            showNewComponentModal: false
+            showNewComponentModal: false,
+            activeTab: 'Event'
         }
     }
 
@@ -35,6 +37,10 @@ class Event extends Component {
         this.setState({ loading: false })
     }
 
+    changeActive = (cathegory) => {
+        this.setState({activeTab: cathegory})
+    }
+
     isCreator = () => {
         if (!this.props.UserStore.currentUser) {
             return false
@@ -47,10 +53,6 @@ class Event extends Component {
             return false
         }
         return this.props.EventStore.event.guests.some(guest => guest.user._id === this.props.UserStore.currentUser._id)
-    }
-
-    addGuest = async (name) => {
-        console.log('TODO: add guest: ' + name)
     }
 
     toggleNewComponentModal = () => {
@@ -81,6 +83,10 @@ class Event extends Component {
             <div className='Event'>
                 <Navbar />
                 <Header isGuest={this.isGuest()} />
+                <Tabs 
+                    active={this.state.activeTab}
+                    changeActive={this.changeActive}
+                />
                 <ComponentContainer isCreator={this.isCreator} />
                 {this.isCreator() ?
                     <div>
