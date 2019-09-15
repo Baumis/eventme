@@ -2,22 +2,35 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    background: #c5c3c6;
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.4);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
 }
 
 .tabs-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     max-width: 800px;
     width: 100%;
 }
 
 .tabs-tab {
-    padding: 10px 10px 0px 10px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 10px 0px 10px 0px;
+    width: 120px;
     cursor: pointer;
+    color: #4c5c68;
     border-bottom: 1px solid transparent;
+}
+
+.tabs-tab:hover {
+    background: rgba(197, 195, 198, 0.5);
 }
 
 #active-tab {
     color: #1985a1;
-    border-bottom: 1px solid #1985a1;
+    background: white;
 }
