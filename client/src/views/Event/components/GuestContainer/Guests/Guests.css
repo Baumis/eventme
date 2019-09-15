@@ -75,13 +75,13 @@
     text-align: left;
 }
 
-.ComponentGuestDelete{
+.GuestDelete{
     cursor: pointer;
-    color: rgba(255,255,255,0.5);
+    color: rgba(0,0,0,0.5);
 }
 
-.ComponentGuestDelete:hover{
-    color: rgba(255,255,255,1);
+.GuestDelete:hover{
+    color: rgba(0,0,0);
 }
 
 .GuestSearchField{

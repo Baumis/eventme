@@ -7,7 +7,7 @@ class GuestContainer extends Component {
     render() {
         return (
             <div className="discussion-content">
-                <Guests isCreator={this.props.isCreator} />
+                <Guests isCreator={this.props.isCreator()} />
             </div>
         )
     }

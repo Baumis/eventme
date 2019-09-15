@@ -41,7 +41,7 @@ class StatusBar extends Component {
     }
 
     styledStaus = (status) => {
-        const color = status === 'GOING' ? 'green'
+        const color = status === 'GOING' ? 'rgba(46, 184, 46, 1)'
             : status === 'PENDING' ? 'orange'
                 : status === 'DECLINED' ? 'red'
                     : 'black'

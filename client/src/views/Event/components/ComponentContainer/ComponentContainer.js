@@ -19,7 +19,7 @@ class ComponentContainer extends Component {
                         />
                     ))}
                 </div>
-                {this.props.isCreator ?
+                {this.props.isCreator() ?
                     <ComponentAdder add={this.props.toggleNewComponentModal} />
                     : null}
             </div>
