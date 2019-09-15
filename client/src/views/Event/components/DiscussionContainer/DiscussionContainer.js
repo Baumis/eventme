@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './DiscussionContainer.css'
-import Discussion from '../contentTypes/Discussion/EventDiscussion'
+import Discussion from './Discussion/EventDiscussion'
 
 class DiscussionContainer extends Component {
 

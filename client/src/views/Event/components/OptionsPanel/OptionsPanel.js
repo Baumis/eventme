@@ -6,7 +6,6 @@ import { FaAngleDoubleLeft } from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
-import GuestList from './GuestList/GuestList'
 import RefreshKey from './RefreshKey/RefreshKey'
 
 class OptionsPanel extends Component {

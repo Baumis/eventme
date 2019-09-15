@@ -21,7 +21,10 @@ class EventContent extends Component {
         const Content = this.state.cathegories[this.props.activeTab]
         return (
             <div className="event-content">
-                <Content isCreator={this.props.isCreator} />
+                <Content 
+                isCreator={this.props.isCreator}
+                toggleNewComponentModal={this.props.toggleNewComponentModal}
+                />
             </div>
         )
     }

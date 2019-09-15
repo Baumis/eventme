@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Event.css'
 import Header from './components/Header/Header'
-import ComponentAdder from './components/ComponentAdder/ComponentAdder'
-import ComponentContainer from './components/ComponentContainer/ComponentContainer'
 import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import SaveButton from './components/SaveButton/SaveButton'
 import OptionsButton from './components/OptionsButton/OptionsButton'
@@ -88,15 +86,13 @@ class Event extends Component {
                     active={this.state.activeTab}
                     changeActive={this.changeActive}
                 />
-
-                {/*<ComponentContainer isCreator={this.isCreator} />*/}
                 <EventContent
                     isCreator={this.isCreator}
                     activeTab={this.state.activeTab}
+                    toggleNewComponentModal={this.toggleNewComponentModal}
                 />
                 {this.isCreator() ?
                     <div>
-                        <ComponentAdder add={this.toggleNewComponentModal} />
                         <OptionsPanel />
                         <OptionsButton showPanel={this.slidePanel} />
                         <SaveButton save={this.save} saved={this.props.EventStore.saved} />

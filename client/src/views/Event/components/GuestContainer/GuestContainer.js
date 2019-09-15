@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './GuestContainer.css'
-import Guests from '../contentTypes/Guests/Guests'
+import Guests from './Guests/Guests'
 
 class GuestContainer extends Component {
 

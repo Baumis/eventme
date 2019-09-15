@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Text from '../contentTypes/Text/Text'
-import Guests from '../contentTypes/Guests/Guests'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
-import Discussion from '../contentTypes/Discussion/EventDiscussion'
 import Picture from '../contentTypes/Picture/Picture'
 import './MasterComponent.css'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
@@ -15,9 +13,7 @@ class MasterComponent extends Component {
         editMode: false,
         components: {
             TEXT: Text,
-            GUESTS: Guests,
             INVITE_LINK: InviteLink,
-            DISCUSSION: Discussion,
             PICTURE: Picture
         }
     }
