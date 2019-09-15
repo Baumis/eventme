@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './EventContent.css'
 import ComponentContainer from '../ComponentContainer/ComponentContainer'
 import DiscussionContainer from '../DiscussionContainer/DiscussionContainer'
+import GuestContainer from '../GuestContainer/GuestContainer'
 
 class EventContent extends Component {
 
@@ -11,7 +12,7 @@ class EventContent extends Component {
             cathegories: {
                 Event: ComponentContainer,
                 Discussion: DiscussionContainer,
-                Guests: null,
+                Guests: GuestContainer,
             }
         }
     }

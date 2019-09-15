@@ -7,9 +7,6 @@
     border-radius: 5px;
     height: 100%;
     overflow-y: hidden;
-    -webkit-box-shadow: 0px 0px 4px -1px rgb(69, 69, 69, 0.5);
-    -moz-box-shadow: 0px 0px 4px -1px rgba(69,69,69,0.5);
-    box-shadow: 0px 0px 4px -1px rgba(69,69,69,0.5);
 }
 
 .ComponentStatusButtons{
@@ -39,17 +36,17 @@
 .ComponentGuestList{
     display: flex;
     flex-direction: column;
-    background: white;
-    padding: 10px 30px 10px 30px;
-    color: black;
+    background: transparent;
+    padding: 10px;
+    color: rgba(0,0,0);
     font-size: 15px;
-    overflow-y: auto;
-    height: 100%;
+    overflow: auto;
 }
 
 .ComponentGuest{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 12px 22px 12px 22px;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }

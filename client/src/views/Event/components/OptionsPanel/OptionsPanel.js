@@ -149,12 +149,6 @@ class OptionsPanel extends Component {
                         </div>
                         <RefreshKey />
                     </div>
-                    <div className="options-panel-content">
-                        <GuestList
-                            guests={this.props.EventStore.event.guests}
-                            mod={true}
-                        />
-                    </div>
                 </div>
             </div>
         )
