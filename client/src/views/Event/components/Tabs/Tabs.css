@@ -2,16 +2,13 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    background: #c5c3c6;
-    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.4);
-    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
-    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
+    border-bottom: 1px solid rgba(197, 195, 198, 0.5);
 }
 
 .tabs-container {
     display: flex;
-    justify-content: center;
-    max-width: 800px;
+    justify-content: space-between;
+    max-width: 500px;
     width: 100%;
 }
 
@@ -24,13 +21,15 @@
     cursor: pointer;
     color: #4c5c68;
     border-bottom: 1px solid transparent;
+    transition: background 0.2s;
 }
 
 .tabs-tab:hover {
-    background: rgba(197, 195, 198, 0.5);
+    background: rgba(197, 195, 198, 0.2);
 }
 
 #active-tab {
     color: #1985a1;
+    border-bottom: 2px solid #1985a1;
     background: white;
 }

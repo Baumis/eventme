@@ -4,7 +4,6 @@
     margin: 5px;
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
     height: 100%;
     overflow-y: hidden;
 }
@@ -12,20 +11,28 @@
 .ComponentStatusButtons{
     display: flex;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     background: white;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
 .ComponentStatusButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: rgba(0,0,0,0.8);
     font-size: 17px;
-    padding: 10px 5px 10px 5px;
+    width: 60px;
+    padding: 8px 10px 8px 10px;
+    margin: 1px;
+    border-radius: 5px;
+    border: 1px solid transparent;
 }
 
 #TabActive{
     color: rgba(46, 184, 46, 1);
-    border-bottom: 1px solid rgba(46, 184, 46, 1);
+    background: rgba(0,0,0,0.1);
+    border: 1px solid rgba(46, 184, 46, 1);
 }
 
 .ComponentStatusButton:hover{
@@ -77,11 +84,11 @@
 
 .GuestDelete{
     cursor: pointer;
-    color: rgba(0,0,0,0.5);
+    color: rgba(0,0,0,0.2);
 }
 
 .GuestDelete:hover{
-    color: rgba(0,0,0);
+    color: rgba(0,0,0,0.5);
 }
 
 .GuestSearchField{
