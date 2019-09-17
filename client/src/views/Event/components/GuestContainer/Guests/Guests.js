@@ -21,6 +21,9 @@ class Guests extends Component {
     }
 
     getAvatar = (avatar) => {
+        if (!avatar) {
+            return null
+        }
         return { backgroundImage: `url(${avatar})` }
     }
 
@@ -64,8 +67,8 @@ class Guests extends Component {
                                 <div style={this.getAvatar(guest.user.avatar)} className="ComponentGuestIcon"> </div>
                                 <div className="ComponentGuestName">{guest.user.name}</div>
                             </a>
-                            {this.props.EventStore.event.creator._id !== guest.user._id 
-                            && this.props.EventStore.event.creator._id === this.props.UserStore.currentUser._id ? 
+                            {this.props.EventStore.event.creator._id !== guest.user._id
+                            && this.props.EventStore.event.creator._id === this.props.UserStore.currentUser._id ?
                                 <div className="GuestDelete" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
                                 : null}
                         </div>
