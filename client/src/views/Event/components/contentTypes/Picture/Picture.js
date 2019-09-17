@@ -1,15 +1,31 @@
 import React from 'react'
 import './Picture.css'
+import { FaExpand, FaCompress } from 'react-icons/fa'
 
 const Picture = (props) => {
 
     const getPicture = () => {
-        return { backgroundImage: `url(${props.data.url})` }
+        const size = props.data.expand ? 'contain' : 'cover'
+        const position = props.data.expand ? '' : 'center'
+        return {
+            backgroundImage: `url(${props.data.url})`,
+            backgroundSize: size,
+            backgroundPosition: position
+        }
     }
 
     const changeUrl = (event) => {
         const dataObject = {
-            url: event.target.value
+            url: event.target.value,
+            expand: props.data.expand
+        }
+        props.changeData(dataObject)
+    }
+
+    const changeSize = (event) => {
+        const dataObject = {
+            url: props.data.url,
+            expand: !props.data.expand
         }
         props.changeData(dataObject)
     }
@@ -23,6 +39,13 @@ const Picture = (props) => {
                         onChange={changeUrl}
                         placeholder={'picture url'}
                     />
+                    <div className="picture-size-button" onClick={() => changeSize()}>
+                        {props.data.expand ?
+                            <FaExpand />
+                            :
+                            <FaCompress />
+                        }
+                    </div>
                 </div>
                 : null}
         </div>

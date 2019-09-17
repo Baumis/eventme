@@ -87,7 +87,10 @@ exports.validateComponent = (component) => {
             if (component.data.url.length > 1000) {
                 return false
             }
-            if (Object.keys(component.data).length !== 1) {
+            if ((typeof component.data.expand !== 'boolean')) {
+                return false
+            }
+            if (Object.keys(component.data).length !== 2) {
                 return false
             }
             return true
