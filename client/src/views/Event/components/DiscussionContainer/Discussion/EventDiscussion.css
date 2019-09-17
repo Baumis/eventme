@@ -12,11 +12,6 @@
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.discussion-header-title {
-    display: flex;
-    padding-left: 10px;
-}
-
 .discussion-header-title h3 {
     font-weight: 500;
     color: #46494c;

@@ -1,33 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './EventContent.css'
 import ComponentContainer from '../ComponentContainer/ComponentContainer'
 import DiscussionContainer from '../DiscussionContainer/DiscussionContainer'
 import GuestContainer from '../GuestContainer/GuestContainer'
 
-class EventContent extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            cathegories: {
-                Event: ComponentContainer,
-                Discussion: DiscussionContainer,
-                Guests: GuestContainer,
-            }
-        }
-    }
-
-    render() {
-        const Content = this.state.cathegories[this.props.activeTab]
-        return (
-            <div className="event-content">
-                <Content 
-                isCreator={this.props.isCreator}
-                toggleNewComponentModal={this.props.toggleNewComponentModal}
+const EventContent = (props) => {
+    return (
+        <div className="event-content">
+            {props.activeTab === "Event" ?
+                <ComponentContainer
+                    isCreator={props.isCreator}
+                    toggleNewComponentModal={props.toggleNewComponentModal}
                 />
-            </div>
-        )
-    }
+                : props.activeTab === "Discussion" ?
+                    <DiscussionContainer
+                        isCreator={props.isCreator}
+                    />
+                    : props.activeTab === "Guests" ?
+                        <GuestContainer
+                            isCreator={props.isCreator}
+                        />
+                        : null
+            }
+        </div>
+    )
 }
-
 export default EventContent
