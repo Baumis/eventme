@@ -19,7 +19,8 @@
     padding: 10px 0px 10px 0px;
     width: 120px;
     cursor: pointer;
-    color: #4c5c68;
+    color: rgba(76, 92, 104, 0.7);
+    font-weight: 600;
     border-bottom: 1px solid transparent;
     transition: background 0.2s;
 }
@@ -29,7 +30,7 @@
 }
 
 #active-tab {
-    color: #1985a1;
-    border-bottom: 2px solid #1985a1;
+    color: rgba(76, 92, 104, 1);
+    border-bottom: 2px solid rgba(76, 92, 104, 1);
     background: white;
 }

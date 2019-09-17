@@ -4,9 +4,9 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    height: 50px;
+    height: 40px;
     width: 100px;
-    margin: 0px 0px 70px 50px;
+    margin: 0px 0px 60px 50px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
