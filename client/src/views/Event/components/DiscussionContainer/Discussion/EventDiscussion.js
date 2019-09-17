@@ -55,9 +55,6 @@ class EventDiscussion extends Component {
         return (
             <div className="discussion-container">
                 <div className="discussion-header">
-                    <div className="discussion-header-title">
-                        <h3>Discussion</h3>
-                    </div>
                     <div className="discussion-input-row">
                         <input
                             name="messageInput"

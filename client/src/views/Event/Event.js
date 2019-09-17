@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Event.css'
 import Header from './components/Header/Header'
-import ComponentAdder from './components/ComponentAdder/ComponentAdder'
-import ComponentContainer from './components/ComponentContainer/ComponentContainer'
 import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import SaveButton from './components/SaveButton/SaveButton'
 import OptionsButton from './components/OptionsButton/OptionsButton'
@@ -12,6 +10,8 @@ import JoinEventModal from './components/JoinEventModal/JoinEventModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
+import Tabs from './components/Tabs/Tabs'
+import EventContent from './components/EventContent/EventContent'
 
 class Event extends Component {
 
@@ -20,7 +20,8 @@ class Event extends Component {
         this.state = {
             loading: true,
             showInviteModal: false,
-            showNewComponentModal: false
+            showNewComponentModal: false,
+            activeTab: 'Event'
         }
     }
 
@@ -35,6 +36,10 @@ class Event extends Component {
         this.setState({ loading: false })
     }
 
+    changeActive = (cathegory) => {
+        this.setState({ activeTab: cathegory })
+    }
+
     isCreator = () => {
         if (!this.props.UserStore.currentUser) {
             return false
@@ -47,10 +52,6 @@ class Event extends Component {
             return false
         }
         return this.props.EventStore.event.guests.some(guest => guest.user._id === this.props.UserStore.currentUser._id)
-    }
-
-    addGuest = async (name) => {
-        console.log('TODO: add guest: ' + name)
     }
 
     toggleNewComponentModal = () => {
@@ -81,10 +82,17 @@ class Event extends Component {
             <div className='Event'>
                 <Navbar />
                 <Header isGuest={this.isGuest()} />
-                <ComponentContainer isCreator={this.isCreator} />
+                <Tabs
+                    active={this.state.activeTab}
+                    changeActive={this.changeActive}
+                />
+                <EventContent
+                    isCreator={this.isCreator}
+                    activeTab={this.state.activeTab}
+                    toggleNewComponentModal={this.toggleNewComponentModal}
+                />
                 {this.isCreator() ?
                     <div>
-                        <ComponentAdder add={this.toggleNewComponentModal} />
                         <OptionsPanel />
                         <OptionsButton showPanel={this.slidePanel} />
                         <SaveButton save={this.save} saved={this.props.EventStore.saved} />

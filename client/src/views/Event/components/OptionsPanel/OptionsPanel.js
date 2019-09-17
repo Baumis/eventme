@@ -6,7 +6,6 @@ import { FaAngleDoubleLeft } from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
-import GuestList from './GuestList/GuestList'
 import RefreshKey from './RefreshKey/RefreshKey'
 
 class OptionsPanel extends Component {
@@ -148,12 +147,6 @@ class OptionsPanel extends Component {
                             />
                         </div>
                         <RefreshKey />
-                    </div>
-                    <div className="options-panel-content">
-                        <GuestList
-                            guests={this.props.EventStore.event.guests}
-                            mod={true}
-                        />
                     </div>
                 </div>
             </div>
