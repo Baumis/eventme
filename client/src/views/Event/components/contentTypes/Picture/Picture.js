@@ -7,7 +7,7 @@ const Picture = (props) => {
     const getPicture = () => {
         const size = props.data.expand ? 'contain' : 'cover'
         const position = props.data.expand ? '' : 'center'
-        return { 
+        return {
             backgroundImage: `url(${props.data.url})`,
             backgroundSize: size,
             backgroundPosition: position
