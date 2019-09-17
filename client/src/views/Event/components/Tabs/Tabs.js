@@ -6,7 +6,7 @@ class Tabs extends Component {
     render() {
 
         const getActivityClass = (tabName) => {
-            return this.props.active === tabName ? ' active-tab' : ' normal-cathegory'
+            return this.props.active === tabName ? ' active-tab' : ''
         }
 
         return (
