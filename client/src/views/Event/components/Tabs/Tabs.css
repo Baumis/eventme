@@ -29,7 +29,7 @@
     background: rgba(197, 195, 198, 0.2);
 }
 
-#active-tab {
+.active-tab {
     color: rgba(76, 92, 104, 1);
     border-bottom: 2px solid rgba(76, 92, 104, 1);
     background: white;
