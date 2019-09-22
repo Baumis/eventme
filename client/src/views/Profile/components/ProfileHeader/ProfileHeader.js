@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './ProfileHeader.css'
-import ProfileCard from './ProfileCard'
+import ProfileCard from './ProfileCard/ProfileCard'
 
 class ProfileHeader extends Component {
 
