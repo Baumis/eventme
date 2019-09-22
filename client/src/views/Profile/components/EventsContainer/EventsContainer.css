@@ -1,13 +1,14 @@
 .event-container {
     display: flex;
     flex-direction: column;
+    max-width: 900px;
+    width: 100%;
     align-items: center;
-    padding-top: 20px;
+    padding: 20px;
 }
 
 .event-container-header {
     display: flex;
-    max-width: 900px;
     padding-left: 40px;
     color: rgba(69,69,69,0.9);
 }

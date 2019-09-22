@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './UserOptions.css'
-import { FaTimes, FaUserCog } from 'react-icons/fa'
 import Spinner from '../../../../commonComponents/Spinner/Spinner'
 
 class UserOptions extends Component {
@@ -35,63 +34,52 @@ class UserOptions extends Component {
 
     render() {
         return (
-            <div className="user-options-background">
-                <div className="user-options-container">
-                    <div className="user-options-top-row">
-                        <div className="user-options-title">
-                            <h2>Settings</h2>
-                            <FaUserCog />
-                        </div>
-                        <div className="user-options-exit-icon" onClick={() => this.props.toggleOptions()}>
-                            <FaTimes />
-                        </div>
-                    </div>
-                    <div className="user-options-input">
-                        <label>Name</label>
-                        <input
-                            name={'name'}
-                            value={this.state.userValues.name}
-                            onChange={this.changeUserValue}
-                        />
-                    </div>
-                    <div className="user-options-input">
-                        <label>Email</label>
-                        <input
-                            name={'email'}
-                            value={this.state.userValues.email}
-                            onChange={this.changeUserValue}
-                        />
-                    </div>
-                    <div className="user-options-input">
-                        <label>Profile cover url</label>
-                        <input
-                            name={'cover'}
-                            value={this.state.userValues.cover}
-                            onChange={this.changeUserValue}
-                        />
-                    </div>
-                    <div className="user-options-input">
-                        <label>Avatar url</label>
-                        <input
-                            name={'avatar'}
-                            value={this.state.userValues.avatar}
-                            onChange={this.changeUserValue}
-                        />
-                    </div>
-                    <div className="user-options-button-row">
-                        {this.state.saved ?
-                            <div className="user-options-save-button" id="disabled">
-                                Save
+            <div className="user-options-container">
+                <div className="user-options-input">
+                    <label>Name</label>
+                    <input
+                        name={'name'}
+                        value={this.state.userValues.name}
+                        onChange={this.changeUserValue}
+                    />
+                </div>
+                <div className="user-options-input">
+                    <label>Email</label>
+                    <input
+                        name={'email'}
+                        value={this.state.userValues.email}
+                        onChange={this.changeUserValue}
+                    />
+                </div>
+                <div className="user-options-input">
+                    <label>Profile cover url</label>
+                    <input
+                        name={'cover'}
+                        value={this.state.userValues.cover}
+                        onChange={this.changeUserValue}
+                    />
+                </div>
+                <div className="user-options-input">
+                    <label>Avatar url</label>
+                    <input
+                        name={'avatar'}
+                        value={this.state.userValues.avatar}
+                        onChange={this.changeUserValue}
+                    />
+                </div>
+                <div className="user-options-button-row">
+                    {this.state.saved ?
+                        <div className="user-options-save-button" id="disabled">
+                            Save
                             </div>
-                            :
-                            <div className="user-options-save-button" onClick={() => this.saveOptions()}>
-                                {this.state.loading ?
-                                    <Spinner />
-                                    :
-                                    <div>Save</div>
-                                }
-                            </div>}
-                    </div>
+                        :
+                        <div className="user-options-save-button" onClick={() => this.saveOptions()}>
+                            {this.state.loading ?
+                                <Spinner />
+                                :
+                                <div>Save</div>
+                            }
+                        </div>}
                 </div>
             </div>
         )

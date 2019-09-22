@@ -1,0 +1,36 @@
+.profile-tabs-row {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border-bottom: 1px solid rgba(197, 195, 198, 0.5);
+}
+
+.profile-tabs-container {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 500px;
+    width: 100%;
+}
+
+.profile-tabs-tab {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 10px 0px 10px 0px;
+    width: 120px;
+    cursor: pointer;
+    color: rgba(76, 92, 104, 0.7);
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: background 0.2s;
+}
+
+.profile-tabs-tab:hover {
+    background: rgba(197, 195, 198, 0.2);
+}
+
+.profile-tabs-active {
+    color: rgba(76, 92, 104, 1);
+    border-bottom: 2px solid rgba(76, 92, 104, 1);
+    background: transparent;
+}

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import UserServices from '../../services/users'
 import ProfileHeader from './components/ProfileHeader/ProfileHeader'
-import EventContainer from './components/EventContainer/EventContainer'
+import ProfileContent from './components/ProfileContent/ProfileContent'
+import ProfileTabs from './components/ProfileTabs/ProfileTabs'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewEventModal from '../../commonComponents/NewEventModal/NewEventModal'
 import UserOptions from './components/UserOptions/UserOptions'
@@ -17,7 +18,8 @@ class Profile extends Component {
             loading: true,
             idValid: true,
             newEventModal: false,
-            userOptionsModal: false
+            userOptionsModal: false,
+            activeTab: 'Events'
         }
     }
 
@@ -31,6 +33,10 @@ class Profile extends Component {
             this.setState({ idValid: false })
         }
         this.setState({ loading: false })
+    }
+
+    changeActive = (cathegory) => {
+        this.setState({ activeTab: cathegory })
     }
 
     isOwner = () => {
@@ -79,9 +85,14 @@ class Profile extends Component {
                     isOwner={this.isOwner()}
                     toggleOptions={this.toggleUserOptionsModal}
                 />
-                <EventContainer
+                <ProfileTabs 
+                    changeActive={this.changeActive}
+                    active={this.state.activeTab}
+                />
+                <ProfileContent
                     user={this.state.user}
                     newEvent={this.toggleNewEventModal}
+                    activeTab={this.state.activeTab}
                 />
                 {this.state.newEventModal ?
                     <NewEventModal

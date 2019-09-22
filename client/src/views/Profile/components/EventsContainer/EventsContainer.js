@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import './EventContainer.css'
+import './EventsContainer.css'
 import EventCard from './EventCard/EventCard'
 
-class EventContainer extends Component {
+class EventsContainer extends Component {
 
     render() {
         return (
@@ -34,4 +34,4 @@ class EventContainer extends Component {
     }
 }
 
-export default inject('UserStore')(observer(EventContainer))
+export default inject('UserStore')(observer(EventsContainer))
