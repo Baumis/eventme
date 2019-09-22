@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EventContainer.css'
-import EventCard from './EventCard'
+import EventCard from './EventCard/EventCard'
 
 class EventContainer extends Component {
 
@@ -12,7 +12,7 @@ class EventContainer extends Component {
                     <p>Created events</p>
                 </div >
                 <div className="event-container-row">
-                    <div className="eventCard event-container-new-button"
+                    <div className="event-container-new-button"
                         onClick={() => this.props.newEvent()}
                     >
                         {'+'}
