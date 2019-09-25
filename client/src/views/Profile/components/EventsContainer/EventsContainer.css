@@ -3,8 +3,8 @@
     flex-direction: column;
     max-width: 900px;
     width: 100%;
-    align-items: center;
-    padding: 20px;
+    align-items: flex-start;
+    padding: 20px 0px 20px 0px;
 }
 
 .event-container-header {
@@ -29,7 +29,6 @@
     margin-top: 0px;
     margin-bottom: 10px;
     overflow-x: auto;
-    border-top: 1px solid rgba(197, 195, 198, 0.5);
 }
 
 .event-container-new-button {
@@ -50,4 +49,11 @@
 .event-container-new-button:hover{
     border: 5px solid rgba(26, 26, 26, 0.3);
     color: rgba(26, 26, 26, 0.3);
+}
+
+@media only screen and (max-width: 620px) {
+    .event-container-new-button {
+        min-height: 110px;
+        min-width: 110px;
+    }
 }

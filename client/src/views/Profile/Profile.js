@@ -6,7 +6,6 @@ import ProfileContent from './components/ProfileContent/ProfileContent'
 import ProfileTabs from './components/ProfileTabs/ProfileTabs'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewEventModal from '../../commonComponents/NewEventModal/NewEventModal'
-import UserOptions from './components/UserOptions/UserOptions'
 import NotFound from '../NotFound/NotFound'
 
 class Profile extends Component {
@@ -18,7 +17,6 @@ class Profile extends Component {
             loading: true,
             idValid: true,
             newEventModal: false,
-            userOptionsModal: false,
             activeTab: 'Events'
         }
     }
@@ -97,13 +95,6 @@ class Profile extends Component {
                 {this.state.newEventModal ?
                     <NewEventModal
                         hide={this.toggleNewEventModal}
-                    />
-                    : null}
-                {this.state.userOptionsModal ?
-                    <UserOptions
-                        toggleOptions={this.toggleUserOptionsModal}
-                        user={this.state.user}
-                        save={this.saveUserValues}
                     />
                     : null}
             </div>

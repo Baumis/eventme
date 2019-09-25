@@ -1,7 +1,7 @@
 import React from 'react'
 import './ProfileContent.css'
 import EventsContainer from '../EventsContainer/EventsContainer'
-import UserOptions from '../UserOptions/UserOptions'
+import SettingsContainer from '../SettingsContainer/SettingsConainer'
 
 const EventContent = (props) => {
     return (
@@ -13,10 +13,9 @@ const EventContent = (props) => {
                     newEvent={props.toggleNewEventModal}
                 />
                 : props.activeTab === "Settings" ?
-                    <UserOptions
+                    <SettingsContainer
                         activeTab={props.activeTab}
                         user={props.user}
-                        newEvent={props.toggleNewEventModal}
                     />
                     :
                     null

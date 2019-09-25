@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './UserOptions.css'
-import Spinner from '../../../../commonComponents/Spinner/Spinner'
+import Spinner from '../../../../../commonComponents/Spinner/Spinner'
 
 class UserOptions extends Component {
 

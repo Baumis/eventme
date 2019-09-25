@@ -27,3 +27,10 @@
     padding: 10px;
     color: white;
 }
+
+@media only screen and (max-width: 620px) {
+    .event-card {
+        min-height: 110px;
+        min-width: 110px;
+    }
+}
