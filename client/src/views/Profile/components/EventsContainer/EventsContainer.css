@@ -1,9 +1,8 @@
 .event-container {
     display: flex;
     flex-direction: column;
-    max-width: 900px;
-    width: 100%;
     align-items: flex-start;
+    width: 900px;
     padding: 20px 0px 20px 0px;
 }
 
@@ -49,6 +48,12 @@
 .event-container-new-button:hover{
     border: 5px solid rgba(26, 26, 26, 0.3);
     color: rgba(26, 26, 26, 0.3);
+}
+
+@media only screen and (max-width: 900px) {
+    .event-container {
+        width: 95vw;
+    }
 }
 
 @media only screen and (max-width: 620px) {
