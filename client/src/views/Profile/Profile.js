@@ -89,6 +89,7 @@ class Profile extends Component {
                 />
                 <ProfileContent
                     user={this.state.user}
+                    save={this.saveUserValues}
                     newEvent={this.toggleNewEventModal}
                     activeTab={this.state.activeTab}
                 />

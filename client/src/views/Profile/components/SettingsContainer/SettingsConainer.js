@@ -7,7 +7,9 @@ class SettingsContainer extends Component {
     render() {
         return (
             <div className="settings-container">
-                <UserOptions />
+                <UserOptions 
+                    save={this.props.save}
+                />
             </div >
         )
     }

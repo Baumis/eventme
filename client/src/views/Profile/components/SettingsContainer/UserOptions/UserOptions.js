@@ -8,7 +8,7 @@ class UserOptions extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userValues: { ...this.props.user },
+            userValues: { ...this.props.UserStore.currentUser },
             saved: true,
             loading: false
         }

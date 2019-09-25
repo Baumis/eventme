@@ -16,6 +16,7 @@ const EventContent = (props) => {
                     <SettingsContainer
                         activeTab={props.activeTab}
                         user={props.user}
+                        save={props.save}
                     />
                     :
                     null
