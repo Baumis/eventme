@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon index.js",
     "heroku-postbuild": "cd ./client && npm install && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "author": "",
   "license": "ISC",
@@ -22,9 +22,17 @@
   "devDependencies": {
     "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
-    "nodemon": "^1.18.11"
+    "jest": "^24.9.0",
+    "nodemon": "^1.18.11",
+    "supertest": "^4.0.2"
   },
   "engines": {
     "node": "10.16.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
