@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
 import './SiteLogo.css'
+import { withRouter } from 'react-router-dom'
 
 class SiteLogo extends Component {
+
+    toMain = () => {
+        this.props.history.push(`/`)
+    }
 
     render() {
         return (
             <div className="site-logo">
-                <a href="/" className="site-logo-content">
+                <div onClick={() => this.toMain()}>
                     <p>InviteOwl</p>
-                </a>
+                </div>
             </div>
         )
     }
 }
 
-export default SiteLogo
+export default withRouter(SiteLogo)
