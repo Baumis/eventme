@@ -21,19 +21,15 @@ class User extends Component {
         return { backgroundImage: `url(${this.props.UserStore.currentUser.avatar})` }
     }
 
-    toProfile = () => {
-        this.props.history.push(`/profile/${this.props.UserStore.currentUser._id}`)
-    }
-
     render() {
         return (
             <div className="user">
                 {this.props.UserStore.currentUser ?
                     <div className="user-signed-in">
-                        <div className="user-username" onClick={() => this.toProfile()}>
+                        <a className="user-username" href={`/profile/${this.props.UserStore.currentUser._id}`}>
                             <div style={this.getAvatar()} className="user-avatar"> </div>
                             {this.props.UserStore.currentUser.name}
-                        </div>
+                        </a>
                         <div className="user-section-devider"> </div>
                         <div className="user-sign-button" onClick={this.signOut} >{'Sign out'}</div>
                     </div>
