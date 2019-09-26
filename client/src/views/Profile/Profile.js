@@ -80,15 +80,16 @@ class Profile extends Component {
                 <Navbar />
                 <ProfileHeader
                     user={this.state.user}
-                    isOwner={this.isOwner()}
                     toggleOptions={this.toggleUserOptionsModal}
                 />
                 <ProfileTabs 
                     changeActive={this.changeActive}
                     active={this.state.activeTab}
+                    isOwner={this.isOwner()}
                 />
                 <ProfileContent
                     user={this.state.user}
+                    isOwner={this.isOwner()}
                     save={this.saveUserValues}
                     newEvent={this.toggleNewEventModal}
                     activeTab={this.state.activeTab}

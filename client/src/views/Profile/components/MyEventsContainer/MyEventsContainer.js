@@ -9,11 +9,14 @@ class MyEventsContainer extends Component {
         return (
             <div className="event-container">
                 <div className="event-container-column">
-                    <div className="event-container-new-button"
-                        onClick={() => this.props.newEvent()}
-                    >
-                        New Event
-                    </div>
+                    {this.props.isOwner ?
+                        <div className="event-container-new-button"
+                            onClick={() => this.props.newEvent()}
+                        >
+                            New Event
+                        </div>
+                        : null
+                    }
                     {this.props.user.myEvents.map((event, i) => (
                         <EventCard key={i} event={event} />
                     ))}

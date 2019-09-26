@@ -12,6 +12,7 @@ const EventContent = (props) => {
                     activeTab={props.activeTab}
                     user={props.user}
                     newEvent={props.newEvent}
+                    isOwner={props.isOwner}
                 />
                 : props.activeTab === "Invites" ?
                     <InvitesContainer
