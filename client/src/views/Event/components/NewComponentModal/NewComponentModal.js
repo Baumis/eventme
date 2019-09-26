@@ -11,7 +11,7 @@ class NewComponentModal extends Component {
             typeData: {
                 TEXT: { title: 'Your title', content: 'excellent content' },
                 INVITE_LINK: {},
-                PICTURE: { url: '' }
+                PICTURE: { url: '', expand: false }
             }
         }
     }

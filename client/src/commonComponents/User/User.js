@@ -15,6 +15,9 @@ class User extends Component {
     }
 
     getAvatar = () => {
+        if (!this.props.UserStore.currentUser.avatar) {
+            return null
+        }
         return { backgroundImage: `url(${this.props.UserStore.currentUser.avatar})` }
     }
 

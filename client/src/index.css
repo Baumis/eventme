@@ -4,6 +4,7 @@ body {
   font-family: sans-serif;
   background: rgba(196, 194, 198, 0.03);
   outline: none;
+  overflow: overlay;
 }
 
 input {

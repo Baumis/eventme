@@ -21,6 +21,9 @@ class GuestList extends Component {
     }
 
     getAvatar = (avatar) => {
+        if (!avatar) {
+            return null
+        }
         return { backgroundImage: `url(${avatar})` }
     }
 

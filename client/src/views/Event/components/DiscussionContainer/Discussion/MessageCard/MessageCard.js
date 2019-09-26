@@ -7,6 +7,9 @@ import Moment from 'moment'
 const MessageCard = (props) => {
 
     const getAvatar = () => {
+        if (!props.message.author.avatar) {
+            return null
+        }
         return { backgroundImage: `url(${props.message.author.avatar})` }
     }
 

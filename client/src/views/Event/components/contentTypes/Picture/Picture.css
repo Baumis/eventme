@@ -6,9 +6,8 @@
     -webkit-background-size: contain;
     -moz-background-size: contain;
     -o-background-size: contain;
-    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
+    background-size: contain;
 }
 
 .picture-url-row {
@@ -23,4 +22,23 @@
     font-size: 15px;
     border-radius: 5px;
     border: 1px solid rgb(25, 133, 161);
+}
+
+.picture-size-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 36px;
+    margin-left: 5px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    background: rgba(0,0,0,0.8);
+    border-radius: 5px;
+    border: 1px solid rgb(25, 133, 161);
+}
+
+.picture-size-button:hover {
+    color: rgba(255,255,255,0.7)
 }
