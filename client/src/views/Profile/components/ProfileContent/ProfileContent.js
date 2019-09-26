@@ -10,7 +10,7 @@ const EventContent = (props) => {
                 <EventsContainer
                     activeTab={props.activeTab}
                     user={props.user}
-                    newEvent={props.toggleNewEventModal}
+                    newEvent={props.newEvent}
                 />
                 : props.activeTab === "Settings" ?
                     <SettingsContainer
