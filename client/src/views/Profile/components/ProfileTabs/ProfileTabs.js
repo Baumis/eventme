@@ -12,9 +12,13 @@ class ProfileTabs extends Component {
         return (
             <div className="profile-tabs-row">
                 <div className="profile-tabs-container">
-                    <div className={'profile-tabs-tab' + getActivityClass('Events')}
-                        onClick={() => this.props.changeActive('Events')}>
-                        Events
+                    <div className={'profile-tabs-tab' + getActivityClass('MyEvents')}
+                        onClick={() => this.props.changeActive('MyEvents')}>
+                        My Events
+                    </div>
+                    <div className={'profile-tabs-tab' + getActivityClass('Invites')}
+                        onClick={() => this.props.changeActive('Invites')}>
+                        Invites
                     </div>
                     <div className={'profile-tabs-tab' + getActivityClass('Settings')}
                         onClick={() => this.props.changeActive('Settings')}>

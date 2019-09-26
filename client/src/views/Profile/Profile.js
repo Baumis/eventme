@@ -17,7 +17,7 @@ class Profile extends Component {
             loading: true,
             idValid: true,
             newEventModal: false,
-            activeTab: 'Events'
+            activeTab: 'MyEvents'
         }
     }
 

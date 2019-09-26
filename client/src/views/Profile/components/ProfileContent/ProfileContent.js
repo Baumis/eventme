@@ -1,25 +1,32 @@
 import React from 'react'
 import './ProfileContent.css'
-import EventsContainer from '../EventsContainer/EventsContainer'
+import MyEventsContainer from '../MyEventsContainer/MyEventsContainer'
+import InvitesContainer from '../InvitesContainer/InvitesContainer'
 import SettingsContainer from '../SettingsContainer/SettingsConainer'
 
 const EventContent = (props) => {
     return (
         <div className="profile-content">
-            {props.activeTab === "Events" ?
-                <EventsContainer
+            {props.activeTab === "MyEvents" ?
+                <MyEventsContainer
                     activeTab={props.activeTab}
                     user={props.user}
                     newEvent={props.newEvent}
                 />
-                : props.activeTab === "Settings" ?
-                    <SettingsContainer
+                : props.activeTab === "Invites" ?
+                    <InvitesContainer
                         activeTab={props.activeTab}
                         user={props.user}
                         save={props.save}
                     />
-                    :
-                    null
+                    : props.activeTab === "Settings" ?
+                        <SettingsContainer
+                            activeTab={props.activeTab}
+                            user={props.user}
+                            save={props.save}
+                        />
+                        :
+                        null
             }
         </div>
     )
