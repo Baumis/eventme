@@ -1,6 +1,5 @@
 import React from 'react'
 import './ProfileCard.css'
-import { FaCog } from 'react-icons/fa'
 
 const ProfileCard = (props) => {
     const avatar = {
