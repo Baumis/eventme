@@ -139,9 +139,8 @@
   color:#46494c;
 }
 
-.options-panel-add-field-row{
-  display: flex;
-  padding: 0px 0px 0px 10px;
+.options-panel-info-panel {
+  padding: 10px;
 }
 
 .options-panel-add-field-button{
@@ -155,7 +154,7 @@
   border-radius: 5px;
   height: 30px;
   width: 80px;
-  margin-left: 0px;
+  margin: 10px;
 }
 
 .options-panel-info-icon{

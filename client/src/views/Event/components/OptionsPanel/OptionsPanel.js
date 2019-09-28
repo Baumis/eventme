@@ -123,26 +123,26 @@ class OptionsPanel extends Component {
                         </div>
                         <RefreshKey />
                     </div>
-                    <div className="options-panel-section-devider">
-                        <label>Info panel</label>
-                    </div>
                     <div className="options-panel-content">
-                        {this.props.EventStore.event.infoPanel.map((info, i) =>
-                            <InfoBlock
-                                label={'Example'}
-                                index={i}
-                                key={i}
-                                value={info.text}
-                                icon={info.icon}
-                                changeValue={this.changeFieldText}
-                                deleteInfoField={() => this.deleteInfoField(i)}
-                                changeIcon={this.changeIcon}
-                            />
-                        )}
-                    </div>
-                    <div className="options-panel-add-field-row">
-                        <div className="options-panel-add-field-button" onClick={() => this.addInfoField()}>
-                            <p>new field</p>
+                        <div className="options-panel-info-panel">
+                            <div className="inputLabel">
+                                <label>Info panel</label>
+                            </div>
+                            {this.props.EventStore.event.infoPanel.map((info, i) =>
+                                <InfoBlock
+                                    label={'Example'}
+                                    index={i}
+                                    key={i}
+                                    value={info.text}
+                                    icon={info.icon}
+                                    changeValue={this.changeFieldText}
+                                    deleteInfoField={() => this.deleteInfoField(i)}
+                                    changeIcon={this.changeIcon}
+                                />
+                            )}
+                            <div className="options-panel-add-field-button" onClick={() => this.addInfoField()}>
+                                <p>new field</p>
+                            </div>
                         </div>
                     </div>
                 </div>
