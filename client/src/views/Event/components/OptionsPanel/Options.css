@@ -96,7 +96,7 @@
 }
 
 .inputBlock input[type=date]{
-  width: 96px;
+  width: 108px;
 }
 
 .inputBlock input[type=date]::-webkit-clear-button {
@@ -141,19 +141,20 @@
 
 .options-panel-add-field-row{
   display: flex;
-  padding: 0px 10px 5px 20px;
+  padding: 0px 0px 0px 10px;
 }
 
 .options-panel-add-field-button{
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   color: white;
   background: #4c5c68; 
   cursor: pointer;
   border: 1px solid #46494c;
   border-radius: 5px;
-  padding: 3px;
+  height: 30px;
+  width: 80px;
   margin-left: 0px;
 }
 

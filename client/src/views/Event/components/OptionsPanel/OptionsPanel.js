@@ -111,6 +111,22 @@ class OptionsPanel extends Component {
                         />
                     </div>
                     <div className="options-panel-section-devider">
+                        <label>Guests</label>
+                    </div>
+                    <div className="options-panel-content">
+                        <div className="inputBlock">
+                            <div className="inputLabel">
+                                <label>{'Invite link'}</label>
+                            </div>
+                            <input
+                                id="readOnly"
+                                value={`${window.location.origin}/events/${this.props.EventStore.event._id}/invite/${this.props.EventStore.event.inviteKey}`}
+                                readOnly
+                            />
+                        </div>
+                        <RefreshKey />
+                    </div>
+                    <div className="options-panel-section-devider">
                         <label>Info panel</label>
                     </div>
                     <div className="options-panel-content">
@@ -131,22 +147,6 @@ class OptionsPanel extends Component {
                         <div className="options-panel-add-field-button" onClick={() => this.addInfoField()}>
                             <p>new field</p>
                         </div>
-                    </div>
-                    <div className="options-panel-section-devider">
-                        <label>Guests</label>
-                    </div>
-                    <div className="options-panel-content">
-                        <div className="inputBlock">
-                            <div className="inputLabel">
-                                <label>{'Invite link'}</label>
-                            </div>
-                            <input
-                                id="readOnly"
-                                value={`${window.location.origin}/events/${this.props.EventStore.event._id}/invite/${this.props.EventStore.event.inviteKey}`}
-                                readOnly
-                            />
-                        </div>
-                        <RefreshKey />
                     </div>
                 </div>
             </div>
