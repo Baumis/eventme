@@ -74,7 +74,7 @@ class Event extends Component {
             return (
                 <NotFound
                     title={'Event not found'}
-                    message={'The event you are looking for is removed or you don\'t have a permission to view it.'}
+                    message={'The event you are looking for is removed or you don\'t have permission to view it.'}
                 />
             )
         }

@@ -70,7 +70,7 @@ class Profile extends Component {
             return (
                 <NotFound
                     title={'Profile not found'}
-                    message={'The profile you are looking for is removed or you don\'t have a permission to view it.'}
+                    message={'The profile you are looking for is removed or you don\'t have permission to view it.'}
                 />
             )
         }
