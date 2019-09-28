@@ -2,9 +2,15 @@ import React from 'react'
 import { FaCog } from 'react-icons/fa'
 
 const ProfileCard = (props) => {
-    const avatar = {
-        backgroundImage: `url(${props.user.avatar})`
+
+    const getAvatar = () => {
+        if (!props.user.avatar) {
+            return null
+        }
+
+        return { backgroundImage: `url(${props.user.avatar})` }
     }
+
     return (
         <div className="profileCard">
             {props.isOwner ?
@@ -15,7 +21,7 @@ const ProfileCard = (props) => {
             }
             < div className="profileInfo">
                 <div>
-                    <div style={avatar} className="profileCircle"></div>
+                    <div style={getAvatar()} className="profileCircle"></div>
                 </div>
                 <div className="cardInfo">
                     <div className="cardInfoRow">
