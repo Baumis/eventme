@@ -86,7 +86,7 @@ class OptionsPanel extends Component {
                     </div>
                     <InputBlock
                         type={'text'}
-                        label={'Header'}
+                        label={'Title'}
                         value={this.props.EventStore.event.label}
                         changeValue={this.changeLabel}
                     />

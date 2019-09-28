@@ -33,7 +33,13 @@ class UserStore {
 
 
     async signUp(newUser) {
-        await userService.create(newUser)
+        try {
+            const user = await userService.create(newUser)
+            this.currentUser = user
+            return user
+        } catch (error) {
+            return null
+        }
     }
 
     async saveUser(user) {
