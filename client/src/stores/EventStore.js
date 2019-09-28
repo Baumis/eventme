@@ -15,42 +15,13 @@ class EventStore {
         }
     }
 
-    setValue(value, field) {
-        const newEvent = {
-            ...this.event,
-            [field]: value
-        }
-        runInAction(() => {
-            this.event = newEvent
-            this.saved = false
-        })
-    }
-
-    addInfoPanelValue() {
-        const newInfo = { icon: 'EMPTY', text: '' }
-        this.event.infoPanel.push(newInfo)
-        this.saved = false
-    }
-
-    deleteInfoPanelValue(index) {
-        const newInfoPanel = this.event.infoPanel.slice()
-        newInfoPanel.splice(index, 1)
-        this.event.infoPanel = newInfoPanel
-        this.saved = false
-    }
-
-    changeInfoPanelText(text, index) {
-        const newInfoPanel = this.event.infoPanel.slice()
-        newInfoPanel[index].text = text
-        this.event.infoPanel = newInfoPanel
-        this.saved = false
-    }
-
-    changeInfoPanelIcon(icon, index) {
-        const newInfoPanel = this.event.infoPanel.slice()
-        newInfoPanel[index].icon = icon
-        this.event.infoPanel = newInfoPanel
-        this.saved = false
+    async getEvent(eventId) {
+        try {
+            const event = await eventService.getOne(eventId)
+            if (this.saved) {
+                this.event = event
+            }
+        } catch (error) { }
     }
 
     async joinEvent(eventId, inviteKey) {
@@ -117,14 +88,6 @@ class EventStore {
         }
     }
 
-    getUserStatus(id) {
-        const guest = this.event.guests.find(guest => guest.user._id === id)
-        if (guest) {
-            return guest.status
-        }
-        return null
-    }
-
     async changeUserStatus(userId, status) {
         try {
             this.event = await eventService.changeStatus(this.event._id, userId, status)
@@ -150,6 +113,52 @@ class EventStore {
         } catch {
             return null
         }
+    }
+
+    setValue(value, field) {
+        const newEvent = {
+            ...this.event,
+            [field]: value
+        }
+        runInAction(() => {
+            this.event = newEvent
+            this.saved = false
+        })
+    }
+
+    addInfoPanelValue() {
+        const newInfo = { icon: 'EMPTY', text: '' }
+        this.event.infoPanel.push(newInfo)
+        this.saved = false
+    }
+
+    deleteInfoPanelValue(index) {
+        const newInfoPanel = this.event.infoPanel.slice()
+        newInfoPanel.splice(index, 1)
+        this.event.infoPanel = newInfoPanel
+        this.saved = false
+    }
+
+    changeInfoPanelText(text, index) {
+        const newInfoPanel = this.event.infoPanel.slice()
+        newInfoPanel[index].text = text
+        this.event.infoPanel = newInfoPanel
+        this.saved = false
+    }
+
+    changeInfoPanelIcon(icon, index) {
+        const newInfoPanel = this.event.infoPanel.slice()
+        newInfoPanel[index].icon = icon
+        this.event.infoPanel = newInfoPanel
+        this.saved = false
+    }
+
+    getUserStatus(id) {
+        const guest = this.event.guests.find(guest => guest.user._id === id)
+        if (guest) {
+            return guest.status
+        }
+        return null
     }
 
     removeComponent(index) {
@@ -186,7 +195,7 @@ class EventStore {
         if (event.components.length !== index + 1) {
             event.components[index] = event.components[index + 1]
             event.components[index + 1] = copy
-        } else{
+        } else {
             event.components[index] = event.components[0]
             event.components[0] = copy
         }
@@ -202,9 +211,9 @@ class EventStore {
         if (index - 1 > -1) {
             event.components[index] = event.components[index - 1]
             event.components[index - 1] = copy
-        } else{
-            event.components[index] = event.components[event.components.length -1]
-            event.components[event.components.length -1] = copy
+        } else {
+            event.components[index] = event.components[event.components.length - 1]
+            event.components[event.components.length - 1] = copy
         }
 
         this.event = event
@@ -216,7 +225,8 @@ decorate(EventStore, {
     event: observable,
     saved: observable,
 
-    setCurrentEvent: action,
+    initializeEvent: action,
+    getEvent: action,
     setValue: action,
     setInfoPanelValue: action,
     changeInfoPanelText: action,
