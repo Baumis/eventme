@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: column;
     background: white;
-    border-radius: 10px;
+    border-radius: 5px;
     max-width: 400px;
 }
 
@@ -52,14 +52,22 @@
     background: rgba(0,0,0,0.01);
 }
 
-.component-modal-top-row {
+.component-modal-bottom-row {
     display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-    color: rgb(70, 73, 76, 0.5);
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
 }
 
-.component-modal-exit-icon {
+.component-modal-close {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background: #4c5c68;
+    width: 70px;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
     cursor: pointer;
 }
 

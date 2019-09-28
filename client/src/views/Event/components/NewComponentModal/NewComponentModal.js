@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './NewComponentModal.css'
-import { FaPen, FaTimes, FaLink, FaImage } from 'react-icons/fa'
+import { FaPen, FaLink, FaImage } from 'react-icons/fa'
 
 
 class NewComponentModal extends Component {
@@ -25,9 +25,6 @@ class NewComponentModal extends Component {
         return (
             <div className="component-modal-background" >
                 <div className="component-modal-container">
-                    <div className="component-modal-top-row">
-                        <div className="component-modal-exit-icon" onClick={this.props.close} ><FaTimes /></div>
-                    </div>
                     <div className="component-modal-button-row">
                         <div className="component-modal-button" onClick={() => this.createComponent('TEXT')}>
                             <FaPen />
@@ -40,6 +37,11 @@ class NewComponentModal extends Component {
                         <div className="component-modal-button" onClick={() => this.createComponent('PICTURE')}>
                             <FaImage />
                             <label>Picture</label>
+                        </div>
+                    </div>
+                    <div className="component-modal-bottom-row">
+                        <div className="component-modal-close" onClick={this.props.close} >
+                            close
                         </div>
                     </div>
                 </div>
