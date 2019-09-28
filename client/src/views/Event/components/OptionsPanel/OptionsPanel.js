@@ -110,9 +110,6 @@ class OptionsPanel extends Component {
                             changeValue={this.changeEndDate}
                         />
                     </div>
-                    <div className="options-panel-section-devider">
-                        <label>Guests</label>
-                    </div>
                     <div className="options-panel-content">
                         <div className="inputBlock">
                             <div className="inputLabel">
