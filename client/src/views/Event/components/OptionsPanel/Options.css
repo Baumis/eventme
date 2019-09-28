@@ -124,19 +124,25 @@
 .options-panel-info-block{
   display: flex;
   align-items: center;
-  padding: 7px 12px 7px 20px;
+  margin: 0px 0px 7px 0px;
   padding-bottom: 1px;
   color: #46494c;
 }
 
-.options-panel-info-block input{
-  border-radius: 5px;
-  height: 18px;
-  width: 150px;
-  padding: 3px 12px 3px 10px;
+.options-panel-info-input-row {
+  display: flex;
   background: rgb(76, 92, 104, 0.07);
   border: 1px solid #dddddd;
   color:#46494c;
+  border-radius: 5px;
+}
+
+.options-panel-info-block input{
+  height: 18px;
+  width: 180px;
+  padding: 3px 12px 3px 10px;
+  border: none;
+  background: transparent;
 }
 
 .options-panel-info-panel {
@@ -154,19 +160,17 @@
   border-radius: 5px;
   height: 30px;
   width: 80px;
-  margin: 10px;
+  margin: 10px 0px 10px 0px;
 }
 
 .options-panel-info-icon{
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   width: 20px;
-  height: 20px;
+  height: 25px;
   margin: 0px 10px 0px 0px;
-  padding: 0px;
-  border-radius: 30px;
   color: #46494c;
   cursor: pointer;
 }
