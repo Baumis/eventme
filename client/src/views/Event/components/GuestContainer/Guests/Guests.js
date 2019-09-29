@@ -56,10 +56,10 @@ class Guests extends Component {
                         className="ComponentStatusButton"
                     > Declined </div>
                 </div>
-                <div className="GuestSearchField">
+                {/*<div className="GuestSearchField">
                     <input value={this.state.filter} onChange={this.changeFilter}></input>
                     <div id="searchIcon"><FaSearch /></div>
-                </div>
+                </div>*/}
                 <div className="ComponentGuestList">
                     {guestsToShow.map((guest, i) =>
                         <div className="ComponentGuest" key={i}>

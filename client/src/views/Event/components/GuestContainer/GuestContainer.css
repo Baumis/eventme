@@ -1,0 +1,10 @@
+.guests-content {
+    display: flex;
+    width: 900px;
+}
+
+@media only screen and (max-width: 900px) {
+    .guests-content {
+        width: 95vw;
+    }
+}
