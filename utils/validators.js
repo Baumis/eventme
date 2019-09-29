@@ -46,9 +46,6 @@ exports.validateComponent = (component) => {
     switch(component.type) {
         case 'TEXT':
             console.log(component)
-            if (!component.data.title || !component.data.content) {
-                return false
-            }
             if (Object.keys(component.data).length > 2) {
                 return false
             }
