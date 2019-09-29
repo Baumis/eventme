@@ -27,16 +27,17 @@ class StatusBar extends Component {
     }
 
     changeStatus = async (status) => {
-        if (this.props.EventStore.saved) {
-            this.setState({ loading: true })
-            const response = await this.props.EventStore.changeUserStatus(this.props.UserStore.currentUser._id, status)
-            this.setState({ loading: false })
-
-            if (!response) {
-                alert('Status could not be changed.')
-            }
-        } else {
+        if (!this.props.EventStore.saved) {
             alert('Please save your event before changing status.')
+            return
+        }
+
+        this.setState({ loading: true })
+        const response = await this.props.EventStore.changeUserStatus(this.props.UserStore.currentUser._id, status)
+        this.setState({ loading: false })
+
+        if (!response) {
+            alert('Status could not be changed.')
         }
     }
 

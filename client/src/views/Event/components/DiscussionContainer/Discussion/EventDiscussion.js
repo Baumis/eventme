@@ -19,6 +19,11 @@ class EventDiscussion extends Component {
             return
         }
 
+        if (!this.props.EventStore.saved) {
+            alert('Please save your event before posting message.')
+            return
+        }
+
         this.setState({ sending: true })
         const event = await this.props.EventStore.postMessage(this.state.messageInput)
         this.setState({ sending: false })
@@ -31,6 +36,11 @@ class EventDiscussion extends Component {
     }
 
     delete = async (id) => {
+        if (!this.props.EventStore.saved) {
+            alert('Please save your event before deleting message.')
+            return
+        }
+
         const confirmation = window.confirm('Do you want to delete this message?')
         if (confirmation) {
             const event = await this.props.EventStore.deleteMessage(id)
