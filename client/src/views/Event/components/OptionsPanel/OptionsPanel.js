@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
-import './Options.css'
+import './OptionsPanel.css'
 import { FaAngleDoubleLeft } from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock'
 import InfoBlock from './InfoBlock'
 import RefreshKey from './RefreshKey/RefreshKey'
+import InviteLinkBlock from './InviteLinkBlock/InviteLinkBlock'
 
 class OptionsPanel extends Component {
 
@@ -111,16 +112,7 @@ class OptionsPanel extends Component {
                         />
                     </div>
                     <div className="options-panel-content">
-                        <div className="inputBlock">
-                            <div className="inputLabel">
-                                <label>{'Invite link'}</label>
-                            </div>
-                            <input
-                                id="readOnly"
-                                value={`${window.location.origin}/events/${this.props.EventStore.event._id}/invite/${this.props.EventStore.event.inviteKey}`}
-                                readOnly
-                            />
-                        </div>
+                        <InviteLinkBlock />
                         <RefreshKey />
                     </div>
                     <div className="options-panel-content">

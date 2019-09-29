@@ -1,5 +1,5 @@
 import React from 'react'
-import './Options.css'
+import './OptionsPanel.css'
 
 const InputBlock = (props) => {
 

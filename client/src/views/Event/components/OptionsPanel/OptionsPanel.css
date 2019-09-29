@@ -114,13 +114,6 @@
     color:rgba(0,0,0);
 }
 
-#readOnly {
-  color: #1985a1;
-  border: 2px solid #4c5c68;
-  font-size: 16px;
-  background: rgb(76, 92, 104, 0.07);
-}
-
 .options-panel-info-block{
   display: flex;
   align-items: center;
@@ -215,18 +208,4 @@
   padding: 0px 5px 0px 5px;
   margin: 0px;
   font-size: 14px;
-}
-
-.options-panel-section-devider{
-  border-bottom: 1px solid #c5c3c6;
-  margin: 30px 8px 10px 8px;
-  padding: 0px 12px 0px 12px;
-}
-
-.options-panel-section-devider label{
-  display: block;
-  margin-bottom: 1px;
-  color: #46494c;
-  width: 90px;
-  background: transparent;
 }

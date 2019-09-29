@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Options.css'
+import './OptionsPanel.css'
 import { FaTimes, FaPhone, FaAt, FaInfo, FaCalendar, FaLocationArrow, FaClock, FaUser } from 'react-icons/fa'
 
 class InfoBlock extends Component {
