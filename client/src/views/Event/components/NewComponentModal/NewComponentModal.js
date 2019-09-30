@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './NewComponentModal.css'
-import { FaPen, FaLink, FaImage } from 'react-icons/fa'
+import { FaPen, FaLink, FaImage, FaPoll } from 'react-icons/fa'
 
 
 class NewComponentModal extends Component {
@@ -11,7 +11,8 @@ class NewComponentModal extends Component {
             typeData: {
                 TEXT: { title: 'Your title', content: 'excellent content' },
                 INVITE_LINK: {},
-                PICTURE: { url: '', expand: false }
+                PICTURE: { url: '', expand: false },
+                VOTE: { subject: 'new subject', options: ['option1', 'option2'], votes: [] }
             }
         }
     }
@@ -37,6 +38,10 @@ class NewComponentModal extends Component {
                         <div className="component-modal-button" onClick={() => this.createComponent('PICTURE')}>
                             <FaImage />
                             <label>Picture</label>
+                        </div>
+                        <div className="component-modal-button" onClick={() => this.createComponent('VOTE')}>
+                            <FaPoll />
+                            <label>Vote</label>
                         </div>
                     </div>
                     <div className="component-modal-bottom-row">

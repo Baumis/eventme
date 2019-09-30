@@ -15,7 +15,7 @@ const Vote = (props) => {
 
     const changeOption = (event) => {
         const editedOptions = props.data.options
-        editedOptions[i] = event.target.value
+        editedOptions[event.index] = event.target.value
 
         const dataObject = {
             subject: props.data.subject,
@@ -42,15 +42,15 @@ const Vote = (props) => {
         <div className="vote-component">
             <div className={"vote-component-subject " + borderStyle}>
                 <EditableWrapper
-                    html={props.data.content}
+                    html={props.data.subject}
                     editable={!props.edit}
                     onChange={changeSubject}
                 />
             </div>
 
             {props.data.options.map((option, i) =>
-                <div className="vote-component-option-row">
-                    <div className="vote-component-option">
+                <div className="vote-component-option-container">
+                    <div className={"vote-component-option " + borderStyle}>
                         <EditableWrapper
                             html={option}
                             index={i}
@@ -58,19 +58,24 @@ const Vote = (props) => {
                             onChange={changeOption}
                         />
                     </div>
-                    {props.edit ?
-                        <div className="vote-component-delete-button">
-                            delete
+                    <div className="vote-component-option-row">
+                        {props.edit ?
+                            <div className="vote-component-delete-button">
+                                delete
                         </div>
-                        :
-                        <div className="vote-component-vote-button">
-                            vote
+                            :
+                            <div className="vote-component-vote-button">
+
+                            </div>
+                        }
+                        <div className="vote-component-status-bar">
+                            <div className="vote-component-bar-filler">0%</div>
                         </div>
-                    }
+                    </div>
                 </div>
             )}
             {props.edit ?
-                <div className="vote-component-delete-button" onClick={() => newOptions()}>
+                <div className="vote-component-add-button" onClick={() => newOptions()}>
                     add option
                 </div>
                 :
