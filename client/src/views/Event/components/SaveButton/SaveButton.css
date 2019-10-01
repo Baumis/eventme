@@ -8,8 +8,8 @@
     z-index: 3;
     right: 40px;
     bottom: 30px;
-    background: rgba(46, 184, 46, 1);
-    border-radius: 6px;
+    background: #4f784e;
+    border-radius: 5px;
     color:white;
     transition: bottom 0.2s;
     cursor: pointer;
