@@ -44,7 +44,27 @@ class Vote extends Component {
         this.props.changeData(dataObject)
     }
 
+    removeOption = (optionIndex) => {
+        const editedOptions = this.props.data.options
+        editedOptions.splice(optionIndex, 1)
+
+        const dataObject = {
+            subject: this.props.data.subject,
+            options: editedOptions,
+        }
+        this.props.changeData(dataObject)
+    }
+
     submit = () => {
+        if (!this.props.UserStore.currentUser) {
+            alert('Sign In to vote!')
+            return
+        }
+
+        if (this.hasVoted()) {
+            return
+        }
+
         const editedOptions = this.props.data.options
         editedOptions[this.state.checked].votes.push(this.props.UserStore.currentUser._id)
 
@@ -73,7 +93,6 @@ class Vote extends Component {
     render() {
         const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         const hasVoted = this.hasVoted()
-        console.log(hasVoted)
         return (
             <div className="vote-component">
                 <div className={"vote-component-subject " + borderStyle}>
@@ -83,7 +102,7 @@ class Vote extends Component {
                         onChange={this.changeSubject}
                     />
                 </div>
-                {hasVoted ?
+                {hasVoted && !this.props.edit ?
                     <VoteResults
                         options={this.props.data.options}
                     />
@@ -96,6 +115,7 @@ class Vote extends Component {
                         newOptions={this.newOptions}
                         submit={this.submit}
                         changeOption={this.changeOption}
+                        removeOption={this.removeOption}
                     />
                 }
             </div>

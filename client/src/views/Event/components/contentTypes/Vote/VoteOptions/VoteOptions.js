@@ -12,7 +12,7 @@ const VoteOptions = (props) => {
                 <div key={i} className="vote-component-option-container">
                     <div className="vote-component-option-row">
                         {props.edit ?
-                            <div className="vote-component-delete-button">
+                            <div className="vote-component-delete-button" onClick={() => props.removeOption(i)}>
                                 <FaTrash />
                             </div>
                             :
