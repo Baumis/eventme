@@ -23,6 +23,7 @@
     font-weight: 600;
     border-bottom: 1px solid transparent;
     transition: background 0.2s;
+    user-select: none;
 }
 
 .tabs-tab:hover {

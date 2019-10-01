@@ -11,6 +11,7 @@
     width: 100%;
     justify-content: flex-start;
     background: white;
+    user-select: none;
 }
 
 .ComponentStatusButton{
