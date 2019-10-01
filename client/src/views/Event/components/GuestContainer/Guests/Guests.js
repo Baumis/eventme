@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Guests.css'
-import { FaSearch, FaTimes } from 'react-icons/fa'
+import { FaTimes } from 'react-icons/fa'
 
 class Guests extends Component {
     constructor(props) {

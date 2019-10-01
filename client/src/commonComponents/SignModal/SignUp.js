@@ -42,6 +42,7 @@ class SignUp extends Component {
             this.setState({ loading: false })
             this.props.closeModal()
         } catch (error) {
+            console.log(error)
             this.setState({ loading: false })
             alert('Sign Up failed. Check your connection and try again.')
         }
