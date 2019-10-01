@@ -65,21 +65,23 @@ class EventDiscussion extends Component {
         return (
             <div className="discussion-container">
                 <div className="discussion-header">
-                    <div className="discussion-input-row">
-                        <input
-                            name="messageInput"
-                            onChange={this.changeInputValue}
-                            value={this.state.messageInput}
-                            placeholder={'your message'}
-                        />
-                        <div className="discussion-send-button" onClick={() => this.post()}>
-                            {this.state.sending ?
-                                <Spinner />
-                                :
-                                <div>post</div>
-                            }
+                    {this.props.UserStore.currentUser ?
+                        <div className="discussion-input-row">
+                            <input
+                                name="messageInput"
+                                onChange={this.changeInputValue}
+                                value={this.state.messageInput}
+                                placeholder={'your message'}
+                            />
+                            <div className="discussion-send-button" onClick={() => this.post()}>
+                                {this.state.sending ?
+                                    <Spinner />
+                                    :
+                                    <div>post</div>
+                                }
+                            </div>
                         </div>
-                    </div>
+                        : null}
                 </div>
                 <div className="discussion-content">
                     {this.props.EventStore.event.discussion.map((message, i) =>
