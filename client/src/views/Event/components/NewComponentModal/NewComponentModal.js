@@ -12,7 +12,7 @@ class NewComponentModal extends Component {
                 TEXT: { title: 'Your title', content: 'excellent content' },
                 INVITE_LINK: {},
                 PICTURE: { url: '', expand: false },
-                VOTE: { subject: 'new subject', options: ['option1', 'option2'], votes: [] }
+                VOTE: { subject: 'New Poll', options: [{ content: 'first option', votes: [] }] }
             }
         }
     }

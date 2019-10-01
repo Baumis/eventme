@@ -16,7 +16,7 @@
     flex-direction: column;
     align-items: center;
     padding: 0px 30px 20px 30px;
-    color: #4c5c68;
+    color: #46494c;
 }
 
 .invite-component h2{
@@ -27,22 +27,32 @@
     margin: 5px;
 }
 
-.invite-component-copy{
+.invite-component-url-field {
     display: flex;
-    justify-content: center;
-    align-content: center;
-    color: white;
-    background: #46494c;
+    border: 2px solid #4c5c68;
+    background: rgb(76, 92, 104, 0.07);
     border-radius: 5px;
-    padding: 8px; 
-    cursor: pointer;
+    height: 30px;
 }
 
-.invite-component-url-field input{
+.invite-component-url-field input {
+    background: transparent;
+    border: none;
+    width: 100%;
+    color: #1985a1;
+    font-size: 16px;
+}
+
+.invite-component-copy-button{
     display: flex;
-    padding: 8px;
-    margin: 10px;
-    border-radius: 5px;
-    border: 1px solid #46494c;
-    font-size: 15px;
+    justify-content: center;
+    align-items: center; 
+    background: #4c5c68;
+    cursor: pointer;
+    color: white;
+    width: 50px;
+}
+
+.invite-component-copy:hover{
+    background: rgba(76, 92, 104, 0.9);
 }
