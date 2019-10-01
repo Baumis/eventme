@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import './Vote.css'
 import EditableWrapper from '../../EditableWrapper/EditableWrapper'
 import VoteOptions from './VoteOptions/VoteOptions'
+import VoteResults from './VoteResults/VoteResults'
 
 class Vote extends Component {
 
@@ -83,7 +84,9 @@ class Vote extends Component {
                     />
                 </div>
                 {hasVoted ?
-                    null
+                    <VoteResults
+                        options={this.props.data.options}
+                    />
                     :
                     <VoteOptions
                         edit={this.props.edit}
