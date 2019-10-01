@@ -28,10 +28,21 @@ class Guests extends Component {
     }
 
     removeGuest = (guest) => {
-        const confirmation = window.confirm(`Do you want to delete user ${guest.name}?`)
+        const confirmation = window.confirm(`Do you want to kick user ${guest.name}?`)
         if (confirmation) {
             this.props.EventStore.removeGuest(this.props.EventStore.event._id, guest._id)
         }
+    }
+
+    rightsToRemove = (guestId) => {
+        if (this.props.UserStore.currentUser) {
+            if (this.props.EventStore.event.creator._id !== guestId
+                && this.props.EventStore.event.creator._id === this.props.UserStore.currentUser._id) {
+                    return true
+            }
+            return false
+        }
+
     }
 
     render() {
@@ -67,10 +78,9 @@ class Guests extends Component {
                                 <div style={this.getAvatar(guest.user.avatar)} className="ComponentGuestIcon"> </div>
                                 <div className="ComponentGuestName">{guest.user.name}</div>
                             </a>
-                            {this.props.EventStore.event.creator._id !== guest.user._id
-                            && this.props.EventStore.event.creator._id === this.props.UserStore.currentUser._id ?
+                            {this.rightsToRemove(guest.user._id) ?
                                 <div className="GuestDelete" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
-                                : null}
+                            : null}
                         </div>
                     )}
                 </div>

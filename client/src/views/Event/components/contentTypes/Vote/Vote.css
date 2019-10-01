@@ -24,7 +24,7 @@
 }
 
 .vote-component-option {
-    padding: 5px 0px 5px 30px;
+    padding: 5px 0px 5px 35px;
 }
 
 .vote-component-status-bar {
@@ -53,8 +53,8 @@
     color: #4c5c68;
     border-radius: 5px;
     border: 1px solid darkgrey;
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
     cursor: pointer;
 }
 
