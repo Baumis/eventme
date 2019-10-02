@@ -25,8 +25,6 @@ class JoinEventModal extends Component {
                     </div>
                     {!this.props.UserStore.currentUser ?
                         <div className="join-event-signin">
-                            <p>You have to sign in before joining.</p>
-                            <p>The host wants to know who you are!</p>
                             <div id="join-event-signin-button" onClick={this.signIn}>
                                 Sign in / Sign up
                             </div>
