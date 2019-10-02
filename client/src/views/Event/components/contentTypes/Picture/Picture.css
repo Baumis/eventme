@@ -45,5 +45,6 @@
 
 @media only screen and (max-width: 400px) {
     .picture-container {
+        height: 400px;
     }
 }

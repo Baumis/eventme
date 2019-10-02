@@ -1,8 +1,7 @@
 .discussion-container{
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
-    margin: 5px;
+    margin: 15px;
 }
 
 .discussion-header{
@@ -19,6 +18,7 @@
 .discussion-input-row {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .discussion-input-row input {
@@ -27,7 +27,7 @@
     height: 30px;
     border-radius: 5px;
     border: 1px solid #c5c3c6;
-    background: white;
+    background: transparent;
 }
 
 .discussion-send-button {
@@ -39,13 +39,14 @@
     border: 1px solid #4c5c68;
     color: white;
     border-radius: 5px;
-    height: 33px;
+    height: 32px;
     margin-left: 5px;
     cursor: pointer;
 }
 
 .discussion-content {
     display: flex;
+    flex: 1;
     flex-direction: column;
     margin-bottom: 10px;
     padding-top: 3px;
