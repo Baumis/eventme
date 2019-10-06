@@ -39,10 +39,10 @@ class NewComponentModal extends Component {
                             <FaImage />
                             <label>Picture</label>
                         </div>
-                        <div className="component-modal-button" onClick={() => this.createComponent('VOTE')}>
+                        {/*<div className="component-modal-button" onClick={() => this.createComponent('VOTE')}>
                             <FaPoll />
                             <label>Vote</label>
-                        </div>
+                        </div>*/}
                     </div>
                     <div className="component-modal-bottom-row">
                         <div className="component-modal-close" onClick={this.props.close} >

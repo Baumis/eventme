@@ -1,7 +1,7 @@
 .master-component {
     display: flex;
     flex-direction: column;
-    background: white;
+    background: transparent;
     width: 400px;
     height: 400px;
     position: relative;

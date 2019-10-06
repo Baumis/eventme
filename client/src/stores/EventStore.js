@@ -16,12 +16,15 @@ class EventStore {
     }
 
     async getEvent(eventId) {
-        try {
-            const event = await eventService.getOne(eventId)
-            if (this.saved) {
-                this.event = event
-            }
-        } catch (error) { }
+        if (this.saved) {
+            try {
+                const event = await eventService.getOne(eventId)
+                if (this.saved) {
+                    this.event = event
+
+                }
+            } catch (error) { }
+        }
     }
 
     async joinEvent(eventId, inviteKey) {
@@ -208,7 +211,7 @@ class EventStore {
         const event = { ...this.event }
         const copy = event.components[index]
 
-        if (index - 1 > -1) {
+        if (index > 0) {
             event.components[index] = event.components[index - 1]
             event.components[index - 1] = copy
         } else {
