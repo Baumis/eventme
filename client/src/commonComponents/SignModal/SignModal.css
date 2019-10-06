@@ -68,7 +68,7 @@
     padding: 5px 10px 5px 10px;
 }
 
-#ActiveTab{
+.active-sign-tab{
     color: #1985a1;
     border-bottom: 1px solid #1985a1;
 }
@@ -139,13 +139,10 @@
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        margin: 0px 10px 0px 10px;
+        margin: 10px 10px 0px 10px;
         width: 15px;
         height: 15px;
         background: white;
-        -webkit-box-shadow: 0px 0px 4px -1px rgb(69, 69, 69, 0.5);
-        -moz-box-shadow: 0px 0px 4px -1px rgba(69,69,69,0.5);
-        box-shadow: 0px 0px 4px -1px rgba(69,69,69,0.5);
     }
 
     .signModalContent {
