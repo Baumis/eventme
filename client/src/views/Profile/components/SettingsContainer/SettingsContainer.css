@@ -1,0 +1,10 @@
+.settings-container {
+    display: flex;
+    width: 900px;
+}
+
+@media only screen and (max-width: 900px) {
+    .settings-container {
+        width: 95vw;
+    }
+}

@@ -1,18 +1,18 @@
-.tabs-row {
+.profile-tabs-row {
     display: flex;
     justify-content: center;
     align-content: center;
     border-bottom: 1px solid rgba(197, 195, 198, 0.5);
 }
 
-.tabs-container {
+.profile-tabs-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     max-width: 500px;
     width: 100%;
 }
 
-.tabs-tab {
+.profile-tabs-tab {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -22,16 +22,15 @@
     color: rgba(76, 92, 104, 0.7);
     font-weight: 600;
     border-bottom: 1px solid transparent;
-    background: transparent;
     transition: background 0.2s;
-    user-select: none;
 }
 
-.tabs-tab:hover {
+.profile-tabs-tab:hover {
     background: rgba(197, 195, 198, 0.2);
 }
 
-.active-tab {
+.profile-tabs-active {
     color: rgba(76, 92, 104, 1);
     border-bottom: 2px solid rgba(76, 92, 104, 1);
+    background: transparent;
 }

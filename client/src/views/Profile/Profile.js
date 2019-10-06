@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import UserServices from '../../services/users'
 import ProfileHeader from './components/ProfileHeader/ProfileHeader'
-import EventContainer from './components/EventContainer/EventContainer'
+import ProfileContent from './components/ProfileContent/ProfileContent'
+import ProfileTabs from './components/ProfileTabs/ProfileTabs'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewEventModal from '../../commonComponents/NewEventModal/NewEventModal'
-import UserOptions from './components/UserOptions/UserOptions'
 import NotFound from '../NotFound/NotFound'
 
 class Profile extends Component {
@@ -17,7 +17,7 @@ class Profile extends Component {
             loading: true,
             idValid: true,
             newEventModal: false,
-            userOptionsModal: false
+            activeTab: 'MyEvents'
         }
     }
 
@@ -31,6 +31,10 @@ class Profile extends Component {
             this.setState({ idValid: false })
         }
         this.setState({ loading: false })
+    }
+
+    changeActive = (cathegory) => {
+        this.setState({ activeTab: cathegory })
     }
 
     isOwner = () => {
@@ -66,7 +70,7 @@ class Profile extends Component {
             return (
                 <NotFound
                     title={'Profile not found'}
-                    message={'The profile you are looking for is removed or you don\'t have a permission to view it.'}
+                    message={'The profile you are looking for is removed or you don\'t have permission to view it.'}
                 />
             )
         }
@@ -76,23 +80,23 @@ class Profile extends Component {
                 <Navbar />
                 <ProfileHeader
                     user={this.state.user}
-                    isOwner={this.isOwner()}
                     toggleOptions={this.toggleUserOptionsModal}
                 />
-                <EventContainer
+                <ProfileTabs 
+                    changeActive={this.changeActive}
+                    active={this.state.activeTab}
+                    isOwner={this.isOwner()}
+                />
+                <ProfileContent
                     user={this.state.user}
+                    isOwner={this.isOwner()}
+                    save={this.saveUserValues}
                     newEvent={this.toggleNewEventModal}
+                    activeTab={this.state.activeTab}
                 />
                 {this.state.newEventModal ?
                     <NewEventModal
                         hide={this.toggleNewEventModal}
-                    />
-                    : null}
-                {this.state.userOptionsModal ?
-                    <UserOptions
-                        toggleOptions={this.toggleUserOptionsModal}
-                        user={this.state.user}
-                        save={this.saveUserValues}
                     />
                     : null}
             </div>
