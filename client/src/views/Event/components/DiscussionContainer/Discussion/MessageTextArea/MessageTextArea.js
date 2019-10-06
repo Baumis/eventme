@@ -34,30 +34,15 @@ class MessageTextArea extends Component {
         }
     }
 
-    delete = async (id) => {
-        if (!this.props.EventStore.saved) {
-            alert('Please save your event before deleting message.')
-            return
-        }
-
-        const confirmation = window.confirm('Do you want to delete this message?')
-        if (confirmation) {
-            const event = await this.props.EventStore.deleteMessage(id)
-            if (!event) {
-                alert('The message could not be deleted right now.')
-            }
-        }
-    }
-
     changeInputValue = (event) => {
         this.setState({ messageInput: event.target.value })
     }
 
-    isAuthor = (id) => {
-        if (!this.props.UserStore.currentUser) {
-            return false
+    getAvatar = () => {
+        if (!this.props.UserStore.currentUser.avatar) {
+            return null
         }
-        return this.props.isCreator() || this.props.UserStore.currentUser._id === id
+        return { backgroundImage: `url(${this.props.UserStore.currentUser.avatar})` }
     }
 
     render() {
@@ -68,8 +53,9 @@ class MessageTextArea extends Component {
 
         return (
             <div className="text-area-container">
+                <div className="text-area-avatar" style={this.getAvatar()}></div>
                 <div className="text-area-input">
-                    <textarea
+                    <input
                         onChange={this.changeInputValue}
                         value={this.state.messageInput}
                         placeholder={'your message'}
