@@ -2,9 +2,14 @@ import React from 'react'
 import './ProfileCard.css'
 
 const ProfileCard = (props) => {
-    const avatar = {
-        backgroundImage: `url(${props.user.avatar})`
+
+    const avatar = () => {
+        if (!props.user.avatar) {
+            return null
+        }
+        return { backgroundImage: `url(${props.user.avatar})` }
     }
+
     return (
         <div className="profile-row">
             < div className="profile-row-content">
