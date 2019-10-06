@@ -1,0 +1,41 @@
+.text-area-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid rgba(70, 73, 76, 0.5);
+    margin: 10px;
+}
+
+.text-area-input{
+    display: flex;
+}
+
+.text-area-input textarea {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+    resize: none;
+}
+
+.text-area-button-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.text-area-send-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    background : #4c5c68;
+    border: 1px solid #4c5c68;
+    color: white;
+    border-radius: 5px;
+    height: 32px;
+    margin-left: 5px;
+    cursor: pointer;
+}
