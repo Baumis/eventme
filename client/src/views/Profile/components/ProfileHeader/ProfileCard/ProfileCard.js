@@ -7,13 +7,15 @@ const ProfileCard = (props) => {
         if (!props.user.avatar) {
             return null
         }
-        return { backgroundImage: `url(${props.user.avatar})` }
+        return (
+            { backgroundImage: `url(${props.user.avatar})` }
+        )
     }
 
     return (
         <div className="profile-row">
             < div className="profile-row-content">
-                <div style={avatar} className="profile-avatar"></div>
+                <div style={avatar()} className="profile-avatar"></div>
                 <div className="profile-name">
                     <h2>{props.user.name}</h2>
                 </div>

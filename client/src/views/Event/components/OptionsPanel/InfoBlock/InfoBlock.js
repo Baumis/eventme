@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Options.css'
+import './InfoBlock.css'
 import { FaTimes, FaPhone, FaAt, FaInfo, FaCalendar, FaLocationArrow, FaClock, FaUser } from 'react-icons/fa'
 
 class InfoBlock extends Component {
@@ -42,26 +42,28 @@ class InfoBlock extends Component {
         const Icon = this.state.icons[this.props.icon]
         return (
             <div className="options-panel-info-block">
-                {this.state.displayMenu ?
-                    <div className="options-panel-icon-menu">
-                        {Object.keys(this.state.icons).map(iconName =>
-                            <div key={iconName} className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon(iconName, this.props.index)}>
-                                {this.identifyIcon(iconName)}
-                            </div>
-                        )}
+                <div className="options-panel-info-input-row">
+                    {this.state.displayMenu ?
+                        <div className="options-panel-icon-menu">
+                            {Object.keys(this.state.icons).map(iconName =>
+                                <div key={iconName} className="options-panel-icon-menu-item" onClick={() => this.props.changeIcon(iconName, this.props.index)}>
+                                    {this.identifyIcon(iconName)}
+                                </div>
+                            )}
+                        </div>
+                        : null
+                    }
+                    <div className="options-panel-info-icon" onClick={this.openMenu}>
+                        {Icon ?
+                            <Icon />
+                            : '-'}
                     </div>
-                    : null
-                }
-                <div className="options-panel-info-icon" onClick={this.openMenu}>
-                    {Icon ?
-                        <Icon />
-                        : '-'}
+                    <input
+                        name={this.props.index}
+                        value={this.props.value}
+                        onChange={this.props.changeValue}>
+                    </input>
                 </div>
-                <input
-                    name={this.props.index}
-                    value={this.props.value}
-                    onChange={this.props.changeValue}>
-                </input>
                 <div className="options-panel-info-delete" onClick={this.props.deleteInfoField}>
                     <FaTimes />
                 </div>

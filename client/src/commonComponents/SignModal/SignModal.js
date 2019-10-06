@@ -48,7 +48,10 @@ class SignModal extends Component {
                             Sign up
                         </div>
                     </div>
-                    <TagName changeTab={this.changeTab}/>
+                    <TagName 
+                        changeTab={this.changeTab}
+                        closeModal={() => this.props.VisibilityStore.closeSignModal()}
+                    />
                 </div>
             </div>
         )

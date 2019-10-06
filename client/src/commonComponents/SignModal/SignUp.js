@@ -18,6 +18,14 @@ class SignUp extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
+    signIn = async (username, password) => {
+        try {
+            await this.props.UserStore.signIn(username, password)
+        } catch (error) {
+            alert('Your account was created, but login failed. Please try to login again.')
+        }
+    }
+
     signUp = async () => {
         const userObject = {
             name: this.state.name,
@@ -26,16 +34,18 @@ class SignUp extends Component {
             password: this.state.password
         }
         this.setState({ loading: true })
+
         try {
             await this.props.UserStore.signUp(userObject)
-            this.setState({ loading: false })
-            alert('Your account has been saved. Continue by signing in.')
-            this.props.changeTab('SignIn')
-        } catch (error) {
-            this.setState({ loading: false })
-            alert('Something went wrong...')
-        }
+            this.signIn(userObject.username, userObject.password)
 
+            this.setState({ loading: false })
+            this.props.closeModal()
+        } catch (error) {
+            console.log(error)
+            this.setState({ loading: false })
+            alert('Sign Up failed. Check your connection and try again.')
+        }
     }
 
     render() {

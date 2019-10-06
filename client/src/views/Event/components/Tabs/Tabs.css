@@ -24,6 +24,7 @@
     border-bottom: 1px solid transparent;
     background: transparent;
     transition: background 0.2s;
+    user-select: none;
 }
 
 .tabs-tab:hover {

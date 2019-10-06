@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './RefreshKey.css'
-import { FaSyncAlt } from 'react-icons/fa'
 import Spinner from '../../../../.././commonComponents/Spinner/Spinner'
 
 class RefreshKey extends Component {
@@ -34,7 +33,6 @@ class RefreshKey extends Component {
                     :
                     <div className="refresh-key-content">
                         <p>renew</p>
-                        <FaSyncAlt />
                     </div>
                 }
             </div>
