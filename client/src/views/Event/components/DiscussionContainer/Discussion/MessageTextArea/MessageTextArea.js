@@ -14,6 +14,11 @@ class MessageTextArea extends Component {
     }
 
     post = async () => {
+
+        if (this.state.sending) {
+            return
+        }
+
         if (this.state.messageInput.length < 1) {
             return
         }
