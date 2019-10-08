@@ -7,10 +7,20 @@ exports.login = async (request, response) => {
 
         const token = User.generateToken(user)
 
-        response.cookie('jwt', token, { httpOnly: true })
+        response.cookie('jwt', token, { expires: new Date(Date.now() + 86400000), httpOnly: true })
         response.status(200).json(User.formatForLogin(user))
     } catch (exception) {
         response.status(401).json({ error: exception.message })
+    }
+}
+
+exports.refresh = async (request, response) => {
+    try {
+        const user = await userService.getOnePopulated(request.senderId)
+
+        response.json(User.formatForLogin(user))
+    } catch (exception) {
+        response.status(400).json({ error: 'Malformatted id' })
     }
 }
 
@@ -20,7 +30,7 @@ exports.googleLogin = async (request, response) => {
 
         const token = User.generateToken(user)
 
-        response.cookie('jwt', token, { httpOnly: true })
+        response.cookie('jwt', token, { expires: new Date(Date.now() + 86400000), httpOnly: true })
         response.status(200).json(User.formatForLogin(user))
     } catch (exception) {
         response.status(401).json({ error: exception.message })

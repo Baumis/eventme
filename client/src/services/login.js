@@ -6,6 +6,11 @@ const login = async (credentials) => {
     return response.data
 }
 
+const refresh = async () => {
+    const response = await http.post(`${baseUrl}/refresh`)
+    return response.data
+}
+
 const googleLogin = async (googleToken) => {
     const response = await http.post(`${baseUrl}/google`, { googleToken })
     return response.data
@@ -16,4 +21,4 @@ const logout = async () => {
     return response.data
 }
 
-export default { login, googleLogin, logout }
+export default { login, googleLogin, logout, refresh }
