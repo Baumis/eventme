@@ -1,6 +1,7 @@
 const supertest = require('supertest')
 const { app, server } = require('../index')
 const User = require('../models/user')
+const ActivityLog = require('../models/activityLog')
 
 const api = supertest(app)
 
@@ -8,6 +9,7 @@ describe('POST /api/user', () => {
 
     beforeEach(async () => {
         await User.deleteMany({})
+        await ActivityLog.deleteMany({})
     })
 
     it('should create a new valid user', async () => {
