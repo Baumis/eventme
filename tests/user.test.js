@@ -12,7 +12,7 @@ describe('POST /api/user', () => {
         await ActivityLog.deleteMany({})
     })
 
-    it('should create a new valid user', async () => {
+    it('should create a new user with correct response', async () => {
         const user = {
             username: 'johndoe',
             name: 'John Doe',
@@ -26,13 +26,45 @@ describe('POST /api/user', () => {
             .expect(201)
             .expect('Content-Type', /application\/json/)
 
+        const cookie = res
+            .headers['set-cookie'][0]
+            .split(',')
+            .map(item => item.split(';')[0])
+            .join(';')
+
         expect.stringContaining(res.body._id)
-        expect(res.body.username).toEqual(user.username)
         expect(res.body.name).toEqual(user.name)
         expect(res.body.email).toEqual(user.email)
         expect(res.body.cover).toBeDefined()
         expect.arrayContaining(res.body.myEvents)
         expect.arrayContaining(res.body.myInvites)
+        expect(cookie).toBeDefined()
+    })
+
+    it('should create a new valid user', async () => {
+        const user = {
+            username: 'johndoe',
+            name: 'John Doe',
+            password: 'secret',
+            email: 'john.doe@test.com'
+        }
+
+        const res = await api
+            .post('/api/users')
+            .send(user)
+
+        const createdUser = await User.findById(res.body._id)
+
+        expect(createdUser._id.toString()).toEqual(res.body._id)
+        expect(createdUser.username).toEqual(user.username)
+        expect(createdUser.name).toEqual(user.name)
+        expect.stringContaining(createdUser.passwordHash)
+        expect(createdUser.email).toEqual(user.email)
+        expect(createdUser.emailVerified).toBeFalsy()
+        expect.arrayContaining(createdUser.myEvents)
+        expect.arrayContaining(createdUser.myInvites)
+        expect.stringContaining(createdUser.cover)
+        expect(createdUser.userType).toEqual('LOCAL')
     })
 
     it('should require unique username', async () => {
@@ -83,35 +115,54 @@ describe('POST /api/user', () => {
 })
 
 describe('GET /api/user/:id', () => {
+    const user = {
+        username: 'johndoe',
+        name: 'John Doe',
+        password: 'secret',
+        email: 'john.doe@test.com'
+    }
+    let signedUser = null
+    let cookie = null
+
     beforeAll(async () => {
         await User.deleteMany({})
-        const user = {
-            username: 'johndoe',
-            name: 'John Doe',
-            password: 'secret',
-            email: 'john.doe@test.com'
-        }
-        
-        await api
+
+        const res = await api
             .post('/api/users')
             .send(user)
-            .expect(201)
-        
-        const res = await api
-            .post('/api/login')
-            .send({
-                username: user.username,
-                password: user.password
-            })
-            .expect(200)
 
-        console.log(res.headers['set-cookie'])
+        cookie = res
+            .headers['set-cookie'][0]
+            .split(',')
+            .map(item => item.split(';')[0])
+            .join(';')
+        
+        signedUser = res.body
     })
 
     it('should require authentication', async () => {
         await api
-            .get('/api/users/asd')
+            .get('/api/users/' + signedUser._id)
             .expect(401)
+    })
+
+    it('should succeed with correct response when authenticated', async () => {
+        const res = await api
+            .get('/api/users/' + signedUser._id)
+            .set('Cookie', cookie)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+
+        expect(res.body._id.toString()).toEqual(signedUser._id)
+        expect(res.body.username).toEqual(user.username)
+        expect(res.body.name).toEqual(user.name)
+        expect(res.body.passwordHash).toBeUndefined()
+        expect(res.body.email).toEqual(user.email)
+        expect(res.body.emailVerified).toBeUndefined()
+        expect.arrayContaining(res.body.myEvents)
+        expect.arrayContaining(res.body.myInvites)
+        expect.stringContaining(res.body.cover)
+        expect(res.body.userType).toBeUndefined()
     })
 })
 

@@ -16,7 +16,7 @@ exports.login = async (request, response) => {
 
 exports.refresh = async (request, response) => {
     try {
-        const user = await userService.getOnePopulated(request.senderId)
+        const user = await userService.getOne(request.senderId)
 
         response.json(User.formatForLogin(user))
     } catch (exception) {

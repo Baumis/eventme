@@ -4,6 +4,10 @@ const User = require('../models/user')
 const Event = require('../models/event')
 const eventService = require('./eventService')
 
+exports.getOne = async (id) => {
+    return await User.findById(id)
+}
+
 exports.getOnePopulated = async (id) => {
     return await User
         .findById(id)
