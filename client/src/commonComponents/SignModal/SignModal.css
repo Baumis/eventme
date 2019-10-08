@@ -68,7 +68,7 @@
     padding: 5px 10px 5px 10px;
 }
 
-#ActiveTab{
+.active-sign-tab{
     color: #1985a1;
     border-bottom: 1px solid #1985a1;
 }
@@ -139,44 +139,10 @@
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        margin: 0px 10px 0px 10px;
+        margin: 10px 10px 0px 10px;
         width: 15px;
         height: 15px;
         background: white;
-        -webkit-box-shadow: 0px 0px 4px -1px rgb(69, 69, 69, 0.5);
-        -moz-box-shadow: 0px 0px 4px -1px rgba(69,69,69,0.5);
-        box-shadow: 0px 0px 4px -1px rgba(69,69,69,0.5);
     }
 
-    .signModalContent {
-        justify-content: center;
-        height: 100vh;
-    }
-
-    .signDetails {
-        -webkit-box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0);
-        -moz-box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0);
-        box-shadow: inset 3px 9px 5px -10px rgba(0,0,0,0);
-    }
-
-    .signInput{
-        display: flex;
-        height: 13vh;
-        justify-content: center; 
-    }
-
-    .signInput input{
-        border: 1px solid #c5c3c6;
-        border-radius: 5px;
-        padding: 8px 5px 8px 5px;
-        box-shadow: none;
-        transition: border 0.5s, box-shadow 0.1s;
-    }
-
-    .signInput input:focus{
-        border: 1px solid #1985a1;
-        -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.3);
-        -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.3);
-        box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.3);
-    }
 }

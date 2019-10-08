@@ -1,11 +1,7 @@
 .discussion-content {
     display: flex;
-    width: 900px;
-
+    max-width: 900px;
 }
 
 @media only screen and (max-width: 900px) {
-    .discussion-content {
-        width: 95vw;
-    }
 }

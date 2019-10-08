@@ -1,8 +1,7 @@
 .master-component {
     display: flex;
     flex-direction: column;
-    background: white;
-    padding: 0px 0px 0px 0px;
+    background: transparent;
     width: 400px;
     height: 400px;
     position: relative;
@@ -12,14 +11,15 @@
 
 @media only screen and (max-width: 840px) {
     .master-component {
-        margin: 2% 0px 2% 0px;
+        margin: 2px 0px 2px 0px;
     }
 }
 
 @media only screen and (max-width: 400px) {
     .master-component {
         width: 95vw;
-        height: 95vw;
+        height: auto;
+        min-height: 400px;
     }
 }
 

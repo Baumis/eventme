@@ -1,0 +1,82 @@
+.vote-component-option-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.vote-component-option-row {
+    display: flex;
+    align-items: center;
+    color: #4c5c68;
+}
+
+.vote-component-option {
+    padding: 5px 10px 5px 10px;
+    color: rgba(70, 73, 76, 0.7);
+}
+
+.vote-component-vote-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    color: #4c5c68;
+    border-radius: 5px;
+    border: 1px solid darkgrey;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.vote-component-submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #4c5c68;
+    color: white;
+    margin-top: 20px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.vote-component-delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    width: 15px;
+    height: 15px;
+    color: #c74C3C;
+    border-radius: 5px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.vote-component-add-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4f784e;
+    width: 80px;
+    height: 30px;
+    margin: 10px 0px 0px 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.vote-component-submit-button:hover {
+    background: rgba(76, 92, 104, 0.9);
+}
+
+.vote-component-delete-button:hover {
+    color: rgba(199, 76, 60, 0.3);
+}
+
+.vote-component-vote-button:hover {
+    -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.5);
+    box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.5);
+}

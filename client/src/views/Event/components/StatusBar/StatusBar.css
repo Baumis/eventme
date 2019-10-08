@@ -1,12 +1,12 @@
 .status-bar{
     background: rgba(255,255,255,1);
-    border-radius: 50px;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-content: center;
     height: 40px;
     width: 100px;
-    margin: 0px 0px 60px 50px;
+    margin: 0px 0px 20px 20px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     margin-top: -135px;
     margin-bottom: 20px;
     background: white;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .status-bar-menu-icon{

@@ -1,0 +1,73 @@
+.profile-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 45px;
+    background: rgba(70, 73, 76, 0.3);
+}
+
+.profile-row-content{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    padding: 0px 50px 0px 50px;
+}
+
+.profile-card-options-button{
+    z-index: 3;
+    display: flex;
+    justify-content: flex-end;
+    height: 0px;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.profile-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 130px;
+    min-height: 130px;
+    background: darkgrey;
+    border-radius: 50%;
+    color: white;
+    border: 5px solid #dddddd;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position:center center;
+}
+
+.profile-name {
+    color: white;
+    padding: 0px 10px 0px 10px;
+}
+
+.profile-name h2 {
+    margin: 0px;
+    color: white;
+}
+@media only screen and (max-width: 620px) {
+    .profile-row {
+        height: 110px;
+        align-items: flex-end;
+        background: transparent;
+    }
+    .profile-row-content {
+        padding: 0px 10px 0px 10px;
+        align-items: flex-end;
+    }
+    .profile-avatar {
+        min-width: 90px;
+        min-height: 90px;
+        margin-bottom: 5px;
+    }
+    .profile-name h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+}

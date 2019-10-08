@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import Text from '../contentTypes/Text/Text'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
 import Picture from '../contentTypes/Picture/Picture'
+import Vote from '../contentTypes/Vote/Vote'
 import './MasterComponent.css'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import EditorPanel from './EditorPanel/EditorPanel'
@@ -14,7 +15,8 @@ class MasterComponent extends Component {
         components: {
             TEXT: Text,
             INVITE_LINK: InviteLink,
-            PICTURE: Picture
+            PICTURE: Picture,
+            VOTE: Vote
         }
     }
 

@@ -21,7 +21,7 @@ const MessageCard = (props) => {
         <div className="message-card">
             {!props.message.author ?
                 <div className="message-card-wrapper" id="deleted">
-                    deleted
+                    Message deleted
                 </div>
                 :
                 <div className="message-card-wrapper">

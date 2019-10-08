@@ -34,6 +34,13 @@ class Event extends Component {
         }
 
         this.setState({ loading: false })
+        this.startEventUpdater(this.props.eventId)
+    }
+
+    startEventUpdater = (eventId) => {
+        setInterval(() => {
+            this.props.EventStore.getEvent(eventId)
+        }, 30000) 
     }
 
     changeActive = (cathegory) => {
@@ -74,7 +81,7 @@ class Event extends Component {
             return (
                 <NotFound
                     title={'Event not found'}
-                    message={'The event you are looking for is removed or you don\'t have a permission to view it.'}
+                    message={'The event you are looking for is removed or you don\'t have permission to view it.'}
                 />
             )
         }

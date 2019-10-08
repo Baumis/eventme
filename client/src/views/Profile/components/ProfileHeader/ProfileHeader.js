@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './ProfileHeader.css'
-import ProfileCard from './ProfileCard'
+import ProfileCard from './ProfileCard/ProfileCard'
 
 class ProfileHeader extends Component {
 
     getCover = () => {
+        if (!this.props.UserStore.currentUser.cover) {
+            return null
+        }
         return ({
             backgroundImage: `url(${this.props.UserStore.currentUser.cover})`
         })

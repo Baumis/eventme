@@ -1,9 +1,9 @@
 .message-card {
     display: flex;
-    border-radius: 6px;
+    flex: 1;
     padding: 15px;
     margin: 2px 0px 2px 0px;
-    background: white;
+    background: transparent;
 }
 
 .message-card-avatar-section {

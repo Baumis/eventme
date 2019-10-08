@@ -42,3 +42,9 @@
 .picture-size-button:hover {
     color: rgba(255,255,255,0.7)
 }
+
+@media only screen and (max-width: 400px) {
+    .picture-container {
+        height: 400px;
+    }
+}

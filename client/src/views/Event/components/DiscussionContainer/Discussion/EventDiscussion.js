@@ -2,35 +2,16 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EventDiscussion.css'
 import MessageCard from './MessageCard/MessageCard'
-import Spinner from '../../../../../commonComponents/Spinner/Spinner'
+import MessageTextArea from './MessageTextArea/MessageTextArea'
 
 class EventDiscussion extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            messageInput: '',
-            sending: false
-        }
-    }
-
-    post = async () => {
-        if (this.state.messageInput.length < 1) {
+    delete = async (id) => {
+        if (!this.props.EventStore.saved) {
+            alert('Please save your event before deleting message.')
             return
         }
 
-        this.setState({ sending: true })
-        const event = await this.props.EventStore.postMessage(this.state.messageInput)
-        this.setState({ sending: false })
-
-        if (!event) {
-            alert('The post could not be sent.')
-        } else {
-            this.setState({ messageInput: '' })
-        }
-    }
-
-    delete = async (id) => {
         const confirmation = window.confirm('Do you want to delete this message?')
         if (confirmation) {
             const event = await this.props.EventStore.deleteMessage(id)
@@ -38,10 +19,6 @@ class EventDiscussion extends Component {
                 alert('The message could not be deleted right now.')
             }
         }
-    }
-
-    changeInputValue = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
     }
 
     isAuthor = (id) => {
@@ -54,23 +31,7 @@ class EventDiscussion extends Component {
     render() {
         return (
             <div className="discussion-container">
-                <div className="discussion-header">
-                    <div className="discussion-input-row">
-                        <input
-                            name="messageInput"
-                            onChange={this.changeInputValue}
-                            value={this.state.messageInput}
-                            placeholder={'your message'}
-                        />
-                        <div className="discussion-send-button" onClick={() => this.post()}>
-                            {this.state.sending ?
-                                <Spinner />
-                                :
-                                <div>post</div>
-                            }
-                        </div>
-                    </div>
-                </div>
+                <MessageTextArea />
                 <div className="discussion-content">
                     {this.props.EventStore.event.discussion.map((message, i) =>
                         <MessageCard

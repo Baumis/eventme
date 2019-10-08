@@ -26,7 +26,7 @@ class User extends Component {
             <div className="user">
                 {this.props.UserStore.currentUser ?
                     <div className="user-signed-in">
-                        <a href={`/profile/${this.props.UserStore.currentUser._id}`} className="user-username">
+                        <a className="user-username" href={`/profile/${this.props.UserStore.currentUser._id}`}>
                             <div style={this.getAvatar()} className="user-avatar"> </div>
                             {this.props.UserStore.currentUser.name}
                         </a>

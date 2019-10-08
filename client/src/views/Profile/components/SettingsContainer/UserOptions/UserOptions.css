@@ -1,58 +1,15 @@
-.user-options-background{
-    position: fixed;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background: rgba(0,0,0,0.3);
-}
-
 .user-options-container{
     display: flex;
+    flex: 1;
     flex-direction: column;
     padding-bottom: 5px;
-    border-radius: 10px;
-    max-width: 500px;
-    width: 100%;
     overflow: hidden;
-    z-index: 3;
-    background: rgba(255,255,255);
+    background: transparent;
 }
-
-.user-options-top-row{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 20px;
-}
-
-.user-options-top-row h2{
-    margin: 0px;
-    padding-left: 45px;
-    padding-right: 10px;
-    font-size: 22px;
-    color: #4c5c68;
-}
-
 .user-options-title {
     display: flex;
     font-size: 22px;
     color: #4c5c68;
-}
-
-.user-options-exit-icon{
-    padding: 10px 25px 10px 15px;
-    color: #c5c3c6;
-    cursor: pointer;
-}
-
-.user-options-exit-icon:hover{
-    color: #46494c;
 }
 
 .user-options-input{
@@ -84,9 +41,8 @@
 }
 
 .user-options-button-row{
-    margin-top: 25px;
-    width: 100%;
     display: flex;
+    margin-top: 25px;
     justify-content: center;
 }
 

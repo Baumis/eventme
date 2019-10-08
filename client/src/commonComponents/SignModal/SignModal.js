@@ -13,17 +13,15 @@ class SignModal extends Component {
         }
     }
 
-    contents = {
-        SignIn: SignIn,
-        SignUp: SignUp
-    }
-
     changeTab = (tab) => {
         this.setState({ content: tab })
     }
 
+    getActivityClass = (tabName) => {
+        return this.state.content === tabName ? ' active-sign-tab' : ''
+    }
+
     render() {
-        const TagName = this.contents[this.state.content]
         return (
             <div className="sign-modal-bg">
                 <div className="sign-modal">
@@ -34,21 +32,29 @@ class SignModal extends Component {
                     </div>
                     <div className="sign-modal-tabs">
                         <div
-                            className="sign-modal-tab"
-                            id={this.state.content === 'SignIn' ? 'ActiveTab' : 'Normal'}
+                            className={"sign-modal-tab" + this.getActivityClass('SignIn')}
                             onClick={() => this.changeTab('SignIn')}
                         >
                             Sign in
                         </div>
                         <div
-                            className="sign-modal-tab"
-                            id={this.state.content === 'SignUp' ? 'ActiveTab' : 'Normal'}
+                            className={"sign-modal-tab" + this.getActivityClass('SignUp')}
                             onClick={() => this.changeTab('SignUp')}
                         >
                             Sign up
                         </div>
                     </div>
-                    <TagName changeTab={this.changeTab}/>
+                    {this.state.content === 'SignIn' ?
+                        <SignIn
+                            changeTab={this.changeTab}
+                            closeModal={() => this.props.VisibilityStore.closeSignModal()}
+                        />
+                        :
+                        <SignUp
+                            changeTab={this.changeTab}
+                            closeModal={() => this.props.VisibilityStore.closeSignModal()}
+                        />
+                    }
                 </div>
             </div>
         )

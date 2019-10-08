@@ -22,7 +22,9 @@
     color: rgba(76, 92, 104, 0.7);
     font-weight: 600;
     border-bottom: 1px solid transparent;
+    background: transparent;
     transition: background 0.2s;
+    user-select: none;
 }
 
 .tabs-tab:hover {
@@ -32,5 +34,4 @@
 .active-tab {
     color: rgba(76, 92, 104, 1);
     border-bottom: 2px solid rgba(76, 92, 104, 1);
-    background: white;
 }
