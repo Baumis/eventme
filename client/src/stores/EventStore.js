@@ -129,33 +129,6 @@ class EventStore {
         })
     }
 
-    addInfoPanelValue() {
-        const newInfo = { icon: 'EMPTY', text: '' }
-        this.event.infoPanel.push(newInfo)
-        this.saved = false
-    }
-
-    deleteInfoPanelValue(index) {
-        const newInfoPanel = this.event.infoPanel.slice()
-        newInfoPanel.splice(index, 1)
-        this.event.infoPanel = newInfoPanel
-        this.saved = false
-    }
-
-    changeInfoPanelText(text, index) {
-        const newInfoPanel = this.event.infoPanel.slice()
-        newInfoPanel[index].text = text
-        this.event.infoPanel = newInfoPanel
-        this.saved = false
-    }
-
-    changeInfoPanelIcon(icon, index) {
-        const newInfoPanel = this.event.infoPanel.slice()
-        newInfoPanel[index].icon = icon
-        this.event.infoPanel = newInfoPanel
-        this.saved = false
-    }
-
     getUserStatus(id) {
         const guest = this.event.guests.find(guest => guest.user._id === id)
         if (guest) {

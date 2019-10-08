@@ -5,7 +5,6 @@ import './OptionsPanel.css'
 import { FaAngleDoubleLeft } from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock/InputBlock'
-import InfoBlock from './InfoBlock/InfoBlock'
 import RefreshKey from './RefreshKey/RefreshKey'
 import InviteLinkBlock from './InviteLinkBlock/InviteLinkBlock'
 
@@ -114,28 +113,6 @@ class OptionsPanel extends Component {
                     <div className="options-panel-content">
                         <InviteLinkBlock />
                         <RefreshKey />
-                    </div>
-                    <div className="options-panel-content">
-                        <div className="options-panel-info-panel">
-                            <div className="inputLabel">
-                                <label>Info panel</label>
-                            </div>
-                            {this.props.EventStore.event.infoPanel.map((info, i) =>
-                                <InfoBlock
-                                    label={'Example'}
-                                    index={i}
-                                    key={i}
-                                    value={info.text}
-                                    icon={info.icon}
-                                    changeValue={this.changeFieldText}
-                                    deleteInfoField={() => this.deleteInfoField(i)}
-                                    changeIcon={this.changeIcon}
-                                />
-                            )}
-                            <div className="options-panel-add-field-button" onClick={() => this.addInfoField()}>
-                                <p>new field</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
