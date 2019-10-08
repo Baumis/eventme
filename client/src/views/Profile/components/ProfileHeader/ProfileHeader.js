@@ -10,7 +10,7 @@ class ProfileHeader extends Component {
             return null
         }
         return ({
-            backgroundImage: `url(${this.props.UserStore.currentUser.cover})`
+            backgroundImage: `url(${this.props.user.cover})`
         })
     }
 
