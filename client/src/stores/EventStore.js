@@ -11,6 +11,7 @@ class EventStore {
             console.log('event initialized: ', this.event)
             return this.event
         } catch (error) {
+            this.event = null
             return null
         }
     }
