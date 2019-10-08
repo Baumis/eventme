@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import InfoPanel from './InfoPanel.js'
 import StatusBar from '../StatusBar/StatusBar'
 import moment from 'moment'
 import './Header.css'
@@ -23,7 +22,6 @@ class Header extends Component {
                         <StatusBar />
                     </div>
                     : null}
-                <InfoPanel data={this.props.EventStore.event.infoPanel} />
             </div>
         )
     }
