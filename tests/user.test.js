@@ -2,6 +2,7 @@ const supertest = require('supertest')
 const { app, server } = require('../index')
 const User = require('../models/user')
 const ActivityLog = require('../models/activityLog')
+const testUtils = require('../utils/testUtils')
 
 const api = supertest(app)
 
@@ -13,12 +14,7 @@ describe('POST /api/user', () => {
     })
 
     it('should create a new user with correct response', async () => {
-        const user = {
-            username: 'johndoe',
-            name: 'John Doe',
-            password: 'secret',
-            email: 'john.doe@test.com'
-        }
+        const user = testUtils.user
 
         const res = await api
             .post('/api/users')
@@ -42,12 +38,7 @@ describe('POST /api/user', () => {
     })
 
     it('should create a new valid user', async () => {
-        const user = {
-            username: 'johndoe',
-            name: 'John Doe',
-            password: 'secret',
-            email: 'john.doe@test.com'
-        }
+        const user = testUtils.user
 
         const res = await api
             .post('/api/users')
@@ -68,12 +59,7 @@ describe('POST /api/user', () => {
     })
 
     it('should require unique username', async () => {
-        const user = {
-            username: 'johndoe',
-            name: 'John Doe',
-            password: 'secret',
-            email: 'john.doe@test.com'
-        }
+        const user = testUtils.user
 
         await api
             .post('/api/users')
@@ -115,12 +101,7 @@ describe('POST /api/user', () => {
 })
 
 describe('GET /api/user/:id', () => {
-    const user = {
-        username: 'johndoe',
-        name: 'John Doe',
-        password: 'secret',
-        email: 'john.doe@test.com'
-    }
+    const user = testUtils.user
     let signedUser = null
     let cookie = null
 
