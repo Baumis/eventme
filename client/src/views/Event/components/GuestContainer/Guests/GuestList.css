@@ -1,4 +1,4 @@
-.GuestComponent{
+.event-guests{
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -6,7 +6,7 @@
     margin-bottom: 20px;
 }
 
-.ComponentStatusButtons{
+.event-guests-status-button{
     display: flex;
     width: 100%;
     justify-content: flex-start;
@@ -39,7 +39,7 @@
     cursor: pointer;
 }
 
-.ComponentGuestList{
+.event-guests-list{
     display: flex;
     flex-direction: column;
     background: transparent;
@@ -49,7 +49,7 @@
     overflow: auto;
 }
 
-.ComponentGuest{
+.event-guests-guest-row{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -57,7 +57,7 @@
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.ComponentGuestIcon {
+.event-guests-guest-avatar {
     background: darkgray;
     min-width: 30px;
     height: 30px;
@@ -69,45 +69,23 @@
     border-radius: 50%;
 }
 
-.ComponentGuest a{
+.event-guests-guest-row a{
     color: black;
     display: flex;
     align-items: center;
 }
 
-.ComponentGuestName{
+.event-guests-guest-name{
     padding-left: 10px;
     width: 80%;
     text-align: left;
 }
 
-.GuestDelete{
+.event-guests-guest-remove{
     cursor: pointer;
     color: rgba(0,0,0,0.2);
 }
 
-.GuestDelete:hover{
+.event-guests-guest-remove:hover{
     color: rgba(0,0,0,0.5);
-}
-
-.GuestSearchField{
-    display: flex;
-    position: flex;
-    align-items: center;
-    bottom: 2px;
-    border: 1px solid rgba(0,0,0,0.3);
-    margin: 2px 10% 2px 10%;
-    padding: 5px 15px 5px 15px;
-    border-radius: 30px;
-    background: white;
-}
-
-.GuestSearchField input{
-    border: none;
-    width: 100%;
-}
-
-#searchIcon{
-    color: rgba(46, 184, 46, 1);
-    cursor: pointer;
 }

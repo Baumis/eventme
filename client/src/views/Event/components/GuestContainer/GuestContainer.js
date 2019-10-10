@@ -1,13 +1,27 @@
 import React, { Component } from 'react'
 import './GuestContainer.css'
-import Guests from './Guests/Guests'
+import GuestList from './Guests/GuestList'
 
 class GuestContainer extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            filter: 'ALL'
+        }
+    }
+
+    changeActive = (status) => {
+        this.setState({ filter: status })
+    }
 
     render() {
         return (
             <div className="guests-content">
-                <Guests isCreator={this.props.isCreator()} />
+                <GuestList
+                    isCreator={this.props.isCreator()}
+                    filter={this.state.filter}
+                />
             </div>
         )
     }
