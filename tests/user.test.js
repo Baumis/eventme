@@ -103,6 +103,7 @@ describe('POST /api/user', () => {
 describe('GET /api/user/:id', () => {
     const user = testUtils.user
     let signedUser = null
+    let otherUser = null
     let cookie = null
 
     beforeAll(async () => {
@@ -119,6 +120,7 @@ describe('GET /api/user/:id', () => {
             .join(';')
         
         signedUser = res.body
+        otherUser = await testUtils.addAndGetUser()
     })
 
     it('should require authentication', async () => {
@@ -127,7 +129,7 @@ describe('GET /api/user/:id', () => {
             .expect(401)
     })
 
-    it('should succeed with correct response when authenticated', async () => {
+    it('should succeed with correct response when fetching own user', async () => {
         const res = await api
             .get('/api/users/' + signedUser._id)
             .set('Cookie', cookie)
@@ -144,6 +146,34 @@ describe('GET /api/user/:id', () => {
         expect.arrayContaining(res.body.myInvites)
         expect.stringContaining(res.body.cover)
         expect(res.body.userType).toBeUndefined()
+    })
+
+    it('should succeed with correct response when fetching someone elses user', async () => {
+        const res = await api
+            .get('/api/users/' + otherUser._id)
+            .set('Cookie', cookie)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+
+        expect(res.body._id.toString()).toEqual(otherUser._id.toString())
+        expect(res.body.username).toBeUndefined()
+        expect(res.body.name).toEqual(otherUser.name)
+        expect(res.body.passwordHash).toBeUndefined()
+        expect(res.body.email).toBeUndefined()
+        expect(res.body.emailVerified).toBeUndefined()
+        expect.arrayContaining(res.body.myEvents)
+        expect.arrayContaining(res.body.myInvites)
+        expect.stringContaining(res.body.cover)
+        expect(res.body.userType).toBeUndefined()
+    })
+
+    it('should fail if id not found', async () => {
+        const nonExistingUserId = await testUtils.nonExistingUserId()
+
+        await api
+            .get('/api/users/' + nonExistingUserId)
+            .set('Cookie', cookie)
+            .expect(400)
     })
 })
 
