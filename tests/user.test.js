@@ -6,7 +6,7 @@ const testUtils = require('../utils/testUtils')
 
 const api = supertest(app)
 
-describe('POST /api/user', () => {
+describe('POST /api/users', () => {
 
     beforeEach(async () => {
         await User.deleteMany({})
@@ -100,7 +100,7 @@ describe('POST /api/user', () => {
     })
 })
 
-describe('GET /api/user/:id', () => {
+describe('GET /api/users/:id', () => {
     const user = testUtils.user
     let signedUser = null
     let otherUser = null
@@ -174,6 +174,43 @@ describe('GET /api/user/:id', () => {
             .get('/api/users/' + nonExistingUserId)
             .set('Cookie', cookie)
             .expect(400)
+    })
+})
+
+describe('PUT /api/users/:id', () => {
+    const user = testUtils.user
+    let signedUser = null
+    let otherUser = null
+    let cookie = null
+
+    beforeAll(async () => {
+        await User.deleteMany({})
+
+        const res = await api
+            .post('/api/users')
+            .send(user)
+
+        cookie = res
+            .headers['set-cookie'][0]
+            .split(',')
+            .map(item => item.split(';')[0])
+            .join(';')
+        
+        signedUser = res.body
+        otherUser = await testUtils.addAndGetUser()
+    })
+
+    it('should require authentication', async () => {
+        await api
+            .put('/api/users/' + signedUser._id)
+            .expect(401)
+    })
+
+    it.only('should fail if trying to update someone elses user', async () => {
+        await api
+            .put('/api/users/' + otherUser._id)
+            .set('Cookie', cookie)
+            .expect(403)
     })
 })
 
