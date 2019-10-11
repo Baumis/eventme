@@ -1,6 +1,5 @@
 .event-guests{
     display: flex;
-    flex: 1;
     flex-direction: column;
     overflow-y: hidden;
     margin-bottom: 20px;

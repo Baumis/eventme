@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './GuestContainer.css'
 import GuestList from './Guests/GuestList'
+import GuestFilter from './GuestFilter/GuestFilter'
 
 class GuestContainer extends Component {
 
@@ -11,13 +12,17 @@ class GuestContainer extends Component {
         }
     }
 
-    changeActive = (status) => {
+    changeFilter = (status) => {
         this.setState({ filter: status })
     }
 
     render() {
         return (
             <div className="guests-content">
+                <GuestFilter 
+                    currentFilter={this.state.filter}
+                    changeFilter={this.changeFilter}
+                />
                 <GuestList
                     isCreator={this.props.isCreator()}
                     filter={this.state.filter}

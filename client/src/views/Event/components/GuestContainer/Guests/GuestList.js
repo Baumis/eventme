@@ -30,20 +30,21 @@ class Guests extends Component {
 
     }
 
-    filteredGuests = () => {
-        return this.props.filter === 'ALL' ?
-            this.props.EventStore.event.guests
-            :
-            this.props.EventStore.event.guests.filter((guest) =>
+    filterGuests = () => {
+        let guests = this.props.EventStore.event.guests
+        if (this.props.filter !== 'ALL') {
+            guests = this.props.EventStore.event.guests.filter((guest) =>
                 guest.status === this.props.filter
             )
+        }
+        return guests
     }
 
     render() {
         return (
             <div className="event-guests">
                 <div className="event-guests-list">
-                    {this.filteredGuests().map((guest, i) =>
+                    {this.filterGuests().map((guest, i) =>
                         <div className="event-guests-guest-row" key={i}>
                             <a href={`/profile/${guest.user._id}`}>
                                 <div style={this.getAvatar(guest.user.avatar)} className="event-guests-guest-avatar"> </div>
