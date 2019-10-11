@@ -7,7 +7,7 @@ class GuestFilter extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            showOptions: true
+            showOptions: false
         }
     }
 

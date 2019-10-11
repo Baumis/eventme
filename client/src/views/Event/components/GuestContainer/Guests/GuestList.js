@@ -37,7 +37,29 @@ class Guests extends Component {
                 guest.status === this.props.filter
             )
         }
-        return guests
+        return guests.sort(this.sorter)
+    }
+
+    styleStatus = (status) => {
+        const color = status === 'GOING' ? 'rgba(46, 184, 46, 1)'
+            : status === 'PENDING' ? 'orange'
+                : status === 'DECLINED' ? 'red'
+                    : 'black'
+        status = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()
+        return <div style={{ color: color }}>{status}</div>
+    }
+
+    sorter = (guestA, guestB) => {
+        if (guestA.status === guestB.status) {
+            return guestA.user.name > guestB.user.name ? 1 : -1
+        }
+        if (guestA.status === 'GOING') {
+            return -1
+        }
+        if (guestA.status === 'PENDING' && guestB.status === 'DECLINED') {
+            return -1
+        }
+        return 1
     }
 
     render() {
@@ -50,9 +72,16 @@ class Guests extends Component {
                                 <div style={this.getAvatar(guest.user.avatar)} className="event-guests-guest-avatar"> </div>
                                 <div className="event-guests-guest-name">{guest.user.name}</div>
                             </a>
-                            {this.rightsToRemove(guest.user._id) ?
-                                <div className="event-guests-guest-remove" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
-                                : null}
+                            <div className="event-guests-right-column">
+                                <div className="event-guests-guest-status">
+                                    {this.styleStatus(guest.status)}
+                                </div>
+                                {this.rightsToRemove(guest.user._id) ?
+                                    <div className="event-guests-guest-remove" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
+                                    :
+                                    null
+                                }
+                            </div>
                         </div>
                     )}
                 </div>
