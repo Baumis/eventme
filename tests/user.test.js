@@ -13,7 +13,7 @@ describe('POST /api/users', () => {
         await ActivityLog.deleteMany({})
     })
 
-    it('should create a new user with correct response', async () => {
+    it('should succeed and create a new user with correct response', async () => {
         const user = testUtils.user
 
         const res = await api
@@ -35,9 +35,13 @@ describe('POST /api/users', () => {
         expect.arrayContaining(res.body.myEvents)
         expect.arrayContaining(res.body.myInvites)
         expect(cookie).toBeDefined()
+
+        const amountOfUsers = await User.countDocuments()
+
+        expect(amountOfUsers).toEqual(1)
     })
 
-    it('should create a new valid user', async () => {
+    it('should succeed and create a new valid user', async () => {
         const user = testUtils.user
 
         const res = await api
@@ -56,9 +60,13 @@ describe('POST /api/users', () => {
         expect.arrayContaining(createdUser.myInvites)
         expect.stringContaining(createdUser.cover)
         expect(createdUser.userType).toEqual('LOCAL')
+
+        const amountOfUsers = await User.countDocuments()
+
+        expect(amountOfUsers).toEqual(1)
     })
 
-    it('should require unique username', async () => {
+    it('should fail if username taken', async () => {
         const user = testUtils.user
 
         await api
@@ -70,9 +78,13 @@ describe('POST /api/users', () => {
             .post('/api/users')
             .send(user)
             .expect(400)
+        
+        const amountOfUsers = await User.countDocuments()
+
+        expect(amountOfUsers).toEqual(1)
     })
 
-    it('should require defined username', async () => {
+    it('should fail if username undefined', async () => {
         const user = {
             name: 'John Doe',
             password: 'secret',
@@ -85,7 +97,7 @@ describe('POST /api/users', () => {
             .expect(400)
     })
 
-    it('should require password length to be at least 3', async () => {
+    it('should fail if password too short', async () => {
         const user = {
             username: 'johndoe',
             name: 'John Doe',
@@ -206,11 +218,104 @@ describe('PUT /api/users/:id', () => {
             .expect(401)
     })
 
-    it.only('should fail if trying to update someone elses user', async () => {
+    it('should succeed and update user info', async () => {
+        userObject = {
+            name: 'New name',
+            email: 'new.email@mail.com',
+            avatar: 'www.picture.com/avatarjpg',
+            cover: 'www.picture.com/coverjpg'
+        }
+
+        const res = await api
+            .put('/api/users/' + signedUser._id)
+            .set('Cookie', cookie)
+            .send(userObject)
+            .expect(200)
+        
+        expect(res.body._id.toString()).toEqual(signedUser._id)
+        expect(res.body.username).toEqual(user.username)
+        expect(res.body.name).toEqual(userObject.name)
+        expect(res.body.passwordHash).toBeUndefined()
+        expect(res.body.email).toEqual(userObject.email)
+        expect(res.body.emailVerified).toBeUndefined()
+        expect.arrayContaining(res.body.myEvents)
+        expect.arrayContaining(res.body.myInvites)
+        expect(res.body.cover).toEqual(userObject.cover)
+        expect(res.body.avatar).toEqual(userObject.avatar)
+        expect(res.body.userType).toBeUndefined()
+    })
+
+    it('should fail if trying to update someone elses user', async () => {
         await api
             .put('/api/users/' + otherUser._id)
             .set('Cookie', cookie)
             .expect(403)
+    })
+
+    it('should fail if name undefined or too short', async () => {
+        const userInBeginning = await User.findById(signedUser._id)
+
+        userObject = {
+            email: 'new.email@mail.com',
+            avatar: 'www.picture.com/avatarjpg',
+            cover: 'www.picture.com/coverjpg'
+        }
+
+        userObject2 = {
+            name: 'Ne',
+            email: 'new.email@mail.com',
+            avatar: 'www.picture.com/avatarjpg',
+            cover: 'www.picture.com/coverjpg'
+        }
+
+        await api
+            .put('/api/users/' + signedUser._id)
+            .set('Cookie', cookie)
+            .send(userObject)
+            .expect(400)
+        
+        await api
+            .put('/api/users/' + signedUser._id)
+            .set('Cookie', cookie)
+            .send(userObject2)
+            .expect(400)
+        
+        const userInEnd = await User.findById(signedUser._id)
+
+        expect(userInBeginning).toEqual(userInEnd)
+    })
+
+    it('should fail if email undefined or not valid', async () => {
+        const userInBeginning = await User.findById(signedUser._id)
+
+        userObject = {
+            name: 'Wrong email',
+            avatar: 'www.picture.net/avatarjpg',
+            cover: 'www.picture.net/coverjpg'
+        }
+
+        userObject2 = {
+            name: 'Wrong email',
+            email: 'new.emailmail.com',
+            avatar: 'www.picture.fi/avatarjpg',
+            cover: 'www.picture.fi/coverjpg'
+        }
+
+        await api
+            .put('/api/users/' + signedUser._id)
+            .set('Cookie', cookie)
+            .send(userObject)
+            .expect(400)
+        
+        await api
+            .put('/api/users/' + signedUser._id)
+            .set('Cookie', cookie)
+            .send(userObject2)
+            .expect(400)
+        
+        const userInEnd = await User.findById(signedUser._id)
+
+        expect(userInBeginning).toEqual(userInEnd)
     })
 })
 
