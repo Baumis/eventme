@@ -20,7 +20,7 @@ exports.create = async (request, response) => {
     try {
         const createdUser = await userService.create(request.body)
 
-        logService.create(createdUser._id)
+        await logService.create(createdUser._id)
 
         const token = User.generateToken(createdUser)
 
@@ -53,7 +53,7 @@ exports.delete = async (request, response) => {
 
         await userService.delete(request.params.id)
 
-        logService.delete(request.params.id)
+        await logService.delete(request.params.id)
 
         response.status(204).end()
     } catch (exception) {

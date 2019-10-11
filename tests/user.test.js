@@ -10,7 +10,6 @@ describe('POST /api/users', () => {
 
     beforeEach(async () => {
         await User.deleteMany({})
-        await ActivityLog.deleteMany({})
     })
 
     it('should succeed and create a new user with correct response', async () => {
@@ -316,6 +315,51 @@ describe('PUT /api/users/:id', () => {
         const userInEnd = await User.findById(signedUser._id)
 
         expect(userInBeginning).toEqual(userInEnd)
+    })
+})
+
+describe('DELETE /api/users/:id', () => {
+    const user = testUtils.user
+    let signedUser = null
+    let otherUser = null
+    let cookie = null
+
+    beforeEach(async () => {
+        await User.deleteMany({})
+
+        const res = await api
+            .post('/api/users')
+            .send(user)
+
+        cookie = res
+            .headers['set-cookie'][0]
+            .split(',')
+            .map(item => item.split(';')[0])
+            .join(';')
+        
+        signedUser = res.body
+        otherUser = await testUtils.addAndGetUser()
+    })
+
+    it('should require authentication', async () => {
+        await api
+            .delete('/api/users/' + signedUser._id)
+            .expect(401)
+        
+        const amountOfUsers = await User.countDocuments()
+
+        expect(amountOfUsers).toEqual(2)
+    })
+
+    it('should succeed and remove user', async () => {
+        await api
+            .delete('/api/users/' + signedUser._id)
+            .set('Cookie', cookie)
+            .expect(204)
+        
+        const amountOfUsers = await User.countDocuments()
+
+        expect(amountOfUsers).toEqual(1)
     })
 })
 
