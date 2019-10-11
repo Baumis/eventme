@@ -6,6 +6,11 @@ const testUtils = require('../utils/testUtils')
 
 const api = supertest(app)
 
+beforeAll(async () => {
+    await User.deleteMany({})
+    await ActivityLog.deleteMany({})
+})
+
 describe('POST /api/users', () => {
 
     beforeEach(async () => {
