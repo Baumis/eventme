@@ -6,41 +6,36 @@ class UserStore {
     currentUser = null
 
     async signIn(username, password) {
-        const user = await loginService.login({ username, password })
-        this.currentUser = user
-        window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
+        this.currentUser = await loginService.login({ username, password })
     }
 
     async googleSignIn(googleToken) {
-        const user = await loginService.googleLogin(googleToken)
-        this.currentUser = user
-        window.localStorage.setItem('loggedEventAppUser', JSON.stringify(user))
+        this.currentUser = await loginService.googleLogin(googleToken)
     }
 
-    async refreshUser(user) {
+    async refreshUser() {
         try {
-            this.currentUser = await userService.getOne(user._id)
+            this.currentUser = await loginService.refresh()
+            return this.currentUser
         } catch (error) {
-            window.localStorage.removeItem('loggedEventAppUser')
+            return null
         }
     }
 
     async signOut() {
         await loginService.logout()
         this.currentUser = null
-        window.localStorage.removeItem('loggedEventAppUser')
     }
 
 
     async signUp(newUser) {
-        await userService.create(newUser)
+        this.currentUser = await userService.create(newUser)
     }
 
     async saveUser(user) {
         try {
-            const savedUser = await userService.update(user)
-            this.currentUser = savedUser
-            return savedUser
+            this.currentUser = await userService.update(user)
+            return this.currentUser
         } catch (error) {
             return null
         }
