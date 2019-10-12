@@ -6,15 +6,11 @@ const testUtils = require('./testUtils')
 
 const api = supertest(app)
 
-beforeEach(async () => {
-    await User.deleteMany({})
-    await ActivityLog.deleteMany({})
-})
-
 describe('POST /api/users', () => {
 
     beforeEach(async () => {
         await User.deleteMany({})
+        await ActivityLog.deleteMany({})
     })
 
     it('should succeed and create a new user with correct response', async () => {
@@ -127,6 +123,7 @@ describe('GET /api/users/:id', () => {
 
     beforeAll(async () => {
         await User.deleteMany({})
+        await ActivityLog.deleteMany({})
 
         const res = await api
             .post('/api/users')
@@ -155,7 +152,7 @@ describe('GET /api/users/:id', () => {
             .expect(200)
             .expect('Content-Type', /application\/json/)
 
-        expect(res.body._id.toString()).toEqual(signedUser._id)
+        expect(res.body._id).toEqual(signedUser._id)
         expect(res.body.username).toEqual(user.username)
         expect(res.body.name).toEqual(user.name)
         expect(res.body.passwordHash).toBeUndefined()
@@ -174,7 +171,7 @@ describe('GET /api/users/:id', () => {
             .expect(200)
             .expect('Content-Type', /application\/json/)
 
-        expect(res.body._id.toString()).toEqual(otherUser._id.toString())
+        expect(res.body._id).toEqual(otherUser._id.toString())
         expect(res.body.username).toBeUndefined()
         expect(res.body.name).toEqual(otherUser.name)
         expect(res.body.passwordHash).toBeUndefined()
@@ -204,6 +201,7 @@ describe('PUT /api/users/:id', () => {
 
     beforeAll(async () => {
         await User.deleteMany({})
+        await ActivityLog.deleteMany({})
 
         const res = await api
             .post('/api/users')
@@ -334,6 +332,7 @@ describe('DELETE /api/users/:id', () => {
 
     beforeEach(async () => {
         await User.deleteMany({})
+        await ActivityLog.deleteMany({})
 
         const res = await api
             .post('/api/users')
