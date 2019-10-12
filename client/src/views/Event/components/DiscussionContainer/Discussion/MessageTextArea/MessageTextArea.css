@@ -14,7 +14,7 @@
     -o-background-size: cover;
     background-size: cover;
     background-position:center center;
-    margin: 0px 8px 0px 8px;
+    margin: 0px 8px 0px 5px;
 }
 
 .text-area-input{
@@ -44,9 +44,9 @@
     justify-content: center;
     align-items: center;
     width: 60px;
-    background : #4c5c68;
+    background : transparent;
     border: 1px solid #4c5c68;
-    color: white;
+    color: #4c5c68;
     border-radius: 5px;
     height: 32px;
     margin-left: 5px;

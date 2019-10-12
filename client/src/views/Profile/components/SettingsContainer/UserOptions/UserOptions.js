@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { inject, observer } from 'mobx-react'
 import './UserOptions.css'
 import Spinner from '../../../../../commonComponents/Spinner/Spinner'
 
@@ -8,7 +7,7 @@ class UserOptions extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userValues: { ...this.props.UserStore.currentUser },
+            userValues: { ...this.props.user },
             saved: true,
             loading: false
         }
@@ -86,4 +85,4 @@ class UserOptions extends Component {
     }
 }
 
-export default inject('UserStore')(observer(UserOptions))
+export default UserOptions
