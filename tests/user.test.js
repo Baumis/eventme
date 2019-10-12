@@ -2,11 +2,11 @@ const supertest = require('supertest')
 const { app, server } = require('../index')
 const User = require('../models/user')
 const ActivityLog = require('../models/activityLog')
-const testUtils = require('../utils/testUtils')
+const testUtils = require('./testUtils')
 
 const api = supertest(app)
 
-beforeAll(async () => {
+beforeEach(async () => {
     await User.deleteMany({})
     await ActivityLog.deleteMany({})
 })
@@ -41,7 +41,6 @@ describe('POST /api/users', () => {
         expect(cookie).toBeDefined()
 
         const amountOfUsers = await User.countDocuments()
-
         expect(amountOfUsers).toEqual(1)
     })
 
@@ -66,7 +65,6 @@ describe('POST /api/users', () => {
         expect(createdUser.userType).toEqual('LOCAL')
 
         const amountOfUsers = await User.countDocuments()
-
         expect(amountOfUsers).toEqual(1)
     })
 
@@ -84,7 +82,6 @@ describe('POST /api/users', () => {
             .expect(400)
         
         const amountOfUsers = await User.countDocuments()
-
         expect(amountOfUsers).toEqual(1)
     })
 
@@ -99,6 +96,9 @@ describe('POST /api/users', () => {
             .post('/api/users')
             .send(user)
             .expect(400)
+
+        const amountOfUsers = await User.countDocuments()
+        expect(amountOfUsers).toEqual(0)
     })
 
     it('should fail if password too short', async () => {
@@ -113,6 +113,9 @@ describe('POST /api/users', () => {
             .post('/api/users')
             .send(user)
             .expect(400)
+        
+        const amountOfUsers = await User.countDocuments()
+        expect(amountOfUsers).toEqual(0)
     })
 })
 
@@ -365,6 +368,17 @@ describe('DELETE /api/users/:id', () => {
         const amountOfUsers = await User.countDocuments()
 
         expect(amountOfUsers).toEqual(1)
+    })
+
+    it('should fail if trying to remove someone elses user', async () => {
+        await api
+            .delete('/api/users/' + otherUser._id)
+            .set('Cookie', cookie)
+            .expect(403)
+        
+        const amountOfUsers = await User.countDocuments()
+
+        expect(amountOfUsers).toEqual(2)
     })
 })
 
