@@ -1,10 +1,3 @@
-.event-guests{
-    display: flex;
-    flex-direction: column;
-    overflow-y: hidden;
-    margin-bottom: 20px;
-}
-
 .event-guests-list{
     display: flex;
     flex-direction: column;
@@ -12,7 +5,7 @@
     padding: 10px;
     color: rgba(0,0,0);
     font-size: 15px;
-    overflow: auto;
+    margin-bottom: 20px;
 }
 
 .event-guests-guest-row{

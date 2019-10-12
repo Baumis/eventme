@@ -44,9 +44,9 @@
     justify-content: center;
     align-items: center;
     width: 60px;
-    background : #4c5c68;
+    background : transparent;
     border: 1px solid #4c5c68;
-    color: white;
+    color: #4c5c68;
     border-radius: 5px;
     height: 32px;
     margin-left: 5px;

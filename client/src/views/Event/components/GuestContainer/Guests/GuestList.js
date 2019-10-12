@@ -64,27 +64,25 @@ class Guests extends Component {
 
     render() {
         return (
-            <div className="event-guests">
-                <div className="event-guests-list">
-                    {this.filterGuests().map((guest, i) =>
-                        <div className="event-guests-guest-row" key={i}>
-                            <a href={`/profile/${guest.user._id}`}>
-                                <div style={this.getAvatar(guest.user.avatar)} className="event-guests-guest-avatar"> </div>
-                                <div className="event-guests-guest-name">{guest.user.name}</div>
-                            </a>
-                            <div className="event-guests-right-column">
-                                <div className="event-guests-guest-status">
-                                    {this.styleStatus(guest.status)}
-                                </div>
-                                {this.rightsToRemove(guest.user._id) ?
-                                    <div className="event-guests-guest-remove" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
-                                    :
-                                    null
-                                }
+            <div className="event-guests-list">
+                {this.filterGuests().map((guest, i) =>
+                    <div className="event-guests-guest-row" key={i}>
+                        <a href={`/profile/${guest.user._id}`}>
+                            <div style={this.getAvatar(guest.user.avatar)} className="event-guests-guest-avatar"> </div>
+                            <div className="event-guests-guest-name">{guest.user.name}</div>
+                        </a>
+                        <div className="event-guests-right-column">
+                            <div className="event-guests-guest-status">
+                                {this.styleStatus(guest.status)}
                             </div>
+                            {this.rightsToRemove(guest.user._id) ?
+                                <div className="event-guests-guest-remove" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
+                                :
+                                null
+                            }
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
             </div>
         )
     }
