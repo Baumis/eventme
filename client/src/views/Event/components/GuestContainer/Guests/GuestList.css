@@ -1,0 +1,58 @@
+.event-guests-list{
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    padding: 10px;
+    color: rgba(0,0,0);
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.event-guests-guest-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 22px 12px 22px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.event-guests-guest-avatar {
+    background: darkgray;
+    min-width: 30px;
+    height: 30px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position:center center;
+    border-radius: 50%;
+}
+
+.event-guests-guest-row a{
+    color: black;
+    display: flex;
+    align-items: center;
+}
+
+.event-guests-guest-name{
+    padding-left: 10px;
+    width: 80%;
+    text-align: left;
+}
+
+.event-guests-right-column{
+    display: flex;
+}
+
+.event-guests-guest-status {
+    padding: 0px 5px;
+}
+
+.event-guests-guest-remove{
+    cursor: pointer;
+    color: rgba(0,0,0,0.2);
+}
+
+.event-guests-guest-remove:hover{
+    color: rgba(0,0,0,0.5);
+}
