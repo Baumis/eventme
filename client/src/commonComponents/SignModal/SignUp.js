@@ -19,6 +19,10 @@ class SignUp extends Component {
     }
 
     validateInputData = () => {
+        if (this.state.name.split(' ').length < 2) {
+            alert('Name must consist of first and last name.')
+            return false
+        }
         if (this.state.name.length < 3) {
             alert('Name must have a length of at least 3 characters.')
             return false
