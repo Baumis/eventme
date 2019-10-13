@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const supertest = require('supertest')
 const { app, server } = require('../index')
 const User = require('../models/user')
@@ -46,8 +47,9 @@ describe('POST /api/events', () => {
             .set('Cookie', cookie)
             .send(event)
             .expect(201)
-        
+
         expect.stringContaining(res.body._id)
+        expect.stringContaining(res.body.inviteKey)
         expect(res.body.label).toEqual(event.label)
         expect(new Date(res.body.startDate)).toEqual(event.startDate)
         expect(new Date(res.body.endDate)).toEqual(event.endDate)
@@ -58,6 +60,60 @@ describe('POST /api/events', () => {
         expect.arrayContaining(res.body.guests)
         expect.arrayContaining(res.body.components)
         expect.stringContaining(res.body.background)
+    })
+
+    it('should succeed and be listed in users myEvents', async () => {
+        const res = await api
+            .post('/api/events')
+            .set('Cookie', cookie)
+            .send(event)
+            .expect(201)
+
+        const userInEnd = await User.findById(signedUser._id)
+
+        expect(userInEnd.myEvents).toContainEqual(mongoose.Types.ObjectId(res.body._id))
+    })
+
+    it('should fail if label not given', async () => {
+        const amountInBeginning = await Event.countDocuments()
+        const userInBeginning = await User.findById(signedUser._id)
+
+        const notValidEvent = {
+            ...event,
+            label: ''
+        }
+
+        await api
+            .post('/api/events')
+            .set('Cookie', cookie)
+            .send(notValidEvent)
+            .expect(400)
+
+        const amountInEnd = await Event.countDocuments()
+        const userInEnd = await User.findById(signedUser._id)
+
+        expect(amountInBeginning).toEqual(amountInEnd)
+        expect(userInBeginning.myEvents.length).toEqual(userInEnd.myEvents.length)
+    })
+
+    it('should fail if endDate is before startDate', async () => {
+        const amountInBeginning = await Event.countDocuments()
+
+        const notValidEvent = {
+            ...event,
+            startDate: new Date(Date.now() + 86400000),
+            endDate: new Date()
+        }
+
+        await api
+            .post('/api/events')
+            .set('Cookie', cookie)
+            .send(notValidEvent)
+            .expect(400)
+
+        const amountInEnd = await Event.countDocuments()
+
+        expect(amountInBeginning).toEqual(amountInEnd)
     })
 })
 

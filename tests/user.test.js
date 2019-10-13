@@ -83,9 +83,8 @@ describe('POST /api/users', () => {
 
     it('should fail if username undefined', async () => {
         const user = {
-            name: 'John Doe',
-            password: 'secret',
-            email: 'john.doe@test.com'
+            ...testUtils.user,
+            username: undefined
         }
 
         await api
@@ -99,10 +98,8 @@ describe('POST /api/users', () => {
 
     it('should fail if password too short', async () => {
         const user = {
-            username: 'johndoe',
-            name: 'John Doe',
-            password: 'se',
-            email: 'john.doe@test.com'
+            ...testUtils.user,
+            password: 'se'
         }
 
         await api
