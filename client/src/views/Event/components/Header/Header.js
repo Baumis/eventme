@@ -14,8 +14,8 @@ componentDidMount(){
 
 scrollEffect = () => {
     const element = document.getElementById('scroller')
-    const yPosition = 0 + window.pageYOffset / 20
-    element.style.top = 1 + yPosition + '%'
+    const yPosition = window.pageYOffset / 20
+    element.style.top = yPosition + '%'
 }
 
 render() {
