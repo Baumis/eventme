@@ -18,7 +18,39 @@ class SignUp extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
+    validateInputData = () => {
+        if (this.state.name.length < 3) {
+            alert('Name must have a length of at least 3 characters.')
+            return false
+        }
+        if (this.state.name.length > 70) {
+            alert('Name can\'t be over 70 characters long')
+            return false
+        }
+        if (this.state.password.length < 3) {
+            alert('The password have to be at least 3 characters long.')
+            return false
+        }
+        if (this.state.username.length < 3) {
+            alert('Username must have a length of at least 3 characters.')
+            return false
+        }
+        if (this.state.username.length > 70) {
+            alert('Username can\'t be over 70 characters long')
+            return false
+        }
+        if (!this.state.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+            alert('Use a valid email.')
+            return false
+        }
+        return true
+    }
+
     signUp = async () => {
+        if (!this.validateInputData()) {
+            return
+        }
+
         const userObject = {
             name: this.state.name,
             username: this.state.username,
