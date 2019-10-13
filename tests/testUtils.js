@@ -7,6 +7,12 @@ exports.user = {
     email: 'john.doe@test.com'
 }
 
+exports.event = {
+    label: 'First event',
+    startDate: new Date(),
+    endDate: new Date(Date.now() + 86400000)
+}
+
 exports.nonExistingUserId = async () => {
     const user = new User({
         userType: 'LOCAL',
