@@ -20,9 +20,12 @@ exports.create = async (request, response) => {
     try {
         const createdUser = await userService.create(request.body)
 
-        logService.create(createdUser._id)
+        await logService.create(createdUser._id)
 
-        response.status(201).json(User.format(createdUser))
+        const token = User.generateToken(createdUser)
+
+        response.cookie('jwt', token, { expires: new Date(Date.now() + 86400000), httpOnly: true })
+        response.status(201).json(User.formatForLogin(createdUser))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
     }
@@ -50,7 +53,7 @@ exports.delete = async (request, response) => {
 
         await userService.delete(request.params.id)
 
-        logService.delete(request.params.id)
+        await logService.delete(request.params.id)
 
         response.status(204).end()
     } catch (exception) {
