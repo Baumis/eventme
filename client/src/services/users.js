@@ -7,8 +7,12 @@ const getOne = async (id) => {
 }
 
 const create = async (newObject) => {
-    const response = await http.post(baseUrl, newObject)
-    return response.data
+    try {
+        const response = await http.post(baseUrl, newObject)
+        return response.data
+    } catch (error) {
+        return error.response
+    }
 }
 
 const remove = async (id) => {
