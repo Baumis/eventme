@@ -25,18 +25,18 @@ class SignUp extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        this.setState({ loading: true })
 
+        this.setState({ loading: true })
         try {
             await this.props.UserStore.signUp(userObject)
-
-            this.setState({ loading: false })
             this.props.closeModal()
         } catch (error) {
-            console.log(error)
-            this.setState({ loading: false })
-            alert('Sign Up failed. Check your connection and try again.')
+            error.response.data.error === 'Username must be unique' ?
+                alert('This username is already taken.')
+                :
+                alert('Sign Up failed. Check your connection and try again.')
         }
+        this.setState({ loading: false })
     }
 
     render() {
