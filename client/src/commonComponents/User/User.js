@@ -21,6 +21,14 @@ class User extends Component {
         return { backgroundImage: `url(${this.props.UserStore.currentUser.avatar})` }
     }
 
+    parseFirstName = (name) => {
+        const nameArray = name.split(' ')
+        if (nameArray.length > 1) {
+            return nameArray[0]
+        }
+        return name
+    }
+
     render() {
         return (
             <div className="user">
@@ -28,7 +36,7 @@ class User extends Component {
                     <div className="user-signed-in">
                         <a className="user-username" href={`/profile/${this.props.UserStore.currentUser._id}`}>
                             <div style={this.getAvatar()} className="user-avatar"> </div>
-                            {this.props.UserStore.currentUser.name}
+                            {this.parseFirstName(this.props.UserStore.currentUser.name)}
                         </a>
                         <div className="user-section-devider"> </div>
                         <div className="user-sign-button" onClick={this.signOut} >{'Sign out'}</div>

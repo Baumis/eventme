@@ -7,3 +7,9 @@
     align-items: center;
     background: #fcfcfc;
 }
+
+.event-content-status-row {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+}
