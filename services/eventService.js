@@ -57,6 +57,10 @@ exports.create = async (creatorId, eventObject) => {
         throw new Error('End Date must be greater than Start Date')
     }
 
+    if (eventObject.components && !validators.validateComponents(eventObject.components)) {
+        throw new Error('Components are not valid')
+    }
+
     const newEvent = new Event({
         label: eventObject.label,
         startDate: startDate,

@@ -74,7 +74,7 @@ describe('POST /api/events', () => {
         expect(userInEnd.myEvents).toContainEqual(mongoose.Types.ObjectId(res.body._id))
     })
 
-    it('should fail if label not given', async () => {
+    it('should fail if label not given or not valid', async () => {
         const amountInBeginning = await Event.countDocuments()
         const userInBeginning = await User.findById(signedUser._id)
 
@@ -83,10 +83,23 @@ describe('POST /api/events', () => {
             label: ''
         }
 
+        const notValidEvent2 = {
+            ...event,
+            label: {
+                label: 'fail'
+            }
+        }
+
         await api
             .post('/api/events')
             .set('Cookie', cookie)
             .send(notValidEvent)
+            .expect(400)
+        
+        await api
+            .post('/api/events')
+            .set('Cookie', cookie)
+            .send(notValidEvent2)
             .expect(400)
 
         const amountInEnd = await Event.countDocuments()
@@ -103,6 +116,69 @@ describe('POST /api/events', () => {
             ...event,
             startDate: new Date(Date.now() + 86400000),
             endDate: new Date()
+        }
+
+        await api
+            .post('/api/events')
+            .set('Cookie', cookie)
+            .send(notValidEvent)
+            .expect(400)
+
+        const amountInEnd = await Event.countDocuments()
+
+        expect(amountInBeginning).toEqual(amountInEnd)
+    })
+
+    it('should fail if components not valid', async () => {
+        const amountInBeginning = await Event.countDocuments()
+
+        const notValidEvent = {
+            ...event,
+            components: 'component'
+        }
+        const notValidEvent2 = {
+            ...event,
+            components: ['component']
+        }
+        const notValidEvent3 = {
+            ...event,
+            components: [
+                {
+                    type: 'NOT EXISTING',
+                    data: ''
+                }
+            ]
+        }
+
+        await api
+            .post('/api/events')
+            .set('Cookie', cookie)
+            .send(notValidEvent)
+            .expect(400)
+
+        await api
+            .post('/api/events')
+            .set('Cookie', cookie)
+            .send(notValidEvent2)
+            .expect(400)
+
+        await api
+            .post('/api/events')
+            .set('Cookie', cookie)
+            .send(notValidEvent3)
+            .expect(400)
+
+        const amountInEnd = await Event.countDocuments()
+
+        expect(amountInBeginning).toEqual(amountInEnd)
+    })
+
+    it('should fail if background not valid', async () => {
+        const amountInBeginning = await Event.countDocuments()
+
+        const notValidEvent = {
+            ...event,
+            background: 'notvalidbackgroundurl'
         }
 
         await api
