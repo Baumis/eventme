@@ -22,7 +22,7 @@ exports.populate = async (event) => {
             return null
         }
         const guest = populatedEvent.guests.find(guest => guest.user._id.toString() === userId.toString())
-        return guest ? guest.user : await User.findOne({ _id: userId }, { _id: 1, name: 1, avatar: 1 })
+        return guest ? guest.user : await User.findById(userId, { _id: 1, name: 1, avatar: 1 })
     }
 
     populatedEvent.creator = await getUser(populatedEvent.creator)

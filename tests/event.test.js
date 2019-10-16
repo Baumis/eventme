@@ -134,14 +134,6 @@ describe('POST /api/events', () => {
 
         const notValidEvent = {
             ...event,
-            components: 'component'
-        }
-        const notValidEvent2 = {
-            ...event,
-            components: ['component']
-        }
-        const notValidEvent3 = {
-            ...event,
             components: [
                 {
                     type: 'NOT EXISTING',
@@ -154,18 +146,6 @@ describe('POST /api/events', () => {
             .post('/api/events')
             .set('Cookie', cookie)
             .send(notValidEvent)
-            .expect(400)
-
-        await api
-            .post('/api/events')
-            .set('Cookie', cookie)
-            .send(notValidEvent2)
-            .expect(400)
-
-        await api
-            .post('/api/events')
-            .set('Cookie', cookie)
-            .send(notValidEvent3)
             .expect(400)
 
         const amountInEnd = await Event.countDocuments()
@@ -190,6 +170,48 @@ describe('POST /api/events', () => {
         const amountInEnd = await Event.countDocuments()
 
         expect(amountInBeginning).toEqual(amountInEnd)
+    })
+})
+
+describe('GET /api/events/:id', () => {
+
+    let createdEvent = null
+
+    beforeAll(async () => {
+        await Event.deleteMany({})
+
+        const res = await api
+            .post('/api/events')
+            .set('Cookie', cookie)
+            .send(event)
+
+        createdEvent = res.body
+    })
+
+    it('should require authentication', async () => {
+        await api
+            .get('/api/events/' + createdEvent._id)
+            .expect(401)
+    })
+
+    it('should succeed and return correct event to creator', async () => {
+        
+    })
+
+    it('should succeed and return correct event to guest', async () => {
+        
+    })
+
+    it('should succeed and return correct event to guest', async () => {
+        
+    })
+
+    it('should fail if authenticated but not creator or guest', async () => {
+        
+    })
+
+    it('should fail if event not existing', async () => {
+        
     })
 })
 
