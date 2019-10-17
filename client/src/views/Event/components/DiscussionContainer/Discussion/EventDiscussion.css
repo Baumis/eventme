@@ -4,9 +4,9 @@
     margin: 15px 30px 15px 30px;
 }
 
-.discussion-content {
+.discussion-messages {
     display: flex;
-    flex: 1;
+    width: 100%;
     flex-direction: column;
     margin-bottom: 10px;
     padding-top: 3px;

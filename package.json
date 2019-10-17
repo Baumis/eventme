@@ -17,7 +17,8 @@
     "express": "^4.16.4",
     "google-auth-library": "^5.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.5.4"
+    "mongoose": "^5.5.4",
+    "react-google-maps": "^9.4.5"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
