@@ -40,12 +40,14 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        maxlength: [2048, 'Url too long']
+        maxlength: [2048, 'Url too long'],
+        match: [/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/, 'Avatar url not valid']
     },
     cover: {
         type: String,
         default: 'https://picsum.photos/1440/550',
-        maxlength: [2048, 'Url too long']
+        maxlength: [2048, 'Url too long'],
+        match: [/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/, 'Cover url not valid']
     },
     passwordHash: {
         type: String

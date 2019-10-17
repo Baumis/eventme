@@ -33,31 +33,31 @@ beforeAll(async () => {
         .split(',')
         .map(item => item.split(';')[0])
         .join(';')
-    
+
     user = res.body
 
     const res2 = await api
         .post('/api/users')
         .send(user2Object)
-    
+
     user2Cookie = res2
         .headers['set-cookie'][0]
         .split(',')
         .map(item => item.split(';')[0])
         .join(';')
-    
+
     user2 = res2.body
 
     const res3 = await api
         .post('/api/users')
         .send(user3Object)
-    
+
     user3Cookie = res3
         .headers['set-cookie'][0]
         .split(',')
         .map(item => item.split(';')[0])
         .join(';')
-    
+
     user3 = res3.body
 })
 
@@ -70,12 +70,17 @@ describe('POST /api/events', () => {
     })
 
     it('should succeed and create a new event with correct response', async () => {
+        const amountInBeginning = await Event.countDocuments()
+
         const res = await api
             .post('/api/events')
             .set('Cookie', userCookie)
             .send(eventObject)
             .expect(201)
 
+        const amountInEnd = await Event.countDocuments()
+
+        expect(amountInBeginning + 1).toEqual(amountInEnd)
         expect.stringContaining(res.body._id)
         expect.stringContaining(res.body.inviteKey)
         expect(res.body.label).toEqual(eventObject.label)
@@ -88,6 +93,7 @@ describe('POST /api/events', () => {
         expect.arrayContaining(res.body.guests)
         expect.arrayContaining(res.body.components)
         expect.stringContaining(res.body.background)
+        expect.arrayContaining(res.body.discussion)
     })
 
     it('should succeed and be listed in users myEvents', async () => {
@@ -238,13 +244,13 @@ describe('GET /api/events/:id', () => {
         expect(res.body._id).toEqual(createdEvent._id)
         expect(res.body.label).toEqual(createdEvent.label)
         expect(res.body.inviteKey).toEqual(createdEvent.inviteKey)
-        expect(res.body.label).toEqual(createdEvent.label)
         expect(res.body.startDate).toEqual(createdEvent.startDate)
         expect(res.body.endDate).toEqual(createdEvent.endDate)
         expect(res.body.creator).toEqual(createdEvent.creator)
         expect(res.body.guests).toEqual(createdEvent.guests)
         expect(res.body.components).toEqual(createdEvent.components)
         expect(res.body.background).toEqual(createdEvent.background)
+        expect(res.body.discussion).toEqual(createdEvent.discussion)
     })
 
     it('should succeed and return correct event to guest', async () => {
@@ -255,22 +261,103 @@ describe('GET /api/events/:id', () => {
 
         expect(res.body._id).toEqual(createdEvent._id)
         expect(res.body.label).toEqual(createdEvent.label)
-        expect(res.body.label).toEqual(createdEvent.label)
         expect(res.body.startDate).toEqual(createdEvent.startDate)
         expect(res.body.endDate).toEqual(createdEvent.endDate)
         expect(res.body.creator).toEqual(createdEvent.creator)
         expect(res.body.guests).toEqual(createdEvent.guests)
         expect(res.body.components).toEqual(createdEvent.components)
         expect(res.body.background).toEqual(createdEvent.background)
+        expect(res.body.discussion).toEqual(createdEvent.discussion)
     })
 
     it('should fail if authenticated but not creator or guest', async () => {
-
+        await api
+            .get('/api/events/' + createdEvent._id)
+            .set('Cookie', user3Cookie)
+            .expect(403)
     })
 
     it('should fail if event not existing', async () => {
-
+        await api
+            .get('/api/events/' + mongoose.Types.ObjectId())
+            .set('Cookie', userCookie)
+            .expect(404)
     })
+})
+
+describe('PUT /api/events/:id', () => {
+
+    let createdEvent = null
+
+    beforeAll(async () => {
+        await Event.deleteMany({})
+
+        const res = await api
+            .post('/api/events')
+            .set('Cookie', userCookie)
+            .send(eventObject)
+
+        createdEvent = res.body
+    })
+
+    it('should require authentication', async () => {
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .expect(401)
+    })
+
+    it('should succeed and update event with correct response', async () => {
+        const newEventObject = {
+            label: 'This is my new label',
+            startDate: new Date(),
+            endDate: new Date(),
+            background: 'www.beautifulpictures.org',
+            components: [
+                {
+                    type: 'TEXT',
+                    data: {
+                        title: 'New Title',
+                        content: 'The content'
+                    }
+                },
+                {
+                    type: 'GUESTS',
+                    data: {}
+                },
+                {
+                    type: 'INVITE_LINK',
+                    data: {}
+                },
+                {
+                    type: 'PICTURE',
+                    data: {
+                        url: 'www.validpictureurl.fi',
+                        expand: true
+                    }
+                }
+            ]
+        }
+
+        const res = await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(newEventObject)
+
+        expect(res.body._id).toEqual(createdEvent._id)
+        expect(res.body.label).toEqual(newEventObject.label)
+        expect(res.body.inviteKey).toEqual(createdEvent.inviteKey)
+        expect(new Date(res.body.startDate)).toEqual(newEventObject.startDate)
+        expect(new Date(res.body.endDate)).toEqual(newEventObject.endDate)
+        expect(res.body.creator).toEqual(createdEvent.creator)
+        expect(res.body.guests).toEqual(createdEvent.guests)
+        expect(res.body.components[0]).toEqual(newEventObject.components[0])
+        expect(res.body.components[1].type).toEqual(newEventObject.components[1].type)
+        expect(res.body.components[2].type).toEqual(newEventObject.components[2].type)
+        expect(res.body.components[2].data.inviteKey).toEqual(createdEvent.inviteKey)
+        expect(res.body.components[3]).toEqual(newEventObject.components[3])
+        expect(res.body.background).toEqual(newEventObject.background)
+    })
+
 })
 
 afterAll(() => {
