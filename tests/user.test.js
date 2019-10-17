@@ -14,11 +14,11 @@ describe('POST /api/users', () => {
     })
 
     it('should succeed and create a new user with correct response', async () => {
-        const user = testUtils.user
+        const userObject = testUtils.userObject
 
         const res = await api
             .post('/api/users')
-            .send(user)
+            .send(userObject)
             .expect(201)
             .expect('Content-Type', /application\/json/)
 
@@ -29,8 +29,8 @@ describe('POST /api/users', () => {
             .join(';')
 
         expect.stringContaining(res.body._id)
-        expect(res.body.name).toEqual(user.name)
-        expect(res.body.email).toEqual(user.email)
+        expect(res.body.name).toEqual(userObject.name)
+        expect(res.body.email).toEqual(userObject.email)
         expect(res.body.cover).toBeDefined()
         expect.arrayContaining(res.body.myEvents)
         expect.arrayContaining(res.body.myInvites)
@@ -41,19 +41,19 @@ describe('POST /api/users', () => {
     })
 
     it('should succeed and create a new valid user', async () => {
-        const user = testUtils.user
+        const userObject = testUtils.userObject
 
         const res = await api
             .post('/api/users')
-            .send(user)
+            .send(userObject)
 
         const createdUser = await User.findById(res.body._id)
 
         expect(createdUser._id.toString()).toEqual(res.body._id)
-        expect(createdUser.username).toEqual(user.username)
-        expect(createdUser.name).toEqual(user.name)
+        expect(createdUser.username).toEqual(userObject.username)
+        expect(createdUser.name).toEqual(userObject.name)
         expect.stringContaining(createdUser.passwordHash)
-        expect(createdUser.email).toEqual(user.email)
+        expect(createdUser.email).toEqual(userObject.email)
         expect(createdUser.emailVerified).toBeFalsy()
         expect.arrayContaining(createdUser.myEvents)
         expect.arrayContaining(createdUser.myInvites)
@@ -65,16 +65,16 @@ describe('POST /api/users', () => {
     })
 
     it('should fail if username taken', async () => {
-        const user = testUtils.user
+        const userObject = testUtils.userObject
 
         await api
             .post('/api/users')
-            .send(user)
+            .send(userObject)
             .expect(201)
 
         await api
             .post('/api/users')
-            .send(user)
+            .send(userObject)
             .expect(400)
         
         const amountOfUsers = await User.countDocuments()
@@ -82,14 +82,14 @@ describe('POST /api/users', () => {
     })
 
     it('should fail if username undefined', async () => {
-        const user = {
-            ...testUtils.user,
+        const userObject = {
+            ...testUtils.userObject,
             username: undefined
         }
 
         await api
             .post('/api/users')
-            .send(user)
+            .send(userObject)
             .expect(400)
 
         const amountOfUsers = await User.countDocuments()
@@ -97,14 +97,14 @@ describe('POST /api/users', () => {
     })
 
     it('should fail if password too short', async () => {
-        const user = {
-            ...testUtils.user,
+        const userObject = {
+            ...testUtils.userObject,
             password: 'se'
         }
 
         await api
             .post('/api/users')
-            .send(user)
+            .send(userObject)
             .expect(400)
         
         const amountOfUsers = await User.countDocuments()
@@ -113,7 +113,7 @@ describe('POST /api/users', () => {
 })
 
 describe('GET /api/users/:id', () => {
-    const user = testUtils.user
+    const userObject = testUtils.userObject
     let signedUser = null
     let otherUser = null
     let cookie = null
@@ -124,7 +124,7 @@ describe('GET /api/users/:id', () => {
 
         const res = await api
             .post('/api/users')
-            .send(user)
+            .send(userObject)
 
         cookie = res
             .headers['set-cookie'][0]
@@ -150,10 +150,10 @@ describe('GET /api/users/:id', () => {
             .expect('Content-Type', /application\/json/)
 
         expect(res.body._id).toEqual(signedUser._id)
-        expect(res.body.username).toEqual(user.username)
-        expect(res.body.name).toEqual(user.name)
+        expect(res.body.username).toEqual(userObject.username)
+        expect(res.body.name).toEqual(userObject.name)
         expect(res.body.passwordHash).toBeUndefined()
-        expect(res.body.email).toEqual(user.email)
+        expect(res.body.email).toEqual(userObject.email)
         expect(res.body.emailVerified).toBeUndefined()
         expect.arrayContaining(res.body.myEvents)
         expect.arrayContaining(res.body.myInvites)
@@ -191,7 +191,7 @@ describe('GET /api/users/:id', () => {
 })
 
 describe('PUT /api/users/:id', () => {
-    const user = testUtils.user
+    const userObject = testUtils.userObject
     let signedUser = null
     let otherUser = null
     let cookie = null
@@ -202,7 +202,7 @@ describe('PUT /api/users/:id', () => {
 
         const res = await api
             .post('/api/users')
-            .send(user)
+            .send(userObject)
 
         cookie = res
             .headers['set-cookie'][0]
@@ -221,7 +221,7 @@ describe('PUT /api/users/:id', () => {
     })
 
     it('should succeed and update user info', async () => {
-        userObject = {
+        const newUserObject = {
             name: 'New name',
             email: 'new.email@mail.com',
             avatar: 'www.picture.com/avatarjpg',
@@ -231,19 +231,19 @@ describe('PUT /api/users/:id', () => {
         const res = await api
             .put('/api/users/' + signedUser._id)
             .set('Cookie', cookie)
-            .send(userObject)
+            .send(newUserObject)
             .expect(200)
         
         expect(res.body._id.toString()).toEqual(signedUser._id)
-        expect(res.body.username).toEqual(user.username)
-        expect(res.body.name).toEqual(userObject.name)
+        expect(res.body.username).toEqual(userObject.username)
+        expect(res.body.name).toEqual(newUserObject.name)
         expect(res.body.passwordHash).toBeUndefined()
-        expect(res.body.email).toEqual(userObject.email)
+        expect(res.body.email).toEqual(newUserObject.email)
         expect(res.body.emailVerified).toBeUndefined()
         expect.arrayContaining(res.body.myEvents)
         expect.arrayContaining(res.body.myInvites)
-        expect(res.body.cover).toEqual(userObject.cover)
-        expect(res.body.avatar).toEqual(userObject.avatar)
+        expect(res.body.cover).toEqual(newUserObject.cover)
+        expect(res.body.avatar).toEqual(newUserObject.avatar)
         expect(res.body.userType).toBeUndefined()
     })
 
@@ -257,13 +257,13 @@ describe('PUT /api/users/:id', () => {
     it('should fail if name undefined or too short', async () => {
         const userInBeginning = await User.findById(signedUser._id)
 
-        userObject = {
+        const newUserObject = {
             email: 'new.email@mail.com',
             avatar: 'www.picture.com/avatarjpg',
             cover: 'www.picture.com/coverjpg'
         }
 
-        userObject2 = {
+        const newUserObject2 = {
             name: 'Ne',
             email: 'new.email@mail.com',
             avatar: 'www.picture.com/avatarjpg',
@@ -273,13 +273,13 @@ describe('PUT /api/users/:id', () => {
         await api
             .put('/api/users/' + signedUser._id)
             .set('Cookie', cookie)
-            .send(userObject)
+            .send(newUserObject)
             .expect(400)
         
         await api
             .put('/api/users/' + signedUser._id)
             .set('Cookie', cookie)
-            .send(userObject2)
+            .send(newUserObject2)
             .expect(400)
         
         const userInEnd = await User.findById(signedUser._id)
@@ -290,13 +290,13 @@ describe('PUT /api/users/:id', () => {
     it('should fail if email undefined or not valid', async () => {
         const userInBeginning = await User.findById(signedUser._id)
 
-        userObject = {
+        const newUserObject = {
             name: 'Wrong email',
             avatar: 'www.picture.net/avatarjpg',
             cover: 'www.picture.net/coverjpg'
         }
 
-        userObject2 = {
+        const newUserObject2 = {
             name: 'Wrong email',
             email: 'new.emailmail.com',
             avatar: 'www.picture.fi/avatarjpg',
@@ -306,13 +306,13 @@ describe('PUT /api/users/:id', () => {
         await api
             .put('/api/users/' + signedUser._id)
             .set('Cookie', cookie)
-            .send(userObject)
+            .send(newUserObject)
             .expect(400)
         
         await api
             .put('/api/users/' + signedUser._id)
             .set('Cookie', cookie)
-            .send(userObject2)
+            .send(newUserObject2)
             .expect(400)
         
         const userInEnd = await User.findById(signedUser._id)
@@ -322,7 +322,7 @@ describe('PUT /api/users/:id', () => {
 })
 
 describe('DELETE /api/users/:id', () => {
-    const user = testUtils.user
+    const userObject = testUtils.userObject
     let signedUser = null
     let otherUser = null
     let cookie = null
@@ -333,7 +333,7 @@ describe('DELETE /api/users/:id', () => {
 
         const res = await api
             .post('/api/users')
-            .send(user)
+            .send(userObject)
 
         cookie = res
             .headers['set-cookie'][0]

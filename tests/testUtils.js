@@ -1,13 +1,27 @@
 const User = require('../models/user')
 
-exports.user = {
+exports.userObject = {
     username: 'johndoe',
     name: 'John Doe',
     password: 'secret',
     email: 'john.doe@test.com'
 }
 
-exports.event = {
+exports.user2Object = {
+    username: 'millers',
+    name: 'Frederic Millers',
+    password: 'secret',
+    email: 'frederic.millers@mail.com'
+}
+
+exports.user3Object = {
+    username: 'mara',
+    name: 'Mara Mara',
+    password: 'secret2',
+    email: 'mara.mara@mail.com'
+}
+
+exports.eventObject = {
     label: 'First event',
     startDate: new Date(),
     endDate: new Date(Date.now() + 86400000)
