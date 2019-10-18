@@ -1,5 +1,6 @@
 .discussion-content {
     display: flex;
+<<<<<<< HEAD
     flex-direction: column;
     width: 900px;
     background: white;
@@ -15,3 +16,8 @@
         width: 95vw;
     }
 }
+=======
+    width: 100%;
+    max-width: 900px;
+}
+>>>>>>> master

@@ -1,4 +1,6 @@
 .event-header {
+    position: absolute;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,7 +14,6 @@
     -o-background-size: cover;
     background-size: cover;
     background-position:center center;
-    position: relative;
 }
 
 .event-header h1{
@@ -35,39 +36,4 @@
 .event-header-status-row{
     width: 100%;
     max-width: 900px;
-}
-
-.info-panel{
-    width: 100%;
-    background: rgba(0,0,0,0.5);
-    position: absolute;
-    min-height: 40px;
-    bottom: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.info-panel-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 900px;
-}
-
-.info-panel-content-field{
-    display: flex;
-    z-index: 1;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 20px 0px 20px;
-    color: rgba(255,255,255, 0.9);
-    font-size: 15px;
-}
-
-.info-panel-content-field p{
-    padding: 5px 0px 5px 5px;
-    margin: 0px;
 }
