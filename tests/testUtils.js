@@ -27,6 +27,37 @@ exports.eventObject = {
     endDate: new Date(Date.now() + 86400000)
 }
 
+exports.newEventObject = {
+    label: 'This is my new label',
+    startDate: new Date(),
+    endDate: new Date(),
+    background: 'www.beautifulpictures.org',
+    components: [
+        {
+            type: 'TEXT',
+            data: {
+                title: 'New Title',
+                content: 'The content'
+            }
+        },
+        {
+            type: 'GUESTS',
+            data: {}
+        },
+        {
+            type: 'INVITE_LINK',
+            data: {}
+        },
+        {
+            type: 'PICTURE',
+            data: {
+                url: 'www.validpictureurl.fi',
+                expand: true
+            }
+        }
+    ]
+}
+
 exports.nonExistingUserId = async () => {
     const user = new User({
         userType: 'LOCAL',

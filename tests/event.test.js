@@ -9,6 +9,7 @@ const testUtils = require('./testUtils')
 const api = supertest(app)
 
 const eventObject = testUtils.eventObject
+const newEventObject = testUtils.newEventObject
 const userObject = testUtils.userObject
 const user2Object = testUtils.user2Object
 const user3Object = testUtils.user3Object
@@ -307,41 +308,11 @@ describe('PUT /api/events/:id', () => {
     })
 
     it('should succeed and update event with correct response', async () => {
-        const newEventObject = {
-            label: 'This is my new label',
-            startDate: new Date(),
-            endDate: new Date(),
-            background: 'www.beautifulpictures.org',
-            components: [
-                {
-                    type: 'TEXT',
-                    data: {
-                        title: 'New Title',
-                        content: 'The content'
-                    }
-                },
-                {
-                    type: 'GUESTS',
-                    data: {}
-                },
-                {
-                    type: 'INVITE_LINK',
-                    data: {}
-                },
-                {
-                    type: 'PICTURE',
-                    data: {
-                        url: 'www.validpictureurl.fi',
-                        expand: true
-                    }
-                }
-            ]
-        }
-
         const res = await api
             .put('/api/events/' + createdEvent._id)
             .set('Cookie', userCookie)
             .send(newEventObject)
+            .expect(200)
 
         expect(res.body._id).toEqual(createdEvent._id)
         expect(res.body.label).toEqual(newEventObject.label)
@@ -358,6 +329,170 @@ describe('PUT /api/events/:id', () => {
         expect(res.body.background).toEqual(newEventObject.background)
     })
 
+    it('should fail if label too short', async () => {
+        const notValidEventObject = {
+            ...newEventObject,
+            label: ''
+        }
+
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(notValidEventObject)
+            .expect(400)
+    })
+
+    it('should fail if startDate not valid', async () => {
+        const notValidEventObject = {
+            ...newEventObject,
+            startDate: 'Not a date',
+        }
+
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(notValidEventObject)
+            .expect(400)
+    })
+
+    it('should fail if endDate not valid', async () => {
+        const notValidEventObject = {
+            ...newEventObject,
+            endDate: {
+                date: 'not a date'
+            }
+        }
+
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(notValidEventObject)
+            .expect(400)
+    })
+
+    it('should fail if background not valid', async () => {
+        const notValidEventObject = {
+            ...newEventObject,
+            background: 'www'
+        }
+
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(notValidEventObject)
+            .expect(400)
+    })
+
+    it('should fail if endDate is before startDate', async () => {
+        const notValidEventObject = {
+            ...newEventObject,
+            startDate: new Date(Date.now() + 86400000),
+            endDate: new Date()
+        }
+
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(notValidEventObject)
+            .expect(400)
+    })
+
+    it('should fail if non existing component is provided', async () => {
+        const notValidEventObject = {
+            ...newEventObject,
+            components: [
+                {
+                    type: 'NOT_EXISTING',
+                    data: {}
+                }
+            ]
+        }
+
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(notValidEventObject)
+            .expect(400)
+    })
+
+    it('should fail if TEXT component not valid', async () => {
+        const notValidEventObject = {
+            ...newEventObject,
+            components: [
+                {
+                    type: 'TEXT',
+                    data: {}
+                }
+            ]
+        }
+
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(notValidEventObject)
+            .expect(400)
+    })
+
+    it('should fail if GUESTS component not valid', async () => {
+        const notValidEventObject = {
+            ...newEventObject,
+            components: [
+                {
+                    type: 'GUESTS',
+                    data: {
+                        extra: 'some hidden data'
+                    }
+                }
+            ]
+        }
+
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(notValidEventObject)
+            .expect(400)
+    })
+
+    it('should fail if INVITE_LINK component not valid', async () => {
+        const notValidEventObject = {
+            ...newEventObject,
+            components: [
+                {
+                    type: 'INVITE_LINK',
+                    data: {
+                        text: 'this is the link'
+                    }
+                }
+            ]
+        }
+
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(notValidEventObject)
+            .expect(400)
+    })
+
+    it('should fail if PICTURE component not valid', async () => {
+        const notValidEventObject = {
+            ...newEventObject,
+            components: [
+                {
+                    type: 'PICTURE',
+                    data: {
+                        url: 'not a url',
+                        extended: false
+                    }
+                }
+            ]
+        }
+
+        await api
+            .put('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .send(notValidEventObject)
+            .expect(400)
+    })
 })
 
 afterAll(() => {
