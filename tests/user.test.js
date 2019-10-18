@@ -136,7 +136,7 @@ describe('GET /api/users/:id', () => {
         otherUser = await testUtils.addAndGetUser()
     })
 
-    it('should require authentication', async () => {
+    it('should fail if not authenticated', async () => {
         await api
             .get('/api/users/' + signedUser._id)
             .expect(401)
@@ -214,7 +214,7 @@ describe('PUT /api/users/:id', () => {
         otherUser = await testUtils.addAndGetUser()
     })
 
-    it('should require authentication', async () => {
+    it('should fail if not authenticated', async () => {
         await api
             .put('/api/users/' + signedUser._id)
             .expect(401)
@@ -345,7 +345,7 @@ describe('DELETE /api/users/:id', () => {
         otherUser = await testUtils.addAndGetUser()
     })
 
-    it('should require authentication', async () => {
+    it('should fail if not authenticated', async () => {
         await api
             .delete('/api/users/' + signedUser._id)
             .expect(401)

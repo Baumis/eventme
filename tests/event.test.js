@@ -64,7 +64,7 @@ beforeAll(async () => {
 
 describe('POST /api/events', () => {
 
-    it('should require authentication', async () => {
+    it('should fail if not authenticated', async () => {
         await api
             .post('/api/events')
             .expect(401)
@@ -230,7 +230,7 @@ describe('GET /api/events/:id', () => {
         createdEvent = res2.body
     })
 
-    it('should require authentication', async () => {
+    it('should fail if not authenticated', async () => {
         await api
             .get('/api/events/' + createdEvent._id)
             .expect(401)
@@ -301,7 +301,7 @@ describe('PUT /api/events/:id', () => {
         createdEvent = res.body
     })
 
-    it('should require authentication', async () => {
+    it('should fail if not authenticated', async () => {
         await api
             .put('/api/events/' + createdEvent._id)
             .expect(401)
@@ -492,6 +492,48 @@ describe('PUT /api/events/:id', () => {
             .set('Cookie', userCookie)
             .send(notValidEventObject)
             .expect(400)
+    })
+})
+
+describe('DELETE /api/events/:id', () => {
+    let createdEvent = null
+
+    beforeEach(async () => {
+        await Event.deleteMany({})
+
+        const res = await api
+            .post('/api/events')
+            .set('Cookie', userCookie)
+            .send(eventObject)
+
+        createdEvent = res.body
+    })
+
+    it('should succeed with correct response', async () => {
+        const amountInBeginning = await Event.countDocuments()
+        await api
+            .delete('/api/events/' + createdEvent._id)
+            .set('Cookie', userCookie)
+            .expect(204)
+
+        const amountInEnd = await Event.countDocuments()
+        const userInEnd = await User.findById(user._id)
+
+        expect(amountInBeginning - 1).toEqual(amountInEnd)
+        expect(userInEnd.myEvents).not.toContainEqual(mongoose.Types.ObjectId(createdEvent._id))
+    })
+
+    it('should fail if not authenticated', async () => {
+        await api
+            .delete('/api/events/' + createdEvent._id)
+            .expect(401)
+    })
+
+    it('should fail if trying to remove someone elses event', async () => {
+        await api
+            .delete('/api/events/' + createdEvent._id)
+            .set('Cookie', user2Cookie)
+            .expect(403)
     })
 })
 
