@@ -1,4 +1,15 @@
 .event-content {
+    position: absolute;
+    top: 395px;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: #fcfcfc;
+}
+
+.event-content-status-row {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
 }

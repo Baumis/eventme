@@ -89,14 +89,12 @@ class Event extends Component {
             <div className='Event'>
                 <Navbar />
                 <Header isGuest={this.isGuest()} />
-                <Tabs
-                    active={this.state.activeTab}
-                    changeActive={this.changeActive}
-                />
                 <EventContent
                     isCreator={this.isCreator}
                     activeTab={this.state.activeTab}
                     toggleNewComponentModal={this.toggleNewComponentModal}
+                    active={this.state.activeTab}
+                    changeActive={this.changeActive}
                 />
                 {this.isCreator() ?
                     <div>
