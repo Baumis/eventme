@@ -1,7 +1,7 @@
 .discussion-container{
     display: flex;
     flex-direction: column;
-    margin: 15px 30px 15px 30px;
+    margin: 15px 10px 15px 10px;
 }
 
 .discussion-messages {
@@ -15,5 +15,6 @@
 @media only screen and (max-width: 400px) {
     .discussion-container {
         margin: 10px;
+        margin: 15px 5px 15px 5px;
     }
 }
