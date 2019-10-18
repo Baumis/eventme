@@ -3,9 +3,6 @@
     justify-content: center;
     align-content: center;
     background: white;
-    -webkit-box-shadow: 0px 0px 3px -1px rgb(69, 69, 69, 0.5);
-    -moz-box-shadow: 0px 0px 3px -1px rgba(69,69,69,0.5);
-    box-shadow: 0px 0px 3px -1px rgba(69,69,69,0.5);
 }
 
 .profile-tabs-container {
