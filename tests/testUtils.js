@@ -21,6 +21,13 @@ exports.user3Object = {
     email: 'mara.mara@mail.com'
 }
 
+exports.newUserObject = {
+    name: 'New name',
+    email: 'new.email@mail.com',
+    avatar: 'www.picture.com/avatarjpg',
+    cover: 'www.picture.com/coverjpg'
+}
+
 exports.eventObject = {
     label: 'First event',
     startDate: new Date(),
