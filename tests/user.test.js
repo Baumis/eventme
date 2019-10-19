@@ -149,12 +149,6 @@ describe('POST /api/users', () => {
 
 describe('GET /api/users/:id', () => {
 
-    it('should fail if not authenticated', async () => {
-        await api
-            .get('/api/users/' + user._id)
-            .expect(401)
-    })
-
     it('should succeed with correct response when fetching own user', async () => {
         const res = await api
             .get('/api/users/' + user._id)
@@ -193,6 +187,12 @@ describe('GET /api/users/:id', () => {
         expect(res.body.userType).toBeUndefined()
     })
 
+    it('should fail if not authenticated', async () => {
+        await api
+            .get('/api/users/' + user._id)
+            .expect(401)
+    })
+
     it('should fail if id not found', async () => {
         await api
             .get('/api/users/' + mongoose.Types.ObjectId())
@@ -202,12 +202,6 @@ describe('GET /api/users/:id', () => {
 })
 
 describe('PUT /api/users/:id', () => {
-
-    it('should fail if not authenticated', async () => {
-        await api
-            .put('/api/users/' + user._id)
-            .expect(401)
-    })
 
     it('should succeed and update user info', async () => {
         const res = await api
@@ -227,6 +221,12 @@ describe('PUT /api/users/:id', () => {
         expect(res.body.cover).toEqual(newUserObject.cover)
         expect(res.body.avatar).toEqual(newUserObject.avatar)
         expect(res.body.userType).toBeUndefined()
+    })
+
+    it('should fail if not authenticated', async () => {
+        await api
+            .put('/api/users/' + user._id)
+            .expect(401)
     })
 
     it('should fail if trying to update someone elses user', async () => {
@@ -305,17 +305,6 @@ describe('PUT /api/users/:id', () => {
 
 describe('DELETE /api/users/:id', () => {
 
-    it('should fail if not authenticated', async () => {
-        const amountInBeginning = await User.countDocuments()
-
-        await api
-            .delete('/api/users/' + user._id)
-            .expect(401)
-
-        const amountInEnd = await User.countDocuments()
-        expect(amountInBeginning).toEqual(amountInEnd)
-    })
-
     it('should succeed and remove user', async () => {
         const amountInBeginning = await User.countDocuments()
 
@@ -326,6 +315,17 @@ describe('DELETE /api/users/:id', () => {
 
         const amountInEnd = await User.countDocuments()
         expect(amountInBeginning - 1).toEqual(amountInEnd)
+    })
+
+    it('should fail if not authenticated', async () => {
+        const amountInBeginning = await User.countDocuments()
+
+        await api
+            .delete('/api/users/' + user._id)
+            .expect(401)
+
+        const amountInEnd = await User.countDocuments()
+        expect(amountInBeginning).toEqual(amountInEnd)
     })
 
     it('should fail if trying to remove someone elses user', async () => {

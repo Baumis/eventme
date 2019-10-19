@@ -158,17 +158,33 @@ exports.findOrCreateGoogleUser = async (googleToken) => {
 }
 
 exports.addToMyEvents = async (id, eventId, options = {}) => {
-    await User.findByIdAndUpdate(id, { $addToSet: { myEvents: eventId } }, options)
+    const user = await User.findByIdAndUpdate(id, { $addToSet: { myEvents: eventId } }, options)
+
+    if (!user) {
+        throw Error('Malformatted id')
+    }
 }
 
 exports.removeFromMyEvents = async (id, eventId, options = {}) => {
-    await User.findByIdAndUpdate(id, { $pull: { myEvents: eventId } }, options)
+    const user = await User.findByIdAndUpdate(id, { $pull: { myEvents: eventId } }, options)
+
+    if (!user) {
+        throw Error('Malformatted id')
+    }
 }
 
 exports.addToMyInvites = async (id, eventId, options = {}) => {
-    await User.findByIdAndUpdate(id, { $addToSet: { myInvites: eventId } }, options)
+    const user = await User.findByIdAndUpdate(id, { $addToSet: { myInvites: eventId } }, options)
+
+    if (!user) {
+        throw Error('Malformatted id')
+    }
 }
 
 exports.removeFromMyInvites = async (id, eventId, options = {}) => {
-    await User.findByIdAndUpdate(id, { $pull: { myInvites: eventId } }, options)
+    const user = await User.findByIdAndUpdate(id, { $pull: { myInvites: eventId } }, options)
+
+    if (!user) {
+        throw Error('Malformatted id')
+    }
 }
