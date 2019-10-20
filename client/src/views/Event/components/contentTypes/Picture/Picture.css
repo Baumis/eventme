@@ -8,6 +8,7 @@
     -o-background-size: contain;
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
 }
 
 .picture-url-row {
