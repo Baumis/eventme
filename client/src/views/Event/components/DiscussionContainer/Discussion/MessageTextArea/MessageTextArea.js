@@ -50,6 +50,14 @@ class MessageTextArea extends Component {
         return { backgroundImage: `url(${this.props.UserStore.currentUser.avatar})` }
     }
 
+    sendButtonClass = () => {
+        let className = "text-area-send-button"
+        if (this.state.messageInput.length === 0) {
+            className += " text-area-send-button-disabled"
+        }
+        return className
+    }
+
     render() {
 
         if (!this.props.UserStore.currentUser) {
@@ -67,7 +75,7 @@ class MessageTextArea extends Component {
                     />
                 </div>
                 <div className="text-area-button-row">
-                    <div className="text-area-send-button" onClick={() => this.post()}>
+                    <div className={this.sendButtonClass()} onClick={() => this.post()}>
                         {this.state.sending ?
                             <Spinner />
                             :

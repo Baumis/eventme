@@ -1,7 +1,6 @@
 .component-adder{
     text-align: center;
     justify-content: center;
-    display: flex;
 }
 
 .component-adder button {

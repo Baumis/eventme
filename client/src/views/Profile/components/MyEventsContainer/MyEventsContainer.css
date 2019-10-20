@@ -20,19 +20,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #1985a1;
-    font-size: 16px;
     border-radius: 5px;
+    background: #4c5c68;
+    color: #dddddd;
+    font-size: 16px;
     width: 120px;
     height: 30px;
     margin: 10px 30px 10px 30px;
-    color: #1985a1;
     transition: background 0.2s;
     cursor: pointer;
 }
 
 .event-container-new-button:hover{
-    background: rgba(25, 133, 161, 0.001);
+    background: rgba(76, 92, 104, 0.8);
 }
 
 @media only screen and (max-width: 900px) {
