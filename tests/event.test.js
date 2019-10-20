@@ -796,6 +796,111 @@ describe('POST api/events/:id/guests/invitekey', () => {
     })
 })
 
+describe('PUT api/events/:id/invitekey', () => {
+
+    it('should succeed and update inviteKey', async () => {
+        const res = await api
+            .put('/api/events/' + event._id + '/invitekey')
+            .set('Cookie', userCookie)
+            .expect(200)
+
+        expect.stringContaining(res.body.inviteKey)
+        expect(res.body.inviteKey).not.toEqual(event.inviteKey)
+    })
+
+    it('should fail if not authenticated', async () => {
+        await api
+            .put('/api/events/' + event._id + '/invitekey')
+            .expect(401)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.inviteKey.toString()).toEqual(event.inviteKey)
+    })
+
+    it('should fail if requester not creator', async () => {
+        await api
+            .put('/api/events/' + event._id + '/invitekey')
+            .set('Cookie', user2Cookie)
+            .expect(403)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.inviteKey.toString()).toEqual(event.inviteKey)
+    })
+})
+
+describe('POST api/events/:id/discussion', () => {
+
+    it.only('should succeed and add a message to discussion', async () => {
+        const res = await api
+            .post('/api/events/' + event._id + '/discussion')
+            .set('Cookie', userCookie)
+            .send({ message: 'This is what I post' })
+            .expect(200)
+
+        const message = res.body.discussion[0]
+
+        expect(message.content).toEqual('This is what I post')
+        expect(message.author._id).toEqual(user._id)
+        expect.stringContaining(message.time)
+    })
+
+    it.only('should succeed and add a message from guest to discussion', async () => {
+        const res = await api
+            .post('/api/events/' + event._id + '/discussion')
+            .set('Cookie', user2Cookie)
+            .send({ message: 'I am just a guest' })
+            .expect(200)
+
+        const message = res.body.discussion[0]
+
+        expect(message.content).toEqual('I am just a guest')
+        expect(message.author._id).toEqual(user2._id)
+        expect.stringContaining(message.time)
+    })
+
+    it.only('should fail if not authenticated', async () => {
+        await api
+            .post('/api/events/' + event._id + '/discussion')
+            .send({ message: 'I am not a guest' })
+            .expect(401)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.discussion.some(message => message.content === 'I am not a guest')).toBeFalsy()
+    })
+
+    it.only('should fail if requester not creator or guest', async () => {
+        await api
+            .post('/api/events/' + event._id + '/discussion')
+            .set('Cookie', user3Cookie)
+            .send({ message: 'I am not a guest' })
+            .expect(403)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.discussion.some(message => message.content === 'I am not a guest')).toBeFalsy()
+    })
+
+    it.only('should fail if message too short or undefined', async () => {
+        await api
+            .post('/api/events/' + event._id + '/discussion')
+            .set('Cookie', userCookie)
+            .send({ message: '' })
+            .expect(400)
+
+        await api
+            .post('/api/events/' + event._id + '/discussion')
+            .set('Cookie', userCookie)
+            .expect(400)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.discussion.some(message => message.content === '')).toBeFalsy()
+    })
+})
+
 afterAll(() => {
     server.close()
 })
