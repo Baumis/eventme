@@ -77,7 +77,7 @@ class OptionsPanel extends Component {
         return (
             <div style={{ left: this.props.VisibilityStore.optionsPanelPosition }} className="options-panel-container">
                 <div className="options-panel-header">
-                    <p>Editor</p>
+                    <p>event editor</p>
                     <button onClick={this.slidePanel}><FaAngleDoubleLeft /></button>
                 </div>
                 <div className="options-panel-canvas">
@@ -92,7 +92,7 @@ class OptionsPanel extends Component {
                     />
                     <InputBlock
                         type={'text'}
-                        label={'Header background url'}
+                        label={'Header background'}
                         value={this.props.EventStore.event.background}
                         changeValue={this.changeBackground}
                     />

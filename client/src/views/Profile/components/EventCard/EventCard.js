@@ -13,13 +13,11 @@ const EventCard = (props) => {
     }
 
     return (
-        <div
-            style={background}
-            className="event-card"
-            onClick={() => toEvent()}
-        >
-            <div className="event-card-title">
-                <p>{props.event.label}</p>
+        <div className="event-card" onClick={() => toEvent()}>
+            <div className="event-card-picture-container" style={background}>
+                <div className="event-card-title">
+                    <p>{props.event.label}</p>
+                </div>
             </div>
         </div>
     )

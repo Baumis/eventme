@@ -24,12 +24,8 @@
     font-weight: 500;
     border-bottom: 1px solid transparent;
     background: transparent;
-    transition: background 0.2s;
+    transition: color 0.2s;
     user-select: none;
-}
-
-.tabs-tab:hover {
-    background: rgba(197, 195, 198, 0.2);
 }
 
 .active-tab {

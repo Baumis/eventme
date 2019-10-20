@@ -21,7 +21,7 @@ scrollEffect = () => {
 render() {
     const headerStyles = {
         color: 'white',
-        backgroundImage: 'url(' + this.props.EventStore.event.background + ')'
+        backgroundImage: 'linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),' + ' url(' + this.props.EventStore.event.background + ')'
     }
     return (
         <div style={headerStyles} className="event-header" id="slower-picture">
