@@ -501,7 +501,7 @@ describe('DELETE /api/events/:id', () => {
         await api
             .delete('/api/events/' + event._id)
             .expect(401)
-        
+
         const amountInEnd = await Event.countDocuments()
         expect(amountInBeginning).toEqual(amountInEnd)
     })
@@ -525,9 +525,9 @@ describe('POST /api/events/:id/guests', () => {
         const res = await api
             .post('/api/events/' + event._id + '/guests')
             .set('Cookie', userCookie)
-            .send({userId: user3._id})
+            .send({ userId: user3._id })
             .expect(200)
-        
+
         const userInEnd = await User.findById(user3._id)
 
         expect(userInEnd.myInvites.includes(mongoose.Types.ObjectId(event._id))).toBeTruthy()
@@ -537,7 +537,7 @@ describe('POST /api/events/:id/guests', () => {
     it('should fail if not authenticated', async () => {
         await api
             .post('/api/events/' + event._id + '/guests')
-            .send({userId: user3._id})
+            .send({ userId: user3._id })
             .expect(401)
 
         const eventInEnd = await Event.findById(event._id)
@@ -546,19 +546,24 @@ describe('POST /api/events/:id/guests', () => {
     })
 
     it('should fail if event not existing', async () => {
+        const nonExistingEventId = mongoose.Types.ObjectId()
         await api
-            .post('/api/events/' + mongoose.Types.ObjectId() + '/guests')
-            .send({userId: user3._id})
+            .post('/api/events/' + nonExistingEventId + '/guests')
+            .send({ userId: user3._id })
             .expect(404)
+
+        const userInEnd = await User.findById(user3._id)
+
+        expect(userInEnd.myInvites.includes(nonExistingEventId)).toBeFalsy()
     })
 
     it('should fail if guest already added', async () => {
         await api
             .post('/api/events/' + event._id + '/guests')
             .set('Cookie', userCookie)
-            .send({userId: user2._id})
+            .send({ userId: user2._id })
             .expect(400)
-        
+
         const eventInEnd = await Event.findById(event._id)
         const userInEnd = await User.findById(user2._id)
 
@@ -570,9 +575,9 @@ describe('POST /api/events/:id/guests', () => {
         await api
             .post('/api/events/' + event._id + '/guests')
             .set('Cookie', user2Cookie)
-            .send({userId: user3._id})
+            .send({ userId: user3._id })
             .expect(403)
-        
+
         const eventInEnd = await Event.findById(event._id)
 
         expect(eventInEnd.guests.some(guest => guest.user.toString() === user3._id)).toBeFalsy()
@@ -584,11 +589,131 @@ describe('POST /api/events/:id/guests', () => {
         await api
             .post('/api/events/' + event._id + '/guests')
             .set('Cookie', userCookie)
-            .send({userId: nonExistingUserId})
-        
+            .send({ userId: nonExistingUserId })
+
         const eventInEnd = await Event.findById(event._id)
 
         expect(eventInEnd.guests.some(guest => guest.user.toString() === nonExistingUserId.toString())).toBeFalsy()
+    })
+})
+
+describe('PUT /api/events/:id/guests/:userId', () => {
+
+    it('should succeed and update guest status to GOING', async () => {
+        const res = await api
+            .put('/api/events/' + event._id + '/guests/' + user2._id)
+            .set('Cookie', userCookie)
+            .send({ newStatus: 'GOING' })
+            .expect(200)
+
+        expect(res.body.guests.find(guest => guest.user._id === user2._id).status).toEqual('GOING')
+    })
+
+    it('should succeed and update guest status to DECLINED', async () => {
+        const res = await api
+            .put('/api/events/' + event._id + '/guests/' + user2._id)
+            .set('Cookie', userCookie)
+            .send({ newStatus: 'DECLINED' })
+            .expect(200)
+
+        expect(res.body.guests.find(guest => guest.user._id === user2._id).status).toEqual('DECLINED')
+    })
+
+    it('should succeed and update own status to GOING', async () => {
+        const res = await api
+            .put('/api/events/' + event._id + '/guests/' + user2._id)
+            .set('Cookie', user2Cookie)
+            .send({ newStatus: 'GOING' })
+            .expect(200)
+
+        expect(res.body.guests.find(guest => guest.user._id === user2._id).status).toEqual('GOING')
+    })
+
+    it('should fail if not authenticated', async () => {
+        await api
+            .put('/api/events/' + event._id + '/guests/' + user2._id)
+            .send({ newStatus: 'DECLINED' })
+            .expect(401)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.guests.find(guest => guest.user.toString() === user2._id).status).toEqual('PENDING')
+    })
+
+    it('should fail if requester not guest or creator', async () => {
+        await api
+            .put('/api/events/' + event._id + '/guests/' + user2._id)
+            .set('Cookie', user3Cookie)
+            .send({ newStatus: 'GOING' })
+            .expect(403)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.guests.find(guest => guest.user.toString() === user2._id).status).toEqual('PENDING')
+    })
+
+    it('should fail if new status not valid', async () => {
+        await api
+            .put('/api/events/' + event._id + '/guests/' + user2._id)
+            .set('Cookie', userCookie)
+            .send({ newStatus: 'NOT_EXISTING' })
+            .expect(400)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.guests.find(guest => guest.user.toString() === user2._id).status).toEqual('PENDING')
+    })
+})
+
+describe('DELETE /api/events/:id/guests/:userId', () => {
+
+    it('should succeed and remove guest from event', async () => {
+        const res = await api
+            .delete('/api/events/' + event._id + '/guests/' + user2._id)
+            .set('Cookie', userCookie)
+            .expect(200)
+
+        const userInEnd = await User.findById(user2._id)
+
+        expect(userInEnd.myInvites.includes(mongoose.Types.ObjectId(event._id))).toBeFalsy()
+        expect(res.body.guests.some(guest => guest.user._id === user2._id)).toBeFalsy()
+    })
+
+    it('should succeed and remove self from event', async () => {
+        const res = await api
+            .delete('/api/events/' + event._id + '/guests/' + user2._id)
+            .set('Cookie', user2Cookie)
+            .expect(200)
+
+        const userInEnd = await User.findById(user2._id)
+
+        expect(userInEnd.myInvites.includes(mongoose.Types.ObjectId(event._id))).toBeFalsy()
+        expect(res.body.guests.some(guest => guest.user._id === user2._id)).toBeFalsy()
+    })
+
+    it('should fail if not authenticated', async () => {
+        await api
+            .delete('/api/events/' + event._id + '/guests/' + user2._id)
+            .expect(401)
+
+        const userInEnd = await User.findById(user2._id)
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(userInEnd.myInvites.includes(mongoose.Types.ObjectId(event._id))).toBeTruthy()
+        expect(eventInEnd.guests.some(guest => guest.user.toString() === user2._id)).toBeTruthy()
+    })
+
+    it('should fail if not creator or guest itself', async () => {
+        await api
+            .delete('/api/events/' + event._id + '/guests/' + user2._id)
+            .set('Cookie', user3Cookie)
+            .expect(403)
+
+        const userInEnd = await User.findById(user2._id)
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(userInEnd.myInvites.includes(mongoose.Types.ObjectId(event._id))).toBeTruthy()
+        expect(eventInEnd.guests.some(guest => guest.user.toString() === user2._id)).toBeTruthy()
     })
 })
 
