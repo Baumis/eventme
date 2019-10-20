@@ -832,7 +832,7 @@ describe('PUT api/events/:id/invitekey', () => {
 
 describe('POST api/events/:id/discussion', () => {
 
-    it.only('should succeed and add a message to discussion', async () => {
+    it('should succeed and add a message to discussion', async () => {
         const res = await api
             .post('/api/events/' + event._id + '/discussion')
             .set('Cookie', userCookie)
@@ -846,7 +846,7 @@ describe('POST api/events/:id/discussion', () => {
         expect.stringContaining(message.time)
     })
 
-    it.only('should succeed and add a message from guest to discussion', async () => {
+    it('should succeed and add a message from guest to discussion', async () => {
         const res = await api
             .post('/api/events/' + event._id + '/discussion')
             .set('Cookie', user2Cookie)
@@ -860,7 +860,7 @@ describe('POST api/events/:id/discussion', () => {
         expect.stringContaining(message.time)
     })
 
-    it.only('should fail if not authenticated', async () => {
+    it('should fail if not authenticated', async () => {
         await api
             .post('/api/events/' + event._id + '/discussion')
             .send({ message: 'I am not a guest' })
@@ -871,7 +871,7 @@ describe('POST api/events/:id/discussion', () => {
         expect(eventInEnd.discussion.some(message => message.content === 'I am not a guest')).toBeFalsy()
     })
 
-    it.only('should fail if requester not creator or guest', async () => {
+    it('should fail if requester not creator or guest', async () => {
         await api
             .post('/api/events/' + event._id + '/discussion')
             .set('Cookie', user3Cookie)
@@ -883,7 +883,7 @@ describe('POST api/events/:id/discussion', () => {
         expect(eventInEnd.discussion.some(message => message.content === 'I am not a guest')).toBeFalsy()
     })
 
-    it.only('should fail if message too short or undefined', async () => {
+    it('should fail if message too short or undefined', async () => {
         await api
             .post('/api/events/' + event._id + '/discussion')
             .set('Cookie', userCookie)
@@ -898,6 +898,83 @@ describe('POST api/events/:id/discussion', () => {
         const eventInEnd = await Event.findById(event._id)
 
         expect(eventInEnd.discussion.some(message => message.content === '')).toBeFalsy()
+    })
+})
+
+describe('POST api/events/:id/discussion/:messageId/comments', () => {
+
+    it('should succeed and add a comment to a message', async () => {
+
+    })
+
+    it('should succeed and add a comment from guest to a message', async () => {
+        
+    })
+
+    it('should fail if not authenticated', async () => {
+        
+    })
+
+    it('should fail if requester not guest or creator', async () => {
+        
+    })
+
+    it('should fail if comment too short or undefined', async () => {
+        
+    })
+
+    it('should fail if message not existing', async () => {
+        
+    })
+})
+
+describe('DELETE api/events/:id/discussion/:messageId', () => {
+
+    it('should succeed and remove message', async () => {
+
+    })
+
+    it('should succeed and remove own message', async () => {
+
+    })
+
+    it('should fail if not authenticated', async () => {
+        
+    })
+
+    it('should fail if requester not message writer or creator', async () => {
+        
+    })
+
+    it('should fail if message not existing', async () => {
+        
+    })
+})
+
+describe('DELETE api/events/:id/discussion/:messageId/comments/:commentId', () => {
+
+    it('should succeed and remove comment', async () => {
+
+    })
+
+    it('should succeed and remove own comment', async () => {
+
+    })
+
+    it('should fail if not authenticated', async () => {
+        
+    })
+
+    it('should fail if requester not comment writer or creator', async () => {
+        
+    })
+
+    it('should fail if message not existing', async () => {
+        
+    })
+
+    it('should fail if comment not existing', async () => {
+        
     })
 })
 
