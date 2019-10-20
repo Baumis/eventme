@@ -7,6 +7,7 @@
         "mobx": "^5.9.4",
         "mobx-react": "^5.4.4",
         "moment": "^2.24.0",
+        "ol": "^6.0.1",
         "react": "^16.8.6",
         "react-contenteditable": "^3.3.2",
         "react-dom": "^16.8.6",

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    background: white;
+    background: transparent;
 }
 
 .profile-tabs-container {
@@ -20,7 +20,7 @@
     width: 120px;
     cursor: pointer;
     color: rgba(76, 92, 104, 0.7);
-    font-weight: 600;
+    font-weight: 500;
     border-bottom: 1px solid transparent;
     transition: background 0.2s;
 }

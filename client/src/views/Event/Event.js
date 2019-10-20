@@ -10,7 +10,6 @@ import JoinEventModal from './components/JoinEventModal/JoinEventModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
-import Tabs from './components/Tabs/Tabs'
 import EventContent from './components/EventContent/EventContent'
 
 class Event extends Component {
