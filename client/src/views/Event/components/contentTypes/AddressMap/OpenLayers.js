@@ -3,15 +3,16 @@ import Map from 'ol/Map'
 import View from 'ol/View'
 import TileLayer from 'ol/layer/Tile'
 import OSM from 'ol/source/OSM'
+import Overlay from 'ol/Overlay'
 import './OpenLayers.css'
 
 class OpenLayers extends Component {
 
     componentDidMount() {
-        const map = new Map({
+        const olMap = new Map({
             target: this.refs.mapContainer,
             view: new View({
-                center: [60, 24],
+                center: this.props.cordinates,
                 zoom: 8,
             }),
             layers: [
@@ -20,11 +21,19 @@ class OpenLayers extends Component {
                 })
             ]
         })
+
+        this.marker = new Overlay({
+            position: [949282, 6002552],
+            positioning: "center-center",
+            element: document.getElementById("marker"),
+            stopEvent: false
+          })
+
+          olMap.addOverlay(this.marker)
     }
 
     render() {
         return (
-
             <div className="openLayer-container" ref="mapContainer"> </div>
         )
     }

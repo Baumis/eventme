@@ -21,7 +21,6 @@
     width: 120px;
     cursor: pointer;
     color: gray;
-    font-weight: 500;
     border-bottom: 1px solid transparent;
     background: transparent;
     transition: color 0.2s;
@@ -35,4 +34,5 @@
 .active-tab {
     color: rgba(76, 92, 104, 1);
     border-bottom: 2px solid rgba(76, 92, 104, 1);
+    font-weight: 600;
 }

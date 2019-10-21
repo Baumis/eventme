@@ -1,8 +1,11 @@
 .text-component{
     display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
     flex-direction: column;
     overflow-y: hidden;
-    padding: 10px;
 }
 
 .text-component-title{

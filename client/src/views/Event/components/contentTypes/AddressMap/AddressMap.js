@@ -1,6 +1,7 @@
 import React from 'react'
 import './AddressMap.css'
 import OpenLayers from './OpenLayers'
+import Leaflet from './Leaflet'
 
 const AddressMap = (props) => {
 
@@ -22,7 +23,7 @@ const AddressMap = (props) => {
                     />
                 </div>
                 : null}
-                <OpenLayers />
+                <Leaflet />
         </div>
     )
 }
