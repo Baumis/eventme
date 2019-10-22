@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './NewComponentModal.css'
-import { FaPen, FaLink, FaImage, FaPoll, FaMap } from 'react-icons/fa'
+import { FaPen, FaLink, FaImage, FaPoll } from 'react-icons/fa'
 
 
 class NewComponentModal extends Component {
@@ -13,7 +13,7 @@ class NewComponentModal extends Component {
                 INVITE_LINK: {},
                 PICTURE: { url: '', expand: false },
                 VOTE: { subject: 'New Poll', options: [{ content: 'first option', votes: [] }] },
-                ADDRESS_MAP: { address: ''}
+                ADDRESS_MAP: { cordinates: [60.1699961,24.9352594]}
             }
         }
     }
@@ -39,10 +39,6 @@ class NewComponentModal extends Component {
                         <div className="component-modal-button" onClick={() => this.createComponent('PICTURE')}>
                             <FaImage />
                             <label>Picture</label>
-                        </div>
-                        <div className="component-modal-button" onClick={() => this.createComponent('ADDRESS_MAP')}>
-                            <FaMap />
-                            <label>Map</label>
                         </div>
                         {/*<div className="component-modal-button" onClick={() => this.createComponent('VOTE')}>
                             <FaPoll />
