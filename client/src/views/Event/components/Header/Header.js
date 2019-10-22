@@ -12,7 +12,7 @@ class Header extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.scrollEffect)
-}
+    }
 
     scrollEffect = () => {
         const element = document.getElementById('slower-picture')
