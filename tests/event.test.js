@@ -860,6 +860,26 @@ describe('POST api/events/:id/discussion', () => {
         expect.stringContaining(message.time)
     })
 
+    it('should succeed and add a message first in discussion array', async () => {
+        await api
+            .post('/api/events/' + event._id + '/discussion')
+            .set('Cookie', userCookie)
+            .send({ message: 'Hello everyone' })
+            .expect(200)
+
+        const res = await api
+            .post('/api/events/' + event._id + '/discussion')
+            .set('Cookie', user2Cookie)
+            .send({ message: 'This is what you need' })
+            .expect(200)
+
+        const message = res.body.discussion[0]
+
+        expect(message.content).toEqual('This is what you need')
+        expect(message.author._id).toEqual(user2._id)
+        expect.stringContaining(message.time)
+    })
+
     it('should fail if not authenticated', async () => {
         await api
             .post('/api/events/' + event._id + '/discussion')
@@ -903,78 +923,265 @@ describe('POST api/events/:id/discussion', () => {
 
 describe('POST api/events/:id/discussion/:messageId/comments', () => {
 
-    it('should succeed and add a comment to a message', async () => {
+    let messageId = null
 
+    beforeEach(async () => {
+        const res = await api
+            .post('/api/events/' + event._id + '/discussion')
+            .set('Cookie', user2Cookie)
+            .send({ message: 'My message is real' })
+
+        messageId = res.body.discussion[0]._id
+    })
+
+    it('should succeed and add a comment to a message', async () => {
+        const res = await api
+            .post('/api/events/' + event._id + '/discussion/' + messageId + '/comments')
+            .set('Cookie', userCookie)
+            .send({ comment: 'Okey, nice to know' })
+            .expect(200)
+
+        const comments = res.body.discussion[0].comments
+        comment = comments[comments.length - 1]
+
+        expect(comment.content).toEqual('Okey, nice to know')
+        expect(comment.author._id).toEqual(user._id)
+        expect.stringContaining(comment.time)
     })
 
     it('should succeed and add a comment from guest to a message', async () => {
-        
+        const res = await api
+            .post('/api/events/' + event._id + '/discussion/' + messageId + '/comments')
+            .set('Cookie', user2Cookie)
+            .send({ comment: 'Okey, nice to know' })
+            .expect(200)
+
+        const comments = res.body.discussion[0].comments
+        comment = comments[comments.length - 1]
+
+        expect(comment.content).toEqual('Okey, nice to know')
+        expect(comment.author._id).toEqual(user2._id)
+        expect.stringContaining(comment.time)
+    })
+
+    it('should succeed and add a comment last in comments array', async () => {
+        await api
+            .post('/api/events/' + event._id + '/discussion/' + messageId + '/comments')
+            .set('Cookie', userCookie)
+            .send({ comment: 'Okey, nice to know' })
+            .expect(200)
+
+        const res2 = await api
+            .post('/api/events/' + event._id + '/discussion/' + messageId + '/comments')
+            .set('Cookie', user2Cookie)
+            .send({ comment: 'This is what you look for' })
+            .expect(200)
+
+        const comments = res2.body.discussion[0].comments
+        comment = comments[comments.length - 1]
+
+        expect(comment.content).toEqual('This is what you look for')
+        expect(comment.author._id).toEqual(user2._id)
+        expect.stringContaining(comment.time)
     })
 
     it('should fail if not authenticated', async () => {
-        
+        await api
+            .post('/api/events/' + event._id + '/discussion/' + messageId + '/comments')
+            .send({ comment: 'Okey, nice to know' })
+            .expect(401)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.discussion[0].comments.length).toEqual(0)
     })
 
     it('should fail if requester not guest or creator', async () => {
-        
+        await api
+            .post('/api/events/' + event._id + '/discussion/' + messageId + '/comments')
+            .set('Cookie', user3Cookie)
+            .send({ comment: 'Okey, nice to know' })
+            .expect(403)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.discussion[0].comments.length).toEqual(0)
     })
 
     it('should fail if comment too short or undefined', async () => {
-        
+        await api
+            .post('/api/events/' + event._id + '/discussion/' + messageId + '/comments')
+            .set('Cookie', user2Cookie)
+            .send({ comment: '' })
+            .expect(400)
+
+        await api
+            .post('/api/events/' + event._id + '/discussion/' + messageId + '/comments')
+            .set('Cookie', userCookie)
+            .expect(400)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.discussion[0].comments.length).toEqual(0)
     })
 
     it('should fail if message not existing', async () => {
-        
+        await api
+            .post('/api/events/' + event._id + '/discussion/' + mongoose.Types.ObjectId() + '/comments')
+            .set('Cookie', userCookie)
+            .send({ comment: 'My new comment' })
+            .expect(400)
     })
 })
 
 describe('DELETE api/events/:id/discussion/:messageId', () => {
 
-    it('should succeed and remove message', async () => {
+    let messageId = null
 
+    beforeEach(async () => {
+        const res = await api
+            .post('/api/events/' + event._id + '/discussion')
+            .set('Cookie', user2Cookie)
+            .send({ message: 'My message is real' })
+
+        messageId = res.body.discussion[0]._id
+    })
+
+    it('should succeed and remove message', async () => {
+        const res2 = await api
+            .delete('/api/events/' + event._id + '/discussion/' + messageId)
+            .set('Cookie', userCookie)
+            .expect(200)
+
+        const message = res2.body.discussion[0]
+
+        expect(message.content).toBeNull()
+        expect(message.author).toBeNull()
     })
 
     it('should succeed and remove own message', async () => {
+        const res2 = await api
+            .delete('/api/events/' + event._id + '/discussion/' + messageId)
+            .set('Cookie', user2Cookie)
+            .expect(200)
 
+        const message = res2.body.discussion[0]
+
+        expect(message.content).toBeNull()
+        expect(message.author).toBeNull()
     })
 
     it('should fail if not authenticated', async () => {
-        
+        await api
+            .delete('/api/events/' + event._id + '/discussion/' + messageId)
+            .expect(401)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.discussion[0].content).toEqual('My message is real')
+        expect(eventInEnd.discussion[0].author.toString()).toEqual(user2._id)
     })
 
     it('should fail if requester not message writer or creator', async () => {
-        
+        await api
+            .delete('/api/events/' + event._id + '/discussion/' + messageId)
+            .set('Cookie', user3Cookie)
+            .expect(403)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.discussion[0].content).toEqual('My message is real')
+        expect(eventInEnd.discussion[0].author.toString()).toEqual(user2._id)
     })
 
     it('should fail if message not existing', async () => {
-        
+        await api
+            .delete('/api/events/' + event._id + '/discussion/' + mongoose.Types.ObjectId())
+            .set('Cookie', userCookie)
+            .expect(400)
     })
 })
 
 describe('DELETE api/events/:id/discussion/:messageId/comments/:commentId', () => {
 
-    it('should succeed and remove comment', async () => {
+    let messageId = null
+    let commentId = null
 
+    beforeEach(async () => {
+        const res = await api
+            .post('/api/events/' + event._id + '/discussion')
+            .set('Cookie', userCookie)
+            .send({ message: 'This is what I post' })
+
+        messageId = res.body.discussion[0]._id
+
+        const res2 = await api
+            .post('/api/events/' + event._id + '/discussion/' + messageId + '/comments')
+            .set('Cookie', user2Cookie)
+            .send({ comment: 'Okey, nice to know' })
+
+        commentId = res2.body.discussion[0].comments[0]._id
+    })
+
+    it('should succeed and remove comment', async () => {
+        const res = await api
+            .delete('/api/events/' + event._id + '/discussion/' + messageId + '/comments/' + commentId)
+            .set('Cookie', userCookie)
+            .expect(200)
+
+        const comment = res.body.discussion[0].comments[0]
+
+        expect(comment.content).toBeNull()
+        expect(comment.author).toBeNull()
     })
 
     it('should succeed and remove own comment', async () => {
+        const res = await api
+            .delete('/api/events/' + event._id + '/discussion/' + messageId + '/comments/' + commentId)
+            .set('Cookie', user2Cookie)
+            .expect(200)
 
+        const comment = res.body.discussion[0].comments[0]
+
+        expect(comment.content).toBeNull()
+        expect(comment.author).toBeNull()
     })
 
     it('should fail if not authenticated', async () => {
-        
+        await api
+            .delete('/api/events/' + event._id + '/discussion/' + messageId + '/comments/' + commentId)
+            .expect(401)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.discussion[0].comments[0].content).toEqual('Okey, nice to know')
+        expect(eventInEnd.discussion[0].comments[0].author.toString()).toEqual(user2._id)
     })
 
     it('should fail if requester not comment writer or creator', async () => {
-        
+        await api
+            .delete('/api/events/' + event._id + '/discussion/' + messageId + '/comments/' + commentId)
+            .set('Cookie', user3Cookie)
+            .expect(403)
+
+        const eventInEnd = await Event.findById(event._id)
+
+        expect(eventInEnd.discussion[0].comments[0].content).toEqual('Okey, nice to know')
+        expect(eventInEnd.discussion[0].comments[0].author.toString()).toEqual(user2._id)
     })
 
     it('should fail if message not existing', async () => {
-        
+        await api
+            .delete('/api/events/' + event._id + '/discussion/' + mongoose.Types.ObjectId() + '/comments/' + commentId)
+            .set('Cookie', userCookie)
+            .expect(400)
     })
 
     it('should fail if comment not existing', async () => {
-        
+        await api
+            .delete('/api/events/' + event._id + '/discussion/' + messageId + '/comments/' + mongoose.Types.ObjectId())
+            .set('Cookie', userCookie)
+            .expect(400)
     })
 })
 
