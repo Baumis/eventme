@@ -30,7 +30,7 @@
 }
 
 .tabs-tab:hover {
-    background: rgba(197, 195, 198, 0.2);
+    color: rgba(76, 92, 104, 1);
 }
 
 .active-tab {
