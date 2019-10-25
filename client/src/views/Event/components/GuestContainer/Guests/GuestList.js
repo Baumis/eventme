@@ -37,7 +37,7 @@ class Guests extends Component {
                 guest.status === this.props.filter
             )
         }
-        return guests.sort(this.sorter)
+        return guests.slice().sort(this.sorter)
     }
 
     statusColorBullet = (status) => {
