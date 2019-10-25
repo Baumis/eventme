@@ -7,7 +7,7 @@ class Navbar extends Component {
 
     render() {
         return (
-            <div className="Navbar" style={this.props.style}>
+            <div className="Navbar">
                 <div className="NavBarItem">
                     <SiteLogo />
                 </div>
