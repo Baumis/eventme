@@ -10,7 +10,6 @@ import JoinEventModal from './components/JoinEventModal/JoinEventModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
-import Tabs from './components/Tabs/Tabs'
 import EventContent from './components/EventContent/EventContent'
 
 class Event extends Component {
@@ -21,7 +20,8 @@ class Event extends Component {
             loading: true,
             showInviteModal: false,
             showNewComponentModal: false,
-            activeTab: 'Event'
+            activeTab: 'Event',
+            updater: null
         }
     }
 
@@ -34,13 +34,19 @@ class Event extends Component {
         }
 
         this.setState({ loading: false })
-        this.startEventUpdater(this.props.eventId)
+        this.startEventUpdater()
     }
 
-    startEventUpdater = (eventId) => {
-        setInterval(() => {
-            this.props.EventStore.getEvent(eventId)
-        }, 30000) 
+    componentWillUnmount() {
+        clearInterval(this.state.updater)
+    }
+
+    startEventUpdater = () => {
+        this.setState({
+            updater: setInterval(() => {
+                this.props.EventStore.getEvent(this.props.EventStore.event._id)
+            }, 20000)
+        })
     }
 
     changeActive = (cathegory) => {
@@ -87,7 +93,7 @@ class Event extends Component {
         }
         return (
             <div className='Event'>
-                <Navbar />
+                <Navbar/>
                 <Header isGuest={this.isGuest()} />
                 <EventContent
                     isCreator={this.isCreator}

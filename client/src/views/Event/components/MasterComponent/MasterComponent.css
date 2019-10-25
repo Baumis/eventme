@@ -1,12 +1,16 @@
 .master-component {
     display: flex;
     flex-direction: column;
-    background: transparent;
+    background: white;
     width: 400px;
     height: 400px;
     position: relative;
     z-index: 2;
     overflow: hidden;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 3px -1px rgb(69, 69, 69, 0.7);
+    -moz-box-shadow: 0px 0px 3px -1px rgba(69,69,69,0.7);
+    box-shadow: 0px 0px 3px -1px rgba(69,69,69,0.7);
 }
 
 @media only screen and (max-width: 840px) {
@@ -18,7 +22,6 @@
 @media only screen and (max-width: 400px) {
     .master-component {
         width: 95vw;
-        height: auto;
         min-height: 400px;
     }
 }
@@ -34,7 +37,7 @@
 
 .master-options-edit-button{
     display: flex;
-    background: rgba(255,255,255,0.6);
+    background: rgba(255,255,255, 1 );
     justify-content: center;
     align-items: center;
     border-radius: 50%;
@@ -45,9 +48,9 @@
     z-index: 2;
     color: rgba(0,0,0,0.6);
     cursor: pointer;
-    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.3);
-    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.3);
-    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.3);
+    -webkit-box-shadow: 0px 0px 3px -1px rgb(69, 69, 69, 0.7);
+    -moz-box-shadow: 0px 0px 3px -1px rgba(69,69,69,0.7);
+    box-shadow: 0px 0px 3px -1px rgba(69,69,69,0.7);
 }
 
 .editMasterActive {

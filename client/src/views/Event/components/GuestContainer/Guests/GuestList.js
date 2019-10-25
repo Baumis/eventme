@@ -40,13 +40,12 @@ class Guests extends Component {
         return guests.sort(this.sorter)
     }
 
-    styleStatus = (status) => {
-        const color = status === 'GOING' ? 'rgba(46, 184, 46, 1)'
-            : status === 'PENDING' ? 'orange'
-                : status === 'DECLINED' ? 'red'
+    statusColorBullet = (status) => {
+        const color = status === 'GOING' ? '#4caf50'
+            : status === 'PENDING' ? '#ff9800'
+                : status === 'DECLINED' ? '#b2102f'
                     : 'black'
-        status = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()
-        return <div style={{ color: color }}>{status}</div>
+        return { background: color}
     }
 
     sorter = (guestA, guestB) => {
@@ -73,12 +72,17 @@ class Guests extends Component {
                         </a>
                         <div className="event-guests-right-column">
                             <div className="event-guests-guest-status">
-                                {this.styleStatus(guest.status)}
+                                {guest.status.toLowerCase()}
+                                <div 
+                                    className="event-guests-guest-bullet"
+                                    style={this.statusColorBullet(guest.status)}
+                                >
+                                </div>
                             </div>
                             {this.rightsToRemove(guest.user._id) ?
                                 <div className="event-guests-guest-remove" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
                                 :
-                                null
+                                <div className="event-guests-guest-remove-disabled"></div>
                             }
                         </div>
                     </div>

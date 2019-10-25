@@ -37,6 +37,7 @@ const Text = (props) => {
                     html={props.data.content}
                     editable={!props.edit}
                     onChange={changeContent}
+                    style={{textAlign: 'center'}}
                 />
             </div>
         </div>

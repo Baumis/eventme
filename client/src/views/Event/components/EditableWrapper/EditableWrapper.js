@@ -16,6 +16,7 @@ class EditableWrapper extends Component {
                 onPaste={this.handlePaste}
                 disabled={this.props.editable}
                 onChange={this.props.onChange}
+                style={this.props.style}
             />
         )
     }

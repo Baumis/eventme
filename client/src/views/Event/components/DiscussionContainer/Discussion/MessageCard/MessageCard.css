@@ -52,6 +52,7 @@
 .message-card-time-author {
     display: flex;
     flex-wrap: nowrap;
+    font-size: 16px;
 }
 
 .message-card-time {

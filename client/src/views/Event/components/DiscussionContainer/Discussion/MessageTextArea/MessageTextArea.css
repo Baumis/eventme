@@ -26,7 +26,7 @@
     width: 100%;
     border: none;
     background: transparent;
-    border-bottom: 1px solid rgba(70, 73, 76, 0.5);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
     padding: 10px;
     outline: none;
     font-size: 16px;
@@ -44,11 +44,18 @@
     justify-content: center;
     align-items: center;
     width: 60px;
-    background : transparent;
-    border: 1px solid #4c5c68;
-    color: #4c5c68;
+    border-radius: 5px;
+    background: #4c5c68;
+    color: #dddddd;
     border-radius: 5px;
     height: 32px;
     margin-left: 5px;
     cursor: pointer;
+}
+
+.text-area-send-button-disabled {
+    background: rgb(76, 92, 104, 0.3);
+    border: none;
+    color: white;
+    cursor: default;
 }

@@ -15,7 +15,7 @@ class ProfileTabs extends Component {
                     <div className={'profile-tabs-tab' + getActivityClass('MyEvents')}
                         onClick={() => this.props.changeActive('MyEvents')}>
                         {this.props.isOwner ?
-                            <div>My Events</div>
+                            <div>My events</div>
                             :
                             <div>Events</div>
                         }

@@ -13,7 +13,7 @@ class MyEventsContainer extends Component {
                         <div className="event-container-new-button"
                             onClick={() => this.props.newEvent()}
                         >
-                            New Event
+                            Create event
                         </div>
                         : null
                     }

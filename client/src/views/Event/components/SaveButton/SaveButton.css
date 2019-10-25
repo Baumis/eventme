@@ -8,7 +8,7 @@
     z-index: 3;
     right: 40px;
     bottom: 30px;
-    background: #4f784e;
+    background: rgba(46, 184, 46, 0.8);
     border-radius: 5px;
     color:white;
     transition: bottom 0.2s;

@@ -12,7 +12,8 @@ class NewComponentModal extends Component {
                 TEXT: { title: 'Your title', content: 'excellent content' },
                 INVITE_LINK: {},
                 PICTURE: { url: '', expand: false },
-                VOTE: { subject: 'New Poll', options: [{ content: 'first option', votes: [] }] }
+                VOTE: { subject: 'New Poll', options: [{ content: 'first option', votes: [] }] },
+                ADDRESS_MAP: { cordinates: [60.1699961,24.9352594]}
             }
         }
     }

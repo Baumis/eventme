@@ -3,7 +3,7 @@
     width: 100%;
     justify-content: center;
     align-content: center;
-    border-bottom: 1px solid rgba(197, 195, 198, 0.5);
+    background: transparent;
 }
 
 .tabs-container {
@@ -20,11 +20,10 @@
     padding: 10px 0px 10px 0px;
     width: 120px;
     cursor: pointer;
-    color: rgba(76, 92, 104, 1);
-    font-weight: 600;
+    color: gray;
     border-bottom: 1px solid transparent;
     background: transparent;
-    transition: background 0.2s;
+    transition: color 0.2s;
     user-select: none;
 }
 
@@ -35,4 +34,5 @@
 .active-tab {
     color: rgba(76, 92, 104, 1);
     border-bottom: 2px solid rgba(76, 92, 104, 1);
+    font-weight: 600;
 }

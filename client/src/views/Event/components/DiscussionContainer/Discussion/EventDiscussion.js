@@ -32,7 +32,7 @@ class EventDiscussion extends Component {
         return (
             <div className="discussion-container">
                 <MessageTextArea />
-                <div className="discussion-content">
+                <div className="discussion-messages">
                     {this.props.EventStore.event.discussion.map((message, i) =>
                         <MessageCard
                             key={i}
