@@ -7,7 +7,7 @@ const VoteOptions = (props) => {
 
     const borderStyle = props.edit ? 'text-editable-mode' : ''
     return (
-        <div>
+        <div className="vote-component-options">
             {props.options.map((option, i) =>
                 <div key={i} className="vote-component-option-container">
                     <div className="vote-component-option-row">
