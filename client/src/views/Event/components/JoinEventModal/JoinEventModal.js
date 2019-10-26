@@ -8,6 +8,7 @@ class JoinEventModal extends Component {
 
         if(!this.props.UserStore.currentUser){
             this.props.VisibilityStore.showSignModal()
+            return
         }
 
         await this.props.EventStore.joinEvent(

@@ -56,10 +56,6 @@ class StatusBar extends Component {
 
     render() {
 
-        if(!this.props.UserStore.currentUser) {
-            return null
-        }
-
         const status = this.checkUserStatus()
         if (this.state.loading) {
             return (
