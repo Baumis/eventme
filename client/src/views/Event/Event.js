@@ -101,6 +101,7 @@ class Event extends Component {
                     toggleNewComponentModal={this.toggleNewComponentModal}
                     active={this.state.activeTab}
                     changeActive={this.changeActive}
+                    isGuest={this.isGuest()}
                 />
                 {this.isCreator() ?
                     <div>

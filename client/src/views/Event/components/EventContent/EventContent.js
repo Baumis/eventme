@@ -9,10 +9,14 @@ import StatusBar from '../StatusBar/StatusBar'
 const EventContent = (props) => {
     return (
         <div className="event-content">
-            <div className="event-content-status-row">
-                <StatusBar />
-            </div>
-            <Tabs 
+            {props.isGuest ?
+                <div className="event-content-status-row">
+                    <StatusBar />
+                </div>
+                :
+                null
+            }
+            <Tabs
                 active={props.activeTab}
                 changeActive={props.changeActive}
             />
