@@ -41,7 +41,7 @@ beforeEach(async () => {
 
 describe('POST /api/users', () => {
 
-    it('should succeed and create a new user with correct response', async () => {
+    it.only('should succeed and create a new user with correct response', async () => {
         const user3Object = testUtils.user3Object
         const amountInBeginning = await Event.countDocuments()
 

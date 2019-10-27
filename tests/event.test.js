@@ -30,6 +30,8 @@ beforeEach(async () => {
         .post('/api/users')
         .send(userObject)
 
+    console.log(res.body)
+
     userCookie = res
         .headers['set-cookie'][0]
         .split(',')
@@ -79,7 +81,7 @@ beforeEach(async () => {
 
 describe('POST /api/events', () => {
 
-    it('should succeed and create a new event with correct response', async () => {
+    it.only('should succeed and create a new event with correct response', async () => {
         const amountInBeginning = await Event.countDocuments()
 
         const res = await api
