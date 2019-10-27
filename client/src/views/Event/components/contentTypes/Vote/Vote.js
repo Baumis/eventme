@@ -56,6 +56,10 @@ class Vote extends Component {
     }
 
     submit = () => {
+        if (this.state.checked === null) {
+            return
+        }
+
         if (!this.props.UserStore.currentUser) {
             alert('Sign In to vote!')
             return

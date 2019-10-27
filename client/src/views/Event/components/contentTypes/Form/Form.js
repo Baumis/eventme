@@ -40,28 +40,30 @@ class Form extends Component {
         const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         return (
             <div className="form-component">
-                {this.props.data.questions.map((question, i) =>
-                    <div key={i} className="form-component-question-container">
-                        <div className="form-component-title-row">
-                            {this.props.edit ?
-                                <div className="form-component-delete-button" onClick={() => this.removeQuestion(i)}>
-                                    <FaTrash />
+                <div className="form-component-questions">
+                    {this.props.data.questions.map((question, i) =>
+                        <div key={i} className="form-component-question">
+                            <div className="form-component-title-row">
+                                {this.props.edit ?
+                                    <div className="form-component-delete-button" onClick={() => this.removeQuestion(i)}>
+                                        <FaTrash />
+                                    </div>
+                                    : null
+                                }
+                                <div className={"form-component-title " + borderStyle}>
+                                    <EditableWrapper
+                                        html={question.question}
+                                        editable={!this.props.edit}
+                                        onChange={(event) => this.changeQuestion(i, event)}
+                                    />
                                 </div>
-                                : null
-                            }
-                            <div className={"form-component-title " + borderStyle}>
-                                <EditableWrapper
-                                    html={question.question}
-                                    editable={!this.props.edit}
-                                    onChange={(event) => this.changeQuestion(i, event)}
-                                />
+                            </div>
+                            <div>
+                                <textarea />
                             </div>
                         </div>
-                        <div>
-                            <textarea />
-                        </div>
-                    </div>
-                )}
+                    )}
+                </div>
                 {this.props.edit ?
                     <div className="form-component-add-button" onClick={() => this.newQuestion()}>
                         add question

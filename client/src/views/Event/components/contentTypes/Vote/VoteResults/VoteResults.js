@@ -25,7 +25,7 @@ const VoteResults = (props) => {
                     <div className="vote-component-title-row">
                         <div className={"vote-component-title"}>
                             <div>{option.content}</div>
-                            <div>{voteCount(i) + ' votes'}</div>
+                            <div className="vote-component-vote-count">{voteCount(i) + ' votes'}</div>
                         </div>
                     </div>
                     <div className="vote-component-status-bar">
