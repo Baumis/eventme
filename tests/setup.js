@@ -1,13 +1,21 @@
-const { MongoMemoryServer } = require('mongodb-memory-server')
+const { MongoMemoryReplSet } = require('mongodb-memory-server')
 
 module.exports = async () => {
     console.log('SETUP')
-    const mongod = new MongoMemoryServer({
-        instance: {
-            port: 3003,
+    const replSet = new MongoMemoryReplSet({
+        instanceOpts: [
+            {
+                port: 3003,
+            }
+        ],
+        replSet: {
+            storageEngine: 'wiredTiger',
             dbName: 'test'
         }
     })
+    await replSet.waitUntilRunning()
+    const uri = await replSet.getConnectionString()
+    console.log(uri)
 
-    global.mongod = mongod
+    global.mongod = replSet
 }

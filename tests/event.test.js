@@ -30,8 +30,6 @@ beforeEach(async () => {
         .post('/api/users')
         .send(userObject)
 
-    console.log(res.body)
-
     userCookie = res
         .headers['set-cookie'][0]
         .split(',')

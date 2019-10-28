@@ -50,8 +50,8 @@ const server = http.createServer(app)
 
 server.listen(config.port)
 
-server.on('close', () => {
-    mongoose.connection.close()
+server.on('close', async () => {
+    await mongoose.connection.close()
 })
 
 module.exports = {
