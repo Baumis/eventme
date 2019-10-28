@@ -1,59 +1,15 @@
-const http = require('http')
-const express = require('express')
-const cookieParser = require('cookie-parser')
-const app = express()
-const bodyParser = require('body-parser')
-const cors = require('cors')
+const app = require('./app')
 const mongoose = require('mongoose')
-const path = require('path')
 const config = require('./utils/config')
-const middleware = require('./utils/middleware')
+const mongodbUri = config.mongodbUri
+const port = config.port
 
-const eventRouter = require('./routes/eventRouter')
-const userRouter = require('./routes/userRouter')
-const loginRouter = require('./routes/loginRouter')
-const logRouter = require('./routes/logRouter')
+// Server Initialization
+const main = async () => {
+    await mongoose.connect(mongodbUri, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true })
 
-mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true })
-
-// Middlewares
-app.use(cookieParser())
-app.use(cors())
-app.use(bodyParser.json())
-
-// Static files from react app
-if ( process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, './client/build')))
+    // Start up the server on the port specified
+    app.listen(port)
 }
 
-// More middlewares
-app.use(middleware.extractToken)
-app.use(middleware.logger)
-
-// Routes & Controllers
-app.use('/api/events', eventRouter)
-app.use('/api/users', userRouter)
-app.use('/api/login', loginRouter)
-app.use('/api/log', logRouter)
-
-// Rest of endpoints to react
-if ( process.env.NODE_ENV === 'production') {
-    app.get('*', (request, response) => {
-        response.sendFile(path.join(__dirname, './client/build/index.html'))
-    })
-}
-
-// Catches unknown endpoints
-app.use(middleware.error)
-
-const server = http.createServer(app)
-
-server.listen(config.port)
-
-server.on('close', async () => {
-    await mongoose.connection.close()
-})
-
-module.exports = {
-    app, server
-}
+main()

@@ -1,13 +1,16 @@
-const mongoose = require('mongoose')
 const supertest = require('supertest')
-const { app, server } = require('../index')
+const mongoose = require('mongoose')
+const app = require('../app')
+const config = require('../utils/config')
 const User = require('../models/user')
 const ActivityLog = require('../models/activityLog')
 const Event = require('../models/event')
 const testUtils = require('./testUtils')
 
 const api = supertest(app)
+let server
 
+// Variables for tests
 const eventObject = testUtils.eventObject
 const newEventObject = testUtils.newEventObject
 let event = null
@@ -20,6 +23,11 @@ let user3 = null
 let userCookie = null
 let user2Cookie = null
 let user3Cookie = null
+
+beforeAll(async () => {
+    await mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true })
+    server = app.listen(config.port)
+})
 
 beforeEach(async () => {
     await User.deleteMany({})
@@ -79,7 +87,7 @@ beforeEach(async () => {
 
 describe('POST /api/events', () => {
 
-    it.only('should succeed and create a new event with correct response', async () => {
+    it('should succeed and create a new event with correct response', async () => {
         const amountInBeginning = await Event.countDocuments()
 
         const res = await api
@@ -1185,6 +1193,7 @@ describe('DELETE api/events/:id/discussion/:messageId/comments/:commentId', () =
     })
 })
 
-afterAll(() => {
+afterAll(async () => {
+    await mongoose.connection.close()
     server.close()
 })

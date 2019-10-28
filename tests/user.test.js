@@ -1,19 +1,27 @@
 const supertest = require('supertest')
 const mongoose = require('mongoose')
-const { app, server } = require('../index')
+const app = require('../app')
+const config = require('../utils/config')
 const User = require('../models/user')
 const Event = require('../models/user')
 const ActivityLog = require('../models/activityLog')
 const testUtils = require('./testUtils')
 
 const api = supertest(app)
+let server
 
+// Variables for tests
 const userObject = testUtils.userObject
 const user2Object = testUtils.user2Object
 const newUserObject = testUtils.newUserObject
 let user = null
 let user2 = null
 let userCookie = null
+
+beforeAll(async () => {
+    await mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true })
+    server = app.listen(config.port)
+})
 
 beforeEach(async () => {
     await User.deleteMany({})
@@ -41,7 +49,7 @@ beforeEach(async () => {
 
 describe('POST /api/users', () => {
 
-    it.only('should succeed and create a new user with correct response', async () => {
+    it('should succeed and create a new user with correct response', async () => {
         const user3Object = testUtils.user3Object
         const amountInBeginning = await Event.countDocuments()
 
@@ -341,6 +349,7 @@ describe('DELETE /api/users/:id', () => {
     })
 })
 
-afterAll(() => {
+afterAll(async () => {
+    await mongoose.connection.close()
     server.close()
 })
