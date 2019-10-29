@@ -45,7 +45,6 @@ exports.validateComponent = (component) => {
 
     switch(component.type) {
         case 'TEXT':
-            console.log(component)
             if (Object.keys(component.data).length > 2) {
                 return false
             }
@@ -72,13 +71,11 @@ exports.validateComponent = (component) => {
                 return false
             }
             return true
-        case 'DISCUSSION':
-            if (Object.keys(component.data).length !== 0) {
-                return false
-            }
-            return true
         case 'PICTURE':
             if (component.data.url !== '' && !component.data.url) {
+                return false
+            }
+            if (!component.data.url.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)) {
                 return false
             }
             if (component.data.url.length > 1000) {

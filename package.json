@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon index.js",
     "heroku-postbuild": "cd ./client && npm install && npm run build",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
+    "test": "cross-env NODE_ENV=test jest --runInBand",
+    "test-watch": "cross-env NODE_ENV=test jest --runInBand --watchAll"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +24,7 @@
     "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
     "jest": "^24.9.0",
+    "mongodb-memory-server": "^6.0.1",
     "nodemon": "^1.18.11",
     "supertest": "^4.0.2"
   },
@@ -31,6 +33,9 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "verbose": true,
+    "globalTeardown": "./tests/teardown",
+    "globalSetup": "./tests/setup",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]

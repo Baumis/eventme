@@ -57,7 +57,7 @@ exports.delete = async (request, response) => {
 
 exports.addGuest = async (request, response) => {
     try {
-        const userId = request.params.userId
+        const userId = request.body.userId
 
         const updatedEvent = await eventService.addGuest(request.event, userId)
 
