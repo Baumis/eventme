@@ -6,19 +6,19 @@
 
 .content-container-info-row {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     max-width: 900px;
 }
 
 .content-container-info-block{
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 300px;
     padding-top: 10px;
 }
 
 .content-container-info-block h1 {
-    font-size: 30px;
+    font-size: 25px;
     margin-bottom: 10px;
     font-weight: 500;
     color:#4c5c68; 
@@ -36,6 +36,6 @@
     }
 
     .content-container-info-block   {
-        width: auto;
+        width: 300px;
     }
 }
