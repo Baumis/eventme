@@ -10,6 +10,8 @@
     border-radius: 5px;
     border: 1px solid white;
     background: transparent;
+    color: white;
+    font-size: 18px;
 }
 
 .search-block-title {
