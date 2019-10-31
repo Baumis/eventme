@@ -1,15 +1,29 @@
 const app = require('./app')
 const mongoose = require('mongoose')
 const config = require('./utils/config')
-const mongodbUri = config.mongodbUri
-const port = config.port
 
 // Server Initialization
 const main = async () => {
-    await mongoose.connect(mongodbUri, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true })
+    let replSet
+
+    if (process.env.NODE_ENV === 'local') {
+        const memoryDatabase = require('./utils/memoryDatabase')
+        replSet = await memoryDatabase.start()
+    }
+
+    await mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true })
 
     // Start up the server on the port specified
-    app.listen(port)
+    app.listen(config.port, () => {
+        console.log('Listening on port', config.port)
+    })
+
+    app.on('close', async () => {
+        await mongoose.connection.close()
+        if (process.env.NODE_ENV === 'local') {
+            await replSet.stop()
+        }
+    })
 }
 
 main()

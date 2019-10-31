@@ -1,19 +1,7 @@
-const { MongoMemoryReplSet } = require('mongodb-memory-server')
+const memoryDatabase = require('../utils/memoryDatabase')
 
 module.exports = async () => {
-    const replSet = new MongoMemoryReplSet({
-        instanceOpts: [
-            {
-                port: 3003,
-            }
-        ],
-        replSet: {
-            storageEngine: 'wiredTiger',
-            dbName: 'test'
-        }
-    })
-
-    await replSet.waitUntilRunning()
+    const replSet = await memoryDatabase.start()
 
     global.replSet = replSet
 }
