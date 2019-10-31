@@ -1,6 +1,9 @@
 .search-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 500px;
-    background-image: url('../../../../assets/BerryBG.jpg');
+    background-image: url('../../../../assets/sprakaBG.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
