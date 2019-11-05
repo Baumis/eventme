@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px;
-    background-image: url('https://images.unsplash.com/photo-1425421598808-4a22ce59cc97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
+    height: 600px;
+    background-image: url('');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     background-position:center center;
-    box-shadow: inset 0px 300px 234px 0px rgba(0,0,0,0.5);
+    box-shadow: inset 0px 300px 234px 0px rgba(0,0,0,0.0);
 
 }
