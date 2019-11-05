@@ -1,9 +1,12 @@
 .component-adder{
-    text-align: center;
+    display: flex;
     justify-content: center;
 }
 
-.component-adder button {
+.component-adder-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 150px;
     width: 150px;
     background: transparent;
@@ -18,12 +21,12 @@
     cursor: pointer;
 }
 
-.component-adder button:hover{
+.component-adder-button:hover{
     border: 5px solid rgb(26, 26, 26, 15%);
     color: rgb(26, 26, 26, 15%);
 }
 
-.component-adder button:active{
+.component-adder-button:active{
     border: 5px solid rgb(26, 26, 26, 20%);
     color: rgb(26, 26, 26, 20%);
 }
