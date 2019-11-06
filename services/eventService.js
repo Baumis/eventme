@@ -61,22 +61,16 @@ exports.create = async (creatorId, eventObject) => {
         throw new Error('End Date must be greater than Start Date')
     }
 
-    if (eventObject.components && !validators.validateComponents(eventObject.components)) {
-        throw new Error('Components are not valid')
-    }
-
     const newEvent = new Event({
         label: eventObject.label,
         startDate: startDate,
         endDate: endDate,
         creator: creatorId,
         background: eventObject.background,
-        infoPanel: eventObject.infoPanel,
         guests: [{
             user: creatorId,
             status: 'GOING'
-        }],
-        components: eventObject.components
+        }]
     })
 
     const error = newEvent.validateSync()
@@ -151,8 +145,7 @@ exports.update = async (event, eventObject) => {
         label: eventObject.label,
         startDate: startDate,
         endDate: endDate,
-        background: eventObject.background,
-        infoPanel: eventObject.infoPanel
+        background: eventObject.background
     }
 
     const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })

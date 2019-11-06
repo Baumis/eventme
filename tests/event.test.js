@@ -187,30 +187,6 @@ describe('POST /api/events', () => {
         expect(amountInBeginning).toEqual(amountInEnd)
     })
 
-    it('should fail if components not valid', async () => {
-        const amountInBeginning = await Event.countDocuments()
-
-        const notValidEvent = {
-            ...eventObject,
-            components: [
-                {
-                    type: 'NOT EXISTING',
-                    data: ''
-                }
-            ]
-        }
-
-        await api
-            .post('/api/events')
-            .set('Cookie', userCookie)
-            .send(notValidEvent)
-            .expect(400)
-
-        const amountInEnd = await Event.countDocuments()
-
-        expect(amountInBeginning).toEqual(amountInEnd)
-    })
-
     it('should fail if background not valid', async () => {
         const amountInBeginning = await Event.countDocuments()
 
@@ -306,11 +282,12 @@ describe('PUT /api/events/:id', () => {
         expect(new Date(res.body.endDate)).toEqual(newEventObject.endDate)
         expect(res.body.creator).toEqual(event.creator)
         expect(res.body.guests).toEqual(event.guests)
-        expect(res.body.components[0]).toEqual(newEventObject.components[0])
+        expect(res.body.components[0].type).toEqual(newEventObject.components[0].type)
+        expect(res.body.components[0].data).toEqual(newEventObject.components[0].data)
         expect(res.body.components[1].type).toEqual(newEventObject.components[1].type)
+        expect(res.body.components[1].data.inviteKey).toEqual(event.inviteKey)
         expect(res.body.components[2].type).toEqual(newEventObject.components[2].type)
-        expect(res.body.components[2].data.inviteKey).toEqual(event.inviteKey)
-        expect(res.body.components[3]).toEqual(newEventObject.components[3])
+        expect(res.body.components[2].data).toEqual(newEventObject.components[2].data)
         expect(res.body.background).toEqual(newEventObject.background)
     })
 

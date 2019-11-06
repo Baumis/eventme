@@ -96,16 +96,6 @@ event = {
     inviteKey: "asdasdasdasdasd",
     startDate: "2019-07-25T19:02:52.178Z",
     endDate: "2019-07-25T19:02:52.178Z",
-    infoPanel: [
-        {
-            icon: "EMAIL",
-            text: "perseenreikä@email.com"
-        },
-        {
-            icon: "PHONE",
-            text: "0400-534234243"
-        }
-    ],
     creator: {
         _id: "5cd445507c2a502a18cba5ca",
         name: "John Doe"
@@ -164,7 +154,6 @@ event = {
 - När man anländer till sidan skall inloggning ske för att bli guest
 - Tre olika user types (ADMIN, GUEST, GHOST)
 - 3 sidor: search/login (create), event, profile
-- INFOPANEL types: PHONE, EMAIL, LOCATION, INFO, TIME, DATE, CONTACT, EMPTY
 
 ADD
 
