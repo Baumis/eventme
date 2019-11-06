@@ -67,6 +67,7 @@
     font-weight: 500;
     color: #1985a1;
     cursor: pointer;
+    word-break:break-all
 }
 
 .comment-delete {

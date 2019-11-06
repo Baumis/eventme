@@ -98,6 +98,8 @@
     color: rgba(0,0,0,0.5);
     cursor: pointer;
     font-size: 15px;
+    max-width: 100px;
+    padding-bottom: 5px;
 }
 
 @media only screen and (max-width: 450px) {
