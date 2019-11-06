@@ -118,13 +118,37 @@ exports.update = async (event, eventObject) => {
         throw new Error('Components are not valid')
     }
 
+    const componentPromises = []
+
+    // Remove components
+    event.components.map(eventComponent => {
+        const removed = !eventObject.components.some(component => component._id === eventComponent._id.toString())
+
+        if (removed) {
+            const componentPromise = this.removeComponent(event._id, eventComponent._id)
+            componentPromises.push(componentPromise)
+        }
+    })
+
+    // Update or Create components
+    eventObject.components.map((component, position) => {
+        const componentPromise = component._id ?
+            this.updateComponent(event._id, component._id, component.data, position)
+            :
+            this.createComponent(event._id, component.type, component.data, position)
+
+        componentPromises.push(componentPromise)
+    })
+
+    // Wait for all component update promises to resolve
+    await Promise.all(componentPromises)
+
     const updateObject = {
         label: eventObject.label,
         startDate: startDate,
         endDate: endDate,
         background: eventObject.background,
-        infoPanel: eventObject.infoPanel,
-        components: eventObject.components
+        infoPanel: eventObject.infoPanel
     }
 
     const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })
@@ -305,4 +329,33 @@ exports.removeFromGuests = async (id, userId, options = {}) => {
     options.new = true
 
     return await Event.findByIdAndUpdate(id, { $pull: { guests: { user: userId } } }, options)
+}
+
+exports.createComponent = async (id, type, data, position, options = {}) => {
+    options.new = true
+    options.runValidators = true
+
+    const component = {
+        type,
+        data,
+        position
+    }
+
+    return await Event.findByIdAndUpdate(id, { $addToSet: { components: component } }, options)
+}
+
+exports.updateComponent = async (id, componentId, data, position, options = {}) => {
+    options.new = true
+    options.runValidators = true
+
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId },
+        { $set: { 'components.$.data': data, 'components.$.position': position } },
+        options)
+}
+
+exports.removeComponent = async (id, componentId, options = {}) => {
+    options.new = true
+
+    return await Event.findByIdAndUpdate(id, { $pull: { components: { _id: componentId } } }, options)
 }

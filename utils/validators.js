@@ -55,11 +55,6 @@ exports.validateComponent = (component) => {
                 return false
             }
             return true
-        case 'GUESTS':
-            if (Object.keys(component.data).length !== 0) {
-                return false
-            }
-            return true
         case 'INVITE_LINK':
             if (Object.keys(component.data).length === 1 && component.data.inviteKey) {
                 if (typeof component.data.inviteKey === 'string' && component.data.inviteKey.length < 100) {

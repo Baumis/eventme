@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const componentSchema = new mongoose.Schema({
     type: {
         type: String,
-        enum: ['TEXT', 'GUESTS', 'INVITE_LINK', 'PICTURE'],
+        enum: ['TEXT', 'INVITE_LINK', 'PICTURE'],
         required: [true, 'Type required']
     },
     data: {
@@ -11,7 +11,10 @@ const componentSchema = new mongoose.Schema({
         default: {},
         required: true
     },
-    _id: false
+    position: {
+        type: Number,
+        required: true
+    }
 })
 
 module.exports = componentSchema
