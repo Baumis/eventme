@@ -21,7 +21,7 @@ const Comment = (props) => {
         <div className="comment">
             {!props.comment.author ?
                 <div className="comment-wrapper comment-deleted">
-                    Message deleted
+                    Comment deleted
                 </div>
                 :
                 <div className="comment-wrapper">
@@ -39,7 +39,7 @@ const Comment = (props) => {
                                 </div>
                             </div>
                             {props.isAuthor(props.comment.author._id) ?
-                                <div className="comment-delete" onClick={() => props.delete(props.comment._id)}>
+                                <div className="comment-delete" onClick={() => props.deleteComment(props.comment._id)}>
                                     <FaTimes />
                                 </div>
                                 : null}

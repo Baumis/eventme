@@ -128,6 +128,15 @@ class EventStore {
         }
     }
 
+    async deleteComment(messageId, commentId){
+        try {
+            this.event = await eventService.removeComment(this.event._id, messageId, commentId)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
     setValue(value, field) {
         const newEvent = {
             ...this.event,
@@ -214,6 +223,10 @@ decorate(EventStore, {
     initializeEvent: action,
     getEvent: action,
     setValue: action,
+    postMessage: action,
+    deleteMessage: action,
+    postComment: action,
+    deleteComment: action,
     getComponent: action,
     addComponent: action,
     saveComponentData: action,
