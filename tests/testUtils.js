@@ -48,10 +48,6 @@ exports.newEventObject = {
             }
         },
         {
-            type: 'GUESTS',
-            data: {}
-        },
-        {
             type: 'INVITE_LINK',
             data: {}
         },

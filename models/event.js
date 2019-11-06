@@ -16,21 +16,6 @@ const guestSchema = new mongoose.Schema({
     _id: false
 })
 
-const infoPanelEntrySchema = new mongoose.Schema({
-    icon: {
-        type: String,
-        enum: ['PHONE', 'EMAIL', 'LOCATION', 'INFO', 'TIME', 'DATE', 'CONTACT', 'EMPTY'],
-        default: 'EMPTY',
-        required: [true, 'Infopanel entry logo required']
-    },
-    text: {
-        type: String,
-        default: '',
-        maxlength: [144, 'Infopanel entry text too long']
-    },
-    _id: false
-})
-
 const eventSchema = new mongoose.Schema({
     label: {
         type: String,
@@ -61,7 +46,6 @@ const eventSchema = new mongoose.Schema({
         maxlength: [2048, 'Url too long'],
         match: [/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/, 'Background url not valid']
     },
-    infoPanel: [infoPanelEntrySchema],
     guests: [guestSchema],
     components: [componentSchema],
     discussion: [messageSchema]
@@ -75,7 +59,6 @@ eventSchema.statics.format = (event) => ({
     creator: event.creator,
     inviteKey: event.inviteKey,
     background: event.background,
-    infoPanel: event.infoPanel,
     guests: event.guests,
     components: event.components,
     discussion: event.discussion
@@ -88,7 +71,6 @@ eventSchema.statics.formatForGuest = (event) => ({
     endDate: event.endDate,
     creator: event.creator,
     background: event.background,
-    infoPanel: event.infoPanel,
     guests: event.guests,
     components: event.components,
     discussion: event.discussion
@@ -100,8 +82,7 @@ eventSchema.statics.formatForGhost = (event) => ({
     startDate: event.startDate,
     endDate: event.endDate,
     creator: event.creator,
-    background: event.background,
-    infoPanel: event.infoPanel
+    background: event.background
 })
 
 const Event = mongoose.model('Event', eventSchema)

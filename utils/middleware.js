@@ -79,7 +79,7 @@ exports.requireRole = (...roles) => {
 }
 
 exports.logger = (request, response, next) => {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'local') {
         console.log('Method: ', request.method)
         console.log('Path:   ', request.path)
         console.log('Sender: ', request.senderId)

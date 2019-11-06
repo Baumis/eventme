@@ -10,6 +10,10 @@ exports.populate = async (event) => {
         .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 
+    populatedEvent.components.sort((a, b) => 
+        a.position - b.position
+    )
+
     populatedEvent.components.forEach(component => {
         if (component.type === 'INVITE_LINK') {
             component.data = {}
@@ -57,22 +61,16 @@ exports.create = async (creatorId, eventObject) => {
         throw new Error('End Date must be greater than Start Date')
     }
 
-    if (eventObject.components && !validators.validateComponents(eventObject.components)) {
-        throw new Error('Components are not valid')
-    }
-
     const newEvent = new Event({
         label: eventObject.label,
         startDate: startDate,
         endDate: endDate,
         creator: creatorId,
         background: eventObject.background,
-        infoPanel: eventObject.infoPanel,
         guests: [{
             user: creatorId,
             status: 'GOING'
-        }],
-        components: eventObject.components
+        }]
     })
 
     const error = newEvent.validateSync()
@@ -118,13 +116,36 @@ exports.update = async (event, eventObject) => {
         throw new Error('Components are not valid')
     }
 
+    const componentPromises = []
+
+    // Remove components
+    event.components.map(eventComponent => {
+        const removed = !eventObject.components.some(component => component._id === eventComponent._id.toString())
+
+        if (removed) {
+            const componentPromise = this.removeComponent(event._id, eventComponent._id)
+            componentPromises.push(componentPromise)
+        }
+    })
+
+    // Update or Create components
+    eventObject.components.map((component, position) => {
+        const componentPromise = component._id ?
+            this.updateComponent(event._id, component._id, component.data, position)
+            :
+            this.createComponent(event._id, component.type, component.data, position)
+
+        componentPromises.push(componentPromise)
+    })
+
+    // Wait for all component update promises to resolve
+    await Promise.all(componentPromises)
+
     const updateObject = {
         label: eventObject.label,
         startDate: startDate,
         endDate: endDate,
-        background: eventObject.background,
-        infoPanel: eventObject.infoPanel,
-        components: eventObject.components
+        background: eventObject.background
     }
 
     const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })
@@ -305,4 +326,33 @@ exports.removeFromGuests = async (id, userId, options = {}) => {
     options.new = true
 
     return await Event.findByIdAndUpdate(id, { $pull: { guests: { user: userId } } }, options)
+}
+
+exports.createComponent = async (id, type, data, position, options = {}) => {
+    options.new = true
+    options.runValidators = true
+
+    const component = {
+        type,
+        data,
+        position
+    }
+
+    return await Event.findByIdAndUpdate(id, { $addToSet: { components: component } }, options)
+}
+
+exports.updateComponent = async (id, componentId, data, position, options = {}) => {
+    options.new = true
+    options.runValidators = true
+
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId },
+        { $set: { 'components.$.data': data, 'components.$.position': position } },
+        options)
+}
+
+exports.removeComponent = async (id, componentId, options = {}) => {
+    options.new = true
+
+    return await Event.findByIdAndUpdate(id, { $pull: { components: { _id: componentId } } }, options)
 }
