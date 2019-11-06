@@ -10,6 +10,10 @@ exports.populate = async (event) => {
         .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 
+    populatedEvent.components.sort((a, b) => 
+        a.position - b.position
+    )
+
     populatedEvent.components.forEach(component => {
         if (component.type === 'INVITE_LINK') {
             component.data = {}

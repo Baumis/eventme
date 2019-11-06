@@ -13,6 +13,7 @@ const componentSchema = new mongoose.Schema({
     },
     position: {
         type: Number,
+        default: 0,
         required: true
     }
 })
