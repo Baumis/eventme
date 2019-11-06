@@ -6,10 +6,7 @@ import { FaArrowCircleLeft, FaArrowCircleRight, FaTrashAlt } from 'react-icons/f
 class EditorPanel extends Component {
 
     removeComponent = () => {
-        const confirmation = window.confirm('Delete component?')
-        if (confirmation) {
-            this.props.EventStore.removeComponent(this.props.index)
-        }
+        this.props.EventStore.removeComponent(this.props.index)
     }
 
     moveForward = () => {

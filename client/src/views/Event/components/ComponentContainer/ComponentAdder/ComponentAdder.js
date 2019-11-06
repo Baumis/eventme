@@ -5,7 +5,7 @@ const ComponentAdder = ({ add }) => {
 
     return (
         <div className="component-adder">
-            <div className="component-adder-button" onClick={() => add('Text', { text: 'This is a new component' })}> + </div>
+            <div className="component-adder-button" onClick={() => add()}> + </div>
         </div>
     )
 }
