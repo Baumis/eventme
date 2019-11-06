@@ -1,40 +1,58 @@
-.vote-component-options{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.vote-component-option-container {
+.form-component {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 10px;
 }
 
-.vote-component-option-row {
+.form-component-title-row {
     display: flex;
-    align-items: center;
+    justify-content: center;
+}
+
+.form-component-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(70, 73, 76, 1);
+    padding: 5px 0px 5px 0px;
+}
+
+.form-component-questions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 50%;
+}
+
+.form-component-question {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+.form-component-title-row {
+    display: flex;
+    justify-content: flex-start;
     color: #4c5c68;
 }
 
-.vote-component-option {
-    padding: 5px 10px 5px 10px;
-    color: rgba(70, 73, 76, 0.7);
-}
-
-.vote-component-vote-button {
+.form-component-question textarea{
     display: flex;
     justify-content: center;
     align-items: center;
+    resize: none;
     margin-right: 5px;
     color: #4c5c68;
     border-radius: 5px;
-    border: 1px solid darkgrey;
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
+    border: 1px solid #dddddd;;
+    width: 100%;
+    outline: none;
 }
 
-.vote-component-submit-button {
+.form-component-submit-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,7 +65,7 @@
     cursor: pointer;
 }
 
-.vote-component-delete-button {
+.form-component-delete-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,12 +78,12 @@
     cursor: pointer;
 }
 
-.vote-component-add-button{
+.form-component-add-button{
     display: flex;
     align-items: center;
     justify-content: center;
     color: #4f784e;
-    width: 80px;
+    width: 90px;
     height: 30px;
     margin: 10px 0px 0px 10px;
     border-radius: 5px;
@@ -73,15 +91,15 @@
     cursor: pointer;
 }
 
-.vote-component-submit-button:hover {
+.form-component-submit-button:hover {
     background: rgba(76, 92, 104, 0.9);
 }
 
-.vote-component-delete-button:hover {
-    color: rgba(199, 76, 60, 0.3);
+.form-component-delete-button:hover {
+    color: rgba(199, 76, 60, 0.9);
 }
 
-.vote-component-vote-button:hover {
+.form-component-vote-button:hover {
     -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.5);
     box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.5);

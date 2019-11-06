@@ -5,6 +5,10 @@
     color: rgba(70, 73, 76, 0.7);
 }
 
+.vote-component-vote-count {
+    padding: 0px 0px 0px 20px;
+}
+
 .vote-component-status-bar {
     display: flex;
     height: 20px;
