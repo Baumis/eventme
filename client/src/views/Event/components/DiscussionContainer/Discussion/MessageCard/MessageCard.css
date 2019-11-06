@@ -1,7 +1,7 @@
 .message-card {
     display: flex;
     flex: 1;
-    padding: 15px;
+    padding: 10px 15px;
     margin: 2px 0px 2px 0px;
     background: transparent;
 }
@@ -87,7 +87,7 @@
     justify-content: flex-start;
     text-align: start;
     color: #46494c;
-    padding: 5px 10px;
+    padding: 5px 5px;
 }
 
 .message-card-interaction {

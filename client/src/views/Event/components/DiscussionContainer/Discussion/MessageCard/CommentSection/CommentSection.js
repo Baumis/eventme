@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import './CommentSection.css'
-import { withRouter } from 'react-router-dom'
-import { FaTimes } from 'react-icons/fa'
-import Moment from 'moment'
 import Comment from './Comment/Comment'
 import CommentInput from './CommentInput/CommentInput'
 
@@ -18,13 +15,17 @@ class CommentSection extends Component {
     render(){
         return(
             <div className="comment-section">
-                {this.props.comments.map(comment => 
+                {this.props.comments.map((comment,i)=> 
                     <Comment
+                        key={i}
                         comment={comment}
+                        isAuthor={this.props.isAuthor}
                     />
                 )}
                 <div className="comment-section-input">
-                    <CommentInput />
+                    <CommentInput 
+                        messageId={this.props.messageId}
+                    />
                 </div>
             </div>
         )

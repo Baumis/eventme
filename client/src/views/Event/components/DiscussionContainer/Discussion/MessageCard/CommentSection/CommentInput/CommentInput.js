@@ -13,34 +13,34 @@ class CommentInput extends Component {
         }
     }
 
-    post = async () => {
+    comment = async () => {
 
         if (this.state.sending) {
             return
         }
 
-        if (this.state.messageInput.length < 1) {
+        if (this.state.commentInput.length < 1) {
             return
         }
 
         if (!this.props.EventStore.saved) {
-            alert('Please save your event before posting message.')
+            alert('Please save your event before commenting.')
             return
         }
 
         this.setState({ sending: true })
-        const event = await this.props.EventStore.postMessage(this.state.messageInput)
+        const event = await this.props.EventStore.postComment(this.props.messageId, this.state.commentInput)
         this.setState({ sending: false })
 
         if (!event) {
-            alert('The post could not be sent.')
+            alert('The comment could not be sent.')
         } else {
-            this.setState({ messageInput: '' })
+            this.setState({ commentInput: '' })
         }
     }
 
     changeInputValue = (event) => {
-        this.setState({ messageInput: event.target.value })
+        this.setState({ commentInput: event.target.value })
     }
 
     getAvatar = () => {
@@ -52,7 +52,7 @@ class CommentInput extends Component {
 
     sendButtonClass = () => {
         let className = "comment-input-send-button"
-        if (this.state.messageInput.length === 0) {
+        if (this.state.commentInput.length === 0) {
             className += " comment-input-send-button-disabled"
         }
         return className
@@ -67,19 +67,19 @@ class CommentInput extends Component {
         return (
             <div className="comment-input-container">
                 <div className="comment-input-avatar" style={this.getAvatar()}></div>
-                <div className="comment-input-input">
+                <div className="comment-input-input-container">
                     <input
                         onChange={this.changeInputValue}
                         value={this.state.commentInput}
-                        placeholder={'your message'}
+                        placeholder={'write comment'}
                     />
                 </div>
                 <div className="comment-input-button-row">
-                    <div className={this.sendButtonClass()} onClick={() => this.post()}>
+                    <div className={this.sendButtonClass()} onClick={() => this.comment()}>
                         {this.state.sending ?
                             <Spinner />
                             :
-                            <div>post</div>
+                            <div>comment</div>
                         }
                     </div>
                 </div>

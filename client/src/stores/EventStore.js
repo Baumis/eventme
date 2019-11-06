@@ -119,6 +119,15 @@ class EventStore {
         }
     }
 
+    async postComment(messageId, comment) {
+        try {
+            this.event = await eventService.addComment(this.event._id, messageId, comment)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
     setValue(value, field) {
         const newEvent = {
             ...this.event,
@@ -205,11 +214,6 @@ decorate(EventStore, {
     initializeEvent: action,
     getEvent: action,
     setValue: action,
-    setInfoPanelValue: action,
-    changeInfoPanelText: action,
-    deleteInfoPanelValue: action,
-    addInfoPanelValue: action,
-    changeInfoPanelIcon: action,
     getComponent: action,
     addComponent: action,
     saveComponentData: action,

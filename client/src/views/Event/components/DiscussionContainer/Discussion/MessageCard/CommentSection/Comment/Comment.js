@@ -7,44 +7,44 @@ import { FaTimes } from 'react-icons/fa'
 const Comment = (props) => {
 
     const getAvatar = () => {
-        if (!this.props.comment.author.avatar) {
+        if (!props.comment.author.avatar) {
             return null
         }
-        return { backgroundImage: `url(${this.props.comment.author.avatar})` }
+        return { backgroundImage: `url(${props.comment.author.avatar})` }
     }
 
     const toProfile = (id) => {
-        this.props.history.push(`/profile/${id}`)
+        props.history.push(`/profile/${id}`)
     }
 
     return (
-        <div className="message-card">
+        <div className="comment">
             {!props.comment.author ?
-                <div className="message-card-wrapper deleted">
+                <div className="comment-wrapper comment-deleted">
                     Message deleted
                 </div>
                 :
-                <div className="message-card-wrapper">
-                    <div className="message-card-avatar-section">
-                        <div style={getAvatar()} className="message-card-avatar"> </div>
+                <div className="comment-wrapper">
+                    <div className="comment-avatar-section">
+                        <div style={getAvatar()} className="comment-avatar"> </div>
                     </div>
-                    <div className="message-card-info-section">
-                        <div className="message-card-header">
-                            <div className="message-card-time-author">
-                                <div className="message-card-author" onClick={() => toProfile(props.comment.author._id)}>
+                    <div className="comment-info-section">
+                        <div className="comment-header">
+                            <div className="comment-time-author">
+                                <div className="comment-author" onClick={() => toProfile(props.comment.author._id)}>
                                     {props.comment.author.name}
                                 </div>
-                                <div className="message-card-time">
-                                    {Moment(props.comment.time).format(' D.MM.YY HH:mm')}
+                                <div className="comment-time">
+                                    {Moment(props.comment.time).format('D.MM.YY')}
                                 </div>
                             </div>
-                            {props.isAuthor(this.props.comment.author._id) ?
-                                <div className="message-card-delete" onClick={() => props.delete(props.comment._id)}>
+                            {props.isAuthor(props.comment.author._id) ?
+                                <div className="comment-delete" onClick={() => props.delete(props.comment._id)}>
                                     <FaTimes />
                                 </div>
                                 : null}
                         </div>
-                        <div className="message-card-content">
+                        <div className="comment-content">
                             {props.comment.content}
                         </div>
                     </div>
@@ -54,4 +54,4 @@ const Comment = (props) => {
     )
 }
 
-export default Comment
+export default withRouter(Comment)

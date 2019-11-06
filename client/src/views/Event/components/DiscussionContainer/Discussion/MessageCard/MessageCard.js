@@ -47,7 +47,7 @@ class MessageCard extends Component {
                                         {this.props.message.author.name}
                                     </div>
                                     <div className="message-card-time">
-                                        {Moment(this.props.message.time).format(' D.MM.YY HH:mm')}
+                                        {Moment(this.props.message.time).format('D.MM.YY')}
                                     </div>
                                 </div>
                                 {this.props.isAuthor(this.props.message.author._id) ?
@@ -62,15 +62,17 @@ class MessageCard extends Component {
                             <div className="message-card-interaction">
                                 <div className="message-card-comment-button" onClick={() => this.toggleComments()}>
                                     {`comments (${this.props.message.comments.length})`}
-                                    {this.state.showComments ?
-                                        <div>
-                                            <CommentSection 
-                                                comments={this.props.message.comments}
-                                            />
-                                        </div>
-                                        : null
-                                    }
                                 </div>
+                                {this.state.showComments ?
+                                    <div>
+                                        <CommentSection
+                                            comments={this.props.message.comments}
+                                            messageId={this.props.message._id}
+                                            isAuthor={this.props.isAuthor}
+                                        />
+                                    </div>
+                                    : null
+                                }
                             </div>
                         </div>
                     </div>}
