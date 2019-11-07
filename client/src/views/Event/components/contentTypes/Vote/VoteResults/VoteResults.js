@@ -19,7 +19,7 @@ const VoteResults = (props) => {
     }
 
     return (
-        <div>
+        <div className="vote-component-results">
             {props.options.map((option, i) =>
                 <div key={i} className="vote-component-option-container">
                     <div className="vote-component-title-row">
