@@ -6,13 +6,6 @@ import CommentInput from './CommentInput/CommentInput'
 
 class CommentSection extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            commentInput: ''
-        }
-    }
-
     deleteComment = async (commentId) => {
         if (!this.props.EventStore.saved) {
             alert('Please save your event before deleting comment.')
