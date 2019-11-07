@@ -6,7 +6,6 @@ import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import SaveButton from './components/SaveButton/SaveButton'
 import OptionsButton from './components/OptionsButton/OptionsButton'
 import SignModal from '../../commonComponents/SignModal/SignModal'
-import JoinEventModal from './components/JoinEventModal/JoinEventModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
@@ -102,6 +101,8 @@ class Event extends Component {
                     active={this.state.activeTab}
                     changeActive={this.changeActive}
                     isGuest={this.isGuest()}
+                    inviteKey={this.props.inviteKey}
+                    closeInviteModal={this.closeInviteModal}
                 />
                 {this.isCreator() ?
                     <div>
@@ -119,10 +120,6 @@ class Event extends Component {
                 }
                 {this.props.VisibilityStore.signModal ?
                     <SignModal history={this.props.history} />
-                    : null
-                }
-                {this.state.showInviteModal ?
-                    <JoinEventModal inviteKey={this.props.inviteKey} closeInviteModal={this.closeInviteModal} />
                     : null
                 }
             </div>
