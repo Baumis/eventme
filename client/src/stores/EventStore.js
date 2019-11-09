@@ -146,12 +146,9 @@ class EventStore {
         this.saved = false
     }
 
-    createComponent(type, data) {
+    createComponent(component) {
         const event = { ...this.event }
-        event.components.push({
-            type: type,
-            data: data
-        })
+        event.components.push(component)
 
         this.event = event
         this.saved = false
