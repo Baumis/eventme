@@ -15,44 +15,26 @@ class Vote extends Component {
     }
 
     changeSubject = (event) => {
-        const dataObject = {
-            subject: event.target.value,
-            options: this.props.component.data.options,
-        }
-        this.props.changeData(dataObject)
+        this.props.changeData({ ... this.props.component.data, subject: event.target.value})
     }
 
     changeOption = (optionIndex, event) => {
-        const editedOptions = this.props.component.data.options
-        editedOptions[optionIndex].content = event.target.value
-
-        const dataObject = {
-            subject: this.props.component.data.subject,
-            options: editedOptions,
-        }
-        this.props.changeData(dataObject)
+        this.props.component.data.options[optionIndex].content = event.target.value
+        this.props.changeData({ ... this.props.component.data })
     }
 
     newOptions = () => {
-        const editedOptions = this.props.component.data.options
-        editedOptions.push({ _id: this.generateUUIDv4(), content: 'new option'})
-
-        const dataObject = {
-            subject: this.props.component.data.subject,
-            options: this.props.component.data.options,
+        const optionObject = {
+            _id: this.generateUUIDv4(),
+            content: 'new option'
         }
-        this.props.changeData(dataObject)
+        this.props.component.data.options.push(optionObject)
+        this.props.changeData({ ... this.props.component.data })
     }
 
     removeOption = (optionIndex) => {
-        const editedOptions = this.props.component.data.options
-        editedOptions.splice(optionIndex, 1)
-
-        const dataObject = {
-            subject: this.props.component.data.subject,
-            options: editedOptions,
-        }
-        this.props.changeData(dataObject)
+        this.props.component.data.options.splice(optionIndex, 1)
+        this.props.changeData({ ... this.props.component.data })
     }
 
     submit = () => {
