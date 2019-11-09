@@ -33,7 +33,6 @@ class Form extends Component {
 
     render() {
         const borderStyle = this.props.edit ? 'text-editable-mode' : ''
-        console.log(this.props.component)
         return (
             <div className="form-component">
                 <div className="form-component-questions">
