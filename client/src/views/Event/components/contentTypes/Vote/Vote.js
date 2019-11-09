@@ -24,11 +24,11 @@ class Vote extends Component {
     }
 
     newOptions = () => {
-        const optionObject = {
+        const option = {
             _id: this.generateUUIDv4(),
             content: 'new option'
         }
-        this.props.component.data.options.push(optionObject)
+        this.props.component.data.options.push(option)
         this.props.changeData({ ... this.props.component.data })
     }
 
@@ -77,7 +77,6 @@ class Vote extends Component {
     render() {
         const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         const hasVoted = this.hasVoted()
-        console.log(this.props.component)
         return (
             <div className="vote-component">
                 <div className={"vote-component-subject " + borderStyle}>

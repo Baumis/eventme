@@ -32,7 +32,7 @@ class NewComponentModal extends Component {
                 FORM: {
                     type: 'FORM',
                     data: {
-                        questions: [{ question: 'first question' }]
+                        questions: [{ _id: this.generateUUIDv4(), content: 'title' }]
                     },
                     interactiveData: []
                 }
