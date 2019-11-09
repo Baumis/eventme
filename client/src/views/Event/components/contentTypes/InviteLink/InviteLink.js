@@ -22,7 +22,7 @@ class InviteLink extends Component {
                 <div className="invite-component-url-field">
                     <input
                         id="inviteUrlField"
-                        value={`${window.location.origin}/events/${this.props.EventStore.event._id}/invite/${this.props.data.inviteKey}`}
+                        value={`${window.location.origin}/events/${this.props.EventStore.event._id}/invite/${this.props.component.data.inviteKey}`}
                         type="text"
                         readOnly
                     />

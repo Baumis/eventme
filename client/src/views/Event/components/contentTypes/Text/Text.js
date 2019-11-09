@@ -7,14 +7,14 @@ const Text = (props) => {
     const changeTitle = (event) => {
         const dataObject = {
             title: event.target.value,
-            content: props.data.content
+            content: props.component.data.content
         }
         props.changeData(dataObject)
     }
 
     const changeContent = (event) => {
         const dataObject = {
-            title: props.data.title,
+            title: props.component.data.title,
             content: event.target.value
         }
         props.changeData(dataObject)
@@ -26,7 +26,7 @@ const Text = (props) => {
             <div className={"text-component-title " + borderStyle}>
                 <h2>
                     <EditableWrapper
-                        html={props.data.title}
+                        html={props.component.data.title}
                         editable={!props.edit}
                         onChange={changeTitle}
                     />
@@ -34,7 +34,7 @@ const Text = (props) => {
             </div>
             <div className={"text-component-content " + borderStyle}>
                 <EditableWrapper
-                    html={props.data.content}
+                    html={props.component.data.content}
                     editable={!props.edit}
                     onChange={changeContent}
                     style={{textAlign: 'center'}}

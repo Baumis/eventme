@@ -17,39 +17,39 @@ class Vote extends Component {
     changeSubject = (event) => {
         const dataObject = {
             subject: event.target.value,
-            options: this.props.data.options,
+            options: this.props.component.data.options,
         }
         this.props.changeData(dataObject)
     }
 
     changeOption = (optionIndex, event) => {
-        const editedOptions = this.props.data.options
+        const editedOptions = this.props.component.data.options
         editedOptions[optionIndex].content = event.target.value
 
         const dataObject = {
-            subject: this.props.data.subject,
+            subject: this.props.component.data.subject,
             options: editedOptions,
         }
         this.props.changeData(dataObject)
     }
 
     newOptions = () => {
-        const editedOptions = this.props.data.options
-        editedOptions.push({ content: 'new option', votes: [] })
+        const editedOptions = this.props.component.data.options
+        editedOptions.push({ _id: this.generateUUIDv4(), content: 'new option'})
 
         const dataObject = {
-            subject: this.props.data.subject,
-            options: this.props.data.options,
+            subject: this.props.component.data.subject,
+            options: this.props.component.data.options,
         }
         this.props.changeData(dataObject)
     }
 
     removeOption = (optionIndex) => {
-        const editedOptions = this.props.data.options
+        const editedOptions = this.props.component.data.options
         editedOptions.splice(optionIndex, 1)
 
         const dataObject = {
-            subject: this.props.data.subject,
+            subject: this.props.component.data.subject,
             options: editedOptions,
         }
         this.props.changeData(dataObject)
@@ -69,14 +69,12 @@ class Vote extends Component {
             return
         }
 
-        const editedOptions = this.props.data.options
-        editedOptions[this.state.checked].votes.push(this.props.UserStore.currentUser._id)
-
-        const dataObject = {
-            subject: this.props.data.subject,
-            options: editedOptions,
+        const vote = {
+            userId: this.props.UserStore.currentUser._id,
+            optionId: this.props.component.data.options[this.state.checked]._id
         }
-        this.props.changeData(dataObject)
+
+        this.props.component.interactiveData.push(vote)
     }
 
     setChecked = (index) => {
@@ -84,36 +82,38 @@ class Vote extends Component {
     }
 
     hasVoted = () => {
-        let voted = false
         const userId = this.props.UserStore.currentUser._id
-        this.props.data.options.forEach(options => {
-            if (options.votes.find(vote => vote === userId)) {
-                voted = true
-            }
-        })
-        return voted
+        return this.props.component.interactiveData.some(vote => vote.userId === userId)
+    }
+
+    generateUUIDv4 = () => {
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        )
     }
 
     render() {
         const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         const hasVoted = this.hasVoted()
+        console.log(this.props.component)
         return (
             <div className="vote-component">
                 <div className={"vote-component-subject " + borderStyle}>
                     <EditableWrapper
-                        html={this.props.data.subject}
+                        html={this.props.component.data.subject}
                         editable={!this.props.edit}
                         onChange={this.changeSubject}
                     />
                 </div>
                 {hasVoted && !this.props.edit ?
                     <VoteResults
-                        options={this.props.data.options}
+                        options={this.props.component.data.options}
+                        votes={this.props.component.interactiveData}
                     />
                     :
                     <VoteOptions
                         edit={this.props.edit}
-                        options={this.props.data.options}
+                        options={this.props.component.data.options}
                         setChecked={this.setChecked}
                         checked={this.state.checked}
                         newOptions={this.newOptions}

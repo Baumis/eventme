@@ -33,7 +33,8 @@ class NewComponentModal extends Component {
                     type: 'FORM',
                     data: {
                         questions: [{ question: 'first question' }]
-                    }
+                    },
+                    interactiveData: []
                 }
             }
         }
@@ -46,6 +47,7 @@ class NewComponentModal extends Component {
     }
 
     createComponent = (type) => {
+        console.log(this.state.typeData[type])
         this.props.EventStore.createComponent(this.state.typeData[type])
         this.props.close()
     }
