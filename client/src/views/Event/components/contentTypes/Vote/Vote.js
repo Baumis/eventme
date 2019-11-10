@@ -10,8 +10,17 @@ class Vote extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            checked: null
+            checked: null,
+            showResults: false
         }
+    }
+
+    componentDidMount() {
+        this.setState({showResults: this.hasVoted()})
+    }
+
+    toggleResults = (boolean) => {
+        this.setState({showResults: boolean})
     }
 
     changeSubject = (event) => {
@@ -47,16 +56,13 @@ class Vote extends Component {
             return
         }
 
-        if (this.hasVoted()) {
-            return
-        }
-
         const vote = {
             userId: this.props.UserStore.currentUser._id,
             optionId: this.props.component.data.options[this.state.checked]._id
         }
 
         this.props.component.interactiveData.push(vote)
+        this.setState({showResults: true})
     }
 
     setChecked = (index) => {
@@ -76,7 +82,6 @@ class Vote extends Component {
 
     render() {
         const borderStyle = this.props.edit ? 'text-editable-mode' : ''
-        const hasVoted = this.hasVoted()
         return (
             <div className="vote-component">
                 <div className={"vote-component-subject " + borderStyle}>
@@ -86,10 +91,11 @@ class Vote extends Component {
                         onChange={this.changeSubject}
                     />
                 </div>
-                {hasVoted && !this.props.edit ?
+                {this.state.showResults ?
                     <VoteResults
                         options={this.props.component.data.options}
                         votes={this.props.component.interactiveData}
+                        toggleResults={this.toggleResults}
                     />
                     :
                     <VoteOptions
@@ -101,6 +107,7 @@ class Vote extends Component {
                         submit={this.submit}
                         changeOption={this.changeOption}
                         removeOption={this.removeOption}
+                        toggleResults={this.toggleResults}
                     />
                 }
             </div>

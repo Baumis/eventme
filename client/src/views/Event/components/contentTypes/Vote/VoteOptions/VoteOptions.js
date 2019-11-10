@@ -1,7 +1,7 @@
 import React from 'react'
 import './VoteOptions.css'
 import EditableWrapper from '../../../EditableWrapper/EditableWrapper'
-import { FaTrash, FaCheck } from 'react-icons/fa'
+import { FaTrash } from 'react-icons/fa'
 
 const VoteOptions = (props) => {
 
@@ -19,7 +19,7 @@ const VoteOptions = (props) => {
                                 :
                                 <div className="vote-component-vote-button" onClick={() => props.setChecked(i)}>
                                     {props.checked === i ?
-                                        <FaCheck />
+                                        <div className="vote-component-radio-marker"> </div>
                                         : null
                                     }
                                 </div>
@@ -40,8 +40,13 @@ const VoteOptions = (props) => {
                     add option
                 </div>
                 :
-                <div className="vote-component-submit-button" onClick={() => props.submit()}>
-                    Submit
+                <div className="vote-component-button-row">
+                    <div className="vote-component-results-button" onClick={() => props.toggleResults(true)}>
+                        results
+                    </div> 
+                    <div className="vote-component-submit-button" onClick={() => props.submit()}>
+                        Submit
+                    </div>
                 </div>
             }
         </div>

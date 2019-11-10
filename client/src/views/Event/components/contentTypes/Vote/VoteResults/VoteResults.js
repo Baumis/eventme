@@ -1,5 +1,6 @@
 import React from 'react'
 import './VoteResults.css'
+import { FaChevronLeft } from 'react-icons/fa'
 
 const VoteResults = (props) => {
 
@@ -29,6 +30,12 @@ const VoteResults = (props) => {
                     </div>
                 </div>
             )}
+            <div className="vote-component-button-row">
+                <div className="vote-component-back-button" onClick={() => props.toggleResults(false)}>
+                    < FaChevronLeft />
+                    {'vote'}
+                </div>
+            </div>
         </div>
     )
 }

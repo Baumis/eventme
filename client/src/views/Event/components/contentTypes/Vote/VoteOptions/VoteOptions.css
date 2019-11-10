@@ -27,11 +27,25 @@
     align-items: center;
     margin-right: 5px;
     color: #4c5c68;
-    border-radius: 5px;
+    border-radius: 50%;
     border: 1px solid darkgrey;
-    width: 22px;
-    height: 22px;
+    outline-offset: inherit;
+    min-width: 21px;
+    min-height: 21px;
     cursor: pointer;
+}
+
+.vote-component-radio-marker{
+    width: 16px;
+    height: 16px;
+    background: #4c5c68;
+    border-radius: 50%;
+}
+
+.vote-component-button-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .vote-component-submit-button {
@@ -40,11 +54,25 @@
     align-items: center;
     background: #4c5c68;
     color: white;
-    margin-top: 20px;
     width: 100px;
     height: 30px;
     border-radius: 5px;
     cursor: pointer;
+    margin: 20px 3px;
+}
+
+.vote-component-results-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: 1px solid #4c5c68;
+    color: #4c5c68;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 3px;
 }
 
 .vote-component-delete-button {
