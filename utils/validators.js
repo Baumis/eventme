@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 exports.validateDate = (date) => {
     if (!date) {
         return false
@@ -89,10 +91,44 @@ exports.validateComponent = (component) => {
 }
 
 exports.validateTextData = async (data) => {
-    if (!(typeof data.title === 'string') || !(typeof data.content === 'string')) {
+    if ((typeof data.title !== 'string') || (typeof data.content !== 'string')) {
         return false
     }
     if (data.title.length > 100 || data.content.length > 2000) {
+        return false
+    }
+    return true
+}
+
+exports.validatePictureData = async (data) => {
+    if ((typeof data.expand !== 'boolean') || (typeof data.url !== 'string')) {
+        return false
+    }
+    if (!data.url.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)) {
+        return false
+    }
+    if (data.url.length > 1000) {
+        return false
+    }
+    return true
+}
+
+exports.validateVoteData = async (data) => {
+    if (!Array.isArray(data.options) || (typeof data.subject !== 'string')) {
+        return false
+    }
+    if (data.options.length > 10 || data.subject.length > 100) {
+        return false
+    }
+    return true
+
+}
+
+exports.validateVoteOptionLabel = async (label) => {
+    if (typeof label !== 'string') {
+        return false
+    }
+    if (label.length > 100) {
         return false
     }
     return true

@@ -10,7 +10,7 @@ exports.populate = async (event) => {
         .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 
-    populatedEvent.components.sort((a, b) => 
+    populatedEvent.components.sort((a, b) =>
         a.position - b.position
     )
 
@@ -346,12 +346,15 @@ exports.updateComponent = async (id, componentId, type, data, position, options 
     options.new = true
     options.runValidators = true
 
-    switch(type) {
+    switch (type) {
         case 'TEXT':
-            return await Event.findOneAndUpdate(
-                { _id: id, 'components._id': componentId },
-                { $set: { 'components.$.data': data, 'components.$.position': position } },
-                options)
+            return await this.updateTextComponent(id, componentId, data, position, options)
+        case 'PICTURE':
+            return await this.updatePictureComponent(id, componentId, data, position, options)
+        case 'INVITE_LINK':
+            return await this.updateInviteLinkComponent(id, componentId, position, options)
+        case 'VOTE':
+            return await this.updateVoteComponent(id, componentId, data, position, options)
         default:
             throw new Error(type + ' is not a valid component type')
     }
@@ -361,12 +364,73 @@ exports.updateTextComponent = async (id, componentId, data, position, options = 
     if (!validators.validateTextData(data)) {
         throw new Error('Data for component type TEXT is not valid')
     }
-    if (!validators.validatePosition(position)) {
-        throw new Error('Position not valid')
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId },
+        { $set: { 'components.$.data.title': data.title, 'components.$.data.content': data.content, 'components.$.position': position } },
+        options)
+}
+
+exports.updatePictureComponent = async (id, componentId, data, position, options = {}) => {
+    if (!validators.validatePictureData(data)) {
+        throw new Error('Data for component type PICTURE is not valid')
     }
     return await Event.findOneAndUpdate(
         { _id: id, 'components._id': componentId },
-        { $set: { 'components.$.data': data, 'components.$.position': position } },
+        { $set: { 'components.$.data.url': data.url, 'components.$.data.expand': data.expand, 'components.$.position': position } },
+        options)
+}
+
+exports.updateInviteLinkComponent = async (id, componentId, position, options = {}) => {
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId },
+        { $set: { 'components.$.position': position } },
+        options)
+}
+
+exports.updateVoteComponent = async (id, componentId, data, position, options = {}) => {
+    if (!validators.validateVoteData(data)) {
+        throw new Error('Data for component type VOTE is not valid')
+    }
+
+    const updatePromises = data.options.map(option => {
+        if (option._id) {
+            return this.updateOptionInVoteComponent(id, componentId, option._id, option.label, options)
+        } else {
+            return this.addOptionToVoteComponent(id, componentId, option.label, options)
+        }
+    })
+
+    await Promise.all(updatePromises)
+
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId },
+        { $set: { 'components.$.data.subject': data.subject, 'components.$.position': position } },
+        options)
+}
+
+exports.updateOptionInVoteComponent = async (id, componentId, optionId, label, options = {}) => {
+    if (!validators.validateVoteOptionLabel(label)) {
+        throw new Error('Label of component option not valid')
+    }
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId,  },
+        { $set: { 'components.$.data.options.$[option].label': label} },
+        { arrayFilters: [{ 'option._id': optionId }] },
+        options)
+}
+
+exports.addOptionToVoteComponent = async (id, componentId, label, options = {}) => {
+    if (!validators.validateVoteOptionLabel(label)) {
+        throw new Error('Label of component option not valid')
+    }
+    const option = {
+        _id: mongoose.Types.ObjectId(),
+        label: label,
+        votes: []
+    }
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId,  },
+        { $addToSet: { 'components.$.data.options': option} },
         options)
 }
 
