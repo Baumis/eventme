@@ -87,3 +87,23 @@ exports.validateComponent = (component) => {
             return false
     }
 }
+
+exports.validateTextData = async (data) => {
+    if (!(typeof data.title === 'string') || !(typeof data.content === 'string')) {
+        return false
+    }
+    if (data.title.length > 100 || data.content.length > 2000) {
+        return false
+    }
+    return true
+}
+
+exports.validatePosition = async (position) => {
+    if (typeof position === 'number') {
+        return false
+    }
+    if (position > 100) {
+        return false
+    }
+    return true
+}

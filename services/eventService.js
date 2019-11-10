@@ -130,11 +130,12 @@ exports.update = async (event, eventObject) => {
 
     // Update or Create components
     eventObject.components.map((component, position) => {
-        const componentPromise = component._id ?
-            this.updateComponent(event._id, component._id, component.data, position)
-            :
-            this.createComponent(event._id, component.type, component.data, position)
-
+        if (component._id) {
+            const type = event.components.find(c => c._id.toString() === component._id).type
+            componentPromise = this.updateComponent(event._id, component._id, type, component.data, position)
+        } else {
+            componentPromise = this.createComponent(event._id, component.type, component.data, position)
+        }
         componentPromises.push(componentPromise)
     })
 
@@ -341,10 +342,28 @@ exports.createComponent = async (id, type, data, position, options = {}) => {
     return await Event.findByIdAndUpdate(id, { $addToSet: { components: component } }, options)
 }
 
-exports.updateComponent = async (id, componentId, data, position, options = {}) => {
+exports.updateComponent = async (id, componentId, type, data, position, options = {}) => {
     options.new = true
     options.runValidators = true
 
+    switch(type) {
+        case 'TEXT':
+            return await Event.findOneAndUpdate(
+                { _id: id, 'components._id': componentId },
+                { $set: { 'components.$.data': data, 'components.$.position': position } },
+                options)
+        default:
+            throw new Error(type + ' is not a valid component type')
+    }
+}
+
+exports.updateTextComponent = async (id, componentId, data, position, options = {}) => {
+    if (!validators.validateTextData(data)) {
+        throw new Error('Data for component type TEXT is not valid')
+    }
+    if (!validators.validatePosition(position)) {
+        throw new Error('Position not valid')
+    }
     return await Event.findOneAndUpdate(
         { _id: id, 'components._id': componentId },
         { $set: { 'components.$.data': data, 'components.$.position': position } },
