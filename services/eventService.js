@@ -522,3 +522,37 @@ exports.removeComponent = async (id, componentId, options = {}) => {
 
     return await Event.findByIdAndUpdate(id, { $pull: { components: { _id: componentId } } }, options)
 }
+
+exports.addVote = async (event, componentId, optionId, userId, options = {}) => {
+    options.new = true
+
+    const component = event.components.find(component => component._id.toString() === componentId)
+
+    if (component.type !== 'VOTE') {
+        throw new Error('You can only vote in components of type VOTE')
+    }
+
+    for (let option of component.data.options) {
+        if (option._id.toString() !== optionId) {
+            if (option.votes.some(vote => vote._id.toString() === userId)) {
+                await this.removeVote(event._id, componentId, option._id, userId)
+            }
+        }
+    }
+
+    const savedEvent = await Event.findOneAndUpdate(
+        { _id: event._id, 'components._id': componentId },
+        { $addToSet: { 'components.$.data.options.$[option].votes': mongoose.Types.ObjectId(userId) } },
+        { ...options, arrayFilters: [{ 'option._id': mongoose.Types.ObjectId(optionId) }] })
+
+    return await this.populate(savedEvent)
+}
+
+exports.removeVote = async (id, componentId, optionId, userId, options = {}) => {
+    options.new = true
+
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId },
+        { $pull: { 'components.$.data.options.$[option].votes': mongoose.Types.ObjectId(userId) } },
+        { ...options, arrayFilters: [{ 'option._id': mongoose.Types.ObjectId(optionId) }] })
+}

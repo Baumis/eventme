@@ -239,3 +239,37 @@ exports.removeComment = async (request, response) => {
         response.status(400).json({ error: exception.message })
     }
 }
+
+exports.addVote = async (request, response) => {
+    try {
+        const { componentId, optionId } = request.params
+        const userId = request.senderId
+
+        const updatedEvent = await eventService.addVote(request.event, componentId, optionId, userId)
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(updatedEvent))
+        } else {
+            response.json(Event.formatForGuest(updatedEvent))
+        }
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
+exports.removeVote = async (request, response) => {
+    try {
+        const { id, componentId, optionId } = request.params
+        const userId = request.senderId
+
+        const updatedEvent = await eventService.removeVote(id, componentId, optionId, userId)
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(updatedEvent))
+        } else {
+            response.json(Event.formatForGuest(updatedEvent))
+        }
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
