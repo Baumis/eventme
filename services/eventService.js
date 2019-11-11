@@ -112,10 +112,6 @@ exports.update = async (event, eventObject) => {
         throw new Error('End Date must be greater than Start Date')
     }
 
-    if (!validators.validateComponents(eventObject.components)) {
-        throw new Error('Components are not valid')
-    }
-
     const componentPromises = []
 
     // Remove components
@@ -131,8 +127,11 @@ exports.update = async (event, eventObject) => {
     // Update or Create components
     eventObject.components.map((component, position) => {
         if (component._id) {
-            const type = event.components.find(c => c._id.toString() === component._id).type
-            componentPromise = this.updateComponent(event._id, component._id, type, component.data, position)
+            const eventComponent = event.components.find(c => c._id.toString() === component._id)
+            if (!eventComponent) {
+                throw new Error('There is no component with id ' + component._id)
+            }
+            componentPromise = this.updateComponent(event, component._id, eventComponent.type, component.data, position)
         } else {
             componentPromise = this.createComponent(event._id, component.type, component.data, position)
         }
@@ -333,28 +332,97 @@ exports.createComponent = async (id, type, data, position, options = {}) => {
     options.new = true
     options.runValidators = true
 
+    switch (type) {
+        case 'TEXT':
+            return await this.createTextComponent(id, data, position, options)
+        case 'PICTURE':
+            return await this.createPictureComponent(id, data, position, options)
+        case 'INVITE_LINK':
+            return await this.createInviteLinkComponent(id, position, options)
+        case 'VOTE':
+            return await this.createVoteComponent(id, data, position, options)
+        default:
+            throw new Error(type + ' is not a valid component type')
+    }
+}
+
+exports.createTextComponent = async (id, data, position, options = {}) => {
+    if (!validators.validateTextData(data)) {
+        throw new Error('Data for component type TEXT is not valid')
+    }
     const component = {
-        type,
-        data,
+        type: 'TEXT',
+        data: {
+            title: data.title,
+            content: data.content
+        },
         position
     }
 
     return await Event.findByIdAndUpdate(id, { $addToSet: { components: component } }, options)
 }
 
-exports.updateComponent = async (id, componentId, type, data, position, options = {}) => {
+exports.createPictureComponent = async (id, data, position, options = {}) => {
+    if (!validators.validatePictureData(data)) {
+        throw new Error('Data for component type PICTURE is not valid')
+    }
+    const component = {
+        type: 'PICTURE',
+        data: {
+            url: data.url,
+            expand: data.expand
+        },
+        position
+    }
+
+    return await Event.findByIdAndUpdate(id, { $addToSet: { components: component } }, options)
+}
+
+exports.createInviteLinkComponent = async (id, position, options = {}) => {
+    const component = {
+        type: 'INVITE_LINK',
+        data: {},
+        position
+    }
+
+    return await Event.findByIdAndUpdate(id, { $addToSet: { components: component } }, options)
+}
+
+exports.createVoteComponent = async (id, data, position, options = {}) => {
+    const voteOptions = data.options.map(option => ({
+        _id: mongoose.Types.ObjectId(),
+        label: option.label,
+        votes: []
+    }))
+
+    if (!validators.validateVoteData(data) || !validators.validateVoteOptions(voteOptions)) {
+        throw new Error('Data for component type VOTE is not valid')
+    }
+    const component = {
+        type: 'VOTE',
+        data: {
+            subject: data.subject,
+            options: voteOptions
+        },
+        position
+    }
+
+    return await Event.findByIdAndUpdate(id, { $addToSet: { components: component } }, options)
+}
+
+exports.updateComponent = async (event, componentId, type, data, position, options = {}) => {
     options.new = true
     options.runValidators = true
 
     switch (type) {
         case 'TEXT':
-            return await this.updateTextComponent(id, componentId, data, position, options)
+            return await this.updateTextComponent(event._id, componentId, data, position, options)
         case 'PICTURE':
-            return await this.updatePictureComponent(id, componentId, data, position, options)
+            return await this.updatePictureComponent(event._id, componentId, data, position, options)
         case 'INVITE_LINK':
-            return await this.updateInviteLinkComponent(id, componentId, position, options)
+            return await this.updateInviteLinkComponent(event._id, componentId, position, options)
         case 'VOTE':
-            return await this.updateVoteComponent(id, componentId, data, position, options)
+            return await this.updateVoteComponent(event, componentId, data, position, options)
         default:
             throw new Error(type + ' is not a valid component type')
     }
@@ -387,23 +455,32 @@ exports.updateInviteLinkComponent = async (id, componentId, position, options = 
         options)
 }
 
-exports.updateVoteComponent = async (id, componentId, data, position, options = {}) => {
+exports.updateVoteComponent = async (event, componentId, data, position, options = {}) => {
     if (!validators.validateVoteData(data)) {
         throw new Error('Data for component type VOTE is not valid')
     }
 
     const updatePromises = data.options.map(option => {
         if (option._id) {
-            return this.updateOptionInVoteComponent(id, componentId, option._id, option.label, options)
+            return this.updateOptionInVoteComponent(event._id, componentId, option._id, option.label, options)
         } else {
-            return this.addOptionToVoteComponent(id, componentId, option.label, options)
+            return this.addOptionToVoteComponent(event._id, componentId, option.label, options)
+        }
+    })
+
+    const oldVoteComponent = event.components.find(component => component._id.toString() === componentId)
+
+    oldVoteComponent.data.options.map(oldOption => {
+        if (!data.options.some(option => option._id === oldOption._id.toString())) {
+            const removePromise = this.removeOptionFromVoteComponent(event._id, componentId, oldOption._id)
+            updatePromises.push(removePromise)
         }
     })
 
     await Promise.all(updatePromises)
 
     return await Event.findOneAndUpdate(
-        { _id: id, 'components._id': componentId },
+        { _id: event._id, 'components._id': componentId },
         { $set: { 'components.$.data.subject': data.subject, 'components.$.position': position } },
         options)
 }
@@ -413,10 +490,9 @@ exports.updateOptionInVoteComponent = async (id, componentId, optionId, label, o
         throw new Error('Label of component option not valid')
     }
     return await Event.findOneAndUpdate(
-        { _id: id, 'components._id': componentId,  },
-        { $set: { 'components.$.data.options.$[option].label': label} },
-        { arrayFilters: [{ 'option._id': optionId }] },
-        options)
+        { _id: id, 'components._id': componentId },
+        { $set: { 'components.$.data.options.$[option].label': label } },
+        { ...options, arrayFilters: [{ 'option._id': mongoose.Types.ObjectId(optionId) }] })
 }
 
 exports.addOptionToVoteComponent = async (id, componentId, label, options = {}) => {
@@ -429,8 +505,15 @@ exports.addOptionToVoteComponent = async (id, componentId, label, options = {}) 
         votes: []
     }
     return await Event.findOneAndUpdate(
-        { _id: id, 'components._id': componentId,  },
-        { $addToSet: { 'components.$.data.options': option} },
+        { _id: id, 'components._id': componentId, },
+        { $addToSet: { 'components.$.data.options': option } },
+        options)
+}
+
+exports.removeOptionFromVoteComponent = async (id, componentId, optionId, options = {}) => {
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId, },
+        { $pull: { 'components.$.data.options': { _id: optionId } } },
         options)
 }
 

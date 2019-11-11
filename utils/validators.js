@@ -90,7 +90,7 @@ exports.validateComponent = (component) => {
     }
 }
 
-exports.validateTextData = async (data) => {
+exports.validateTextData = (data) => {
     if ((typeof data.title !== 'string') || (typeof data.content !== 'string')) {
         return false
     }
@@ -100,7 +100,7 @@ exports.validateTextData = async (data) => {
     return true
 }
 
-exports.validatePictureData = async (data) => {
+exports.validatePictureData = (data) => {
     if ((typeof data.expand !== 'boolean') || (typeof data.url !== 'string')) {
         return false
     }
@@ -113,7 +113,7 @@ exports.validatePictureData = async (data) => {
     return true
 }
 
-exports.validateVoteData = async (data) => {
+exports.validateVoteData = (data) => {
     if (!Array.isArray(data.options) || (typeof data.subject !== 'string')) {
         return false
     }
@@ -121,10 +121,21 @@ exports.validateVoteData = async (data) => {
         return false
     }
     return true
-
 }
 
-exports.validateVoteOptionLabel = async (label) => {
+exports.validateVoteOptions = (options) => {
+    for (let option of options) {
+        if(!this.validateVoteOptionLabel(option.label)) {
+            return false
+        }
+        if (!Array.isArray(option.votes)) {
+            return false
+        }
+    }
+    return true
+}
+
+exports.validateVoteOptionLabel = (label) => {
     if (typeof label !== 'string') {
         return false
     }
@@ -134,7 +145,7 @@ exports.validateVoteOptionLabel = async (label) => {
     return true
 }
 
-exports.validatePosition = async (position) => {
+exports.validatePosition = (position) => {
     if (typeof position === 'number') {
         return false
     }
