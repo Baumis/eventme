@@ -57,6 +57,20 @@ exports.newEventObject = {
                 url: 'www.validpictureurl.fi',
                 expand: true
             }
+        },
+        {
+            type: 'VOTE',
+            data: {
+                subject: 'My subject',
+                options: [
+                    {
+                        label: 'first option'
+                    },
+                    {
+                        label: 'second option'
+                    }
+                ]
+            }
         }
     ]
 }
