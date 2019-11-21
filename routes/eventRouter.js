@@ -41,4 +41,6 @@ eventRouter.post('/:id/components/:componentId/data/options/:optionId/votes', mi
 
 eventRouter.delete('/:id/components/:componentId/data/options/:optionId/votes/vote', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeVote)
 
+eventRouter.post('/:id/components/:componentId/data/questions', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addAnswersToFormComponent)
+
 module.exports = eventRouter

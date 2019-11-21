@@ -446,6 +446,8 @@ exports.updateComponent = async (event, componentId, type, data, position, optio
             return await this.updateInviteLinkComponent(event._id, componentId, position, options)
         case 'VOTE':
             return await this.updateVoteComponent(event, componentId, data, position, options)
+        case 'FORM':
+            return await this.updateFormComponent(event, componentId, data, position, options)
         default:
             throw new Error(type + ' is not a valid component type')
     }
@@ -509,7 +511,7 @@ exports.updateVoteComponent = async (event, componentId, data, position, options
 }
 
 exports.updateOptionInVoteComponent = async (id, componentId, optionId, label, options = {}) => {
-    if (!validators.validateVoteOptionLabel(label)) {
+    if (!validators.validateLabel(label)) {
         throw new Error('Label of component option not valid')
     }
     return await Event.findOneAndUpdate(
@@ -519,7 +521,7 @@ exports.updateOptionInVoteComponent = async (id, componentId, optionId, label, o
 }
 
 exports.addOptionToVoteComponent = async (id, componentId, label, options = {}) => {
-    if (!validators.validateVoteOptionLabel(label)) {
+    if (!validators.validateLabel(label)) {
         throw new Error('Label of component option not valid')
     }
     const option = {
@@ -540,6 +542,68 @@ exports.removeOptionFromVoteComponent = async (id, componentId, optionId, option
         options)
 }
 
+exports.updateFormComponent = async (event, componentId, data, position, options = {}) => {
+    if (!validators.validateFormData(data)) {
+        throw new Error('Data for component type FORM is not valid')
+    }
+
+    const updatePromises = data.questions.map(question => {
+        if (question._id) {
+            return this.updateQuestionInFormComponent(event._id, componentId, question._id, question.label, options)
+        } else {
+            return this.addQuestionToFormComponent(event._id, componentId, question.label, options)
+        }
+    })
+
+    const oldFormComponent = event.components.find(component => component._id.toString() === componentId)
+
+    oldFormComponent.data.questions.map(oldQuestion => {
+        if (!data.questions.some(question => question._id === oldQuestion._id.toString())) {
+            const removePromise = this.removeQuestionFromFormComponent(event._id, componentId, oldQuestion._id)
+            updatePromises.push(removePromise)
+        }
+    })
+
+    await Promise.all(updatePromises)
+
+    return await Event.findOneAndUpdate(
+        { _id: event._id, 'components._id': componentId },
+        { $set: { 'components.$.position': position } },
+        options)
+}
+
+exports.updateQuestionInFormComponent = async (id, componentId, questionId, label, options = {}) => {
+    if (!validators.validateLabel(label)) {
+        throw new Error('Label of component question not valid')
+    }
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId },
+        { $set: { 'components.$.data.questions.$[question].label': label } },
+        { ...options, arrayFilters: [{ 'question._id': mongoose.Types.ObjectId(questionId) }] })
+}
+
+exports.addQuestionToFormComponent = async (id, componentId, label, options = {}) => {
+    if (!validators.validateLabel(label)) {
+        throw new Error('Label of component question not valid')
+    }
+    const question = {
+        _id: mongoose.Types.ObjectId(),
+        label: label,
+        answers: []
+    }
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId, },
+        { $addToSet: { 'components.$.data.questions': question } },
+        options)
+}
+
+exports.removeQuestionFromFormComponent = async (id, componentId, questionId, options = {}) => {
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId, },
+        { $pull: { 'components.$.data.questions': { _id: questionId } } },
+        options)
+}
+
 exports.removeComponent = async (id, componentId, options = {}) => {
     options.new = true
 
@@ -556,10 +620,8 @@ exports.addVote = async (event, componentId, optionId, userId, options = {}) => 
     }
 
     for (let option of component.data.options) {
-        if (option._id.toString() !== optionId) {
-            if (option.votes.some(vote => vote._id.toString() === userId)) {
-                await this.removeVote(event._id, componentId, option._id, userId)
-            }
+        if (option.votes.some(vote => vote.toString() === userId)) {
+            await this.removeVote(event._id, componentId, option._id, userId)
         }
     }
 
@@ -578,4 +640,59 @@ exports.removeVote = async (id, componentId, optionId, userId, options = {}) => 
         { _id: id, 'components._id': componentId },
         { $pull: { 'components.$.data.options.$[option].votes': mongoose.Types.ObjectId(userId) } },
         { ...options, arrayFilters: [{ 'option._id': mongoose.Types.ObjectId(optionId) }] })
+}
+
+exports.addAnswersToFormComponent = async (event, componentId, answers, userId, options = {}) => {
+    options.new = true
+
+    const component = event.components.find(component => component._id.toString() === componentId)
+
+    if (component.type !== 'FORM') {
+        throw new Error('Component is not of type FORM')
+    }
+
+    if (!validators.validateAnswers(answers)) {
+        throw new Error('Answers are not valid')
+    }
+
+    const removePromises = []
+
+    for (let question of component.data.questions) {
+        if (question.answers.some(answer => answer.user.toString() === userId)) {
+            const removePromise = this.removeAnswerFromFormComponent(event._id, componentId, question._id, userId)
+            removePromises.push(removePromise)
+        }
+    }
+
+    await Promise.all(removePromises)
+
+    const updatePromises = []
+
+    for (let answer of answers) {
+        const answerObject = {
+            content: answer.content,
+            user: mongoose.Types.ObjectId(userId)
+        }
+        const updatePromise = Event.findOneAndUpdate(
+            { _id: event._id, 'components._id': componentId },
+            { $addToSet: { 'components.$.data.questions.$[question].answers': answerObject } },
+            { ...options, arrayFilters: [{ 'question._id': mongoose.Types.ObjectId(answer.question) }] })
+
+        updatePromises.push(updatePromise)
+    }
+
+    await Promise.all(updatePromises)
+
+    const savedEvent = await Event.findById(event._id)
+
+    return await this.populate(savedEvent)
+}
+
+exports.removeAnswerFromFormComponent = async (id, componentId, questionId, userId, options = {}) => {
+    options.new = true
+
+    return await Event.findOneAndUpdate(
+        { _id: id, 'components._id': componentId },
+        { $pull: { 'components.$.data.questions.$[question].answers': { user: mongoose.Types.ObjectId(userId) } } },
+        { ...options, arrayFilters: [{ 'question._id': mongoose.Types.ObjectId(questionId) }] })
 }

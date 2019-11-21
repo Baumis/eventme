@@ -178,3 +178,15 @@ exports.validateFormQuestions = (questions) => {
     }
     return true
 }
+
+exports.validateAnswers = (answers) => {
+    for (let answer of answers) {
+        if ((typeof answer.question !== 'string') || (typeof answer.content !== 'string')) {
+            return false
+        }
+        if (answer.content.length > 200) {
+            return false
+        }
+    }
+    return true
+}

@@ -273,3 +273,21 @@ exports.removeVote = async (request, response) => {
         response.status(400).json({ error: exception.message })
     }
 }
+
+exports.addAnswersToFormComponent = async (request, response) => {
+    try {
+        const { componentId } = request.params
+        const userId = request.senderId
+        const answers = request.body.answers
+
+        const updatedEvent = await eventService.addAnswersToFormComponent(request.event, componentId, answers, userId)
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(updatedEvent))
+        } else {
+            response.json(Event.formatForGuest(updatedEvent))
+        }
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
