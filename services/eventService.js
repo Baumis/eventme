@@ -341,6 +341,8 @@ exports.createComponent = async (id, type, data, position, options = {}) => {
             return await this.createInviteLinkComponent(id, position, options)
         case 'VOTE':
             return await this.createVoteComponent(id, data, position, options)
+        case 'FORM':
+            return await this.createFormComponent(id, data, position, options)
         default:
             throw new Error(type + ' is not a valid component type')
     }
@@ -403,6 +405,27 @@ exports.createVoteComponent = async (id, data, position, options = {}) => {
         data: {
             subject: data.subject,
             options: voteOptions
+        },
+        position
+    }
+
+    return await Event.findByIdAndUpdate(id, { $addToSet: { components: component } }, options)
+}
+
+exports.createFormComponent = async (id, data, position, options = {}) => {
+    const formQuestions = data.questions.map(question => ({
+        _id: mongoose.Types.ObjectId(),
+        label: question.label,
+        answers: []
+    }))
+
+    if (!validators.validateFormData(data) || !validators.validateFormQuestions(formQuestions)) {
+        throw new Error('Data for component type FORM is not valid')
+    }
+    const component = {
+        type: 'FORM',
+        data: {
+            questions: formQuestions
         },
         position
     }

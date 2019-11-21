@@ -97,6 +97,9 @@ exports.validateTextData = (data) => {
     if (data.title.length > 100 || data.content.length > 2000) {
         return false
     }
+    if (Object.keys(data).length !== 2) {
+        return false
+    }
     return true
 }
 
@@ -110,6 +113,9 @@ exports.validatePictureData = (data) => {
     if (data.url.length > 1000) {
         return false
     }
+    if (Object.keys(data).length !== 2) {
+        return false
+    }
     return true
 }
 
@@ -120,12 +126,28 @@ exports.validateVoteData = (data) => {
     if (data.options.length > 10 || data.subject.length > 100) {
         return false
     }
+    if (Object.keys(data).length !== 2) {
+        return false
+    }
+    return true
+}
+
+exports.validateFormData = (data) => {
+    if (!Array.isArray(data.questions)) {
+        return false
+    }
+    if (data.questions.length > 10) {
+        return false
+    }
+    if (Object.keys(data).length !== 1) {
+        return false
+    }
     return true
 }
 
 exports.validateVoteOptions = (options) => {
     for (let option of options) {
-        if(!this.validateVoteOptionLabel(option.label)) {
+        if(!this.validateLabel(option.label)) {
             return false
         }
         if (!Array.isArray(option.votes)) {
@@ -135,7 +157,7 @@ exports.validateVoteOptions = (options) => {
     return true
 }
 
-exports.validateVoteOptionLabel = (label) => {
+exports.validateLabel = (label) => {
     if (typeof label !== 'string') {
         return false
     }
@@ -145,12 +167,14 @@ exports.validateVoteOptionLabel = (label) => {
     return true
 }
 
-exports.validatePosition = (position) => {
-    if (typeof position === 'number') {
-        return false
-    }
-    if (position > 100) {
-        return false
+exports.validateFormQuestions = (questions) => {
+    for (let question of questions) {
+        if(!this.validateLabel(question.label)) {
+            return false
+        }
+        if (!Array.isArray(question.answers)) {
+            return false
+        }
     }
     return true
 }
