@@ -56,7 +56,7 @@ class MasterComponent extends Component {
                 />
 
                 <TagName
-                    data={this.props.component.data}
+                    component={this.props.component}
                     edit={this.state.editMode}
                     changeData={this.changeComponentData}
                     isCreator={this.props.isCreator}

@@ -7,33 +7,32 @@ import { FaTrash } from 'react-icons/fa'
 class Form extends Component {
 
     newQuestion = () => {
-        const editedQuestions = this.props.data.questions
-        editedQuestions.push({ question: 'new question' })
-
-        const dataObject = {
-            questions: editedQuestions,
+        const question = {
+            content: 'title',
+            _id: this.generateUUIDv4()
         }
-        this.props.changeData(dataObject)
+        this.props.component.data.questions.push(question)
+        this.props.changeData({ ... this.props.component.data })
     }
 
     removeQuestion = (optionIndex) => {
-        const editedQuestions = this.props.data.questions
-        editedQuestions.splice(optionIndex, 1)
-
-        const dataObject = {
-            questions: editedQuestions,
-        }
-        this.props.changeData(dataObject)
+        this.props.component.data.questions.splice(optionIndex, 1)
+        this.props.changeData({ ... this.props.component.data })
     }
 
     changeQuestion(index, event) {
-        const editedQuestions = this.props.data.questions
-        editedQuestions[index].question = event.target.value
+        this.props.component.data.questions[index].content = event.target.value
+        this.props.changeData({ ... this.props.component.data })
+    }
 
-        const dataObject = {
-            questions: editedQuestions,
-        }
-        this.props.changeData(dataObject)
+    generateUUIDv4 = () => {
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        )
+    }
+
+    findOldAnswer = (questionId) =>  {
+        return this.props.component.interactiveData.find(answer => answer.questionId === questionId)
     }
 
     render() {
@@ -41,7 +40,7 @@ class Form extends Component {
         return (
             <div className="form-component">
                 <div className="form-component-questions">
-                    {this.props.data.questions.map((question, i) =>
+                    {this.props.component.data.questions.map((question, i) =>
                         <div key={i} className="form-component-question">
                             <div className="form-component-title-row">
                                 {this.props.edit ?
@@ -52,7 +51,7 @@ class Form extends Component {
                                 }
                                 <div className={"form-component-title " + borderStyle}>
                                     <EditableWrapper
-                                        html={question.question}
+                                        html={question.content}
                                         editable={!this.props.edit}
                                         onChange={(event) => this.changeQuestion(i, event)}
                                     />

@@ -1,0 +1,14 @@
+.join-event-button{
+    display: flex;
+    top: -50px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    background: white;
+    color: #1985a1;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px;
+}
