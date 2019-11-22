@@ -71,6 +71,19 @@ exports.newEventObject = {
                     }
                 ]
             }
+        },
+        {
+            type: 'FORM',
+            data: {
+                questions: [
+                    {
+                        label: 'What is your name?'
+                    },
+                    {
+                        label: 'What do you eat?'
+                    }
+                ]
+            }
         }
     ]
 }

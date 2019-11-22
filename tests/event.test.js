@@ -293,6 +293,9 @@ describe('PUT /api/events/:id', () => {
         expect(res.body.components[3].data.options[0].label).toEqual(newEventObject.components[3].data.options[0].label)
         expect.stringContaining(res.body.components[3].data.options[0]._id)
         expect.arrayContaining(res.body.components[3].data.options[0].votes)
+        expect(res.body.components[4].data.questions[0].label).toEqual(newEventObject.components[4].data.questions[0].label)
+        expect.stringContaining(res.body.components[4].data.questions[0]._id)
+        expect.arrayContaining(res.body.components[4].data.questions[0].answers)
         expect(res.body.background).toEqual(newEventObject.background)
     })
 
@@ -1263,10 +1266,10 @@ describe('DELETE /api/events/:id/components/:componentId/data/options/:optionId/
             .delete('/api/events/' + event._id + '/components/' + voteComponentId + '/data/options/' + optionId + '/votes/vote')
             .set('Cookie', user2Cookie)
             .expect(200)
-    
+
         const voteComponentInEnd = res.body.components.find(component => component._id === voteComponentId)
         const optionInEnd = voteComponentInEnd.data.options.find(option => option._id === optionId)
-    
+
         expect(optionInEnd.votes).not.toContainEqual(user2._id)
     })
 
@@ -1277,6 +1280,58 @@ describe('DELETE /api/events/:id/components/:componentId/data/options/:optionId/
             .expect(403)
     })
 
+})
+
+describe('POST /api/events/:id/components/:componentId/data/questions', () => {
+
+    let questionId
+    let question2Id
+    let formComponentId
+
+    beforeEach(async () => {
+        const res = await api
+            .put('/api/events/' + event._id)
+            .set('Cookie', userCookie)
+            .send(newEventObject)
+            .expect(200)
+
+        const formComponent = res.body.components.find(component => component.type === 'FORM')
+        questionId = formComponent.data.questions[0]._id
+        question2Id = formComponent.data.questions[1]._id
+        formComponentId = formComponent._id
+    })
+
+    it('should succeed and answer questions provided', async () => {
+        const body = {
+            answers: [
+                {
+                    question: questionId,
+                    content: 'John doe'
+                },
+                {
+                    question: question2Id,
+                    content: 'Vegetables & fish'
+                }
+            ]
+        }
+
+        const res = await api
+            .post('/api/events/' + event._id + '/components/' + formComponentId + '/data/questions')
+            .set('Cookie', user2Cookie)
+            .send(body)
+            .expect(200)
+
+        const formComponentInEnd = res.body.components.find(component => component._id === formComponentId)
+
+        for (let answer of body.answers) {
+            const questionInEnd = formComponentInEnd.data.questions.find(question => question._id === answer.question)
+            const answerObject = {
+                content: answer.content,
+                user: user2._id
+            }
+            expect(questionInEnd.answers).toContainEqual(answerObject)
+        }
+    })
 })
 
 afterAll(async () => {
