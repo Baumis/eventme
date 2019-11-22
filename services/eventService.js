@@ -610,7 +610,7 @@ exports.removeComponent = async (id, componentId, options = {}) => {
     return await Event.findByIdAndUpdate(id, { $pull: { components: { _id: componentId } } }, options)
 }
 
-exports.addVote = async (event, componentId, optionId, userId, options = {}) => {
+exports.addVoteToVoteComponent = async (event, componentId, optionId, userId, options = {}) => {
     options.new = true
 
     const component = event.components.find(component => component._id.toString() === componentId)
@@ -621,7 +621,7 @@ exports.addVote = async (event, componentId, optionId, userId, options = {}) => 
 
     for (let option of component.data.options) {
         if (option.votes.some(vote => vote.toString() === userId)) {
-            await this.removeVote(event._id, componentId, option._id, userId)
+            await this.removeVoteFromVoteComponent(event._id, componentId, option._id, userId)
         }
     }
 
@@ -633,7 +633,7 @@ exports.addVote = async (event, componentId, optionId, userId, options = {}) => 
     return await this.populate(savedEvent)
 }
 
-exports.removeVote = async (id, componentId, optionId, userId, options = {}) => {
+exports.removeVoteFromVoteComponent = async (id, componentId, optionId, userId, options = {}) => {
     options.new = true
 
     return await Event.findOneAndUpdate(

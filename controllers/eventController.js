@@ -240,12 +240,12 @@ exports.removeComment = async (request, response) => {
     }
 }
 
-exports.addVote = async (request, response) => {
+exports.addVoteToVoteComponent = async (request, response) => {
     try {
         const { componentId, optionId } = request.params
         const userId = request.senderId
 
-        const updatedEvent = await eventService.addVote(request.event, componentId, optionId, userId)
+        const updatedEvent = await eventService.addVoteToVoteComponent(request.event, componentId, optionId, userId)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
@@ -257,12 +257,12 @@ exports.addVote = async (request, response) => {
     }
 }
 
-exports.removeVote = async (request, response) => {
+exports.removeVoteFromVoteComponent = async (request, response) => {
     try {
         const { id, componentId, optionId } = request.params
         const userId = request.senderId
 
-        const updatedEvent = await eventService.removeVote(id, componentId, optionId, userId)
+        const updatedEvent = await eventService.removeVoteFromVoteComponent(id, componentId, optionId, userId)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
