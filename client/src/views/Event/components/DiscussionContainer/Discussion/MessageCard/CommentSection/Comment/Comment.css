@@ -1,19 +1,18 @@
-.message-card {
+.comment {
     display: flex;
     flex: 1;
-    padding: 10px 15px;
-    margin: 2px 0px 2px 0px;
+    margin: 3px 0px 2px 0px;
     background: transparent;
 }
 
-.message-card-avatar-section {
+.comment-avatar-section {
     display: flex;
     margin: 0px 5px 0px 0px;
 }
 
-.message-card-avatar {
-    min-width: 50px;
-    height: 50px;
+.comment-avatar {
+    min-width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: darkgray;
     -webkit-background-size: cover;
@@ -23,25 +22,25 @@
     background-position:center center;
 }
 
-.message-card-wrapper {
+.comment-wrapper {
     display: flex;
     flex: 1;
 }
 
-.deleted {
+.comment-deleted {
     color: rgba(0,0,0,0.3);
     padding-left: 60px;
     height: 30px;
     align-items: center;
 }
 
-.message-card-info-section {
+.comment-info-section {
     display: flex;
     flex: 1;
     flex-direction: column;
 }
 
-.message-card-header {
+.comment-header {
     display: flex;
     justify-content: space-between;
     padding: 3px;
@@ -49,13 +48,13 @@
     align-items: center;
 }
 
-.message-card-time-author {
+.comment-time-author {
     display: flex;
     flex-wrap: nowrap;
     font-size: 16px;
 }
 
-.message-card-time {
+.comment-time {
     display: flex;
     padding: 0px 10px 0px 10px;
     font-size: 14px;
@@ -63,14 +62,15 @@
     justify-content: center;
 }
 
-.message-card-author {
+.comment-author {
     display: flex;
     font-weight: 500;
     color: #1985a1;
     cursor: pointer;
+    word-break:break-all
 }
 
-.message-card-delete {
+.comment-delete {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,35 +78,14 @@
     color: rgba(0,0,0,0.2)
 }
 
-.message-card-delete:hover {
+.comment-delete:hover {
     color: rgba(0,0,0,0.5)
 }
 
-.message-card-content {
+.comment-content {
     display: flex;
     justify-content: flex-start;
     text-align: start;
     color: #46494c;
-    padding: 5px 5px;
-}
-
-.message-card-interaction {
-    padding: 3px;
-}
-
-.message-card-comment-button {
-    color: rgba(0,0,0,0.5);
-    cursor: pointer;
-    font-size: 15px;
-    max-width: 100px;
-    padding-bottom: 5px;
-}
-
-@media only screen and (max-width: 450px) {
-    .message-card-content {
-        padding: 20px 10px 20px 10px;
-    }
-    .message-card-time {
-        font-size: 14px;
-    }
+    padding: 5px 10px;
 }
