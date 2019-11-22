@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const componentSchema = new mongoose.Schema({
     type: {
         type: String,
-        enum: ['TEXT', 'INVITE_LINK', 'PICTURE'],
+        enum: ['TEXT', 'INVITE_LINK', 'PICTURE', 'VOTE', 'FORM'],
         required: [true, 'Type required']
     },
     data: {

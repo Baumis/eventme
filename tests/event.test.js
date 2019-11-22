@@ -288,6 +288,14 @@ describe('PUT /api/events/:id', () => {
         expect(res.body.components[1].data.inviteKey).toEqual(event.inviteKey)
         expect(res.body.components[2].type).toEqual(newEventObject.components[2].type)
         expect(res.body.components[2].data).toEqual(newEventObject.components[2].data)
+        expect(res.body.components[3].type).toEqual(newEventObject.components[3].type)
+        expect(res.body.components[3].data.subject).toEqual(newEventObject.components[3].data.subject)
+        expect(res.body.components[3].data.options[0].label).toEqual(newEventObject.components[3].data.options[0].label)
+        expect.stringContaining(res.body.components[3].data.options[0]._id)
+        expect.arrayContaining(res.body.components[3].data.options[0].votes)
+        expect(res.body.components[4].data.questions[0].label).toEqual(newEventObject.components[4].data.questions[0].label)
+        expect.stringContaining(res.body.components[4].data.questions[0]._id)
+        expect.arrayContaining(res.body.components[4].data.questions[0].answers)
         expect(res.body.background).toEqual(newEventObject.background)
     })
 
@@ -421,14 +429,15 @@ describe('PUT /api/events/:id', () => {
             .expect(400)
     })
 
-    it('should fail if INVITE_LINK component not valid', async () => {
+    it('should fail if PICTURE component not valid', async () => {
         const notValidEventObject = {
             ...newEventObject,
             components: [
                 {
-                    type: 'INVITE_LINK',
+                    type: 'PICTURE',
                     data: {
-                        text: 'this is the link'
+                        url: 'not a url',
+                        extended: false
                     }
                 }
             ]
@@ -441,15 +450,16 @@ describe('PUT /api/events/:id', () => {
             .expect(400)
     })
 
-    it('should fail if PICTURE component not valid', async () => {
+    it('should fail if VOTE component not valid', async () => {
         const notValidEventObject = {
             ...newEventObject,
             components: [
                 {
-                    type: 'PICTURE',
+                    type: 'VOTE',
                     data: {
-                        url: 'not a url',
-                        extended: false
+                        options: [
+                            'notvalid'
+                        ]
                     }
                 }
             ]
@@ -1167,6 +1177,160 @@ describe('DELETE api/events/:id/discussion/:messageId/comments/:commentId', () =
             .delete('/api/events/' + event._id + '/discussion/' + messageId + '/comments/' + mongoose.Types.ObjectId())
             .set('Cookie', userCookie)
             .expect(400)
+    })
+})
+
+describe('POST /api/events/:id/components/:componentId/data/options/:optionId/votes', () => {
+
+    let optionId
+    let option2Id
+    let voteComponentId
+
+    beforeEach(async () => {
+        const res = await api
+            .put('/api/events/' + event._id)
+            .set('Cookie', userCookie)
+            .send(newEventObject)
+            .expect(200)
+
+        const voteComponent = res.body.components.find(component => component.type === 'VOTE')
+        optionId = voteComponent.data.options[0]._id
+        option2Id = voteComponent.data.options[1]._id
+        voteComponentId = voteComponent._id
+    })
+
+    it('should succeed and add a vote', async () => {
+        const res = await api
+            .post('/api/events/' + event._id + '/components/' + voteComponentId + '/data/options/' + optionId + '/votes')
+            .set('Cookie', user2Cookie)
+            .expect(200)
+
+        const voteComponentInEnd = res.body.components.find(component => component._id === voteComponentId)
+        const optionInEnd = voteComponentInEnd.data.options.find(option => option._id === optionId)
+
+        expect(optionInEnd.votes).toContainEqual(user2._id)
+    })
+
+    it('should succeed and change vote', async () => {
+        await api
+            .post('/api/events/' + event._id + '/components/' + voteComponentId + '/data/options/' + optionId + '/votes')
+            .set('Cookie', user2Cookie)
+            .expect(200)
+
+        const res = await api
+            .post('/api/events/' + event._id + '/components/' + voteComponentId + '/data/options/' + option2Id + '/votes')
+            .set('Cookie', user2Cookie)
+            .expect(200)
+
+        const voteComponentInEnd = res.body.components.find(component => component._id === voteComponentId)
+        const optionInEnd = voteComponentInEnd.data.options.find(option => option._id === optionId)
+        const option2InEnd = voteComponentInEnd.data.options.find(option => option._id === option2Id)
+
+        expect(optionInEnd.votes).not.toContainEqual(user2._id)
+        expect(option2InEnd.votes).toContainEqual(user2._id)
+    })
+
+    it('should fail if not guest or creator', async () => {
+        await api
+            .post('/api/events/' + event._id + '/components/' + voteComponentId + '/data/options/' + optionId + '/votes')
+            .set('Cookie', user3Cookie)
+            .expect(403)
+    })
+
+})
+
+describe('DELETE /api/events/:id/components/:componentId/data/options/:optionId/votes/vote', () => {
+
+    let optionId
+    let voteComponentId
+
+    beforeEach(async () => {
+        const res = await api
+            .put('/api/events/' + event._id)
+            .set('Cookie', userCookie)
+            .send(newEventObject)
+            .expect(200)
+
+        const voteComponent = res.body.components.find(component => component.type === 'VOTE')
+        optionId = voteComponent.data.options[0]._id
+        voteComponentId = voteComponent._id
+
+        await api
+            .post('/api/events/' + event._id + '/components/' + voteComponentId + '/data/options/' + optionId + '/votes')
+            .set('Cookie', user2Cookie)
+            .expect(200)
+    })
+
+    it('should succeed and remove a vote', async () => {
+        const res = await api
+            .delete('/api/events/' + event._id + '/components/' + voteComponentId + '/data/options/' + optionId + '/votes/vote')
+            .set('Cookie', user2Cookie)
+            .expect(200)
+
+        const voteComponentInEnd = res.body.components.find(component => component._id === voteComponentId)
+        const optionInEnd = voteComponentInEnd.data.options.find(option => option._id === optionId)
+
+        expect(optionInEnd.votes).not.toContainEqual(user2._id)
+    })
+
+    it('should fail if not guest or creator', async () => {
+        await api
+            .delete('/api/events/' + event._id + '/components/' + voteComponentId + '/data/options/' + optionId + '/votes/vote')
+            .set('Cookie', user3Cookie)
+            .expect(403)
+    })
+
+})
+
+describe('POST /api/events/:id/components/:componentId/data/questions', () => {
+
+    let questionId
+    let question2Id
+    let formComponentId
+
+    beforeEach(async () => {
+        const res = await api
+            .put('/api/events/' + event._id)
+            .set('Cookie', userCookie)
+            .send(newEventObject)
+            .expect(200)
+
+        const formComponent = res.body.components.find(component => component.type === 'FORM')
+        questionId = formComponent.data.questions[0]._id
+        question2Id = formComponent.data.questions[1]._id
+        formComponentId = formComponent._id
+    })
+
+    it('should succeed and answer questions provided', async () => {
+        const body = {
+            answers: [
+                {
+                    question: questionId,
+                    content: 'John doe'
+                },
+                {
+                    question: question2Id,
+                    content: 'Vegetables & fish'
+                }
+            ]
+        }
+
+        const res = await api
+            .post('/api/events/' + event._id + '/components/' + formComponentId + '/data/questions')
+            .set('Cookie', user2Cookie)
+            .send(body)
+            .expect(200)
+
+        const formComponentInEnd = res.body.components.find(component => component._id === formComponentId)
+
+        for (let answer of body.answers) {
+            const questionInEnd = formComponentInEnd.data.questions.find(question => question._id === answer.question)
+            const answerObject = {
+                content: answer.content,
+                user: user2._id
+            }
+            expect(questionInEnd.answers).toContainEqual(answerObject)
+        }
     })
 })
 

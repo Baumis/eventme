@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 exports.validateDate = (date) => {
     if (!date) {
         return false
@@ -86,4 +88,105 @@ exports.validateComponent = (component) => {
         default:
             return false
     }
+}
+
+exports.validateTextData = (data) => {
+    if ((typeof data.title !== 'string') || (typeof data.content !== 'string')) {
+        return false
+    }
+    if (data.title.length > 100 || data.content.length > 2000) {
+        return false
+    }
+    if (Object.keys(data).length !== 2) {
+        return false
+    }
+    return true
+}
+
+exports.validatePictureData = (data) => {
+    if ((typeof data.expand !== 'boolean') || (typeof data.url !== 'string')) {
+        return false
+    }
+    if (!data.url.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)) {
+        return false
+    }
+    if (data.url.length > 1000) {
+        return false
+    }
+    if (Object.keys(data).length !== 2) {
+        return false
+    }
+    return true
+}
+
+exports.validateVoteData = (data) => {
+    if (!Array.isArray(data.options) || (typeof data.subject !== 'string')) {
+        return false
+    }
+    if (data.options.length > 10 || data.subject.length > 100) {
+        return false
+    }
+    if (Object.keys(data).length !== 2) {
+        return false
+    }
+    return true
+}
+
+exports.validateFormData = (data) => {
+    if (!Array.isArray(data.questions)) {
+        return false
+    }
+    if (data.questions.length > 10) {
+        return false
+    }
+    if (Object.keys(data).length !== 1) {
+        return false
+    }
+    return true
+}
+
+exports.validateVoteOptions = (options) => {
+    for (let option of options) {
+        if(!this.validateLabel(option.label)) {
+            return false
+        }
+        if (!Array.isArray(option.votes)) {
+            return false
+        }
+    }
+    return true
+}
+
+exports.validateLabel = (label) => {
+    if (typeof label !== 'string') {
+        return false
+    }
+    if (label.length > 100) {
+        return false
+    }
+    return true
+}
+
+exports.validateFormQuestions = (questions) => {
+    for (let question of questions) {
+        if(!this.validateLabel(question.label)) {
+            return false
+        }
+        if (!Array.isArray(question.answers)) {
+            return false
+        }
+    }
+    return true
+}
+
+exports.validateAnswers = (answers) => {
+    for (let answer of answers) {
+        if ((typeof answer.question !== 'string') || (typeof answer.content !== 'string')) {
+            return false
+        }
+        if (answer.content.length > 200) {
+            return false
+        }
+    }
+    return true
 }
