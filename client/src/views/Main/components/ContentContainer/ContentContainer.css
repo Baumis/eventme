@@ -19,9 +19,18 @@
     padding-top: 20px;
 }
 
+.content-container-title-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#4c5c68;
+    font-size: 25px;
+}
+
 .content-container-info-block h1 {
     font-size: 25px;
     margin-bottom: 10px;
+    padding: 0px 10px;
     font-weight: 500;
     color:#4c5c68; 
 }

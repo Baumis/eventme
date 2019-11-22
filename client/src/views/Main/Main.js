@@ -37,8 +37,8 @@ class Main extends Component {
         return (
             <div className="Main">
                 <Navbar />
-                <MainHeader />
-                <ContentContainer click={this.createEvent} />
+                <MainHeader createEvent={this.createEvent} />
+                <ContentContainer />
                 {this.props.VisibilityStore.signModal ?
                     <SignModal />
                     : null
