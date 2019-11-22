@@ -6,10 +6,6 @@ import CreateButton from '../CreateButton/CreateButton'
 class ContentContainer extends Component {
 
     render() {
-        if (this.props.VisibilityStore.signModal) {
-            return <div className="content-container"></div>
-        }
-
         return (
             <div className="content-container">
                 <div className="content-container-info-row">

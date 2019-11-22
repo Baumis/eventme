@@ -8,17 +8,19 @@
     display: flex;
     justify-content: space-evenly;
     max-width: 900px;
+    width: 100%;
 }
 
 .content-container-info-block{
     display: flex;
+    align-items: center;
     flex-direction: column;
-    width: 40%;
-    padding-top: 10px;
+    width: 300px;
+    padding-top: 20px;
 }
 
 .content-container-info-block h1 {
-    font-size: 30px;
+    font-size: 25px;
     margin-bottom: 10px;
     font-weight: 500;
     color:#4c5c68; 
@@ -26,6 +28,7 @@
 
 .content-container-info-block p  {
     font-size: 16px;
+    text-align: center;
     color: #4c5c68;
 }
 
@@ -36,6 +39,7 @@
     }
 
     .content-container-info-block   {
-        width: auto;
+        width: 300px;
+        padding: 20px 0px 20px 0px;
     }
 }
