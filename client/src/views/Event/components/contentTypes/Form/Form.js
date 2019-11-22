@@ -31,6 +31,10 @@ class Form extends Component {
         )
     }
 
+    findOldAnswer = (questionId) =>  {
+        return this.props.component.interactiveData.find(answer => answer.questionId === questionId)
+    }
+
     render() {
         const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         return (

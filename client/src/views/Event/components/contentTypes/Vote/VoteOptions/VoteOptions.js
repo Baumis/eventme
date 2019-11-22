@@ -42,7 +42,7 @@ const VoteOptions = (props) => {
                 :
                 <div className="vote-component-button-row">
                     <div className="vote-component-results-button" onClick={() => props.toggleResults(true)}>
-                        results
+                        Results
                     </div> 
                     <div className="vote-component-submit-button" onClick={() => props.submit()}>
                         Submit

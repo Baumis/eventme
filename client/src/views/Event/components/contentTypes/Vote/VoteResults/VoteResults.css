@@ -48,3 +48,7 @@
     cursor: pointer;
     margin: 20px 3px;
 }
+
+.vote-component-back-icon{
+    font-size: 12px;
+}
