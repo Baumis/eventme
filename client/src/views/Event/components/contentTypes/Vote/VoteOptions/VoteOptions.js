@@ -13,12 +13,12 @@ const VoteOptions = (props) => {
                     <div key={i} className="vote-component-option-container">
                         <div className="vote-component-option-row">
                             {props.edit ?
-                                <div className="vote-component-delete-button" onClick={() => props.removeOption(i)}>
+                                <div className="vote-component-delete-button" onClick={() => props.removeOption(option._id)}>
                                     <FaTrash />
                                 </div>
                                 :
-                                <div className="vote-component-vote-button" onClick={() => props.setChecked(i)}>
-                                    {props.checked === i ?
+                                <div className="vote-component-vote-button" onClick={() => props.setChecked(option._id)}>
+                                    {props.checked === option._id ?
                                         <div className="vote-component-radio-marker"> </div>
                                         : null
                                     }
@@ -28,7 +28,7 @@ const VoteOptions = (props) => {
                                 <EditableWrapper
                                     html={option.label}
                                     editable={!props.edit}
-                                    onChange={(event) => props.changeOption(i, event)}
+                                    onChange={(event) => props.changeOption(option._id, event)}
                                 />
                             </div>
                         </div>

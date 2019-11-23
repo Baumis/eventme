@@ -31,7 +31,7 @@ class Header extends Component {
                     <h1>{this.props.EventStore.event.label}</h1>
                     <h3>{moment(this.props.EventStore.event.startDate).format('DD.MM.YYYY')}</h3>
                 </div>
-                {this.props.isGuest ?
+                {this.props.isGuest() ?
                     <div className="event-header-status-row">
                         <StatusBar />
                     </div>
