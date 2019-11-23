@@ -15,17 +15,26 @@ class Form extends Component {
 
     componentDidMount() {
         const answerObjects = this.props.component.data.questions.map(question => {
-            const oldAnswer = this.props.component.data.answers.find(answer => answer._id === question._id)
-            const answer = oldAnswer ? oldAnswer : ''
-            return { _id: this.question._id, content: answer }
+            const answer = this.getOldAnswerContent(question._id)
+            return { _id: question._id, content: answer.content }
         })
         this.setState({ answerAreas: answerObjects })
     }
 
     syncAnswersWithStore = () => {
-        const inSync = true
-        this.state.answerAreas.forEach( area => {
+        this.props.component.data.questions.forEach(question => {
+            if (!this.state.answerAreas.some(answer => answer._id === question._id)) {
+                const answerAreasCopy = this.state.answerAreas
+                const answer = this.getOldAnswerContent(question._id)
+                answerAreasCopy.push({ _id: question._id, content: answer.content })
+                this.setState({ answerAreasCopy })
+            }
         })
+    }
+
+    getOldAnswerContent = (id) => {
+        const oldAnswer = this.props.component.data.answers.find(answer => answer._id === id)
+        return oldAnswer ? oldAnswer : { content: '' }
     }
 
     newQuestion = () => {
@@ -46,7 +55,16 @@ class Form extends Component {
         this.props.changeData({ ... this.props.component.data })
     }
 
+    changeAnser(questionId, event) {
+        const answerAreasCopy = this.state.answerAreas
+        const answer = answerAreasCopy.find(answer => answer._id === questionId)
+        answer.content = event.target.value
+        this.setState({ answerAreas: answerAreasCopy })
+        console.log(this.state.answerAreas)
+    }
+
     render() {
+        this.syncAnswersWithStore()
         const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         return (
             <div className="form-component">
@@ -62,14 +80,17 @@ class Form extends Component {
                                 }
                                 <div className={"form-component-title " + borderStyle}>
                                     <EditableWrapper
-                                        html={question.content}
+                                        html={question.label}
                                         editable={!this.props.edit}
                                         onChange={(event) => this.changeQuestion(i, event)}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <textarea />
+                                <textarea
+                                    value={this.state.answerAreas.find(answer => answer._id === question._id).content}
+                                    onChange={(event) => this.changeAnser(question._id, event)}
+                                />
                             </div>
                         </div>
                     )}
