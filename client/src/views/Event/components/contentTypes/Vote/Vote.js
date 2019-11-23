@@ -17,7 +17,7 @@ class Vote extends Component {
     }
 
     componentDidMount() {
-        const checked = this.getVotedOption()
+        const checked = this.getVotedOptionIndex()
         const showResults = !!checked
         this.setState({
             showResults,
@@ -25,18 +25,17 @@ class Vote extends Component {
         })
     }
 
-    getVotedOption = () => {
+    getVotedOptionIndex = () => {
         if (!this.props.UserStore.currentUser) {
             return null
         }
         const userId = this.props.UserStore.currentUser._id
-        for (let option of this.props.component.data.options) {
+        for (let [index, option] of this.props.component.data.options.entries()) {
             const voted = option.votes.some(vote => vote === userId)
             if (voted) {
-                return option._id
+                return index
             }
         }
-
         return null
     }
 
@@ -48,11 +47,8 @@ class Vote extends Component {
         this.props.changeData({ ... this.props.component.data, subject: event.target.value })
     }
 
-    changeOption = (optionId, event) => {
-        this.props.component.data.options = this.props.component.data.options.map(option => ({
-            ...option,
-            label: option._id === optionId ? event.target.value : option.label
-        }))
+    changeOption = (optionIndex, event) => {
+        this.props.component.data.options[optionIndex].label = event.target.value
         this.props.changeData({ ... this.props.component.data })
     }
 
@@ -65,8 +61,8 @@ class Vote extends Component {
         this.props.changeData({ ... this.props.component.data })
     }
 
-    removeOption = (optionId) => {
-        this.props.component.data.options = this.props.component.data.options.filter(option => option._id !== optionId)
+    removeOption = (optionIndex) => {
+        this.props.component.data.options.splice(optionIndex, 1)
         this.props.changeData({ ... this.props.component.data })
     }
 
@@ -91,9 +87,11 @@ class Vote extends Component {
             return
         }
 
+        const optionId = this.props.component.data.options[this.state.checked]._id
+
         this.setState({ loading: true })
 
-        const response = await this.props.EventStore.addVoteToVoteComponent(this.props.component._id, this.state.checked)
+        const response = await this.props.EventStore.addVoteToVoteComponent(this.props.component._id, optionId)
 
         if (response) {
             this.setState({ showResults: true, loading: false })
@@ -103,8 +101,8 @@ class Vote extends Component {
         }
     }
 
-    setChecked = (optionId) => {
-        this.setState({ checked: optionId })
+    setChecked = (optionIndex) => {
+        this.setState({ checked: optionIndex })
     }
 
     render() {

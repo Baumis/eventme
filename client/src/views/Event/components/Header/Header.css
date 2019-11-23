@@ -17,7 +17,6 @@
 }
 
 .event-header h1{
-    padding-top: 90px;
     text-shadow: 1px 1px rgba(0,0,0,0.2);
 }
 .event-header h3{
@@ -26,11 +25,16 @@
 }
 
 .event-header-content{
+    margin-top: -35px;
+}
+
+.event-header-content-wrapper{
     height: 100%;
     max-width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .event-header-status-row{
