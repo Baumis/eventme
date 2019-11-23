@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import './Form.css'
 import Questions from './Questions/Questions'
 import Submitted from './Submitted/Submitted'
+import Answers from './Answers/Answers'
 
 class Form extends Component {
 
@@ -127,8 +128,8 @@ class Form extends Component {
         this.setState({ submittedAll: hasSubmitted })
     }
 
-    showAnswers = () => {
-
+    toggleAnswers = () => {
+        this.setState({ showAnswers: !this.state.showAnswers})
     }
 
     render() {
@@ -137,11 +138,23 @@ class Form extends Component {
             this.syncAnswersWithStore()
         }
 
+        if(this.state.showAnswers && this.props.isCreator()){
+            return (
+                <div className="form-component">
+                    <Answers
+                        toggleAnswers={this.toggleAnswers}
+                        component={this.props.component}
+                    />
+                </div>
+            )
+        }
+
         if (this.state.submittedAll && !this.props.edit) {
             return (
                 <div className="form-component">
                     <Submitted
-                        showAnswers={this.showAnswers}
+                        toggleAnswers={this.toggleAnswers}
+                        isCreator={this.props.isCreator}
                     />
                 </div>
             )
@@ -159,7 +172,8 @@ class Form extends Component {
                     changeQuestion={this.changeQuestion}
                     newQuestion={this.newQuestion}
                     removeQuestion={this.removeQuestion}
-                    showAnswers={this.showAnswers}
+                    toggleAnswers={this.toggleAnswers}
+                    isCreator={this.props.isCreator}
                 />
             </div>
         )

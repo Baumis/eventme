@@ -9,7 +9,7 @@ class Questions extends Component {
 
     getContent = (questionId) => {
         const answer = this.props.answerAreas.find(answer => answer.question === questionId)
-        return answer? answer.content : ' '
+        return answer ? answer.content : ' '
     }
 
     render() {
@@ -48,8 +48,15 @@ class Questions extends Component {
                         add question
                         </div>
                     :
-                    <div className="form-component-submit-button" onClick={() => this.props.submit()}>
-                        {this.props.loading ? <Spinner /> : 'Submit'}
+                    <div className="form-component-button-row">
+                        {this.props.isCreator() ?
+                            <div className="form-component-answers-button" onClick={() => this.props.toggleAnswers()}>
+                                Answers
+                            </div>
+                            : null}
+                        <div className="form-component-submit-button" onClick={() => this.props.submit()}>
+                            {this.props.loading ? <Spinner /> : 'Submit'}
+                        </div>
                     </div>
                 }
             </div>
