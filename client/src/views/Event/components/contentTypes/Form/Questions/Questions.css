@@ -76,6 +76,7 @@
     border-radius: 5px;
     cursor: pointer;
     margin: 20px 3px;
+    box-sizing: border-box;
 }
 
 .form-component-delete-button {

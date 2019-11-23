@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Questions.css'
-import EditableWrapper from '../../../EditableWrapper/EditableWrapper'
+import QuestionField from './QuestionField'
 import Spinner from '../../../../../../commonComponents/Spinner/Spinner'
-import { FaTrash } from 'react-icons/fa'
 
 class Questions extends Component {
 
@@ -13,34 +12,23 @@ class Questions extends Component {
     }
 
     render() {
-        const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         return (
             <div className="form-component-questions">
                 <div className="form-component-question-area">
                     {this.props.component.data.questions.map((question, i) =>
-                        <div key={i} className="form-component-question">
-                            <div className="form-component-title-row">
-                                {this.props.edit ?
-                                    <div className="form-component-delete-button" onClick={() => this.props.removeQuestion(i)}>
-                                        <FaTrash />
-                                    </div>
-                                    : null
-                                }
-                                <div className={"form-component-title " + borderStyle}>
-                                    <EditableWrapper
-                                        html={question.label}
-                                        editable={!this.props.edit}
-                                        onChange={(event) => this.props.changeQuestion(i, event)}
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <textarea
-                                    value={this.getContent(question._id)}
-                                    onChange={(event) => this.props.changeAnswer(question._id, event)}
-                                />
-                            </div>
-                        </div>
+                        <QuestionField
+                            getContent={this.getContent}
+                            question={question}
+                            key={i}
+                            index={i}
+                            edit={this.props.edit}
+                            changeAnswer={this.props.changeAnswer}
+                            changeQuestion={this.props.changeQuestion}
+                            newQuestion={this.props.newQuestion}
+                            removeQuestion={this.props.removeQuestion}
+                            answerAreas={this.props.answerAreas}
+                            syncAnswersWithStore={this.props.syncAnswersWithStore}
+                        />
                     )}
                 </div>
                 {this.props.edit ?

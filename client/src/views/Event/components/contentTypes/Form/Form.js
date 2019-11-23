@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { toJS } from 'mobx'
 import './Form.css'
 import Questions from './Questions/Questions'
 import Submitted from './Submitted/Submitted'
@@ -72,12 +73,19 @@ class Form extends Component {
     }
 
     changeQuestion = (questionIndex, event) => {
+        console.log(questionIndex)
         this.props.component.data.questions[questionIndex].label = event.target.value
         this.props.changeData({ ... this.props.component.data })
         this.hasSubmittedAll()
     }
 
     changeAnswer = (questionId, event) => {
+
+        if(!questionId){
+            alert('Save event before answering.')
+            return
+        }
+
         const answerAreasCopy = [... this.state.answerAreas]
         const answer = answerAreasCopy.find(answer => answer.question === questionId)
         answer.content = event.target.value
@@ -133,11 +141,8 @@ class Form extends Component {
     }
 
     render() {
-
-        if (!this.inSync()) {
-            this.syncAnswersWithStore()
-        }
-
+        console.log('component:', toJS(this.props.component.data.questions))
+        console.log('state:', this.state.answerAreas)
         if(this.state.showAnswers && this.props.isCreator()){
             return (
                 <div className="form-component">
@@ -174,6 +179,7 @@ class Form extends Component {
                     removeQuestion={this.removeQuestion}
                     toggleAnswers={this.toggleAnswers}
                     isCreator={this.props.isCreator}
+                    syncAnswersWithStore={this.syncAnswersWithStore}
                 />
             </div>
         )
