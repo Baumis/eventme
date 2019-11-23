@@ -71,6 +71,11 @@ const removeComment = async (id, messageId, commentId) => {
     return response.data
 }
 
+const addVoteToVoteComponent = async (id, componentId, optionId) => {
+    const response = await http.post(`${baseUrl}/${id}/components/${componentId}/data/options/${optionId}/votes`)
+    return response.data
+}
+
 export default {
     getOne,
     create,
@@ -85,5 +90,6 @@ export default {
     addMessage,
     addComment,
     removeMessage,
-    removeComment
+    removeComment,
+    addVoteToVoteComponent
 }

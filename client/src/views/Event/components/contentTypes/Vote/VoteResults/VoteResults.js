@@ -5,14 +5,17 @@ import { FaChevronLeft } from 'react-icons/fa'
 const VoteResults = (props) => {
 
     const votePercentage = (id) => {
-        const allVotes = props.votes.length
+        let allVotes = 0
+        for (let option of props.options) {
+            allVotes += option.votes.length
+        }
         const targetVoteCount = voteCount(id)
         return (targetVoteCount / allVotes) * 100
     }
 
-    const voteCount = (id) => {
-        const votes = props.votes.filter(vote => vote.optionId === id)
-        return votes.length
+    const voteCount = (optionId) => {
+        const option = props.options.find(option => option._id === optionId)
+        return option.votes.length
     }
 
     return (
@@ -21,8 +24,8 @@ const VoteResults = (props) => {
                 <div key={i} className="vote-component-option-container">
                     <div className="vote-component-title-row">
                         <div className={"vote-component-title"}>
-                            <div>{option.content}</div>
-                            <div className="vote-component-vote-count">{voteCount(option._id) + ' votes'}</div>
+                            <div>{option.label}</div>
+                            <div className="vote-component-vote-count">{option.votes.length + ' votes'}</div>
                         </div>
                     </div>
                     <div className="vote-component-status-bar">

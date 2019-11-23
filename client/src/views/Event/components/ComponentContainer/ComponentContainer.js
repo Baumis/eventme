@@ -16,6 +16,7 @@ class ComponentContainer extends Component {
                             index={i}
                             component={component}
                             isCreator={this.props.isCreator}
+                            isGuest={this.props.isGuest}
                         />
                     ))}
                 </div>
