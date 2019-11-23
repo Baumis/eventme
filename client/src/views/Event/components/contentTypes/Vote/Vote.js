@@ -67,7 +67,7 @@ class Vote extends Component {
     }
 
     submit = async () => {
-        if (this.state.checked === null) {
+        if (this.state.checked === null || this.state.checked >= this.props.component.data.options.length) {
             alert('Select an option before submitting!')
             return
         }
