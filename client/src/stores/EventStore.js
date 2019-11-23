@@ -220,6 +220,15 @@ class EventStore {
         this.event = event
         this.saved = false
     }
+
+    async addVoteToVoteComponent(componentId, optionId) {
+        try {
+            this.event = await eventService.addVoteToVoteComponent(this.event._id, componentId, optionId)
+            return this.event
+        } catch {
+            return null
+        }
+    }
 }
 
 decorate(EventStore, {

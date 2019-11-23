@@ -11,7 +11,7 @@ const EventContent = (props) => {
     return (
         <div className="event-content">
             <div className="event-content-status-row">
-                {props.isGuest ?
+                {props.isGuest() ?
                     <StatusBar />
                     :
                     <JoinEventModal
@@ -27,6 +27,7 @@ const EventContent = (props) => {
             {props.activeTab === "Event" ?
                 <ComponentContainer
                     isCreator={props.isCreator}
+                    isGuest={props.isGuest}
                     toggleNewComponentModal={props.toggleNewComponentModal}
                 />
                 : props.activeTab === "Discussion" ?

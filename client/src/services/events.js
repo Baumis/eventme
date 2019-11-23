@@ -76,6 +76,11 @@ const addAnswersToFormComponent = async (id, componentId, answers) => {
     return response.data
 }
 
+const addVoteToVoteComponent = async (id, componentId, optionId) => {
+    const response = await http.post(`${baseUrl}/${id}/components/${componentId}/data/options/${optionId}/votes`)
+    return response.data
+}
+
 export default {
     getOne,
     create,
@@ -91,5 +96,6 @@ export default {
     addComment,
     removeMessage,
     removeComment,
-    addAnswersToFormComponent
+    addAnswersToFormComponent,
+    addVoteToVoteComponent
 }

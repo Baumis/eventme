@@ -43,7 +43,9 @@ class Event extends Component {
     startEventUpdater = () => {
         this.setState({
             updater: setInterval(() => {
-                this.props.EventStore.getEvent(this.props.EventStore.event._id)
+                if (this.isGuest()) {
+                    this.props.EventStore.getEvent(this.props.EventStore.event._id)
+                }
             }, 20000)
         })
     }
@@ -93,14 +95,14 @@ class Event extends Component {
         return (
             <div className='Event'>
                 <Navbar/>
-                <Header isGuest={this.isGuest()} />
+                <Header isGuest={this.isGuest} />
                 <EventContent
                     isCreator={this.isCreator}
                     activeTab={this.state.activeTab}
                     toggleNewComponentModal={this.toggleNewComponentModal}
                     active={this.state.activeTab}
                     changeActive={this.changeActive}
-                    isGuest={this.isGuest()}
+                    isGuest={this.isGuest}
                     inviteKey={this.props.inviteKey}
                     closeInviteModal={this.closeInviteModal}
                 />

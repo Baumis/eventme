@@ -35,8 +35,12 @@ class Form extends Component {
     }
 
     getOldAnswerContent = (question) => {
-        console.log(question)
-        const oldAnswer = question.answers.find(answer => answer.user === this.props.UserStore.currentUser._id)
+        if (!this.props.UserStore.currentUser) {
+            return { content: '' }
+        }
+
+        const userId = this.props.UserStore.currentUser._id
+        const oldAnswer = question.answers.find(answer => answer.user === userId)
         return oldAnswer ? oldAnswer : { content: '' }
     }
 
@@ -70,7 +74,7 @@ class Form extends Component {
         const response = await this.props.EventStore.addAnswersToFormComponent(this.props.component._id, this.state.answerAreas)
         this.setState({ loading: false })
 
-        if(!response) {
+        if (!response) {
             alert('Could not submit. Try again.')
         }
     }

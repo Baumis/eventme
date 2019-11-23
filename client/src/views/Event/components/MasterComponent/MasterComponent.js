@@ -60,6 +60,7 @@ class MasterComponent extends Component {
                     edit={this.state.editMode}
                     changeData={this.changeComponentData}
                     isCreator={this.props.isCreator}
+                    isGuest={this.props.isGuest}
                 />
             </div>
         )

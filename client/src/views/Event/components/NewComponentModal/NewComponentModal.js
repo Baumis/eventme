@@ -25,9 +25,8 @@ class NewComponentModal extends Component {
                     type: 'VOTE',
                     data: {
                         subject: 'Title',
-                        options: [{ content: 'option' }]
-                    },
-                    interactiveData: []
+                        options: [{ label: 'option', votes: [] }]
+                    }
                 },
                 FORM: {
                     type: 'FORM',
