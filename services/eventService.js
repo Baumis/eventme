@@ -10,17 +10,6 @@ exports.populate = async (event) => {
         .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 
-    populatedEvent.components.sort((a, b) =>
-        a.position - b.position
-    )
-
-    populatedEvent.components.forEach(component => {
-        if (component.type === 'INVITE_LINK') {
-            component.data = {}
-            component.data.inviteKey = populatedEvent.inviteKey
-        }
-    })
-
     const getUser = async userId => {
         if (userId === null) {
             return null
@@ -49,6 +38,27 @@ exports.populate = async (event) => {
     })
 
     populatedEvent.discussion = await Promise.all(discussionPromises)
+
+    populatedEvent.components.sort((a, b) =>
+        a.position - b.position
+    )
+    
+    for (let component of populatedEvent.components) {
+        if (component.type === 'INVITE_LINK') {
+            component.data = {}
+            component.data.inviteKey = populatedEvent.inviteKey
+        } else if (component.type === 'FORM') {
+            const questionPromises = component.data.questions.map(async question => {
+                const answerPromises = question.answers.map(async answer => {
+                    answer.user = await getUser(answer.user)
+                    return answer
+                })
+                question.answers = await Promise.all(answerPromises)
+                return question
+            })
+            component.data.questions = await Promise.all(questionPromises)
+        }
+    }
 
     return populatedEvent
 }

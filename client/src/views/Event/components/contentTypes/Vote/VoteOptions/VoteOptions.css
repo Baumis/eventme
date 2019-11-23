@@ -30,8 +30,8 @@
     border-radius: 50%;
     border: 1px solid darkgrey;
     outline-offset: inherit;
-    min-width: 21px;
-    min-height: 21px;
+    min-width: 22px;
+    min-height: 22px;
     cursor: pointer;
 }
 

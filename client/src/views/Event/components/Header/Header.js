@@ -27,9 +27,11 @@ class Header extends Component {
         }
         return (
             <div style={headerStyles} className="event-header" id="slower-picture">
-                <div className="event-header-content">
-                    <h1>{this.props.EventStore.event.label}</h1>
-                    <h3>{moment(this.props.EventStore.event.startDate).format('DD.MM.YYYY')}</h3>
+                <div className="event-header-content-wrapper">
+                    <div className="event-header-content">
+                        <h1>{this.props.EventStore.event.label}</h1>
+                        <h3>{moment(this.props.EventStore.event.startDate).format('DD.MM.YYYY')}</h3>
+                    </div>
                 </div>
                 {this.props.isGuest() ?
                     <div className="event-header-status-row">
