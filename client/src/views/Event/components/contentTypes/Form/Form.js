@@ -6,6 +6,28 @@ import { FaTrash } from 'react-icons/fa'
 
 class Form extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            answerAreas: []
+        }
+    }
+
+    componentDidMount() {
+        const answerObjects = this.props.component.data.questions.map(question => {
+            const oldAnswer = this.props.component.data.answers.find(answer => answer._id === question._id)
+            const answer = oldAnswer ? oldAnswer : ''
+            return { _id: this.question._id, content: answer }
+        })
+        this.setState({ answerAreas: answerObjects })
+    }
+
+    syncAnswersWithStore = () => {
+        const inSync = true
+        this.state.answerAreas.forEach( area => {
+        })
+    }
+
     newQuestion = () => {
         const question = {
             label: 'question',
