@@ -11,7 +11,8 @@ class Form extends Component {
         this.state = {
             answerAreas: [],
             loading: false,
-            submittedAll: false
+            submittedAll: false,
+            showAnswers: false
         }
     }
 
@@ -25,7 +26,7 @@ class Form extends Component {
             if (!this.state.answerAreas.some(answer => answer.question === question._id)) {
                 const answerAreasCopy = this.state.answerAreas
                 const answer = this.getOldAnswerContent(question)
-                if(question._id){
+                if (question._id) {
                     answerAreasCopy.push({ question: question._id, content: answer.content })
                     this.setState({ answerAreasCopy })
                 }
@@ -126,16 +127,22 @@ class Form extends Component {
         this.setState({ submittedAll: hasSubmitted })
     }
 
+    showAnswers = () => {
+
+    }
+
     render() {
 
-        if(!this.inSync()){
+        if (!this.inSync()) {
             this.syncAnswersWithStore()
         }
 
         if (this.state.submittedAll && !this.props.edit) {
             return (
                 <div className="form-component">
-                    <Submitted />
+                    <Submitted
+                        showAnswers={this.showAnswers}
+                    />
                 </div>
             )
         }
@@ -152,6 +159,7 @@ class Form extends Component {
                     changeQuestion={this.changeQuestion}
                     newQuestion={this.newQuestion}
                     removeQuestion={this.removeQuestion}
+                    showAnswers={this.showAnswers}
                 />
             </div>
         )
