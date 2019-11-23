@@ -18,7 +18,7 @@ class Vote extends Component {
 
     componentDidMount() {
         const checked = this.getVotedOptionIndex()
-        const showResults = !!checked
+        const showResults = checked === null ? false : true
         this.setState({
             showResults,
             checked
@@ -31,7 +31,7 @@ class Vote extends Component {
         }
         const userId = this.props.UserStore.currentUser._id
         for (let [index, option] of this.props.component.data.options.entries()) {
-            const voted = option.votes.some(vote => vote === userId)
+            const voted = option.votes.some(vote => vote._id === userId)
             if (voted) {
                 return index
             }

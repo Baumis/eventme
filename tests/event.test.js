@@ -1208,7 +1208,7 @@ describe('POST /api/events/:id/components/:componentId/data/options/:optionId/vo
         const voteComponentInEnd = res.body.components.find(component => component._id === voteComponentId)
         const optionInEnd = voteComponentInEnd.data.options.find(option => option._id === optionId)
 
-        expect(optionInEnd.votes).toContainEqual(user2._id)
+        expect(optionInEnd.votes).toContainEqual({ _id: user2._id, name: user2.name, avatar: user2.avatar })
     })
 
     it('should succeed and change vote', async () => {
@@ -1226,8 +1226,8 @@ describe('POST /api/events/:id/components/:componentId/data/options/:optionId/vo
         const optionInEnd = voteComponentInEnd.data.options.find(option => option._id === optionId)
         const option2InEnd = voteComponentInEnd.data.options.find(option => option._id === option2Id)
 
-        expect(optionInEnd.votes).not.toContainEqual(user2._id)
-        expect(option2InEnd.votes).toContainEqual(user2._id)
+        expect(optionInEnd.votes).not.toContainEqual({ _id: user2._id, name: user2.name, avatar: user2.avatar })
+        expect(option2InEnd.votes).toContainEqual({ _id: user2._id, name: user2.name, avatar: user2.avatar })
     })
 
     it('should fail if not guest or creator', async () => {
@@ -1270,7 +1270,7 @@ describe('DELETE /api/events/:id/components/:componentId/data/options/:optionId/
         const voteComponentInEnd = res.body.components.find(component => component._id === voteComponentId)
         const optionInEnd = voteComponentInEnd.data.options.find(option => option._id === optionId)
 
-        expect(optionInEnd.votes).not.toContainEqual(user2._id)
+        expect(optionInEnd.votes).not.toContainEqual({ _id: user2._id, name: user2.name, avatar: user2.avatar })
     })
 
     it('should fail if not guest or creator', async () => {
@@ -1327,7 +1327,11 @@ describe('POST /api/events/:id/components/:componentId/data/questions', () => {
             const questionInEnd = formComponentInEnd.data.questions.find(question => question._id === answer.question)
             const answerObject = {
                 content: answer.content,
-                user: user2._id
+                user: {
+                    _id: user2._id,
+                    name: user2.name,
+                    avatar: user2.avatar
+                }
             }
             expect(questionInEnd.answers).toContainEqual(answerObject)
         }
