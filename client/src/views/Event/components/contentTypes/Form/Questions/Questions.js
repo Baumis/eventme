@@ -7,6 +7,11 @@ import { FaTrash } from 'react-icons/fa'
 
 class Questions extends Component {
 
+    getContent = (questionId) => {
+        const answer = this.props.answerAreas.find(answer => answer.question === questionId)
+        return answer? answer.content : ' '
+    }
+
     render() {
         const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         return (
@@ -16,7 +21,7 @@ class Questions extends Component {
                         <div key={i} className="form-component-question">
                             <div className="form-component-title-row">
                                 {this.props.edit ?
-                                    <div className="form-component-delete-button" onClick={() => this.removeQuestion(i)}>
+                                    <div className="form-component-delete-button" onClick={() => this.props.removeQuestion(i)}>
                                         <FaTrash />
                                     </div>
                                     : null
@@ -31,7 +36,7 @@ class Questions extends Component {
                             </div>
                             <div>
                                 <textarea
-                                    value={this.props.answerAreas.find(answer => answer.question === question._id).content}
+                                    value={this.getContent(question._id)}
                                     onChange={(event) => this.props.changeAnswer(question._id, event)}
                                 />
                             </div>
