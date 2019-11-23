@@ -57,6 +57,13 @@ exports.populate = async (event) => {
                 return question
             })
             component.data.questions = await Promise.all(questionPromises)
+        } else if (component.type === 'VOTE') {
+            const optionPromises = component.data.options.map(async option => {
+                const votePromises = option.votes.map(async vote => await getUser(vote))
+                option.votes = await Promise.all(votePromises)
+                return option
+            })
+            component.data.options = await Promise.all(optionPromises)
         }
     }
 
