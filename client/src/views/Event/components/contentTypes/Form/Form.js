@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Form.css'
-import EditableWrapper from '../../EditableWrapper/EditableWrapper'
-import { FaTrash } from 'react-icons/fa'
+import Questions from './Questions/Questions'
 
 class Form extends Component {
 
@@ -20,7 +19,6 @@ class Form extends Component {
             return { question: question._id, content: answer.content }
         })
         this.setState({ answerAreas: answerObjects })
-        console.log(answerObjects)
     }
 
     syncAnswersWithStore = () => {
@@ -47,6 +45,7 @@ class Form extends Component {
     newQuestion = () => {
         const question = {
             label: 'question',
+            answers: []
         }
         this.props.component.data.questions.push(question)
         this.props.changeData({ ... this.props.component.data })
@@ -57,13 +56,13 @@ class Form extends Component {
         this.props.changeData({ ... this.props.component.data })
     }
 
-    changeQuestion(questionIndex, event) {
+    changeQuestion = (questionIndex, event) => {
         this.props.component.data.questions[questionIndex].label = event.target.value
         this.props.changeData({ ... this.props.component.data })
     }
 
-    changeAnser(questionId, event) {
-        const answerAreasCopy = this.state.answerAreas
+    changeAnswer = (questionId, event) => {
+        const answerAreasCopy = [ ... this.state.answerAreas ] 
         const answer = answerAreasCopy.find(answer => answer.question === questionId)
         answer.content = event.target.value
         this.setState({ answerAreas: answerAreasCopy })
@@ -81,45 +80,18 @@ class Form extends Component {
 
     render() {
         this.syncAnswersWithStore()
-        const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         return (
             <div className="form-component">
-                <div className="form-component-questions">
-                    {this.props.component.data.questions.map((question, i) =>
-                        <div key={i} className="form-component-question">
-                            <div className="form-component-title-row">
-                                {this.props.edit ?
-                                    <div className="form-component-delete-button" onClick={() => this.removeQuestion(i)}>
-                                        <FaTrash />
-                                    </div>
-                                    : null
-                                }
-                                <div className={"form-component-title " + borderStyle}>
-                                    <EditableWrapper
-                                        html={question.label}
-                                        editable={!this.props.edit}
-                                        onChange={(event) => this.changeQuestion(i, event)}
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <textarea
-                                    value={this.state.answerAreas.find(answer => answer.question === question._id).content}
-                                    onChange={(event) => this.changeAnser(question._id, event)}
-                                />
-                            </div>
-                        </div>
-                    )}
-                </div>
-                {this.props.edit ?
-                    <div className="form-component-add-button" onClick={() => this.newQuestion()}>
-                        add question
-                        </div>
-                    :
-                    <div className="form-component-submit-button" onClick={() => this.submit()}>
-                        Submit
-                        </div>
-                }
+                <Questions
+                    component={this.props.component}
+                    loading={this.state.loading}
+                    answerAreas={this.state.answerAreas}
+                    edit={this.props.edit}
+                    changeAnswer={this.changeAnswer}
+                    submit={this.submit}
+                    changeQuestion={this.changeQuestion}
+                    newQuestion={this.newQuestion}
+                />
             </div>
         )
     }
