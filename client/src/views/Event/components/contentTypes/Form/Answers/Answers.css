@@ -1,8 +1,7 @@
-
 .form-component-answers {
     display: flex;
     flex-direction: column;
-    
+
 }
 
 .form-component-back-button {
@@ -17,4 +16,31 @@
     border-radius: 5px;
     cursor: pointer;
     margin: 20px 3px;
+}
+
+.form-component-answers-content{
+    flex: 1;
+    overflow-y: auto;
+}
+
+.form-component-answers-question{
+    font-size: 18px;
+    color: #4c5c68;
+    padding: 5px 0px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.form-component-answers-user-name {
+    font-size: 14px;
+    color: #4c5c68;
+}
+
+.form-component-answers-user-content {
+    font-size: 14px;
+    color: #4c5c68;
+}
+
+.form-component-back-button-row {
+    display: flex;
+    justify-content: center;
 }

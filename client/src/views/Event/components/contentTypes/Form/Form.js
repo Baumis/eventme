@@ -141,8 +141,6 @@ class Form extends Component {
     }
 
     render() {
-        console.log('component:', toJS(this.props.component.data.questions))
-        console.log('state:', this.state.answerAreas)
         if(this.state.showAnswers && this.props.isCreator()){
             return (
                 <div className="form-component">
