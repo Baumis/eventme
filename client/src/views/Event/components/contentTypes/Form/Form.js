@@ -9,31 +9,34 @@ class Form extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            answerAreas: []
+            answerAreas: [],
+            loading: false
         }
     }
 
     componentDidMount() {
         const answerObjects = this.props.component.data.questions.map(question => {
-            const answer = this.getOldAnswerContent(question._id)
-            return { _id: question._id, content: answer.content }
+            const answer = this.getOldAnswerContent(question)
+            return { question: question._id, content: answer.content }
         })
         this.setState({ answerAreas: answerObjects })
+        console.log(answerObjects)
     }
 
     syncAnswersWithStore = () => {
         this.props.component.data.questions.forEach(question => {
-            if (!this.state.answerAreas.some(answer => answer._id === question._id)) {
+            if (!this.state.answerAreas.some(answer => answer.question === question._id)) {
                 const answerAreasCopy = this.state.answerAreas
-                const answer = this.getOldAnswerContent(question._id)
-                answerAreasCopy.push({ _id: question._id, content: answer.content })
+                const answer = this.getOldAnswerContent(question)
+                answerAreasCopy.push({ question: question._id, content: answer.content })
                 this.setState({ answerAreasCopy })
             }
         })
     }
 
-    getOldAnswerContent = (id) => {
-        const oldAnswer = this.props.component.data.answers.find(answer => answer._id === id)
+    getOldAnswerContent = (question) => {
+        console.log(question)
+        const oldAnswer = question.answers.find(answer => answer.user === this.props.UserStore.currentUser._id)
         return oldAnswer ? oldAnswer : { content: '' }
     }
 
@@ -51,16 +54,25 @@ class Form extends Component {
     }
 
     changeQuestion(questionIndex, event) {
-        this.props.component.data.questions[questionIndex].content = event.target.value
+        this.props.component.data.questions[questionIndex].label = event.target.value
         this.props.changeData({ ... this.props.component.data })
     }
 
     changeAnser(questionId, event) {
         const answerAreasCopy = this.state.answerAreas
-        const answer = answerAreasCopy.find(answer => answer._id === questionId)
+        const answer = answerAreasCopy.find(answer => answer.question === questionId)
         answer.content = event.target.value
         this.setState({ answerAreas: answerAreasCopy })
-        console.log(this.state.answerAreas)
+    }
+
+    submit = async () => {
+        this.setState({ loading: true })
+        const response = await this.props.EventStore.addAnswersToFormComponent(this.props.component._id, this.state.answerAreas)
+        this.setState({ loading: false })
+
+        if(!response) {
+            alert('Could not submit. Try again.')
+        }
     }
 
     render() {
@@ -88,7 +100,7 @@ class Form extends Component {
                             </div>
                             <div>
                                 <textarea
-                                    value={this.state.answerAreas.find(answer => answer._id === question._id).content}
+                                    value={this.state.answerAreas.find(answer => answer.question === question._id).content}
                                     onChange={(event) => this.changeAnser(question._id, event)}
                                 />
                             </div>
@@ -100,7 +112,7 @@ class Form extends Component {
                         add question
                         </div>
                     :
-                    <div className="form-component-submit-button">
+                    <div className="form-component-submit-button" onClick={() => this.submit()}>
                         Submit
                         </div>
                 }
@@ -109,4 +121,4 @@ class Form extends Component {
     }
 }
 
-export default inject('UserStore')(observer(Form))
+export default inject('EventStore', 'UserStore')(observer(Form))

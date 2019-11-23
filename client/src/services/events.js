@@ -71,6 +71,11 @@ const removeComment = async (id, messageId, commentId) => {
     return response.data
 }
 
+const addAnswersToFormComponent = async (id, componentId, answers) => {
+    const response = await http.post(`${baseUrl}/${id}/components/${componentId}/data/questions`, { answers })
+    return response.data
+}
+
 export default {
     getOne,
     create,
@@ -85,5 +90,6 @@ export default {
     addMessage,
     addComment,
     removeMessage,
-    removeComment
+    removeComment,
+    addAnswersToFormComponent
 }

@@ -137,6 +137,15 @@ class EventStore {
         }
     }
 
+    async addAnswersToFormComponent(componentId, answers){
+        try {
+            this.event = await eventService.addAnswersToFormComponent(this.event._id, componentId, answers)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
     setValue(value, field) {
         const newEvent = {
             ...this.event,
@@ -226,6 +235,7 @@ decorate(EventStore, {
     deleteComment: action,
     getComponent: action,
     addComponent: action,
+    addAnswersToFormComponent: action,
     saveComponentData: action,
     save: action
 })

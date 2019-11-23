@@ -32,8 +32,7 @@ class NewComponentModal extends Component {
                 FORM: {
                     type: 'FORM',
                     data: {
-                        questions: [{ label: 'question' }],
-                        answers: []
+                        questions: [{ label: 'question', answers: [] }],
                     }
                 }
             }
