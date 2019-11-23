@@ -2,6 +2,7 @@ import React from 'react'
 import './VoteOptions.css'
 import EditableWrapper from '../../../EditableWrapper/EditableWrapper'
 import { FaTrash } from 'react-icons/fa'
+import Spinner from '../../../../../../commonComponents/Spinner/Spinner'
 
 const VoteOptions = (props) => {
 
@@ -45,7 +46,7 @@ const VoteOptions = (props) => {
                         Results
                     </div> 
                     <div className="vote-component-submit-button" onClick={() => props.submit()}>
-                        Submit
+                        {props.loading ? <Spinner/> : 'Submit'}
                     </div>
                 </div>
             }

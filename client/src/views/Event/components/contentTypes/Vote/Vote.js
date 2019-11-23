@@ -11,7 +11,8 @@ class Vote extends Component {
         super(props)
         this.state = {
             checked: null,
-            showResults: false
+            showResults: false,
+            loading: false
         }
     }
 
@@ -40,11 +41,11 @@ class Vote extends Component {
     }
 
     toggleResults = (boolean) => {
-        this.setState({showResults: boolean})
+        this.setState({ showResults: boolean })
     }
 
     changeSubject = (event) => {
-        this.props.changeData({ ... this.props.component.data, subject: event.target.value})
+        this.props.changeData({ ... this.props.component.data, subject: event.target.value })
     }
 
     changeOption = (optionId, event) => {
@@ -90,9 +91,16 @@ class Vote extends Component {
             return
         }
 
-        await this.props.EventStore.addVoteToVoteComponent(this.props.component._id, this.state.checked)
+        this.setState({ loading: true })
 
-        this.setState({showResults: true})
+        const response = await this.props.EventStore.addVoteToVoteComponent(this.props.component._id, this.state.checked)
+
+        if (response) {
+            this.setState({ showResults: true, loading: false })
+        } else {
+            this.setState({ loading: false })
+            alert('Could not submit, try again.')
+        }
     }
 
     setChecked = (optionId) => {
@@ -126,6 +134,7 @@ class Vote extends Component {
                         changeOption={this.changeOption}
                         removeOption={this.removeOption}
                         toggleResults={this.toggleResults}
+                        loading={this.state.loading}
                     />
                 }
             </div>
