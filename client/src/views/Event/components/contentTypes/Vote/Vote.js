@@ -28,14 +28,14 @@ class Vote extends Component {
     }
 
     changeOption = (optionIndex, event) => {
-        this.props.component.data.options[optionIndex].content = event.target.value
+        this.props.component.data.options[optionIndex].label = event.target.value
         this.props.changeData({ ... this.props.component.data })
     }
 
     newOptions = () => {
         const option = {
-            _id: this.generateUUIDv4(),
-            content: 'new option'
+            label: 'new option',
+            votes: []
         }
         this.props.component.data.options.push(option)
         this.props.changeData({ ... this.props.component.data })
@@ -46,7 +46,7 @@ class Vote extends Component {
         this.props.changeData({ ... this.props.component.data })
     }
 
-    submit = () => {
+    submit = async () => {
         if (this.state.checked === null) {
             return
         }
@@ -56,12 +56,10 @@ class Vote extends Component {
             return
         }
 
-        const vote = {
-            userId: this.props.UserStore.currentUser._id,
-            optionId: this.props.component.data.options[this.state.checked]._id
-        }
+        const optionId = this.props.component.data.options[this.state.checked]._id
 
-        this.props.component.interactiveData.push(vote)
+        await this.props.EventStore.addVoteToVoteComponent(this.props.component._id, optionId)
+
         this.setState({showResults: true})
     }
 
@@ -71,13 +69,13 @@ class Vote extends Component {
 
     hasVoted = () => {
         const userId = this.props.UserStore.currentUser._id
-        return this.props.component.interactiveData.some(vote => vote.userId === userId)
-    }
-
-    generateUUIDv4 = () => {
-        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-        )
+        for (let option of this.props.component.data.options) {
+            const hasVoted = option.votes.some(vote => vote === userId)
+            if (hasVoted) {
+                return true
+            }
+        }
+        return false
     }
 
     render() {
@@ -94,7 +92,6 @@ class Vote extends Component {
                 {this.state.showResults ?
                     <VoteResults
                         options={this.props.component.data.options}
-                        votes={this.props.component.interactiveData}
                         toggleResults={this.toggleResults}
                     />
                     :
@@ -115,4 +112,4 @@ class Vote extends Component {
     }
 }
 
-export default inject('UserStore')(observer(Vote))
+export default inject('EventStore', 'UserStore')(observer(Vote))

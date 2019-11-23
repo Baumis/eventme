@@ -26,7 +26,7 @@ const VoteOptions = (props) => {
                             }
                             <div className={"vote-component-option " + borderStyle}>
                                 <EditableWrapper
-                                    html={option.content}
+                                    html={option.label}
                                     editable={!props.edit}
                                     onChange={(event) => props.changeOption(i, event)}
                                 />
