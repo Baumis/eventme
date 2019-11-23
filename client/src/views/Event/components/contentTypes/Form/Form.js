@@ -36,23 +36,13 @@ class Form extends Component {
         })
     }
 
-    inSync = () => {
-        let inSync = true
-        this.props.component.data.questions.forEach(question => {
-            if (!this.state.answerAreas.some(answer => answer.question === question._id)) {
-                inSync = false
-            }
-        })
-        return inSync
-    }
-
     getOldAnswerContent = (question) => {
         if (!this.props.UserStore.currentUser) {
             return { content: '' }
         }
 
         const userId = this.props.UserStore.currentUser._id
-        const oldAnswer = question.answers.find(answer => answer.user === userId)
+        const oldAnswer = question.answers.find(answer => answer.user._id === userId)
         return oldAnswer ? oldAnswer : { content: '' }
     }
 
@@ -73,7 +63,6 @@ class Form extends Component {
     }
 
     changeQuestion = (questionIndex, event) => {
-        console.log(questionIndex)
         this.props.component.data.questions[questionIndex].label = event.target.value
         this.props.changeData({ ... this.props.component.data })
         this.hasSubmittedAll()
