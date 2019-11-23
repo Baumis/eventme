@@ -25,29 +25,22 @@ class NewComponentModal extends Component {
                     type: 'VOTE',
                     data: {
                         subject: 'Title',
-                        options: [{ _id: this.generateUUIDv4(), content: 'option' }]
+                        options: [{ content: 'option' }]
                     },
                     interactiveData: []
                 },
                 FORM: {
                     type: 'FORM',
                     data: {
-                        questions: [{ _id: this.generateUUIDv4(), content: 'title' }]
-                    },
-                    interactiveData: []
+                        questions: [{ label: 'question' }],
+                        answers: []
+                    }
                 }
             }
         }
     }
 
-    generateUUIDv4 = () => {
-        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-        )
-    }
-
     createComponent = (type) => {
-        console.log(this.state.typeData[type])
         this.props.EventStore.createComponent(this.state.typeData[type])
         this.props.close()
     }

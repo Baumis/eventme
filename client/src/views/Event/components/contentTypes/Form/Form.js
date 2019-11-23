@@ -8,31 +8,20 @@ class Form extends Component {
 
     newQuestion = () => {
         const question = {
-            content: 'title',
-            _id: this.generateUUIDv4()
+            label: 'question',
         }
         this.props.component.data.questions.push(question)
         this.props.changeData({ ... this.props.component.data })
     }
 
-    removeQuestion = (optionIndex) => {
-        this.props.component.data.questions.splice(optionIndex, 1)
+    removeQuestion = (questionIndex) => {
+        this.props.component.data.questions.splice(questionIndex, 1)
         this.props.changeData({ ... this.props.component.data })
     }
 
-    changeQuestion(index, event) {
-        this.props.component.data.questions[index].content = event.target.value
+    changeQuestion(questionIndex, event) {
+        this.props.component.data.questions[questionIndex].content = event.target.value
         this.props.changeData({ ... this.props.component.data })
-    }
-
-    generateUUIDv4 = () => {
-        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-        )
-    }
-
-    findOldAnswer = (questionId) =>  {
-        return this.props.component.interactiveData.find(answer => answer.questionId === questionId)
     }
 
     render() {
