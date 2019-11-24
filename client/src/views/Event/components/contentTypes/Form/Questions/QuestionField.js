@@ -5,10 +5,6 @@ import { FaTrash } from 'react-icons/fa'
 
 class QuestionField extends Component {
 
-    componentDidUpdate(){
-        this.props.syncAnswersWithStore()
-    }
-
     getContent = (questionId) => {
         const answer = this.props.answerAreas.find(answer => answer.question === questionId)
         return answer ? answer.content : ''

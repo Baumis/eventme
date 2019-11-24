@@ -18,20 +18,24 @@ class Form extends Component {
     }
 
     componentDidMount() {
-        this.syncAnswersWithStore()
-    }
-
-    syncAnswersWithStore = () => {
-        const answerAreasCopy = [ ... this.state.answerAreas ]
+        const answerAreasCopy = [... this.state.answerAreas]
         this.props.component.data.questions.forEach(question => {
             if (!this.state.answerAreas.some(answer => answer.question === question._id)) {
                 if (question._id) {
                     const answer = this.getOldAnswerContent(question)
-                    answerAreasCopy.push({ question: question._id, content: answer.content })
+                    answerAreasCopy.push({ question: question._id, content: answer })
                     this.setState({ answerAreas: answerAreasCopy })
                 }
             }
         })
+    }
+
+    addIdToAnswerAreas = (questionId) => {
+        const answerAreasCopy = this.state.answerAreas.slice()
+        answerAreasCopy.push({ question: questionId, content: '' })
+        console.log(questionId, answerAreasCopy)
+        this.setState({ answerAreas: answerAreasCopy })
+        console.log(this.state.answerAreas)
     }
 
     getOldAnswerContent = (question) => {
@@ -41,7 +45,7 @@ class Form extends Component {
 
         const userId = this.props.UserStore.currentUser._id
         const oldAnswer = question.answers.find(answer => answer.user._id === userId)
-        return oldAnswer ? oldAnswer : { content: '' }
+        return oldAnswer ? oldAnswer.content : ''
     }
 
     newQuestion = () => {
@@ -64,9 +68,13 @@ class Form extends Component {
     }
 
     changeAnswer = (questionId, event) => {
-        if(!questionId){
+        if (!questionId) {
             alert('Save event before answering.')
             return
+        }
+
+        if (!this.state.answerAreas.find(answer => answer.question === questionId)) {
+            this.addIdToAnswerAreas(questionId)
         }
 
         const answerAreasCopy = [... this.state.answerAreas]
@@ -101,15 +109,13 @@ class Form extends Component {
 
         if (!response) {
             alert('Could not submit. Try again.')
-        } else {
-            this.syncAnswersWithStore()
         }
     }
 
     hasSubmittedAll = () => {
         let hasSubmitted = true
         this.props.component.data.questions.forEach(question => {
-            if (!this.getOldAnswerContent(question).content) {
+            if (!this.getOldAnswerContent(question)) {
                 hasSubmitted = false
             }
         })
@@ -117,11 +123,11 @@ class Form extends Component {
     }
 
     toggleAnswers = () => {
-        this.setState({ showAnswers: !this.state.showAnswers})
+        this.setState({ showAnswers: !this.state.showAnswers })
     }
 
     render() {
-        if(this.state.showAnswers && this.props.isCreator() && !this.props.edit){
+        if (this.state.showAnswers && this.props.isCreator() && !this.props.edit) {
             return (
                 <div className="form-component">
                     <Answers
