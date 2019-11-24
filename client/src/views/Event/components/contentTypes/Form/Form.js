@@ -20,7 +20,7 @@ class Form extends Component {
 
     componentDidMount() {
         this.syncAnswersWithStore()
-        this.hasSubmittedAll()
+        this.updateSubmittedAll()
     }
 
     syncAnswersWithStore = () => {
@@ -53,19 +53,19 @@ class Form extends Component {
         }
         this.props.component.data.questions.push(question)
         this.props.changeData({ ... this.props.component.data })
-        this.hasSubmittedAll()
+        this.updateSubmittedAll()
     }
 
     removeQuestion = (questionIndex) => {
         this.props.component.data.questions.splice(questionIndex, 1)
         this.props.changeData({ ... this.props.component.data })
-        this.hasSubmittedAll()
+        this.updateSubmittedAll()
     }
 
     changeQuestion = (questionIndex, event) => {
         this.props.component.data.questions[questionIndex].label = event.target.value
         this.props.changeData({ ... this.props.component.data })
-        this.hasSubmittedAll()
+        this.updateSubmittedAll()
     }
 
     changeAnswer = (questionId, event) => {
@@ -78,7 +78,7 @@ class Form extends Component {
         const answer = answerAreasCopy.find(answer => answer.question === questionId)
         answer.content = event.target.value
         this.setState({ answerAreas: answerAreasCopy })
-        this.hasSubmittedAll()
+        this.updateSubmittedAll()
     }
 
     findEmptyAnswers = () => {
@@ -108,12 +108,12 @@ class Form extends Component {
         if (!response) {
             alert('Could not submit. Try again.')
         } else {
-            this.hasSubmittedAll()
+            this.updateSubmittedAll()
             this.syncAnswersWithStore()
         }
     }
 
-    hasSubmittedAll = () => {
+    updateSubmittedAll = () => {
         let hasSubmitted = true
         this.props.component.data.questions.forEach(question => {
             if (!this.getOldAnswerContent(question).content) {
