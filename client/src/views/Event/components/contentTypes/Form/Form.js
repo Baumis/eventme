@@ -24,13 +24,13 @@ class Form extends Component {
     }
 
     syncAnswersWithStore = () => {
+        const answerAreasCopy = [ ... this.state.answerAreas ]
         this.props.component.data.questions.forEach(question => {
             if (!this.state.answerAreas.some(answer => answer.question === question._id)) {
-                const answerAreasCopy = this.state.answerAreas
-                const answer = this.getOldAnswerContent(question)
                 if (question._id) {
+                    const answer = this.getOldAnswerContent(question)
                     answerAreasCopy.push({ question: question._id, content: answer.content })
-                    this.setState({ answerAreasCopy })
+                    this.setState({ answerAreas: answerAreasCopy })
                 }
             }
         })
@@ -69,7 +69,6 @@ class Form extends Component {
     }
 
     changeAnswer = (questionId, event) => {
-
         if(!questionId){
             alert('Save event before answering.')
             return
@@ -87,7 +86,6 @@ class Form extends Component {
     }
 
     submit = async () => {
-
         if (!this.props.EventStore.saved) {
             alert('Save the event before submitting.')
             return

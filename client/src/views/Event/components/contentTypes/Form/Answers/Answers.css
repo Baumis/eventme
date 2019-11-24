@@ -21,7 +21,8 @@
 .form-component-answers-content{
     flex: 1;
     overflow-y: auto;
-    max-height: 300px;
+    max-height: 290px;
+    margin-top: 25px;
 }
 
 .form-component-answers-question{

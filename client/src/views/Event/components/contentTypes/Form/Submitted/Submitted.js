@@ -4,7 +4,7 @@ import './Submitted.css'
 const Submitted = (props) => {
     return (
         <div className="form-component-submitted">
-            Your answers has been submitted.
+            Your answers have been submitted.
             <div className="form-component-button-row">
                 {props.isCreator() ?
                     <div className="form-component-answers-button" onClick={() => props.toggleAnswers()}>
