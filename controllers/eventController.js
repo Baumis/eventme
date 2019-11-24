@@ -14,7 +14,7 @@ exports.getOne = async (request, response) => {
         if (senderRole === roles.CREATOR) {
             response.json(Event.format(event))
         } else if (senderRole === roles.GUEST) {
-            response.json(Event.formatForGuest(event))
+            response.json(Event.formatForGuest(event, request.senderId))
         } else {
             response.status(403).json({ error: 'Event is private' })
         }
@@ -82,7 +82,7 @@ exports.removeGuest = async (request, response) => {
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
-            response.json(Event.formatForGuest(updatedEvent))
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -96,7 +96,12 @@ exports.getOneWithInviteKey = async (request, response) => {
         }
 
         const event = await eventService.populate(request.event)
-        response.json(Event.formatForGuest(event))
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(event))
+        } else {
+            response.json(Event.formatForGuest(event, request.senderId))
+        }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
     }
@@ -112,7 +117,11 @@ exports.addGuestWithInviteKey = async (request, response) => {
 
         logService.joinedEvent(request.senderId, updatedEvent._id, updatedEvent.label)
 
-        response.json(Event.formatForGuest(updatedEvent))
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(updatedEvent))
+        } else {
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
+        }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
     }
@@ -141,7 +150,7 @@ exports.setStatus = async (request, response) => {
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
-            response.json(Event.formatForGuest(updatedEvent))
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -159,7 +168,7 @@ exports.addMessage = async (request, response) => {
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
-            response.json(Event.formatForGuest(updatedEvent))
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -179,7 +188,7 @@ exports.addComment = async (request, response) => {
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
-            response.json(Event.formatForGuest(updatedEvent))
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -203,7 +212,7 @@ exports.removeMessage = async (request, response) => {
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
-            response.json(Event.formatForGuest(updatedEvent))
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -233,7 +242,7 @@ exports.removeComment = async (request, response) => {
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
-            response.json(Event.formatForGuest(updatedEvent))
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -250,7 +259,7 @@ exports.addVoteToVoteComponent = async (request, response) => {
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
-            response.json(Event.formatForGuest(updatedEvent))
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -267,7 +276,7 @@ exports.removeVoteFromVoteComponent = async (request, response) => {
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
-            response.json(Event.formatForGuest(updatedEvent))
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
@@ -285,7 +294,7 @@ exports.addAnswersToFormComponent = async (request, response) => {
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
         } else {
-            response.json(Event.formatForGuest(updatedEvent))
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
