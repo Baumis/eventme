@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { toJS } from 'mobx'
 import './Form.css'
 import Questions from './Questions/Questions'
 import Submitted from './Submitted/Submitted'
@@ -21,9 +20,11 @@ class Form extends Component {
         const answerAreasCopy = [... this.state.answerAreas]
         this.props.component.data.questions.forEach(question => {
 
-            if (!this.state.answerAreas.some(answer => answer.question === question._id)) {
-                const answer = this.getOldAnswerContent(question)
-                answerAreasCopy.push({ question: question._id, content: answer })
+            if (!answerAreasCopy.some(answer => answer.question === question._id)) {
+                if (question._id) {
+                    const answer = this.getOldAnswerContent(question)
+                    answerAreasCopy.push({ question: question._id, content: answer })
+                }
             }
 
         })
