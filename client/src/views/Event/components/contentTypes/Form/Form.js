@@ -83,13 +83,14 @@ class Form extends Component {
         this.setState({ answerAreas: answerAreasCopy })
     }
 
-    checkForEmptyAnswers = () => {
-        return this.props.component.data.questions.some(question => {
-            return (
-                this.state.answerAreas.find(answer => answer.question === question._id
-                    && answer.content === '')
-            )
-        })
+    hasEmptyAnswers = () => {
+        for (let question of this.props.component.data.questions) {
+            const answer = this.state.answerAreas.find(answer => answer.question === question._id)
+            if (!answer || answer.content === '') {
+                return true
+            }
+        }
+        return false
     }
 
     submit = async () => {
@@ -103,7 +104,7 @@ class Form extends Component {
             return
         }
 
-        if (this.checkForEmptyAnswers()) {
+        if (this.hasEmptyAnswers()) {
             alert('You can\'t submit empty answers.')
             return
         }
