@@ -1,4 +1,4 @@
-import { observable, decorate, action, runInAction } from 'mobx'
+import { observable, decorate, action, runInAction, toJS } from 'mobx'
 import eventService from '../services/events'
 
 class EventStore {
@@ -8,7 +8,7 @@ class EventStore {
     async initializeEvent(eventId) {
         try {
             this.event = await eventService.getOne(eventId)
-            console.log('event initialized: ', this.event)
+            console.log('event initialized: ', toJS(this.event))
             return this.event
         } catch (error) {
             this.event = null
@@ -137,6 +137,15 @@ class EventStore {
         }
     }
 
+    async addAnswersToFormComponent(componentId, answers){
+        try {
+            this.event = await eventService.addAnswersToFormComponent(this.event._id, componentId, answers)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
     setValue(value, field) {
         const newEvent = {
             ...this.event,
@@ -235,6 +244,7 @@ decorate(EventStore, {
     deleteComment: action,
     getComponent: action,
     addComponent: action,
+    addAnswersToFormComponent: action,
     saveComponentData: action,
     save: action
 })

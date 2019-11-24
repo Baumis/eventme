@@ -1,80 +1,174 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { toJS } from 'mobx'
 import './Form.css'
-import EditableWrapper from '../../EditableWrapper/EditableWrapper'
-import { FaTrash } from 'react-icons/fa'
+import Questions from './Questions/Questions'
+import Submitted from './Submitted/Submitted'
+import Answers from './Answers/Answers'
 
 class Form extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            answerAreas: [],
+            loading: false,
+            submittedAll: false,
+            showAnswers: false
+        }
+    }
+
+    componentDidMount() {
+        this.syncAnswersWithStore()
+        this.updateSubmittedAll()
+    }
+
+    syncAnswersWithStore = () => {
+        const answerAreasCopy = [ ... this.state.answerAreas ]
+        this.props.component.data.questions.forEach(question => {
+            if (!this.state.answerAreas.some(answer => answer.question === question._id)) {
+                if (question._id) {
+                    const answer = this.getOldAnswerContent(question)
+                    answerAreasCopy.push({ question: question._id, content: answer.content })
+                    this.setState({ answerAreas: answerAreasCopy })
+                }
+            }
+        })
+    }
+
+    getOldAnswerContent = (question) => {
+        if (!this.props.UserStore.currentUser) {
+            return { content: '' }
+        }
+
+        const userId = this.props.UserStore.currentUser._id
+        const oldAnswer = question.answers.find(answer => answer.user._id === userId)
+        return oldAnswer ? oldAnswer : { content: '' }
+    }
+
     newQuestion = () => {
         const question = {
-            content: 'title',
-            _id: this.generateUUIDv4()
+            label: 'question',
+            answers: []
         }
         this.props.component.data.questions.push(question)
         this.props.changeData({ ... this.props.component.data })
+        this.updateSubmittedAll()
     }
 
-    removeQuestion = (optionIndex) => {
-        this.props.component.data.questions.splice(optionIndex, 1)
+    removeQuestion = (questionIndex) => {
+        this.props.component.data.questions.splice(questionIndex, 1)
         this.props.changeData({ ... this.props.component.data })
+        this.updateSubmittedAll()
     }
 
-    changeQuestion(index, event) {
-        this.props.component.data.questions[index].content = event.target.value
+    changeQuestion = (questionIndex, event) => {
+        this.props.component.data.questions[questionIndex].label = event.target.value
         this.props.changeData({ ... this.props.component.data })
+        this.updateSubmittedAll()
     }
 
-    generateUUIDv4 = () => {
-        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-        )
+    changeAnswer = (questionId, event) => {
+        if(!questionId){
+            alert('Save event before answering.')
+            return
+        }
+
+        const answerAreasCopy = [... this.state.answerAreas]
+        const answer = answerAreasCopy.find(answer => answer.question === questionId)
+        answer.content = event.target.value
+        this.setState({ answerAreas: answerAreasCopy })
+        this.updateSubmittedAll()
     }
 
-    findOldAnswer = (questionId) =>  {
-        return this.props.component.interactiveData.find(answer => answer.questionId === questionId)
+    findEmptyAnswers = () => {
+        return this.state.answerAreas.find(answer => answer.content === '')
+    }
+
+    submit = async () => {
+        if (!this.props.EventStore.saved) {
+            alert('Save the event before submitting.')
+            return
+        }
+
+        if (!this.props.isGuest()) {
+            alert('You have to join the event to submit.')
+            return
+        }
+
+        if (this.findEmptyAnswers()) {
+            alert('You can\'t submit empty answers.')
+            return
+        }
+
+        this.setState({ loading: true })
+        const response = await this.props.EventStore.addAnswersToFormComponent(this.props.component._id, this.state.answerAreas)
+        this.setState({ loading: false })
+
+        if (!response) {
+            alert('Could not submit. Try again.')
+        } else {
+            this.updateSubmittedAll()
+            this.syncAnswersWithStore()
+        }
+    }
+
+    updateSubmittedAll = () => {
+        let hasSubmitted = true
+        this.props.component.data.questions.forEach(question => {
+            if (!this.getOldAnswerContent(question).content) {
+                hasSubmitted = false
+            }
+        })
+        this.setState({ submittedAll: hasSubmitted })
+    }
+
+    toggleAnswers = () => {
+        this.setState({ showAnswers: !this.state.showAnswers})
     }
 
     render() {
-        const borderStyle = this.props.edit ? 'text-editable-mode' : ''
+        if(this.state.showAnswers && this.props.isCreator()){
+            return (
+                <div className="form-component">
+                    <Answers
+                        toggleAnswers={this.toggleAnswers}
+                        component={this.props.component}
+                    />
+                </div>
+            )
+        }
+
+        if (this.state.submittedAll && !this.props.edit) {
+            return (
+                <div className="form-component">
+                    <Submitted
+                        toggleAnswers={this.toggleAnswers}
+                        isCreator={this.props.isCreator}
+                    />
+                </div>
+            )
+        }
+
         return (
             <div className="form-component">
-                <div className="form-component-questions">
-                    {this.props.component.data.questions.map((question, i) =>
-                        <div key={i} className="form-component-question">
-                            <div className="form-component-title-row">
-                                {this.props.edit ?
-                                    <div className="form-component-delete-button" onClick={() => this.removeQuestion(i)}>
-                                        <FaTrash />
-                                    </div>
-                                    : null
-                                }
-                                <div className={"form-component-title " + borderStyle}>
-                                    <EditableWrapper
-                                        html={question.content}
-                                        editable={!this.props.edit}
-                                        onChange={(event) => this.changeQuestion(i, event)}
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <textarea />
-                            </div>
-                        </div>
-                    )}
-                </div>
-                {this.props.edit ?
-                    <div className="form-component-add-button" onClick={() => this.newQuestion()}>
-                        add question
-                        </div>
-                    :
-                    <div className="form-component-submit-button">
-                        Submit
-                        </div>
-                }
+                <Questions
+                    component={this.props.component}
+                    loading={this.state.loading}
+                    answerAreas={this.state.answerAreas}
+                    edit={this.props.edit}
+                    changeAnswer={this.changeAnswer}
+                    submit={this.submit}
+                    changeQuestion={this.changeQuestion}
+                    newQuestion={this.newQuestion}
+                    removeQuestion={this.removeQuestion}
+                    toggleAnswers={this.toggleAnswers}
+                    isCreator={this.props.isCreator}
+                    syncAnswersWithStore={this.syncAnswersWithStore}
+                />
             </div>
         )
     }
 }
 
-export default inject('UserStore')(observer(Form))
+export default inject('EventStore', 'UserStore')(observer(Form))

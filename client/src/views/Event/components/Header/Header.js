@@ -16,7 +16,7 @@ class Header extends Component {
 
     scrollEffect = () => {
         const element = document.getElementById('slower-picture')
-        const yPosition = window.pageYOffset / 20
+        const yPosition = window.pageYOffset / 60
         element.style.top = yPosition + '%'
     }
 
