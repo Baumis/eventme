@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './JoinEventButton.css'
+import Spinner from '../../../../commonComponents/Spinner/Spinner'
 
 class JoinEventModal extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: false
+        }
+    }
 
     join = async () => {
 
@@ -11,10 +19,16 @@ class JoinEventModal extends Component {
             return
         }
 
-        await this.props.EventStore.joinEvent(
+        this.setState({ loading: true })
+        const response = await this.props.EventStore.joinEvent(
             this.props.EventStore.event._id,
             this.props.inviteKey
         )
+        this.setState({ loading: false })
+        if(!response){
+            alert('Could not join, try again.')
+        }
+
         this.props.closeInviteModal()
     }
 
@@ -22,7 +36,7 @@ class JoinEventModal extends Component {
         return (
             <div className="join-event-button-container">
                 <div className="join-event-button" onClick={() => this.join()}>
-                    Join event
+                {this.state.loading ? <Spinner /> : 'Join event'}
                 </div>
             </div>
         )
