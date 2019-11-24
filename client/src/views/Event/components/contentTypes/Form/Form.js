@@ -30,7 +30,7 @@ class Form extends Component {
         })
     }
 
-    addIdToAnswerAreas = (questionId) => {
+    addIdToAnswerAreas = async (questionId) => {
         const answerAreasCopy = this.state.answerAreas.slice()
         answerAreasCopy.push({ question: questionId, content: '' })
         console.log(questionId, answerAreasCopy)
@@ -40,7 +40,7 @@ class Form extends Component {
 
     getOldAnswerContent = (question) => {
         if (!this.props.UserStore.currentUser) {
-            return { content: '' }
+            return ''
         }
 
         const userId = this.props.UserStore.currentUser._id
@@ -73,18 +73,23 @@ class Form extends Component {
             return
         }
 
-        if (!this.state.answerAreas.find(answer => answer.question === questionId)) {
-            this.addIdToAnswerAreas(questionId)
+        const answerAreasCopy = [... this.state.answerAreas]
+        if (!answerAreasCopy.find(answer => answer.question === questionId)) {
+            answerAreasCopy.push({ question: questionId, content: '' })
         }
 
-        const answerAreasCopy = [... this.state.answerAreas]
         const answer = answerAreasCopy.find(answer => answer.question === questionId)
         answer.content = event.target.value
         this.setState({ answerAreas: answerAreasCopy })
     }
 
-    findEmptyAnswers = () => {
-        return this.state.answerAreas.find(answer => answer.content === '')
+    checkForEmptyAnswers = () => {
+        return this.props.component.data.questions.some(question => {
+            return (
+                this.state.answerAreas.find(answer => answer.question === question._id
+                    && answer.content === '')
+            )
+        })
     }
 
     submit = async () => {
@@ -98,7 +103,7 @@ class Form extends Component {
             return
         }
 
-        if (this.findEmptyAnswers()) {
+        if (this.checkForEmptyAnswers()) {
             alert('You can\'t submit empty answers.')
             return
         }
