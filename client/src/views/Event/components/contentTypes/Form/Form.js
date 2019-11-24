@@ -20,22 +20,20 @@ class Form extends Component {
     componentDidMount() {
         const answerAreasCopy = [... this.state.answerAreas]
         this.props.component.data.questions.forEach(question => {
+
             if (!this.state.answerAreas.some(answer => answer.question === question._id)) {
-                if (question._id) {
-                    const answer = this.getOldAnswerContent(question)
-                    answerAreasCopy.push({ question: question._id, content: answer })
-                    this.setState({ answerAreas: answerAreasCopy })
-                }
+                const answer = this.getOldAnswerContent(question)
+                answerAreasCopy.push({ question: question._id, content: answer })
             }
+
         })
+        this.setState({ answerAreas: answerAreasCopy })
     }
 
     addIdToAnswerAreas = async (questionId) => {
         const answerAreasCopy = this.state.answerAreas.slice()
         answerAreasCopy.push({ question: questionId, content: '' })
-        console.log(questionId, answerAreasCopy)
         this.setState({ answerAreas: answerAreasCopy })
-        console.log(this.state.answerAreas)
     }
 
     getOldAnswerContent = (question) => {
