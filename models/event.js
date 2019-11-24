@@ -64,17 +64,31 @@ eventSchema.statics.format = (event) => ({
     discussion: event.discussion
 })
 
-eventSchema.statics.formatForGuest = (event) => ({
-    _id: event._id,
-    label: event.label,
-    startDate: event.startDate,
-    endDate: event.endDate,
-    creator: event.creator,
-    background: event.background,
-    guests: event.guests,
-    components: event.components,
-    discussion: event.discussion
-})
+eventSchema.statics.formatForGuest = (event, guestId) => {
+
+    const formattedComponents = event.components.map(component => {
+        if (component.type === 'FORM') {
+            component.data.questions = component.data.questions.map(question => {
+                question.answers = question.answers.filter(answer => answer.user._id.toString() === guestId)
+                return question
+            })
+        }
+        return component
+    })
+
+    const formattedEvent = {
+        _id: event._id,
+        label: event.label,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        creator: event.creator,
+        background: event.background,
+        guests: event.guests,
+        components: formattedComponents,
+        discussion: event.discussion
+    }
+    return formattedEvent
+}
 
 eventSchema.statics.formatForGhost = (event) => ({
     _id: event._id,
