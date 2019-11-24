@@ -9,6 +9,11 @@ class QuestionField extends Component {
         this.props.syncAnswersWithStore()
     }
 
+    getContent = (questionId) => {
+        const answer = this.props.answerAreas.find(answer => answer.question === questionId)
+        return answer ? answer.content : ''
+    }
+
     render() {
         const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         return (
@@ -30,7 +35,7 @@ class QuestionField extends Component {
                 </div>
                 <div>
                     <textarea
-                        value={this.props.getContent(this.props.question._id)}
+                        value={this.getContent(this.props.question._id)}
                         onChange={(event) => this.props.changeAnswer(this.props.question._id, event)}
                     />
                 </div>

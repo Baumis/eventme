@@ -6,18 +6,12 @@ import Spinner from '../../../../../../commonComponents/Spinner/Spinner'
 
 class Questions extends Component {
 
-    getContent = (questionId) => {
-        const answer = this.props.answerAreas.find(answer => answer.question === questionId)
-        return answer ? answer.content : ' '
-    }
-
     render() {
         return (
             <div className="form-component-questions">
                 <div className="form-component-question-area">
                     {this.props.component.data.questions.map((question, i) =>
                         <QuestionField
-                            getContent={this.getContent}
                             question={question}
                             key={i}
                             index={i}
