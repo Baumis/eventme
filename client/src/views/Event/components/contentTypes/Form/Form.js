@@ -13,14 +13,12 @@ class Form extends Component {
         this.state = {
             answerAreas: [],
             loading: false,
-            submittedAll: false,
             showAnswers: false
         }
     }
 
     componentDidMount() {
         this.syncAnswersWithStore()
-        this.updateSubmittedAll()
     }
 
     syncAnswersWithStore = () => {
@@ -53,19 +51,16 @@ class Form extends Component {
         }
         this.props.component.data.questions.push(question)
         this.props.changeData({ ... this.props.component.data })
-        this.updateSubmittedAll()
     }
 
     removeQuestion = (questionIndex) => {
         this.props.component.data.questions.splice(questionIndex, 1)
         this.props.changeData({ ... this.props.component.data })
-        this.updateSubmittedAll()
     }
 
     changeQuestion = (questionIndex, event) => {
         this.props.component.data.questions[questionIndex].label = event.target.value
         this.props.changeData({ ... this.props.component.data })
-        this.updateSubmittedAll()
     }
 
     changeAnswer = (questionId, event) => {
@@ -78,7 +73,6 @@ class Form extends Component {
         const answer = answerAreasCopy.find(answer => answer.question === questionId)
         answer.content = event.target.value
         this.setState({ answerAreas: answerAreasCopy })
-        this.updateSubmittedAll()
     }
 
     findEmptyAnswers = () => {
@@ -108,19 +102,18 @@ class Form extends Component {
         if (!response) {
             alert('Could not submit. Try again.')
         } else {
-            this.updateSubmittedAll()
             this.syncAnswersWithStore()
         }
     }
 
-    updateSubmittedAll = () => {
+    hasSubmittedAll = () => {
         let hasSubmitted = true
         this.props.component.data.questions.forEach(question => {
             if (!this.getOldAnswerContent(question).content) {
                 hasSubmitted = false
             }
         })
-        this.setState({ submittedAll: hasSubmitted })
+        return hasSubmitted
     }
 
     toggleAnswers = () => {
@@ -128,7 +121,7 @@ class Form extends Component {
     }
 
     render() {
-        if(this.state.showAnswers && this.props.isCreator()){
+        if(this.state.showAnswers && this.props.isCreator() && !this.props.edit){
             return (
                 <div className="form-component">
                     <Answers
@@ -139,7 +132,7 @@ class Form extends Component {
             )
         }
 
-        if (this.state.submittedAll && !this.props.edit) {
+        if (this.hasSubmittedAll() && !this.props.edit) {
             return (
                 <div className="form-component">
                     <Submitted
