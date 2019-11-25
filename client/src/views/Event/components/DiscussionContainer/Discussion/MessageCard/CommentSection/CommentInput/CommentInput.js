@@ -71,7 +71,7 @@ class CommentInput extends Component {
                     <input
                         onChange={this.changeInputValue}
                         value={this.state.commentInput}
-                        placeholder={'write comment'}
+                        placeholder={'comment'}
                     />
                 </div>
                 <div className="comment-input-button-row">
@@ -79,7 +79,7 @@ class CommentInput extends Component {
                         {this.state.sending ?
                             <Spinner />
                             :
-                            <div>comment</div>
+                            <div>send</div>
                         }
                     </div>
                 </div>

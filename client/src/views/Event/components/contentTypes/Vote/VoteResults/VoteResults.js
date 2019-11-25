@@ -35,8 +35,7 @@ const VoteResults = (props) => {
             )}
             <div className="vote-component-button-row">
                 <div className="vote-component-back-button" onClick={() => props.toggleResults(false)}>
-                    <div className="vote-component-back-icon">< FaChevronLeft /></div>
-                    {'vote'}
+                    {'Vote'}
                 </div>
             </div>
         </div>

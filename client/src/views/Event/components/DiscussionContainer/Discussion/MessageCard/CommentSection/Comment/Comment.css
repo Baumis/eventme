@@ -67,7 +67,7 @@
     font-weight: 500;
     color: #1985a1;
     cursor: pointer;
-    word-break:break-all
+    word-break:white-space;
 }
 
 .comment-delete {
@@ -88,4 +88,10 @@
     text-align: start;
     color: #46494c;
     padding: 5px 10px;
+}
+
+@media only screen and (max-width: 450px) {
+    .comment-time {
+        display: none;
+    }
 }
