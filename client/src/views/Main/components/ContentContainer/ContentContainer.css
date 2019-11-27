@@ -18,15 +18,11 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-<<<<<<< HEAD
     justify-content: center;
     padding: 10px;
     width: 280px;
     height: 200px;
     color: #4c5c68;
-=======
-    width: 300px;
->>>>>>> 8eb257eac408353221b301ca6f7044cf8f214a31
 }
 
 .content-container-title-row{
@@ -52,15 +48,3 @@
     margin: 0px; 
     color: #46494c;
 }
-
-/*@media only screen and (max-width: 620px) {
-    .content-container-info-row {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .content-container-info-block   {
-        width: 300px;
-        padding: 20px 0px 20px 0px;
-    }
-}*/
