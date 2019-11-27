@@ -12,14 +12,14 @@ class ContentContainer extends Component {
                     <div className="content-container-info-block">
                         <div className="content-container-title-row">
                         <FaLink />
-                        <h1>Invites</h1>
+                        <h1>Invite</h1>
                     </div>
-                    <p>Use a simple link to invite people to your private events.</p>
+                    <p>Each event has its own invitation link, which can easily be shared to invite guests.</p>
                 </div>
                 <div className="content-container-info-block">
                     <div className="content-container-title-row">
                         <FaPuzzlePiece />
-                        <h1>Editor</h1>
+                        <h1>Edit</h1>
                     </div>
                     <p>Create events fast and customize them with a simple puzzlelike editor.</p>
                 </div>

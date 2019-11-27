@@ -16,14 +16,6 @@ class Main extends Component {
         }
     }
 
-    createEvent = () => {
-        if (this.props.UserStore.currentUser === null) {
-            this.props.VisibilityStore.showSignModal()
-        } else {
-            this.displayEventModal()
-        }
-    }
-
     displayEventModal = () => {
         this.setState({ newEventModal: true })
     }
@@ -37,14 +29,18 @@ class Main extends Component {
         return (
             <div className="Main">
                 <Navbar />
-                <MainHeader createEvent={this.createEvent} />
+                <MainHeader
+                    displayEventModal={this.displayEventModal}
+                />
                 <ContentContainer />
                 {this.props.VisibilityStore.signModal ?
                     <SignModal />
                     : null
                 }
                 {this.state.newEventModal ?
-                    <NewEventModal hide={this.hideEventModal} />
+                    <NewEventModal
+                        hide={this.hideEventModal}
+                    />
                     : null
                 }
             </div>
