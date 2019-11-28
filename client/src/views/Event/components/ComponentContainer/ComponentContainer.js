@@ -14,7 +14,8 @@ class ComponentContainer extends Component {
     }
 
     setEditable = (index) => {
-        this.setState({ editable: index })
+        const value = index === this.state.editable ? null : index
+        this.setState({ editable: value })
     }
 
     moveEditableBackward = () => {

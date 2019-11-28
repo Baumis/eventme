@@ -39,7 +39,7 @@ class MasterComponent extends Component {
                     <div className="master-options-row">
                         <div className={'master-options-edit-button ' + buttonMode}
                             onClick={() => this.props.setEditable(this.props.index)}>
-                            {this.state.editMode ?
+                            {this.props.editable ?
                                 <FaChevronUp />
                                 :
                                 <FaChevronDown />
