@@ -7,15 +7,15 @@ class MainHeader extends Component {
 
     goToProfile = () => {
         if (this.props.UserStore.currentUser === null) {
-            this.props.VisibilityStore.showSignModal()
+            this.props.VisibilityStore.showSignModal(this.goToProfile)
         } else {
-            this.props.history.push(`/profile/${this.props.UserStore.UserStore.currentUser._id}`)
+            this.props.history.push(`/profile/${this.props.UserStore.currentUser._id}`)
         }
     }
 
     createEvent = () => {
         if (this.props.UserStore.currentUser === null) {
-            this.props.VisibilityStore.showSignModal()
+            this.props.VisibilityStore.showSignModal(this.createEvent)
         } else {
             this.props.displayEventModal()
         }

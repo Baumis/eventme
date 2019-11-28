@@ -66,6 +66,11 @@ class SignUp extends Component {
         try {
             await this.props.UserStore.signUp(userObject)
             this.props.closeModal()
+
+            if (this.props.VisibilityStore.onSignSuccess) {
+                this.props.VisibilityStore.onSignSuccess()
+            }
+            
         } catch (error) {
             error.response.data.error === 'Username must be unique' ?
                 alert('This username is already taken.')

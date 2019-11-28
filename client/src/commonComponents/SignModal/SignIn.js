@@ -13,17 +13,17 @@ class SignIn extends Component {
         }
     }
 
-    
-    componentDidMount(){
+
+    componentDidMount() {
         document.addEventListener('keydown', this.handleKey)
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         document.removeEventListener('keydown', this.handleKey)
     }
 
     handleKey = (event) => {
-        if(event.keyCode === 13){
+        if (event.keyCode === 13) {
             this.signIn()
         }
     }
@@ -47,6 +47,11 @@ class SignIn extends Component {
             await this.props.UserStore.signIn(this.state.username, this.state.password)
             this.setState({ loading: false })
             this.props.VisibilityStore.closeSignModal()
+
+            if (this.props.VisibilityStore.onSignSuccess) {
+                this.props.VisibilityStore.onSignSuccess()
+            }
+
         } catch (error) {
             this.setState({ loading: false })
             this.setState({ password: '' })
@@ -58,6 +63,11 @@ class SignIn extends Component {
         try {
             await this.props.UserStore.googleSignIn(response.tokenId)
             this.props.VisibilityStore.closeSignModal()
+
+            if (this.props.VisibilityStore.onSignSuccess) {
+                this.props.VisibilityStore.onSignSuccess()
+            }
+
         } catch (error) {
             this.onSignInFail('Could not sign in')
         }
@@ -102,7 +112,7 @@ class SignIn extends Component {
                         clientId="911838998946-ofev1jb8srpg1qjaak4st5j6huablfvl.apps.googleusercontent.com"
                         buttonText="Google sign in"
                         onSuccess={this.googleSignIn}
-                        onFailure={()  => this.onSignInFail('Could not sign in')}
+                        onFailure={() => this.onSignInFail('Could not sign in')}
                     />
                 </div>
             </div>
