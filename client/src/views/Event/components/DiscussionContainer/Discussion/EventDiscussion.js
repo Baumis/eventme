@@ -33,15 +33,17 @@ class EventDiscussion extends Component {
             <div className="discussion-container">
                 <MessageTextArea />
                 <div className="discussion-messages">
-                    {this.props.EventStore.event.discussion.map((message, i) =>
-                        <MessageCard
-                            key={i}
-                            message={message}
-                            isAuthor={this.isAuthor}
-                            delete={this.delete}
-                        />
-
-                    )}
+                    {this.props.EventStore.event.discussion.length === 0 ?
+                        <div className="no-messages">There are currently no messages</div> :
+                        this.props.EventStore.event.discussion.map((message, i) =>
+                            <MessageCard
+                                key={i}
+                                message={message}
+                                isAuthor={this.isAuthor}
+                                delete={this.delete}
+                            />
+                        )
+                    }
                 </div>
             </div>
         )

@@ -1,15 +1,17 @@
 .refresh-key {
     display: flex;
+    width: 90px;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    color: white;
-    background: #4c5c68;
-    width: 80px;
-    height: 30px;
+    justify-content: space-evenly;
+    background: rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.07);
+    font-size: 14px;
+    padding: 8px 10px 8px 10px;
     margin: 10px 0px 0px 12px;
     border-radius: 5px;
-    font-size: 15px;
     cursor: pointer;
+    color: #46494c;
 }
 
 .refresh-key-content{

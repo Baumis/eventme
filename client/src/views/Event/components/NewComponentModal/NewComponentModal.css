@@ -17,11 +17,12 @@
     flex-direction: column;
     background: white;
     border-radius: 5px;
-    max-width: 400px;
+    width: 345px;
 }
 
 .component-modal-button-row{
     display: flex;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
@@ -30,17 +31,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 90px;
-    height: 90px;
-    margin: 10px;
+    min-width: 95px;
+    height: 95px;
+    margin: 9px;
     font-size: 18px;
     color: #1985a1;
     cursor: pointer;
-    border: 1px solid white;
-    -webkit-box-shadow: 0px 0px 4px -1px rgb(69, 69, 69, 0.5);
-    -moz-box-shadow: 0px 0px 4px -1px rgba(69,69,69,0.5);
-    box-shadow: 0px 0px 4px -1px rgba(69,69,69,0.5);
-    border-radius: 10px;
+    border: 1px solid rgba(69,69,69,0.2);
+    border-radius: 5px;
 }
 
 .component-modal-button label {
@@ -71,16 +69,12 @@
     cursor: pointer;
 }
 
-.component-modal-title {
-    color: rgb(70, 73, 76, 1);
-}
-
 .component-modal-exit-icon:hover {
     color: rgb(70, 73, 76, 0.9);
 }
 
 @media only screen and (max-width: 450px) {
     .component-modal-container {
-        width: 300px;
+        width: 230px;
     }
 }

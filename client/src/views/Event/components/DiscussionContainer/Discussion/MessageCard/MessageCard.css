@@ -1,7 +1,7 @@
 .message-card {
     display: flex;
     flex: 1;
-    padding: 15px;
+    padding: 10px 15px;
     margin: 2px 0px 2px 0px;
     background: transparent;
 }
@@ -87,7 +87,19 @@
     justify-content: flex-start;
     text-align: start;
     color: #46494c;
-    padding-left: 10px;
+    padding: 5px 5px;
+}
+
+.message-card-interaction {
+    padding: 3px;
+}
+
+.message-card-comment-button {
+    color: rgba(0,0,0,0.5);
+    cursor: pointer;
+    font-size: 15px;
+    max-width: 100px;
+    padding-bottom: 5px;
 }
 
 @media only screen and (max-width: 450px) {

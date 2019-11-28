@@ -1,4 +1,4 @@
-import { observable, decorate, action, runInAction } from 'mobx'
+import { observable, decorate, action, runInAction, toJS } from 'mobx'
 import eventService from '../services/events'
 
 class EventStore {
@@ -8,7 +8,7 @@ class EventStore {
     async initializeEvent(eventId) {
         try {
             this.event = await eventService.getOne(eventId)
-            console.log('event initialized: ', this.event)
+            console.log('event initialized: ', toJS(this.event))
             return this.event
         } catch (error) {
             this.event = null
@@ -119,6 +119,33 @@ class EventStore {
         }
     }
 
+    async postComment(messageId, comment) {
+        try {
+            this.event = await eventService.addComment(this.event._id, messageId, comment)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
+    async deleteComment(messageId, commentId){
+        try {
+            this.event = await eventService.removeComment(this.event._id, messageId, commentId)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
+    async addAnswersToFormComponent(componentId, answers){
+        try {
+            this.event = await eventService.addAnswersToFormComponent(this.event._id, componentId, answers)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
     setValue(value, field) {
         const newEvent = {
             ...this.event,
@@ -146,12 +173,9 @@ class EventStore {
         this.saved = false
     }
 
-    createComponent(type, data) {
+    createComponent(component) {
         const event = { ...this.event }
-        event.components.push({
-            type: type,
-            data: data
-        })
+        event.components.push(component)
 
         this.event = event
         this.saved = false
@@ -196,6 +220,15 @@ class EventStore {
         this.event = event
         this.saved = false
     }
+
+    async addVoteToVoteComponent(componentId, optionId) {
+        try {
+            this.event = await eventService.addVoteToVoteComponent(this.event._id, componentId, optionId)
+            return this.event
+        } catch {
+            return null
+        }
+    }
 }
 
 decorate(EventStore, {
@@ -205,13 +238,13 @@ decorate(EventStore, {
     initializeEvent: action,
     getEvent: action,
     setValue: action,
-    setInfoPanelValue: action,
-    changeInfoPanelText: action,
-    deleteInfoPanelValue: action,
-    addInfoPanelValue: action,
-    changeInfoPanelIcon: action,
+    postMessage: action,
+    deleteMessage: action,
+    postComment: action,
+    deleteComment: action,
     getComponent: action,
     addComponent: action,
+    addAnswersToFormComponent: action,
     saveComponentData: action,
     save: action
 })

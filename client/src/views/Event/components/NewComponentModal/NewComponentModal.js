@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './NewComponentModal.css'
-import { FaPen, FaLink, FaImage, FaPoll } from 'react-icons/fa'
+import { FaPen, FaLink, FaImage, FaPoll, FaFileAlt } from 'react-icons/fa'
 
 
 class NewComponentModal extends Component {
@@ -9,17 +9,37 @@ class NewComponentModal extends Component {
         super(props)
         this.state = {
             typeData: {
-                TEXT: { title: 'Your title', content: 'excellent content' },
-                INVITE_LINK: {},
-                PICTURE: { url: '', expand: false },
-                VOTE: { subject: 'New Poll', options: [{ content: 'first option', votes: [] }] },
-                ADDRESS_MAP: { cordinates: [60.1699961,24.9352594]}
+                TEXT: {
+                    type: 'TEXT',
+                    data: { title: 'Title', content: 'content' }
+                },
+                INVITE_LINK: {
+                    type: 'INVITE_LINK',
+                    data: {}
+                },
+                PICTURE: {
+                    type: 'PICTURE',
+                    data: { url: '', expand: false }
+                },
+                VOTE: {
+                    type: 'VOTE',
+                    data: {
+                        subject: 'Title',
+                        options: [{ label: 'option', votes: [] }]
+                    }
+                },
+                FORM: {
+                    type: 'FORM',
+                    data: {
+                        questions: [{ label: 'question', answers: [] }],
+                    }
+                }
             }
         }
     }
 
     createComponent = (type) => {
-        this.props.EventStore.createComponent(type, this.state.typeData[type])
+        this.props.EventStore.createComponent(this.state.typeData[type])
         this.props.close()
     }
 
@@ -40,10 +60,14 @@ class NewComponentModal extends Component {
                             <FaImage />
                             <label>Picture</label>
                         </div>
-                        {/*<div className="component-modal-button" onClick={() => this.createComponent('VOTE')}>
+                        <div className="component-modal-button" onClick={() => this.createComponent('FORM')}>
+                            <FaFileAlt />
+                            <label>Form</label>
+                        </div>
+                        <div className="component-modal-button" onClick={() => this.createComponent('VOTE')}>
                             <FaPoll />
                             <label>Vote</label>
-                        </div>*/}
+                        </div>
                     </div>
                     <div className="component-modal-bottom-row">
                         <div className="component-modal-close" onClick={this.props.close} >

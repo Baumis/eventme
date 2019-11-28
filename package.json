@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon index.js",
+    "local": "cross-env NODE_ENV=local nodemon index.js",
     "heroku-postbuild": "cd ./client && npm install && npm run build",
     "test": "cross-env NODE_ENV=test jest --runInBand",
     "test-watch": "cross-env NODE_ENV=test jest --runInBand --watchAll"

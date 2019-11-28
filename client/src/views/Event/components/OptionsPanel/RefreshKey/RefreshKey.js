@@ -32,7 +32,7 @@ class RefreshKey extends Component {
                     <Spinner />
                     :
                     <div className="refresh-key-content">
-                        <p>renew</p>
+                        <p>Get new link</p>
                     </div>
                 }
             </div>

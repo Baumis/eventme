@@ -4,6 +4,7 @@ import Text from '../contentTypes/Text/Text'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
 import Picture from '../contentTypes/Picture/Picture'
 import Vote from '../contentTypes/Vote/Vote'
+import Form from '../contentTypes/Form/Form'
 import './MasterComponent.css'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import EditorPanel from './EditorPanel/EditorPanel'
@@ -16,7 +17,8 @@ class MasterComponent extends Component {
             TEXT: Text,
             INVITE_LINK: InviteLink,
             PICTURE: Picture,
-            VOTE: Vote
+            VOTE: Vote,
+            FORM: Form
         }
     }
 
@@ -54,10 +56,11 @@ class MasterComponent extends Component {
                 />
 
                 <TagName
-                    data={this.props.component.data}
+                    component={this.props.component}
                     edit={this.state.editMode}
                     changeData={this.changeComponentData}
                     isCreator={this.props.isCreator}
+                    isGuest={this.props.isGuest}
                 />
             </div>
         )

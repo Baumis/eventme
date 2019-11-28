@@ -40,12 +40,13 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
+        default: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
         maxlength: [2048, 'Url too long'],
         match: [/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/, 'Avatar url not valid']
     },
     cover: {
         type: String,
-        default: 'https://picsum.photos/1440/550',
+        default: 'https://images.unsplash.com/photo-1495312040802-a929cd14a6ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2978&q=80',
         maxlength: [2048, 'Url too long'],
         match: [/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/, 'Cover url not valid']
     },

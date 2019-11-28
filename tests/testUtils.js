@@ -48,10 +48,6 @@ exports.newEventObject = {
             }
         },
         {
-            type: 'GUESTS',
-            data: {}
-        },
-        {
             type: 'INVITE_LINK',
             data: {}
         },
@@ -60,6 +56,33 @@ exports.newEventObject = {
             data: {
                 url: 'www.validpictureurl.fi',
                 expand: true
+            }
+        },
+        {
+            type: 'VOTE',
+            data: {
+                subject: 'My subject',
+                options: [
+                    {
+                        label: 'first option'
+                    },
+                    {
+                        label: 'second option'
+                    }
+                ]
+            }
+        },
+        {
+            type: 'FORM',
+            data: {
+                questions: [
+                    {
+                        label: 'What is your name?'
+                    },
+                    {
+                        label: 'What do you eat?'
+                    }
+                ]
             }
         }
     ]

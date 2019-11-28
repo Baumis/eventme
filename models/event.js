@@ -16,21 +16,6 @@ const guestSchema = new mongoose.Schema({
     _id: false
 })
 
-const infoPanelEntrySchema = new mongoose.Schema({
-    icon: {
-        type: String,
-        enum: ['PHONE', 'EMAIL', 'LOCATION', 'INFO', 'TIME', 'DATE', 'CONTACT', 'EMPTY'],
-        default: 'EMPTY',
-        required: [true, 'Infopanel entry logo required']
-    },
-    text: {
-        type: String,
-        default: '',
-        maxlength: [144, 'Infopanel entry text too long']
-    },
-    _id: false
-})
-
 const eventSchema = new mongoose.Schema({
     label: {
         type: String,
@@ -57,11 +42,10 @@ const eventSchema = new mongoose.Schema({
     },
     background: {
         type: String,
-        default: 'https://picsum.photos/1440/550',
+        default: 'https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80',
         maxlength: [2048, 'Url too long'],
         match: [/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/, 'Background url not valid']
     },
-    infoPanel: [infoPanelEntrySchema],
     guests: [guestSchema],
     components: [componentSchema],
     discussion: [messageSchema]
@@ -75,24 +59,36 @@ eventSchema.statics.format = (event) => ({
     creator: event.creator,
     inviteKey: event.inviteKey,
     background: event.background,
-    infoPanel: event.infoPanel,
     guests: event.guests,
     components: event.components,
     discussion: event.discussion
 })
 
-eventSchema.statics.formatForGuest = (event) => ({
-    _id: event._id,
-    label: event.label,
-    startDate: event.startDate,
-    endDate: event.endDate,
-    creator: event.creator,
-    background: event.background,
-    infoPanel: event.infoPanel,
-    guests: event.guests,
-    components: event.components,
-    discussion: event.discussion
-})
+eventSchema.statics.formatForGuest = (event, guestId) => {
+
+    const formattedComponents = event.components.map(component => {
+        if (component.type === 'FORM') {
+            component.data.questions = component.data.questions.map(question => {
+                question.answers = question.answers.filter(answer => answer.user._id.toString() === guestId)
+                return question
+            })
+        }
+        return component
+    })
+
+    const formattedEvent = {
+        _id: event._id,
+        label: event.label,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        creator: event.creator,
+        background: event.background,
+        guests: event.guests,
+        components: formattedComponents,
+        discussion: event.discussion
+    }
+    return formattedEvent
+}
 
 eventSchema.statics.formatForGhost = (event) => ({
     _id: event._id,
@@ -100,8 +96,7 @@ eventSchema.statics.formatForGhost = (event) => ({
     startDate: event.startDate,
     endDate: event.endDate,
     creator: event.creator,
-    background: event.background,
-    infoPanel: event.infoPanel
+    background: event.background
 })
 
 const Event = mongoose.model('Event', eventSchema)

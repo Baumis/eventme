@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './ComponentContainer.css'
 import MasterComponent from '../MasterComponent/MasterComponent.js'
-import ComponentAdder from '../ComponentAdder/ComponentAdder'
+import ComponentAdder from './ComponentAdder/ComponentAdder'
 
 class ComponentContainer extends Component {
 
@@ -16,6 +16,7 @@ class ComponentContainer extends Component {
                             index={i}
                             component={component}
                             isCreator={this.props.isCreator}
+                            isGuest={this.props.isGuest}
                         />
                     ))}
                 </div>

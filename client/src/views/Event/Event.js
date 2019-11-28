@@ -6,7 +6,6 @@ import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import SaveButton from './components/SaveButton/SaveButton'
 import OptionsButton from './components/OptionsButton/OptionsButton'
 import SignModal from '../../commonComponents/SignModal/SignModal'
-import JoinEventModal from './components/JoinEventModal/JoinEventModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
@@ -44,7 +43,9 @@ class Event extends Component {
     startEventUpdater = () => {
         this.setState({
             updater: setInterval(() => {
-                this.props.EventStore.getEvent(this.props.EventStore.event._id)
+                if (this.isGuest()) {
+                    this.props.EventStore.getEvent(this.props.EventStore.event._id)
+                }
             }, 20000)
         })
     }
@@ -94,14 +95,16 @@ class Event extends Component {
         return (
             <div className='Event'>
                 <Navbar/>
-                <Header isGuest={this.isGuest()} />
+                <Header isGuest={this.isGuest} />
                 <EventContent
                     isCreator={this.isCreator}
                     activeTab={this.state.activeTab}
                     toggleNewComponentModal={this.toggleNewComponentModal}
                     active={this.state.activeTab}
                     changeActive={this.changeActive}
-                    isGuest={this.isGuest()}
+                    isGuest={this.isGuest}
+                    inviteKey={this.props.inviteKey}
+                    closeInviteModal={this.closeInviteModal}
                 />
                 {this.isCreator() ?
                     <div>
@@ -119,10 +122,6 @@ class Event extends Component {
                 }
                 {this.props.VisibilityStore.signModal ?
                     <SignModal history={this.props.history} />
-                    : null
-                }
-                {this.state.showInviteModal ?
-                    <JoinEventModal inviteKey={this.props.inviteKey} closeInviteModal={this.closeInviteModal} />
                     : null
                 }
             </div>
