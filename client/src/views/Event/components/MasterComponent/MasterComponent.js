@@ -11,14 +11,16 @@ import EditorPanel from './EditorPanel/EditorPanel'
 
 class MasterComponent extends Component {
 
-    state = {
-        editMode: false,
-        components: {
-            TEXT: Text,
-            INVITE_LINK: InviteLink,
-            PICTURE: Picture,
-            VOTE: Vote,
-            FORM: Form
+    constructor(props) {
+        super(props)
+        this.state = {
+            components: {
+                TEXT: Text,
+                INVITE_LINK: InviteLink,
+                PICTURE: Picture,
+                VOTE: Vote,
+                FORM: Form
+            }
         }
     }
 
@@ -26,21 +28,17 @@ class MasterComponent extends Component {
         this.props.EventStore.editComponentData(this.props.index, data)
     }
 
-    toggleEditMode = () => {
-        this.setState({ editMode: !this.state.editMode })
-    }
-
     render() {
-        const buttonMode = this.state.editMode ? 'editButtonActive' : ''
-        const masterMode = this.state.editMode ? 'editMasterActive' : ''
-        const panelMarginTop = this.state.editMode ? '0px' : '-40px'
+        const buttonMode = this.props.editable ? 'editButtonActive' : ''
+        const masterMode = this.props.editable ? 'editMasterActive' : ''
+        const panelMarginTop = this.props.editable ? '0px' : '-40px'
         const TagName = this.state.components[this.props.component.type || 'TEXT']
         return (
             <div className={'master-component ' + masterMode}>
                 {this.props.isCreator() ?
                     <div className="master-options-row">
                         <div className={'master-options-edit-button ' + buttonMode}
-                            onClick={this.toggleEditMode}>
+                            onClick={() => this.props.setEditable(this.props.index)}>
                             {this.state.editMode ?
                                 <FaChevronUp />
                                 :
@@ -53,11 +51,13 @@ class MasterComponent extends Component {
                 <EditorPanel
                     style={panelMarginTop}
                     index={this.props.index}
+                    moveEditableForward={this.props.moveEditableForward}
+                    moveEditableBackward={this.props.moveEditableBackward}
                 />
 
                 <TagName
                     component={this.props.component}
-                    edit={this.state.editMode}
+                    edit={this.props.editable}
                     changeData={this.changeComponentData}
                     isCreator={this.props.isCreator}
                     isGuest={this.props.isGuest}

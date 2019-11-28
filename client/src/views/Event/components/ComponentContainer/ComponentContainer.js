@@ -6,6 +6,33 @@ import ComponentAdder from './ComponentAdder/ComponentAdder'
 
 class ComponentContainer extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            editable: null
+        }
+    }
+
+    setEditable = (index) => {
+        this.setState({ editable: index })
+    }
+
+    moveEditableBackward = () => {
+        if (this.state.editable > 0) {
+            this.setState({ editable: this.state.editable - 1 })
+        } else {
+            this.setState({ editable: this.props.EventStore.event.components.length - 1 })
+        }
+    }
+
+    moveEditableForward = () => {
+        if (this.props.EventStore.event.components.length !== this.state.editable + 1) {
+            this.setState({ editable: this.state.editable + 1 })
+        } else {
+            this.setState({ editable: 0 })
+        }
+    }
+
     render() {
         return (
             <div className="component-container">
@@ -14,6 +41,10 @@ class ComponentContainer extends Component {
                         <MasterComponent
                             key={i}
                             index={i}
+                            editable={i === this.state.editable}
+                            setEditable={this.setEditable}
+                            moveEditableForward={this.moveEditableForward}
+                            moveEditableBackward={this.moveEditableBackward}
                             component={component}
                             isCreator={this.props.isCreator}
                             isGuest={this.props.isGuest}
