@@ -1,31 +1,37 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './ContentContainer.css'
-import CreateButton from '../CreateButton/CreateButton'
+import { FaLink, FaPuzzlePiece, FaUser } from 'react-icons/fa'
 
 class ContentContainer extends Component {
 
     render() {
-        if (this.props.VisibilityStore.signModal) {
-            return <div className="content-container"></div>
-        }
-
         return (
             <div className="content-container">
                 <div className="content-container-info-row">
                     <div className="content-container-info-block">
-                        <div className="content-container-info-panel">
-                            <h1>Let's create your event!</h1>
-                            <p>Get things started by clicking the button below!</p>
-                            <CreateButton click={this.props.click} />
-                        </div>
-                        <div className="content-container-info-panel">
-                            <h1>What is InviteOwl?</h1>
-                            <p>InviteOwl is a great tool for creating homes for your events. Share your events and invite your friends!</p>
-                        </div>
+                        <div className="content-container-title-row">
+                        <FaLink />
+                        <h1>Invite</h1>
                     </div>
+                    <p>Each event has its own invitation link, which can easily be shared to invite guests.</p>
+                </div>
+                <div className="content-container-info-block">
+                    <div className="content-container-title-row">
+                        <FaPuzzlePiece />
+                        <h1>Edit</h1>
+                    </div>
+                    <p>Create events fast and customize them with a simple puzzlelike editor.</p>
+                </div>
+                <div className="content-container-info-block">
+                    <div className="content-container-title-row">
+                        <FaUser />
+                        <h1>Manage</h1>
+                    </div>
+                    <p>Manage all your own events and invites in one place</p>
                 </div>
             </div>
+            </div >
         )
     }
 }
