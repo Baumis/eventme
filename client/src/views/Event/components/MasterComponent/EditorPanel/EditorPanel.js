@@ -11,10 +11,12 @@ class EditorPanel extends Component {
 
     moveForward = () => {
         this.props.EventStore.moveComponentForward(this.props.index)
+        this.props.moveEditableForward()
     }
 
     moveBackward = () => {
         this.props.EventStore.moveComponentBackward(this.props.index)
+        this.props.moveEditableBackward()
     }
 
     render() {
