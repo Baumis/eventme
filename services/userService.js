@@ -66,6 +66,23 @@ exports.update = async (id, userObject) => {
         cover: userObject.cover
     }
 
+    if (user.email !== updateObject.email) {
+        updateObject.emailVerified = false
+    }
+
+    const savedUser = await User.findByIdAndUpdate(id, updateObject, { new: true, runValidators: true })
+
+    return await savedUser
+        .populate('myEvents', { _id: 1, label: 1, background: 1 })
+        .populate('myInvites', { _id: 1, label: 1, background: 1 })
+        .execPopulate()
+}
+
+exports.verifyEmail = async (id) => {
+    const updateObject = {
+        emailVerified: true
+    }
+
     const savedUser = await User.findByIdAndUpdate(id, updateObject, { new: true, runValidators: true })
 
     return await savedUser

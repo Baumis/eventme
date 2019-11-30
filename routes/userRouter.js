@@ -8,6 +8,10 @@ userRouter.post('/', userController.create)
 
 userRouter.put('/:id', middleware.requireAuthentication, userController.update)
 
+userRouter.post('/:id/verify', userController.sendEmailVerification)
+
+userRouter.post('/:id/verify/:token', userController.verifyEmail)
+
 userRouter.delete('/:id', middleware.requireAuthentication, userController.delete)
 
 module.exports = userRouter
