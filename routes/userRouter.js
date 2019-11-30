@@ -8,7 +8,7 @@ userRouter.post('/', userController.create)
 
 userRouter.put('/:id', middleware.requireAuthentication, userController.update)
 
-userRouter.post('/:id/verify', userController.sendEmailVerification)
+userRouter.post('/:id/verify', middleware.requireAuthentication, userController.sendEmailVerification)
 
 userRouter.post('/:id/verify/:token', userController.verifyEmail)
 
