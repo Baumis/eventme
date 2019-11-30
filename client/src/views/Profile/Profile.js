@@ -29,8 +29,8 @@ class Profile extends Component {
             window.location.replace(`/profile/${this.props.profileId}`)
         } else {
             await this.getUserInformation()
+            this.setState({ loading: false })
         }
-        this.setState({ loading: false })
     }
 
     async componentDidUpdate() {
