@@ -6,7 +6,7 @@ import './User.css'
 class User extends Component {
 
     openSignModal = () => {
-        this.props.VisibilityStore.showSignModal()
+        this.props.VisibilityStore.showSignModal(this.props.afterSign)
     }
 
     signOut = () => {

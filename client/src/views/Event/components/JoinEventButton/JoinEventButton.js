@@ -28,8 +28,6 @@ class JoinEventModal extends Component {
         if(!response){
             alert('Could not join, try again.')
         }
-
-        this.props.closeInviteModal()
     }
 
     render() {

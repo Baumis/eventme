@@ -18,7 +18,6 @@ class Event extends Component {
         super(props)
         this.state = {
             loading: true,
-            showInviteModal: false,
             showNewComponentModal: false,
             activeTab: 'Event',
             updater: null
@@ -27,8 +26,10 @@ class Event extends Component {
 
     async componentDidMount() {
         if (this.props.inviteKey) {
-            await this.props.EventStore.validateKey(this.props.eventId, this.props.inviteKey)
-            this.setState({ showInviteModal: true })
+            const response = await this.props.EventStore.validateKey(this.props.eventId, this.props.inviteKey)
+            if (!response) {
+                await this.props.EventStore.initializeEvent(this.props.eventId)
+            }
         } else {
             await this.props.EventStore.initializeEvent(this.props.eventId)
         }
@@ -72,7 +73,7 @@ class Event extends Component {
     }
 
     isGuest = () => {
-        if (!this.props.UserStore.currentUser) {
+        if (!this.props.UserStore.currentUser || !this.props.EventStore.event) {
             return false
         }
         return this.props.EventStore.event.guests.some(guest => guest.user._id === this.props.UserStore.currentUser._id)
@@ -84,10 +85,6 @@ class Event extends Component {
 
     slidePanel = () => {
         this.props.VisibilityStore.slideOptionsPanel()
-    }
-
-    closeInviteModal = () => {
-        this.setState({ showInviteModal: false })
     }
 
     render() {
@@ -119,7 +116,6 @@ class Event extends Component {
                         changeActive={this.changeActive}
                         isGuest={this.isGuest}
                         inviteKey={this.props.inviteKey}
-                        closeInviteModal={this.closeInviteModal}
                     />
                     {this.isCreator() ?
                         <div>

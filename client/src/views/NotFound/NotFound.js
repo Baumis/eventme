@@ -6,10 +6,22 @@ import NotFoundMessage from './components/NotFoundMessage/NotFoundMessage'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 
 class NotFound extends Component {
+
+    componentDidMount() {
+        if(!this.props.UserStore.currentUser){
+            this.props.VisibilityStore.showSignModal(this.afterSign)
+        }
+    }
+
+    afterSign = () => {
+        console.log("after sign got executed")
+        window.location.reload()
+    }
+
     render() {
         return (
             <div className="NotFound">
-                <NavBar />
+                <NavBar afterSign={this.afterSign} />
                 <div className="NotFound-container">
                     <NotFoundMessage
                         title={this.props.title}

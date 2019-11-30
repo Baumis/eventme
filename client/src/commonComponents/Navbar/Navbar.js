@@ -11,7 +11,7 @@ class Navbar extends Component {
                 <div className="NavBarItem">
                     <SiteLogo />
                 </div>
-                <div className="NavBarItem"><User /></div>
+                <div className="NavBarItem"><User afterSign={this.props.afterSign} /></div>
             </div>
         )
     }
