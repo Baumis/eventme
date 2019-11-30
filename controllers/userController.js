@@ -1,6 +1,8 @@
 const User = require('../models/user')
 const userService = require('../services/userService')
 const logService = require('../services/logService')
+const emailService = require('../services/emailService')
+const jwt = require('jsonwebtoken')
 
 exports.getOne = async (request, response) => {
     try {
@@ -22,6 +24,8 @@ exports.create = async (request, response) => {
 
         await logService.create(createdUser._id)
 
+        await emailService.sendEmailVerification(createdUser)
+
         const token = User.generateToken(createdUser)
 
         response.cookie('jwt', token, { expires: new Date(Date.now() + 86400000), httpOnly: true })
@@ -40,6 +44,40 @@ exports.update = async (request, response) => {
         const updatedUser = await userService.update(request.params.id, request.body)
 
         response.json(User.format(updatedUser))
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
+exports.verifyEmail = async (request, response) => {
+    try {
+        const { id, token } = request.params
+
+        const decodedToken = jwt.verify(token, process.env.EMAIL_VERIFICATION_SECRET)
+
+        if (decodedToken.id !== id) {
+            return response.status(400).json({ error: 'Invalid verify token or id' })
+        }
+
+        const updatedUser = await userService.verifyEmail(id)
+
+        response.json(User.format(updatedUser))
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
+exports.sendEmailVerification = async (request, response) => {
+    try {
+        if (request.senderId !== request.params.id) {
+            return response.status(403).json({ error: 'Only user itself can send email verification' })
+        }
+
+        const user = await userService.getOne(request.params.id)
+
+        await emailService.sendEmailVerification(user)
+
+        response.end()
     } catch (exception) {
         response.status(400).json({ error: exception.message })
     }

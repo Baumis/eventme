@@ -2,6 +2,7 @@ const Event = require('../models/event')
 
 const eventService = require('../services/eventService')
 const logService = require('../services/logService')
+const emailService = require('../services/emailService')
 
 const roles = require('../utils/roles')
 
@@ -164,6 +165,7 @@ exports.addMessage = async (request, response) => {
         const message = updatedEvent.discussion.find(message => message.author._id.toString() === request.senderId && message.content === request.body.message)
 
         logService.wroteMessage(request.senderId, updatedEvent._id, updatedEvent.label, message._id, message.content)
+        emailService.notifyAboutNewMessage(message, request.event)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))

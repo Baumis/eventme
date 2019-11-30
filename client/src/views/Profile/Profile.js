@@ -22,15 +22,20 @@ class Profile extends Component {
     }
 
     async componentDidMount() {
-        try {
-            const user = await UserServices.getOne(this.props.profileId)
-            if (user) {
-                this.setState({ user: user })
+        if (this.props.verificationToken) {
+            await UserServices.verifyEmail(this.props.profileId, this.props.verificationToken)
+            window.location.replace(`/profile/${this.props.profileId}`)
+        } else {
+            try {
+                const user = await UserServices.getOne(this.props.profileId)
+                if (user) {
+                    this.setState({ user: user })
+                }
+            } catch (error) {
+                this.setState({ idValid: false })
             }
-        } catch (error) {
-            this.setState({ idValid: false })
+            this.setState({ loading: false })
         }
-        this.setState({ loading: false })
     }
 
     changeActive = (cathegory) => {
@@ -82,7 +87,7 @@ class Profile extends Component {
                     user={this.state.user}
                     toggleOptions={this.toggleUserOptionsModal}
                 />
-                <ProfileTabs 
+                <ProfileTabs
                     changeActive={this.changeActive}
                     active={this.state.activeTab}
                     isOwner={this.isOwner()}
