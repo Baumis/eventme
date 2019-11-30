@@ -62,6 +62,7 @@ userSchema.statics.format = (user) => ({
     name: user.name,
     username: user.username,
     email: user.email,
+    emailVerified: user.emailVerified,
     avatar: user.avatar,
     cover: user.cover,
     myEvents: user.myEvents,
@@ -87,18 +88,28 @@ userSchema.statics.formatForGhost = (user) => ({
 userSchema.statics.formatForLogin = (user) => ({
     _id: user._id,
     email: user.email,
+    emailVerified: user.emailVerified,
     name: user.name,
     cover: user.cover,
     avatar: user.avatar
 })
 
-userSchema.statics.generateToken = (user) => {
+userSchema.statics.generateToken = (user, expiresIn = '1d') => {
     const userForToken = {
         email: user.email,
         id: user._id
     }
 
-    return jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1d' })
+    return jwt.sign(userForToken, process.env.SECRET, { expiresIn })
+}
+
+userSchema.statics.generateEmailVerificationToken = (user, expiresIn = '7d') => {
+    const userForToken = {
+        email: user.email,
+        id: user._id
+    }
+
+    return jwt.sign(userForToken, process.env.EMAIL_VERIFICATION_SECRET, { expiresIn })
 }
 
 const User = mongoose.model('User', userSchema)

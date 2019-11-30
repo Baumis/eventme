@@ -21,4 +21,14 @@ const update = async (updatedObject) => {
     return response.data
 }
 
-export default { getOne, create, remove, update }
+const verifyEmail = async (id, verificationToken) => {
+    const response = await http.post(`${baseUrl}/${id}/verify/${verificationToken}`)
+    return response.data
+}
+
+const sendVerificationToEmail = async (id) => {
+    const response = await http.post(`${baseUrl}/${id}/verify`)
+    return response.data
+}
+
+export default { getOne, create, remove, update, verifyEmail, sendVerificationToEmail }

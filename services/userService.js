@@ -3,6 +3,7 @@ const { OAuth2Client } = require('google-auth-library')
 const User = require('../models/user')
 const Event = require('../models/event')
 const eventService = require('./eventService')
+const emailService = require('../services/emailService')
 
 exports.getOne = async (id) => {
     return await User.findById(id)
@@ -64,6 +65,29 @@ exports.update = async (id, userObject) => {
         email: userObject.email,
         avatar: userObject.avatar,
         cover: userObject.cover
+    }
+
+    const emailChanged = user.email !== updateObject.email
+
+    if (emailChanged) {
+        updateObject.emailVerified = false
+    }
+
+    const savedUser = await User.findByIdAndUpdate(id, updateObject, { new: true, runValidators: true })
+
+    if (emailChanged) {
+        emailService.sendEmailVerification(savedUser)
+    }
+
+    return await savedUser
+        .populate('myEvents', { _id: 1, label: 1, background: 1 })
+        .populate('myInvites', { _id: 1, label: 1, background: 1 })
+        .execPopulate()
+}
+
+exports.verifyEmail = async (id) => {
+    const updateObject = {
+        emailVerified: true
     }
 
     const savedUser = await User.findByIdAndUpdate(id, updateObject, { new: true, runValidators: true })
