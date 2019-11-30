@@ -23,13 +23,12 @@ class Profile extends Component {
     }
 
     async componentDidMount() {
-        this.setState({ parameterId: this.props.profileId })
         if (this.props.verificationToken) {
             await UserServices.verifyEmail(this.props.profileId, this.props.verificationToken)
             window.location.replace(`/profile/${this.props.profileId}`)
         } else {
             await this.getUserInformation()
-            this.setState({ loading: false })
+            this.setState({ parameterId: this.props.profileId, loading: false })
         }
     }
 
