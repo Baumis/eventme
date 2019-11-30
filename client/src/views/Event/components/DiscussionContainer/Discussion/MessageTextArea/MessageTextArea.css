@@ -59,3 +59,14 @@
     color: white;
     cursor: default;
 }
+
+@media only screen and (max-width: 450px) {
+    .text-area-avatar {
+        min-width: 40px;
+        height: 40px;
+    }
+
+    .text-area-send-button {
+        height: 27px;
+    }
+}

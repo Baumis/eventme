@@ -5,7 +5,7 @@ import DiscussionContainer from '../DiscussionContainer/DiscussionContainer'
 import GuestContainer from '../GuestContainer/GuestContainer'
 import Tabs from '../Tabs/Tabs'
 import StatusBar from '../StatusBar/StatusBar'
-import JoinEventModal from '../JoinEventButton/JoinEventButton'
+import JoinEventButton from '../JoinEventButton/JoinEventButton'
 
 const EventContent = (props) => {
     return (
@@ -14,9 +14,8 @@ const EventContent = (props) => {
                 {props.isGuest() ?
                     <StatusBar />
                     :
-                    <JoinEventModal
+                    <JoinEventButton
                         inviteKey={props.inviteKey}
-                        closeInviteModal={props.closeInviteModal}
                     />
                 }
             </div>

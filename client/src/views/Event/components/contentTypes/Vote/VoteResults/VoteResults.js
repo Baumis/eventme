@@ -1,6 +1,5 @@
 import React from 'react'
 import './VoteResults.css'
-import { FaChevronLeft } from 'react-icons/fa'
 
 const VoteResults = (props) => {
 

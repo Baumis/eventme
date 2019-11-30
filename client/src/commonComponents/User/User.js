@@ -6,7 +6,7 @@ import './User.css'
 class User extends Component {
 
     openSignModal = () => {
-        this.props.VisibilityStore.showSignModal()
+        this.props.VisibilityStore.showSignModal(this.props.afterSign)
     }
 
     signOut = () => {
@@ -29,15 +29,19 @@ class User extends Component {
         return name
     }
 
+    goToProfile = () => {
+        this.props.history.push(`/profile/${this.props.UserStore.currentUser._id}`)
+    }
+
     render() {
         return (
             <div className="user">
                 {this.props.UserStore.currentUser ?
                     <div className="user-signed-in">
-                        <a className="user-username" href={`/profile/${this.props.UserStore.currentUser._id}`}>
+                        <div className="user-username" onClick={this.goToProfile}>
                             <div style={this.getAvatar()} className="user-avatar"> </div>
                             {this.parseFirstName(this.props.UserStore.currentUser.name)}
-                        </a>
+                        </div>
                         <div className="user-section-devider"> </div>
                         <div className="user-sign-button" onClick={this.signOut} >{'Sign out'}</div>
                     </div>

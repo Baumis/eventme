@@ -13,6 +13,7 @@ class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            parameterId: null,
             user: null,
             loading: true,
             idValid: true,
@@ -22,19 +23,31 @@ class Profile extends Component {
     }
 
     async componentDidMount() {
+        this.setState({ parameterId: this.props.profileId })
         if (this.props.verificationToken) {
             await UserServices.verifyEmail(this.props.profileId, this.props.verificationToken)
             window.location.replace(`/profile/${this.props.profileId}`)
         } else {
-            try {
-                const user = await UserServices.getOne(this.props.profileId)
-                if (user) {
-                    this.setState({ user: user })
-                }
-            } catch (error) {
-                this.setState({ idValid: false })
+            await this.getUserInformation()
+        }
+        this.setState({ loading: false })
+    }
+
+    async componentDidUpdate() {
+        if (this.state.parameterId !== this.props.profileId) {
+            this.setState({ parameterId: this.props.profileId, activeTab: 'MyEvents' })
+            await this.getUserInformation()
+        }
+    }
+
+    getUserInformation = async () => {
+        try {
+            const user = await UserServices.getOne(this.props.profileId)
+            if (user) {
+                this.setState({ user: user })
             }
-            this.setState({ loading: false })
+        } catch (error) {
+            this.setState({ idValid: false })
         }
     }
 

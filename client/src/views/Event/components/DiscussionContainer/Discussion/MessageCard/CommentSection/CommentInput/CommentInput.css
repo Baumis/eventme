@@ -61,3 +61,14 @@
     color: rgb(76, 92, 104, 0.3);
     cursor: default;
 }
+
+@media only screen and (max-width: 450px) {
+    .comment-input-avatar {
+        min-width: 30px;
+        height: 30px;
+    }
+
+    .comment-input-send-button {
+        height: 25px;
+    }
+}
