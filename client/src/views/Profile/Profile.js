@@ -13,6 +13,7 @@ class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            parameterId: null,
             user: null,
             loading: true,
             idValid: true,
@@ -22,6 +23,19 @@ class Profile extends Component {
     }
 
     async componentDidMount() {
+        this.setState({ parameterId: this.props.profileId })
+        await this.getUserInformation()
+        this.setState({ loading: false })
+    }
+
+    async componentDidUpdate() {
+        if (this.state.parameterId !== this.props.profileId) {
+            this.setState({ parameterId: this.props.profileId, activeTab: 'MyEvents' })
+            await this.getUserInformation()
+        }
+    }
+
+    getUserInformation = async () => {
         try {
             const user = await UserServices.getOne(this.props.profileId)
             if (user) {
@@ -30,7 +44,6 @@ class Profile extends Component {
         } catch (error) {
             this.setState({ idValid: false })
         }
-        this.setState({ loading: false })
     }
 
     changeActive = (cathegory) => {
@@ -82,7 +95,7 @@ class Profile extends Component {
                     user={this.state.user}
                     toggleOptions={this.toggleUserOptionsModal}
                 />
-                <ProfileTabs 
+                <ProfileTabs
                     changeActive={this.changeActive}
                     active={this.state.activeTab}
                     isOwner={this.isOwner()}

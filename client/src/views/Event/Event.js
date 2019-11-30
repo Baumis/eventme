@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { Prompt } from 'react-router'
 import './Event.css'
 import Header from './components/Header/Header'
 import OptionsPanel from './components/OptionsPanel/OptionsPanel'
@@ -36,8 +37,17 @@ class Event extends Component {
         this.startEventUpdater()
     }
 
+    componentDidUpdate = () => {
+        if (!this.props.EventStore.saved) {
+            window.onbeforeunload = () => true
+        } else {
+            window.onbeforeunload = undefined
+        }
+    }
+
     componentWillUnmount() {
         clearInterval(this.state.updater)
+        window.onbeforeunload = null
     }
 
     startEventUpdater = () => {
@@ -93,40 +103,47 @@ class Event extends Component {
             )
         }
         return (
-            <div className='Event'>
-                <Navbar/>
-                <Header isGuest={this.isGuest} />
-                <EventContent
-                    isCreator={this.isCreator}
-                    activeTab={this.state.activeTab}
-                    toggleNewComponentModal={this.toggleNewComponentModal}
-                    active={this.state.activeTab}
-                    changeActive={this.changeActive}
-                    isGuest={this.isGuest}
-                    inviteKey={this.props.inviteKey}
-                    closeInviteModal={this.closeInviteModal}
+            <React.Fragment>
+                <Prompt
+                    when={!this.props.EventStore.saved}
+                    message='You have unsaved changes, are you sure you want to leave?'
                 />
-                {this.isCreator() ?
-                    <div>
-                        <OptionsPanel />
-                        <OptionsButton showPanel={this.slidePanel} />
-                        <SaveButton save={this.save} saved={this.props.EventStore.saved} />
-                        {this.state.showNewComponentModal ?
-                            <NewComponentModal
-                                close={this.toggleNewComponentModal}
-                            />
-                            : null
-                        }
-                    </div>
-                    : null
-                }
-                {this.props.VisibilityStore.signModal ?
-                    <SignModal history={this.props.history} />
-                    : null
-                }
-            </div>
+                <div className='Event'>
+                    <Navbar />
+                    <Header isGuest={this.isGuest} />
+                    <EventContent
+                        isCreator={this.isCreator}
+                        activeTab={this.state.activeTab}
+                        toggleNewComponentModal={this.toggleNewComponentModal}
+                        active={this.state.activeTab}
+                        changeActive={this.changeActive}
+                        isGuest={this.isGuest}
+                        inviteKey={this.props.inviteKey}
+                        closeInviteModal={this.closeInviteModal}
+                    />
+                    {this.isCreator() ?
+                        <div>
+                            <OptionsPanel />
+                            <OptionsButton showPanel={this.slidePanel} />
+                            <SaveButton save={this.save} saved={this.props.EventStore.saved} />
+                            {this.state.showNewComponentModal ?
+                                <NewComponentModal
+                                    close={this.toggleNewComponentModal}
+                                />
+                                : null
+                            }
+                        </div>
+                        : null
+                    }
+                    {this.props.VisibilityStore.signModal ?
+                        <SignModal history={this.props.history} />
+                        : null
+                    }
+                </div>
+            </React.Fragment>
         )
     }
+
 }
 
 export default inject('EventStore', 'VisibilityStore', 'UserStore')(observer(Event))

@@ -94,4 +94,9 @@
     .comment-time {
         display: none;
     }
+
+    .comment-avatar {
+        min-width: 30px;
+        height: 30px;
+    }
 }
