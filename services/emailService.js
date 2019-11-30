@@ -26,7 +26,7 @@ exports.sendMail = async (to, subject, html) => {
 }
 
 exports.notifyAboutNewMessage = async (message, event) => {
-    const guestIds = event.guests.map(guest => guest.user).filter(guestId => guestId !== message.author._id.toString())
+    const guestIds = event.guests.map(guest => guest.user).filter(guestId => guestId !== message.author._id)
     const guestsWithVerifiedEmail = await User.find({ _id: { $in: guestIds }, emailVerified: true })
 
     const emails = guestsWithVerifiedEmail.map(guest => guest.email)
