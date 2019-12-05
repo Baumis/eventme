@@ -22,11 +22,23 @@ exports.sendMail = async (to, subject, html) => {
         html
     }
 
-    await transporter.sendMail(mailOptions)
+    return await transporter.sendMail(mailOptions)
+}
+
+exports.sendSeparatedMails = async (emails, subject, html) => {
+    const emailPromises = []
+    for (let email of emails) {
+        const emailPromise = this.sendMail(email, subject, html)
+        emailPromises.push(emailPromise)
+    }
+    return await Promise.all(emailPromises)
 }
 
 exports.notifyAboutNewMessage = async (message, event) => {
-    const guestIds = event.guests.map(guest => guest.user).filter(guestId => guestId !== message.author._id)
+    const guestIds = event.guests
+        .map(guest => guest.user)
+        .filter(guestId => guestId.toString() !== message.author._id.toString())
+
     const guestsWithVerifiedEmail = await User.find({ _id: { $in: guestIds }, emailVerified: true })
 
     const emails = guestsWithVerifiedEmail.map(guest => guest.email)
@@ -38,7 +50,7 @@ exports.notifyAboutNewMessage = async (message, event) => {
         <a href="${config.baseUrl}/events/${event._id}">Go to ${event.label}</a>
     `
 
-    await this.sendMail(emails.join(), event.label, content)
+    await this.sendSeparatedMails(emails, event.label, content)
 }
 
 exports.sendEmailVerification = async (user) => {
