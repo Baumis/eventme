@@ -21,20 +21,30 @@ class PasswordOptions extends Component {
 
     submitChangeRequest = async () => {
         if (this.state.oldPassword.length < 1) {
-            return 
+            return
         }
-        if (this.state.newPassword.length < 1) {
-            return 
+        if (this.state.newPassword.length < 3) {
+            alert('Password has to be over 3 character long')
+            return
         }
-        if (this.state.newPasswordAgain.length < 1) {
-            return 
+        if (this.state.newPasswordAgain !== this.state.newPassword) {
+            alert('Passwords are not matching')
+            return
         }
+
 
         this.setState({ loading: true })
-        const user = await this.props.UserStore.saveUser()
+        const user = await this.props.UserStore.updatePassword(this.state.oldPassword, this.state.newPassword)
         this.setState({ loading: false })
 
-        if (!user) {
+        if (user) {
+            alert('password has been changed')
+            this.setState({
+                oldPassword: '',
+                newPassword: '',
+                newPasswordAgain: ''
+            })
+        } else {
             alert('password could not be saved')
         }
     }
@@ -71,7 +81,7 @@ class PasswordOptions extends Component {
                     />
                 </div>
                 <div className="general-options-button-row">
-                    <div className="general-options-save-button" onClick={() => this.saveOptions()}>
+                    <div className="general-options-save-button" onClick={this.submitChangeRequest}>
                         {this.state.loading ?
                             <Spinner />
                             :
