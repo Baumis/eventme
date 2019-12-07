@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import './UserOptions.css'
+import './GeneralOptions.css'
 import Spinner from '../../../../../commonComponents/Spinner/Spinner'
 
-class UserOptions extends Component {
+class GeneralOptions extends Component {
 
     constructor(props) {
         super(props)
@@ -85,4 +85,4 @@ class UserOptions extends Component {
     }
 }
 
-export default UserOptions
+export default GeneralOptions

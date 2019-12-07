@@ -1,0 +1,22 @@
+.settings-tabs {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid darkgray;
+    height: 60px;
+    margin-top: 20px;
+}
+
+.settings-tab {
+    padding: 5px 30px 5px 30px;
+    cursor: pointer;
+}
+
+.settings-tab:hover {
+    background: rgba(0,0,0,0.1);
+}
+
+@media only screen and (max-width: 620px){
+    .settings-tabs {
+        display: none;
+    }
+}
