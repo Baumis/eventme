@@ -49,6 +49,30 @@ exports.update = async (request, response) => {
     }
 }
 
+exports.updatePassword = async (request, response) => {
+    try {
+        if (request.senderId !== request.params.id) {
+            return response.status(403).json({ error: 'Only user itself can update password' })
+        }
+
+        if (!request.body.oldPassword || !request.body.newPassword) {
+            return response.status(400).json({ error: 'Old or new password not provided' })
+        }
+
+        const correctPassword = await userService.isPasswordCorrect(request.params.id, request.body.oldPassword)
+        
+        if (!correctPassword) {
+            return response.status(401).json({ error: 'Password incorrect' })
+        }
+
+        const updatedUser = await userService.updatePassword(request.params.id, request.body.newPassword)
+
+        response.json(User.format(updatedUser))
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
 exports.verifyEmail = async (request, response) => {
     try {
         const { id, token } = request.params
