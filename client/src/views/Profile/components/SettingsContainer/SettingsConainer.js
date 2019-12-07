@@ -15,6 +15,7 @@ class SettingsContainer extends Component {
     }
 
     componentDidMount() {
+        this.updateScreenSize()
         window.addEventListener("resize", () => this.updateScreenSize())
     }
 
