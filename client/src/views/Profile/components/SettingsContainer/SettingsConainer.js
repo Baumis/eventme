@@ -58,7 +58,10 @@ class SettingsContainer extends Component {
     render() {
         return (
             <div className="settings-container">
-                <SettingsTabs setTab={this.setTab} />
+                <SettingsTabs
+                    setTab={this.setTab}
+                    activeTab={this.state.activeTab}
+                />
                 <div className="settings-content-container">
                     {this.tabSwitch()}
                 </div>

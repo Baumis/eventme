@@ -52,7 +52,7 @@ class PasswordOptions extends Component {
     render() {
         return (
             <div className="password-options">
-                <h2>Password Settings</h2>
+                <h2>Change password</h2>
                 <div className="general-options-input">
                     <label>Old password</label>
                     <input

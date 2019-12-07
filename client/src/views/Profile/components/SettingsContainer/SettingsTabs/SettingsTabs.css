@@ -16,6 +16,11 @@
     background: rgba(0,0,0,0.1);
 }
 
+.settings-tab-active {
+    font-weight: 600;
+    color: rgba(76, 92, 104, 1);
+}
+
 @media only screen and (max-width: 620px){
     .settings-tabs {
         display: none;
