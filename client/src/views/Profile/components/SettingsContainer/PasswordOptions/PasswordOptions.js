@@ -1,13 +1,87 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './PasswordOptions.css'
+import Spinner from '../../../../../commonComponents/Spinner/Spinner'
 
-const PasswordOptions = (props) => {
+class PasswordOptions extends Component {
 
-    return (
-        <div className="password-options">
-            password
-        </div>
-    )
+    constructor(props) {
+        super(props)
+        this.state = {
+            oldPassword: '',
+            newPassword: '',
+            newPasswordAgain: '',
+            loading: false
+        }
+    }
+
+    changeValue = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
+    }
+
+    submitChangeRequest = async () => {
+        if (this.state.oldPassword.length < 1) {
+            return 
+        }
+        if (this.state.newPassword.length < 1) {
+            return 
+        }
+        if (this.state.newPasswordAgain.length < 1) {
+            return 
+        }
+
+        this.setState({ loading: true })
+        const user = await this.props.UserStore.saveUser()
+        this.setState({ loading: false })
+
+        if (!user) {
+            alert('password could not be saved')
+        }
+    }
+
+    render() {
+        return (
+            <div className="password-options">
+                <h2>Password Settings</h2>
+                <div className="general-options-input">
+                    <label>Old password</label>
+                    <input
+                        name={'oldPassword'}
+                        value={this.state.oldPassword}
+                        onChange={this.changeValue}
+                        type={'password'}
+                    />
+                </div>
+                <div className="general-options-input">
+                    <label>New password</label>
+                    <input
+                        name={'newPassword'}
+                        value={this.state.newPassword}
+                        onChange={this.changeValue}
+                        type={'password'}
+                    />
+                </div>
+                <div className="general-options-input">
+                    <label>New password again</label>
+                    <input
+                        name={'newPasswordAgain'}
+                        value={this.state.newPasswordAgain}
+                        onChange={this.changeValue}
+                        type={'password'}
+                    />
+                </div>
+                <div className="general-options-button-row">
+                    <div className="general-options-save-button" onClick={() => this.saveOptions()}>
+                        {this.state.loading ?
+                            <Spinner />
+                            :
+                            <div>Submit</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
 
-export default PasswordOptions
+export default inject('UserStore')(observer(PasswordOptions))
