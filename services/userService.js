@@ -85,6 +85,23 @@ exports.update = async (id, userObject) => {
         .execPopulate()
 }
 
+exports.updatePassword = async (id, newPassword) => {
+
+    if (!newPassword || newPassword.length < 3) {
+        throw new Error('Password too short')
+    }
+
+    const saltRounds = 10
+    const passwordHash = await bcrypt.hash(newPassword, saltRounds)
+
+    const savedUser = await User.findByIdAndUpdate(id, { passwordHash }, { new: true, runValidators: true })
+
+    return await savedUser
+        .populate('myEvents', { _id: 1, label: 1, background: 1 })
+        .populate('myInvites', { _id: 1, label: 1, background: 1 })
+        .execPopulate()
+}
+
 exports.verifyEmail = async (id) => {
     const updateObject = {
         emailVerified: true
@@ -142,10 +159,23 @@ exports.findByUsernameAndPassword = async (username, password) => {
         await bcrypt.compare(password, user.passwordHash)
 
     if (!user || !passwordCorrect) {
-        throw new Error('Invalid email or password')
+        throw new Error('Invalid username or password')
     }
 
     return user
+}
+
+exports.isPasswordCorrect = async (id, password) => {
+    const user = await User.findById(id)
+    const passwordCorrect = user === null ?
+        false :
+        await bcrypt.compare(password, user.passwordHash)
+
+    if (!user || !passwordCorrect) {
+        return false
+    }
+
+    return true
 }
 
 exports.findOrCreateGoogleUser = async (googleToken) => {
