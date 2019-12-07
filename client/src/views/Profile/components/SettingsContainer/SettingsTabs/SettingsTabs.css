@@ -3,6 +3,7 @@
     flex-direction: column;
     border-right: 1px solid rgba(69,69,69,0.2);
     margin: 60px 0px 60px 0px;
+    width: 130px;
 }
 
 .settings-tab {

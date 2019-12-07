@@ -53,7 +53,7 @@ class PasswordOptions extends Component {
         return (
             <div className="password-options">
                 <h2>Change password</h2>
-                <div className="general-options-input">
+                <div className="password-options-input">
                     <label>Old password</label>
                     <input
                         name={'oldPassword'}
@@ -62,7 +62,7 @@ class PasswordOptions extends Component {
                         type={'password'}
                     />
                 </div>
-                <div className="general-options-input">
+                <div className="password-options-input">
                     <label>New password</label>
                     <input
                         name={'newPassword'}
@@ -71,7 +71,7 @@ class PasswordOptions extends Component {
                         type={'password'}
                     />
                 </div>
-                <div className="general-options-input">
+                <div className="password-options-input">
                     <label>New password again</label>
                     <input
                         name={'newPasswordAgain'}
@@ -80,8 +80,8 @@ class PasswordOptions extends Component {
                         type={'password'}
                     />
                 </div>
-                <div className="general-options-button-row">
-                    <div className="general-options-save-button" onClick={this.submitChangeRequest}>
+                <div className="password-options-button-row">
+                    <div className="password-options-save-button" onClick={this.submitChangeRequest}>
                         {this.state.loading ?
                             <Spinner />
                             :
