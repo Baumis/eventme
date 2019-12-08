@@ -50,6 +50,16 @@ class PasswordOptions extends Component {
     }
 
     render() {
+
+        if(this.props.UserStore.currentUser.userType === 'GOOGLE'){
+            return(
+                <div className="password-options">
+                    <h2>Change password</h2>
+                    <div>This account is connected to a google account. Password can only be changed on a local account.</div>
+                </div>
+            )
+        }
+
         return (
             <div className="password-options">
                 <h2>Change password</h2>
