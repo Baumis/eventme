@@ -42,11 +42,7 @@ class UserStore {
     }
 
     async updatePassword(oldPassword, newPassword) {
-        try {
-            return await userService.updatePassword(this.currentUser._id, oldPassword, newPassword)
-        } catch (error) {
-            return null
-        }
+        await userService.updatePassword(this.currentUser._id, oldPassword, newPassword)
     }
 }
 

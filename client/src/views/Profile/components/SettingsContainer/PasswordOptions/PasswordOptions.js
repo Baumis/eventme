@@ -34,19 +34,21 @@ class PasswordOptions extends Component {
 
 
         this.setState({ loading: true })
-        const user = await this.props.UserStore.updatePassword(this.state.oldPassword, this.state.newPassword)
-        this.setState({ loading: false })
-
-        if (user) {
+        try {
+            await this.props.UserStore.updatePassword(this.state.oldPassword, this.state.newPassword)
             alert('password has been changed')
             this.setState({
                 oldPassword: '',
                 newPassword: '',
                 newPasswordAgain: ''
             })
-        } else {
-            alert('password could not be saved')
+        } catch (error) {
+            error.response.data.error === 'Password incorrect' ?
+                alert('Old password incorrect')
+                :
+                alert('password could not be saved')
         }
+        this.setState({ loading: false })
     }
 
     render() {
