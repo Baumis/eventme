@@ -63,6 +63,7 @@ userSchema.statics.format = (user) => ({
     username: user.username,
     email: user.email,
     emailVerified: user.emailVerified,
+    userType: user.userType,
     avatar: user.avatar,
     cover: user.cover,
     myEvents: user.myEvents,
@@ -87,9 +88,10 @@ userSchema.statics.formatForGhost = (user) => ({
 
 userSchema.statics.formatForLogin = (user) => ({
     _id: user._id,
+    name: user.name,
     email: user.email,
     emailVerified: user.emailVerified,
-    name: user.name,
+    userType: user.userType,
     cover: user.cover,
     avatar: user.avatar
 })
