@@ -87,6 +87,12 @@ exports.update = async (id, userObject) => {
 
 exports.updatePassword = async (id, newPassword) => {
 
+    const user = await User.findById(id)
+
+    if (user.userType !== 'LOCAL') {
+        throw new Error('You can only change password of local accounts')
+    }
+
     if (!newPassword || newPassword.length < 3) {
         throw new Error('Password too short')
     }
