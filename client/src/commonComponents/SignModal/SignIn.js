@@ -103,7 +103,7 @@ class SignIn extends Component {
                             <Spinner />
                             :
                             <div>
-                                Sign In
+                                Sign in
                             </div>
                         }
                     </div>
