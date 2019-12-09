@@ -8,6 +8,18 @@
     border: 1px solid rgba(69,69,69,0.2);
 }
 
+.settings-content-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background: transparent;
+    padding: 20px;
+}
+
+.settings-content-container h2 {
+    color:#4c5c68;
+}
+
 @media only screen and (max-width: 900px) {
     .settings-container {
         width: 95vw;

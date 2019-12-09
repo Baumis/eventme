@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import './UserOptions.css'
+import './GeneralOptions.css'
 import Spinner from '../../../../../commonComponents/Spinner/Spinner'
 
-class UserOptions extends Component {
+class GeneralOptions extends Component {
 
     constructor(props) {
         super(props)
@@ -20,6 +20,10 @@ class UserOptions extends Component {
     }
 
     saveOptions = async () => {
+        if (this.state.loading) {
+            return
+        }
+
         this.setState({ loading: true })
         const user = await this.props.save(this.state.userValues)
         this.setState({ loading: false })
@@ -33,8 +37,9 @@ class UserOptions extends Component {
 
     render() {
         return (
-            <div className="user-options-container">
-                <div className="user-options-input">
+            <div className="general-options-container">
+                <h2>General Settings</h2>
+                <div className="general-options-input">
                     <label>Name</label>
                     <input
                         name={'name'}
@@ -42,7 +47,7 @@ class UserOptions extends Component {
                         onChange={this.changeUserValue}
                     />
                 </div>
-                <div className="user-options-input">
+                <div className="general-options-input">
                     <label>Email</label>
                     <input
                         name={'email'}
@@ -50,7 +55,7 @@ class UserOptions extends Component {
                         onChange={this.changeUserValue}
                     />
                 </div>
-                <div className="user-options-input">
+                <div className="general-options-input">
                     <label>Profile cover url</label>
                     <input
                         name={'cover'}
@@ -58,7 +63,7 @@ class UserOptions extends Component {
                         onChange={this.changeUserValue}
                     />
                 </div>
-                <div className="user-options-input">
+                <div className="general-options-input">
                     <label>Avatar url</label>
                     <input
                         name={'avatar'}
@@ -66,23 +71,18 @@ class UserOptions extends Component {
                         onChange={this.changeUserValue}
                     />
                 </div>
-                <div className="user-options-button-row">
-                    {this.state.saved ?
-                        <div className="user-options-save-button" id="disabled">
-                            Save
-                            </div>
-                        :
-                        <div className="user-options-save-button" onClick={() => this.saveOptions()}>
-                            {this.state.loading ?
-                                <Spinner />
-                                :
-                                <div>Save</div>
-                            }
-                        </div>}
+                <div className="general-options-button-row">
+                    <div className="general-options-save-button" onClick={() => this.saveOptions()}>
+                        {this.state.loading ?
+                            <Spinner />
+                            :
+                            <div>Save</div>
+                        }
+                    </div>
                 </div>
             </div>
         )
     }
 }
 
-export default UserOptions
+export default GeneralOptions

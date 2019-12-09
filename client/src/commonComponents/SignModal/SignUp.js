@@ -85,12 +85,11 @@ class SignUp extends Component {
             <div className="signModalContent">
                 <div className="signDetails">
                     <div className="signInput">
-                        <label>Name</label>
+                        <label>First and last name</label>
                         <input
                             name={'name'}
                             onChange={this.changeStateValue}
                             value={this.state.name}
-                            placeholder={'Fredrik Miller'}
                         >
                         </input>
                     </div>
@@ -101,7 +100,6 @@ class SignUp extends Component {
                             type={'email'}
                             onChange={this.changeStateValue}
                             value={this.state.email}
-                            placeholder={'miller@email.com'}
                         >
                         </input>
                     </div>
@@ -111,7 +109,6 @@ class SignUp extends Component {
                             name={'username'}
                             onChange={this.changeStateValue}
                             value={this.state.username}
-                            placeholder={'freda'}
                         >
                         </input>
                     </div>
@@ -122,7 +119,6 @@ class SignUp extends Component {
                             type={'password'}
                             onChange={this.changeStateValue}
                             value={this.state.password}
-                            placeholder={'****'}
                         >
                         </input>
                     </div>
@@ -135,7 +131,7 @@ class SignUp extends Component {
                             <Spinner />
                             :
                             <div>
-                                Sign Up
+                                Sign up
                             </div>
                         }
                     </div>

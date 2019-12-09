@@ -1,0 +1,57 @@
+.general-options-title {
+    display: flex;
+    font-size: 22px;
+    color: #4c5c68;
+}
+
+.general-options-input{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #1985a1;
+    font-size: 16px;
+    padding: 20px 0px 15px 0px;
+}
+
+.general-options-input label{
+    padding: 0px 20px 10px 10px;
+}
+
+.general-options-input input{
+    border-radius: 5px;
+    height: 25px;
+    font-size: 15px;
+    padding: 3px 12px 3px 10px;
+    background: white;
+    border: 1px solid #dddddd;
+    color:#46494c;
+    transition: border 0.2s;
+}
+
+.general-options-input input:focus{
+    border: 1px solid #1985a1;
+}
+
+.general-options-button-row{
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.general-options-save-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    height: 12px;
+    width: 60px;
+    border-radius: 5px;
+    background: #4c5c68;
+    color: #dddddd;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.general-options-save-button:hover{
+    color: white;
+}

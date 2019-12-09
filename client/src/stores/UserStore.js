@@ -40,6 +40,10 @@ class UserStore {
             return null
         }
     }
+
+    async updatePassword(oldPassword, newPassword) {
+        await userService.updatePassword(this.currentUser._id, oldPassword, newPassword)
+    }
 }
 
 decorate(UserStore, {

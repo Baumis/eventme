@@ -1,0 +1,29 @@
+.settings-tabs {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(69,69,69,0.2);
+    margin: 60px 0px 60px 0px;
+    width: 130px;
+}
+
+.settings-tab {
+    text-align: start;
+    padding: 5px 30px 5px 30px;
+    color: rgba(76, 92, 104, 0.7);
+    cursor: pointer;
+}
+
+.settings-tab:hover {
+    background: rgba(0,0,0,0.1);
+}
+
+.settings-tab-active {
+    font-weight: 600;
+    color: rgba(76, 92, 104, 1);
+}
+
+@media only screen and (max-width: 620px){
+    .settings-tabs {
+        display: none;
+    }
+}
