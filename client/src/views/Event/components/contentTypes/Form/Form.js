@@ -4,6 +4,7 @@ import './Form.css'
 import Questions from './Questions/Questions'
 import Submitted from './Submitted/Submitted'
 import Answers from './Answers/Answers'
+import UniversalModal from '../../../../../commonComponents/UniversalModal/UniversalModal'
 
 class Form extends Component {
 
@@ -132,17 +133,6 @@ class Form extends Component {
     }
 
     render() {
-        if (this.state.showAnswers && this.props.isCreator() && !this.props.edit) {
-            return (
-                <div className="form-component">
-                    <Answers
-                        toggleAnswers={this.toggleAnswers}
-                        component={this.props.component}
-                    />
-                </div>
-            )
-        }
-
         if (this.hasSubmittedAll() && !this.props.edit) {
             return (
                 <div className="form-component">
@@ -150,6 +140,14 @@ class Form extends Component {
                         toggleAnswers={this.toggleAnswers}
                         isCreator={this.props.isCreator}
                     />
+                    {this.state.showAnswers && this.props.isCreator() && !this.props.edit ?
+                        <UniversalModal
+                            content={<Answers
+                                toggleAnswers={this.toggleAnswers}
+                                component={this.props.component}
+                            />}
+                        />
+                        : null}
                 </div>
             )
         }
