@@ -41,7 +41,7 @@
 }
 
 .event-options-input p{
-    color: #46494c;
+    color: #1985a1;
     margin: 10px 0px 10px 5px;
 }
 
@@ -73,10 +73,11 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
     border: 1px solid #4c5c68;
     border-radius: 5px;
     background: #4c5c68;
-    color: #dddddd;
+    color: white;
     margin: 0px 5px 0px 5px;
     cursor: pointer;
     outline: none;
+    transition: background 0.2s;
 }
 
 .event-options-close {
@@ -85,14 +86,21 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
     border: 1px solid #c74C3C;
 }
 
+.event-options-button:hover {
+    background: #404e59;
+}
+
+.event-options-close:hover {
+    background: rgb(221, 221, 221, 0.2);
+}
+
 .event-options-top{
     padding: 5px 10px 5px 10px;
-    color: #4c5c68;
 }
 
 .event-options-top h2{
     margin: 0px 0px 10px 0px;
-    color: #4c5c68;
+    color: #46494c;
 }
 
 @media only screen and (max-width: 620px) {

@@ -64,10 +64,10 @@ class NewEventModal extends Component {
                 <div className="event-options-surface">
                     <div className="event-options-content">
                         <div className="event-options-top">
-                            <h2>New event</h2>
+                            <h2>Create event</h2>
                         </div>
                         <div className="event-options-input">
-                            <p>Event title</p>
+                            <p>Title</p>
                             <input
                                 name={'eventName'}
                                 onChange={this.changeStateValue}
