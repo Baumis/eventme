@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
-import './NewEventModal.css'
+import './NewEventOptions.css'
 import moment from 'moment'
 import Spinner from '../Spinner/Spinner'
 
