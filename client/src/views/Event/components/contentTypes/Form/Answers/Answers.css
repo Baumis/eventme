@@ -1,7 +1,7 @@
 .form-component-answers {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    max-width: 400px;
 }
 
 .form-component-back-button {
