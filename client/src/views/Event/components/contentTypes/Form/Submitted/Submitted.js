@@ -7,7 +7,7 @@ const Submitted = (props) => {
             Your answers have been submitted.
             <div className="form-component-button-row">
                 {props.isCreator() ?
-                    <div className="form-component-answers-button" onClick={() => props.toggleAnswers()}>
+                    <div className="form-component-answers-button" onClick={() => props.openModal()}>
                         Answers
                     </div>
                     : null}

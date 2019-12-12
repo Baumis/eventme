@@ -37,7 +37,7 @@ const Answers = (props) => {
                 )}
             </div>
             <div className="form-component-back-button-row">
-                <div className="form-component-back-button" onClick={() => props.toggleAnswers()}>
+                <div className="form-component-back-button" onClick={() => props.close()}>
                     Back
                 </div>
             </div>

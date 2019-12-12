@@ -137,17 +137,9 @@ class Form extends Component {
             return (
                 <div className="form-component">
                     <Submitted
-                        toggleAnswers={this.toggleAnswers}
+                        openModal={() => this.props.openModal(<Answers close={this.props.closeModal} component={this.props.component} />)}
                         isCreator={this.props.isCreator}
                     />
-                    {this.state.showAnswers && this.props.isCreator() && !this.props.edit ?
-                        <UniversalModal
-                            content={<Answers
-                                toggleAnswers={this.toggleAnswers}
-                                component={this.props.component}
-                            />}
-                        />
-                        : null}
                 </div>
             )
         }
