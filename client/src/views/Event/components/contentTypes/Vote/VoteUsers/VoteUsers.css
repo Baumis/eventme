@@ -1,7 +1,8 @@
 .vote-users-container {
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    width: 400px;
+    height: 450px;
 }
 
 .vote-users-option {
@@ -15,6 +16,7 @@
     border-bottom: 1px solid rgba(0,0,0,0.2);
     padding: 10px 0px;
     max-height: 500px;
+    height: 100%;
 }
 
 .vote-users-user {
@@ -61,4 +63,10 @@
     cursor: pointer;
     outline: none;
     transition: background 0.2s;
+}
+
+@media only screen and (max-width: 450px) {
+    .vote-users-container {
+        width: 95vw;
+    }
 }
