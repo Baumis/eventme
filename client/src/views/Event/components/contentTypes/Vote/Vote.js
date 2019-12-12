@@ -120,6 +120,8 @@ class Vote extends Component {
                     <VoteResults
                         options={this.props.component.data.options}
                         toggleResults={this.toggleResults}
+                        openModal={this.props.openModal}
+                        closeModal={this.props.closeModal}
                     />
                     :
                     <VoteOptions

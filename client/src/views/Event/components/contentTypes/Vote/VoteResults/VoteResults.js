@@ -5,19 +5,8 @@ import VoteUsers from '../VoteUsers/VoteUsers'
 
 class VoteResults extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            showVoters: false,
-            displayedOption: this.props.options[0]
-        }
-    }
-
     showVoters = (option) => {
-        this.setState({
-            showVoters: true,
-            displayedOption: option
-        })
+        this.props.openModal(<VoteUsers option={option}/>)
     }
 
     hideVoters = () => {
@@ -41,20 +30,12 @@ class VoteResults extends Component {
     render() {
         return (
             <div className="vote-component-results">
-                {this.state.showVoters ?
-                    <UniversalModal
-                        content={<VoteUsers
-                            option={this.state.displayedOption}
-                            close={this.hideVoters}
-                        />}
-                    />
-                    : null}
                 {this.props.options.map((option, i) =>
                     <div key={i} className="vote-component-option-container">
                         <div className="vote-component-title-row">
                             <div className={"vote-component-title"}>
                                 <div>{option.label}</div>
-                                <div className="vote-component-vote-count" onClick={() => this.showVoters(option)}>
+                                <div className="vote-component-vote-count" onClick={() => this.props.openModal(<VoteUsers close={this.props.closeModal} option={option}/>)}>
                                     {option.votes.length + ' votes'}
                                 </div>
                             </div>
