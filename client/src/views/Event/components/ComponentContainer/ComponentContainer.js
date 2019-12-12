@@ -56,6 +56,7 @@ class ComponentContainer extends Component {
                 {this.state.showModal ?
                     <UniversalModal
                         content={this.state.modalContent}
+                        open={this.state.showModal}
                     />
                     : null}
                 <div className="component-container-grid">
