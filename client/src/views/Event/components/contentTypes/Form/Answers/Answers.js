@@ -38,7 +38,7 @@ const Answers = (props) => {
             </div>
             <div className="form-component-back-button-row">
                 <div className="form-component-back-button" onClick={() => props.close()}>
-                    Back
+                    Close
                 </div>
             </div>
         </div>

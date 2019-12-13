@@ -12,8 +12,8 @@
 }
 
 .vote-users-user-list {
-    border-top: 1px solid rgba(0,0,0,0.2);
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
     padding: 10px 0px;
     max-height: 500px;
     height: 100%;
@@ -55,14 +55,16 @@
     padding: 8px;
     width: 80px;
     height: 20px;
-    border: 1px solid #4c5c68;
     border-radius: 5px;
-    background: #4c5c68;
-    color: white;
+    color: #c74C3C;
     margin: 0px 5px 0px 5px;
     cursor: pointer;
     outline: none;
     transition: background 0.2s;
+}
+
+.vote-users-close-button:hover {
+    background: rgb(221, 221, 221, 0.2);
 }
 
 @media only screen and (max-width: 450px) {

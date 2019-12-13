@@ -59,8 +59,9 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
 
 .event-options-button-row{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     padding: 20px 0px 0px 0px;
+    border-top: 1px solid #dddddd;
 }
 
 .event-options-button {
@@ -84,6 +85,7 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
     color: #c74C3C;
     background: transparent;
     border: 1px solid #c74C3C;
+    border: none;
 }
 
 .event-options-button:hover {
@@ -101,6 +103,7 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
 .event-options-top h2{
     margin: 0px 0px 10px 0px;
     color: #46494c;
+    font-size: 22px;
 }
 
 @media only screen and (max-width: 620px) {
