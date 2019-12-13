@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import './VoteResults.css'
-import UniversalModal from '../../../../../../commonComponents/UniversalModal/UniversalModal'
 import VoteUsers from '../VoteUsers/VoteUsers'
 
 class VoteResults extends Component {
 
     showVoters = (option) => {
-        this.props.openModal(<VoteUsers option={option}/>)
+        this.props.openModal(<VoteUsers option={option} />)
     }
 
     hideVoters = () => {
@@ -14,10 +13,9 @@ class VoteResults extends Component {
     }
 
     votePercentage = (id) => {
-        let allVotes = 0
-        for (let option of this.props.options) {
-            allVotes += option.votes.length
-        }
+        const allVotes = this.props.options
+            .map(option => option.votes.length)
+            .reduce((total, length) => total + length)
         const targetVoteCount = this.voteCount(id)
         return (targetVoteCount / allVotes) * 100
     }
@@ -35,7 +33,7 @@ class VoteResults extends Component {
                         <div className="vote-component-title-row">
                             <div className={"vote-component-title"}>
                                 <div>{option.label}</div>
-                                <div className="vote-component-vote-count" onClick={() => this.props.openModal(<VoteUsers close={this.props.closeModal} option={option}/>)}>
+                                <div className="vote-component-vote-count" onClick={() => this.props.openModal(<VoteUsers close={this.props.closeModal} option={option} />)}>
                                     {option.votes.length + ' votes'}
                                 </div>
                             </div>
