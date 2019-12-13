@@ -1,3 +1,31 @@
 .form-component-submitted {
-    color: rgba(0,0,0,0.3);
+    min-width: 70%;
+}
+
+.form-component-submitted-option {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+}
+
+.form-component-submitted-question {
+    font-size: 19px;
+    font-weight: 600;
+    color: rgba(70, 73, 76, 1);
+    padding: 5px 0px 5px 0px;
+}
+
+.form-component-submitted-answers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4c5c68;
+    margin: 10px 0px;
+    border-bottom: 1px solid #4c5c68;
+    cursor: pointer;
 }

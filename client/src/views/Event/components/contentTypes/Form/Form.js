@@ -139,6 +139,7 @@ class Form extends Component {
                     <Submitted
                         openModal={() => this.props.openModal(<Answers close={this.props.closeModal} component={this.props.component} />)}
                         isCreator={this.props.isCreator}
+                        component={this.props.component}
                     />
                 </div>
             )

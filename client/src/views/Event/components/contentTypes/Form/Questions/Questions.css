@@ -3,18 +3,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .form-component-question-area {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-width: 50%;
+    min-width: 70%;
 }
 
 .form-component-title {
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 19px;
+    font-weight: 600;
     color: rgba(70, 73, 76, 1);
     padding: 5px 0px 5px 0px;
 }
@@ -59,7 +60,7 @@
     color: white;
     margin-top: 20px;
     width: 100px;
-    height: 30px;
+    height: 35px;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -72,7 +73,7 @@
     border: 1px solid #4c5c68;
     color: #4c5c68;
     width: 100px;
-    height: 30px;
+    height: 35px;
     border-radius: 5px;
     cursor: pointer;
     margin: 20px 3px;
