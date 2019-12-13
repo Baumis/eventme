@@ -16,8 +16,7 @@ class VoteResults extends Component {
         const allVotes = this.props.options
             .map(option => option.votes.length)
             .reduce((total, length) => total + length)
-        const targetVoteCount = this.voteCount(id)
-        return (targetVoteCount / allVotes) * 100
+        return (this.voteCount(id) / allVotes) * 100
     }
 
     voteCount = (optionId) => {
