@@ -16,9 +16,14 @@ const googleLogin = async (googleToken) => {
     return response.data
 }
 
+const facebookLogin = async (userId, facebookToken) => {
+    const response = await http.post(`${baseUrl}/facebook`, { userId, facebookToken })
+    return response.data
+}
+
 const logout = async () => {
     const response = await http.post(`${baseUrl}/logout`)
     return response.data
 }
 
-export default { login, googleLogin, logout, refresh }
+export default { login, googleLogin, logout, refresh, facebookLogin }

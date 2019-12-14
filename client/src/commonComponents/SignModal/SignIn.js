@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Spinner from '../Spinner/Spinner'
 import GoogleLogin from 'react-google-login'
+import FacebookLogin from 'react-facebook-login'
 
 class SignIn extends Component {
     constructor(props) {
@@ -73,6 +74,20 @@ class SignIn extends Component {
         }
     }
 
+    facebookSignIn = async (response) => {
+        try {
+            await this.props.UserStore.facebookSignIn(response.id, response.accessToken)
+            this.props.VisibilityStore.closeSignModal()
+
+            if (this.props.VisibilityStore.onSignSuccess) {
+                this.props.VisibilityStore.onSignSuccess()
+            }
+
+        } catch (error) {
+            this.onSignInFail('Could not sign in')
+        }
+    }
+
     render() {
         return (
             <div className="signModalContent">
@@ -114,6 +129,14 @@ class SignIn extends Component {
                         onSuccess={this.googleSignIn}
                         onFailure={() => this.onSignInFail('Could not sign in')}
                     />
+                    <FacebookLogin
+                        cssClass="facebookSignButton"
+                        icon="fa-facebook"
+                        textButton="Facebook sign in"
+                        appId="494414091444821"
+                        fields="name,email,picture"
+                        callback={this.facebookSignIn}
+                        onFailure={() => this.onSignInFail('Could not sign in')} />
                 </div>
             </div>
         )

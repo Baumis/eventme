@@ -4,6 +4,7 @@ const User = require('../models/user')
 const Event = require('../models/event')
 const eventService = require('./eventService')
 const emailService = require('../services/emailService')
+const axios = require('axios')
 
 exports.getOne = async (id) => {
     return await User.findById(id)
@@ -205,6 +206,35 @@ exports.findOrCreateGoogleUser = async (googleToken) => {
         email: googleUser.email,
         emailVerified: true,
         avatar: googleUser.picture
+    })
+
+    const error = user.validateSync()
+
+    if (error) {
+        const errorMessages = Object.keys(error.errors).map(field => error.errors[field])
+        throw new Error(errorMessages.join(', '))
+    }
+
+    return await user.save()
+}
+
+exports.findOrCreateFacebookUser = async (userId, facebookToken) => {
+    const response = await axios.get(`https://graph.facebook.com/${userId}?fields=id,name,email,picture.width(720).height(720)&access_token=${facebookToken}`)
+    const facebookUser = response.data
+
+    const existingUser = await User.findOne({ userType: 'FACEBOOK', externalId: facebookUser.id })
+
+    if (existingUser) {
+        return existingUser
+    }
+
+    const user = new User({
+        userType: 'FACEBOOK',
+        externalId: facebookUser.id,
+        name: facebookUser.name,
+        email: facebookUser.email,
+        emailVerified: true,
+        avatar: facebookUser.picture.data.url
     })
 
     const error = user.validateSync()

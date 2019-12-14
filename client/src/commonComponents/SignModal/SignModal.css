@@ -133,6 +133,22 @@
     margin: 0px 5px 5px 5px !important;
 }
 
+.facebookSignButton {
+    color: white;
+    font-family: Helvetica, sans-serif;
+    background-color: #4267b2;
+    width: 145px;
+    height: 40px;
+    box-shadow: none !important;
+    border: 1px solid #c5c3c6 !important;
+    border-radius: 5px !important;
+    padding: 1px !important;
+}
+
+.facebookSignButton i {
+    margin-right: 10px;
+}
+
 @media only screen and (max-width: 450px) {
     .sign-modal-bg {
         z-index: 5;

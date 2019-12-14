@@ -8,6 +8,8 @@ loginRouter.post('/refresh', middleware.requireAuthentication, loginController.r
 
 loginRouter.post('/google', loginController.googleLogin)
 
+loginRouter.post('/facebook', loginController.facebookLogin)
+
 loginRouter.post('/logout', loginController.logout)
 
 module.exports = loginRouter
