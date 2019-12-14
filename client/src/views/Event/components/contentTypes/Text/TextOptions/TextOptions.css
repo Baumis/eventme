@@ -1,0 +1,95 @@
+.text-options {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.text-options-header {
+    font-size: 22px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
+}
+
+.text-options-container {
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding: 10px 0px;
+    height: 100%;
+}
+
+.text-options-textarea {
+    padding: 12px;
+}
+
+.text-options-textarea label {
+    display: flex;
+    padding: 10px;
+    color: #1985a1;
+}
+
+.text-options-textarea-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid #dddddd;;
+    padding: 10px;
+    outline: none;
+    text-align: start;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
+
+.text-options-button-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 0px 0px 0px;
+}
+
+.text-options-close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    width: 80px;
+    height: 20px;
+    border-radius: 5px;
+    color: #c74C3C;
+    margin: 0px 5px 0px 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.2s;
+}
+
+.text-options-apply-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    width: 62px;
+    height: 12px;
+    border: 1px solid #4c5c68;
+    border-radius: 5px;
+    background: #4c5c68;
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.text-options-apply-button:hover{
+    background: #404e59;
+}
+
+.text-options-close-button:hover {
+    background: rgb(221, 221, 221, 0.2);
+}
+
+@media only screen and (max-width: 450px) {
+    .text-options {
+        width: 95vw;
+    }
+}

@@ -17,6 +17,7 @@ class EditableWrapper extends Component {
                 disabled={this.props.editable}
                 onChange={this.props.onChange}
                 style={this.props.style}
+                className={this.props.className}
             />
         )
     }

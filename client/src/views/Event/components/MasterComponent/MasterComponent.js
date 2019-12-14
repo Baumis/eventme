@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Text from '../contentTypes/Text/Text'
+import TextOptions from '../contentTypes/Text/TextOptions/TextOptions'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
 import Picture from '../contentTypes/Picture/Picture'
 import Vote from '../contentTypes/Vote/Vote'
@@ -15,11 +16,11 @@ class MasterComponent extends Component {
         super(props)
         this.state = {
             components: {
-                TEXT: Text,
-                INVITE_LINK: InviteLink,
-                PICTURE: Picture,
-                VOTE: Vote,
-                FORM: Form
+                TEXT: { type: Text, options: TextOptions },
+                INVITE_LINK: { type: InviteLink, options: null },
+                PICTURE: { type: Picture, options: null },
+                VOTE: { type: Vote, options: null },
+                FORM: { type: Form, options: null }
             }
         }
     }
@@ -32,7 +33,8 @@ class MasterComponent extends Component {
         const buttonMode = this.props.editable ? 'editButtonActive' : ''
         const masterMode = this.props.editable ? 'editMasterActive' : ''
         const panelMarginTop = this.props.editable ? '0px' : '-40px'
-        const TagName = this.state.components[this.props.component.type || 'TEXT']
+        const ComponentType = this.state.components[this.props.component.type || 'TEXT'].type
+        const ComponentOptions = this.state.components[this.props.component.type || 'TEXT'].options
         return (
             <div className={'master-component ' + masterMode}>
                 {this.props.isCreator() ?
@@ -53,10 +55,17 @@ class MasterComponent extends Component {
                     index={this.props.index}
                     moveEditableForward={this.props.moveEditableForward}
                     moveEditableBackward={this.props.moveEditableBackward}
-                    openModal={this.props.openModal}
+                    openModal={
+                        () => this.props.openModal(
+                            <ComponentOptions
+                                component={this.props.component}
+                                changeData={this.changeComponentData}
+                                close={this.props.closeModal}
+                            />
+                        )}
                 />
 
-                <TagName
+                <ComponentType
                     component={this.props.component}
                     edit={this.props.editable}
                     changeData={this.changeComponentData}
