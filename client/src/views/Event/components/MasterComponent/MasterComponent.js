@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import Text from '../contentTypes/Text/Text'
 import TextOptions from '../contentTypes/Text/TextOptions/TextOptions'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
+import InviteLinkOptions from '../contentTypes/InviteLink/InviteLinkOptions/InviteLinkOptions'
 import Picture from '../contentTypes/Picture/Picture'
 import PictureOptions from '../contentTypes/Picture/PictureOptions/PictureOptions'
 import Vote from '../contentTypes/Vote/Vote'
@@ -18,7 +19,7 @@ class MasterComponent extends Component {
         this.state = {
             components: {
                 TEXT: { type: Text, options: TextOptions },
-                INVITE_LINK: { type: InviteLink, options: null },
+                INVITE_LINK: { type: InviteLink, options: InviteLinkOptions },
                 PICTURE: { type: Picture, options: PictureOptions },
                 VOTE: { type: Vote, options: null },
                 FORM: { type: Form, options: null }

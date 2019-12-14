@@ -1,0 +1,41 @@
+.invitelink-options {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.invitelink-options-header {
+    font-size: 22px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
+}
+
+.invitelink-options-container {
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding: 10px 0px;
+    height: 100%;
+}
+
+.invitelink-options-button-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 0px 0px 0px;
+}
+
+.invitelink-options-close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    width: 80px;
+    height: 20px;
+    border-radius: 5px;
+    color: #c74C3C;
+    margin: 0px 5px 0px 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.2s;
+}
