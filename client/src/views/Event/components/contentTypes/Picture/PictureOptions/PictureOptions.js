@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
 import './PictureOptions.css'
 import OptionInput from '../../components/OptionInput/OptionInput'
-import { FaApple } from 'react-icons/fa'
+import { FaAppleAlt } from 'react-icons/fa'
 
 class PictureOptions extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            component: { ... this.props.component }
+            component: { ...this.props.component }
         }
     }
 
     changeUrl = (event) => {
-        const componentClone = { ... this.state.component }
+        const componentClone = { ...this.state.component }
         componentClone.data.url = event.target.value
         this.setState({ component: componentClone })
     }
 
     changeExpand = (isExpanded) => {
-        const componentClone = { ... this.state.component }
+        const componentClone = { ...this.state.component }
         componentClone.data.expand = isExpanded
         this.setState({ component: componentClone })
     }
@@ -50,7 +50,7 @@ class PictureOptions extends Component {
                             <div className="picture-options-expand-section">
                                 <div className={"picture-options-expand-button" + this.expandButtonClass(true)} onClick={() => this.changeExpand(true)}>
                                     <div className="picture-options-compress-icon">
-                                        <FaApple />
+                                        <FaAppleAlt />
                                     </div>
                                 </div>
                                 Compress
@@ -58,7 +58,7 @@ class PictureOptions extends Component {
                             <div className="picture-options-expand-section">
                                 <div className={"picture-options-expand-button" + this.expandButtonClass(false)} onClick={() => this.changeExpand(false)}>
                                     <div className="picture-options-expand-icon">
-                                        <FaApple />
+                                        <FaAppleAlt />
                                     </div>
                                 </div>
                                 Expand

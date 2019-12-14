@@ -53,6 +53,8 @@ class SettingsContainer extends Component {
                 />
             case 'password':
                 return <PasswordOptions />
+            default:
+                return null
         }
     }
 

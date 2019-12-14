@@ -44,12 +44,12 @@ class Vote extends Component {
     }
 
     changeSubject = (event) => {
-        this.props.changeData({ ... this.props.component.data, subject: event.target.value })
+        this.props.changeData({ ...this.props.component.data, subject: event.target.value })
     }
 
     changeOption = (optionIndex, event) => {
         this.props.component.data.options[optionIndex].label = event.target.value
-        this.props.changeData({ ... this.props.component.data })
+        this.props.changeData({ ...this.props.component.data })
     }
 
     newOptions = () => {
@@ -58,12 +58,12 @@ class Vote extends Component {
             votes: []
         }
         this.props.component.data.options.push(option)
-        this.props.changeData({ ... this.props.component.data })
+        this.props.changeData({ ...this.props.component.data })
     }
 
     removeOption = (optionIndex) => {
         this.props.component.data.options.splice(optionIndex, 1)
-        this.props.changeData({ ... this.props.component.data })
+        this.props.changeData({ ...this.props.component.data })
     }
 
     submit = async () => {

@@ -1,6 +1,5 @@
 import React from 'react'
 import './Submitted.css'
-import QuestionField from '../Questions/QuestionField'
 
 const Submitted = (props) => {
 

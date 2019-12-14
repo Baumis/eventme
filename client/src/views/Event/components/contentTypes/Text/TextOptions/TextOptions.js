@@ -8,18 +8,18 @@ class TextOptions extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            component: { ... this.props.component }
+            component: { ...this.props.component }
         }
     }
 
     changeTitle = (event) => {
-        const componentClone = { ... this.state.component }
+        const componentClone = { ...this.state.component }
         componentClone.data.title = event.target.value
         this.setState({ component: componentClone })
     }
 
     changeContent = (event) => {
-        const componentClone = { ... this.state.component }
+        const componentClone = { ...this.state.component }
         componentClone.data.content = event.target.value
         this.setState({ component: componentClone })
     }

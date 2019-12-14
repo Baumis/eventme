@@ -17,7 +17,7 @@ class Form extends Component {
     }
 
     componentDidMount() {
-        const answerAreasCopy = [... this.state.answerAreas]
+        const answerAreasCopy = [...this.state.answerAreas]
         this.props.component.data.questions.forEach(question => {
 
             if (!answerAreasCopy.some(answer => answer.question === question._id)) {
@@ -53,17 +53,17 @@ class Form extends Component {
             answers: []
         }
         this.props.component.data.questions.push(question)
-        this.props.changeData({ ... this.props.component.data })
+        this.props.changeData({ ...this.props.component.data })
     }
 
     removeQuestion = (questionIndex) => {
         this.props.component.data.questions.splice(questionIndex, 1)
-        this.props.changeData({ ... this.props.component.data })
+        this.props.changeData({ ...this.props.component.data })
     }
 
     changeQuestion = (questionIndex, event) => {
         this.props.component.data.questions[questionIndex].label = event.target.value
-        this.props.changeData({ ... this.props.component.data })
+        this.props.changeData({ ...this.props.component.data })
     }
 
     changeAnswer = (questionId, event) => {
@@ -72,7 +72,7 @@ class Form extends Component {
             return
         }
 
-        const answerAreasCopy = [... this.state.answerAreas]
+        const answerAreasCopy = [...this.state.answerAreas]
         if (!answerAreasCopy.find(answer => answer.question === questionId)) {
             answerAreasCopy.push({ question: questionId, content: '' })
         }

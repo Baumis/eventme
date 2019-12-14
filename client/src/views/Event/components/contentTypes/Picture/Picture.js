@@ -1,6 +1,5 @@
 import React from 'react'
 import './Picture.css'
-import { FaExpand, FaCompress } from 'react-icons/fa'
 
 const Picture = (props) => {
 
