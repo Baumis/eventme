@@ -12,7 +12,7 @@ const Submitted = (props) => {
     return (
         <div className="form-component-submitted">
             {props.component.data.questions.map((question, i) =>
-                <div className="form-component-submitted-option">
+                <div className="form-component-submitted-option" key={i}>
                     <div className={"form-component-submitted-title"}>
                         {question.label}
                         <div className="form-component-submitted-submitted">
@@ -23,6 +23,7 @@ const Submitted = (props) => {
                         <textarea
                             value={getContent(question._id)}
                             rows={3}
+                            readOnly
                         />
                     </div>
                 </div>
