@@ -12,6 +12,7 @@
 .vote-component-vote-count {
     padding: 0px 0px 0px 10px;
     cursor: pointer;
+    color: #1985a1;
 }
 
 .vote-component-status-bar {

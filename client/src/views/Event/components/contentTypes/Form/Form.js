@@ -4,8 +4,7 @@ import './Form.css'
 import Questions from './Questions/Questions'
 import Submitted from './Submitted/Submitted'
 import Answers from './Answers/Answers'
-import UniversalModal from '../../../../../commonComponents/UniversalModal/UniversalModal'
-
+import CreatorView from './CreatorView/CreatorView'
 class Form extends Component {
 
     constructor(props) {
@@ -133,13 +132,27 @@ class Form extends Component {
     }
 
     render() {
+
+        if (this.props.isCreator() && !this.props.edit) {
+            return (
+                <div className="form-component">
+                    <CreatorView
+                        openModal={(question) => this.props.openModal(<Answers close={this.props.closeModal} component={this.props.component} question={question} />)}
+                        isCreator={this.props.isCreator}
+                        component={this.props.component}
+                    />
+                </div>
+            )
+        }
+
         if (this.hasSubmittedAll() && !this.props.edit) {
             return (
                 <div className="form-component">
                     <Submitted
-                        openModal={() => this.props.openModal(<Answers close={this.props.closeModal} component={this.props.component} />)}
+                        openModal={(question) => this.props.openModal(<Answers close={this.props.closeModal} component={this.props.component} question={question} />)}
                         isCreator={this.props.isCreator}
                         component={this.props.component}
+                        answerAreas={this.state.answerAreas}
                     />
                 </div>
             )

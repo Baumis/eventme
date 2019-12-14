@@ -30,10 +30,11 @@
     border-bottom: 1px solid #dddddd;
 }
 
-.form-component-answers-question{
-    font-size: 18px;
-    color: #4c5c68;
-    margin: 20px 10px;
+.form-component-answers-question-title{
+    font-size: 22px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
 }
 
 .form-component-answers-user-row {

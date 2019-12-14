@@ -33,6 +33,7 @@ class QuestionField extends Component {
                     <textarea
                         value={this.getContent(this.props.question._id)}
                         onChange={(event) => this.props.changeAnswer(this.props.question._id, event)}
+                        rows={3}
                     />
                 </div>
             </div>

@@ -1,5 +1,5 @@
 .form-component-submitted {
-    min-width: 70%;
+    min-width: 80%;
 }
 
 .form-component-submitted-option {
@@ -8,24 +8,44 @@
     justify-content: flex-start;
     align-items: flex-start;
     margin: 5px;
-    padding: 10px;
+    padding: 7px;
     border-radius: 5px;
-    border: 1px solid #dddddd;
 }
 
-.form-component-submitted-question {
+.form-component-submitted-textarea {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 100%;
+}
+
+.form-component-submitted-textarea textarea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    resize: none;
+    margin-right: 5px;
+    color: rgba(0,0,0,0.3);
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+    width: 100%;
+    outline: none;
+}
+
+.form-component-submitted-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     font-size: 19px;
     font-weight: 600;
     color: rgba(70, 73, 76, 1);
     padding: 5px 0px 5px 0px;
 }
 
-.form-component-submitted-answers {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #4c5c68;
-    margin: 10px 0px;
-    border-bottom: 1px solid #4c5c68;
-    cursor: pointer;
+.form-component-submitted-submitted {
+    font-size: 14px;
+    padding-left: 5px;
+    font-weight: 500;
+    color: #1985a1;
 }

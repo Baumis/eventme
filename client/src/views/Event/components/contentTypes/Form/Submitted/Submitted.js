@@ -1,21 +1,29 @@
 import React from 'react'
 import './Submitted.css'
+import QuestionField from '../Questions/QuestionField'
 
 const Submitted = (props) => {
+
+    const getContent = (questionId) => {
+        const answer = props.answerAreas.find(answer => answer.question === questionId)
+        return answer ? answer.content : ''
+    }
 
     return (
         <div className="form-component-submitted">
             {props.component.data.questions.map((question, i) =>
                 <div className="form-component-submitted-option">
-                    <div className="form-component-submitted-question">
+                    <div className={"form-component-submitted-title"}>
                         {question.label}
-                    </div> 
-                    <div className="form-component-button-row">
-                        {props.isCreator() ?
-                            <div className="form-component-submitted-answers" onClick={() => props.openModal()}>
-                                {`${question.answers.length} answers`}
-                            </div>
-                            : null}
+                        <div className="form-component-submitted-submitted">
+                        submitted
+                        </div>
+                    </div>
+                    <div className={"form-component-submitted-textarea"}>
+                        <textarea
+                            value={getContent(question._id)}
+                            rows={3}
+                        />
                     </div>
                 </div>
             )}
