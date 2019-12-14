@@ -53,6 +53,7 @@ class MasterComponent extends Component {
                     index={this.props.index}
                     moveEditableForward={this.props.moveEditableForward}
                     moveEditableBackward={this.props.moveEditableBackward}
+                    openModal={this.props.openModal}
                 />
 
                 <TagName

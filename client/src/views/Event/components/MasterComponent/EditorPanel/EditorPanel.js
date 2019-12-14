@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EditorPanel.css'
-import { FaArrowCircleLeft, FaArrowCircleRight, FaTrashAlt } from 'react-icons/fa'
+import { FaArrowCircleLeft, FaArrowCircleRight, FaTrashAlt, FaPen } from 'react-icons/fa'
 
 class EditorPanel extends Component {
 
@@ -21,7 +21,7 @@ class EditorPanel extends Component {
 
     render() {
         return (
-            <div className="editor-panel" style={{marginTop: this.props.style}}>
+            <div className="editor-panel" style={{ marginTop: this.props.style }}>
                 <div className="editor-panel-arrows">
                     <div className="editor-panel-button" onClick={this.moveBackward}>
                         <FaArrowCircleLeft />
@@ -30,8 +30,13 @@ class EditorPanel extends Component {
                         <FaArrowCircleRight />
                     </div>
                 </div>
-                <div className="editor-panel-button" onClick={this.removeComponent}>
-                    <FaTrashAlt />
+                <div className="editor-panel-functions">
+                    <div className="editor-panel-button" onClick={this.props.openModal}>
+                        <FaPen />
+                    </div>
+                    <div className="editor-panel-button" onClick={this.removeComponent}>
+                        <FaTrashAlt />
+                    </div>
                 </div>
             </div>
         )
