@@ -4,7 +4,7 @@ import './Form.css'
 import Questions from './Questions/Questions'
 import Submitted from './Submitted/Submitted'
 import Answers from './Answers/Answers'
-
+import CreatorView from './CreatorView/CreatorView'
 class Form extends Component {
 
     constructor(props) {
@@ -132,11 +132,13 @@ class Form extends Component {
     }
 
     render() {
-        if (this.state.showAnswers && this.props.isCreator() && !this.props.edit) {
+
+        if (this.props.isCreator() && !this.props.edit) {
             return (
                 <div className="form-component">
-                    <Answers
-                        toggleAnswers={this.toggleAnswers}
+                    <CreatorView
+                        openModal={(question) => this.props.openModal(<Answers close={this.props.closeModal} component={this.props.component} question={question} />)}
+                        isCreator={this.props.isCreator}
                         component={this.props.component}
                     />
                 </div>
@@ -147,8 +149,10 @@ class Form extends Component {
             return (
                 <div className="form-component">
                     <Submitted
-                        toggleAnswers={this.toggleAnswers}
+                        openModal={(question) => this.props.openModal(<Answers close={this.props.closeModal} component={this.props.component} question={question} />)}
                         isCreator={this.props.isCreator}
+                        component={this.props.component}
+                        answerAreas={this.state.answerAreas}
                     />
                 </div>
             )

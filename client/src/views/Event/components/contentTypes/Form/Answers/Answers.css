@@ -1,7 +1,8 @@
 .form-component-answers {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 400px;
+    height: 450px;
 }
 
 .form-component-back-button {
@@ -9,37 +10,45 @@
     justify-content: center;
     align-items: center;
     background: transparent;
-    border: 1px solid #4c5c68;
-    color: #4c5c68;
-    width: 100px;
-    height: 30px;
+    color: #c74C3C;
+    padding: 8px;
+    width: 80px;
+    height: 20px;
     border-radius: 5px;
     cursor: pointer;
-    margin: 20px 3px;
+}
+
+.form-component-back-button:hover {
+    background: rgb(221, 221, 221, 0.2);
 }
 
 .form-component-answers-content{
     flex: 1;
     overflow-y: auto;
-    max-height: 290px;
-    margin-top: 25px;
+    max-height: 500px;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
 }
 
-.form-component-answers-question{
-    font-size: 18px;
-    color: #4c5c68;
-    margin: 20px 10px;
+.form-component-answers-question-title{
+    font-size: 22px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
 }
 
 .form-component-answers-user-row {
-    padding: 5px 10px;
+    padding: 10px;
+    background: rgb(221, 221, 221, 0.3);
+    border-radius: 5px;
+    margin: 5px 0px;
 }
 
 .form-component-answers-user-info {
     display: flex;
     align-items: center;
     font-size: 14px;
-    color: #4c5c68;
+    color: #1985a1;
 }
 
 .form-component-answers-user-avatar {
@@ -61,11 +70,18 @@
 
 .form-component-answers-user-content {
     font-size: 14px;
-    color: #4c5c68;
+    color: black;
     padding-left: 35px;
 }
 
 .form-component-back-button-row {
     display: flex;
     justify-content: center;
+    padding: 15px 0px 0px 0px;
+}
+
+@media only screen and (max-width: 450px) {
+    .form-component-answers {
+        width: 95vw;
+    }
 }

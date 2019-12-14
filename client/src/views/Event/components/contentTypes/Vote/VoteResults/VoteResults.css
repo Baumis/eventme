@@ -1,5 +1,5 @@
 .vote-component-results {
-    min-width: 50%;
+    min-width: 70%;
 }
 
 .vote-component-title {
@@ -11,6 +11,8 @@
 
 .vote-component-vote-count {
     padding: 0px 0px 0px 10px;
+    cursor: pointer;
+    color: #1985a1;
 }
 
 .vote-component-status-bar {

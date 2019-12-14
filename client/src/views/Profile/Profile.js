@@ -5,7 +5,8 @@ import ProfileHeader from './components/ProfileHeader/ProfileHeader'
 import ProfileContent from './components/ProfileContent/ProfileContent'
 import ProfileTabs from './components/ProfileTabs/ProfileTabs'
 import Navbar from '../../commonComponents/Navbar/Navbar'
-import NewEventModal from '../../commonComponents/NewEventModal/NewEventModal'
+import NewEventOptions from '../../commonComponents/NewEventOptions/NewEventOptions'
+import UniversalModal from '../.././commonComponents/UniversalModal/UniversalModal'
 import NotFound from '../NotFound/NotFound'
 
 class Profile extends Component {
@@ -112,8 +113,8 @@ class Profile extends Component {
                     activeTab={this.state.activeTab}
                 />
                 {this.state.newEventModal ?
-                    <NewEventModal
-                        hide={this.toggleNewEventModal}
+                    <UniversalModal
+                        content={<NewEventOptions hide={this.toggleNewEventModal}/>}
                     />
                     : null}
             </div>

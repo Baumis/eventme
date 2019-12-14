@@ -3,7 +3,8 @@ import { inject, observer } from 'mobx-react'
 import './Main.css'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import SignModal from '../../commonComponents/SignModal/SignModal'
-import NewEventModal from '../../commonComponents/NewEventModal/NewEventModal'
+import NewEventOptions from '../../commonComponents/NewEventOptions/NewEventOptions'
+import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 import ContentContainer from './components/ContentContainer/ContentContainer'
 import MainHeader from './components/MainHeader/MainHeader'
 
@@ -38,8 +39,8 @@ class Main extends Component {
                     : null
                 }
                 {this.state.newEventModal ?
-                    <NewEventModal
-                        hide={this.hideEventModal}
+                    <UniversalModal
+                        content={<NewEventOptions hide={this.hideEventModal} />}
                     />
                     : null
                 }

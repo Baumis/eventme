@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
-import './NewEventModal.css'
+import './NewEventOptions.css'
 import moment from 'moment'
 import Spinner from '../Spinner/Spinner'
 
@@ -64,10 +64,10 @@ class NewEventModal extends Component {
                 <div className="event-options-surface">
                     <div className="event-options-content">
                         <div className="event-options-top">
-                            <h2>New event</h2>
+                            <h2>Create event</h2>
                         </div>
                         <div className="event-options-input">
-                            <p>Event title</p>
+                            <p>Title</p>
                             <input
                                 name={'eventName'}
                                 onChange={this.changeStateValue}

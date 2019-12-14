@@ -30,7 +30,7 @@
 }
 
 .event-container-new-button:hover{
-    background: rgba(76, 92, 104, 0.8);
+    background: #404e59;
 }
 
 @media only screen and (max-width: 900px) {

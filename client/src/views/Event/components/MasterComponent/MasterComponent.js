@@ -61,6 +61,8 @@ class MasterComponent extends Component {
                     changeData={this.changeComponentData}
                     isCreator={this.props.isCreator}
                     isGuest={this.props.isGuest}
+                    openModal={this.props.openModal}
+                    closeModal={this.props.closeModal}
                 />
             </div>
         )
