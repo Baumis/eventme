@@ -11,23 +11,7 @@ const Picture = (props) => {
             backgroundSize: size,
         }
     }
-
-    const changeUrl = (event) => {
-        const dataObject = {
-            url: event.target.value,
-            expand: props.component.data.expand
-        }
-        props.changeData(dataObject)
-    }
-
-    const changeSize = (event) => {
-        const dataObject = {
-            url: props.component.data.url,
-            expand: !props.component.data.expand
-        }
-        props.changeData(dataObject)
-    }
-
+    
     return (
         <div style={getPicture()} className="picture-container"></div>
     )
