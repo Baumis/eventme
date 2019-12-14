@@ -7,6 +7,7 @@ import InviteLinkOptions from '../contentTypes/InviteLink/InviteLinkOptions/Invi
 import Picture from '../contentTypes/Picture/Picture'
 import PictureOptions from '../contentTypes/Picture/PictureOptions/PictureOptions'
 import Vote from '../contentTypes/Vote/Vote'
+import VoteOptions from '../contentTypes/Vote/VoteOptions/VoteOptions'
 import Form from '../contentTypes/Form/Form'
 import './MasterComponent.css'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
@@ -21,7 +22,7 @@ class MasterComponent extends Component {
                 TEXT: { type: Text, options: TextOptions },
                 INVITE_LINK: { type: InviteLink, options: InviteLinkOptions },
                 PICTURE: { type: Picture, options: PictureOptions },
-                VOTE: { type: Vote, options: null },
+                VOTE: { type: Vote, options: VoteOptions },
                 FORM: { type: Form, options: null }
             }
         }
