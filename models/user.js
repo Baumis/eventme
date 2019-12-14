@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const userSchema = new mongoose.Schema({
     userType: {
         type: String,
-        enum: ['LOCAL', 'GOOGLE'],
+        enum: ['LOCAL', 'GOOGLE', 'FACEBOOK'],
         default: 'LOCAL',
         required: [true, 'User type required']
     },

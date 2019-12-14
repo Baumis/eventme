@@ -13,6 +13,10 @@ class UserStore {
         this.currentUser = await loginService.googleLogin(googleToken)
     }
 
+    async facebookSignIn(userId, facebookToken) {
+        this.currentUser = await loginService.facebookLogin(userId, facebookToken)
+    }
+
     async refreshUser() {
         try {
             this.currentUser = await loginService.refresh()
