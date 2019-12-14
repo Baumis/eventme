@@ -1,0 +1,134 @@
+.picture-options {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.picture-options-header {
+    font-size: 22px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
+}
+
+.picture-options-container {
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding: 10px 0px;
+    height: 100%;
+}
+
+.picture-options-expand {
+    padding: 12px;
+}
+
+.picture-options-expand label {
+    display: flex;
+    padding: 10px;
+    color: #1985a1;
+}
+
+.picture-options-expand-buttons {
+    display: flex;
+}
+
+.picture-options-expand-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.picture-options-expand-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgba(0,0,0,0.5);
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 2px;
+    border-radius: 5px;
+    background: #dddddd;
+    border: 2px solid white;
+}
+
+.chosen-button {
+    border: 2px solid #c74C3C;
+    color: rgba(0,0,0,1);
+}
+
+.picture-options-expand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    font-size: 28px;
+    border-radius: 5px;
+    background: rgba(0,0,0,0.3);
+}
+
+.picture-options-compress-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 100%;
+    font-size: 16px;
+    background: rgba(0,0,0,0.3);
+}
+
+.picture-options-button-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 0px 0px 0px;
+}
+
+.picture-options-close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    width: 80px;
+    height: 20px;
+    border-radius: 5px;
+    color: #c74C3C;
+    margin: 0px 5px 0px 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.2s;
+}
+
+.picture-options-apply-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    width: 62px;
+    height: 12px;
+    border: 1px solid #4c5c68;
+    border-radius: 5px;
+    background: #4c5c68;
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.picture-options-apply-button:hover{
+    background: #404e59;
+}
+
+.picture-options-close-button:hover {
+    background: rgb(221, 221, 221, 0.2);
+}
+
+@media only screen and (max-width: 450px) {
+    .picture-options {
+        width: 95vw;
+    }
+}

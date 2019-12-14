@@ -29,24 +29,7 @@ const Picture = (props) => {
     }
 
     return (
-        <div style={getPicture()} className="picture-container">
-            {props.edit ?
-                <div className="picture-url-row">
-                    <input
-                        value={props.component.data.url}
-                        onChange={changeUrl}
-                        placeholder={'picture url'}
-                    />
-                    <div className="picture-size-button" onClick={() => changeSize()}>
-                        {props.component.data.expand ?
-                            <FaExpand />
-                            :
-                            <FaCompress />
-                        }
-                    </div>
-                </div>
-                : null}
-        </div>
+        <div style={getPicture()} className="picture-container"></div>
     )
 }
 
