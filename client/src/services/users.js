@@ -26,6 +26,11 @@ const updatePassword = async (id, oldPassword, newPassword) => {
     return response.data
 }
 
+const resetPassword = async (username, email) => {
+    const response = await http.post(`${baseUrl}/password/reset`, { username, email })
+    return response.data
+}
+
 const verifyEmail = async (id, verificationToken) => {
     const response = await http.post(`${baseUrl}/${id}/verify/${verificationToken}`)
     return response.data
@@ -36,4 +41,4 @@ const sendVerificationToEmail = async (id) => {
     return response.data
 }
 
-export default { getOne, create, remove, update, updatePassword, verifyEmail, sendVerificationToEmail }
+export default { getOne, create, remove, update, updatePassword, verifyEmail, sendVerificationToEmail, resetPassword }
