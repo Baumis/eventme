@@ -4,6 +4,7 @@ import './SignModal.css'
 import { FaTimes } from 'react-icons/fa'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
+import Recover from './Recover'
 
 class SignModal extends Component {
     constructor(props) {
@@ -19,6 +20,28 @@ class SignModal extends Component {
 
     getActivityClass = (tabName) => {
         return this.state.content === tabName ? ' active-sign-tab' : ''
+    }
+
+    getContent = () => {
+        if (this.state.content === 'SignIn') {
+            return (
+                <SignIn
+                    changeTab={this.changeTab}
+                    closeModal={() => this.props.VisibilityStore.closeSignModal()}
+                />
+            )
+        } else if (this.state.content === 'SignUp') {
+            return (
+                <SignUp
+                    changeTab={this.changeTab}
+                    closeModal={() => this.props.VisibilityStore.closeSignModal()}
+                />
+            )
+        } else if (this.state.content === 'Recover') {
+            return (
+                <Recover />
+            )
+        }
     }
 
     render() {
@@ -43,18 +66,14 @@ class SignModal extends Component {
                         >
                             Sign up
                         </div>
+                        <div
+                            className={"sign-modal-tab" + this.getActivityClass('Recover')}
+                            onClick={() => this.changeTab('Recover')}
+                        >
+                            Recover
+                        </div>
                     </div>
-                    {this.state.content === 'SignIn' ?
-                        <SignIn
-                            changeTab={this.changeTab}
-                            closeModal={() => this.props.VisibilityStore.closeSignModal()}
-                        />
-                        :
-                        <SignUp
-                            changeTab={this.changeTab}
-                            closeModal={() => this.props.VisibilityStore.closeSignModal()}
-                        />
-                    }
+                    {this.getContent()}
                 </div>
             </div>
         )
