@@ -148,9 +148,6 @@ class Form extends Component {
                     edit={this.props.edit}
                     changeAnswer={this.changeAnswer}
                     submit={this.submit}
-                    changeQuestion={this.changeQuestion}
-                    newQuestion={this.newQuestion}
-                    removeQuestion={this.removeQuestion}
                     toggleAnswers={this.toggleAnswers}
                     isCreator={this.props.isCreator}
                     syncAnswersWithStore={this.syncAnswersWithStore}
