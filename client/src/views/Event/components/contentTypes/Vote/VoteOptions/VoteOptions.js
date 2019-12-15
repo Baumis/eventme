@@ -1,57 +1,93 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './VoteOptions.css'
-import EditableWrapper from '../../../EditableWrapper/EditableWrapper'
+import OptionInput from '../../components/OptionInput/OptionInput'
 import { FaTrash } from 'react-icons/fa'
-import Spinner from '../../../../../../commonComponents/Spinner/Spinner'
 
-const VoteOptions = (props) => {
+class VoteOptions extends Component {
 
-    const borderStyle = props.edit ? 'text-editable-mode' : ''
-    return (
-        <div className="vote-component-options">
-            <div className="vote-component-options-wrapper">
-                {props.options.map((option, i) =>
-                    <div key={i} className="vote-component-option-container">
-                        <div className="vote-component-option-row">
-                            {props.edit ?
-                                <div className="vote-component-delete-button" onClick={() => props.removeOption(i)}>
+    constructor(props) {
+        super(props)
+        this.state = {
+            component: JSON.parse(JSON.stringify(this.props.component))
+        }
+    }
+
+    changeSubject = (event) => {
+        const componentClone = { ...this.state.component }
+        componentClone.data.subject = event.target.value
+        this.setState({ component: componentClone })
+    }
+
+    changeOption = (optionIndex, event) => {
+        const componentClone = { ...this.state.component }
+        componentClone.data.options[optionIndex].label = event.target.value
+        this.setState({ component: componentClone })
+    }
+
+    addNewOption = () => {
+        const option = {
+            label: 'new option',
+            votes: []
+        }
+        const componentClone = { ...this.state.component }
+        componentClone.data.options.push(option)
+        this.setState({ component: componentClone })
+    }
+
+    removeOption = (optionIndex) => {
+        const componentClone = { ...this.state.component }
+        componentClone.data.options.splice(optionIndex, 1)
+        this.setState({ component: componentClone })
+    }
+
+    applyChanges = () => {
+        this.props.changeData(this.state.component.data)
+        this.props.close()
+    }
+
+    render() {
+        return (
+            <div className="vote-options">
+                <div className="vote-options-header">
+                    Vote component
+                </div>
+                <div className="vote-options-container">
+                    <OptionInput
+                        label={'Subject'}
+                        value={this.state.component.data.subject}
+                        changeValue={this.changeSubject}
+                    />
+                    <div className="vote-options-option-list">
+                        <div className="vote-options-label">Options</div>
+                        {this.state.component.data.options.map((option, i) =>
+                            <div key={i} className="vote-options-option">
+                                <div className="vote-delete-button" onClick={() => this.removeOption(i)}>
                                     <FaTrash />
                                 </div>
-                                :
-                                <div className="vote-component-vote-button" onClick={() => props.setChecked(i)}>
-                                    {props.checked === i ?
-                                        <div className="vote-component-radio-marker"> </div>
-                                        : null
-                                    }
-                                </div>
-                            }
-                            <div className={"vote-component-option " + borderStyle}>
-                                <EditableWrapper
-                                    html={option.label}
-                                    editable={!props.edit}
-                                    onChange={(event) => props.changeOption(i, event)}
+                                <input
+                                    value={option.label}
+                                    onChange={(event) => this.changeOption(i, event)}
                                 />
                             </div>
+                        )}
+                        {this.state.component.data.options.length < 4 ?
+                            <div className="vote-component-add-button" onClick={() => this.addNewOption()}>
+                                add option
                         </div>
+                            : null}
                     </div>
-                )}
+                </div>
+                <div className="vote-options-button-row">
+                    <div className="vote-options-close-button" onClick={() => this.props.close()}>
+                        Close
+                    </div>
+                    <div className="vote-options-apply-button" onClick={this.applyChanges}>
+                        Apply
+                    </div>
+                </div>
             </div>
-            {props.edit ?
-                <div className="vote-component-add-button" onClick={() => props.newOptions()}>
-                    add option
-                </div>
-                :
-                <div className="vote-component-button-row">
-                    <div className="vote-component-results-button" onClick={() => props.toggleResults(true)}>
-                        Results
-                    </div> 
-                    <div className="vote-component-submit-button" onClick={() => props.submit()}>
-                        {props.loading ? <Spinner/> : 'Submit'}
-                    </div>
-                </div>
-            }
-        </div>
-    )
+        )
+    }
 }
 
 export default VoteOptions

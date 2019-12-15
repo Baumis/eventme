@@ -1,71 +1,55 @@
-.vote-options {
+.text-options {
     display: flex;
     flex-direction: column;
     width: 400px;
 }
 
-.vote-options-header {
+.text-options-header {
     font-size: 22px;
     color: #46494c;
     padding-bottom: 20px;
     font-weight: 600;
 }
 
-.vote-options-label {
-    display: flex;
-    padding: 10px;
-    color: #1985a1;
-}
-
-
-.vote-options-container {
+.text-options-container {
     border-top: 1px solid #dddddd;
     border-bottom: 1px solid #dddddd;
     padding: 10px 0px;
     height: 100%;
 }
 
-.vote-options-option-list {
+.text-options-textarea {
     padding: 12px;
 }
 
-.vote-options-option {
+.text-options-textarea label {
     display: flex;
-    padding: 5px 12px;
+    padding: 10px;
+    color: #1985a1;
 }
 
-.vote-delete-button {
+.text-options-textarea-area {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 5px;
-    width: 15px;
-    height: 15px;
-    color: #c74C3C;
     border-radius: 5px;
-    font-size: 30px;
-    cursor: pointer;
+    border: 1px solid #dddddd;;
+    padding: 10px;
+    outline: none;
+    text-align: start;
+    overflow-y: auto;
+    word-wrap: break-word;
 }
 
-.vote-options-option input{
-    border-radius: 5px;
-    border: none;
-    height: 25px;
-    font-size: 14px;
-    padding: 3px 10px 3px 10px;
-    background: white;
-    border: 1px solid #dddddd;
-    color:rgba(0,0,0);
-}
-
-.vote-options-button-row {
+.text-options-button-row {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 20px 0px 0px 0px;
 }
 
-.vote-options-close-button {
+.text-options-close-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +64,7 @@
     transition: background 0.2s;
 }
 
-.vote-options-apply-button {
+.text-options-apply-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,10 +80,16 @@
     transition: background 0.2s;
 }
 
-.vote-options-apply-button:hover{
+.text-options-apply-button:hover{
     background: #404e59;
 }
 
-.vote-options-close-button:hover {
+.text-options-close-button:hover {
     background: rgb(221, 221, 221, 0.2);
+}
+
+@media only screen and (max-width: 450px) {
+    .text-options {
+        width: 95vw;
+    }
 }

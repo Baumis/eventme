@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import './Questions.css'
-import EditableWrapper from '../../../EditableWrapper/EditableWrapper'
-import { FaTrash } from 'react-icons/fa'
 
 class QuestionField extends Component {
 
@@ -11,22 +9,11 @@ class QuestionField extends Component {
     }
 
     render() {
-        const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         return (
             <div className="form-component-question">
                 <div className="form-component-title-row">
-                    {this.props.edit ?
-                        <div className="form-component-delete-button" onClick={() => this.props.removeQuestion(this.props.index)}>
-                            <FaTrash />
-                        </div>
-                        : null
-                    }
-                    <div className={"form-component-title " + borderStyle}>
-                        <EditableWrapper
-                            html={this.props.question.label}
-                            editable={!this.props.edit}
-                            onChange={(event) => this.props.changeQuestion(this.props.index, event)}
-                        />
+                    <div className="form-component-title">
+                        {this.props.question.label}
                     </div>
                 </div>
                 <div>

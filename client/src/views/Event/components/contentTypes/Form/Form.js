@@ -17,7 +17,7 @@ class Form extends Component {
     }
 
     componentDidMount() {
-        const answerAreasCopy = [... this.state.answerAreas]
+        const answerAreasCopy = [...this.state.answerAreas]
         this.props.component.data.questions.forEach(question => {
 
             if (!answerAreasCopy.some(answer => answer.question === question._id)) {
@@ -47,32 +47,13 @@ class Form extends Component {
         return oldAnswer ? oldAnswer.content : ''
     }
 
-    newQuestion = () => {
-        const question = {
-            label: 'question',
-            answers: []
-        }
-        this.props.component.data.questions.push(question)
-        this.props.changeData({ ... this.props.component.data })
-    }
-
-    removeQuestion = (questionIndex) => {
-        this.props.component.data.questions.splice(questionIndex, 1)
-        this.props.changeData({ ... this.props.component.data })
-    }
-
-    changeQuestion = (questionIndex, event) => {
-        this.props.component.data.questions[questionIndex].label = event.target.value
-        this.props.changeData({ ... this.props.component.data })
-    }
-
     changeAnswer = (questionId, event) => {
         if (!questionId) {
             alert('Save event before answering.')
             return
         }
 
-        const answerAreasCopy = [... this.state.answerAreas]
+        const answerAreasCopy = [...this.state.answerAreas]
         if (!answerAreasCopy.find(answer => answer.question === questionId)) {
             answerAreasCopy.push({ question: questionId, content: '' })
         }
@@ -133,7 +114,7 @@ class Form extends Component {
 
     render() {
 
-        if (this.props.isCreator() && !this.props.edit) {
+        if (this.props.isCreator()) {
             return (
                 <div className="form-component">
                     <CreatorView
@@ -145,7 +126,7 @@ class Form extends Component {
             )
         }
 
-        if (this.hasSubmittedAll() && !this.props.edit) {
+        if (this.hasSubmittedAll()) {
             return (
                 <div className="form-component">
                     <Submitted
@@ -167,9 +148,6 @@ class Form extends Component {
                     edit={this.props.edit}
                     changeAnswer={this.changeAnswer}
                     submit={this.submit}
-                    changeQuestion={this.changeQuestion}
-                    newQuestion={this.newQuestion}
-                    removeQuestion={this.removeQuestion}
                     toggleAnswers={this.toggleAnswers}
                     isCreator={this.props.isCreator}
                     syncAnswersWithStore={this.syncAnswersWithStore}

@@ -1,40 +1,40 @@
-.vote-options {
+.form-options {
     display: flex;
     flex-direction: column;
     width: 400px;
 }
 
-.vote-options-header {
+.form-options-header {
     font-size: 22px;
     color: #46494c;
     padding-bottom: 20px;
     font-weight: 600;
 }
 
-.vote-options-label {
+.form-options-label {
     display: flex;
     padding: 10px;
     color: #1985a1;
 }
 
 
-.vote-options-container {
+.form-options-container {
     border-top: 1px solid #dddddd;
     border-bottom: 1px solid #dddddd;
     padding: 10px 0px;
     height: 100%;
 }
 
-.vote-options-option-list {
+.form-options-option-list {
     padding: 12px;
 }
 
-.vote-options-option {
+.form-options-option {
     display: flex;
     padding: 5px 12px;
 }
 
-.vote-delete-button {
+.form-delete-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,7 +47,7 @@
     cursor: pointer;
 }
 
-.vote-options-option input{
+.form-options-option input{
     border-radius: 5px;
     border: none;
     height: 25px;
@@ -58,14 +58,14 @@
     color:rgba(0,0,0);
 }
 
-.vote-options-button-row {
+.form-options-button-row {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 20px 0px 0px 0px;
 }
 
-.vote-options-close-button {
+.form-options-close-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +80,7 @@
     transition: background 0.2s;
 }
 
-.vote-options-apply-button {
+.form-options-apply-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,10 +96,10 @@
     transition: background 0.2s;
 }
 
-.vote-options-apply-button:hover{
+.form-options-apply-button:hover{
     background: #404e59;
 }
 
-.vote-options-close-button:hover {
+.form-options-close-button:hover {
     background: rgb(221, 221, 221, 0.2);
 }

@@ -6,10 +6,10 @@ const CreatorView = (props) => {
     return (
         <div className="form-component-creator">
             {props.component.data.questions.map((question, i) =>
-                <div className="form-component-creator-option">
+                <div key={i} className="form-component-creator-option">
                     <div className="form-component-creator-question">
                         {question.label}
-                    </div> 
+                    </div>
                     <div className="form-component-button-row">
                         {props.isCreator() ?
                             <div className="form-component-creator-answers" onClick={() => props.openModal(question)}>

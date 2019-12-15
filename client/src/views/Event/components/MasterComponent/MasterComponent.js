@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Text from '../contentTypes/Text/Text'
+import TextOptions from '../contentTypes/Text/TextOptions/TextOptions'
 import InviteLink from '../contentTypes/InviteLink/InviteLink'
+import InviteLinkOptions from '../contentTypes/InviteLink/InviteLinkOptions/InviteLinkOptions'
 import Picture from '../contentTypes/Picture/Picture'
+import PictureOptions from '../contentTypes/Picture/PictureOptions/PictureOptions'
 import Vote from '../contentTypes/Vote/Vote'
+import VoteOptions from '../contentTypes/Vote/VoteOptions/VoteOptions'
 import Form from '../contentTypes/Form/Form'
+import FromOptions from '../contentTypes/Form/FormOptions/FormOptions'
 import './MasterComponent.css'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import EditorPanel from './EditorPanel/EditorPanel'
@@ -15,11 +20,11 @@ class MasterComponent extends Component {
         super(props)
         this.state = {
             components: {
-                TEXT: Text,
-                INVITE_LINK: InviteLink,
-                PICTURE: Picture,
-                VOTE: Vote,
-                FORM: Form
+                TEXT: { type: Text, options: TextOptions },
+                INVITE_LINK: { type: InviteLink, options: InviteLinkOptions },
+                PICTURE: { type: Picture, options: PictureOptions },
+                VOTE: { type: Vote, options: VoteOptions },
+                FORM: { type: Form, options: FromOptions }
             }
         }
     }
@@ -32,7 +37,8 @@ class MasterComponent extends Component {
         const buttonMode = this.props.editable ? 'editButtonActive' : ''
         const masterMode = this.props.editable ? 'editMasterActive' : ''
         const panelMarginTop = this.props.editable ? '0px' : '-40px'
-        const TagName = this.state.components[this.props.component.type || 'TEXT']
+        const ComponentType = this.state.components[this.props.component.type || 'TEXT'].type
+        const ComponentOptions = this.state.components[this.props.component.type || 'TEXT'].options
         return (
             <div className={'master-component ' + masterMode}>
                 {this.props.isCreator() ?
@@ -53,9 +59,17 @@ class MasterComponent extends Component {
                     index={this.props.index}
                     moveEditableForward={this.props.moveEditableForward}
                     moveEditableBackward={this.props.moveEditableBackward}
+                    openModal={
+                        () => this.props.openModal(
+                            <ComponentOptions
+                                component={this.props.component}
+                                changeData={this.changeComponentData}
+                                close={this.props.closeModal}
+                            />
+                        )}
                 />
 
-                <TagName
+                <ComponentType
                     component={this.props.component}
                     edit={this.props.editable}
                     changeData={this.changeComponentData}

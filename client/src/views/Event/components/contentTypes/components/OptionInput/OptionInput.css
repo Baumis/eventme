@@ -1,0 +1,23 @@
+.option-input{
+    display: flex;
+    flex-direction: column;
+    padding: 12px 12px 12px 12px;
+    color: #46494c;
+  }
+  
+  .option-input-label{
+    display: flex;
+    padding: 10px;
+    color: #1985a1;
+  }
+
+  .option-input input{
+      border-radius: 5px;
+      border: none;
+      height: 25px;
+      font-size: 14px;
+      padding: 3px 10px 3px 10px;
+      background: white;
+      border: 1px solid #dddddd;
+      color:rgba(0,0,0);
+  }

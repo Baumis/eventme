@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { FaCalendar } from 'react-icons/fa'
 import moment from 'moment'
 import './Header.css'
 
@@ -29,7 +30,10 @@ class Header extends Component {
                 <div className="event-header-content-wrapper">
                     <div className="event-header-content">
                         <h1>{this.props.EventStore.event.label}</h1>
-                        <h3>{moment(this.props.EventStore.event.startDate).format('DD.MM.YYYY')}</h3>
+                        <div className="event-header-date">
+                            <FaCalendar />
+                            <h3>{moment(this.props.EventStore.event.startDate).format('DD.MM.YYYY')}</h3>
+                        </div>
                     </div>
                 </div>
             </div>

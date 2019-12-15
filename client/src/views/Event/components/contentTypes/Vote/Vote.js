@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Vote.css'
-import EditableWrapper from '../../EditableWrapper/EditableWrapper'
-import VoteOptions from './VoteOptions/VoteOptions'
+import VoteingOptions from './VoteingOptions/VoteingOptions'
 import VoteResults from './VoteResults/VoteResults'
 
 class Vote extends Component {
@@ -41,29 +40,6 @@ class Vote extends Component {
 
     toggleResults = (boolean) => {
         this.setState({ showResults: boolean })
-    }
-
-    changeSubject = (event) => {
-        this.props.changeData({ ... this.props.component.data, subject: event.target.value })
-    }
-
-    changeOption = (optionIndex, event) => {
-        this.props.component.data.options[optionIndex].label = event.target.value
-        this.props.changeData({ ... this.props.component.data })
-    }
-
-    newOptions = () => {
-        const option = {
-            label: 'new option',
-            votes: []
-        }
-        this.props.component.data.options.push(option)
-        this.props.changeData({ ... this.props.component.data })
-    }
-
-    removeOption = (optionIndex) => {
-        this.props.component.data.options.splice(optionIndex, 1)
-        this.props.changeData({ ... this.props.component.data })
     }
 
     submit = async () => {
@@ -106,17 +82,12 @@ class Vote extends Component {
     }
 
     render() {
-        const borderStyle = this.props.edit ? 'text-editable-mode' : ''
         return (
             <div className="vote-component">
-                <div className={"vote-component-subject " + borderStyle}>
-                    <EditableWrapper
-                        html={this.props.component.data.subject}
-                        editable={!this.props.edit}
-                        onChange={this.changeSubject}
-                    />
+                <div className={"vote-component-subject "}>
+                    {this.props.component.data.subject}
                 </div>
-                {this.state.showResults && !this.props.edit ?
+                {this.state.showResults ?
                     <VoteResults
                         options={this.props.component.data.options}
                         toggleResults={this.toggleResults}
@@ -124,15 +95,11 @@ class Vote extends Component {
                         closeModal={this.props.closeModal}
                     />
                     :
-                    <VoteOptions
-                        edit={this.props.edit}
+                    <VoteingOptions
                         options={this.props.component.data.options}
                         setChecked={this.setChecked}
                         checked={this.state.checked}
-                        newOptions={this.newOptions}
                         submit={this.submit}
-                        changeOption={this.changeOption}
-                        removeOption={this.removeOption}
                         toggleResults={this.toggleResults}
                         loading={this.state.loading}
                     />
