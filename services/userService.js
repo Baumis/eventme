@@ -175,12 +175,8 @@ exports.findByUsernameAndPassword = async (username, password) => {
 exports.resetPassword = async (username, email) => {
     const user = await User.findOne({ userType: 'LOCAL', username, email })
 
-    if (!user) {
-        throw new Error('Invalid username and email combination')
-    }
-
-    if (!user.emailVerified) {
-        throw new Error('Email not verified')
+    if (!user || !user.emailVerified) {
+        return
     }
 
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'

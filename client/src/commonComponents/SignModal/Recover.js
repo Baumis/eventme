@@ -35,7 +35,7 @@ class Recover extends Component {
             alert('Password reset successful. Check your email.')
         } catch (error) {
             this.setState({ loading: false })
-            this.onRecoveryFail('Could not recover, check username and email!')
+            this.onRecoveryFail('Could not recover, try again!')
         }
     }
 
