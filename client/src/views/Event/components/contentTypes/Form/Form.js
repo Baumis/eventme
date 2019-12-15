@@ -47,25 +47,6 @@ class Form extends Component {
         return oldAnswer ? oldAnswer.content : ''
     }
 
-    newQuestion = () => {
-        const question = {
-            label: 'question',
-            answers: []
-        }
-        this.props.component.data.questions.push(question)
-        this.props.changeData({ ...this.props.component.data })
-    }
-
-    removeQuestion = (questionIndex) => {
-        this.props.component.data.questions.splice(questionIndex, 1)
-        this.props.changeData({ ...this.props.component.data })
-    }
-
-    changeQuestion = (questionIndex, event) => {
-        this.props.component.data.questions[questionIndex].label = event.target.value
-        this.props.changeData({ ...this.props.component.data })
-    }
-
     changeAnswer = (questionId, event) => {
         if (!questionId) {
             alert('Save event before answering.')

@@ -13,13 +13,13 @@ class VoteOptions extends Component {
     }
 
     changeSubject = (event) => {
-        const componentClone = this.state.component
+        const componentClone = { ...this.state.component }
         componentClone.data.subject = event.target.value
         this.setState({ component: componentClone })
     }
 
     changeOption = (optionIndex, event) => {
-        const componentClone = this.state.component
+        const componentClone = { ...this.state.component }
         componentClone.data.options[optionIndex].label = event.target.value
         this.setState({ component: componentClone })
     }
@@ -29,13 +29,13 @@ class VoteOptions extends Component {
             label: 'new option',
             votes: []
         }
-        const componentClone = this.state.component
+        const componentClone = { ...this.state.component }
         componentClone.data.options.push(option)
         this.setState({ component: componentClone })
     }
 
     removeOption = (optionIndex) => {
-        const componentClone = this.state.component
+        const componentClone = { ...this.state.component }
         componentClone.data.options.splice(optionIndex, 1)
         this.setState({ component: componentClone })
     }
@@ -77,11 +77,11 @@ class VoteOptions extends Component {
                             : null}
                     </div>
                 </div>
-                <div className="picture-options-button-row">
-                    <div className="picture-options-close-button" onClick={() => this.props.close()}>
+                <div className="vote-options-button-row">
+                    <div className="vote-options-close-button" onClick={() => this.props.close()}>
                         Close
                     </div>
-                    <div className="picture-options-apply-button" onClick={this.applyChanges}>
+                    <div className="vote-options-apply-button" onClick={this.applyChanges}>
                         Apply
                     </div>
                 </div>
