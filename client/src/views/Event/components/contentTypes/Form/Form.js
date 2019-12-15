@@ -114,7 +114,7 @@ class Form extends Component {
 
     render() {
 
-        if (this.props.isCreator() && !this.props.edit) {
+        if (this.props.isCreator()) {
             return (
                 <div className="form-component">
                     <CreatorView
@@ -126,7 +126,7 @@ class Form extends Component {
             )
         }
 
-        if (this.hasSubmittedAll() && !this.props.edit) {
+        if (this.hasSubmittedAll()) {
             return (
                 <div className="form-component">
                     <Submitted
