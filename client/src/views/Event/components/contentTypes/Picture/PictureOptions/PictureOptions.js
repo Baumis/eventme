@@ -8,7 +8,7 @@ class PictureOptions extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            component: { ...this.props.component }
+            component: JSON.parse(JSON.stringify(this.props.component))
         }
     }
 
