@@ -172,6 +172,33 @@ exports.findByUsernameAndPassword = async (username, password) => {
     return user
 }
 
+exports.resetPassword = async (username, email) => {
+    const user = await User.findOne({ userType: 'LOCAL', username, email })
+
+    if (!user) {
+        throw new Error('Invalid username and email combination')
+    }
+
+    if (!user.emailVerified) {
+        throw new Error('Email not verified')
+    }
+
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    const passwordLength = Math.floor(Math.random() * 5) + 8
+    let newPassword = ''
+    for (let i = 0; i < passwordLength; i++) {
+        const randomNumber = Math.floor(Math.random() * chars.length)
+        newPassword += chars.substring(randomNumber, randomNumber + 1)
+    }
+
+    const saltRounds = 10
+    const passwordHash = await bcrypt.hash(newPassword, saltRounds)
+
+    const updatedUser = await User.findByIdAndUpdate(user._id, { passwordHash }, { new: true, runValidators: true })
+
+    await emailService.sendNewPassword(updatedUser, newPassword)
+}
+
 exports.isPasswordCorrect = async (id, password) => {
     const user = await User.findById(id)
     const passwordCorrect = user === null ?

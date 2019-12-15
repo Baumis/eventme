@@ -10,6 +10,8 @@ userRouter.put('/:id', middleware.requireAuthentication, userController.update)
 
 userRouter.put('/:id/password', middleware.requireAuthentication, userController.updatePassword)
 
+userRouter.post('/:id/password/reset', userController.resetPassword)
+
 userRouter.post('/:id/verify', middleware.requireAuthentication, userController.sendEmailVerification)
 
 userRouter.post('/:id/verify/:token', userController.verifyEmail)
