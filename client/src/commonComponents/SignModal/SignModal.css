@@ -104,7 +104,6 @@
     align-items: center;
     justify-content: center;
     padding: 12px;
-    width: 62px;
     height: 12px;
     border: 1px solid #4c5c68;
     border-radius: 5px;
@@ -126,6 +125,7 @@
     border: 1px solid #c5c3c6 !important;
     border-radius: 5px !important;
     padding: 1px !important;
+    margin: 10px;
 }
 
 .googleSignButton div {
@@ -144,6 +144,7 @@
     border: 1px solid #c5c3c6 !important;
     border-radius: 5px !important;
     padding: 1px !important;
+    margin: 10px;
 }
 
 .facebookSignButton i {

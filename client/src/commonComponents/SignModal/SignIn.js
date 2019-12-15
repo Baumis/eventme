@@ -122,6 +122,8 @@ class SignIn extends Component {
                             </div>
                         }
                     </div>
+                </div>
+                <div className="signButtonRow">
                     <GoogleLogin
                         className="googleSignButton"
                         clientId="911838998946-ofev1jb8srpg1qjaak4st5j6huablfvl.apps.googleusercontent.com"
@@ -138,7 +140,7 @@ class SignIn extends Component {
                         callback={this.facebookSignIn}
                         onFailure={() => this.onSignInFail('Could not sign in')} />
                 </div>
-            </div>
+            </div >
         )
     }
 }

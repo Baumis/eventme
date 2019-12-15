@@ -73,6 +73,16 @@ exports.updatePassword = async (request, response) => {
     }
 }
 
+exports.resetPassword = async (request, response) => {
+    try {
+        await userService.resetPassword(request.body.username, request.body.email)
+
+        response.end()
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
 exports.verifyEmail = async (request, response) => {
     try {
         const { id, token } = request.params

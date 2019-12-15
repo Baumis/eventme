@@ -65,3 +65,13 @@ exports.sendEmailVerification = async (user) => {
 
     await this.sendMail(user.email, 'Please verify your email', content)
 }
+
+exports.sendNewPassword = async (user, newPassword) => {
+    const content = `
+        <h3>Your new password</h3>
+        <p>${newPassword}</p>
+        <p>Remember to change the password in your profile</p>
+    `
+
+    await this.sendMail(user.email, 'Password reseted', content)
+}
