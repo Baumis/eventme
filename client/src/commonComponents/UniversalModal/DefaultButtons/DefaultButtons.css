@@ -1,0 +1,45 @@
+.default-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 0px 0px 0px;
+}
+
+.default-buttons-negative-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    width: 80px;
+    height: 20px;
+    border-radius: 5px;
+    color: #c74C3C;
+    margin: 0px 5px 0px 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.2s;
+}
+
+.default-buttons-positive-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    width: 62px;
+    height: 12px;
+    border: 1px solid #4c5c68;
+    border-radius: 5px;
+    background: #4c5c68;
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.default-buttons-positive-button:hover{
+    background: #404e59;
+}
+
+.default-buttons-negative-button:hover {
+    background: rgb(221, 221, 221, 0.2);
+}
