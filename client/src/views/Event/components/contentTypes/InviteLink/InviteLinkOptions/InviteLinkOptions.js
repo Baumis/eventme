@@ -11,8 +11,8 @@ const InviteLinkOptions = (props) => {
                 This component provides a link that serves as an invitation to this event.
             </div>
             <DefaultButtons
-                    negativeLabel={'Close'}
-                    negativeAction={props.close}
+                    negativeLabel={props.negativeLabel}
+                    negativeAction={props.negativeAction}
             />
         </div>
     )

@@ -34,12 +34,8 @@ class FormOptions extends Component {
         this.setState({ component: componentClone })
     }
 
-    applyChanges = () => {
-        this.props.changeData(this.state.component.data)
-        this.props.close()
-    }
-
     render() {
+        console.log(this.props.negativeLabel)
         return (
             <div className="form-options">
                 <div className="form-options-header">
@@ -67,10 +63,10 @@ class FormOptions extends Component {
                     </div>
                 </div>
                 <DefaultButtons
-                    positiveLabel={'Apply'}
-                    negativeLabel={'Close'}
-                    positiveAction={this.applyChanges}
-                    negativeAction={this.props.close}
+                    positiveLabel={this.props.positiveLabel}
+                    negativeLabel={this.props.negativeLabel}
+                    positiveAction={() => this.props.positiveAction(this.state.component.data)}
+                    negativeAction={this.props.negativeAction}
                 />
             </div>
         )

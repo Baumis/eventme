@@ -51,10 +51,10 @@ class TextOptions extends Component {
                     </div>
                 </div>
                 <DefaultButtons
-                    positiveLabel={'Apply'}
-                    negativeLabel={'Close'}
-                    positiveAction={this.applyChanges}
-                    negativeAction={this.props.close}
+                    positiveLabel={this.props.positiveLabel}
+                    negativeLabel={this.props.negativeLabel}
+                    positiveAction={() => this.props.positiveAction(this.state.component.data)}
+                    negativeAction={this.props.negativeAction}
                 />
             </div>
         )

@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './NewComponentModal.css'
 import { FaPen, FaLink, FaImage, FaPoll, FaFileAlt } from 'react-icons/fa'
+import DefaultButtons from '../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
+import TextOptions from '../contentTypes/Text/TextOptions/TextOptions'
+import InviteLinkOptions from '../contentTypes/InviteLink/InviteLinkOptions/InviteLinkOptions'
+import PictureOptions from '../contentTypes/Picture/PictureOptions/PictureOptions'
+import VoteOptions from '../contentTypes/Vote/VoteOptions/VoteOptions'
+import FormOptions from '../contentTypes/Form/FormOptions/FormOptions'
+import UniversalModal from '../../../../commonComponents/UniversalModal/UniversalModal'
 
 
 class NewComponentModal extends Component {
@@ -10,70 +17,113 @@ class NewComponentModal extends Component {
         this.state = {
             typeData: {
                 TEXT: {
-                    type: 'TEXT',
-                    data: { title: 'Title', content: 'content' }
+                    componentData: {
+                        type: 'TEXT',
+                        data: { title: 'Title', content: 'content' }
+                    },
+                    options: TextOptions
                 },
                 INVITE_LINK: {
-                    type: 'INVITE_LINK',
-                    data: {}
+                    componentData: {
+                        type: 'INVITE_LINK',
+                        data: {}
+                    },
+                    options: InviteLinkOptions
                 },
                 PICTURE: {
-                    type: 'PICTURE',
-                    data: { url: '', expand: false }
+                    componentData: {
+                        type: 'PICTURE',
+                        data: { url: '', expand: false }
+                    },
+                    options: PictureOptions
                 },
                 VOTE: {
                     type: 'VOTE',
                     data: {
-                        subject: 'Title',
-                        options: [{ label: 'option', votes: [] }]
+                        componentData: {
+                            subject: 'Title',
+                            options: [{ label: 'option', votes: [] }]
+                        },
+                        options: VoteOptions
                     }
                 },
                 FORM: {
                     type: 'FORM',
                     data: {
-                        questions: [{ label: 'question', answers: [] }],
+                        componentData: {
+                            questions: [{ label: 'question', answers: [] }],
+                        },
+                        options: FormOptions
                     }
                 }
-            }
+            },
+            showOptions: null,
         }
     }
 
     createComponent = (type) => {
-        this.props.EventStore.createComponent(this.state.typeData[type])
+        this.props.EventStore.createComponent(type)
         this.props.close()
     }
 
+    closeOptions = () => {
+        this.setState({ showOptions: null })
+    }
+
+    openOptions = (type) => {
+        this.setState({
+            showOptions: type
+        })
+    }
+
     render() {
+
+        if (this.state.showOptions) {
+            const Options = this.state.typeData[this.state.showOptions].options
+            return (
+                <UniversalModal
+                    content={
+                        <Options
+                            component={this.state.typeData[this.state.showOptions].componentData}
+                            createComponent={this.createComponent}
+                        />
+                    }
+                />
+            )
+        }
+
         return (
             <div className="component-modal-background" >
                 <div className="component-modal-container">
+                    <div className="component-modal-header">
+                        New component
+                    </div>
                     <div className="component-modal-button-row">
-                        <div className="component-modal-button" onClick={() => this.createComponent('TEXT')}>
+                        <div className="component-modal-button" onClick={() => this.openOptions('TEXT')}>
                             <FaPen />
                             <label>Text</label>
                         </div>
-                        <div className="component-modal-button" onClick={() => this.createComponent('INVITE_LINK')}>
+                        <div className="component-modal-button" onClick={() => this.openOptions('INVITE_LINK')}>
                             <FaLink />
                             <label>Invite</label>
                         </div>
-                        <div className="component-modal-button" onClick={() => this.createComponent('PICTURE')}>
+                        <div className="component-modal-button" onClick={() => this.openOptions('PICTURE')}>
                             <FaImage />
                             <label>Picture</label>
                         </div>
-                        <div className="component-modal-button" onClick={() => this.createComponent('FORM')}>
+                        <div className="component-modal-button" onClick={() => this.openOptions('FORM')}>
                             <FaFileAlt />
                             <label>Form</label>
                         </div>
-                        <div className="component-modal-button" onClick={() => this.createComponent('VOTE')}>
+                        <div className="component-modal-button" onClick={() => this.openOptions('VOTE')}>
                             <FaPoll />
                             <label>Vote</label>
                         </div>
                     </div>
-                    <div className="component-modal-bottom-row">
-                        <div className="component-modal-close" onClick={this.props.close} >
-                            close
-                        </div>
-                    </div>
+                    <DefaultButtons
+                        negativeLabel={'Close'}
+                        negativeAction={this.props.close}
+                    />
                 </div>
             </div>
         )

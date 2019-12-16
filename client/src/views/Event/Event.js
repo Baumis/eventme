@@ -11,6 +11,7 @@ import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
 import EventContent from './components/EventContent/EventContent'
+import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 
 class Event extends Component {
 
@@ -123,8 +124,10 @@ class Event extends Component {
                             <OptionsButton showPanel={this.slidePanel} />
                             <SaveButton save={this.save} saved={this.props.EventStore.saved} />
                             {this.state.showNewComponentModal ?
-                                <NewComponentModal
-                                    close={this.toggleNewComponentModal}
+                                <UniversalModal
+                                    content={<NewComponentModal
+                                        close={this.toggleNewComponentModal}
+                                    />}
                                 />
                                 : null
                             }
