@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './TextOptions.css'
 import OptionInput from '../../components/OptionInput/OptionInput'
 import EditableWrapper from '../../../EditableWrapper/EditableWrapper'
+import DefaultButtons from '../../../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
 
 class TextOptions extends Component {
 
@@ -49,14 +50,12 @@ class TextOptions extends Component {
                         />
                     </div>
                 </div>
-                <div className="text-options-button-row">
-                    <div className="text-options-close-button" onClick={() => this.props.close()}>
-                        Close
-                    </div>
-                    <div className="text-options-apply-button" onClick={this.applyChanges}>
-                        Apply
-                    </div>
-                </div>
+                <DefaultButtons
+                    positiveLabel={'Apply'}
+                    negativeLabel={'Close'}
+                    positiveAction={this.applyChanges}
+                    negativeAction={this.props.close}
+                />
             </div>
         )
     }

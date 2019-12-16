@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './VoteOptions.css'
 import OptionInput from '../../components/OptionInput/OptionInput'
+import DefaultButtons from '../../../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
 import { FaTrash } from 'react-icons/fa'
 
 class VoteOptions extends Component {
@@ -77,14 +78,12 @@ class VoteOptions extends Component {
                             : null}
                     </div>
                 </div>
-                <div className="vote-options-button-row">
-                    <div className="vote-options-close-button" onClick={() => this.props.close()}>
-                        Close
-                    </div>
-                    <div className="vote-options-apply-button" onClick={this.applyChanges}>
-                        Apply
-                    </div>
-                </div>
+                <DefaultButtons
+                    positiveLabel={'Apply'}
+                    negativeLabel={'Close'}
+                    positiveAction={this.applyChanges}
+                    negativeAction={this.props.close}
+                />
             </div>
         )
     }

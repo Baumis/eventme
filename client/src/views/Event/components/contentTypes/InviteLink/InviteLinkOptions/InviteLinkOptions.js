@@ -1,5 +1,6 @@
 import React from 'react'
 import './InviteLinkOptions.css'
+import DefaultButtons from '../../../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
 
 const InviteLinkOptions = (props) => {
 
@@ -9,11 +10,10 @@ const InviteLinkOptions = (props) => {
             <div className="invitelink-options-container">
                 This component provides a link that serves as an invitation to this event.
             </div>
-            <div className="invitelink-options-button-row">
-                <div className="invitelink-options-close-button" onClick={() => props.close()}>
-                    Close
-                </div>
-            </div>
+            <DefaultButtons
+                    negativeLabel={'Close'}
+                    negativeAction={props.close}
+            />
         </div>
     )
 }
