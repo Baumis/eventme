@@ -4,7 +4,14 @@ import './SignInput.css'
 const SignInput = (props) => {
     return (
         <div className="sign-input">
-            <label>{props.label}</label>
+            <div className="sign-input-label-row">
+                <div className="sign-input-label">
+                    {props.label}
+                </div>
+                <div className="sign-input-second-label" onClick={props.labelAction}>
+                    {props.secondLabel || null}
+                </div>
+            </div>
             <input
                 type={props.type}
                 onChange={props.change}

@@ -133,6 +133,8 @@ class SignIn extends Component {
                     />
                     <SignInput
                         label={'Password'}
+                        secondLabel={'Forgot password?'}
+                        labelAction={() => this.props.changeTab('Recovery')}
                         change={this.changePassword}
                         value={this.state.password}
                         type={'password'}

@@ -4,7 +4,7 @@ import './SignModal.css'
 import { FaTimes } from 'react-icons/fa'
 import SignIn from './SignIn/SignIn'
 import SignUp from './SignUp/SignUp'
-import Recover from './Recover'
+import Recover from './Recover/Recover'
 
 class SignModal extends Component {
     constructor(props) {

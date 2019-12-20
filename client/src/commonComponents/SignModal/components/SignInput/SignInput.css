@@ -1,8 +1,20 @@
+.sign-input-label-row{
+    display: flex;
+    padding: 5px 0px;
+    justify-content: space-between;
+    color: #1985a1;
+}
+
+.sign-input-second-label{
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 .sign-input{
     display: flex;
     flex-direction: column;
     text-align: left;
-    color: #1985a1;
     font-size: 16px;
     padding: 8px 0px 8px 0px;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import Spinner from '../Spinner/Spinner'
-import userService from '../../services/users'
+import Spinner from '../../Spinner/Spinner'
+import userService from '../../../services/users'
 
 class Recover extends Component {
     constructor(props) {
