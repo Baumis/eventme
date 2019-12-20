@@ -1,9 +1,15 @@
+.signin-content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
 
 .signin-title {
     font-size: 25px;
     color: #46494c;
     padding-bottom: 20px;
     font-weight: 600;
+    text-align: start;
 }
 
 .signin-info-text {
@@ -99,4 +105,10 @@
 .facebook-icon {
     font-size: 20px;
     padding: 0px 10px;
+}
+
+@media only screen and (max-width: 450px) {
+    .signin-content {
+       margin: 40px;
+    }
 }
