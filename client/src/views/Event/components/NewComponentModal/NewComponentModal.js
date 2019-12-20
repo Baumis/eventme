@@ -33,7 +33,7 @@ class NewComponentModal extends Component {
                 PICTURE: {
                     componentData: {
                         type: 'PICTURE',
-                        data: { url: '', expand: false }
+                        data: { url: '', expand: true }
                     },
                     options: PictureOptions
                 },
@@ -61,8 +61,14 @@ class NewComponentModal extends Component {
         }
     }
 
-    createComponent = (type) => {
-        this.props.EventStore.createComponent(type)
+    createComponent = (data) => {
+        const newComponent = {
+            type: this.state.showOptions,
+            data: data
+        }
+        console.log(newComponent)
+        this.props.EventStore.createComponent(newComponent)
+        this.closeOptions()
         this.props.close()
     }
 
@@ -86,6 +92,10 @@ class NewComponentModal extends Component {
                         <Options
                             component={this.state.typeData[this.state.showOptions].componentData}
                             createComponent={this.createComponent}
+                            positiveLabel={'Create'}
+                            negativeLabel={'back'}
+                            positiveAction={this.createComponent}
+                            negativeAction={this.closeOptions}
                         />
                     }
                 />

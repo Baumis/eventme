@@ -37,7 +37,7 @@
     border: 1px solid #dddddd;;
     padding: 10px;
     outline: none;
-    text-align: start;
+    text-align: center;
     overflow-y: auto;
     word-wrap: break-word;
 }
