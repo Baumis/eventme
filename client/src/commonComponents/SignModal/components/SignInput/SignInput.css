@@ -1,0 +1,22 @@
+.sign-input{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #1985a1;
+    font-size: 16px;
+    padding: 15px 0px 15px 0px;
+}
+
+.sign-input input{
+    border: none;
+    padding: 8px 5px;
+    border: 1px solid #c5c3c6;
+    border-radius: 5px;
+    background: transparent;
+    color: #46494c;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 450px) {
+    
+}

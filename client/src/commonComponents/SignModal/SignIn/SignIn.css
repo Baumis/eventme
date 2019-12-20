@@ -1,0 +1,65 @@
+
+.signin-social-accounts {
+    display: flex;
+    flex-direction: column;
+}
+
+.signin-local-accounts {
+    display: flex;
+    flex-direction: column;
+}
+
+.signButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 5px;
+    background: #4c5c68;
+    color: white;
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.signButton:hover{
+    background: #404e59;
+}
+
+.google-login-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    margin: 10px 0px;
+}
+
+.google-login {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    color: Black;
+    background-color: white;
+    border: 1px solid #c5c3c6;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.facebook-login-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    margin: 10px 0px;
+}
+
+.facebook-login {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #4267b2;
+    border: 1px solid #c5c3c6;
+    border-radius: 5px;
+    cursor: pointer;
+}

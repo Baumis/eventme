@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './SignModal.css'
 import { FaTimes } from 'react-icons/fa'
-import SignIn from './SignIn'
+import SignIn from './SignIn/SignIn'
 import SignUp from './SignUp'
 import Recover from './Recover'
 
@@ -23,24 +23,23 @@ class SignModal extends Component {
     }
 
     getContent = () => {
-        if (this.state.content === 'SignIn') {
-            return (
-                <SignIn
+        switch (this.state.content) {
+            case 'SignIn':
+                return <SignIn
                     changeTab={this.changeTab}
                     closeModal={() => this.props.VisibilityStore.closeSignModal()}
                 />
-            )
-        } else if (this.state.content === 'SignUp') {
-            return (
-                <SignUp
+            case 'SignUp':
+                return <SignUp
                     changeTab={this.changeTab}
                     closeModal={() => this.props.VisibilityStore.closeSignModal()}
                 />
-            )
-        } else if (this.state.content === 'Recover') {
-            return (
-                <Recover />
-            )
+            case 'Recover':
+                return <Recover
+                    changeTab={this.changeTab} />
+            default:
+                return <Recover
+                    changeTab={this.changeTab} />
         }
     }
 
@@ -52,7 +51,7 @@ class SignModal extends Component {
                         <FaTimes />
                     </div>
                 </div>
-                <div className="sign-modal-tabs">
+                {/*} <div className="sign-modal-tabs">
                     <div
                         className={"sign-modal-tab" + this.getActivityClass('SignIn')}
                         onClick={() => this.changeTab('SignIn')}
@@ -71,7 +70,7 @@ class SignModal extends Component {
                     >
                         Recover
                         </div>
-                </div>
+                </div>*/}
                 {this.getContent()}
             </div>
         )
