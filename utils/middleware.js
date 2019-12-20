@@ -92,3 +92,13 @@ exports.logger = (request, response, next) => {
 exports.error = (request, response) => {
     response.status(404).json({ error: 'unknown endpoint' })
 }
+
+exports.redirectToHttps = (request, response, next) => {
+    if (request.secure) {
+        // request was via https, so do no special handling
+        next()
+    } else {
+        // request was via http, so redirect to https
+        response.redirect('https://' + request.headers.host + request.url)
+    }
+}

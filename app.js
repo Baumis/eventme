@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
 // Security modules
+const helmet = require('helmet')
 const cors = require('cors')
 
 // Helper modules
@@ -14,6 +15,7 @@ const middleware = require('./utils/middleware')
 const extractToken = middleware.extractToken
 const logger = middleware.logger
 const error = middleware.error
+const redirectToHttps = middleware.redirectToHttps
 
 // Initialize app
 const app = express()
@@ -25,14 +27,18 @@ const loginRouter = require('./routes/loginRouter')
 const logRouter = require('./routes/logRouter')
 
 // Security middleware
+app.use(helmet())
 app.use(cors())
+if (process.env.NODE_ENV === 'production') {
+    app.use(redirectToHttps)
+}
 
 // Core middleware
 app.use(cookieParser())
 app.use(bodyParser.json())
 
 // Static files from react app
-if ( process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, './client/build')))
 }
 
@@ -47,7 +53,7 @@ app.use('/api/login', loginRouter)
 app.use('/api/log', logRouter)
 
 // Rest of endpoints to react
-if ( process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     app.get('*', (request, response) => {
         response.sendFile(path.join(__dirname, './client/build/index.html'))
     })
