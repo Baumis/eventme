@@ -1,6 +1,6 @@
 
 .signin-title {
-    font-size: 22px;
+    font-size: 25px;
     color: #46494c;
     padding-bottom: 20px;
     font-weight: 600;
@@ -55,11 +55,21 @@
     flex: 1;
     justify-content: center;
     align-items: center;
-    color: Black;
-    background-color: white;
+    color: White;
+    background-color: #4c8bf5;
     border: 1px solid #c5c3c6;
     border-radius: 5px;
+    transition: background 0.2s;
     cursor: pointer;
+}
+
+.google-login:hover {
+    background-color: #2671f2;
+}
+
+.google-icon {
+    font-size: 20px;
+    padding: 0px 10px;
 }
 
 .facebook-login-wrapper {
@@ -78,5 +88,15 @@
     background-color: #4267b2;
     border: 1px solid #c5c3c6;
     border-radius: 5px;
+    transition: background 0.2s;
     cursor: pointer;
+}
+
+.facebook-login:hover {
+    background-color: #0d58d9;
+}
+
+.facebook-icon {
+    font-size: 20px;
+    padding: 0px 10px;
 }

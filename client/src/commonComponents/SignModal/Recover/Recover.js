@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import './Recover.css'
 import Spinner from '../../Spinner/Spinner'
 import userService from '../../../services/users'
+import SignInput from '../components/SignInput/SignInput'
 
 class Recover extends Component {
     constructor(props) {
@@ -27,6 +29,17 @@ class Recover extends Component {
     }
 
     resetPassword = async () => {
+
+        if (this.state.username.length === 0) {
+            alert('Username can\'t be empty.')
+            return
+        }
+
+        if (this.state.email.length === 0) {
+            alert('Email can\'t be empty.')
+            return
+        }
+
         try {
             this.setState({ loading: true })
             await userService.resetPassword(this.state.username, this.state.email)
@@ -41,37 +54,35 @@ class Recover extends Component {
 
     render() {
         return (
-            <div className="signModalContent">
-                <div className="signDetails">
-                    <div className="signInput">
-                        <label>Username</label>
-                        <input
-                            onChange={this.changeUsername}
-                            value={this.state.username}
-                        >
-                        </input>
-                    </div>
-                    <div className="signInput">
-                        <label>Email</label>
-                        <input
-                            onChange={this.changeEmail}
-                            value={this.state.email}
-                        >
-                        </input>
-                    </div>
+            <div className="signin-content">
+                <div className="recover-title">
+                    Recover password
                 </div>
-                <div className="signButtonRow">
-                    <div
-                        className="signButton"
-                        onClick={() => this.resetPassword()}>
-                        {this.state.loading ?
-                            <Spinner />
-                            :
-                            <div>
-                                Reset password
-                            </div>
-                        }
-                    </div>
+                <div className="signDetails">
+                    <SignInput
+                        label={'Username'}
+                        value={this.state.username}
+                        change={this.changeUsername}
+                    />
+                    <SignInput
+                        label={'Email'}
+                        value={this.state.email}
+                        change={this.changeEmail}
+                    />
+                </div>
+                <div
+                    className="recover-button"
+                    onClick={() => this.resetPassword()}>
+                    {this.state.loading ?
+                        <Spinner />
+                        :
+                        <div>
+                            Reset password
+                        </div>
+                    }
+                </div>
+                <div className="recover-info-text">
+                    Back to <a onClick={() => this.props.changeTab('SignIn')} >Sign in</a>.
                 </div>
             </div>
         )

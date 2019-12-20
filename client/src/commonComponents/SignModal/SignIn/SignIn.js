@@ -5,6 +5,8 @@ import Spinner from '../../Spinner/Spinner'
 import SignInput from '../components/SignInput/SignInput'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { FaFacebook, FaGoogle } from 'react-icons/fa'
+
 
 class SignIn extends Component {
     constructor(props) {
@@ -105,6 +107,7 @@ class SignIn extends Component {
                             onFailure={() => this.onSignInFail('Could not sign in')}
                             render={renderProps => (
                                 <div className="google-login" onClick={renderProps.onClick}>
+                                    <FaGoogle className="facebook-icon"/>
                                     Sign in with Google
                                 </div>
                             )}
@@ -118,6 +121,7 @@ class SignIn extends Component {
                             onFailure={() => this.onSignInFail('Could not sign in')}
                             render={renderProps => (
                                 <div className="facebook-login" onClick={renderProps.onClick}>
+                                    <FaFacebook className="facebook-icon"/>
                                     Sign in with Facebook
                                 </div>
                             )}
@@ -152,7 +156,7 @@ class SignIn extends Component {
                     </div>
                 </div>
                 <div className="signin-info-text">
-                        Don't have an account? <a onClick={() => this.props.changeTab('SignUp')} >Create</a> one!
+                        Don't have an account? <a onClick={() => this.props.changeTab('SignUp')} >Create one</a>
                 </div>
             </div >
         )
