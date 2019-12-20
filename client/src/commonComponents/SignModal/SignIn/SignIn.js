@@ -96,9 +96,6 @@ class SignIn extends Component {
                 <div className="signin-title">
                     Sign in
                 </div>
-                <div className="signin-info-text">
-                        using
-                    </div>
                 <div className="signin-social-accounts">
                     <div className="google-login-wrapper">
                         <GoogleLogin
@@ -108,7 +105,7 @@ class SignIn extends Component {
                             onFailure={() => this.onSignInFail('Could not sign in')}
                             render={renderProps => (
                                 <div className="google-login" onClick={renderProps.onClick}>
-                                    Google account
+                                    Sign in with Google
                                 </div>
                             )}
                         />
@@ -121,16 +118,13 @@ class SignIn extends Component {
                             onFailure={() => this.onSignInFail('Could not sign in')}
                             render={renderProps => (
                                 <div className="facebook-login" onClick={renderProps.onClick}>
-                                    Facebook account
+                                    Sign in with Facebook
                                 </div>
                             )}
                         />
                     </div>
                 </div>
                 <div className="signin-local-accounts">
-                    <div className="signin-info-text">
-                        Or use local account
-                    </div>
                     <SignInput
                         label={'Username'}
                         change={this.changeUsername}
@@ -144,7 +138,7 @@ class SignIn extends Component {
                         type={'password'}
                     />
                     <div
-                        className="signButton"
+                        className="signin-button"
                         onClick={() => this.signIn()}>
                         {this.state.loading ?
                             <Spinner />
@@ -157,7 +151,7 @@ class SignIn extends Component {
                 </div>
                 <div className="signin-info-text">
                         Don't have an account? <a onClick={() => this.props.changeTab('SignUp')} >Create</a> one!
-                    </div>
+                </div>
             </div >
         )
     }

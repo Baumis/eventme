@@ -1,0 +1,23 @@
+.signup-title {
+    font-size: 22px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
+}
+
+.signup-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 5px;
+    background: #4c5c68;
+    color: white;
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.signup-button:hover{
+    background: #404e59;
+}

@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import './SignModal.css'
 import { FaTimes } from 'react-icons/fa'
 import SignIn from './SignIn/SignIn'
-import SignUp from './SignUp'
+import SignUp from './SignUp/SignUp'
 import Recover from './Recover'
 
 class SignModal extends Component {
@@ -51,26 +51,6 @@ class SignModal extends Component {
                         <FaTimes />
                     </div>
                 </div>
-                {/*} <div className="sign-modal-tabs">
-                    <div
-                        className={"sign-modal-tab" + this.getActivityClass('SignIn')}
-                        onClick={() => this.changeTab('SignIn')}
-                    >
-                        Sign in
-                        </div>
-                    <div
-                        className={"sign-modal-tab" + this.getActivityClass('SignUp')}
-                        onClick={() => this.changeTab('SignUp')}
-                    >
-                        Sign up
-                        </div>
-                    <div
-                        className={"sign-modal-tab" + this.getActivityClass('Recover')}
-                        onClick={() => this.changeTab('Recover')}
-                    >
-                        Recover
-                        </div>
-                </div>*/}
                 {this.getContent()}
             </div>
         )
