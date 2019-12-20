@@ -11,7 +11,8 @@ const OptionInput = (props) => {
             <input
                 type={props.type}
                 value={props.value}
-                onChange={props.changeValue}>
+                onChange={props.changeValue}
+                style={props.style}>
             </input>
         </div>
     )

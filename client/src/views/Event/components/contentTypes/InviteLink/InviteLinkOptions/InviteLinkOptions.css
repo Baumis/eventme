@@ -40,3 +40,9 @@
     outline: none;
     transition: background 0.2s;
 }
+
+@media only screen and (max-width: 450px) {
+    .invitelink-options {
+        width: 95vw;
+    }
+}

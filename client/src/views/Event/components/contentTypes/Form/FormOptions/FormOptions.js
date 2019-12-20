@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './FormOptions.css'
 import { FaTrash } from 'react-icons/fa'
+import DefaultButtons from '../../../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
 
 class FormOptions extends Component {
 
@@ -33,11 +34,6 @@ class FormOptions extends Component {
         this.setState({ component: componentClone })
     }
 
-    applyChanges = () => {
-        this.props.changeData(this.state.component.data)
-        this.props.close()
-    }
-
     render() {
         return (
             <div className="form-options">
@@ -65,14 +61,12 @@ class FormOptions extends Component {
                             : null}
                     </div>
                 </div>
-                <div className="form-options-button-row">
-                    <div className="form-options-close-button" onClick={() => this.props.close()}>
-                        Close
-                    </div>
-                    <div className="form-options-apply-button" onClick={this.applyChanges}>
-                        Apply
-                    </div>
-                </div>
+                <DefaultButtons
+                    positiveLabel={this.props.positiveLabel}
+                    negativeLabel={this.props.negativeLabel}
+                    positiveAction={() => this.props.positiveAction(this.state.component.data)}
+                    negativeAction={this.props.negativeAction}
+                />
             </div>
         )
     }

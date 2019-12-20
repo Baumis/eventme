@@ -103,3 +103,9 @@
 .vote-options-close-button:hover {
     background: rgb(221, 221, 221, 0.2);
 }
+
+@media only screen and (max-width: 450px) {
+    .vote-options {
+        width: 95vw;
+    }
+}

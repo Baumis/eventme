@@ -69,10 +69,7 @@ exports.validateComponent = (component) => {
             }
             return true
         case 'PICTURE':
-            if (component.data.url !== '' && !component.data.url) {
-                return false
-            }
-            if (!component.data.url.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)) {
+            if (typeof component.data.url !== 'string') {
                 return false
             }
             if (component.data.url.length > 1000) {
@@ -105,9 +102,6 @@ exports.validateTextData = (data) => {
 
 exports.validatePictureData = (data) => {
     if ((typeof data.expand !== 'boolean') || (typeof data.url !== 'string')) {
-        return false
-    }
-    if (!data.url.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)) {
         return false
     }
     if (data.url.length > 1000) {

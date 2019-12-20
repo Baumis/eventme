@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './TextOptions.css'
 import OptionInput from '../../components/OptionInput/OptionInput'
 import EditableWrapper from '../../../EditableWrapper/EditableWrapper'
+import DefaultButtons from '../../../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
 
 class TextOptions extends Component {
 
@@ -38,6 +39,7 @@ class TextOptions extends Component {
                         label={'Title'}
                         value={this.state.component.data.title}
                         changeValue={this.changeTitle}
+                        style={{textAlign: 'center'}}
                     />
                     <div className="text-options-textarea">
                         <label>Content</label>
@@ -49,14 +51,12 @@ class TextOptions extends Component {
                         />
                     </div>
                 </div>
-                <div className="text-options-button-row">
-                    <div className="text-options-close-button" onClick={() => this.props.close()}>
-                        Close
-                    </div>
-                    <div className="text-options-apply-button" onClick={this.applyChanges}>
-                        Apply
-                    </div>
-                </div>
+                <DefaultButtons
+                    positiveLabel={this.props.positiveLabel}
+                    negativeLabel={this.props.negativeLabel}
+                    positiveAction={() => this.props.positiveAction(this.state.component.data)}
+                    negativeAction={this.props.negativeAction}
+                />
             </div>
         )
     }

@@ -17,6 +17,7 @@
     margin: 0px;
     padding: 5px 10px 5px 10px;
     word-wrap: break-word;
+    text-align: center;
     overflow-y: auto;
     color: #46494c;
 }
@@ -26,7 +27,7 @@
     flex-direction: column;
     margin: 1px 0px 0px 0px;
     padding: 10px;
-    text-align: start;
+    text-align: center;
     overflow-y: auto;
     word-wrap: break-word;
     border: 1px solid transparent;

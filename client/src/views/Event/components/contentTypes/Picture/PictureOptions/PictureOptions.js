@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './PictureOptions.css'
 import OptionInput from '../../components/OptionInput/OptionInput'
+import DefaultButtons from '../../../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
 import { FaAppleAlt } from 'react-icons/fa'
 
 class PictureOptions extends Component {
@@ -66,14 +67,12 @@ class PictureOptions extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="picture-options-button-row">
-                    <div className="picture-options-close-button" onClick={() => this.props.close()}>
-                        Close
-                    </div>
-                    <div className="picture-options-apply-button" onClick={this.applyChanges}>
-                        Apply
-                    </div>
-                </div>
+                <DefaultButtons
+                    positiveLabel={this.props.positiveLabel}
+                    negativeLabel={this.props.negativeLabel}
+                    positiveAction={() => this.props.positiveAction(this.state.component.data)}
+                    negativeAction={this.props.negativeAction}
+                />
             </div>
         )
     }

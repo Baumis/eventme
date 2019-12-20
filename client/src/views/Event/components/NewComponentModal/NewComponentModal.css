@@ -12,18 +12,28 @@
     background: rgba(0,0,0,0.3);
 }
 
+.component-modal-header {
+    font-size: 22px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
+}
+
 .component-modal-container {
     display: flex;
     flex-direction: column;
     background: white;
     border-radius: 5px;
     width: 345px;
+    padding: 20px;
 }
 
 .component-modal-button-row{
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
 }
 
 .component-modal-button {
@@ -48,25 +58,6 @@
 
 .component-modal-button:hover {
     background: rgba(0,0,0,0.01);
-}
-
-.component-modal-bottom-row {
-    display: flex;
-    justify-content: center;
-    margin: 5px;
-    padding: 5px;
-}
-
-.component-modal-close {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    background: #4c5c68;
-    width: 70px;
-    height: 40px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
 }
 
 .component-modal-exit-icon:hover {

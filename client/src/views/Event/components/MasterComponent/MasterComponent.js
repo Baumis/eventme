@@ -31,6 +31,7 @@ class MasterComponent extends Component {
 
     changeComponentData = (data) => {
         this.props.EventStore.editComponentData(this.props.index, data)
+        this.props.closeModal()
     }
 
     render() {
@@ -63,8 +64,10 @@ class MasterComponent extends Component {
                         () => this.props.openModal(
                             <ComponentOptions
                                 component={this.props.component}
-                                changeData={this.changeComponentData}
-                                close={this.props.closeModal}
+                                negativeAction={this.props.closeModal}
+                                positiveAction={this.changeComponentData}
+                                positiveLabel={'Apply'}
+                                negativeLabel={'Close'}
                             />
                         )}
                 />
@@ -72,7 +75,6 @@ class MasterComponent extends Component {
                 <ComponentType
                     component={this.props.component}
                     edit={this.props.editable}
-                    changeData={this.changeComponentData}
                     isCreator={this.props.isCreator}
                     isGuest={this.props.isGuest}
                     openModal={this.props.openModal}
