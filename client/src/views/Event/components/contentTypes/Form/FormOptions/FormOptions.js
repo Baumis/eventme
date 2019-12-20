@@ -35,7 +35,6 @@ class FormOptions extends Component {
     }
 
     render() {
-        console.log(this.props.negativeLabel)
         return (
             <div className="form-options">
                 <div className="form-options-header">
