@@ -39,6 +39,7 @@ class TextOptions extends Component {
                         label={'Title'}
                         value={this.state.component.data.title}
                         changeValue={this.changeTitle}
+                        style={{textAlign: 'center'}}
                     />
                     <div className="text-options-textarea">
                         <label>Content</label>
