@@ -11,6 +11,7 @@ import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
 import EventContent from './components/EventContent/EventContent'
+import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 
 class Event extends Component {
 
@@ -132,7 +133,9 @@ class Event extends Component {
                         : null
                     }
                     {this.props.VisibilityStore.signModal ?
-                        <SignModal history={this.props.history} />
+                        <UniversalModal
+                            content={<SignModal />}
+                        />
                         : null
                     }
                 </div>

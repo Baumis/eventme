@@ -46,35 +46,33 @@ class SignModal extends Component {
 
     render() {
         return (
-            <div className="sign-modal-bg">
-                <div className="sign-modal">
-                    <div className="sign-modal-top-row">
-                        <div className="sign-modal-exit-icon" onClick={() => this.props.VisibilityStore.closeSignModal()}>
-                            <FaTimes />
-                        </div>
+            <div className="sign-modal">
+                <div className="sign-modal-top-row">
+                    <div className="sign-modal-exit-icon" onClick={() => this.props.VisibilityStore.closeSignModal()}>
+                        <FaTimes />
                     </div>
-                    <div className="sign-modal-tabs">
-                        <div
-                            className={"sign-modal-tab" + this.getActivityClass('SignIn')}
-                            onClick={() => this.changeTab('SignIn')}
-                        >
-                            Sign in
-                        </div>
-                        <div
-                            className={"sign-modal-tab" + this.getActivityClass('SignUp')}
-                            onClick={() => this.changeTab('SignUp')}
-                        >
-                            Sign up
-                        </div>
-                        <div
-                            className={"sign-modal-tab" + this.getActivityClass('Recover')}
-                            onClick={() => this.changeTab('Recover')}
-                        >
-                            Recover
-                        </div>
-                    </div>
-                    {this.getContent()}
                 </div>
+                <div className="sign-modal-tabs">
+                    <div
+                        className={"sign-modal-tab" + this.getActivityClass('SignIn')}
+                        onClick={() => this.changeTab('SignIn')}
+                    >
+                        Sign in
+                        </div>
+                    <div
+                        className={"sign-modal-tab" + this.getActivityClass('SignUp')}
+                        onClick={() => this.changeTab('SignUp')}
+                    >
+                        Sign up
+                        </div>
+                    <div
+                        className={"sign-modal-tab" + this.getActivityClass('Recover')}
+                        onClick={() => this.changeTab('Recover')}
+                    >
+                        Recover
+                        </div>
+                </div>
+                {this.getContent()}
             </div>
         )
     }
