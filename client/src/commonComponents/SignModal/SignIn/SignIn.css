@@ -1,4 +1,20 @@
 
+.signin-title {
+    font-size: 22px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
+}
+
+.signin-info-text {
+    color: rgba(0,0,0,0.6);
+}
+
+.signin-info-text a {
+    color: #0000EE;
+    cursor: pointer;
+}
+
 .signin-social-accounts {
     display: flex;
     flex-direction: column;
@@ -7,6 +23,7 @@
 .signin-local-accounts {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
 }
 
 .signButton{
@@ -30,7 +47,7 @@
     display: flex;
     justify-content: center;
     height: 40px;
-    margin: 10px 0px;
+    margin: 5px 0px;
 }
 
 .google-login {
@@ -49,7 +66,7 @@
     display: flex;
     justify-content: center;
     height: 40px;
-    margin: 10px 0px;
+    margin: 5px 0px;
 }
 
 .facebook-login {
