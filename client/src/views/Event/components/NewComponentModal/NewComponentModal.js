@@ -38,23 +38,21 @@ class NewComponentModal extends Component {
                     options: PictureOptions
                 },
                 VOTE: {
-                    type: 'VOTE',
-                    data: {
-                        componentData: {
+                    componentData: {
+                        type: 'VOTE',
+                        data: {
                             subject: 'Title',
                             options: [{ label: 'option', votes: [] }]
-                        },
-                        options: VoteOptions
-                    }
+                        }
+                    },
+                    options: VoteOptions
                 },
                 FORM: {
-                    type: 'FORM',
-                    data: {
-                        componentData: {
-                            questions: [{ label: 'question', answers: [] }],
-                        },
-                        options: FormOptions
-                    }
+                    componentData: {
+                        type: 'FORM',
+                        data: { questions: [{ label: 'question', answers: [] }] }
+                    },
+                    options: FormOptions
                 }
             },
             showOptions: null,
@@ -66,7 +64,6 @@ class NewComponentModal extends Component {
             type: this.state.showOptions,
             data: data
         }
-        console.log(newComponent)
         this.props.EventStore.createComponent(newComponent)
         this.closeOptions()
         this.props.close()
