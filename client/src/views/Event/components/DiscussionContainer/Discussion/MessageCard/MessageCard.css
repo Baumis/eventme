@@ -3,7 +3,9 @@
     flex: 1;
     padding: 10px 15px;
     margin: 2px 0px 2px 0px;
-    background: transparent;
+    background: white;
+    border: 1px solid rgba(69,69,69,0.2);
+    border-radius: 5px;
 }
 
 .message-card-avatar-section {
