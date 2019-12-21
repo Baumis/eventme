@@ -16,14 +16,14 @@ class SettingsContainer extends Component {
 
     componentDidMount() {
         this.updateScreenSize()
-        window.addEventListener("resize", () => this.updateScreenSize())
+        window.addEventListener("resize", this.updateScreenSize)
     }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.updateScreenSize)
     }
 
-    updateScreenSize() {
+    updateScreenSize = () => {
         const isSmall = window.innerWidth < 620
         this.setState({ smallScreen: isSmall })
     }
