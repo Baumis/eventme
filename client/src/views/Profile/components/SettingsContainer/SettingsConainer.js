@@ -25,7 +25,9 @@ class SettingsContainer extends Component {
 
     updateScreenSize = () => {
         const isSmall = window.innerWidth < 620
-        this.setState({ smallScreen: isSmall })
+        if (isSmall !== this.state.smallScreen) {
+            this.setState({ smallScreen: isSmall })
+        }
     }
 
     setTab = (tab) => {
