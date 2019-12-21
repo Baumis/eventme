@@ -9,55 +9,12 @@ class SettingsContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            activeTab: 'general',
-            smallScreen: false
-        }
-    }
-
-    componentDidMount() {
-        this.updateScreenSize()
-        window.addEventListener("resize", this.updateScreenSize)
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.updateScreenSize)
-    }
-
-    updateScreenSize = () => {
-        const isSmall = window.innerWidth < 620
-        if (isSmall !== this.state.smallScreen) {
-            this.setState({ smallScreen: isSmall })
+            activeTab: 'general'
         }
     }
 
     setTab = (tab) => {
         this.setState({ activeTab: tab })
-    }
-
-    tabSwitch = () => {
-        if (this.state.smallScreen) {
-            return (
-                <div>
-                    <GeneralOptions
-                        user={this.props.user}
-                        save={this.props.save}
-                    />
-                    <PasswordOptions />
-                </div>
-            )
-        }
-
-        switch (this.state.activeTab) {
-            case 'general':
-                return <GeneralOptions
-                    user={this.props.user}
-                    save={this.props.save}
-                />
-            case 'password':
-                return <PasswordOptions />
-            default:
-                return null
-        }
     }
 
     render() {
@@ -68,7 +25,16 @@ class SettingsContainer extends Component {
                     activeTab={this.state.activeTab}
                 />
                 <div className="settings-content-container">
-                    {this.tabSwitch()}
+                    <div className={this.state.activeTab === "general" ? "general-options-wrapper active-options-wrapper" : "general-options-wrapper"}>
+                        <GeneralOptions
+                            user={this.props.user}
+                            save={this.props.save}
+                            active={this.state.activeTab === 'general'}
+                        />
+                    </div>
+                    <div className={this.state.activeTab === "password" ? "password-options-wrapper active-options-wrapper" : "password-options-wrapper"}>
+                        <PasswordOptions />
+                    </div>
                 </div>
             </div >
         )
