@@ -5,7 +5,7 @@ import Spinner from '../../Spinner/Spinner'
 import SignInput from '../components/SignInput/SignInput'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { FaFacebook, FaGoogle } from 'react-icons/fa'
+import { FaFacebook } from 'react-icons/fa'
 import { ReactComponent as GoogleLogo } from './googleLogo.svg';
 
 
