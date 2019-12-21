@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import Spinner from '../Spinner/Spinner'
+import './SignIn.css'
+import Spinner from '../../Spinner/Spinner'
+import SignInput from '../components/SignInput/SignInput'
 import GoogleLogin from 'react-google-login'
-import FacebookLogin from 'react-facebook-login'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { FaFacebook, FaGoogle } from 'react-icons/fa'
+
 
 class SignIn extends Component {
     constructor(props) {
@@ -90,29 +94,57 @@ class SignIn extends Component {
 
     render() {
         return (
-            <div className="signModalContent">
-                <div className="signDetails">
-                    <div className="signInput">
-                        <label>Username</label>
-                        <input
-                            onChange={this.changeUsername}
-                            value={this.state.username}
-                        >
-                        </input>
+            <div className="signin-content">
+                <div className="signin-title">
+                    Sign in
+                </div>
+                <div className="signin-social-accounts">
+                    <div className="google-login-wrapper">
+                        <GoogleLogin
+                            clientId="911838998946-ofev1jb8srpg1qjaak4st5j6huablfvl.apps.googleusercontent.com"
+                            buttonText="Sign in with Google"
+                            onSuccess={this.googleSignIn}
+                            onFailure={() => this.onSignInFail('Could not sign in')}
+                            render={renderProps => (
+                                <div className="google-login" onClick={renderProps.onClick}>
+                                    <FaGoogle className="facebook-icon"/>
+                                    Sign in with Google
+                                </div>
+                            )}
+                        />
                     </div>
-                    <div className="signInput">
-                        <label>Password</label>
-                        <input
-                            type={'password'}
-                            onChange={this.changePassword}
-                            value={this.state.password}
-                        >
-                        </input>
+                    <div className="facebook-login-wrapper">
+                        <FacebookLogin
+                            appId="494414091444821"
+                            fields="name,email,picture"
+                            callback={this.facebookSignIn}
+                            onFailure={() => this.onSignInFail('Could not sign in')}
+                            render={renderProps => (
+                                <div className="facebook-login" onClick={renderProps.onClick}>
+                                    <FaFacebook className="facebook-icon"/>
+                                    Sign in with Facebook
+                                </div>
+                            )}
+                        />
                     </div>
                 </div>
-                <div className="signButtonRow">
+                <div className="signin-local-accounts">
+                    <SignInput
+                        label={'Username'}
+                        change={this.changeUsername}
+                        value={this.state.username}
+                        type={'text'}
+                    />
+                    <SignInput
+                        label={'Password'}
+                        secondLabel={'Forgot password?'}
+                        labelAction={() => this.props.changeTab('Recovery')}
+                        change={this.changePassword}
+                        value={this.state.password}
+                        type={'password'}
+                    />
                     <div
-                        className="signButton"
+                        className="signin-button"
                         onClick={() => this.signIn()}>
                         {this.state.loading ?
                             <Spinner />
@@ -123,22 +155,8 @@ class SignIn extends Component {
                         }
                     </div>
                 </div>
-                <div className="signButtonRow">
-                    <GoogleLogin
-                        className="googleSignButton"
-                        clientId="911838998946-ofev1jb8srpg1qjaak4st5j6huablfvl.apps.googleusercontent.com"
-                        buttonText="Google sign in"
-                        onSuccess={this.googleSignIn}
-                        onFailure={() => this.onSignInFail('Could not sign in')}
-                    />
-                    <FacebookLogin
-                        cssClass="facebookSignButton"
-                        icon="fa-facebook"
-                        textButton="Facebook sign in"
-                        appId="494414091444821"
-                        fields="name,email,picture"
-                        callback={this.facebookSignIn}
-                        onFailure={() => this.onSignInFail('Could not sign in')} />
+                <div className="signin-info-text">
+                        Don't have an account? <a onClick={() => this.props.changeTab('SignUp')} >Create one.</a>
                 </div>
             </div >
         )

@@ -1,0 +1,114 @@
+.signin-content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.signin-title {
+    font-size: 25px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
+    text-align: start;
+}
+
+.signin-info-text {
+    color: rgba(0,0,0,0.6);
+}
+
+.signin-info-text a {
+    color: #0000EE;
+    cursor: pointer;
+}
+
+.signin-social-accounts {
+    display: flex;
+    flex-direction: column;
+}
+
+.signin-local-accounts {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.signin-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 5px;
+    background: #4c5c68;
+    color: white;
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.signin-button:hover{
+    background: #404e59;
+}
+
+.google-login-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    margin: 5px 0px;
+}
+
+.google-login {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    color: White;
+    background-color: #4c8bf5;
+    border: 1px solid #c5c3c6;
+    border-radius: 5px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.google-login:hover {
+    background-color: #2671f2;
+}
+
+.google-icon {
+    font-size: 20px;
+    padding: 0px 10px;
+}
+
+.facebook-login-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    margin: 5px 0px;
+}
+
+.facebook-login {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #4267b2;
+    border: 1px solid #c5c3c6;
+    border-radius: 5px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.facebook-login:hover {
+    background-color: #0d58d9;
+}
+
+.facebook-icon {
+    font-size: 20px;
+    padding: 0px 10px;
+}
+
+@media only screen and (max-width: 450px) {
+    .signin-content {
+       margin: 40px;
+    }
+}

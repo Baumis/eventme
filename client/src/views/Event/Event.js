@@ -135,7 +135,9 @@ class Event extends Component {
                         : null
                     }
                     {this.props.VisibilityStore.signModal ?
-                        <SignModal history={this.props.history} />
+                        <UniversalModal
+                            content={<SignModal />}
+                        />
                         : null
                     }
                 </div>

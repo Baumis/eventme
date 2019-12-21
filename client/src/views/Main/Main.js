@@ -35,7 +35,9 @@ class Main extends Component {
                 />
                 <ContentContainer />
                 {this.props.VisibilityStore.signModal ?
-                    <SignModal />
+                    <UniversalModal
+                        content={<SignModal />}
+                    />
                     : null
                 }
                 {this.state.newEventModal ?

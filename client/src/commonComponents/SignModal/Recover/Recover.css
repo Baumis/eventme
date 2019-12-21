@@ -1,0 +1,32 @@
+.recover-title {
+    font-size: 25px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
+}
+
+.recover-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 5px;
+    background: #4c5c68;
+    color: white;
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.recover-button:hover{
+    background: #404e59;
+}
+
+.recover-info-text {
+    color: rgba(0,0,0,0.6);
+}
+
+.recover-info-text a {
+    color: #0000EE;
+    cursor: pointer;
+}

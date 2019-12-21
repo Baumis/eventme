@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import Spinner from '../Spinner/Spinner'
+import './SignUp.css'
+import Spinner from '../../Spinner/Spinner'
+import SignInput from '../components/SignInput/SignInput'
 
 class SignUp extends Component {
     constructor(props) {
@@ -14,8 +16,8 @@ class SignUp extends Component {
         }
     }
 
-    changeStateValue = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
+    changeStateValue = (name, event) => {
+        this.setState({ [name]: event.target.value })
     }
 
     validateInputData = () => {
@@ -70,7 +72,7 @@ class SignUp extends Component {
             if (this.props.VisibilityStore.onSignSuccess) {
                 this.props.VisibilityStore.onSignSuccess()
             }
-            
+
         } catch (error) {
             error.response.data.error === 'Username must be unique' ?
                 alert('This username is already taken.')
@@ -82,50 +84,38 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div className="signModalContent">
-                <div className="signDetails">
-                    <div className="signInput">
-                        <label>First and last name</label>
-                        <input
-                            name={'name'}
-                            onChange={this.changeStateValue}
-                            value={this.state.name}
-                        >
-                        </input>
-                    </div>
-                    <div className="signInput">
-                        <label>Email</label>
-                        <input
-                            name={'email'}
-                            type={'email'}
-                            onChange={this.changeStateValue}
-                            value={this.state.email}
-                        >
-                        </input>
-                    </div>
-                    <div className="signInput">
-                        <label>Username</label>
-                        <input
-                            name={'username'}
-                            onChange={this.changeStateValue}
-                            value={this.state.username}
-                        >
-                        </input>
-                    </div>
-                    <div className="signInput">
-                        <label>Password</label>
-                        <input
-                            name={'password'}
-                            type={'password'}
-                            onChange={this.changeStateValue}
-                            value={this.state.password}
-                        >
-                        </input>
-                    </div>
+            <div className="signin-content">
+                <div className="signup-title">
+                    Sign up
                 </div>
-                <div className="signButtonRow">
+                <div className="signup-details">
+                    <SignInput
+                        label={'First and last name'}
+                        change={(event) => this.changeStateValue('name', event)}
+                        value={this.state.name}
+                        type={'text'}
+                    />
+                    <SignInput
+                        label={'Email'}
+                        change={(event) => this.changeStateValue('email', event)}
+                        value={this.state.email}
+                        type={'email'}
+                    />
+                    <SignInput
+                        label={'Username'}
+                        change={(event) => this.changeStateValue('username', event)}
+                        value={this.state.username}
+                        type={'text'}
+                    />
+                    <SignInput
+                        label={'Password'}
+                        change={(event) => this.changeStateValue('password', event)}
+                        value={this.state.password}
+                        type={'password'}
+                    />
+                </div>
                     <div
-                        className="signButton"
+                        className="signup-button"
                         onClick={() => this.signUp()}>
                         {this.state.loading ?
                             <Spinner />
@@ -135,7 +125,9 @@ class SignUp extends Component {
                             </div>
                         }
                     </div>
-                </div>
+                    <div className="signin-info-text">
+                        Already have an account? <a onClick={() => this.props.changeTab('SignIn')} >Sign in.</a>
+                    </div>
             </div>
         )
     }
