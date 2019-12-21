@@ -6,6 +6,7 @@ import SignInput from '../components/SignInput/SignInput'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { FaFacebook, FaGoogle } from 'react-icons/fa'
+import { ReactComponent as GoogleLogo } from './googleLogo.svg';
 
 
 class SignIn extends Component {
@@ -107,7 +108,7 @@ class SignIn extends Component {
                             onFailure={() => this.onSignInFail('Could not sign in')}
                             render={renderProps => (
                                 <div className="google-login" onClick={renderProps.onClick}>
-                                    <FaGoogle className="facebook-icon"/>
+                                    <GoogleLogo className="google-icon"/>
                                     Sign in with Google
                                 </div>
                             )}
