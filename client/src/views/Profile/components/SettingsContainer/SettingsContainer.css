@@ -1,3 +1,4 @@
+
 .settings-container {
     display: flex;
     width: 900px;
@@ -24,29 +25,4 @@
     .settings-container {
         width: 95vw;
     }
-}
-
-.general-options-wrapper {
-    display: none;
-}
-
-.password-options-wrapper {
-    display: none;
-}
-
-@media only screen and (max-width: 620px) {
-    .general-options-wrapper {
-        display: block;
-    }
-    
-}
-
-@media only screen and (max-width: 620px) {
-    .password-options-wrapper {
-        display: block;
-    }
-}
-
-.active-options-wrapper {
-    display: block;
 }

@@ -1,44 +1,46 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import './SettingsContainer.css'
 import GeneralOptions from './GeneralOptions/GeneralOptions'
 import SettingsTabs from './SettingsTabs/SettingsTabs'
 import PasswordOptions from './PasswordOptions/PasswordOptions'
 
-class SettingsContainer extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            activeTab: 'general'
-        }
+const SettingsContainer = (props) => {
+    const [activeTab, setActiveTab] = useState('general')
+    const [smallScreen, setSmallScreen] = useState(false)
+
+    useEffect(() => {
+        updateScreenSize()
+        window.addEventListener("resize", updateScreenSize)
+        return () => window.removeEventListener("resize", updateScreenSize)
+    })
+
+    const updateScreenSize = () => {
+        const isSmall = window.innerWidth < 620
+        if (isSmall !== smallScreen) setSmallScreen(isSmall)
     }
 
-    setTab = (tab) => {
-        this.setState({ activeTab: tab })
+    const isRendered = (tabName) => {
+        return smallScreen || activeTab === tabName
     }
 
-    render() {
-        return (
-            <div className="settings-container">
-                <SettingsTabs
-                    setTab={this.setTab}
-                    activeTab={this.state.activeTab}
-                />
-                <div className="settings-content-container">
-                    <div className={this.state.activeTab === "general" ? "general-options-wrapper active-options-wrapper" : "general-options-wrapper"}>
-                        <GeneralOptions
-                            user={this.props.user}
-                            save={this.props.save}
-                            active={this.state.activeTab === 'general'}
-                        />
-                    </div>
-                    <div className={this.state.activeTab === "password" ? "password-options-wrapper active-options-wrapper" : "password-options-wrapper"}>
-                        <PasswordOptions />
-                    </div>
-                </div>
-            </div >
-        )
-    }
+    return (
+        <div className="settings-container">
+            <SettingsTabs
+                setTab={setActiveTab}
+                activeTab={activeTab}
+            />
+            <div className="settings-content-container">
+                {isRendered('general') ?
+                    < GeneralOptions
+                        user={props.user}
+                        save={props.save}
+                    /> : null}
+                {isRendered('password') ?
+                    <PasswordOptions /> : null}
+            </div>
+        </div >
+    )
 }
 
 export default SettingsContainer
