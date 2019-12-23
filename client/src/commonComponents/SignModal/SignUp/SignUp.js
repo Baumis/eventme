@@ -126,7 +126,7 @@ class SignUp extends Component {
                         }
                     </div>
                     <div className="signin-info-text">
-                        Already have an account? <a onClick={() => this.props.changeTab('SignIn')} >Sign in.</a>
+                        Already have an account? <span onClick={() => this.props.changeTab('SignIn')} >Sign in.</span>
                     </div>
             </div>
         )

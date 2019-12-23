@@ -16,7 +16,7 @@
     color: rgba(0,0,0,0.6);
 }
 
-.signin-info-text a {
+.signin-info-text span {
     color: #0000EE;
     cursor: pointer;
 }

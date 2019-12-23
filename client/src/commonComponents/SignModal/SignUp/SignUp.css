@@ -21,3 +21,8 @@
 .signup-button:hover{
     background: #404e59;
 }
+
+.signin-info-text span {
+    color: #0000EE;
+    cursor: pointer;
+}
