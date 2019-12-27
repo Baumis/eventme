@@ -102,6 +102,7 @@ describe('POST /api/events', () => {
         expect.stringContaining(res.body._id)
         expect.stringContaining(res.body.inviteKey)
         expect(res.body.label).toEqual(eventObject.label)
+        expect(res.body.description).toEqual(eventObject.description)
         expect(new Date(res.body.startDate)).toEqual(eventObject.startDate)
         expect(new Date(res.body.endDate)).toEqual(eventObject.endDate)
         expect(res.body.creator._id).toEqual(user._id)
