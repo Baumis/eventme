@@ -172,7 +172,6 @@ describe('GET /api/users/:id', () => {
         expect.arrayContaining(res.body.myEvents)
         expect.arrayContaining(res.body.myInvites)
         expect.stringContaining(res.body.cover)
-        expect(res.body.userType).toBeUndefined()
     })
 
     it('should succeed with correct response when fetching someone elses user', async () => {
@@ -226,7 +225,6 @@ describe('PUT /api/users/:id', () => {
         expect.arrayContaining(res.body.myInvites)
         expect(res.body.cover).toEqual(newUserObject.cover)
         expect(res.body.avatar).toEqual(newUserObject.avatar)
-        expect(res.body.userType).toBeUndefined()
     })
 
     it('should fail if not authenticated', async () => {
