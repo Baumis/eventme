@@ -94,7 +94,7 @@ exports.error = (request, response) => {
 }
 
 exports.redirectToHttps = (request, response, next) => {
-    if (request.secure) {
+    if (request.protocol === 'https') {
         // request was via https, so do no special handling
         next()
     } else {
