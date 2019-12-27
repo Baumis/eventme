@@ -7,6 +7,7 @@ import NewEventOptions from '../../commonComponents/NewEventOptions/NewEventOpti
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 import ContentContainer from './components/ContentContainer/ContentContainer'
 import MainHeader from './components/MainHeader/MainHeader'
+import CreateEventForm from './components/CreateEventForm/CreateEventForm'
 
 class Main extends Component {
 
@@ -33,6 +34,7 @@ class Main extends Component {
                 <MainHeader
                     displayEventModal={this.displayEventModal}
                 />
+                <CreateEventForm />
                 <ContentContainer />
                 {this.props.VisibilityStore.signModal ?
                     <UniversalModal

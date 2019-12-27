@@ -1,4 +1,10 @@
 .Main{
     display: flex;
+    align-items: center;
     flex-direction: column;
+}
+
+.main-create-event-wrapper {
+    display: flex;
+    width: 900px;
 }
