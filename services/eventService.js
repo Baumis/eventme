@@ -42,7 +42,7 @@ exports.populate = async (event) => {
     populatedEvent.components.sort((a, b) =>
         a.position - b.position
     )
-    
+
     for (let component of populatedEvent.components) {
         if (component.type === 'INVITE_LINK') {
             component.data = {}
@@ -714,4 +714,42 @@ exports.removeAnswerFromFormComponent = async (id, componentId, questionId, user
         { _id: id, 'components._id': componentId },
         { $pull: { 'components.$.data.questions.$[question].answers': { user: mongoose.Types.ObjectId(userId) } } },
         { ...options, arrayFilters: [{ 'question._id': mongoose.Types.ObjectId(questionId) }] })
+}
+
+exports.addRegistration = async (event, registration, senderId) => {
+    if (senderId) {
+        const oldRegistration = event.registrations.find(registration => registration.user.toString() === senderId)
+
+        if (oldRegistration) {
+            throw new Error('User has already joined')
+        }
+
+        registration.user = senderId
+    }
+
+    const session = await Event.startSession()
+    session.startTransaction()
+    const options = { session }
+
+    try {
+        if (senderId) {
+            await userService.addToMyInvites(guestId, event._id, options)
+        }
+
+        const savedEvent = await Event.findByIdAndUpdate(event._id,
+            { $push: { registrations: registration } },
+            { ...options, new: true, runValidators: true })
+
+        const populatedEvent = await this.populate(savedEvent)
+
+        await session.commitTransaction()
+        session.endSession()
+
+        return populatedEvent
+
+    } catch (exception) {
+        await session.abortTransaction()
+        session.endSession()
+        throw new Error('Could not add registration')
+    }
 }

@@ -9,7 +9,7 @@ eventRouter.use('/:id', middleware.extractEvent, middleware.extractRole)
 
 // Routes
 
-eventRouter.get('/:id', middleware.requireAuthentication, eventController.getOne)
+eventRouter.get('/:id', eventController.getOne)
 
 eventRouter.post('/', middleware.requireAuthentication, eventController.create)
 
@@ -42,5 +42,7 @@ eventRouter.post('/:id/components/:componentId/data/options/:optionId/votes', mi
 eventRouter.delete('/:id/components/:componentId/data/options/:optionId/votes/vote', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeVoteFromVoteComponent)
 
 eventRouter.post('/:id/components/:componentId/data/questions', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addAnswersToFormComponent)
+
+eventRouter.post('/:id/registrations', eventController.addRegistration)
 
 module.exports = eventRouter

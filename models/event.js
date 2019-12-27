@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const messageSchema = require('./messageSchema')
 const componentSchema = require('./componentSchema')
+const registrationSchema = require('./registrationSchema')
 
 const guestSchema = new mongoose.Schema({
     user: {
@@ -53,22 +54,38 @@ const eventSchema = new mongoose.Schema({
     },
     guests: [guestSchema],
     components: [componentSchema],
-    discussion: [messageSchema]
+    discussion: [messageSchema],
+    registrations: [registrationSchema]
 })
 
-eventSchema.statics.format = (event) => ({
-    _id: event._id,
-    label: event.label,
-    description: event.description,
-    startDate: event.startDate,
-    endDate: event.endDate,
-    creator: event.creator,
-    inviteKey: event.inviteKey,
-    background: event.background,
-    guests: event.guests,
-    components: event.components,
-    discussion: event.discussion
-})
+eventSchema.statics.format = (event) => {
+    const formattedRegistrations = event.registrations.map(registration => {
+        if (!registration.user) {
+            registration.user = {
+                name: reqistration.name,
+                avatar: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+            }
+        }
+
+        return registration
+    })
+
+    const formattedEvent = {
+        _id: event._id,
+        label: event.label,
+        description: event.description,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        creator: event.creator,
+        inviteKey: event.inviteKey,
+        background: event.background,
+        guests: event.guests,
+        components: event.components,
+        discussion: event.discussion,
+        registrations: formattedRegistrations
+    }
+    return formattedEvent
+}
 
 eventSchema.statics.formatForGuest = (event, guestId) => {
 
