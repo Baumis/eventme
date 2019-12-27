@@ -27,6 +27,7 @@ const loginRouter = require('./routes/loginRouter')
 const logRouter = require('./routes/logRouter')
 
 // Security middleware
+app.enable('trust proxy')
 app.use(helmet())
 app.use(cors())
 if (process.env.NODE_ENV === 'production') {
