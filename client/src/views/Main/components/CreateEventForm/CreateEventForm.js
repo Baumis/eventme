@@ -5,6 +5,7 @@ import './CreateEventForm.css'
 import moment from 'moment'
 import Spinner from '../../../../commonComponents/Spinner/Spinner'
 import CreateInput from './CreateInput/CreateInput'
+import CreateTextArea from './CreateTextArea/CreateTextArea'
 
 class CreateEventForm extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class CreateEventForm extends Component {
             startDate: '',
             endDate: '',
             today: '',
+            description: '',
             loading: false
         }
     }
@@ -68,19 +70,27 @@ class CreateEventForm extends Component {
                         value={this.state.eventName}
                         onChange={(event) => this.changeValue('eventName', event)}
                     />
-                    <CreateInput
-                        label={'Start date'}
-                        type={'date'}
-                        min={this.state.today}
-                        value={this.state.startDate}
-                        onChange={(event) => this.changeStartDate(event)}
-                    />
-                    <CreateInput
-                        label={'End date'}
-                        type={'date'}
-                        min={this.state.today}
-                        value={this.state.startDate}
-                        onChange={(event) => this.changeEndDate(event)}
+                    <div className="create-event-row">
+                        <CreateInput
+                            label={'Start date'}
+                            type={'date'}
+                            min={this.state.today}
+                            value={this.state.startDate}
+                            onChange={(event) => this.changeStartDate(event)}
+                        />
+                        <CreateInput
+                            label={'End date'}
+                            type={'date'}
+                            min={this.state.today}
+                            value={this.state.startDate}
+                            onChange={(event) => this.changeEndDate(event)}
+                        />
+                    </div>
+                    <CreateTextArea
+                        label={'Description'}
+                        value={this.state.description}
+                        onChange={(event) => this.changeValue('description', event)}
+                        rows={5}
                     />
                     <div className="create-event-button-row">
                         <div onClick={() => this.create()} className="event-options-button">

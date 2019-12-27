@@ -1,4 +1,4 @@
-.create-input{
+.create-textarea{
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -6,41 +6,30 @@
     color: #46494c;
 }
   
-.create-input-label{
+.create-textarea-label{
     display: flex;
     padding: 10px;
     color: #1985a1;
 }
 
-.create-input input{
+.create-textarea textarea{
     border-radius: 5px;
     border: none;
-    height: 25px;
     font-size: 14px;
     padding: 3px 10px 3px 10px;
     background: white;
     border: 1px solid #dddddd;
     color:rgba(0,0,0);
+    outline: 0;
+    resize: none;
     transition: border 0.2s;
 }
 
 
-.create-input input:focus{
+.create-textarea textarea:focus{
     border: 1px solid #1985a1;
 }
 
-.create-input input::placeholder{
+.create-textarea textarea::placeholder{
     color: #c5c3c6
-}
-
-input[type=date]::-webkit-clear-button {
-    display: none;
-}
-
-input[type=date]::-webkit-inner-spin-button { 
-    display: none;
-}
-
-input[type=date]::-webkit-calendar-picker-indicator:hover {
-    background: transparent;
 }
