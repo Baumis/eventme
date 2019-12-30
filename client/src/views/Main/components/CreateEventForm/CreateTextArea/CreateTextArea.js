@@ -1,6 +1,6 @@
 import React from 'react'
 import './CreateTextArea.css'
-import EditableWrapper from '../../../../Event/components/EditableWrapper/EditableWrapper'
+import EditableWrapper from '../../../../../commonComponents/EditableWrapper/EditableWrapper'
 
 const CreateTextArea = (props) => {
 

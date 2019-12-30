@@ -1,0 +1,35 @@
+.event-description {
+    display: flex;
+    flex-direction: column;
+    width: 810px;
+    background: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(69,69,69,0.2);
+}
+
+.event-description-content {
+    padding: 20px;
+}
+
+.description-title {
+    font-size: 18px;
+    color: #46494c;
+    margin: 10px 0px;
+    font-weight: 600;
+}
+
+.event-description-text {
+    display: flex;
+    flex-direction: column;
+    margin: 1px 0px 0px 0px;
+    word-wrap: break-word;
+    border: 1px solid transparent;
+}
+
+@media only screen and (max-width: 900px) {
+    .event-description {
+        width: 95vw;
+    }
+}

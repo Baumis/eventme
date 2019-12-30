@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './NewEventOptions.css'
 import moment from 'moment'
+import EditableWrapper from '../EditableWrapper/EditableWrapper'
 import Spinner from '../Spinner/Spinner'
 
 class NewEventModal extends Component {
@@ -13,6 +14,7 @@ class NewEventModal extends Component {
             startDate: '',
             endDate: '',
             today: '',
+            description: '',
             loading: false
         }
     }
@@ -40,8 +42,8 @@ class NewEventModal extends Component {
         }
     }
 
-    changeStateValue = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
+    changeStateValue = (event, field) => {
+        this.setState({ [field]: event.target.value })
     }
 
     create = async () => {
@@ -49,7 +51,8 @@ class NewEventModal extends Component {
         const event = await this.props.EventStore.create({
             label: this.state.eventName,
             startDate: this.state.startDate,
-            endDate: this.state.endDate
+            endDate: this.state.endDate,
+            description: this.state.description
         })
         this.setState({ loading: false })
         event ?
@@ -67,12 +70,11 @@ class NewEventModal extends Component {
                             <h2>Create event</h2>
                         </div>
                         <div className="event-options-input">
-                            <p>Title</p>
+                            <p>Event name</p>
                             <input
-                                name={'eventName'}
-                                onChange={this.changeStateValue}
+                                onChange={(event) => this.changeStateValue(event, 'eventName')}
                                 value={this.state.eventName}
-                                placeholder={'my event'}
+                                placeholder={'My event'}
                             ></input>
                         </div>
                         <div className="event-options-date-section">
@@ -96,6 +98,17 @@ class NewEventModal extends Component {
                                     min={this.state.startDate}
                                 ></input>
                             </div>
+                        </div>
+                        <div className="event-options-area-wrapper">
+                            <div className="event-options-label">
+                                <label>Description</label>
+                            </div>
+                            <EditableWrapper
+                                html={this.state.description}
+                                className={"event-options-area"}
+                                editable={false}
+                                onChange={(event) => this.changeStateValue(event, 'description')}
+                            />
                         </div>
                         <div className="event-options-button-row">
                             <div onClick={() => this.props.hide()} className="event-options-button event-options-close">

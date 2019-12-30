@@ -54,7 +54,8 @@ class CreateEventForm extends Component {
         const event = await this.props.EventStore.create({
             label: this.state.eventName,
             startDate: this.state.startDate,
-            endDate: this.state.endDate
+            endDate: this.state.endDate,
+            description: this.state.description
         })
         this.setState({ loading: false })
         event ?
@@ -95,7 +96,6 @@ class CreateEventForm extends Component {
                         label={'Description'}
                         value={this.state.description}
                         onChange={(event) => this.changeValue('description', event)}
-                        rows={5}
                     />
                     <div className="create-event-button-row">
                         <div onClick={() => this.create()} className="event-options-button">
