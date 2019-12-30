@@ -59,15 +59,25 @@ const eventSchema = new mongoose.Schema({
 })
 
 eventSchema.statics.format = (event) => {
+    
     const formattedRegistrations = event.registrations.map(registration => {
-        if (!registration.user) {
-            registration.user = {
-                name: reqistration.name,
+        let user
+
+        if (registration.user) {
+            user = registration.user
+        } else {
+            user = {
+                name: registration.name,
                 avatar: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
             }
         }
 
-        return registration
+        const formattedRegistration = {
+            _id: registration._id,
+            user
+        }
+
+        return formattedRegistration
     })
 
     const formattedEvent = {
@@ -88,7 +98,6 @@ eventSchema.statics.format = (event) => {
 }
 
 eventSchema.statics.formatForGuest = (event, guestId) => {
-
     const formattedComponents = event.components.map(component => {
         if (component.type === 'FORM') {
             component.data.questions = component.data.questions.map(question => {
@@ -97,6 +106,26 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
             })
         }
         return component
+    })
+
+    const formattedRegistrations = event.registrations.map(registration => {
+        let user
+
+        if (registration.user) {
+            user = registration.user
+        } else {
+            user = {
+                name: registration.name,
+                avatar: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+            }
+        }
+
+        const formattedRegistration = {
+            _id: registration._id,
+            user
+        }
+
+        return formattedRegistration
     })
 
     const formattedEvent = {
@@ -109,7 +138,8 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         background: event.background,
         guests: event.guests,
         components: formattedComponents,
-        discussion: event.discussion
+        discussion: event.discussion,
+        registrations: formattedRegistrations
     }
     return formattedEvent
 }

@@ -8,6 +8,7 @@ exports.populate = async (event) => {
 
     const populatedEvent = await event
         .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
+        .populate('registrations.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 
     const getUser = async userId => {
@@ -716,7 +717,9 @@ exports.removeAnswerFromFormComponent = async (id, componentId, questionId, user
         { ...options, arrayFilters: [{ 'question._id': mongoose.Types.ObjectId(questionId) }] })
 }
 
-exports.addRegistration = async (event, registration, senderId) => {
+exports.addRegistration = async (event, name, senderId) => {
+    const registration = {}
+
     if (senderId) {
         const oldRegistration = event.registrations.find(registration => registration.user.toString() === senderId)
 
@@ -725,6 +728,10 @@ exports.addRegistration = async (event, registration, senderId) => {
         }
 
         registration.user = senderId
+    } else if (name) {
+        registration.name = name
+    } else {
+        throw new Error('Required information not provided')
     }
 
     const session = await Event.startSession()
@@ -733,7 +740,7 @@ exports.addRegistration = async (event, registration, senderId) => {
 
     try {
         if (senderId) {
-            await userService.addToMyInvites(guestId, event._id, options)
+            await userService.addToMyInvites(senderId, event._id, options)
         }
 
         const savedEvent = await Event.findByIdAndUpdate(event._id,

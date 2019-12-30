@@ -303,11 +303,7 @@ exports.addAnswersToFormComponent = async (request, response) => {
 
 exports.addRegistration = async (request, response) => {
     try {
-        if (request.event.inviteKey !== request.body.inviteKey) {
-            return response.status(400).json({ error: 'Malformatted inviteKey' })
-        }
-
-        const updatedEvent = await eventService.addRegistration(request.event, request.body.registration, request.senderId)
+        const updatedEvent = await eventService.addRegistration(request.event, request.body.name, request.senderId)
         
         if (request.senderId) {
             logService.joinedEvent(request.senderId, updatedEvent._id, updatedEvent.label)
