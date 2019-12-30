@@ -63,6 +63,9 @@ class CreateEventForm extends Component {
     render() {
         return (
             <div className="create-event-form">
+                <div className="create-event-header">
+                    <div>Create event</div>
+                </div>
                 <div className="create-event-content">
                     <CreateInput
                         label={'Title'}

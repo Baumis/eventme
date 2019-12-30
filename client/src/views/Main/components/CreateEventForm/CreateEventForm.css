@@ -3,10 +3,20 @@
     flex-direction: column;
     background: white;
     border-radius: 5px;
-    margin-top: -130px;
-    width: 810px;
-    border: 1px solid rgba(69,69,69,0.2);
+    margin-top: -430px;
     margin-bottom: 20px;
+    width: 610px;
+    box-sizing: border-box;
+    padding: 35px;
+    border: 1px solid rgba(69,69,69,0.2);
+}
+
+.create-event-header {
+    padding: 10px 0px;
+    font-size: 28px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 600;
 }
 
 .create-event-row {
@@ -16,7 +26,7 @@
 .create-event-button-row{
     display: flex;
     justify-content: center;
-    padding: 20px 0px 10px 0px;
+    padding: 20px 0px 0px 0px;
 }
 
 .create-event-button {
@@ -40,14 +50,11 @@
     background: #404e59;
 }
 
-
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 610px) {
     .create-event-form {
         width: 95vw;
     }
-}
 
-@media only screen and (max-width: 650px) {
     .create-event-row {
         flex-direction: column;
     }
