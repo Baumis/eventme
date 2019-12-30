@@ -35,9 +35,6 @@ class EventControlPanel extends Component {
                     </div>
                 </div>
                 <div className="event-control-panel-content">
-                    <div className="event-control-panel-title">
-                        Description
-                    </div>
                     <div className="event-control-panel-text">
                         {this.props.EventStore.event.description}
                     </div>
