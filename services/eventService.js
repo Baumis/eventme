@@ -80,6 +80,7 @@ exports.create = async (creatorId, eventObject) => {
 
     const newEvent = new Event({
         label: eventObject.label,
+        description: eventObject.description,
         startDate: startDate,
         endDate: endDate,
         creator: creatorId,
@@ -160,6 +161,7 @@ exports.update = async (event, eventObject) => {
 
     const updateObject = {
         label: eventObject.label,
+        description: eventObject.description,
         startDate: startDate,
         endDate: endDate,
         background: eventObject.background

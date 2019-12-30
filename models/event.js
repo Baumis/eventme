@@ -25,6 +25,11 @@ const eventSchema = new mongoose.Schema({
         minlength: [1, 'Label too short'],
         maxlength: [144, 'Label too long']
     },
+    description: {
+        type: String,
+        default: '',
+        maxlength: [10000, 'Description too long']
+    },
     startDate: {
         type: Date,
         default: Date.now,
@@ -54,6 +59,7 @@ const eventSchema = new mongoose.Schema({
 eventSchema.statics.format = (event) => ({
     _id: event._id,
     label: event.label,
+    description: event.description,
     startDate: event.startDate,
     endDate: event.endDate,
     creator: event.creator,
@@ -79,6 +85,7 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
     const formattedEvent = {
         _id: event._id,
         label: event.label,
+        description: event.description,
         startDate: event.startDate,
         endDate: event.endDate,
         creator: event.creator,
