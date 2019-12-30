@@ -16,6 +16,7 @@ class MainHeader extends Component {
     render() {
         return (
             <div className="main-header">
+                <h1>Create and manage events in one place</h1>
             </div>
         )
     }
