@@ -1,19 +1,22 @@
 import React from 'react'
 import './CreateTextArea.css'
+import EditableWrapper from '../../../../Event/components/EditableWrapper/EditableWrapper'
 
 const CreateTextArea = (props) => {
 
     return (
         <div className="create-textarea">
-            <div className="create-textarea-label">
-                <label>{props.label}</label>
+            <div className="create-textarea-area-wrapper">
+                <div className="create-textarea-label">
+                    <label>{props.label}</label>
+                </div>
+                <EditableWrapper
+                    html={props.value}
+                    className={"create-textarea-area"}
+                    editable={false}
+                    onChange={props.onChange}
+                />
             </div>
-            <textarea
-                value={props.value}
-                onChange={props.onChange}
-                style={props.style}
-                rows={props.rows}>
-            </textarea>
         </div>
     )
 }

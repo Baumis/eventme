@@ -26,6 +26,7 @@
 
 
 .create-input input:focus{
+    transition: border 0s;
     border: 1px solid #1985a1;
 }
 

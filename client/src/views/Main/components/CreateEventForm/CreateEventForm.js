@@ -29,7 +29,7 @@ class CreateEventForm extends Component {
         })
     }
 
-    changeStartdate = (event) => {
+    changeStartDate = (event) => {
         this.setState({ startDate: event.target.value })
         if (moment(event.target.value).isAfter(this.state.endDate)) {
             this.setState({ endDate: event.target.value })
@@ -40,6 +40,8 @@ class CreateEventForm extends Component {
         this.setState({ endDate: event.target.value })
         if (moment(event.target.value).isBefore(this.state.startDate)) {
             this.setState({ startDate: event.target.value })
+        } else {
+
         }
     }
 
@@ -68,7 +70,7 @@ class CreateEventForm extends Component {
                 </div>
                 <div className="create-event-content">
                     <CreateInput
-                        label={'Title'}
+                        label={'Event name'}
                         type={'text'}
                         value={this.state.eventName}
                         onChange={(event) => this.changeValue('eventName', event)}
@@ -85,7 +87,7 @@ class CreateEventForm extends Component {
                             label={'End date'}
                             type={'date'}
                             min={this.state.today}
-                            value={this.state.startDate}
+                            value={this.state.endDate}
                             onChange={(event) => this.changeEndDate(event)}
                         />
                     </div>

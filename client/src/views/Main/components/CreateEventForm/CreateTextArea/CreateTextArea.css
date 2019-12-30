@@ -12,24 +12,31 @@
     color: #1985a1;
 }
 
-.create-textarea textarea{
-    border-radius: 5px;
-    border: none;
-    font-size: 14px;
-    padding: 3px 10px 3px 10px;
-    background: white;
-    border: 1px solid #dddddd;
-    color:rgba(0,0,0);
-    outline: 0;
-    resize: none;
-    transition: border 0.2s;
+.create-textarea-textarea-wrapper {
+    padding: 12px;
 }
 
+.create-textarea-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    border-radius: 5px;
+    border: 1px solid #dddddd;;
+    padding: 10px;
+    outline: none;
+    text-align: start;
+    overflow-y: auto;
+    word-wrap: break-word;
+    transition: border 0.2s;
+    height: 45px;
+}
 
-.create-textarea textarea:focus{
+.create-textarea-area:focus{
+    transition: border 0s;
     border: 1px solid #1985a1;
 }
 
-.create-textarea textarea::placeholder{
+.create-textarea-area::placeholder{
     color: #c5c3c6
 }
