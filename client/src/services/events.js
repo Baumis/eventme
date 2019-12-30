@@ -81,6 +81,11 @@ const addVoteToVoteComponent = async (id, componentId, optionId) => {
     return response.data
 }
 
+const addRegistration = async (id, name = undefined) => {
+    const response = await http.post(`${baseUrl}/${id}/registrations`, { name })
+    return response.data
+}
+
 export default {
     getOne,
     create,
@@ -97,5 +102,6 @@ export default {
     removeMessage,
     removeComment,
     addAnswersToFormComponent,
-    addVoteToVoteComponent
+    addVoteToVoteComponent,
+    addRegistration
 }
