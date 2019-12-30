@@ -34,11 +34,13 @@ class EventControlPanel extends Component {
                         {moment(this.props.EventStore.event.startDate).format('DD.MM.YYYY')}
                     </div>
                 </div>
-                <div className="event-control-panel-content">
-                    <div className="event-control-panel-text">
-                        {this.props.EventStore.event.description}
+                {this.props.EventStore.event.description.length > 0 ?
+                    <div className="event-control-panel-content">
+                        <div className="event-control-panel-text">
+                            {this.props.EventStore.event.description}
+                        </div>
                     </div>
-                </div>
+                    : null}
                 <Tabs
                     active={this.props.activeTab}
                     changeActive={this.props.changeActive}
