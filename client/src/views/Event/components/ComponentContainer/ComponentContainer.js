@@ -4,7 +4,6 @@ import './ComponentContainer.css'
 import MasterComponent from '../MasterComponent/MasterComponent.js'
 import ComponentAdder from './ComponentAdder/ComponentAdder'
 import UniversalModal from '../../../../commonComponents/UniversalModal/UniversalModal'
-import EventDescription from '../EventDescription/EventDescription'
 
 class ComponentContainer extends Component {
 
@@ -54,7 +53,6 @@ class ComponentContainer extends Component {
     render() {
         return (
             <div className="component-container">
-                <EventDescription />
                 {this.state.showModal ?
                     <UniversalModal
                         content={this.state.modalContent}

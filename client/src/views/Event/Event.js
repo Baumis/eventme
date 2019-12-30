@@ -20,7 +20,7 @@ class Event extends Component {
         this.state = {
             loading: true,
             showNewComponentModal: false,
-            activeTab: 'Event',
+            activeTab: 'Discussion',
             updater: null
         }
     }
