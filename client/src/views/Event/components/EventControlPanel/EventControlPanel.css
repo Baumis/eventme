@@ -14,6 +14,7 @@
     margin: 0px 30px;
     align-items: center;
     height: 50px;
+    border-bottom: 1px solid rgba(69,69,69,0.2);
 }
 
 .event-control-panel-info-item {
@@ -59,7 +60,6 @@
     margin: 0px 20px;
     padding: 20px;
     color: rgba(0,0,0,0.8);
-    border-top: 1px solid rgba(69,69,69,0.2);
 }
 
 .event-control-panel-title {

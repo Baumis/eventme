@@ -4,6 +4,7 @@ import './EventControlPanel.css'
 import Tabs from '../Tabs/Tabs'
 import { FaCalendar, FaCalendarDay } from 'react-icons/fa'
 import moment from 'moment'
+import JoinEventButton from '../JoinEventButton/JoinEventButton'
 
 class EventControlPanel extends Component {
 
@@ -32,6 +33,14 @@ class EventControlPanel extends Component {
                             <FaCalendarDay />
                         </div>
                         {moment(this.props.EventStore.event.startDate).format('DD.MM.YYYY')}
+                    </div>
+                    <div className="event-control-panel-info-item">
+                        <div className="event-content-status-row">
+                            {!this.props.isGuest() ?
+                                <JoinEventButton
+                                    inviteKey={this.props.inviteKey}
+                                /> : null}
+                        </div>
                     </div>
                 </div>
                 {this.props.EventStore.event.description.length > 0 ?

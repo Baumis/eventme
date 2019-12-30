@@ -9,15 +9,11 @@ import EventControlPanel from '../EventControlPanel/EventControlPanel'
 const EventContent = (props) => {
     return (
         <div className="event-content">
-            <div className="event-content-status-row">
-                {!props.isGuest() ?
-                    <JoinEventButton
-                        inviteKey={props.inviteKey}
-                    /> : null}
-            </div>
             <EventControlPanel
                 activeTab={props.activeTab}
                 changeActive={props.changeActive}
+                isGuest={props.isGuest}
+                inviteKey={props.inviteKey}
             />
             {props.activeTab === "Discussion" ?
                 <DiscussionContainer
