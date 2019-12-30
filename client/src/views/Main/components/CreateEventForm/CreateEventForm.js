@@ -77,20 +77,24 @@ class CreateEventForm extends Component {
                         onChange={(event) => this.changeValue('eventName', event)}
                     />
                     <div className="create-event-row">
-                        <CreateInput
-                            label={'Start date'}
-                            type={'date'}
-                            min={this.state.today}
-                            value={this.state.startDate}
-                            onChange={(event) => this.changeStartDate(event)}
-                        />
-                        <CreateInput
-                            label={'End date'}
-                            type={'date'}
-                            min={this.state.today}
-                            value={this.state.endDate}
-                            onChange={(event) => this.changeEndDate(event)}
-                        />
+                        <div className="create-event-row-left">
+                            <CreateInput
+                                label={'Start date'}
+                                type={'date'}
+                                min={this.state.today}
+                                value={this.state.startDate}
+                                onChange={(event) => this.changeStartDate(event)}
+                            />
+                        </div>
+                        <div className="create-event-row-right">
+                            <CreateInput
+                                label={'End date'}
+                                type={'date'}
+                                min={this.state.today}
+                                value={this.state.endDate}
+                                onChange={(event) => this.changeEndDate(event)}
+                            />
+                        </div>
                     </div>
                     <CreateTextArea
                         label={'Description'}

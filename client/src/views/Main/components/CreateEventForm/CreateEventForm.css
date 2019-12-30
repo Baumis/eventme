@@ -23,6 +23,17 @@
     display: flex;
 }
 
+.create-event-row-right {
+    flex: 1;
+    margin-left: 5px;
+}
+
+.create-event-row-left {
+    flex: 1;
+    margin-right: 5px;
+}
+
+
 .create-event-button-row{
     display: flex;
     justify-content: center;
@@ -58,5 +69,14 @@
     .create-event-row {
         flex-direction: column;
     }
+
+    .create-event-row-right {
+        margin-left: 0px;
+    }
+    
+    .create-event-row-left {
+        margin-right: 0px;
+    }
+    
 }
 

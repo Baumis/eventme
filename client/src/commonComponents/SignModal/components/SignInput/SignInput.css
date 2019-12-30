@@ -1,6 +1,6 @@
 .sign-input-label-row{
     display: flex;
-    padding: 5px 0px;
+    padding: 3px 0px;
     justify-content: space-between;
     color: #1985a1;
 }
@@ -16,7 +16,7 @@
     flex-direction: column;
     text-align: left;
     font-size: 16px;
-    padding: 8px 0px 8px 0px;
+    padding: 6px 0px 6px 0px;
 }
 
 .sign-input input{
