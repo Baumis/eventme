@@ -31,9 +31,6 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={Main} />
                         <Route exact path="/events/:id" render={({ match }) => <Event eventId={match.params.id} />} />
-                        <Route exact path="/events/:id/invite/:inviteKey" render={({ match }) =>
-                            <Event eventId={match.params.id} inviteKey={match.params.inviteKey} />
-                        } />
                         <Route exact path="/profile/:id" render={({ match }) => <Profile profileId={match.params.id} />} />
                         <Route exact path="/profile/:id/verify/:token" render={({ match }) => <Profile profileId={match.params.id} verificationToken={match.params.token} />} />
                         <Route render={() => <NotFound title={'Page not found'} message={'The page you are looking for could not be found'} />} />

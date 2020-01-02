@@ -25,7 +25,7 @@ eventRouter.delete('/:id/guests/:userId', middleware.requireAuthentication, midd
 
 eventRouter.get('/:id/invitekey/:inviteKey', eventController.getOneWithInviteKey)
 
-eventRouter.post('/:id/guests/invitekey', middleware.requireAuthentication, eventController.addGuestWithInviteKey)
+eventRouter.put('/:id/guests', middleware.requireAuthentication, eventController.joinEvent)
 
 eventRouter.put('/:id/invitekey', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR), eventController.changeInviteKey)
 

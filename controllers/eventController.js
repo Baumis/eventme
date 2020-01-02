@@ -106,12 +106,8 @@ exports.getOneWithInviteKey = async (request, response) => {
     }
 }
 
-exports.addGuestWithInviteKey = async (request, response) => {
+exports.joinEvent = async (request, response) => {
     try {
-        if (request.event.inviteKey !== request.body.inviteKey) {
-            return response.status(400).json({ error: 'Malformatted inviteKey' })
-        }
-
         const updatedEvent = await eventService.addGuest(request.event, request.senderId)
 
         logService.joinedEvent(request.senderId, updatedEvent._id, updatedEvent.label)

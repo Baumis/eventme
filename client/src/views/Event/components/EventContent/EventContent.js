@@ -14,9 +14,7 @@ const EventContent = (props) => {
                 {props.isGuest() ?
                     <StatusBar />
                     :
-                    <JoinEventButton
-                        inviteKey={props.inviteKey}
-                    />
+                    <JoinEventButton />
                 }
             </div>
             <Tabs
