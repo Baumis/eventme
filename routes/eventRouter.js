@@ -41,4 +41,6 @@ eventRouter.post('/:id/components/:componentId/data/questions', middleware.requi
 
 eventRouter.post('/:id/registrations', eventController.addRegistration)
 
+eventRouter.delete('/:id/registrations/:registrationId', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeRegistration)
+
 module.exports = eventRouter

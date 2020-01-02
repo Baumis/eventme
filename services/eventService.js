@@ -726,3 +726,32 @@ exports.addRegistration = async (event, name, senderId) => {
         throw new Error('Could not add registration')
     }
 }
+
+exports.removeRegistration = async (event, registration) => {
+
+    const session = await Event.startSession()
+    session.startTransaction()
+    const options = { session }
+
+    try {
+        if (registration.user) {
+            await userService.removeFromMyInvites(registration.user, event._id, options)
+        }
+
+        const savedEvent = await Event.findByIdAndUpdate(event._id,
+            { $pull: { registrations: { _id: registration._id } } },
+            { ...options, new: true })
+
+        const populatedEvent = await this.populate(savedEvent)
+
+        await session.commitTransaction()
+        session.endSession()
+
+        return populatedEvent
+
+    } catch (exception) {
+        await session.abortTransaction()
+        session.endSession()
+        throw new Error('Could not remove registration')
+    }
+}

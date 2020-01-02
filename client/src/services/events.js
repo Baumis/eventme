@@ -76,6 +76,11 @@ const addRegistration = async (id, name = undefined) => {
     return response.data
 }
 
+const removeRegistration = async (id, registrationId) => {
+    const response = await http.delete(`${baseUrl}/${id}/registrations/${registrationId}`)
+    return response.data
+}
+
 export default {
     getOne,
     create,
@@ -91,5 +96,6 @@ export default {
     removeComment,
     addAnswersToFormComponent,
     addVoteToVoteComponent,
-    addRegistration
+    addRegistration,
+    removeRegistration
 }
