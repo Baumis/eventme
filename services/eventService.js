@@ -45,10 +45,7 @@ exports.populate = async (event) => {
     )
 
     for (let component of populatedEvent.components) {
-        if (component.type === 'INVITE_LINK') {
-            component.data = {}
-            component.data.inviteKey = populatedEvent.inviteKey
-        } else if (component.type === 'FORM') {
+        if (component.type === 'FORM') {
             const questionPromises = component.data.questions.map(async question => {
                 const answerPromises = question.answers.map(async answer => {
                     answer.user = await getUser(answer.user)
@@ -258,16 +255,6 @@ exports.removeGuest = async (event, guestId) => {
     }
 }
 
-exports.changeInviteKey = async (event) => {
-    const updateObject = {
-        inviteKey: mongoose.Types.ObjectId().toHexString()
-    }
-
-    const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true })
-
-    return await this.populate(savedEvent)
-}
-
 exports.setStatus = async (event, guestId, status) => {
     const savedEvent = await Event.findOneAndUpdate(
         { _id: event._id, 'guests.user': guestId },
@@ -357,8 +344,6 @@ exports.createComponent = async (id, type, data, position, options = {}) => {
             return await this.createTextComponent(id, data, position, options)
         case 'PICTURE':
             return await this.createPictureComponent(id, data, position, options)
-        case 'INVITE_LINK':
-            return await this.createInviteLinkComponent(id, position, options)
         case 'VOTE':
             return await this.createVoteComponent(id, data, position, options)
         case 'FORM':
@@ -394,16 +379,6 @@ exports.createPictureComponent = async (id, data, position, options = {}) => {
             url: data.url,
             expand: data.expand
         },
-        position
-    }
-
-    return await Event.findByIdAndUpdate(id, { $addToSet: { components: component } }, options)
-}
-
-exports.createInviteLinkComponent = async (id, position, options = {}) => {
-    const component = {
-        type: 'INVITE_LINK',
-        data: {},
         position
     }
 
@@ -462,8 +437,6 @@ exports.updateComponent = async (event, componentId, type, data, position, optio
             return await this.updateTextComponent(event._id, componentId, data, position, options)
         case 'PICTURE':
             return await this.updatePictureComponent(event._id, componentId, data, position, options)
-        case 'INVITE_LINK':
-            return await this.updateInviteLinkComponent(event._id, componentId, position, options)
         case 'VOTE':
             return await this.updateVoteComponent(event, componentId, data, position, options)
         case 'FORM':
@@ -490,13 +463,6 @@ exports.updatePictureComponent = async (id, componentId, data, position, options
     return await Event.findOneAndUpdate(
         { _id: id, 'components._id': componentId },
         { $set: { 'components.$.data.url': data.url, 'components.$.data.expand': data.expand, 'components.$.position': position } },
-        options)
-}
-
-exports.updateInviteLinkComponent = async (id, componentId, position, options = {}) => {
-    return await Event.findOneAndUpdate(
-        { _id: id, 'components._id': componentId },
-        { $set: { 'components.$.position': position } },
         options)
 }
 

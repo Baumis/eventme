@@ -88,24 +88,6 @@ exports.removeGuest = async (request, response) => {
     }
 }
 
-exports.getOneWithInviteKey = async (request, response) => {
-    try {
-        if (request.event.inviteKey !== request.params.inviteKey) {
-            return response.status(400).json({ error: 'Malformatted inviteKey' })
-        }
-
-        const event = await eventService.populate(request.event)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(event))
-        } else {
-            response.json(Event.formatForGuest(event, request.senderId))
-        }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
 exports.joinEvent = async (request, response) => {
     try {
         const updatedEvent = await eventService.addGuest(request.event, request.senderId)
@@ -117,16 +99,6 @@ exports.joinEvent = async (request, response) => {
         } else {
             response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.changeInviteKey = async (request, response) => {
-    try {
-        const updatedEvent = await eventService.changeInviteKey(request.event)
-
-        response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
     }

@@ -42,10 +42,6 @@ const eventSchema = new mongoose.Schema({
         required: [true, 'Enddate required']
     },
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    inviteKey: {
-        type: String,
-        default: mongoose.Types.ObjectId().toHexString()
-    },
     background: {
         type: String,
         default: 'https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80',
@@ -87,7 +83,6 @@ eventSchema.statics.format = (event) => {
         startDate: event.startDate,
         endDate: event.endDate,
         creator: event.creator,
-        inviteKey: event.inviteKey,
         background: event.background,
         guests: event.guests,
         components: event.components,

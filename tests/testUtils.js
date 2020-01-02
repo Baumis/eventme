@@ -49,10 +49,6 @@ exports.newEventObject = {
             }
         },
         {
-            type: 'INVITE_LINK',
-            data: {}
-        },
-        {
             type: 'PICTURE',
             data: {
                 url: 'www.validpictureurl.fi',

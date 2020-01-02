@@ -23,11 +23,7 @@ eventRouter.put('/:id/guests/:userId', middleware.requireAuthentication, middlew
 
 eventRouter.delete('/:id/guests/:userId', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeGuest)
 
-eventRouter.get('/:id/invitekey/:inviteKey', eventController.getOneWithInviteKey)
-
 eventRouter.put('/:id/guests', middleware.requireAuthentication, eventController.joinEvent)
-
-eventRouter.put('/:id/invitekey', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR), eventController.changeInviteKey)
 
 eventRouter.post('/:id/discussion', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addMessage)
 
