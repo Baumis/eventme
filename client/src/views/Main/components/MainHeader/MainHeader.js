@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './MainHeader.css'
+import ContentBook from '../ContentBook/ContentBook'
 
 class MainHeader extends Component {
 
@@ -16,7 +17,7 @@ class MainHeader extends Component {
     render() {
         return (
             <div className="main-header">
-                <h1>Create and manage events in one place</h1>
+                <ContentBook />
             </div>
         )
     }

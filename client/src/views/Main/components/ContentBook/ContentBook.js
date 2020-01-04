@@ -9,9 +9,13 @@ class ContentBook extends Component {
     render() {
         return (
             <div className="content-book">
-                <CreateEventForm />
+                <div className="content-book-page">
+                    <CreateEventForm />
+                </div>
                 <div className="content-book-devider"></div>
-                <InformationPage />
+                <div className="content-book-page">
+                    <InformationPage />
+                </div>
             </div>
         )
     }

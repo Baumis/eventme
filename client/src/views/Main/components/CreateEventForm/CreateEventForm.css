@@ -2,10 +2,12 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-    width: 610px;
+    background: white;
     box-sizing: border-box;
     padding: 30px;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .create-event-header {
@@ -61,6 +63,7 @@
 @media only screen and (max-width: 610px) {
     .create-event-form {
         width: 95vw;
+        border-radius: 0px;
     }
 
     .create-event-row {

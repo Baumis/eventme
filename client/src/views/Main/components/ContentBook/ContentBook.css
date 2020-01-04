@@ -1,13 +1,25 @@
 .content-book {
     display: flex;
-    margin-top: 45px;
-    background: white;
+    background: transparent;
     border-radius: 5px;
-    width: 100%;
+    width: 95vw;
     max-width: 1024px;
+}
+
+.content-book-page {
+    display: flex;
+    flex: 1;
 }
 
 .content-book-devider {
     width: 1px;
-    background: black;
+    background: transparent;
+}
+
+@media only screen and (max-width: 610px) {
+    .content-book {
+        flex-direction: column-reverse;
+        width: 100vw;
+        border-radius: 0px;
+    }
 }

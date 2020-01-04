@@ -4,7 +4,8 @@ import './Main.css'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
-import ContentBook from './components/ContentBook/ContentBook'
+import MainHeader from './components/MainHeader/MainHeader'
+import ContentContainer from './components/ContentContainer/ContentContainer'
 
 class Main extends Component {
 
@@ -12,8 +13,8 @@ class Main extends Component {
         return (
             <div className="Main">
                 <Navbar />
-                <ContentBook />
-
+                <MainHeader />
+                <ContentContainer />
                 {this.props.VisibilityStore.signModal ?
                     <UniversalModal
                         content={<SignModal />}
