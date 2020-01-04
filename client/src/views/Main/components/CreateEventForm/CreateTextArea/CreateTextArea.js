@@ -10,10 +10,9 @@ const CreateTextArea = (props) => {
                 <div className="create-textarea-label">
                     <label>{props.label}</label>
                 </div>
-                <EditableWrapper
-                    html={props.value}
+                <textarea 
+                    value={props.value}
                     className={"create-textarea-area"}
-                    editable={false}
                     onChange={props.onChange}
                 />
             </div>

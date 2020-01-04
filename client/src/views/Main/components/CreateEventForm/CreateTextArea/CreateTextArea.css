@@ -13,23 +13,24 @@
 }
 
 .create-textarea-textarea-wrapper {
+    display: flex;
     padding: 12px;
 }
 
-.create-textarea-area {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
+.create-textarea textarea {
     border-radius: 5px;
-    border: 1px solid #dddddd;;
+    width: 100%;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
     padding: 10px;
     outline: none;
-    text-align: start;
     overflow-y: auto;
     word-wrap: break-word;
     transition: border 0.2s;
-    height: 45px;
+    height: 55px;
+    resize: none;
+    font-family: sans-serif;
+    font-size: 15px;
 }
 
 .create-textarea-area:focus{
