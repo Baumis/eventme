@@ -21,8 +21,7 @@ class JoinEventModal extends Component {
 
         this.setState({ loading: true })
         const response = await this.props.EventStore.joinEvent(
-            this.props.EventStore.event._id,
-            this.props.inviteKey
+            this.props.EventStore.event._id
         )
         this.setState({ loading: false })
         if(!response){

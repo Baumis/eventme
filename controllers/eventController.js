@@ -88,30 +88,8 @@ exports.removeGuest = async (request, response) => {
     }
 }
 
-exports.getOneWithInviteKey = async (request, response) => {
+exports.joinEvent = async (request, response) => {
     try {
-        if (request.event.inviteKey !== request.params.inviteKey) {
-            return response.status(400).json({ error: 'Malformatted inviteKey' })
-        }
-
-        const event = await eventService.populate(request.event)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(event))
-        } else {
-            response.json(Event.formatForGuest(event, request.senderId))
-        }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.addGuestWithInviteKey = async (request, response) => {
-    try {
-        if (request.event.inviteKey !== request.body.inviteKey) {
-            return response.status(400).json({ error: 'Malformatted inviteKey' })
-        }
-
         const updatedEvent = await eventService.addGuest(request.event, request.senderId)
 
         logService.joinedEvent(request.senderId, updatedEvent._id, updatedEvent.label)
@@ -121,16 +99,6 @@ exports.addGuestWithInviteKey = async (request, response) => {
         } else {
             response.json(Event.formatForGuest(updatedEvent, request.senderId))
         }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.changeInviteKey = async (request, response) => {
-    try {
-        const updatedEvent = await eventService.changeInviteKey(request.event)
-
-        response.json(Event.format(updatedEvent))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
     }
@@ -304,10 +272,36 @@ exports.addAnswersToFormComponent = async (request, response) => {
 exports.addRegistration = async (request, response) => {
     try {
         const updatedEvent = await eventService.addRegistration(request.event, request.body.name, request.senderId)
-        
+
         if (request.senderId) {
             logService.joinedEvent(request.senderId, updatedEvent._id, updatedEvent.label)
         }
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(updatedEvent))
+        } else {
+            response.json(Event.formatForGuest(updatedEvent, request.senderId))
+        }
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
+exports.removeRegistration = async (request, response) => {
+    try {
+        const registrationId = request.params.registrationId
+
+        const registration = request.event.registrations.find(registration => registration._id.toString() === registrationId)
+
+        if (!registration) {
+            response.status(400).json({ error: 'Malformatted registration id' })
+        }
+
+        if (request.senderRole !== roles.CREATOR && request.senderId !== registration.user.toString()) {
+            return response.status(403).json({ error: 'User does not have required permission' })
+        }
+
+        const updatedEvent = await eventService.removeRegistration(request.event, registration)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))

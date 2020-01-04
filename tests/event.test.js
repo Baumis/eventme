@@ -100,7 +100,6 @@ describe('POST /api/events', () => {
 
         expect(amountInBeginning + 1).toEqual(amountInEnd)
         expect.stringContaining(res.body._id)
-        expect.stringContaining(res.body.inviteKey)
         expect(res.body.label).toEqual(eventObject.label)
         expect(res.body.description).toEqual(eventObject.description)
         expect(new Date(res.body.startDate)).toEqual(eventObject.startDate)
@@ -218,7 +217,6 @@ describe('GET /api/events/:id', () => {
 
         expect(res.body._id).toEqual(event._id)
         expect(res.body.label).toEqual(event.label)
-        expect(res.body.inviteKey).toEqual(event.inviteKey)
         expect(res.body.startDate).toEqual(event.startDate)
         expect(res.body.endDate).toEqual(event.endDate)
         expect(res.body.creator).toEqual(event.creator)
@@ -236,7 +234,6 @@ describe('GET /api/events/:id', () => {
 
         expect(res.body._id).toEqual(event._id)
         expect(res.body.label).toEqual(event.label)
-        expect(res.body.inviteKey).toBeUndefined()
         expect(res.body.startDate).toEqual(event.startDate)
         expect(res.body.endDate).toEqual(event.endDate)
         expect(res.body.creator).toEqual(event.creator)
@@ -244,19 +241,6 @@ describe('GET /api/events/:id', () => {
         expect(res.body.components).toEqual(event.components)
         expect(res.body.background).toEqual(event.background)
         expect(res.body.discussion).toEqual(event.discussion)
-    })
-
-    it('should fail if not authenticated', async () => {
-        await api
-            .get('/api/events/' + event._id)
-            .expect(401)
-    })
-
-    it('should fail if authenticated but not creator or guest', async () => {
-        await api
-            .get('/api/events/' + event._id)
-            .set('Cookie', user3Cookie)
-            .expect(403)
     })
 
     it('should fail if event not existing', async () => {
@@ -278,7 +262,6 @@ describe('PUT /api/events/:id', () => {
 
         expect(res.body._id).toEqual(event._id)
         expect(res.body.label).toEqual(newEventObject.label)
-        expect(res.body.inviteKey).toEqual(event.inviteKey)
         expect(new Date(res.body.startDate)).toEqual(newEventObject.startDate)
         expect(new Date(res.body.endDate)).toEqual(newEventObject.endDate)
         expect(res.body.creator).toEqual(event.creator)
@@ -286,17 +269,15 @@ describe('PUT /api/events/:id', () => {
         expect(res.body.components[0].type).toEqual(newEventObject.components[0].type)
         expect(res.body.components[0].data).toEqual(newEventObject.components[0].data)
         expect(res.body.components[1].type).toEqual(newEventObject.components[1].type)
-        expect(res.body.components[1].data.inviteKey).toEqual(event.inviteKey)
+        expect(res.body.components[1].data).toEqual(newEventObject.components[1].data)
         expect(res.body.components[2].type).toEqual(newEventObject.components[2].type)
-        expect(res.body.components[2].data).toEqual(newEventObject.components[2].data)
-        expect(res.body.components[3].type).toEqual(newEventObject.components[3].type)
-        expect(res.body.components[3].data.subject).toEqual(newEventObject.components[3].data.subject)
-        expect(res.body.components[3].data.options[0].label).toEqual(newEventObject.components[3].data.options[0].label)
-        expect.stringContaining(res.body.components[3].data.options[0]._id)
-        expect.arrayContaining(res.body.components[3].data.options[0].votes)
-        expect(res.body.components[4].data.questions[0].label).toEqual(newEventObject.components[4].data.questions[0].label)
-        expect.stringContaining(res.body.components[4].data.questions[0]._id)
-        expect.arrayContaining(res.body.components[4].data.questions[0].answers)
+        expect(res.body.components[2].data.subject).toEqual(newEventObject.components[2].data.subject)
+        expect(res.body.components[2].data.options[0].label).toEqual(newEventObject.components[2].data.options[0].label)
+        expect.stringContaining(res.body.components[2].data.options[0]._id)
+        expect.arrayContaining(res.body.components[2].data.options[0].votes)
+        expect(res.body.components[3].data.questions[0].label).toEqual(newEventObject.components[3].data.questions[0].label)
+        expect.stringContaining(res.body.components[3].data.questions[0]._id)
+        expect.arrayContaining(res.body.components[3].data.questions[0].answers)
         expect(res.body.background).toEqual(newEventObject.background)
     })
 
@@ -711,118 +692,6 @@ describe('DELETE /api/events/:id/guests/:userId', () => {
 
         expect(userInEnd.myInvites.includes(mongoose.Types.ObjectId(event._id))).toBeTruthy()
         expect(eventInEnd.guests.some(guest => guest.user.toString() === user2._id)).toBeTruthy()
-    })
-})
-
-describe('GET api/events/:id/invitekey/:inviteKey', () => {
-
-    it('should succeed and return correct event', async () => {
-        const res = await api
-            .get('/api/events/' + event._id + '/invitekey/' + event.inviteKey)
-            .set('Cookie', user3Cookie)
-            .expect(200)
-
-        expect(res.body._id).toEqual(event._id)
-        expect(res.body.label).toEqual(event.label)
-        expect(res.body.inviteKey).toBeUndefined()
-        expect(res.body.startDate).toEqual(event.startDate)
-        expect(res.body.endDate).toEqual(event.endDate)
-        expect(res.body.creator).toEqual(event.creator)
-        expect(res.body.guests).toEqual(event.guests)
-        expect(res.body.components).toEqual(event.components)
-        expect(res.body.background).toEqual(event.background)
-        expect(res.body.discussion).toEqual(event.discussion)
-    })
-
-    it('should fail if wrong inviteKey given', async () => {
-        await api
-            .get('/api/events/' + event._id + '/invitekey/' + mongoose.Types.ObjectId())
-            .set('Cookie', user3Cookie)
-            .expect(400)
-    })
-})
-
-describe('POST api/events/:id/guests/invitekey', () => {
-
-    it('should succeed and add a guest to event', async () => {
-        const res = await api
-            .post('/api/events/' + event._id + '/guests/invitekey')
-            .set('Cookie', user3Cookie)
-            .send({ inviteKey: event.inviteKey })
-            .expect(200)
-
-        const userInEnd = await User.findById(user3._id)
-
-        expect(userInEnd.myInvites.includes(mongoose.Types.ObjectId(event._id))).toBeTruthy()
-        expect(res.body.guests.some(guest => guest.user._id === user3._id)).toBeTruthy()
-    })
-
-    it('should fail if not authenticated', async () => {
-        await api
-            .post('/api/events/' + event._id + '/guests/invitekey')
-            .send({ inviteKey: event.inviteKey })
-            .expect(401)
-    })
-
-    it('should fail if event not existing', async () => {
-        const nonExistingEventId = mongoose.Types.ObjectId()
-        await api
-            .post('/api/events/' + nonExistingEventId + '/guests/invitekey')
-            .set('Cookie', user3Cookie)
-            .send({ inviteKey: event.inviteKey })
-            .expect(404)
-
-        const userInEnd = await User.findById(user3._id)
-
-        expect(userInEnd.myInvites.includes(nonExistingEventId)).toBeFalsy()
-    })
-
-    it('should fail if guest already added', async () => {
-        await api
-            .post('/api/events/' + event._id + '/guests/invitekey')
-            .set('Cookie', user2Cookie)
-            .send({ inviteKey: event.inviteKey })
-            .expect(400)
-
-        const eventInEnd = await Event.findById(event._id)
-        const userInEnd = await User.findById(user2._id)
-
-        expect(eventInEnd.guests.filter(guest => guest.user.toString() === user2._id).length).toEqual(1)
-        expect(userInEnd.myInvites.filter(invite => invite.toString() === event._id).length).toEqual(1)
-    })
-})
-
-describe('PUT api/events/:id/invitekey', () => {
-
-    it('should succeed and update inviteKey', async () => {
-        const res = await api
-            .put('/api/events/' + event._id + '/invitekey')
-            .set('Cookie', userCookie)
-            .expect(200)
-
-        expect.stringContaining(res.body.inviteKey)
-        expect(res.body.inviteKey).not.toEqual(event.inviteKey)
-    })
-
-    it('should fail if not authenticated', async () => {
-        await api
-            .put('/api/events/' + event._id + '/invitekey')
-            .expect(401)
-
-        const eventInEnd = await Event.findById(event._id)
-
-        expect(eventInEnd.inviteKey.toString()).toEqual(event.inviteKey)
-    })
-
-    it('should fail if requester not creator', async () => {
-        await api
-            .put('/api/events/' + event._id + '/invitekey')
-            .set('Cookie', user2Cookie)
-            .expect(403)
-
-        const eventInEnd = await Event.findById(event._id)
-
-        expect(eventInEnd.inviteKey.toString()).toEqual(event.inviteKey)
     })
 })
 

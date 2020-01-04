@@ -23,11 +23,7 @@ eventRouter.put('/:id/guests/:userId', middleware.requireAuthentication, middlew
 
 eventRouter.delete('/:id/guests/:userId', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeGuest)
 
-eventRouter.get('/:id/invitekey/:inviteKey', eventController.getOneWithInviteKey)
-
-eventRouter.post('/:id/guests/invitekey', middleware.requireAuthentication, eventController.addGuestWithInviteKey)
-
-eventRouter.put('/:id/invitekey', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR), eventController.changeInviteKey)
+eventRouter.put('/:id/guests', middleware.requireAuthentication, eventController.joinEvent)
 
 eventRouter.post('/:id/discussion', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addMessage)
 
@@ -44,5 +40,7 @@ eventRouter.delete('/:id/components/:componentId/data/options/:optionId/votes/vo
 eventRouter.post('/:id/components/:componentId/data/questions', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addAnswersToFormComponent)
 
 eventRouter.post('/:id/registrations', eventController.addRegistration)
+
+eventRouter.delete('/:id/registrations/:registrationId', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeRegistration)
 
 module.exports = eventRouter
