@@ -23,7 +23,7 @@
     padding: 10px 0px 10px 0px;
     cursor: pointer;
     color: gray;
-    border-bottom: 1px solid transparent;
+    border-bottom: 2px solid transparent;
     background: transparent;
     transition: color 0.2s;
     user-select: none;

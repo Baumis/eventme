@@ -18,6 +18,9 @@ class GuestContainer extends Component {
     render() {
         return (
             <div className="guests-content">
+                <div className="guest-title">
+                    Guests
+                </div>
                 <GuestList
                     isCreator={this.props.isCreator()}
                     filter={this.state.filter}

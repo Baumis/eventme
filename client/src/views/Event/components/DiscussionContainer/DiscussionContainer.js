@@ -7,6 +7,9 @@ class DiscussionContainer extends Component {
     render() {
         return (
             <div className="discussion-content">
+                <div className="discussion-title">
+                    Discussion
+                </div>
                 <Discussion isCreator={this.props.isCreator} />
             </div>
         )
