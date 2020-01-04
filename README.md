@@ -41,12 +41,6 @@ Running on localhost:3001
 ### /api/events/:id/addguest/:guestId
 - POST, adds given guest to event and returns updated event
 
-### /api/events/:id/join/:inviteKey
-- POST, adds signed in guest to event and returns updated event
-
-### /api/events/:id/validatekey/:inviteKey
-- POST, validates inviteKey and returns inviteKey if correct
-
 ### /api/events/:id/setstatus/:userId
 - POST, changes status of guest in event
 
@@ -93,7 +87,6 @@ event = {
     _id: "5cd467bf23c640324cf1ec00",
     label: "My event",
     background: "www.kuva.fi/kuva1",
-    inviteKey: "asdasdasdasdasd",
     startDate: "2019-07-25T19:02:52.178Z",
     endDate: "2019-07-25T19:02:52.178Z",
     creator: {

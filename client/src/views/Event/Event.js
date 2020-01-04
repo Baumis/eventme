@@ -26,14 +26,7 @@ class Event extends Component {
     }
 
     async componentDidMount() {
-        if (this.props.inviteKey) {
-            const response = await this.props.EventStore.validateKey(this.props.eventId, this.props.inviteKey)
-            if (!response) {
-                await this.props.EventStore.initializeEvent(this.props.eventId)
-            }
-        } else {
-            await this.props.EventStore.initializeEvent(this.props.eventId)
-        }
+        await this.props.EventStore.initializeEvent(this.props.eventId)
 
         this.setState({ loading: false })
         this.startEventUpdater()
@@ -116,7 +109,6 @@ class Event extends Component {
                         active={this.state.activeTab}
                         changeActive={this.changeActive}
                         isGuest={this.isGuest}
-                        inviteKey={this.props.inviteKey}
                     />
                     {this.isCreator() ?
                         <div>

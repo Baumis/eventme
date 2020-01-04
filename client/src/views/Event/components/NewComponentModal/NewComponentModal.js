@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './NewComponentModal.css'
-import { FaPen, FaLink, FaImage, FaPoll, FaFileAlt } from 'react-icons/fa'
+import { FaPen, FaImage, FaPoll, FaFileAlt } from 'react-icons/fa'
 import DefaultButtons from '../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
 import TextOptions from '../contentTypes/Text/TextOptions/TextOptions'
-import InviteLinkOptions from '../contentTypes/InviteLink/InviteLinkOptions/InviteLinkOptions'
 import PictureOptions from '../contentTypes/Picture/PictureOptions/PictureOptions'
 import VoteOptions from '../contentTypes/Vote/VoteOptions/VoteOptions'
 import FormOptions from '../contentTypes/Form/FormOptions/FormOptions'
@@ -22,13 +21,6 @@ class NewComponentModal extends Component {
                         data: { title: 'Title', content: 'content' }
                     },
                     options: TextOptions
-                },
-                INVITE_LINK: {
-                    componentData: {
-                        type: 'INVITE_LINK',
-                        data: {}
-                    },
-                    options: InviteLinkOptions
                 },
                 PICTURE: {
                     componentData: {
@@ -109,10 +101,6 @@ class NewComponentModal extends Component {
                         <div className="component-modal-button" onClick={() => this.openOptions('TEXT')}>
                             <FaPen />
                             <label>Text</label>
-                        </div>
-                        <div className="component-modal-button" onClick={() => this.openOptions('INVITE_LINK')}>
-                            <FaLink />
-                            <label>Invite</label>
                         </div>
                         <div className="component-modal-button" onClick={() => this.openOptions('PICTURE')}>
                             <FaImage />

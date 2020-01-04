@@ -5,8 +5,6 @@ import './OptionsPanel.css'
 import { FaAngleDoubleLeft } from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock/InputBlock'
-import RefreshKey from './RefreshKey/RefreshKey'
-import InviteLinkBlock from './InviteLinkBlock/InviteLinkBlock'
 
 class OptionsPanel extends Component {
 
@@ -109,10 +107,6 @@ class OptionsPanel extends Component {
                             value={moment(this.props.EventStore.event.endDate).format('YYYY-MM-DD')}
                             changeValue={this.changeEndDate}
                         />
-                    </div>
-                    <div className="options-panel-content">
-                        <InviteLinkBlock />
-                        <RefreshKey />
                     </div>
                 </div>
             </div>

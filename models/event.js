@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const messageSchema = require('./messageSchema')
 const componentSchema = require('./componentSchema')
+const registrationSchema = require('./registrationSchema')
 
 const guestSchema = new mongoose.Schema({
     user: {
@@ -41,10 +42,6 @@ const eventSchema = new mongoose.Schema({
         required: [true, 'Enddate required']
     },
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    inviteKey: {
-        type: String,
-        default: mongoose.Types.ObjectId().toHexString()
-    },
     background: {
         type: String,
         default: 'https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80',
@@ -53,25 +50,49 @@ const eventSchema = new mongoose.Schema({
     },
     guests: [guestSchema],
     components: [componentSchema],
-    discussion: [messageSchema]
+    discussion: [messageSchema],
+    registrations: [registrationSchema]
 })
 
-eventSchema.statics.format = (event) => ({
-    _id: event._id,
-    label: event.label,
-    description: event.description,
-    startDate: event.startDate,
-    endDate: event.endDate,
-    creator: event.creator,
-    inviteKey: event.inviteKey,
-    background: event.background,
-    guests: event.guests,
-    components: event.components,
-    discussion: event.discussion
-})
+eventSchema.statics.format = (event) => {
+    
+    const formattedRegistrations = event.registrations.map(registration => {
+        let user
+
+        if (registration.user) {
+            user = registration.user
+        } else {
+            user = {
+                name: registration.name,
+                avatar: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+            }
+        }
+
+        const formattedRegistration = {
+            _id: registration._id,
+            user
+        }
+
+        return formattedRegistration
+    })
+
+    const formattedEvent = {
+        _id: event._id,
+        label: event.label,
+        description: event.description,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        creator: event.creator,
+        background: event.background,
+        guests: event.guests,
+        components: event.components,
+        discussion: event.discussion,
+        registrations: formattedRegistrations
+    }
+    return formattedEvent
+}
 
 eventSchema.statics.formatForGuest = (event, guestId) => {
-
     const formattedComponents = event.components.map(component => {
         if (component.type === 'FORM') {
             component.data.questions = component.data.questions.map(question => {
@@ -80,6 +101,26 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
             })
         }
         return component
+    })
+
+    const formattedRegistrations = event.registrations.map(registration => {
+        let user
+
+        if (registration.user) {
+            user = registration.user
+        } else {
+            user = {
+                name: registration.name,
+                avatar: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+            }
+        }
+
+        const formattedRegistration = {
+            _id: registration._id,
+            user
+        }
+
+        return formattedRegistration
     })
 
     const formattedEvent = {
@@ -92,7 +133,8 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         background: event.background,
         guests: event.guests,
         components: formattedComponents,
-        discussion: event.discussion
+        discussion: event.discussion,
+        registrations: formattedRegistrations
     }
     return formattedEvent
 }

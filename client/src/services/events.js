@@ -31,18 +31,8 @@ const removeGuest = async (id, userId) => {
     return response.data
 }
 
-const joinEvent = async (id, inviteKey) => {
-    const response = await http.post(`${baseUrl}/${id}/guests/invitekey`, { inviteKey })
-    return response.data
-}
-
-const getOneWithKey = async (id, inviteKey) => {
-    const response = await http.get(`${baseUrl}/${id}/invitekey/${inviteKey}`)
-    return response.data
-}
-
-const updateKey = async (id) => {
-    const response = await http.put(`${baseUrl}/${id}/invitekey`)
+const joinEvent = async (id) => {
+    const response = await http.put(`${baseUrl}/${id}/guests`)
     return response.data
 }
 
@@ -81,6 +71,16 @@ const addVoteToVoteComponent = async (id, componentId, optionId) => {
     return response.data
 }
 
+const addRegistration = async (id, name = undefined) => {
+    const response = await http.post(`${baseUrl}/${id}/registrations`, { name })
+    return response.data
+}
+
+const removeRegistration = async (id, registrationId) => {
+    const response = await http.delete(`${baseUrl}/${id}/registrations/${registrationId}`)
+    return response.data
+}
+
 export default {
     getOne,
     create,
@@ -90,12 +90,12 @@ export default {
     removeGuest,
     joinEvent,
     changeStatus,
-    getOneWithKey,
-    updateKey,
     addMessage,
     addComment,
     removeMessage,
     removeComment,
     addAnswersToFormComponent,
-    addVoteToVoteComponent
+    addVoteToVoteComponent,
+    addRegistration,
+    removeRegistration
 }
