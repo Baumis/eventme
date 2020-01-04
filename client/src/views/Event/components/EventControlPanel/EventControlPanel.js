@@ -43,13 +43,13 @@ class EventControlPanel extends Component {
                         </div>
                     </div>
                 </div>
-                {this.props.EventStore.event.description.length > 0 ?
+                {/*this.props.EventStore.event.description.length > 0 ?
                     <div className="event-control-panel-content">
                         <div className="event-control-panel-text">
                             {this.props.EventStore.event.description}
                         </div>
                     </div>
-                    : null}
+                    : null */}
                 <Tabs
                     active={this.props.activeTab}
                     changeActive={this.props.changeActive}

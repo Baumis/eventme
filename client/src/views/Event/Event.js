@@ -101,7 +101,11 @@ class Event extends Component {
                 />
                 <div className='Event'>
                     <Navbar />
-                    <Header isGuest={this.isGuest} />
+                    <Header
+                        activeTab={this.state.activeTab}
+                        changeActive={this.changeActive}
+                        isGuest={this.isGuest}
+                    />
                     <EventContent
                         isCreator={this.isCreator}
                         activeTab={this.state.activeTab}
