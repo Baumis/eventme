@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import EventControlPanel from '../EventControlPanel/EventControlPanel'
+import OptionsButton from '../OptionsButton/OptionsButton'
 import './Header.css'
 
 class Header extends Component {
@@ -12,6 +13,11 @@ class Header extends Component {
         }
         return (
             <div className="event-header">
+                {this.props.isCreator() ?
+                    <OptionsButton
+                        showPanel={this.props.togglePanel}
+                    />
+                    : null}
                 <div style={headerStyles} className="event-header-cover">
                 </div>
                 <EventControlPanel

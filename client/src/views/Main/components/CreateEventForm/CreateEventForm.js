@@ -67,7 +67,7 @@ class CreateEventForm extends Component {
         return (
             <div className="create-event-form">
                 <div className="create-event-header">
-                    <div>Create event</div>
+                    <div>New event</div>
                 </div>
                 <div className="create-event-content">
                     <CreateInput

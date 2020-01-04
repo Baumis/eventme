@@ -9,9 +9,8 @@
     font-size: 22px;
     height: 45px;
     width: 45px;
-    position: fixed;
-    top: 50px;
-    left: 5px;
+    position: absolute;
+    margin: 10px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 5;

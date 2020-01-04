@@ -105,6 +105,8 @@ class Event extends Component {
                         activeTab={this.state.activeTab}
                         changeActive={this.changeActive}
                         isGuest={this.isGuest}
+                        togglePanel={this.slidePanel}
+                        isCreator={this.isCreator}
                     />
                     <EventContent
                         isCreator={this.isCreator}
@@ -117,7 +119,6 @@ class Event extends Component {
                     {this.isCreator() ?
                         <div>
                             <OptionsPanel />
-                            <OptionsButton showPanel={this.slidePanel} />
                             <SaveButton save={this.save} saved={this.props.EventStore.saved} />
                             {this.state.showNewComponentModal ?
                                 <UniversalModal
