@@ -1,0 +1,13 @@
+.content-book {
+    display: flex;
+    margin-top: 45px;
+    background: white;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 1024px;
+}
+
+.content-book-devider {
+    width: 1px;
+    background: black;
+}

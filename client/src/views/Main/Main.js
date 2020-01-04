@@ -4,9 +4,7 @@ import './Main.css'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
-import ContentContainer from './components/ContentContainer/ContentContainer'
-import MainHeader from './components/MainHeader/MainHeader'
-import CreateEventForm from './components/CreateEventForm/CreateEventForm'
+import ContentBook from './components/ContentBook/ContentBook'
 
 class Main extends Component {
 
@@ -14,9 +12,7 @@ class Main extends Component {
         return (
             <div className="Main">
                 <Navbar />
-                <MainHeader />
-                <CreateEventForm />
-                <ContentContainer />
+                <ContentBook />
 
                 {this.props.VisibilityStore.signModal ?
                     <UniversalModal
