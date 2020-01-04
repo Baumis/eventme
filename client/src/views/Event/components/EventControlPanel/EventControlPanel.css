@@ -78,7 +78,7 @@
     border: 1px solid transparent;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1024px) {
     .event-control-panel {
         width: 100vw;
         border-radius: 0px;

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './ProfileHeader.css'
 import ProfileCard from './ProfileCard/ProfileCard'
+import ProfileTabs from '../ProfileTabs/ProfileTabs'
 
 class ProfileHeader extends Component {
 
@@ -16,7 +17,12 @@ class ProfileHeader extends Component {
 
     render() {
         return (
-            <div style={this.getCover()} className="profileHeaderContainer">
+            <div style={this.getCover()} className="profile-header">
+                <ProfileTabs
+                    changeActive={this.props.changeActive}
+                    active={this.props.active}
+                    isOwner={this.props.isOwner}
+                />
                 <ProfileCard
                     user={this.props.user}
                     isOwner={this.props.isOwner}

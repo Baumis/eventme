@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import './Profile.css'
 import UserServices from '../../services/users'
 import ProfileHeader from './components/ProfileHeader/ProfileHeader'
 import ProfileContent from './components/ProfileContent/ProfileContent'
-import ProfileTabs from './components/ProfileTabs/ProfileTabs'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewEventOptions from '../../commonComponents/NewEventOptions/NewEventOptions'
 import UniversalModal from '../.././commonComponents/UniversalModal/UniversalModal'
@@ -94,16 +94,15 @@ class Profile extends Component {
         }
 
         return (
-            <div className="profileViewContainer">
+            <div className="profile">
                 <Navbar />
                 <ProfileHeader
                     user={this.state.user}
                     toggleOptions={this.toggleUserOptionsModal}
-                />
-                <ProfileTabs
                     changeActive={this.changeActive}
                     active={this.state.activeTab}
                     isOwner={this.isOwner()}
+                    active={this.state.activeTab}
                 />
                 <ProfileContent
                     user={this.state.user}

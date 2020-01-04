@@ -3,8 +3,7 @@
     flex-direction: column;
     width: 100%;
     max-width: 1024px;
-    border-radius: 5px;
-    height: 500px;
+    height: 450px;
     margin-top: 45px;
 }
 
@@ -18,4 +17,14 @@
     background-position:center center;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .event-header {
+        width: 100vw;
+    }
+
+    .event-header-cover {
+        border-radius: 0px;
+    }
 }

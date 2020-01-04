@@ -1,9 +1,11 @@
 .profile-tabs-row {
     display: flex;
+    width: 100%;
     justify-content: center;
     align-content: center;
     background: white;
-    border: 1px solid rgba(69,69,69,0.2);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .profile-tabs-container {
@@ -11,6 +13,8 @@
     justify-content: flex-end;
     max-width: 500px;
     width: 100%;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .profile-tabs-tab {
@@ -34,4 +38,10 @@
     color: rgba(76, 92, 104, 1);
     border-bottom: 2px solid rgba(76, 92, 104, 1);
     background: transparent;
+}
+
+@media only screen and (max-width: 1024px) {
+    .profile-tabs-row {
+        border-radius: 0px;
+    }
 }

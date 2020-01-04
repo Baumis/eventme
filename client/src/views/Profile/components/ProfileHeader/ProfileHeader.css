@@ -1,14 +1,16 @@
-.profileHeaderContainer {
+.profile-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
-    justify-content: flex-end;
     background: rgb(0,0,0, 0.5);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     background-position:center center;
-    height: 280px;
-    padding-top: 45px;
+    height: 380px;
+    width: 100%;
+    max-width: 1024px;
+    margin-top: 45px;
+    border-radius: 6px;
 }
