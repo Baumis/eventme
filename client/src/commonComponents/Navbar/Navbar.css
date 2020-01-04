@@ -8,6 +8,7 @@
     justify-content: space-around;
     height: 40px;
     background: transparent;
+    transition: background 0.1s;
 }
 
 .NavBarItem{
