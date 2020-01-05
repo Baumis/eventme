@@ -6,7 +6,7 @@
 }
 
 .sign-input-second-label{
-    color: black;
+    color: #1985a1;
     font-size: 14px;
     cursor: pointer;
 }
@@ -19,16 +19,39 @@
     padding: 6px 0px 6px 0px;
 }
 
-.sign-input input{
+.sign-input-input-container {
+    display: flex;
+    align-items: center;
     border: none;
-    padding: 8px 5px;
+    height: 38px;
     border: 1px solid #c5c3c6;
     border-radius: 5px;
     background: transparent;
     color: #46494c;
     font-size: 16px;
+    transition: border 0.2s;
 }
 
-@media only screen and (max-width: 450px) {
-    
+.sign-input-icon {
+    display: flex;
+    margin: 0px 5px;
+    color: rgb(70, 73, 76, 0.7);
+}
+
+.sign-input input{
+    flex: 1;
+    border: none;
+    padding: 8px 5px;
+    background: transparent;
+    color: #46494c;
+    font-size: 16px;
+}
+
+.sign-input-input-container:focus-within{
+    transition: border 0s;
+    border: 1px solid #1985a1;
+}
+
+.sign-input input:focus + .sign-input-icon {
+    color: #1985a1;
 }

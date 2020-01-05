@@ -6,7 +6,8 @@ import SignInput from '../components/SignInput/SignInput'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { FaFacebook } from 'react-icons/fa'
-import { ReactComponent as GoogleLogo } from './googleLogo.svg';
+import { ReactComponent as GoogleLogo } from './googleLogo.svg'
+import { FaUser, FaLock } from 'react-icons/fa'
 
 
 class SignIn extends Component {
@@ -108,7 +109,7 @@ class SignIn extends Component {
                             onFailure={() => this.onSignInFail('Could not sign in')}
                             render={renderProps => (
                                 <div className="google-login" onClick={renderProps.onClick}>
-                                    <GoogleLogo className="google-icon"/>
+                                    <GoogleLogo className="google-icon" />
                                     Sign in with Google
                                 </div>
                             )}
@@ -122,7 +123,7 @@ class SignIn extends Component {
                             onFailure={() => this.onSignInFail('Could not sign in')}
                             render={renderProps => (
                                 <div className="facebook-login" onClick={renderProps.onClick}>
-                                    <FaFacebook className="facebook-icon"/>
+                                    <FaFacebook className="facebook-icon" />
                                     Sign in with Facebook
                                 </div>
                             )}
@@ -131,18 +132,23 @@ class SignIn extends Component {
                 </div>
                 <div className="signin-local-accounts">
                     <SignInput
-                        label={'Username'}
+                        label={''}
+                        secondLabel={''}
                         change={this.changeUsername}
                         value={this.state.username}
+                        placeholder={'Username'}
                         type={'text'}
+                        icon={<FaUser />}
                     />
                     <SignInput
-                        label={'Password'}
-                        secondLabel={'Forgot password?'}
+                        label={''}
+                        secondLabel={''}
                         labelAction={() => this.props.changeTab('Recovery')}
                         change={this.changePassword}
                         value={this.state.password}
+                        placeholder={'Password'}
                         type={'password'}
+                        icon={<FaLock />}
                     />
                     <div
                         className="signin-button"
@@ -157,7 +163,10 @@ class SignIn extends Component {
                     </div>
                 </div>
                 <div className="signin-info-text">
-                        Don't have an account? <span onClick={() => this.props.changeTab('SignUp')} >Create one.</span>
+                    Don't have an account? <span onClick={() => this.props.changeTab('SignUp')} >Create one.</span>
+                </div>
+                <div className="signin-info-text">
+                    Forgot password? <span onClick={() => this.props.changeTab('Recovery')} >Recover.</span>
                 </div>
             </div >
         )
