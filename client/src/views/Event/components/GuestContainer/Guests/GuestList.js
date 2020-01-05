@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { withRouter } from 'react-router-dom'
 import './GuestList.css'
 import { FaTimes } from 'react-icons/fa'
 
@@ -12,7 +13,7 @@ class Guests extends Component {
         return { backgroundImage: `url(${avatar})` }
     }
 
-    removeGuest = (guest) => {
+    removeRegistration = (guest) => {
         const confirmation = window.confirm(`Do you want to kick user ${guest.name}?`)
         if (confirmation) {
             this.props.EventStore.removeGuest(this.props.EventStore.event._id, guest._id)
@@ -52,7 +53,7 @@ class Guests extends Component {
                         </div>
                         <div className="event-guests-right-column">
                             {this.rightsToRemove(guest.user._id) ?
-                                <div className="event-guests-guest-remove" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>
+                                <div className="event-guests-guest-remove" onClick={() => this.removeRegistration(guest)}><FaTimes /></div>
                                 :
                                 <div className="event-guests-guest-remove-disabled"></div>
                             }
@@ -64,4 +65,4 @@ class Guests extends Component {
     }
 }
 
-export default inject('EventStore', 'UserStore')(observer(Guests))
+export default withRouter(inject('EventStore', 'UserStore')(observer(Guests)))

@@ -45,7 +45,7 @@ class EventControlPanel extends Component {
                             <div className="event-control-panel-info-icon">
                                 <FaCheck />
                             </div>
-                            Joinded
+                            Joined
                         </div>
                     }
                 </div>

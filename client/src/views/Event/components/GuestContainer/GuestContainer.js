@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './GuestContainer.css'
 import GuestList from './Guests/GuestList'
 
@@ -20,6 +21,7 @@ class GuestContainer extends Component {
             <div className="guests-content">
                 <div className="guest-title">
                     Guests
+                    <span>{` (${this.props.EventStore.event.registrations.length})`}</span>
                 </div>
                 <GuestList
                     isCreator={this.props.isCreator()}
@@ -30,4 +32,4 @@ class GuestContainer extends Component {
     }
 }
 
-export default GuestContainer
+export default inject('EventStore')(observer(GuestContainer))

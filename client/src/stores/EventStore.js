@@ -39,7 +39,7 @@ class EventStore {
 
     async removeGuest(eventId, userId) {
         try {
-            this.event = await eventService.removeGuest(eventId, userId)
+            this.event = await eventService.removeRegistration(eventId, userId)
             return this.event
         } catch (error) {
             return null

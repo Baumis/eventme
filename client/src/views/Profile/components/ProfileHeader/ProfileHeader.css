@@ -14,3 +14,9 @@
     margin-top: 45px;
     border-radius: 6px;
 }
+
+@media only screen and (max-width: 1024px) {
+    .profile-header {
+        border-radius: 0px;
+    }
+}
