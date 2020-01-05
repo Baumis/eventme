@@ -43,7 +43,7 @@ class RegisterModal extends Component {
             <div className="register-modal">
                 <div className="register-top-bar">
                     <div className="register-back-button" onClick={() => this.props.toggleRegisterModal()}>
-                        Back
+                        Close
                     </div>
                 </div>
                 <div className="register-content">

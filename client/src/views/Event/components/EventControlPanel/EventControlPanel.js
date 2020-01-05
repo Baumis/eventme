@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EventControlPanel.css'
 import Tabs from '../Tabs/Tabs'
-import { FaCalendar, FaCalendarDay } from 'react-icons/fa'
+import { FaCalendarDay, FaCheck } from 'react-icons/fa'
 import moment from 'moment'
 import JoinEventButton from '../JoinEventButton/JoinEventButton'
 
@@ -32,16 +32,22 @@ class EventControlPanel extends Component {
                         <div className="event-control-panel-info-icon">
                             <FaCalendarDay />
                         </div>
-                        {moment(this.props.EventStore.event.startDate).format('DD.MM.YYYY')}
+                        {moment(this.props.EventStore.event.startDate).format('DD MMMM YYYY')}
                     </div>
-                    <div className="event-control-panel-info-item">
-                        <div className="event-content-status-row">
-                            {!this.props.isGuest() ?
-                                <JoinEventButton
-                                    toggleRegisterModal={this.props.toggleRegisterModal}
-                                /> : null}
+                    {!this.props.isGuest() ?
+                        <div className="event-control-panel-info-item">
+                            <JoinEventButton
+                                toggleRegisterModal={this.props.toggleRegisterModal}
+                            />
                         </div>
-                    </div>
+                        :
+                        <div className="event-control-panel-info-item">
+                            <div className="event-control-panel-info-icon">
+                                <FaCheck />
+                            </div>
+                            Joinded
+                        </div>
+                    }
                 </div>
                 <Tabs
                     active={this.props.activeTab}

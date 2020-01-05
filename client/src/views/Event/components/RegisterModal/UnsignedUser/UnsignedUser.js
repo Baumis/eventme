@@ -90,7 +90,7 @@ class UnsignedUser extends Component {
                     Or join with an alias.
                 </div>
                 <div className="unsigned-user-info">
-                    (This name will appear in the guest list, but you will not be able to manage your events without an user account.)
+                    This name will appear in the guest list, but you will not be able to manage your events without an user account.
                 </div>
                 <SignInput
                     label={''}

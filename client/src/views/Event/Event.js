@@ -76,7 +76,10 @@ class Event extends Component {
         if (!this.props.UserStore.currentUser || !this.props.EventStore.event) {
             return false
         }
-        return this.props.EventStore.event.guests.some(guest => guest.user._id === this.props.UserStore.currentUser._id)
+        if (this.props.UserStore.currentUser._id === this.props.EventStore.event.creator._id) {
+            return true
+        }
+        return this.props.EventStore.event.registrations.some(guest => guest.user._id === this.props.UserStore.currentUser._id)
     }
 
     toggleNewComponentModal = () => {
