@@ -38,7 +38,7 @@ class EventControlPanel extends Component {
                         <div className="event-content-status-row">
                             {!this.props.isGuest() ?
                                 <JoinEventButton
-                                    inviteKey={this.props.inviteKey}
+                                    toggleRegisterModal={this.props.toggleRegisterModal}
                                 /> : null}
                         </div>
                     </div>

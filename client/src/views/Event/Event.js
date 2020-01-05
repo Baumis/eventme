@@ -12,6 +12,7 @@ import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
 import EventContent from './components/EventContent/EventContent'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
+import RegisterModal from './components/RegisterModal/RegisterModal'
 
 class Event extends Component {
 
@@ -21,6 +22,7 @@ class Event extends Component {
             loading: true,
             showNewComponentModal: false,
             activeTab: 'Discussion',
+            registerModal: false,
             updater: null
         }
     }
@@ -57,6 +59,10 @@ class Event extends Component {
 
     changeActive = (cathegory) => {
         this.setState({ activeTab: cathegory })
+    }
+
+    toggleRegisterModal = () => {
+        this.setState({ registerModal: !this.state.registerModal })
     }
 
     isCreator = () => {
@@ -107,6 +113,7 @@ class Event extends Component {
                         isGuest={this.isGuest}
                         togglePanel={this.slidePanel}
                         isCreator={this.isCreator}
+                        toggleRegisterModal={this.toggleRegisterModal}
                     />
                     <EventContent
                         isCreator={this.isCreator}
@@ -134,6 +141,14 @@ class Event extends Component {
                     {this.props.VisibilityStore.signModal ?
                         <UniversalModal
                             content={<SignModal />}
+                        />
+                        : null
+                    }
+                    {this.state.registerModal ?
+                        <UniversalModal
+                            content={<RegisterModal
+                                toggleRegisterModal={this.toggleRegisterModal}
+                            />}
                         />
                         : null
                     }

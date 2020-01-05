@@ -30,15 +30,26 @@ class Guests extends Component {
 
     }
 
+    toProfile = (id) => {
+        if (!id) {
+            return
+        }
+        this.props.history.push(`/profile/${id}`)
+    }
+
+    getUserClass = (id) => {
+        return !id ? 'ghost-user ' : 'event-guests-guest-name'
+    }
+
     render() {
         return (
             <div className="event-guests-list">
-                {this.props.EventStore.event.guests.map((guest, i) =>
+                {this.props.EventStore.event.registrations.map((guest, i) =>
                     <div className="event-guests-guest-row" key={i}>
-                        <a href={`/profile/${guest.user._id}`}>
+                        <div className="event-guests-guest-wrapper" onClick={() => this.toProfile(guest.user._id)}>
                             <div style={this.getAvatar(guest.user.avatar)} className="event-guests-guest-avatar"> </div>
-                            <div className="event-guests-guest-name">{guest.user.name}</div>
-                        </a>
+                            <div className={this.getUserClass(guest.user._id)}>{guest.user.name}</div>
+                        </div>
                         <div className="event-guests-right-column">
                             {this.rightsToRemove(guest.user._id) ?
                                 <div className="event-guests-guest-remove" onClick={() => this.removeGuest(guest.user)}><FaTimes /></div>

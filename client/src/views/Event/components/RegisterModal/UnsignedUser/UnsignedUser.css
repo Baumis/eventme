@@ -1,0 +1,33 @@
+.unsigned-user {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.unsigned-user-title {
+    color: rgba(76, 92, 104, 1);
+    margin: 20px 0px 5px 0px;
+    font-weight: 600;
+}
+
+.unsigned-user-info {
+    color: rgb(76, 92, 104, 0.8);
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.inviteowl-login {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background: #1985a1;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.inviteowl-login:hover {
+    background: #156e84;
+}

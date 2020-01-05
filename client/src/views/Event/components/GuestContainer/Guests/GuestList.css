@@ -25,11 +25,18 @@
     border-radius: 50%;
 }
 
-.event-guests-guest-row a{
+.event-guests-guest-wrapper{
     color: black;
     display: flex;
     align-items: center;
     color: #46494c;
+}
+
+.ghost-user {
+    display: flex;
+    margin: 0px 10px;
+    font-size: 16px;
+    color: black;
 }
 
 .event-guests-guest-name{

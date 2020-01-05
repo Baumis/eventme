@@ -24,6 +24,7 @@ class Header extends Component {
                     activeTab={this.props.activeTab}
                     changeActive={this.props.changeActive}
                     isGuest={this.props.isGuest}
+                    toggleRegisterModal={this.props.toggleRegisterModal}
                 />
             </div>
         )
