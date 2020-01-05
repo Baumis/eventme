@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import './RegisterModal.css'
 import SignedUser from './SignedUser/SignedUser'
 import UnsignedUser from './UnsignedUser/UnsignedUser'
+import Spinner from '../../../../commonComponents/Spinner/Spinner'
 
 
 class RegisterModal extends Component {
@@ -24,7 +25,7 @@ class RegisterModal extends Component {
 
     join = async () => {
         const alias = this.state.alias.length > 0 ? this.state.alias : undefined
-        
+
         this.setState({ loading: true })
         const response = await this.props.EventStore.joinEvent(
             this.props.EventStore.event._id, alias
@@ -58,7 +59,13 @@ class RegisterModal extends Component {
                     }
                     {this.readyToJoin() ?
                         <div className="register-button" onClick={this.join}>
-                            Join event
+                            {!this.state.loading ?
+                                <div>
+                                    Join event
+                                </div>
+                                :
+                                <Spinner />
+                            }
                         </div>
                         :
                         <div className="register-button join-disabled">
