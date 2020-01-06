@@ -4,11 +4,12 @@ import { inject, observer } from 'mobx-react'
 import NavBar from '../../commonComponents/Navbar/Navbar'
 import NotFoundMessage from './components/NotFoundMessage/NotFoundMessage'
 import SignModal from '../../commonComponents/SignModal/SignModal'
+import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 
 class NotFound extends Component {
 
     componentDidMount() {
-        if(!this.props.UserStore.currentUser){
+        if (!this.props.UserStore.currentUser) {
             this.props.VisibilityStore.showSignModal(this.afterSign)
         }
     }
@@ -27,11 +28,13 @@ class NotFound extends Component {
                         title={this.props.title}
                         message={this.props.message}
                     />
+                    {this.props.VisibilityStore.signModal ?
+                        <UniversalModal
+                            content={<SignModal />}
+                        />
+                        : null
+                    }
                 </div>
-                {this.props.VisibilityStore.signModal ?
-                    <SignModal />
-                    : null
-                }
             </div>
         )
     }

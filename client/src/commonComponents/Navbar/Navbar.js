@@ -32,10 +32,14 @@ class Navbar extends Component {
         const bg = this.state.pageOnTop || window.innerWidth < 450 ? 'transparent' : 'white'
         return (
             <div className="Navbar" style={{ background: bg }}>
-                <div className="NavBarItem">
-                    <SiteLogo />
+                <div className="NavBarContent">
+                    <div className="NavBarItem">
+                        <SiteLogo />
+                    </div>
+                    <div className="NavBarItem">
+                        <User afterSign={this.props.afterSign} />
+                    </div>
                 </div>
-                <div className="NavBarItem"><User afterSign={this.props.afterSign} /></div>
             </div>
         )
     }

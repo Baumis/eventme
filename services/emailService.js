@@ -35,14 +35,19 @@ exports.sendSeparatedMails = async (emails, subject, html) => {
 }
 
 exports.notifyAboutNewMessage = async (message, event) => {
-    const guestIds = event.guests
-        .map(guest => guest.user)
-        .filter(guestId => guestId.toString() !== message.author._id.toString())
-
+    const registrations = event.registrations.filter(registration => {
+        if (registration.user) {
+            if (registration.user.toString() !== message.author._id.toString()) {
+                return true
+            }
+            return false
+        }
+    })
+    const guestIds = registrations.map( registration => registration.user)
+    console.log(guestIds)
     const guestsWithVerifiedEmail = await User.find({ _id: { $in: guestIds }, emailVerified: true })
-
     const emails = guestsWithVerifiedEmail.map(guest => guest.email)
-
+    console.log("verified emails" + emails)
     const content = `
         <h3>New message in ${event.label} discussion</h3>
         <p><b>From: </b>${message.author.name}</p>
