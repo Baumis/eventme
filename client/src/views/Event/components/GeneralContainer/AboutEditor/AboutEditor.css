@@ -12,14 +12,7 @@
 }
 
 .about-editor-container {
-    border-top: 1px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
-    padding: 10px 0px;
     height: 100%;
-}
-
-.about-editor-textarea {
-    padding: 12px;
 }
 
 .about-editor-textarea label {
@@ -45,7 +38,7 @@
 }
 
 @media only screen and (max-width: 450px) {
-    .text-options {
+    .about-editor {
         width: 95vw;
     }
 }

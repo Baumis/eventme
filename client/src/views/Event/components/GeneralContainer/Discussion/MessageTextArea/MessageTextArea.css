@@ -52,7 +52,7 @@
     width: 60px;
     border-radius: 5px;
     background: #4c5c68;
-    color: #dddddd;
+    color: white;
     border-radius: 5px;
     height: 32px;
     margin-left: 5px;
@@ -60,7 +60,7 @@
 }
 
 .text-area-send-button-disabled {
-    background: rgb(76, 92, 104, 0.3);
+    background: rgb(76, 92, 104, 0.8);
     border: none;
     color: white;
     cursor: default;

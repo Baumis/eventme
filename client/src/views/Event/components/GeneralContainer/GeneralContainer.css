@@ -22,6 +22,7 @@
     color: rgba(76, 92, 104, 0.5);
     cursor: pointer;
     margin: 0px 7px;
+    font-size: 21px;
 }
 
 .general-title-icon:hover {

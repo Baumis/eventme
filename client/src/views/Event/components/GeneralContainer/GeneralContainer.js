@@ -25,23 +25,19 @@ class GeneralContainer extends Component {
             <div className="general-content">
                 <div>
                     <div className="general-content-columns">
-                        {this.props.EventStore.event.description.length > 0 ?
-                            <div>
-                                <div className="general-title">
-                                    <div>
-                                        About
+                        <div>
+                            <div className="general-title">
+                                <div>About</div>
+                                {this.props.isCreator() ?
+                                    <div className="general-title-icon" onClick={() => this.toggleAboutEditor()}>
+                                        <FaEdit />
                                     </div>
-                                    {this.props.isCreator() ?
-                                        <div className="general-title-icon" onClick={() => this.toggleAboutEditor()}>
-                                            <FaEdit />
-                                        </div>
-                                        : null}
-                                </div>
-                                <About
-                                    description={this.props.EventStore.event.description}
-                                />
+                                    : null}
                             </div>
-                            : null}
+                            <About
+                                description={this.props.EventStore.event.description}
+                            />
+                        </div>
                     </div>
                     <div className="general-title">
                         Discussion
@@ -55,7 +51,6 @@ class GeneralContainer extends Component {
                         />}
                     />
                     : null}
-                }
             </div>
         )
     }
