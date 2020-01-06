@@ -3,8 +3,22 @@ import { inject, observer } from 'mobx-react'
 import './GeneralContainer.css'
 import Discussion from './Discussion/EventDiscussion'
 import About from './About/About'
+import AboutEditor from './AboutEditor/AboutEditor'
+import UniversalModal from '../../../../commonComponents/UniversalModal/UniversalModal'
+import { FaEdit } from 'react-icons/fa'
 
 class GeneralContainer extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            aboutEditor: false
+        }
+    }
+
+    toggleAboutEditor = () => {
+        this.setState({ aboutEditor: !this.state.aboutEditor })
+    }
 
     render() {
         return (
@@ -14,7 +28,14 @@ class GeneralContainer extends Component {
                         {this.props.EventStore.event.description.length > 0 ?
                             <div>
                                 <div className="general-title">
-                                    About
+                                    <div>
+                                        About
+                                    </div>
+                                    {this.props.isCreator() ?
+                                        <div className="general-title-icon" onClick={() => this.toggleAboutEditor()}>
+                                            <FaEdit />
+                                        </div>
+                                        : null}
                                 </div>
                                 <About
                                     description={this.props.EventStore.event.description}
@@ -27,6 +48,14 @@ class GeneralContainer extends Component {
                     </div>
                     <Discussion isCreator={this.props.isCreator} />
                 </div>
+                {this.state.aboutEditor ?
+                    <UniversalModal
+                        content={<AboutEditor
+                            close={this.toggleAboutEditor}
+                        />}
+                    />
+                    : null}
+                }
             </div>
         )
     }

@@ -44,10 +44,8 @@ exports.notifyAboutNewMessage = async (message, event) => {
         }
     })
     const guestIds = registrations.map( registration => registration.user)
-    console.log(guestIds)
     const guestsWithVerifiedEmail = await User.find({ _id: { $in: guestIds }, emailVerified: true })
     const emails = guestsWithVerifiedEmail.map(guest => guest.email)
-    console.log("verified emails" + emails)
     const content = `
         <h3>New message in ${event.label} discussion</h3>
         <p><b>From: </b>${message.author.name}</p>
