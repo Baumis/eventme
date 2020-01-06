@@ -50,6 +50,12 @@ class CreateEventForm extends Component {
     }
 
     create = async () => {
+
+        if (this.props.UserStore.currentUser === null) {
+            this.props.VisibilityStore.showSignModal(this.create)
+            return
+        }
+
         this.setState({ loading: true })
         const event = await this.props.EventStore.create({
             label: this.state.eventName,
@@ -113,4 +119,4 @@ class CreateEventForm extends Component {
     }
 }
 
-export default withRouter(inject('EventStore')(observer(CreateEventForm)))
+export default withRouter(inject('EventStore', 'UserStore', 'VisibilityStore')(observer(CreateEventForm)))
