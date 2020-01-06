@@ -151,6 +151,8 @@ class Event extends Component {
                         <UniversalModal
                             content={<RegisterModal
                                 toggleRegisterModal={this.toggleRegisterModal}
+                                isGuest={this.isGuest}
+                                changeActive={this.changeActive}
                             />}
                         />
                         : null

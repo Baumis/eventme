@@ -14,19 +14,6 @@ class JoinEventModal extends Component {
 
     join = async () => {
         this.props.toggleRegisterModal()
-        /*if (!this.props.UserStore.currentUser) {
-            this.props.VisibilityStore.showSignModal()
-            return
-        }
-
-        this.setState({ loading: true })
-        const response = await this.props.EventStore.joinEvent(
-            this.props.EventStore.event._id
-        )
-        this.setState({ loading: false })
-        if(!response){
-            alert('Could not join, try again.')
-        }*/
     }
 
     render() {

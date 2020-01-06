@@ -36,6 +36,7 @@ class RegisterModal extends Component {
             alert('Could not join, try again.')
         } else {
             this.props.toggleRegisterModal()
+            this.props.changeActive('Guests')
         }
     }
 
@@ -49,7 +50,10 @@ class RegisterModal extends Component {
                 </div>
                 <div className="register-content">
                     {this.props.UserStore.currentUser ?
-                        <SignedUser />
+                        <SignedUser 
+                            toggleRegisterModal={this.props.toggleRegisterModal}
+                            isGuest={this.props.isGuest}
+                        />
                         :
                         <UnsignedUser
                             alias={this.state.alias}

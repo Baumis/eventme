@@ -42,7 +42,6 @@ class UnsignedUser extends Component {
     inviteOwlSignIn = () => {
         this.props.toggleRegisterModal()
         this.props.VisibilityStore.showSignModal(this.props.toggleRegisterModal)
-        
     }
 
     render() {

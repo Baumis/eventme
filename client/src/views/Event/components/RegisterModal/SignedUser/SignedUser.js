@@ -3,6 +3,13 @@ import { inject, observer } from 'mobx-react'
 import './SignedUser.css'
 
 class SignedUser extends Component {
+
+    componentDidMount() {
+        if(this.props.isGuest()){
+            this.props.toggleRegisterModal()
+        }
+    }
+
     getAvatar = (avatar) => {
         if (!avatar) {
             return null
