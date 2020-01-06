@@ -1,0 +1,72 @@
+.event-control-panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.event-control-panel-info-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0px 30px;
+    align-items: center;
+    border-bottom: 1px solid rgba(69,69,69,0.2);
+}
+
+.event-control-panel-info-item {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    margin: 0px 10px;
+    padding: 10px 0px;
+    color: rgb(70, 73, 76, 0.8);
+}
+
+.event-control-panel-info-icon {
+    display: flex;
+    margin: 0px 5px;
+}
+
+.event-control-panel-info-avatar {
+    background: darkgray;
+    min-width: 30px;
+    height: 30px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position:center center;
+    border-radius: 50%;
+    margin: 0px 5px 0px 0px;
+}
+
+.event-control-panel-label{
+    display: flex;
+    align-items: center;
+    margin: 20px 40px;
+    font-size: 27px;
+    color: rgba(76, 92, 104, 1);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.event-control-panel-info-label-icon {
+    margin: 0px 5px 0px 0px;
+}
+
+.event-control-panel-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(70, 73, 76);
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .event-control-panel {
+        width: 100vw;
+        border-radius: 0px;
+    }
+}

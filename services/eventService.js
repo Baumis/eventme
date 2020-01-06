@@ -687,7 +687,12 @@ exports.addRegistration = async (event, name, senderId) => {
     const registration = {}
 
     if (senderId) {
-        const oldRegistration = event.registrations.find(registration => registration.user.toString() === senderId)
+        const oldRegistration = event.registrations.find(registration => {
+            if (registration.user) {
+                return registration.user._id.toString() === senderId
+            }
+            return false
+        })
 
         if (oldRegistration) {
             throw new Error('User has already joined')

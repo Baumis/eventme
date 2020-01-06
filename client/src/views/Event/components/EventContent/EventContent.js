@@ -1,41 +1,19 @@
 import React from 'react'
 import './EventContent.css'
-import ComponentContainer from '../ComponentContainer/ComponentContainer'
-import DiscussionContainer from '../DiscussionContainer/DiscussionContainer'
+import GeneralContainer from '../GeneralContainer/GeneralContainer'
 import GuestContainer from '../GuestContainer/GuestContainer'
-import Tabs from '../Tabs/Tabs'
-import StatusBar from '../StatusBar/StatusBar'
-import JoinEventButton from '../JoinEventButton/JoinEventButton'
 
 const EventContent = (props) => {
     return (
         <div className="event-content">
-            <div className="event-content-status-row">
-                {props.isGuest() ?
-                    <StatusBar />
-                    :
-                    <JoinEventButton />
-                }
-            </div>
-            <Tabs
-                active={props.activeTab}
-                changeActive={props.changeActive}
-            />
-            {props.activeTab === "Event" ?
-                <ComponentContainer
+            {props.activeTab === "Discussion" ?
+                <GeneralContainer
                     isCreator={props.isCreator}
-                    isGuest={props.isGuest}
-                    toggleNewComponentModal={props.toggleNewComponentModal}
                 />
-                : props.activeTab === "Discussion" ?
-                    <DiscussionContainer
-                        isCreator={props.isCreator}
-                    />
-                    : props.activeTab === "Guests" ?
-                        <GuestContainer
-                            isCreator={props.isCreator}
-                        />
-                        : null
+                :
+                <GuestContainer
+                    isCreator={props.isCreator}
+                />
             }
         </div>
     )

@@ -1,0 +1,9 @@
+.about {
+ display: flex;
+ margin-bottom: 30px;
+}
+
+.about-text {
+    padding: 0px 20px;
+    color: #46494c;
+}

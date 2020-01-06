@@ -13,27 +13,14 @@ class JoinEventModal extends Component {
     }
 
     join = async () => {
-
-        if (!this.props.UserStore.currentUser) {
-            this.props.VisibilityStore.showSignModal()
-            return
-        }
-
-        this.setState({ loading: true })
-        const response = await this.props.EventStore.joinEvent(
-            this.props.EventStore.event._id
-        )
-        this.setState({ loading: false })
-        if(!response){
-            alert('Could not join, try again.')
-        }
+        this.props.toggleRegisterModal()
     }
 
     render() {
         return (
             <div className="join-event-button-container">
                 <div className="join-event-button" onClick={() => this.join()}>
-                {this.state.loading ? <Spinner /> : 'Join event'}
+                    {this.state.loading ? <Spinner /> : 'Join event'}
                 </div>
             </div>
         )

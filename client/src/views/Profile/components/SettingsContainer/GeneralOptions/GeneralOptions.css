@@ -22,7 +22,7 @@
     height: 25px;
     font-size: 15px;
     padding: 3px 12px 3px 10px;
-    background: white;
+    background: transparent;
     border: 1px solid #dddddd;
     color:#46494c;
     transition: border 0.2s;

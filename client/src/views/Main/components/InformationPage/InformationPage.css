@@ -1,0 +1,36 @@
+.information-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #c5c3c6;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: rgb(70, 73, 76);
+}
+
+.information-page-icon {
+  color: white;
+  font-size: 30px;
+}
+
+.information-page-title {
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+  padding: 10px 10px;
+  text-align: center;
+}
+
+.information-page-paragraph {
+  color: rgb(255, 255, 255, 0.7);
+  font-size: 18px;
+  padding: 0px 40px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 610px) {
+  .information-page {
+    height: 300px;
+  }
+}

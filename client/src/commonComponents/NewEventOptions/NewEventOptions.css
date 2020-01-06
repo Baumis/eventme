@@ -7,6 +7,7 @@
     border-radius: 5px;
     overflow: hidden;
     border: 2px solid white;
+    max-width: 400px;
 }
 
 .event-options-date-section{
@@ -104,6 +105,42 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
     margin: 0px 0px 10px 0px;
     color: #46494c;
     font-size: 22px;
+}
+
+.event-options-textarea-wrapper {
+    padding: 12px;
+}
+
+.event-options-label{
+    display: flex;
+    padding: 10px;
+    color: #1985a1;
+}
+
+.event-options-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    border-radius: 5px;
+    border: 1px solid #dddddd;;
+    padding: 10px;
+    outline: none;
+    text-align: start;
+    overflow-y: auto;
+    word-wrap: break-word;
+    transition: border 0.2s;
+    height: 45px;
+    margin-bottom: 10px;
+}
+
+.event-options-area:focus{
+    transition: border 0s;
+    border: 1px solid #1985a1;
+}
+
+.event-options-area::placeholder{
+    color: #c5c3c6
 }
 
 @media only screen and (max-width: 620px) {

@@ -1,24 +1,10 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { FaCalendar } from 'react-icons/fa'
-import moment from 'moment'
+import EventControlPanel from '../EventControlPanel/EventControlPanel'
+import OptionsButton from '../OptionsButton/OptionsButton'
 import './Header.css'
 
 class Header extends Component {
-
-    componentDidMount() {
-        window.addEventListener('scroll', this.scrollEffect)
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.scrollEffect)
-    }
-
-    scrollEffect = () => {
-        const element = document.getElementById('slower-picture')
-        const yPosition = window.pageYOffset / 60
-        element.style.top = yPosition + '%'
-    }
 
     render() {
         const headerStyles = {
@@ -26,16 +12,20 @@ class Header extends Component {
             backgroundImage: 'url(' + this.props.EventStore.event.background + ')'
         }
         return (
-            <div style={headerStyles} className="event-header" id="slower-picture">
-                <div className="event-header-content-wrapper">
-                    <div className="event-header-content">
-                        <h1>{this.props.EventStore.event.label}</h1>
-                        <div className="event-header-date">
-                            <FaCalendar />
-                            <h3>{moment(this.props.EventStore.event.startDate).format('DD.MM.YYYY')}</h3>
-                        </div>
-                    </div>
+            <div className="event-header">
+                {this.props.isCreator() ?
+                    <OptionsButton
+                        showPanel={this.props.togglePanel}
+                    />
+                    : null}
+                <div style={headerStyles} className="event-header-cover">
                 </div>
+                <EventControlPanel
+                    activeTab={this.props.activeTab}
+                    changeActive={this.props.changeActive}
+                    isGuest={this.props.isGuest}
+                    toggleRegisterModal={this.props.toggleRegisterModal}
+                />
             </div>
         )
     }

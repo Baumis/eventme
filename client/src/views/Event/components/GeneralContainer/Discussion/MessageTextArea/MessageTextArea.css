@@ -1,7 +1,7 @@
 .text-area-container {
     display: flex;
     border-radius: 5px;
-    margin: 10px 10px 15px 10px;
+    margin: 10px 10px 25px 10px;
 }
 
 .text-area-avatar {
@@ -27,10 +27,16 @@
     border: none;
     background: transparent;
     border-bottom: 1px solid rgba(0,0,0,0.1);
-    padding: 10px;
+    padding: 10px 10px 0px 10px;
     outline: none;
     font-size: 16px;
     resize: none;
+    transition: border 0.2s;
+}
+
+.text-area-input input:focus {
+    transition: border 0s;
+    border-bottom: 1px solid #1985a1;
 }
 
 .text-area-button-row {

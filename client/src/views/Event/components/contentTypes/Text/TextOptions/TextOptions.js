@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './TextOptions.css'
 import OptionInput from '../../components/OptionInput/OptionInput'
-import EditableWrapper from '../../../EditableWrapper/EditableWrapper'
+import EditableWrapper from '../../../../../../commonComponents/EditableWrapper/EditableWrapper'
 import DefaultButtons from '../../../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
 
 class TextOptions extends Component {

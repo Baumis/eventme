@@ -28,9 +28,9 @@ class EventStore {
         }
     }
 
-    async joinEvent(eventId) {
+    async joinEvent(eventId, alias) {
         try {
-            this.event = await eventService.joinEvent(eventId)
+            this.event = await eventService.addRegistration(eventId, alias)
             return this.event
         } catch (error) {
             return null
@@ -39,7 +39,7 @@ class EventStore {
 
     async removeGuest(eventId, userId) {
         try {
-            this.event = await eventService.removeGuest(eventId, userId)
+            this.event = await eventService.removeRegistration(eventId, userId)
             return this.event
         } catch (error) {
             return null
@@ -70,15 +70,6 @@ class EventStore {
             this.saved = true
             return this.event
         } catch (error) {
-            return null
-        }
-    }
-
-    async changeUserStatus(userId, status) {
-        try {
-            this.event = await eventService.changeStatus(this.event._id, userId, status)
-            return this.event
-        } catch {
             return null
         }
     }

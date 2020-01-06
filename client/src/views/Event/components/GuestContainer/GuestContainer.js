@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './GuestContainer.css'
 import GuestList from './Guests/GuestList'
-import GuestFilter from './GuestFilter/GuestFilter'
 
 class GuestContainer extends Component {
 
@@ -19,10 +19,10 @@ class GuestContainer extends Component {
     render() {
         return (
             <div className="guests-content">
-                <GuestFilter 
-                    currentFilter={this.state.filter}
-                    changeFilter={this.changeFilter}
-                />
+                <div className="guest-title">
+                    Guests
+                    <span>{` (${this.props.EventStore.event.registrations.length})`}</span>
+                </div>
                 <GuestList
                     isCreator={this.props.isCreator()}
                     filter={this.state.filter}
@@ -32,4 +32,4 @@ class GuestContainer extends Component {
     }
 }
 
-export default GuestContainer
+export default inject('EventStore')(observer(GuestContainer))

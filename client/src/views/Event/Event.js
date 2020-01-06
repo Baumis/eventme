@@ -12,6 +12,7 @@ import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
 import EventContent from './components/EventContent/EventContent'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
+import RegisterModal from './components/RegisterModal/RegisterModal'
 
 class Event extends Component {
 
@@ -20,7 +21,8 @@ class Event extends Component {
         this.state = {
             loading: true,
             showNewComponentModal: false,
-            activeTab: 'Event',
+            activeTab: 'Discussion',
+            registerModal: false,
             updater: null
         }
     }
@@ -59,6 +61,10 @@ class Event extends Component {
         this.setState({ activeTab: cathegory })
     }
 
+    toggleRegisterModal = () => {
+        this.setState({ registerModal: !this.state.registerModal })
+    }
+
     isCreator = () => {
         if (!this.props.UserStore.currentUser) {
             return false
@@ -70,7 +76,10 @@ class Event extends Component {
         if (!this.props.UserStore.currentUser || !this.props.EventStore.event) {
             return false
         }
-        return this.props.EventStore.event.guests.some(guest => guest.user._id === this.props.UserStore.currentUser._id)
+        if (this.props.UserStore.currentUser._id === this.props.EventStore.event.creator._id) {
+            return true
+        }
+        return this.props.EventStore.event.registrations.some(guest => guest.user._id === this.props.UserStore.currentUser._id)
     }
 
     toggleNewComponentModal = () => {
@@ -101,7 +110,14 @@ class Event extends Component {
                 />
                 <div className='Event'>
                     <Navbar />
-                    <Header isGuest={this.isGuest} />
+                    <Header
+                        activeTab={this.state.activeTab}
+                        changeActive={this.changeActive}
+                        isGuest={this.isGuest}
+                        togglePanel={this.slidePanel}
+                        isCreator={this.isCreator}
+                        toggleRegisterModal={this.toggleRegisterModal}
+                    />
                     <EventContent
                         isCreator={this.isCreator}
                         activeTab={this.state.activeTab}
@@ -113,7 +129,6 @@ class Event extends Component {
                     {this.isCreator() ?
                         <div>
                             <OptionsPanel />
-                            <OptionsButton showPanel={this.slidePanel} />
                             <SaveButton save={this.save} saved={this.props.EventStore.saved} />
                             {this.state.showNewComponentModal ?
                                 <UniversalModal
@@ -129,6 +144,16 @@ class Event extends Component {
                     {this.props.VisibilityStore.signModal ?
                         <UniversalModal
                             content={<SignModal />}
+                        />
+                        : null
+                    }
+                    {this.state.registerModal ?
+                        <UniversalModal
+                            content={<RegisterModal
+                                toggleRegisterModal={this.toggleRegisterModal}
+                                isGuest={this.isGuest}
+                                changeActive={this.changeActive}
+                            />}
                         />
                         : null
                     }

@@ -1,0 +1,24 @@
+.signed-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.signed-user-avatar {
+    background: darkgray;
+    width: 110px;
+    height: 110px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position:center center;
+    border-radius: 50%;
+}
+
+.signed-user-name {
+    color: #46494c;
+    font-size: 20px;
+    margin: 10px 0px;
+}
