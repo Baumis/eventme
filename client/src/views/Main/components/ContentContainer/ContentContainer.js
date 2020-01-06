@@ -14,21 +14,21 @@ class ContentContainer extends Component {
                             <FaLink />
                             <h1>Invite</h1>
                         </div>
-                        <p>Each event has its own invitation link, which can be shared to invite guests.</p>
+                        <p>Easily share your events using the web address of the event page.</p>
                     </div>
                     <div className="content-container-info-block">
                         <div className="content-container-title-row">
                             <FaPuzzlePiece />
                             <h1>Edit</h1>
                         </div>
-                        <p>Create events fast and customize them with a simple puzzlelike editor.</p>
+                        <p>Create events fast and customize them with our simple editor.</p>
                     </div>
                     <div className="content-container-info-block">
                         <div className="content-container-title-row">
                             <FaUser />
                             <h1>Easy to join</h1>
                         </div>
-                        <p>Guests can join using their favorite social media account.</p>
+                        <p>Guests can join using their favorite social media account or just by leaving their name on the guestlist.</p>
                     </div>
                 </div>
             </div >

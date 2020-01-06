@@ -13,7 +13,7 @@ const InformationPage = (props) => {
                 Create events fast.
                </div>
             <div className="information-page-paragraph">
-                Fill out this short form to create a new event. Invite guests by sharing a link to the event.
+                Fill out the short form to create a new event. Invite guests by sharing the link to the event page.
                </div>
         </div>
     )
