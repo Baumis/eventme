@@ -74,7 +74,7 @@ class CreateEventForm extends Component {
             <div className="create-event-form">
                 <div className="create-event-content">
                     <CreateInput
-                        label={'Event name'}
+                        label={'EVENT NAME'}
                         type={'text'}
                         value={this.state.eventName}
                         onChange={(event) => this.changeValue('eventName', event)}
@@ -82,7 +82,7 @@ class CreateEventForm extends Component {
                     <div className="create-event-row">
                         <div className="create-event-row-left">
                             <CreateInput
-                                label={'Start date'}
+                                label={'START DATE'}
                                 type={'date'}
                                 min={this.state.today}
                                 value={this.state.startDate}
@@ -91,7 +91,7 @@ class CreateEventForm extends Component {
                         </div>
                         <div className="create-event-row-right">
                             <CreateInput
-                                label={'End date'}
+                                label={'END DATE'}
                                 type={'date'}
                                 min={this.state.today}
                                 value={this.state.endDate}
@@ -100,7 +100,7 @@ class CreateEventForm extends Component {
                         </div>
                     </div>
                     <CreateTextArea
-                        label={'Description'}
+                        label={'DESCRIPTION'}
                         value={this.state.description}
                         onChange={(event) => this.changeValue('description', event)}
                     />
@@ -109,7 +109,7 @@ class CreateEventForm extends Component {
                             {this.state.loading ?
                                 <Spinner />
                                 :
-                                <div>create</div>
+                                <div className="create-event-button-label">CREATE</div>
                             }
                         </div>
                     </div>

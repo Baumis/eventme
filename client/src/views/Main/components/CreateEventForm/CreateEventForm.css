@@ -56,6 +56,11 @@
     transition: background 0.2s;
 }
 
+.create-event-button-label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
 .create-event-button:hover {
     background: #404e59;
 }
