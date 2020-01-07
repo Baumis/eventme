@@ -4,13 +4,14 @@
     align-items: center;
     margin-top: 45px;
     padding: 30px 0px;
+    height: 80vh;
     width: 100%;
-    background: rgba(76, 92, 104, 0.8);
-    background-image: 
+    background: rgba(76, 92, 104, 0);
+    /*background-image: 
     linear-gradient(
       rgba(76, 92, 104, 0.8), 
       rgba(76, 92, 104, 0.8)),
-    url('../../../../assets/PeopleAtLake.jpg');
+    url('../../../../assets/PeopleAtLake.jpg');*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -29,5 +30,7 @@
   .main-header {
     padding: 0px;
     margin-bottom: 0px;
+    height: auto;
+    margin-top: 55px;
   }
 }

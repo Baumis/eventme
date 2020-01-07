@@ -12,9 +12,10 @@ class Main extends Component {
     render() {
         return (
             <div className="Main">
-                <Navbar />
+                <Navbar 
+                    staticColor={true}
+                />
                 <MainHeader />
-                <ContentContainer />
                 {this.props.VisibilityStore.signModal ?
                     <UniversalModal
                         content={<SignModal />}

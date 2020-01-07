@@ -29,7 +29,7 @@ class Navbar extends Component {
     }
 
     render() {
-        const bg = this.state.pageOnTop || window.innerWidth < 450 ? 'transparent' : 'white'
+        const bg = (this.state.pageOnTop || window.innerWidth < 450) && !this.props.staticColor ? 'transparent' : 'white'
         return (
             <div className="Navbar" style={{ background: bg }}>
                 <div className="NavBarContent">

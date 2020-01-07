@@ -1,5 +1,6 @@
 .content-book {
     display: flex;
+    flex-direction: row-reverse;
     background: transparent;
     border-radius: 5px;
     width: 95vw;
