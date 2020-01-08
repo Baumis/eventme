@@ -48,4 +48,8 @@
     .create-textarea textarea {
         font-size: 14px;
     }
+
+    .create-textarea-label{
+        font-size: 11px;
+    }
 }
