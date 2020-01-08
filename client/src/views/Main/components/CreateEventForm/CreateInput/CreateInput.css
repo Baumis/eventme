@@ -52,8 +52,4 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
     .create-input input{
         font-size: 14px;
     }
-
-    .create-input-label{
-        font-size: 11px;
-    }
 }
