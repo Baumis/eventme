@@ -2,7 +2,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 20px 0px 0px 0px;
 }
 
 .default-buttons-negative-button {
@@ -14,7 +13,6 @@
     height: 20px;
     border-radius: 5px;
     color: #c74C3C;
-    margin: 0px 5px 0px 5px;
     cursor: pointer;
     outline: none;
     transition: background 0.2s;
@@ -31,7 +29,7 @@
     border-radius: 5px;
     background: #4c5c68;
     color: white;
-    margin: 10px;
+    margin: 10px 10px 0px 10px;
     cursor: pointer;
     transition: background 0.2s;
 }

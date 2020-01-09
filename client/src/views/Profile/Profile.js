@@ -5,7 +5,7 @@ import UserServices from '../../services/users'
 import ProfileHeader from './components/ProfileHeader/ProfileHeader'
 import ProfileContent from './components/ProfileContent/ProfileContent'
 import Navbar from '../../commonComponents/Navbar/Navbar'
-import NewEventOptions from '../../commonComponents/NewEventOptions/NewEventOptions'
+import CreateEventForm from '../../commonComponents/CreateEventForm/CreateEventForm'
 import UniversalModal from '../.././commonComponents/UniversalModal/UniversalModal'
 import NotFound from '../NotFound/NotFound'
 
@@ -113,7 +113,12 @@ class Profile extends Component {
                 />
                 {this.state.newEventModal ?
                     <UniversalModal
-                        content={<NewEventOptions hide={this.toggleNewEventModal}/>}
+                        content={
+                            <CreateEventForm
+                                negativeAction={this.toggleNewEventModal}
+                                negativeLabel={'Close'}
+                            />
+                        }
                     />
                     : null}
             </div>

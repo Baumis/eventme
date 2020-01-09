@@ -7,6 +7,15 @@
     max-width: 1024px;
 }
 
+.content-book-form-wrapper {
+    display: flex;
+    box-sizing: border-box;
+    padding: 35px;
+    border: 1px solid #dddddd;
+    background: rgb(255, 255, 255, 0.8);
+    border-radius: 5px;
+}
+
 .content-book-page {
     display: flex;
     flex: 1;
@@ -22,5 +31,9 @@
         flex-direction: column-reverse;
         width: 100vw;
         border-radius: 0px;
+    }
+
+    .content-book-form-wrapper {
+        width: 100vw;
     }
 }
