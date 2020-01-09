@@ -35,5 +35,6 @@
 
     .content-book-form-wrapper {
         width: 100vw;
+        border-radius: 0px;
     }
 }

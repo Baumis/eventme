@@ -62,11 +62,12 @@
     background: #404e59;
 }
 
-@media only screen and (max-width: 610px) {
+@media only screen and (max-width: 450px) {
     .create-event-form {
         width: 95vw;
         border-radius: 0px;
         border: none;
+        justify-content: center;
     }
 
     .create-event-row {
