@@ -11,7 +11,7 @@
     flex: 1;
     display: flex;
     box-sizing: border-box;
-    padding: 35px;
+    margin: 35px;
     border: 1px solid #dddddd;
     background: rgb(255, 255, 255, 0.8);
     border-radius: 5px;
@@ -35,7 +35,14 @@
     }
 
     .content-book-form-wrapper {
+        border-radius: 0px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .content-book-form-wrapper {
         width: 100vw;
         border-radius: 0px;
+        margin: 0px;
     }
 }

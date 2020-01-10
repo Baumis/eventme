@@ -4,8 +4,9 @@
     flex-direction: column;
     justify-content: center;
     background: transparent;
-    height: 100%;
-    border-radius: 5px;;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 35px;
 }
 
 .create-event-header {
