@@ -3,9 +3,10 @@ import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './CreateEventForm.css'
 import moment from 'moment'
-import Spinner from '../../../../commonComponents/Spinner/Spinner'
+import Spinner from '../Spinner/Spinner'
 import CreateInput from './CreateInput/CreateInput'
 import CreateTextArea from './CreateTextArea/CreateTextArea'
+import DefaultButtons from '../UniversalModal/DefaultButtons/DefaultButtons'
 
 class CreateEventForm extends Component {
     constructor(props) {
@@ -104,15 +105,12 @@ class CreateEventForm extends Component {
                         value={this.state.description}
                         onChange={(event) => this.changeValue('description', event)}
                     />
-                    <div className="create-event-button-row">
-                        <div onClick={() => this.create()} className="event-options-button">
-                            {this.state.loading ?
-                                <Spinner />
-                                :
-                                <div className="create-event-button-label">CREATE</div>
-                            }
-                        </div>
-                    </div>
+                    <DefaultButtons
+                        positiveLabel={'Create'}
+                        negativeLabel={this.props.negativeLabel}
+                        positiveAction={() => this.props.create()}
+                        negativeAction={this.props.negativeAction}
+                    />
                 </div>
             </div>
         )
