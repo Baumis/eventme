@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './GuestList.css'
-import { FaTimes } from 'react-icons/fa'
+import { FaUserTimes, FaSignOutAlt } from 'react-icons/fa'
 
 class Guests extends Component {
 
@@ -35,9 +35,12 @@ class Guests extends Component {
                 && this.props.EventStore.event.creator._id === this.props.UserStore.currentUser._id) {
                 return true
             }
-            return false
+            if (this.props.UserStore.currentUser._id === guestId 
+                && this.props.EventStore.event.creator._id !== guestId) {
+                return true
+            }
         }
-
+        return false
     }
 
     toProfile = (id) => {
@@ -62,7 +65,21 @@ class Guests extends Component {
                         </div>
                         <div className="event-guests-right-column">
                             {this.rightsToRemove(guest.user._id) ?
-                                <div className="event-guests-guest-remove" onClick={() => this.removeRegistration(guest)}><FaTimes /></div>
+                                <div className="event-guests-guest-remove" onClick={() => this.removeRegistration(guest)}>
+                                    {this.props.UserStore.currentUser._id !== guest.user._id ?
+                                        <div className="event-guests-guest-remove-label">
+                                            <div className="event-guests-guest-remove-icon">
+                                                <FaUserTimes />
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="event-guests-guest-remove-label">
+                                            <div className="event-guests-guest-remove-icon">
+                                                <FaSignOutAlt />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
                                 :
                                 <div className="event-guests-guest-remove-disabled"></div>
                             }
