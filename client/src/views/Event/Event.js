@@ -5,7 +5,7 @@ import './Event.css'
 import Header from './components/Header/Header'
 import OptionsPanel from './components/OptionsPanel/OptionsPanel'
 import SaveButton from './components/SaveButton/SaveButton'
-import OptionsButton from './components/OptionsButton/OptionsButton'
+import Alert from '../../commonComponents/Alert/Alert'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
@@ -155,6 +155,10 @@ class Event extends Component {
                                 changeActive={this.changeActive}
                             />}
                         />
+                        : null
+                    }
+                    {this.props.VisibilityStore.alert ?
+                        <Alert />
                         : null
                     }
                 </div>

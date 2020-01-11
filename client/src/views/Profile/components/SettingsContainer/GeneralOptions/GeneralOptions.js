@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './GeneralOptions.css'
+import { inject, observer } from 'mobx-react'
 import Spinner from '../../../../../commonComponents/Spinner/Spinner'
 
 class GeneralOptions extends Component {
@@ -20,7 +21,7 @@ class GeneralOptions extends Component {
     }
 
     saveOptions = async () => {
-        if (this.state.loading) {
+        if (this.state.loading || this.state.saved) {
             return
         }
 
@@ -31,7 +32,12 @@ class GeneralOptions extends Component {
         if (user) {
             this.setState({ saved: true })
         } else {
-            alert('options could not be saved')
+            this.props.VisibilityStore.showAlert(
+                'Fail',
+                'options could not be saved',
+                'OK',
+                () => this.props.VisibilityStore.closeAlert()
+            )
         }
     }
 
@@ -47,14 +53,19 @@ class GeneralOptions extends Component {
                         onChange={this.changeUserValue}
                     />
                 </div>
-                <div className="general-options-input">
-                    <label>Email</label>
-                    <input
-                        name={'email'}
-                        value={this.state.userValues.email}
-                        onChange={this.changeUserValue}
-                    />
-                </div>
+                {this.props.UserStore.currentUser.userType === 'GOOGLE' ||
+                    this.props.UserStore.currentUser.userType === 'FACEBOOK' ?
+                    null
+                    :
+                    <div className="general-options-input">
+                        <label>Email</label>
+                        <input
+                            name={'email'}
+                            value={this.state.userValues.email}
+                            onChange={this.changeUserValue}
+                        />
+                    </div>
+                }
                 <div className="general-options-input">
                     <label>Profile cover url</label>
                     <input
@@ -85,4 +96,4 @@ class GeneralOptions extends Component {
     }
 }
 
-export default GeneralOptions
+export default inject('UserStore', 'VisibilityStore')(observer(GeneralOptions))

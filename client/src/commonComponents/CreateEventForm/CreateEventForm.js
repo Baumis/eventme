@@ -67,7 +67,13 @@ class CreateEventForm extends Component {
         this.setState({ loading: false })
         event ?
             this.props.history.push(`/events/${event._id}`)
-            : alert('The event could not be created')
+            :
+            this.props.VisibilityStore.showAlert(
+                'Creation failed',
+                'The event could not be created',
+                'OK',
+                () => this.props.VisibilityStore.closeAlert()
+            )
     }
 
     render() {
@@ -108,7 +114,7 @@ class CreateEventForm extends Component {
                     <DefaultButtons
                         positiveLabel={'Create'}
                         negativeLabel={this.props.negativeLabel}
-                        positiveAction={() => this.props.create()}
+                        positiveAction={() => this.create()}
                         negativeAction={this.props.negativeAction}
                     />
                 </div>

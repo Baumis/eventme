@@ -5,6 +5,7 @@ import NavBar from '../../commonComponents/Navbar/Navbar'
 import NotFoundMessage from './components/NotFoundMessage/NotFoundMessage'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
+import Alert from '../../commonComponents/Alert/Alert'
 
 class NotFound extends Component {
 
@@ -32,6 +33,10 @@ class NotFound extends Component {
                         <UniversalModal
                             content={<SignModal />}
                         />
+                        : null
+                    }
+                    {this.props.VisibilityStore.alert ?
+                        <Alert />
                         : null
                     }
                 </div>

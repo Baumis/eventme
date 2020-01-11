@@ -19,16 +19,25 @@ class PasswordOptions extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
+    alert = (message) => {
+        this.props.VisibilityStore.showAlert(
+            'Fail',
+            message,
+            'OK',
+            () => this.props.VisibilityStore.closeAlert()
+        )
+    }
+
     submitChangeRequest = async () => {
         if (this.state.oldPassword.length < 1) {
             return
         }
         if (this.state.newPassword.length < 3) {
-            alert('Password has to be over 3 character long')
+            this.alert('Password has to be over 3 character long')
             return
         }
         if (this.state.newPasswordAgain !== this.state.newPassword) {
-            alert('Passwords are not matching')
+            this.alert('Passwords are not matching')
             return
         }
 
@@ -36,7 +45,12 @@ class PasswordOptions extends Component {
         this.setState({ loading: true })
         try {
             await this.props.UserStore.updatePassword(this.state.oldPassword, this.state.newPassword)
-            alert('password has been changed')
+            this.props.VisibilityStore.showAlert(
+                'Success',
+                'password has been changed',
+                'OK',
+                () => this.props.VisibilityStore.closeAlert()
+            )
             this.setState({
                 oldPassword: '',
                 newPassword: '',
@@ -44,9 +58,9 @@ class PasswordOptions extends Component {
             })
         } catch (error) {
             error.response.data.error === 'Password incorrect' ?
-                alert('Old password incorrect')
+                this.alert('Old password incorrect')
                 :
-                alert('password could not be saved')
+                this.alert('password could not be saved')
         }
         this.setState({ loading: false })
     }
@@ -59,6 +73,17 @@ class PasswordOptions extends Component {
                     <h2>Change password</h2>
                     <div className="password-options-info-text">
                         This account is connected to a google account. Password can only be changed on a local account.
+                    </div>
+                </div>
+            )
+        }
+
+        if (this.props.UserStore.currentUser.userType === 'FACEBOOK') {
+            return (
+                <div className="password-options">
+                    <h2>Change password</h2>
+                    <div className="password-options-info-text">
+                        This account is connected to a Facebook account. Password can only be changed on a local account.
                     </div>
                 </div>
             )
@@ -108,4 +133,4 @@ class PasswordOptions extends Component {
     }
 }
 
-export default inject('UserStore')(observer(PasswordOptions))
+export default inject('UserStore', 'VisibilityStore')(observer(PasswordOptions))

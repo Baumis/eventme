@@ -14,10 +14,19 @@ class Guests extends Component {
     }
 
     removeRegistration = (guest) => {
-        const confirmation = window.confirm(`Do you want to kick user ${guest.name}?`)
-        if (confirmation) {
-            this.props.EventStore.removeGuest(this.props.EventStore.event._id, guest._id)
-        }
+        this.props.VisibilityStore.showAlert(
+            'Confirm',
+            `Do you want to remove ${guest.user.name} from the guestlist?`,
+            'Remove',
+            () => this.removeProcess(guest._id),
+            'Cancel',
+            () => this.props.VisibilityStore.closeAlert()
+        )
+    }
+
+    removeProcess = (id) => {
+        this.props.EventStore.removeGuest(this.props.EventStore.event._id, id)
+        this.props.VisibilityStore.closeAlert()
     }
 
     rightsToRemove = (guestId) => {
@@ -65,4 +74,4 @@ class Guests extends Component {
     }
 }
 
-export default withRouter(inject('EventStore', 'UserStore')(observer(Guests)))
+export default withRouter(inject('EventStore', 'UserStore', 'VisibilityStore')(observer(Guests)))

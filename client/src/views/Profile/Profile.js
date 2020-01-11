@@ -8,6 +8,7 @@ import Navbar from '../../commonComponents/Navbar/Navbar'
 import CreateEventForm from '../../commonComponents/CreateEventForm/CreateEventForm'
 import UniversalModal from '../.././commonComponents/UniversalModal/UniversalModal'
 import NotFound from '../NotFound/NotFound'
+import Alert from '../../commonComponents/Alert/Alert'
 
 class Profile extends Component {
 
@@ -66,10 +67,6 @@ class Profile extends Component {
         this.setState({ newEventModal: !this.state.newEventModal })
     }
 
-    toggleUserOptionsModal = () => {
-        this.setState({ userOptionsModal: !this.state.userOptionsModal })
-    }
-
     saveUserValues = async (userValues) => {
         const user = await this.props.UserStore.saveUser(userValues)
         if (user) {
@@ -121,9 +118,12 @@ class Profile extends Component {
                         }
                     />
                     : null}
+                {this.props.VisibilityStore.alert ?
+                    <Alert />
+                    : null}
             </div>
         )
     }
 }
 
-export default inject('UserStore')(observer(Profile))
+export default inject('UserStore','VisibilityStore')(observer(Profile))

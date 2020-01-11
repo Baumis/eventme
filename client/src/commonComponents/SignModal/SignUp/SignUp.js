@@ -20,33 +20,42 @@ class SignUp extends Component {
         this.setState({ [name]: event.target.value })
     }
 
+    alert = (message) => {
+        this.props.VisibilityStore.showAlert(
+            'Sign up failed',
+            message,
+            'OK',
+            () => this.props.VisibilityStore.closeAlert()
+        )
+    }
+
     validateInputData = () => {
         if (this.state.name.split(' ').length < 2) {
-            alert('Name must consist of first and last name.')
+            this.alert('Name must consist of first and last name.')
             return false
         }
         if (this.state.name.length < 3) {
-            alert('Name must have a length of at least 3 characters.')
+            this.alert('Name must have a length of at least 3 characters.')
             return false
         }
         if (this.state.name.length > 70) {
-            alert('Name can\'t be over 70 characters long')
+            this.alert('Name can\'t be over 70 characters long')
             return false
         }
         if (this.state.password.length < 3) {
-            alert('The password have to be at least 3 characters long.')
+            this.alert('The password have to be at least 3 characters long.')
             return false
         }
         if (this.state.username.length < 3) {
-            alert('Username must have a length of at least 3 characters.')
+            this.alert('Username must have a length of at least 3 characters.')
             return false
         }
         if (this.state.username.length > 70) {
-            alert('Username can\'t be over 70 characters long')
+            this.alert('Username can\'t be over 70 characters long')
             return false
         }
         if (!this.state.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-            alert('Use a valid email.')
+            this.alert('Use a valid email.')
             return false
         }
         return true
@@ -75,9 +84,9 @@ class SignUp extends Component {
 
         } catch (error) {
             error.response.data.error === 'Username must be unique' ?
-                alert('This username is already taken.')
+                this.alert('This username is already taken.')
                 :
-                alert('Sign Up failed. Check your connection and try again.')
+                this.alert('Sign Up failed. Check your connection and try again.')
         }
         this.setState({ loading: false })
     }
@@ -114,20 +123,20 @@ class SignUp extends Component {
                         type={'password'}
                     />
                 </div>
-                    <div
-                        className="signup-button"
-                        onClick={() => this.signUp()}>
-                        {this.state.loading ?
-                            <Spinner />
-                            :
-                            <div>
-                                Sign up
+                <div
+                    className="signup-button"
+                    onClick={() => this.signUp()}>
+                    {this.state.loading ?
+                        <Spinner />
+                        :
+                        <div>
+                            Sign up
                             </div>
-                        }
-                    </div>
-                    <div className="signin-info-text">
-                        Already have an account? <span onClick={() => this.props.changeTab('SignIn')} >Sign in.</span>
-                    </div>
+                    }
+                </div>
+                <div className="signin-info-text">
+                    Already have an account? <span onClick={() => this.props.changeTab('SignIn')} >Sign in.</span>
+                </div>
             </div>
         )
     }
