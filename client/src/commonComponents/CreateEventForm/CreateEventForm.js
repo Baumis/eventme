@@ -116,6 +116,7 @@ class CreateEventForm extends Component {
                         negativeLabel={this.props.negativeLabel}
                         positiveAction={() => this.create()}
                         negativeAction={this.props.negativeAction}
+                        showSpinner={this.state.loading}
                     />
                 </div>
             </div>

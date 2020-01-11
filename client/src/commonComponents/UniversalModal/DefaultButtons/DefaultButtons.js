@@ -1,5 +1,6 @@
 import React from 'react'
 import './DefaultButtons.css'
+import Spinner from '../../Spinner/Spinner'
 
 const DefaultButtons = (props) => {
     return (
@@ -16,7 +17,11 @@ const DefaultButtons = (props) => {
                 <div className="default-buttons-positive-button"
                     onClick={props.positiveAction}>
                     <div className="default-buttons-button-label">
-                        {props.positiveLabel}
+                        {props.showSpinner ?
+                            <Spinner />
+                            :
+                            <div>{props.positiveLabel}</div>
+                        }
                     </div>
                 </div>
                 : null}
