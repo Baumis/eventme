@@ -1,0 +1,12 @@
+.guest-information-button-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.guest-information-status {
+    margin: 10px 10px 0px 10px;
+    font-weight: 500;
+    font-size: 18px;
+    color: #4c5c68;
+}

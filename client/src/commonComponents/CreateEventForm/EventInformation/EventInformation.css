@@ -23,34 +23,15 @@
 
 .event-information-button-row{
     display: flex;
-    justify-content: center;
-    padding: 20px 0px 0px 0px;
-}
-
-.event-information-button {
-    display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 8px;
-    width: 80px;
-    height: 20px;
-    border: 1px solid #4c5c68;
-    border-radius: 5px;
-    background: #4c5c68;
-    color: white;
-    margin: 0px 5px 0px 5px;
-    cursor: pointer;
-    outline: none;
-    transition: background 0.2s;
 }
 
-.event-information-button-label {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.event-information-button:hover {
-    background: #404e59;
+.event-information-status {
+    margin: 10px 10px 0px 10px;
+    font-weight: 500;
+    font-size: 18px;
+    color: #4c5c68;
 }
 
 @media only screen and (max-width: 450px) {

@@ -83,13 +83,18 @@ class EventInformation extends Component {
                     value={this.state.description}
                     onChange={(event) => this.changeValue('description', event)}
                 />
-                <DefaultButtons
-                    positiveLabel={'Create'}
-                    negativeLabel={this.props.negativeLabel}
-                    positiveAction={() => this.props.changePage(2)}
-                    negativeAction={this.props.negativeAction}
-                    showSpinner={this.state.loading}
-                />
+                <div className="event-information-button-row">
+                    <div className="event-information-status">
+                        {`1/2`}
+                    </div>
+                    <DefaultButtons
+                        positiveLabel={'Next'}
+                        negativeLabel={this.props.negativeLabel}
+                        positiveAction={() => this.props.changePage(2)}
+                        negativeAction={this.props.negativeAction}
+                        showSpinner={this.state.loading}
+                    />
+                </div>
             </div>
         )
     }

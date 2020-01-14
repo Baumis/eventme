@@ -78,13 +78,18 @@ class GuestInformation extends Component {
     render() {
         return (
             <div className="guest-information">
-                <DefaultButtons
-                    positiveLabel={'Create'}
-                    negativeLabel={'back'}
-                    positiveAction={() => this.create()}
-                    negativeAction={() => this.props.changePage(1)}
-                    showSpinner={this.state.loading}
-                />
+                <div className="guest-information-button-row">
+                    <div className="guest-information-status">
+                        {`2/2`}
+                    </div>
+                    <DefaultButtons
+                        positiveLabel={'Create'}
+                        negativeLabel={'back'}
+                        positiveAction={() => this.create()}
+                        negativeAction={() => this.props.changePage(1)}
+                        showSpinner={this.state.loading}
+                    />
+                </div>
             </div>
         )
     }
