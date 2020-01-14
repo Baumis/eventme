@@ -8,17 +8,6 @@ import CreateTextArea from '../CreateTextArea/CreateTextArea'
 import DefaultButtons from '../../UniversalModal/DefaultButtons/DefaultButtons'
 
 class EventInformation extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            eventName: '',
-            startDate: '',
-            endDate: '',
-            today: '',
-            description: '',
-            loading: false
-        }
-    }
 
     componentDidMount() {
         const today = moment(new Date()).format('YYYY-MM-DD')
@@ -55,7 +44,7 @@ class EventInformation extends Component {
                 <CreateInput
                     label={'EVENT NAME'}
                     type={'text'}
-                    value={this.state.eventName}
+                    value={this.props.information.eventName}
                     onChange={(event) => this.changeValue('eventName', event)}
                 />
                 <div className="event-information-row">
@@ -63,8 +52,8 @@ class EventInformation extends Component {
                         <CreateInput
                             label={'START DATE'}
                             type={'date'}
-                            min={this.state.today}
-                            value={this.state.startDate}
+                            min={this.props.information.today}
+                            value={this.props.information.startDate}
                             onChange={(event) => this.changeStartDate(event)}
                         />
                     </div>
@@ -72,15 +61,15 @@ class EventInformation extends Component {
                         <CreateInput
                             label={'END DATE'}
                             type={'date'}
-                            min={this.state.today}
-                            value={this.state.endDate}
+                            min={this.props.information.today}
+                            value={this.props.information.endDate}
                             onChange={(event) => this.changeEndDate(event)}
                         />
                     </div>
                 </div>
                 <CreateTextArea
                     label={'DESCRIPTION'}
-                    value={this.state.description}
+                    value={this.props.information.description}
                     onChange={(event) => this.changeValue('description', event)}
                 />
                 <div className="event-information-button-row">
@@ -92,7 +81,6 @@ class EventInformation extends Component {
                         negativeLabel={this.props.negativeLabel}
                         positiveAction={() => this.props.changePage(2)}
                         negativeAction={this.props.negativeAction}
-                        showSpinner={this.state.loading}
                     />
                 </div>
             </div>

@@ -1,9 +1,7 @@
-.event-information-header {
-    padding: 10px 0px;
-    font-size: 22px;
-    color: #46494c;
-    padding-bottom: 20px;
-    font-weight: 600;
+.event-information {
+    display: flex;
+    flex-direction: column;
+    flex: 1
 }
 
 .event-information-row {
@@ -20,7 +18,6 @@
     margin-right: 5px;
 }
 
-
 .event-information-button-row{
     display: flex;
     justify-content: space-between;
@@ -30,8 +27,8 @@
 .event-information-status {
     margin: 10px 10px 0px 10px;
     font-weight: 500;
-    font-size: 18px;
-    color: #4c5c68;
+    font-size: 19px;
+    color: rgb(76, 92, 104, 0.4);
 }
 
 @media only screen and (max-width: 450px) {

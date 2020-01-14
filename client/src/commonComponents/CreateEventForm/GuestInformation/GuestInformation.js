@@ -2,82 +2,69 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './GuestInformation.css'
-import moment from 'moment'
 import CreateInput from '../CreateInput/CreateInput'
-import CreateTextArea from '../CreateTextArea/CreateTextArea'
 import DefaultButtons from '../../UniversalModal/DefaultButtons/DefaultButtons'
+import { FaTrash } from 'react-icons/fa'
 
 class GuestInformation extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            eventName: '',
-            startDate: '',
-            endDate: '',
-            today: '',
-            description: '',
             loading: false
         }
     }
 
-    componentDidMount() {
-        const today = moment(new Date()).format('YYYY-MM-DD')
-        this.setState({
-            startDate: today,
-            endDate: today,
-            today: today
-        })
+    changeQuestion = (event, index) => {
+        const questionsClone = [... this.props.questions]
+        questionsClone[index].content = event.target.value
+        this.props.setGuestQuestions(questionsClone)
     }
 
-    changeStartDate = (event) => {
-        this.setState({ startDate: event.target.value })
-        if (moment(event.target.value).isAfter(this.state.endDate)) {
-            this.setState({ endDate: event.target.value })
+    addNewQuestion = () => {
+        if (this.props.questions.length < 3) {
+            const questionsClone = [... this.props.questions]
+            questionsClone.push({ content: '', answers: [] })
+            this.props.setGuestQuestions(questionsClone)
         }
     }
 
-    changeEndDate = (event) => {
-        this.setState({ endDate: event.target.value })
-        if (moment(event.target.value).isBefore(this.state.startDate)) {
-            this.setState({ startDate: event.target.value })
-        } else {
-
-        }
+    removeQuestion = (index) => {
+        const questionsClone = [... this.props.questions]
+        questionsClone.splice(index, 1)
+        this.props.setGuestQuestions(questionsClone)
     }
 
-    changeValue = (field, event) => {
-        this.setState({ [field]: event.target.value })
-    }
-
-    create = async () => {
-
-        if (this.props.UserStore.currentUser === null) {
-            this.props.VisibilityStore.showSignModal(this.create)
-            return
-        }
-
-        this.setState({ loading: true })
-        const event = await this.props.EventStore.create({
-            label: this.state.eventName,
-            startDate: this.state.startDate,
-            endDate: this.state.endDate,
-            description: this.state.description
-        })
-        this.setState({ loading: false })
-        event ?
-            this.props.history.push(`/events/${event._id}`)
-            :
-            this.props.VisibilityStore.showAlert(
-                'Creation failed',
-                'The event could not be created',
-                'OK',
-                () => this.props.VisibilityStore.closeAlert()
-            )
+    getButtonClass = () => {
+        return this.props.questions.length < 3 ? '' : ' add-question-disabled'
     }
 
     render() {
         return (
             <div className="guest-information">
+                <div className="guest-information-description">
+                    What do you want to know about the guests? The questions will be asked to joining guests.
+                </div>
+                <div className="guest-information-questions">
+                    {this.props.questions.map((question, i) =>
+                        <div className="guest-information-question">
+                            <CreateInput
+                                label={''}
+                                type={'text'}
+                                value={question.content}
+                                placeholder={'Write a question'}
+                                onChange={(event) => this.changeQuestion(event, i)}
+                            />
+                            <div className="guest-information-question-icon" onClick={() => this.removeQuestion(i)}>
+                                < FaTrash />
+                            </div>
+                        </div>
+                    )}
+                </div>
+                <div className="guest-information-add-buttons">
+                    <div className={"guest-information-add-question " + this.getButtonClass()} onClick={this.addNewQuestion}>
+                        Add question
+                    </div>
+                </div>
                 <div className="guest-information-button-row">
                     <div className="guest-information-status">
                         {`2/2`}
@@ -85,7 +72,7 @@ class GuestInformation extends Component {
                     <DefaultButtons
                         positiveLabel={'Create'}
                         negativeLabel={'back'}
-                        positiveAction={() => this.create()}
+                        positiveAction={() => this.props.create()}
                         negativeAction={() => this.props.changePage(1)}
                         showSpinner={this.state.loading}
                     />
