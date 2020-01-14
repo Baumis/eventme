@@ -36,6 +36,10 @@
     color: #c5c3c6
 }
 
+input[type=date] {
+    font-family: sans-serif;
+}
+
 input[type=date]::-webkit-clear-button {
     display: none;
 }

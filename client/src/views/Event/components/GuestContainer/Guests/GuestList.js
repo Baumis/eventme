@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './GuestList.css'
-import { FaTimes } from 'react-icons/fa'
+import { FaUserTimes, FaSignOutAlt } from 'react-icons/fa'
 
 class Guests extends Component {
 
@@ -14,10 +14,19 @@ class Guests extends Component {
     }
 
     removeRegistration = (guest) => {
-        const confirmation = window.confirm(`Do you want to kick user ${guest.name}?`)
-        if (confirmation) {
-            this.props.EventStore.removeGuest(this.props.EventStore.event._id, guest._id)
-        }
+        this.props.VisibilityStore.showAlert(
+            'Confirm',
+            `Do you want to remove ${guest.user.name} from the guestlist?`,
+            'Remove',
+            () => this.removeProcess(guest._id),
+            'Cancel',
+            () => this.props.VisibilityStore.closeAlert()
+        )
+    }
+
+    removeProcess = (id) => {
+        this.props.EventStore.removeGuest(this.props.EventStore.event._id, id)
+        this.props.VisibilityStore.closeAlert()
     }
 
     rightsToRemove = (guestId) => {
@@ -26,9 +35,12 @@ class Guests extends Component {
                 && this.props.EventStore.event.creator._id === this.props.UserStore.currentUser._id) {
                 return true
             }
-            return false
+            if (this.props.UserStore.currentUser._id === guestId 
+                && this.props.EventStore.event.creator._id !== guestId) {
+                return true
+            }
         }
-
+        return false
     }
 
     toProfile = (id) => {
@@ -53,7 +65,21 @@ class Guests extends Component {
                         </div>
                         <div className="event-guests-right-column">
                             {this.rightsToRemove(guest.user._id) ?
-                                <div className="event-guests-guest-remove" onClick={() => this.removeRegistration(guest)}><FaTimes /></div>
+                                <div className="event-guests-guest-remove" onClick={() => this.removeRegistration(guest)}>
+                                    {this.props.UserStore.currentUser._id !== guest.user._id ?
+                                        <div className="event-guests-guest-remove-label">
+                                            <div className="event-guests-guest-remove-icon">
+                                                <FaUserTimes />
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="event-guests-guest-remove-label">
+                                            <div className="event-guests-guest-remove-icon">
+                                                <FaSignOutAlt />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
                                 :
                                 <div className="event-guests-guest-remove-disabled"></div>
                             }
@@ -65,4 +91,4 @@ class Guests extends Component {
     }
 }
 
-export default withRouter(inject('EventStore', 'UserStore')(observer(Guests)))
+export default withRouter(inject('EventStore', 'UserStore', 'VisibilityStore')(observer(Guests)))

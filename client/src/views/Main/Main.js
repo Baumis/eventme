@@ -5,14 +5,14 @@ import Navbar from '../../commonComponents/Navbar/Navbar'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 import MainHeader from './components/MainHeader/MainHeader'
-import ContentContainer from './components/ContentContainer/ContentContainer'
+import Alert from '../../commonComponents/Alert/Alert'
 
 class Main extends Component {
 
     render() {
         return (
             <div className="Main">
-                <Navbar 
+                <Navbar
                     staticColor={true}
                 />
                 <MainHeader />
@@ -21,6 +21,10 @@ class Main extends Component {
                         content={<SignModal />}
                     />
                     : null}
+                {this.props.VisibilityStore.alert ?
+                    <Alert />
+                    : null
+                }
             </div>
         )
     }

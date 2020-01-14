@@ -44,7 +44,12 @@ class SignIn extends Component {
     }
 
     onSignInFail = (message) => {
-        alert(message)
+        this.props.VisibilityStore.showAlert(
+            'Sign in failed',
+            message,
+            'OK',
+            () => this.props.VisibilityStore.closeAlert()
+        )
         this.setState({ password: '' })
     }
 

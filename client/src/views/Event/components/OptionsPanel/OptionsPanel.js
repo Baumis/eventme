@@ -57,14 +57,23 @@ class OptionsPanel extends Component {
         this.props.VisibilityStore.slideOptionsPanel()
     }
 
-    deleteEvent = async () => {
-        const confirmation = window.confirm('Do you want to delete this event?')
-        if (confirmation) {
-            const response = await this.props.EventStore.deleteEvent()
-            if (response) {
-                this.setState({ deleted: true })
-            }
+    deleteEvent = () => {
+        this.props.VisibilityStore.showAlert(
+            'Confirm',
+            `Do you want to delete event: "${this.props.EventStore.event.label}"?`,
+            'Delete',
+            () => this.deleteProcess(),
+            'Cancel',
+            () => this.props.VisibilityStore.closeAlert()
+        )
+    }
+
+    deleteProcess = async () => {
+        const response = await this.props.EventStore.deleteEvent()
+        if (response) {
+            this.setState({ deleted: true })
         }
+        this.props.VisibilityStore.closeAlert()
     }
 
     render() {

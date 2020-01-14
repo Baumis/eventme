@@ -53,7 +53,21 @@
 
 .event-guests-guest-remove{
     cursor: pointer;
-    color: rgba(0,0,0,0.2);
+    color: rgb(70, 73, 76, 0.5);
+    padding: 3px;
+}
+
+.event-guests-guest-remove-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.event-guests-guest-remove-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .event-guests-guest-remove-disabled{
@@ -62,5 +76,5 @@
 }
 
 .event-guests-guest-remove:hover{
-    color: rgba(0,0,0,0.5);
+    color: rgb(70, 73, 76, 0.9);
 }
