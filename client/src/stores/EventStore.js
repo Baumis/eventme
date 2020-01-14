@@ -5,6 +5,15 @@ class EventStore {
     event = null
     saved = true
 
+    questions = []
+
+    adQuestion(question) {
+        this.questions.push(question)
+    }
+    removeQuestion(index) {
+        this.questions.slice(index, 1)
+    }
+
     async initializeEvent(eventId) {
         try {
             this.event = await eventService.getOne(eventId)
