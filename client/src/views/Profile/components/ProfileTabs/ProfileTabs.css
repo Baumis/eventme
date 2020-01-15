@@ -25,7 +25,8 @@
     width: 120px;
     cursor: pointer;
     color: rgba(76, 92, 104, 0.7);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 12px;
     border-bottom: 1px solid transparent;
     transition: background 0.2s;
 }

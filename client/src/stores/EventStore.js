@@ -5,7 +5,11 @@ class EventStore {
     event = null
     saved = true
 
-    questions = []
+    questions = [
+        { content: 'Kuka olet?', answers: [] },
+        { content: 'MItä haluaisit syödä illalla?', answers: [] },
+        { content: 'Haluatko jatkaa jäähallilta ravintolaan?', answers: [] }
+    ]
 
     adQuestion(question) {
         this.questions.push(question)
@@ -110,7 +114,7 @@ class EventStore {
         }
     }
 
-    async deleteComment(messageId, commentId){
+    async deleteComment(messageId, commentId) {
         try {
             this.event = await eventService.removeComment(this.event._id, messageId, commentId)
             return this.event
@@ -119,7 +123,7 @@ class EventStore {
         }
     }
 
-    async addAnswersToFormComponent(componentId, answers){
+    async addAnswersToFormComponent(componentId, answers) {
         try {
             this.event = await eventService.addAnswersToFormComponent(this.event._id, componentId, answers)
             return this.event
