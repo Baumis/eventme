@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import './RegisterModal.css'
 import SignedUser from './SignedUser/SignedUser'
 import UnsignedUser from './UnsignedUser/UnsignedUser'
+import RegisterQuestions from './RegisterQuestions/RegisterQuestions'
 import Spinner from '../../../../commonComponents/Spinner/Spinner'
 
 
@@ -49,8 +50,9 @@ class RegisterModal extends Component {
                     </div>
                 </div>
                 <div className="register-content">
+                    <RegisterQuestions />
                     {this.props.UserStore.currentUser ?
-                        <SignedUser 
+                        <SignedUser
                             toggleRegisterModal={this.props.toggleRegisterModal}
                             isGuest={this.props.isGuest}
                         />
