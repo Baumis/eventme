@@ -1,7 +1,7 @@
 .guest-information {
     display: flex;
-    flex-direction: column;
     flex: 1;
+    flex-direction: column;
     max-width: 450px;
 }
 
@@ -9,6 +9,12 @@
     margin: 0px 0px 15px 0px;
     color: rgb(76, 92, 104, 0.7);
     font-size: 15px;
+}
+
+.guest-information-description-title {
+    color: rgb(76, 92, 104);
+    font-size: 20px;
+    margin: 0px 0px 5px 0px;
 }
 
 .guest-information-button-row{
@@ -74,4 +80,10 @@
 
 .guest-information-add-question:hover {
     background: rgba(0,0,0,0.09);
+}
+
+@media only screen and (max-width: 450px) {
+    .guest-information-status {
+        margin: 10px 0px 0px 0px;
+    }
 }

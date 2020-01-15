@@ -111,10 +111,12 @@ class Profile extends Component {
                 {this.state.newEventModal ?
                     <UniversalModal
                         content={
+                        <div className="profile-create-form-wrapper">
                             <CreateEventForm
                                 negativeAction={this.toggleNewEventModal}
                                 negativeLabel={'Close'}
                             />
+                        </div>
                         }
                     />
                     : null}
@@ -126,4 +128,4 @@ class Profile extends Component {
     }
 }
 
-export default inject('UserStore','VisibilityStore')(observer(Profile))
+export default inject('UserStore', 'VisibilityStore')(observer(Profile))

@@ -6,6 +6,7 @@
 
 .event-information-row {
     display: flex;
+    flex: 1;
 }
 
 .event-information-row-right {

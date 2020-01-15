@@ -42,7 +42,10 @@ class GuestInformation extends Component {
         return (
             <div className="guest-information">
                 <div className="guest-information-description">
-                    What do you want to know about the guests? The questions will be asked to joining guests.
+                    <div className="guest-information-description-title">
+                        Ask your guests.
+                    </div>
+                    Write questions for your guests.
                 </div>
                 <div className="guest-information-questions">
                     {this.props.questions.map((question, i) =>
