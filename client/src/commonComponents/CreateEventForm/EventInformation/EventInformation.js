@@ -9,33 +9,28 @@ import DefaultButtons from '../../UniversalModal/DefaultButtons/DefaultButtons'
 
 class EventInformation extends Component {
 
-    componentDidMount() {
-        const today = moment(new Date()).format('YYYY-MM-DD')
-        this.setState({
-            startDate: today,
-            endDate: today,
-            today: today
-        })
-    }
-
     changeStartDate = (event) => {
-        this.setState({ startDate: event.target.value })
-        if (moment(event.target.value).isAfter(this.state.endDate)) {
-            this.setState({ endDate: event.target.value })
+        const informationCopy = {... this.props.information}
+        informationCopy.startDate = event.target.value
+        if (moment(event.target.value).isAfter(informationCopy.endDate)) {
+            informationCopy.endDate = event.target.value
         }
+        this.props.setEventInformation(informationCopy)
     }
 
     changeEndDate = (event) => {
-        this.setState({ endDate: event.target.value })
-        if (moment(event.target.value).isBefore(this.state.startDate)) {
-            this.setState({ startDate: event.target.value })
-        } else {
-
+        const informationCopy = {... this.props.information}
+        informationCopy.endDate = event.target.value
+        if (moment(event.target.value).isBefore(informationCopy.startDate)) {
+            informationCopy.startDate = event.target.value
         }
+        this.props.setEventInformation(informationCopy)
     }
 
     changeValue = (field, event) => {
-        this.setState({ [field]: event.target.value })
+        const informationCopy = {... this.props.information}
+        informationCopy[field] = event.target.value
+        this.props.setEventInformation(informationCopy)
     }
 
     render() {
