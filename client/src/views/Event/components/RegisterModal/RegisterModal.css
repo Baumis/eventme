@@ -66,5 +66,6 @@
     .register-modal {
         width: 95vw;
         max-height: 90vh;
+        margin: 20px 0px;
     }
 }
