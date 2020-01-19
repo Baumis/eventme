@@ -15,6 +15,16 @@ class MessageTextArea extends Component {
 
     post = async () => {
 
+        if (!this.props.UserStore.currentUser) {
+            this.props.VisibilityStore.showAlert(
+                'Please sign in',
+                `Only guests with user accounts can post messages.`,
+                'OK',
+                () => this.props.VisibilityStore.closeAlert(),
+            )
+            return
+        }
+
         if (this.state.sending) {
             return
         }
@@ -24,7 +34,12 @@ class MessageTextArea extends Component {
         }
 
         if (!this.props.EventStore.saved) {
-            alert('Please save your event before posting message.')
+            this.props.VisibilityStore.showAlert(
+                'Unsaved changes',
+                'Please save your event before posting message.',
+                'OK',
+                () => this.props.VisibilityStore.closeAlert(),
+            )
             return
         }
 
@@ -33,7 +48,12 @@ class MessageTextArea extends Component {
         this.setState({ sending: false })
 
         if (!event) {
-            alert('The post could not be sent.')
+            this.props.VisibilityStore.showAlert(
+                'Fail',
+                'The post could not be sent.',
+                'OK',
+                () => this.props.VisibilityStore.closeAlert(),
+            )
         } else {
             this.setState({ messageInput: '' })
         }
@@ -44,6 +64,9 @@ class MessageTextArea extends Component {
     }
 
     getAvatar = () => {
+        if (!this.props.UserStore.currentUser) {
+            return null
+        }
         if (!this.props.UserStore.currentUser.avatar) {
             return null
         }
@@ -59,11 +82,6 @@ class MessageTextArea extends Component {
     }
 
     render() {
-
-        if (!this.props.UserStore.currentUser) {
-            return null
-        }
-
         return (
             <div className="text-area-container">
                 <div className="text-area-avatar" style={this.getAvatar()}></div>
@@ -88,4 +106,4 @@ class MessageTextArea extends Component {
     }
 }
 
-export default inject('EventStore', 'UserStore')(observer(MessageTextArea))
+export default inject('EventStore', 'UserStore', 'VisibilityStore')(observer(MessageTextArea))
