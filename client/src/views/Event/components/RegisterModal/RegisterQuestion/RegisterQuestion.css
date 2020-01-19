@@ -1,18 +1,27 @@
 .register-questions {
     display: flex;
     flex-direction: column;
+    flex: 1;
 
 }
 
 .register-questions-title {
-    color: rgb(76, 92, 104, 0.8);
-    font-size: 16px;
+    color: rgb(76, 92, 104, 1);
+    font-size: 20px;
     margin-bottom: 10px;
+}
+
+.register-questions-index {
+    color: rgb(75, 91, 104, 0.8);
+    margin: 10px 0px;
+    font-size: 15px;
 }
 
 .register-questions-question {
     display: flex;
+    flex: 1;
     flex-direction: column;
+    font-weight: 600;
     margin: 5px 0px;
 }
 

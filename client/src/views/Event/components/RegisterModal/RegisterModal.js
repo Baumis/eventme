@@ -3,8 +3,9 @@ import { inject, observer } from 'mobx-react'
 import './RegisterModal.css'
 import SignedUser from './SignedUser/SignedUser'
 import UnsignedUser from './UnsignedUser/UnsignedUser'
-import RegisterQuestions from './RegisterQuestions/RegisterQuestions'
+import RegisterQuestion from './RegisterQuestion/RegisterQuestion'
 import Spinner from '../../../../commonComponents/Spinner/Spinner'
+import DefaultButtons from '../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
 
 
 class RegisterModal extends Component {
@@ -12,8 +13,19 @@ class RegisterModal extends Component {
         super(props)
         this.state = {
             loading: false,
-            alias: ""
+            alias: "",
+            step: 0
         }
+    }
+
+    scrollPositionByStep = (step) => {
+        const parentWidth = document.getElementById("xScroller").parentElement.clientWidth
+        document.getElementById("xScroller").scrollLeft = parentWidth * step
+    }
+
+    setStep = (step) => {
+        this.setState({ step: step })
+        this.scrollPositionByStep(step)
     }
 
     changeAlias = (event) => {
@@ -42,6 +54,7 @@ class RegisterModal extends Component {
     }
 
     render() {
+        console.log(this.state.step)
         return (
             <div className="register-modal">
                 <div className="register-top-bar">
@@ -49,35 +62,51 @@ class RegisterModal extends Component {
                         Close
                     </div>
                 </div>
-                <div className="register-content">
-                    <RegisterQuestions />
-                    {this.props.UserStore.currentUser ?
-                        <SignedUser
-                            toggleRegisterModal={this.props.toggleRegisterModal}
-                            isGuest={this.props.isGuest}
-                        />
-                        :
-                        <UnsignedUser
-                            alias={this.state.alias}
-                            changeAlias={this.changeAlias}
-                            toggleRegisterModal={this.props.toggleRegisterModal}
-                        />
-                    }
-                    {this.readyToJoin() ?
-                        <div className="register-button" onClick={this.join}>
-                            {!this.state.loading ?
-                                <div>
-                                    Join event
+                <div className="register-content" id={"xScroller"}>
+                    {this.props.EventStore.questions.map((question, i) =>
+                        <div className="register-part">
+                            <RegisterQuestion
+                                question={question}
+                                index={i}
+                                setStep={this.setStep}
+                            />
+                        </div>
+                    )}
+                    <div className="register-part">
+                        {this.props.UserStore.currentUser ?
+                            <SignedUser
+                                toggleRegisterModal={this.props.toggleRegisterModal}
+                                isGuest={this.props.isGuest}
+                            />
+                            :
+                            <UnsignedUser
+                                alias={this.state.alias}
+                                changeAlias={this.changeAlias}
+                                toggleRegisterModal={this.props.toggleRegisterModal}
+                            />
+                        }
+                        <div className="register-button-row">
+                            <DefaultButtons
+                                negativeLabel={'back'}
+                                negativeAction={ () => this.setStep(this.state.step - 1)}
+                            />
+                            {this.readyToJoin() ?
+                                <div className="register-button" onClick={this.join}>
+                                    {!this.state.loading ?
+                                        <div>
+                                            Join event
+                                </div>
+                                        :
+                                        <Spinner />
+                                    }
                                 </div>
                                 :
-                                <Spinner />
+                                <div className="register-button join-disabled">
+                                    Join event
+                                </div>
                             }
                         </div>
-                        :
-                        <div className="register-button join-disabled">
-                            Join event
-                        </div>
-                    }
+                    </div>
                 </div>
             </div>
         )

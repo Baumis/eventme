@@ -30,15 +30,21 @@
     background: rgb(221, 221, 221, 0.2);
 }
 
+.register-button-row{
+    display: flex;
+    justify-content: space-between;
+}
+
 .register-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 40px;
+    padding: 12px;
+    width: 92px;
     border-radius: 5px;
     background: #4c5c68;
     color: white;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 10px 0px 0px;
     cursor: pointer;
     transition: background 0.2s;
 }
@@ -56,10 +62,19 @@
 .register-content {
     overflow-y: auto;
     display: flex;
-    flex-direction: column;
     flex: 1;
     margin: 10px 0px;
     padding: 0px 10px;
+    scroll-behavior: smooth;
+    overflow: hidden;
+}
+
+.register-part {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 100%;
+    margin-right: 20px;
 }
 
 @media only screen and (max-width: 450px) {
