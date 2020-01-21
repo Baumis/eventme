@@ -86,6 +86,9 @@ exports.create = async (creatorId, eventObject) => {
         guests: [{
             user: creatorId,
             status: 'GOING'
+        }],
+        registrations: [{
+            user: creatorId
         }]
     })
 

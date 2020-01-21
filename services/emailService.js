@@ -43,7 +43,7 @@ exports.notifyAboutNewMessage = async (message, event) => {
             return false
         }
     })
-    const guestIds = registrations.map( registration => registration.user)
+    const guestIds = registrations.map(registration => registration.user)
     const guestsWithVerifiedEmail = await User.find({ _id: { $in: guestIds }, emailVerified: true })
     const emails = guestsWithVerifiedEmail.map(guest => guest.email)
     const content = `
