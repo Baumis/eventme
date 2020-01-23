@@ -3,6 +3,44 @@
 }
 
 .answer {
-    font-size: 14px;    
+    padding: 10px;
+    background: rgb(221, 221, 221, 0.5);
+    border-radius: 5px;
+    margin: 5px 0px;   
+}
 
+.answers-user-info {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #1985a1;
+}
+
+.answers-user-avatar {
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: darkgray;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position:center center;
+}
+
+.answers-user-name {
+    font-weight: 600;
+    padding: 0px 10px;
+}
+
+.answers-user-content {
+    font-size: 14px;
+    color: black;
+    padding-left: 35px;
+}
+
+.empty-answers{
+    font-size: 14px;
+    color: rgba(0,0,0,0.5);
+    background: transparent;
 }

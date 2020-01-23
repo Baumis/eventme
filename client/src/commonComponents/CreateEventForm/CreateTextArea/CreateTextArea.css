@@ -33,6 +33,7 @@
     resize: none;
     font-family: sans-serif;
     font-size: 15px;
+    background: white;
 }
 
 .create-textarea-area:focus{
