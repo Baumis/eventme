@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './GuestContainer.css'
 import GuestList from './Guests/GuestList'
+import RegistrationResults from './RegisterResults/RegisterResults'
 
 class GuestContainer extends Component {
 
@@ -19,14 +20,24 @@ class GuestContainer extends Component {
     render() {
         return (
             <div className="guests-content">
-                <div className="guest-title">
-                    Guests
-                    <span>{` (${this.props.EventStore.event.registrations.length})`}</span>
+                <div className="guests-columns">
+                    <div className="guests-columns-left">
+                        <div className="guest-title">
+                            Guests
+                            <span>{` (${this.props.EventStore.event.registrations.length})`}</span>
+                        </div>
+                        <GuestList
+                            isCreator={this.props.isCreator()}
+                            filter={this.state.filter}
+                        />
+                    </div>
+                    <div className="guests-columns-right">
+                        <div className="guest-title">
+                            Answers
+                            <RegistrationResults />
+                        </div>
+                    </div>
                 </div>
-                <GuestList
-                    isCreator={this.props.isCreator()}
-                    filter={this.state.filter}
-                />
             </div>
         )
     }

@@ -1,0 +1,28 @@
+.register-results{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 20px 0px;
+}
+
+.register-results-question {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10px;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+    border-radius: 0px;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 5px 0px;
+    cursor: pointer;
+    height: auto;
+    transition: height 0.5s;
+}
+
+.register-results-question-button {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-content: center;
+}

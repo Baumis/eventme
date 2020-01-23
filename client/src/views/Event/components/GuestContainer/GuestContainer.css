@@ -4,8 +4,25 @@
     width: 810px;
     background: transparent;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border-radius: 5px;
+}
+
+.guests-columns {
+    display: flex;
+    flex: 1;
+}
+
+.guests-columns-left {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.guests-columns-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .guest-title {
@@ -23,5 +40,9 @@
 @media only screen and (max-width: 900px) {
     .guests-content {
         width: 95vw;
+    }
+
+    .guests-columns {
+        flex-direction: column;
     }
 }

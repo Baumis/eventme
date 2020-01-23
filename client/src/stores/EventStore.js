@@ -6,7 +6,7 @@ class EventStore {
     saved = true
 
     questions = [
-        { content: 'Kuka olet?', answers: [] },
+        { content: 'Kuka olet?', answers: [{ user: { name: 'Esko Aho' }, content: 'Minä en tahdo kertoa itsestäni mitään. Olen täysin yksin tässä maailmassa.' }] },
         { content: 'MItä haluaisit syödä illalla?', answers: [] },
         { content: 'Haluatko jatkaa jäähallilta ravintolaan?', answers: [] }
     ]
