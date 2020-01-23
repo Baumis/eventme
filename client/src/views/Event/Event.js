@@ -13,6 +13,7 @@ import NotFound from '../NotFound/NotFound'
 import EventContent from './components/EventContent/EventContent'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 import RegisterModal from './components/RegisterModal/RegisterModal'
+import InviteLink from './components/InviteLink/InviteLink'
 
 class Event extends Component {
 
@@ -23,6 +24,7 @@ class Event extends Component {
             showNewComponentModal: false,
             activeTab: 'Discussion',
             registerModal: false,
+            inviteLink: false,
             updater: null
         }
     }
@@ -30,7 +32,10 @@ class Event extends Component {
     async componentDidMount() {
         await this.props.EventStore.initializeEvent(this.props.eventId)
 
-        this.setState({ loading: false })
+        this.setState({
+            loading: false,
+            inviteLink: this.props.EventStore.event.registrations.length < 2
+        })
         this.startEventUpdater()
     }
 
@@ -84,6 +89,10 @@ class Event extends Component {
 
     toggleNewComponentModal = () => {
         this.setState({ showNewComponentModal: !this.state.showNewComponentModal })
+    }
+
+    toggleInviteLink = () => {
+        this.setState({ inviteLink: !this.state.inviteLink })
     }
 
     slidePanel = () => {
@@ -159,6 +168,14 @@ class Event extends Component {
                     }
                     {this.props.VisibilityStore.alert ?
                         <Alert />
+                        : null
+                    }
+                    {this.state.inviteLink && this.isCreator() ?
+                        <UniversalModal
+                            content={<InviteLink
+                                toggleInviteLink={this.toggleInviteLink}
+                            />}
+                        />
                         : null
                     }
                 </div>

@@ -5,13 +5,13 @@
 .answer {
     padding: 10px;
     background: rgb(221, 221, 221, 0.5);
+    border: 1px solid rgb(221, 221, 221, 0.7);
     border-radius: 5px;
     margin: 5px 0px;   
 }
 
 .answers-user-info {
     display: flex;
-    align-items: center;
     font-size: 14px;
     color: #1985a1;
 }
@@ -36,11 +36,11 @@
 .answers-user-content {
     font-size: 14px;
     color: black;
-    padding-left: 35px;
+    padding-left: 40px;
+    margin-top: -10px;
 }
 
 .empty-answers{
     font-size: 14px;
     color: rgba(0,0,0,0.5);
-    background: transparent;
 }

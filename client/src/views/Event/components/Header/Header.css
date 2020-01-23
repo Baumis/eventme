@@ -25,10 +25,6 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    .event-header {
-        width: 100vw;
-    }
-
     .event-header-cover {
         border-radius: 0px;
     }

@@ -33,7 +33,11 @@ class GuestContainer extends Component {
                     </div>
                     <div className="guests-columns-right">
                         <div className="guest-title">
-                            Answers
+                            {this.props.isCreator() ?
+                                'Answers'
+                                :
+                                'My answers'
+                            }
                             <RegistrationResults />
                         </div>
                     </div>
