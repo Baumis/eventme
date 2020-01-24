@@ -10,7 +10,7 @@ import DefaultButtons from '../../UniversalModal/DefaultButtons/DefaultButtons'
 class EventInformation extends Component {
 
     changeStartDate = (event) => {
-        const informationCopy = {... this.props.information}
+        const informationCopy = { ...this.props.information }
         informationCopy.startDate = event.target.value
         if (moment(event.target.value).isAfter(informationCopy.endDate)) {
             informationCopy.endDate = event.target.value
@@ -19,7 +19,7 @@ class EventInformation extends Component {
     }
 
     changeEndDate = (event) => {
-        const informationCopy = {... this.props.information}
+        const informationCopy = { ...this.props.information }
         informationCopy.endDate = event.target.value
         if (moment(event.target.value).isBefore(informationCopy.startDate)) {
             informationCopy.startDate = event.target.value
@@ -27,8 +27,20 @@ class EventInformation extends Component {
         this.props.setEventInformation(informationCopy)
     }
 
+    changeStartTime = (event) => {
+        const informationCopy = { ...this.props.information }
+        informationCopy.startTime = event.target.value
+        this.props.setEventInformation(informationCopy)
+    }
+
+    changeEndTime = (event) => {
+        const informationCopy = { ...this.props.information }
+        informationCopy.endTime = event.target.value
+        this.props.setEventInformation(informationCopy)
+    }
+
     changeValue = (field, event) => {
-        const informationCopy = {... this.props.information}
+        const informationCopy = { ...this.props.information }
         informationCopy[field] = event.target.value
         this.props.setEventInformation(informationCopy)
     }
@@ -54,11 +66,31 @@ class EventInformation extends Component {
                     </div>
                     <div className="event-information-row-right">
                         <CreateInput
+                            label={'START TIME'}
+                            type={'time'}
+                            min={this.props.information.today}
+                            value={this.props.information.startTime}
+                            onChange={(event) => this.changeStartTime(event)}
+                        />
+                    </div>
+                </div>
+                <div className="event-information-row">
+                    <div className="event-information-row-right">
+                        <CreateInput
                             label={'END DATE'}
                             type={'date'}
                             min={this.props.information.today}
                             value={this.props.information.endDate}
                             onChange={(event) => this.changeEndDate(event)}
+                        />
+                    </div>
+                    <div className="event-information-row-right">
+                        <CreateInput
+                            label={'END TIME'}
+                            type={'time'}
+                            min={this.props.information.today}
+                            value={this.props.information.endTime}
+                            onChange={(event) => this.changeEndTime(event)}
                         />
                     </div>
                 </div>
