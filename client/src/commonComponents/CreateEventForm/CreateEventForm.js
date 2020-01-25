@@ -62,9 +62,6 @@ class CreateEventForm extends Component {
         const startDate = new Date(this.state.information.startDate).setHours(startTime[0], startTime[1])
         const endDate = new Date(this.state.information.endDate).setHours(endTime[0], endTime[1])
 
-        console.log(moment(startDate).format('DD/MM/YY HH:MM'))
-        console.log(moment(endDate).format('DD/MM/YY HH:MM'))
-
         const event = await this.props.EventStore.create({
             label: this.state.information.eventName,
             startDate: startDate,

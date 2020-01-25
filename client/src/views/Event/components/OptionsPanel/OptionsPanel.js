@@ -24,16 +24,46 @@ class OptionsPanel extends Component {
     }
 
     changeStartDate = (event) => {
-        this.props.EventStore.setValue(event.target.value, 'startDate')
-        if (moment(event.target.value).isAfter(this.props.EventStore.event.endDate)) {
-            this.props.EventStore.setValue(event.target.value, 'endDate')
+
+        const currentHours = new Date(this.props.EventStore.event.startDate).getHours()
+        const currentMinutes = new Date(this.props.EventStore.event.startDate).getMinutes()
+        const dateWithTime = new Date(event.target.value).setHours(currentHours, currentMinutes)
+
+        this.props.EventStore.setValue(dateWithTime, 'startDate')
+        if (moment(dateWithTime).isAfter(this.props.EventStore.event.endDate)) {
+            this.props.EventStore.setValue(dateWithTime, 'endDate')
         }
     }
 
     changeEndDate = (event) => {
-        this.props.EventStore.setValue(event.target.value, 'endDate')
-        if (moment(event.target.value).isBefore(this.props.EventStore.event.startDate)) {
-            this.props.EventStore.setValue(event.target.value, 'startDate')
+
+        const currentHours = new Date(this.props.EventStore.event.endDate).getHours()
+        const currentMinutes = new Date(this.props.EventStore.event.endDate).getMinutes()
+        const dateWithTime = new Date(event.target.value).setHours(currentHours, currentMinutes)
+
+        this.props.EventStore.setValue(dateWithTime, 'endDate')
+        if (moment(dateWithTime).isBefore(this.props.EventStore.event.startDate)) {
+            this.props.EventStore.setValue(moment(dateWithTime), 'startDate')
+        }
+    }
+
+    changeStartTime = (event) => {
+        const startTime = event.target.value.split(":")
+        const startDate = new Date(this.props.EventStore.event.startDate).setHours(startTime[0], startTime[1])
+        this.props.EventStore.setValue(startDate, 'startDate')
+
+        if (moment(startDate).isAfter(this.props.EventStore.event.endDate)) {
+            this.props.EventStore.setValue(startDate, 'endDate')
+        }
+    }
+
+    changeEndTime = (event) => {
+        const endTime = event.target.value.split(":")
+        const endDate = new Date(this.props.EventStore.event.endDate).setHours(endTime[0], endTime[1])
+        this.props.EventStore.setValue(endDate, 'endDate')
+
+        if (moment(endDate).isBefore(this.props.EventStore.event.startDate)) {
+            this.props.EventStore.setValue(moment(endDate), 'startDate')
         }
     }
 
@@ -111,10 +141,24 @@ class OptionsPanel extends Component {
                             changeValue={this.changeStartDate}
                         />
                         <InputBlock
+                            type={'time'}
+                            label={'Start time'}
+                            value={moment(this.props.EventStore.event.startDate).format('HH:mm')}
+                            changeValue={this.changeStartTime}
+                        />
+                    </div>
+                    <div className="dateBlock">
+                        <InputBlock
                             type={'date'}
                             label={'End date'}
                             value={moment(this.props.EventStore.event.endDate).format('YYYY-MM-DD')}
                             changeValue={this.changeEndDate}
+                        />
+                        <InputBlock
+                            type={'time'}
+                            label={'End Time'}
+                            value={moment(this.props.EventStore.event.endDate).format('HH:mm')}
+                            changeValue={this.changeEndTime}
                         />
                     </div>
                 </div>

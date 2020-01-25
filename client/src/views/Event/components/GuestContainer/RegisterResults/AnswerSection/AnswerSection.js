@@ -27,7 +27,7 @@ class AnswerSection extends Component {
         return (
             <div className="answer-section">
                 {this.props.question.answers.map((answer, i) =>
-                    <div className="answer">
+                    <div className="answer" key={i}>
                         <div className="answers-user-info">
                             <div className="answers-user-avatar" style={this.getAvatar(answer.user)}>
                             </div>

@@ -16,8 +16,9 @@ const CreateInput = (props) => {
                 value={props.value}
                 onChange={props.onChange}
                 placeholder={props.placeholder}
-                style={props.style}>
-            </input>
+                style={props.style}
+                required
+            ></input>
         </div>
     )
 }

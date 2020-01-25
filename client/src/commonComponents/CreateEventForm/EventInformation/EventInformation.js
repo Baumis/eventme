@@ -75,7 +75,7 @@ class EventInformation extends Component {
                     </div>
                 </div>
                 <div className="event-information-row">
-                    <div className="event-information-row-right">
+                    <div className="event-information-row-left">
                         <CreateInput
                             label={'END DATE'}
                             type={'date'}

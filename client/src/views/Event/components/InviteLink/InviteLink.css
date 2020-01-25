@@ -18,7 +18,7 @@
     display: flex;
     border: 2px solid #4c5c68;
     border-radius: 5px;
-    height: 40px;
+    height: 35px;
 }
 
 .invite-link-row input {
@@ -27,6 +27,7 @@
     width: 100%;
     color: rgb(70, 73, 76, 0.5);
     font-size: 16px;
+    padding-left: 10px;
 }
 
 .invite-link-copy-button {
