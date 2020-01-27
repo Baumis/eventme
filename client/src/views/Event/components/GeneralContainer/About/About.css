@@ -1,10 +1,10 @@
 .about {
  display: flex;
- margin-bottom: 30px;
+ margin-bottom: 35px;
 }
 
 .about-text {
     padding: 0px 20px;
     color: #46494c;
-    white-space: pre;
+    white-space: pre-wrap;
 }

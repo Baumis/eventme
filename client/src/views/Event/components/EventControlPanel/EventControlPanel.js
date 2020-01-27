@@ -55,19 +55,23 @@ class EventControlPanel extends Component {
                             {moment(this.props.EventStore.event.startDate).format('LT')}
                         </div>
                     </div>
-                    {!this.props.isGuest() ?
-                        <div className="event-control-panel-info-item">
-                            <JoinEventButton
-                                toggleRegisterModal={this.props.toggleRegisterModal}
-                            />
-                        </div>
-                        :
-                        <div className="event-control-panel-info-item">
-                            <div className="event-control-panel-info-item-label">
-                                Status
+                    {this.props.isCreator() ?
+                        <div className="event-control-panel-info-item-invite" onClick={() => this.props.toggleInviteLink()}>
+                            Invite
+                         </div>
+                        : !this.props.isGuest() ?
+                            <div className="event-control-panel-info-item">
+                                <JoinEventButton
+                                    toggleRegisterModal={this.props.toggleRegisterModal}
+                                />
                             </div>
-                            Joined
-                        </div>
+                            :
+                            <div className="event-control-panel-info-item">
+                                <div className="event-control-panel-info-item-label">
+                                    Status
+                                </div>
+                                Joined
+                            </div>
                     }
                 </div>
                 <Tabs

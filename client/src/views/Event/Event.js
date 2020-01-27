@@ -126,6 +126,7 @@ class Event extends Component {
                         togglePanel={this.slidePanel}
                         isCreator={this.isCreator}
                         toggleRegisterModal={this.toggleRegisterModal}
+                        toggleInviteLink={this.toggleInviteLink}
                     />
                     <EventContent
                         isCreator={this.isCreator}

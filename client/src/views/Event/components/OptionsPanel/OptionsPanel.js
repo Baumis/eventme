@@ -142,7 +142,7 @@ class OptionsPanel extends Component {
                         />
                         <InputBlock
                             type={'time'}
-                            label={'Start time'}
+                            label={' '}
                             value={moment(this.props.EventStore.event.startDate).format('HH:mm')}
                             changeValue={this.changeStartTime}
                         />
@@ -156,7 +156,7 @@ class OptionsPanel extends Component {
                         />
                         <InputBlock
                             type={'time'}
-                            label={'End Time'}
+                            label={' '}
                             value={moment(this.props.EventStore.event.endDate).format('HH:mm')}
                             changeValue={this.changeEndTime}
                         />

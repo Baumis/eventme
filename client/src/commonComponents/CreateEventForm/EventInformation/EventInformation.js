@@ -66,7 +66,7 @@ class EventInformation extends Component {
                     </div>
                     <div className="event-information-row-right">
                         <CreateInput
-                            label={'START TIME'}
+                            label={' '}
                             type={'time'}
                             min={this.props.information.today}
                             value={this.props.information.startTime}
@@ -86,7 +86,7 @@ class EventInformation extends Component {
                     </div>
                     <div className="event-information-row-right">
                         <CreateInput
-                            label={'END TIME'}
+                            label={' '}
                             type={'time'}
                             min={this.props.information.today}
                             value={this.props.information.endTime}

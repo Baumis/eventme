@@ -14,7 +14,7 @@
     margin: 0px 30px;
     align-items: center;
     border-bottom: 1px solid rgba(69,69,69,0.2);
-    padding: 20px 0px;
+    padding: 15px 0px 0px 0px;
 }
 
 .event-control-panel-info-item {
@@ -23,15 +23,16 @@
     font-size: 14px;
     margin: 0px 10px;
     padding: 0px 0px 10px 0px;
-    color: rgba(76, 92, 104, 0.6);
-    min-width: 100px;
+    color: rgba(76, 92, 104, 1);
+    width: 125px;
+    color: #1985a1;
 }
 
 .event-control-panel-info-item-label {
     display: flex;
     font-weight: 600;
     font-size: 13px;
-    color: rgb(70, 73, 76, 1);
+    color: rgb(70, 73, 76, 0.5);
 }
 
 .event-control-panel-info-item-content {
@@ -67,6 +68,25 @@
     margin-bottom: 10px;
 }
 
+.event-control-panel-info-item-invite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.07);
+    color: #46494c;
+    width: 80px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.event-control-panel-info-item-invite:hover {
+    background: rgba(0,0,0,0.09);
+}
+
 .event-control-panel-info-label-icon {
     margin: 0px 5px 0px 0px;
 }
@@ -80,7 +100,6 @@
 
 @media only screen and (max-width: 1024px) {
     .event-control-panel {
-        /*width: 100vw;*/
         border-radius: 0px;
     }
 }
