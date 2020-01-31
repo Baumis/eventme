@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './AnswerSection.css'
-import { FaChevronDown } from 'react-icons/fa'
 
 class AnswerSection extends Component {
 
@@ -11,13 +11,27 @@ class AnswerSection extends Component {
         return { backgroundImage: `url(${user.avatar})` }
     }
 
+    getAnswers = () => {
+        const answers = []
+        this.props.EventStore.event.registrations.forEach(registration => {
+            const answer = registration.answers.find(answer => answer.id === this.props.question.id)
+            if (answer) {
+                answers.push({
+                    user: registration.user,
+                    content: answer
+                })
+            }
+        })
+        return answers
+    }
+
     render() {
 
         if (!this.props.show) {
             return null
         }
 
-        if (this.props.question.answers.length < 1) {
+        if (this.getAnswers.length < 1) {
             return (
                 <div className="answer empty-answers">
                     No answers to display.
@@ -26,7 +40,7 @@ class AnswerSection extends Component {
 
         return (
             <div className="answer-section">
-                {this.props.question.answers.map((answer, i) =>
+                {this.getAnswers(this.props.id).map((answer, i) =>
                     <div className="answer" key={i}>
                         <div className="answers-user-info">
                             <div className="answers-user-avatar" style={this.getAvatar(answer.user)}>
@@ -45,4 +59,4 @@ class AnswerSection extends Component {
     }
 }
 
-export default AnswerSection
+export default inject('EventStore')(observer(AnswerSection))

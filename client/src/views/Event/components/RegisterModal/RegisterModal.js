@@ -20,10 +20,10 @@ class RegisterModal extends Component {
     }
 
     answerQuestion = (questionId, answer) => {
-        const answers = [...this.props.answers]
+        const answers = [...this.state.answers]
         const targetAnswer = answers.find(answer => answer.id = questionId)
         if (targetAnswer) {
-            targetAnswer.content = targetAnswer
+            targetAnswer.content = answer
         } else {
             answers.push({
                 id: questionId,
@@ -31,6 +31,11 @@ class RegisterModal extends Component {
             })
         }
         this.setState({ answers: answers })
+    }
+
+    getAnswer = (questionId) => {
+        const targetAnswer = this.state.answers.find(answer => answer.id = questionId)
+        return targetAnswer
     }
 
     scrollPositionByStep = (step) => {
@@ -82,8 +87,11 @@ class RegisterModal extends Component {
                         <div className="register-part" key={i}>
                             <RegisterQuestion
                                 question={question.data}
+                                id={question.id}
                                 index={i}
                                 setStep={this.setStep}
+                                answerQuestion={this.answerQuestion}
+                                value={this.getAnswer(question.id)}
                             />
                         </div>
                     )}

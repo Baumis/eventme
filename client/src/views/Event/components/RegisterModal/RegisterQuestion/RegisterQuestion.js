@@ -5,6 +5,10 @@ import DefaultButtons from '../../../../../commonComponents/UniversalModal/Defau
 
 class RegisterQuestion extends Component {
 
+    changeAnswer = (event) => {
+        this.props.answerQuestion(this.props.id, event.target.value)
+    }
+
     render() {
         return (
             <div className="register-questions">
@@ -20,6 +24,8 @@ class RegisterQuestion extends Component {
                     <div className="register-questions-textarea">
                         <textarea
                             rows={6}
+                            onChange={this.changeAnswer}
+                            value={this.props.value}
                         />
                     </div>
                 </div>
