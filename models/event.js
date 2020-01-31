@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const messageSchema = require('./messageSchema')
 const componentSchema = require('./componentSchema')
 const registrationSchema = require('./registrationSchema')
+const registrationQuestionSchema = require('./registrationQuestionSchema')
 
 const guestSchema = new mongoose.Schema({
     user: {
@@ -51,7 +52,8 @@ const eventSchema = new mongoose.Schema({
     guests: [guestSchema],
     components: [componentSchema],
     discussion: [messageSchema],
-    registrations: [registrationSchema]
+    registrations: [registrationSchema],
+    registrationQuestions: [registrationQuestionSchema]
 })
 
 eventSchema.statics.format = (event) => {
@@ -87,7 +89,8 @@ eventSchema.statics.format = (event) => {
         guests: event.guests,
         components: event.components,
         discussion: event.discussion,
-        registrations: formattedRegistrations
+        registrations: formattedRegistrations,
+        registrationQuestions: event.registrationQuestions
     }
     return formattedEvent
 }
@@ -134,7 +137,8 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         guests: event.guests,
         components: formattedComponents,
         discussion: event.discussion,
-        registrations: formattedRegistrations
+        registrations: formattedRegistrations,
+        registrationQuestions: event.registrationQuestions
     }
     return formattedEvent
 }
