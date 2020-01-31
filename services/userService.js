@@ -219,6 +219,7 @@ exports.findOrCreateGoogleUser = async (googleToken) => {
     const existingUser = await User.findOne({ userType: 'GOOGLE', externalId: googleUser.sub })
 
     if (existingUser) {
+        existingUser.avatar = googleUser.picture
         return existingUser
     }
 
@@ -248,6 +249,7 @@ exports.findOrCreateFacebookUser = async (userId, facebookToken) => {
     const existingUser = await User.findOne({ userType: 'FACEBOOK', externalId: facebookUser.id })
 
     if (existingUser) {
+        existingUser.avatar = facebookUser.picture.data.url
         return existingUser
     }
 
