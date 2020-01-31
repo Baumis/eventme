@@ -14,8 +14,23 @@ class RegisterModal extends Component {
         this.state = {
             loading: false,
             alias: "",
-            step: 0
+            step: 0,
+            answers: []
         }
+    }
+
+    answerQuestion = (questionId, answer) => {
+        const answers = [...this.props.answers]
+        const targetAnswer = answers.find(answer => answer.id = questionId)
+        if (targetAnswer) {
+            targetAnswer.content = targetAnswer
+        } else {
+            answers.push({
+                id: questionId,
+                content: answer
+            })
+        }
+        this.setState({ answers: answers })
     }
 
     scrollPositionByStep = (step) => {
@@ -63,10 +78,10 @@ class RegisterModal extends Component {
                     </div>
                 </div>
                 <div className="register-content" id={"xScroller"}>
-                    {this.props.EventStore.questions.map((question, i) =>
+                    {this.props.EventStore.event.registrationQuestions.map((question, i) =>
                         <div className="register-part">
                             <RegisterQuestion
-                                question={question}
+                                question={question.data}
                                 index={i}
                                 setStep={this.setStep}
                             />
@@ -88,7 +103,7 @@ class RegisterModal extends Component {
                         <div className="register-button-row">
                             <DefaultButtons
                                 negativeLabel={'back'}
-                                negativeAction={ () => this.setStep(this.state.step - 1)}
+                                negativeAction={() => this.setStep(this.state.step - 1)}
                             />
                             {this.readyToJoin() ?
                                 <div className="register-button" onClick={this.join}>

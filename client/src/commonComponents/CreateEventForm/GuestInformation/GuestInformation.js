@@ -16,14 +16,19 @@ class GuestInformation extends Component {
 
     changeQuestion = (event, index) => {
         const questionsClone = [... this.props.questions]
-        questionsClone[index].content = event.target.value
+        questionsClone[index].data.content = event.target.value
         this.props.setGuestQuestions(questionsClone)
     }
 
     addNewQuestion = () => {
         if (this.props.questions.length < 3) {
             const questionsClone = [... this.props.questions]
-            questionsClone.push({ content: '', answers: [] })
+            questionsClone.push({
+                type: 'QUESTION',
+                data: {
+                    content: ''
+                }
+            })
             this.props.setGuestQuestions(questionsClone)
         }
     }
@@ -53,7 +58,7 @@ class GuestInformation extends Component {
                             <CreateInput
                                 label={''}
                                 type={'text'}
-                                value={question.content}
+                                value={question.data.content}
                                 placeholder={'Write a question'}
                                 onChange={(event) => this.changeQuestion(event, i)}
                             />

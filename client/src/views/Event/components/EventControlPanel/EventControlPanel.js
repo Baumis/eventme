@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EventControlPanel.css'
 import Tabs from '../Tabs/Tabs'
-import { FaCalendarDay, FaRegClock, FaUser } from 'react-icons/fa'
+import { FaRegCalendarAlt, FaRegClock, FaRegUser } from 'react-icons/fa'
 import moment from 'moment'
 import JoinEventButton from '../JoinEventButton/JoinEventButton'
 
@@ -25,7 +25,7 @@ class EventControlPanel extends Component {
                     <div className="event-control-panel-info-item">
                         <div className="event-control-panel-info-item-label">
                             <div className="event-control-panel-info-icon">
-                                <FaUser />
+                                <FaRegUser />
                             </div>
                             Host
                         </div>
@@ -36,7 +36,7 @@ class EventControlPanel extends Component {
                     <div className="event-control-panel-info-item">
                         <div className="event-control-panel-info-item-label">
                             <div className="event-control-panel-info-icon">
-                                <FaCalendarDay />
+                                <FaRegCalendarAlt />
                             </div>
                             Date
                         </div>
