@@ -25,10 +25,10 @@ class RegisterResults extends Component {
     render() {
         return (
             <div className="register-results">
-                {this.props.EventStore.questions.map((question, i) =>
+                {this.props.EventStore.event.registrationQuestions.map((question, i) =>
                     <div className="register-results-question" key={i}>
                         <div className="register-results-question-button" onClick={() => this.toggleAnswer(i)}>
-                            {question.content}
+                            {question.data.content}
                             {this.state.displayedAnswers.includes(i) ?
                                 <FaChevronUp />
                                 :

@@ -5,30 +5,6 @@ class EventStore {
     event = null
     saved = true
 
-    questions = [
-        {
-            content: 'Kuka olet?', answers: [
-                {
-                    user: { avatar: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png", name: "Kimmo Timonen" },
-                    content: 'Minä en tahdo kertoa itsestäni mitään. Olen täysin yksin tässä maailmassa.'
-                },
-                {
-                    user: { _id: "5ddfa1e96312af39ec5aca2a", avatar: "https://lh3.googleusercontent.com/a-/AAuE7mBtCSTptcv-vr9OSS3Akg7WLIh-NO9d16GFti_Z=s96-c", name: "Axel Baumgartner" },
-                    content: 'Olen sivun admin. Hajaantukaa.'
-                }
-            ]
-        },
-        { content: 'MItä haluaisit syödä illalla?', answers: [] },
-        { content: 'Haluatko jatkaa jäähallilta ravintolaan?', answers: [] }
-    ]
-
-    adQuestion(question) {
-        this.questions.push(question)
-    }
-    removeQuestion(index) {
-        this.questions.slice(index, 1)
-    }
-
     async initializeEvent(eventId) {
         try {
             this.event = await eventService.getOne(eventId)
