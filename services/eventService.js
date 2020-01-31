@@ -693,8 +693,17 @@ exports.removeAnswerFromFormComponent = async (id, componentId, questionId, user
         { ...options, arrayFilters: [{ 'question._id': mongoose.Types.ObjectId(questionId) }] })
 }
 
-exports.addRegistration = async (event, name, senderId) => {
-    const registration = {}
+exports.addRegistration = async (event, name, senderId, answers) => {
+    if (answers) {
+        for (let answer of answers) {
+            const questionExists = event.registrationQuestions.find(question => question._id.toString() === answer.questionId)
+            if (!questionExists) {
+                throw new Error('Question for provided answer does not exist')
+            }
+        }
+    }
+
+    const registration = { answers }
 
     if (senderId) {
         const oldRegistration = event.registrations.find(registration => {
