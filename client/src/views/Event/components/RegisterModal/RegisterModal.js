@@ -21,12 +21,12 @@ class RegisterModal extends Component {
 
     answerQuestion = (questionId, answer) => {
         const answers = [...this.state.answers]
-        const targetAnswer = answers.find(answer => answer.id = questionId)
+        const targetAnswer = answers.find(answer => answer.questionId === questionId)
         if (targetAnswer) {
             targetAnswer.content = answer
         } else {
             answers.push({
-                id: questionId,
+                questionId: questionId,
                 content: answer
             })
         }
@@ -34,8 +34,8 @@ class RegisterModal extends Component {
     }
 
     getAnswer = (questionId) => {
-        const targetAnswer = this.state.answers.find(answer => answer.id = questionId)
-        return targetAnswer
+        const targetAnswer = this.state.answers.find(answer => answer.questionId === questionId)
+        return targetAnswer ? targetAnswer.content : ''
     }
 
     scrollPositionByStep = (step) => {
@@ -59,9 +59,14 @@ class RegisterModal extends Component {
     join = async () => {
         const alias = this.state.alias.length > 0 ? this.state.alias : undefined
 
+        if(alias && alias.length < 3) {
+            alert('Alias has to be at least 3 characters long')
+            return
+        }
+
         this.setState({ loading: true })
         const response = await this.props.EventStore.joinEvent(
-            this.props.EventStore.event._id, alias
+            this.props.EventStore.event._id, alias, this.state.answers
         )
         this.setState({ loading: false })
 
@@ -74,7 +79,6 @@ class RegisterModal extends Component {
     }
 
     render() {
-        console.log(this.state.step)
         return (
             <div className="register-modal">
                 <div className="register-top-bar">
@@ -87,11 +91,11 @@ class RegisterModal extends Component {
                         <div className="register-part" key={i}>
                             <RegisterQuestion
                                 question={question.data}
-                                id={question.id}
+                                id={question._id}
                                 index={i}
                                 setStep={this.setStep}
                                 answerQuestion={this.answerQuestion}
-                                value={this.getAnswer(question.id)}
+                                value={this.getAnswer(question._id)}
                             />
                         </div>
                     )}

@@ -14,11 +14,11 @@ class AnswerSection extends Component {
     getAnswers = () => {
         const answers = []
         this.props.EventStore.event.registrations.forEach(registration => {
-            const answer = registration.answers.find(answer => answer.id === this.props.question.id)
+            const answer = registration.answers.find(answer => answer.questionId === this.props.question._id)
             if (answer) {
                 answers.push({
                     user: registration.user,
-                    content: answer
+                    content: answer.content
                 })
             }
         })
@@ -31,7 +31,7 @@ class AnswerSection extends Component {
             return null
         }
 
-        if (this.getAnswers.length < 1) {
+        if (this.getAnswers().length < 1) {
             return (
                 <div className="answer empty-answers">
                     No answers to display.
@@ -40,7 +40,7 @@ class AnswerSection extends Component {
 
         return (
             <div className="answer-section">
-                {this.getAnswers(this.props.id).map((answer, i) =>
+                {this.getAnswers().map((answer, i) =>
                     <div className="answer" key={i}>
                         <div className="answers-user-info">
                             <div className="answers-user-avatar" style={this.getAvatar(answer.user)}>

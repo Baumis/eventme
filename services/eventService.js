@@ -745,6 +745,7 @@ exports.addRegistration = async (event, name, senderId, answers) => {
         return populatedEvent
 
     } catch (exception) {
+        console.log('EXCEPTION:', exception)
         await session.abortTransaction()
         session.endSession()
         throw new Error('Could not add registration')

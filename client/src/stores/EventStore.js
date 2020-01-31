@@ -28,9 +28,9 @@ class EventStore {
         }
     }
 
-    async joinEvent(eventId, alias) {
+    async joinEvent(eventId, alias, answers) {
         try {
-            this.event = await eventService.addRegistration(eventId, alias)
+            this.event = await eventService.addRegistration(eventId, alias, answers)
             return this.event
         } catch (error) {
             return null
