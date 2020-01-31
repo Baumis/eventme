@@ -23,16 +23,15 @@
     font-size: 14px;
     margin: 0px 10px;
     padding: 0px 0px 10px 0px;
-    color: rgba(76, 92, 104, 1);
     width: 125px;
-    color: #1985a1;
+    color: rgb(70, 73, 76, 0.8);
 }
 
 .event-control-panel-info-item-label {
     display: flex;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
-    color: rgb(70, 73, 76, 0.5);
+    color: #1985a1;
 }
 
 .event-control-panel-info-item-content {
@@ -41,7 +40,7 @@
 }
 
 .event-control-panel-info-icon {
-    display: flex;
+    display: none;
     margin: 0px 5px 0px 0px;
 }
 
