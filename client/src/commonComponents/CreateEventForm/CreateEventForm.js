@@ -71,7 +71,7 @@ class CreateEventForm extends Component {
             startDate: startDate,
             endDate: endDate,
             description: this.state.information.description,
-            registrationQuestions: this.props.questions
+            registrationQuestions: this.state.questions
         })
 
         this.setState({ loading: false })
