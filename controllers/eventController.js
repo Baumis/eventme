@@ -271,7 +271,7 @@ exports.addAnswersToFormComponent = async (request, response) => {
 
 exports.addRegistration = async (request, response) => {
     try {
-        const updatedEvent = await eventService.addRegistration(request.event, request.body.name, request.senderId)
+        const updatedEvent = await eventService.addRegistration(request.event, request.body.name, request.senderId, request.body.answers)
 
         if (request.senderId) {
             logService.joinedEvent(request.senderId, updatedEvent._id, updatedEvent.label)
