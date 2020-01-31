@@ -72,7 +72,8 @@ eventSchema.statics.format = (event) => {
 
         const formattedRegistration = {
             _id: registration._id,
-            user
+            user,
+            answers: registration.answers
         }
 
         return formattedRegistration
@@ -120,7 +121,8 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
 
         const formattedRegistration = {
             _id: registration._id,
-            user
+            user,
+            answers: registration.answers
         }
 
         return formattedRegistration
