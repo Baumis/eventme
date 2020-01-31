@@ -122,7 +122,7 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         const formattedRegistration = {
             _id: registration._id,
             user,
-            answers: registration.answers
+            answers: user._id && user._id.toString() === guestId ? registration.answers : []
         }
 
         return formattedRegistration
