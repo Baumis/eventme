@@ -10,7 +10,7 @@ class RegisterQuestion extends Component {
             <div className="register-questions">
                 <div className="register-questions-question">
                     <div className="register-questions-index">
-                        {`Step ${this.props.index + 1}/${this.props.EventStore.questions.length + 1}`}
+                        {`Step ${this.props.index + 1}/${this.props.EventStore.event.registrationQuestions.length + 1}`}
                     </div>
                     <div className="register-questions-title-row">
                         <div className="register-questions-title">

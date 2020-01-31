@@ -79,7 +79,7 @@ class RegisterModal extends Component {
                 </div>
                 <div className="register-content" id={"xScroller"}>
                     {this.props.EventStore.event.registrationQuestions.map((question, i) =>
-                        <div className="register-part">
+                        <div className="register-part" key={i}>
                             <RegisterQuestion
                                 question={question.data}
                                 index={i}
