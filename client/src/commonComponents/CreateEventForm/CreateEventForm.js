@@ -14,9 +14,7 @@ class CreateEventForm extends Component {
             information: {
                 eventName: '',
                 startDate: '',
-                endDate: '',
                 startTime: '',
-                endTime: '',
                 today: '',
                 description: ''
             },
@@ -30,9 +28,7 @@ class CreateEventForm extends Component {
             information: {
                 eventName: '',
                 startDate: today,
-                endDate: today,
                 startTime: '',
-                endTime: '',
                 today: today,
                 description: ''
             }
@@ -57,19 +53,11 @@ class CreateEventForm extends Component {
         this.setState({ loading: true })
 
         const startTime = this.state.information.startTime.split(":")
-        const endTime = this.state.information.endTime.split(":")
-
         let startDate = new Date(this.state.information.startDate).setHours(startTime[0], startTime[1])
-        let endDate = new Date(this.state.information.endDate).setHours(endTime[0], endTime[1])
-
-        if(moment(startDate).isAfter(endDate)){
-            endDate = startDate
-        }
 
         const event = await this.props.EventStore.create({
             label: this.state.information.eventName,
             startDate: startDate,
-            endDate: endDate,
             description: this.state.information.description,
             registrationQuestions: this.state.questions
         })
