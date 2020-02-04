@@ -10,3 +10,17 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.inviteowl-logo {
+    flex: 1;
+    background: url('../../assets/inviteowl_logo_centered.png');
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    background-position:center center;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 26px;
+    cursor: pointer;
+}
