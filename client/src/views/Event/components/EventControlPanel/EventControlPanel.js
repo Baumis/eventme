@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EventControlPanel.css'
 import Tabs from '../Tabs/Tabs'
-import { FaCalendarDay, FaCheck } from 'react-icons/fa'
+import { FaRegCalendarAlt, FaRegClock, FaRegUser } from 'react-icons/fa'
 import moment from 'moment'
 import JoinEventButton from '../JoinEventButton/JoinEventButton'
 
@@ -23,30 +23,55 @@ class EventControlPanel extends Component {
                 </div>
                 <div className="event-control-panel-info-row">
                     <div className="event-control-panel-info-item">
-                        <div style={this.getAvatar(this.props.EventStore.event.creator.avatar)}
-                            className="event-control-panel-info-avatar">
+                        <div className="event-control-panel-info-item-label">
+                            <div className="event-control-panel-info-icon">
+                                <FaRegUser />
+                            </div>
+                            Host
                         </div>
-                        {this.props.EventStore.event.creator.name}
+                        <div className="event-control-panel-info-item-content">
+                            {this.props.EventStore.event.creator.name}
+                        </div>
                     </div>
                     <div className="event-control-panel-info-item">
-                        <div className="event-control-panel-info-icon">
-                            <FaCalendarDay />
-                        </div>
-                        {moment(this.props.EventStore.event.startDate).format('DD MMMM YYYY')}
-                    </div>
-                    {!this.props.isGuest() ?
-                        <div className="event-control-panel-info-item">
-                            <JoinEventButton
-                                toggleRegisterModal={this.props.toggleRegisterModal}
-                            />
-                        </div>
-                        :
-                        <div className="event-control-panel-info-item">
+                        <div className="event-control-panel-info-item-label">
                             <div className="event-control-panel-info-icon">
-                                <FaCheck />
+                                <FaRegCalendarAlt />
                             </div>
-                            Joined
+                            Date
                         </div>
+                        <div className="event-control-panel-info-item-content">
+                            {moment(this.props.EventStore.event.startDate).format('D MMMM YYYY')}
+                        </div>
+                    </div>
+                    <div className="event-control-panel-info-item">
+                        <div className="event-control-panel-info-item-label">
+                            <div className="event-control-panel-info-icon">
+                                <FaRegClock />
+                            </div>
+                            Time
+                        </div>
+                        <div className="event-control-panel-info-item-content">
+                            {moment(this.props.EventStore.event.startDate).format('LT')}
+                        </div>
+                    </div>
+                    {this.props.isCreator() ?
+                        <div className="event-control-panel-info-item-invite" onClick={() => this.props.toggleInviteLink()}>
+                            Invite
+                         </div>
+                        : !this.props.isGuest() ?
+                            <div className="event-control-panel-info-item">
+                                <JoinEventButton
+                                    toggleRegisterModal={this.props.toggleRegisterModal}
+                                />
+                            </div>
+                            :
+                            <div className="event-control-panel-info-item">
+                                <div className="event-control-panel-info-item-label">
+                                    Status
+                                </div>
+                                Joined
+                            </div>
                     }
                 </div>
                 <Tabs

@@ -32,7 +32,8 @@ exports.eventObject = {
     label: 'First event',
     description: 'This is the description',
     startDate: new Date(),
-    endDate: new Date(Date.now() + 86400000)
+    endDate: new Date(Date.now() + 86400000),
+    registrationQuestions: []
 }
 
 exports.newEventObject = {
@@ -82,7 +83,8 @@ exports.newEventObject = {
                 ]
             }
         }
-    ]
+    ],
+    registrationQuestions: []
 }
 
 exports.nonExistingUserId = async () => {

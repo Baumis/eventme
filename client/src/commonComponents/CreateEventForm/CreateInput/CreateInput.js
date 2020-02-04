@@ -4,17 +4,21 @@ import './CreateInput.css'
 const CreateInput = (props) => {
 
     return (
-        <div className="create-input">
-            <div className="create-input-label">
-                <label>{props.label}</label>
-            </div>
+        <div className="create-input" style={props.style}>
+            {props.label.length > 0 ?
+                <div className="create-input-label">
+                    <label>{props.label}</label>
+                </div>
+                : null}
             <input
                 type={props.type}
                 min={props.min}
                 value={props.value}
                 onChange={props.onChange}
-                style={props.style}>
-            </input>
+                placeholder={props.placeholder}
+                style={props.style}
+                required
+            ></input>
         </div>
     )
 }

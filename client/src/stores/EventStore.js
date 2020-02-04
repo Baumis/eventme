@@ -28,9 +28,9 @@ class EventStore {
         }
     }
 
-    async joinEvent(eventId, alias) {
+    async joinEvent(eventId, alias, answers) {
         try {
-            this.event = await eventService.addRegistration(eventId, alias)
+            this.event = await eventService.addRegistration(eventId, alias, answers)
             if (alias) {
                 const existing = localStorage.getItem('joinedEvents')
                 const joinedEvents = existing ? JSON.parse(existing) : []
@@ -107,7 +107,7 @@ class EventStore {
         }
     }
 
-    async deleteComment(messageId, commentId){
+    async deleteComment(messageId, commentId) {
         try {
             this.event = await eventService.removeComment(this.event._id, messageId, commentId)
             return this.event
@@ -116,7 +116,7 @@ class EventStore {
         }
     }
 
-    async addAnswersToFormComponent(componentId, answers){
+    async addAnswersToFormComponent(componentId, answers) {
         try {
             this.event = await eventService.addAnswersToFormComponent(this.event._id, componentId, answers)
             return this.event

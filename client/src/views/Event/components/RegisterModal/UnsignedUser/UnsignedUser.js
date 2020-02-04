@@ -11,6 +11,16 @@ import { FaUser } from 'react-icons/fa'
 
 class UnsignedUser extends Component {
 
+    onSignInFail = (message) => {
+        this.props.VisibilityStore.showAlert(
+            'Sign in failed',
+            message,
+            'OK',
+            () => this.props.VisibilityStore.closeAlert()
+        )
+        this.setState({ password: '' })
+    }
+
     googleSignIn = async (response) => {
         try {
             await this.props.UserStore.googleSignIn(response.tokenId)
@@ -40,8 +50,7 @@ class UnsignedUser extends Component {
     }
 
     inviteOwlSignIn = () => {
-        this.props.toggleRegisterModal()
-        this.props.VisibilityStore.showSignModal(this.props.toggleRegisterModal)
+        this.props.VisibilityStore.showSignModal()
     }
 
     render() {

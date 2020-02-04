@@ -16,12 +16,12 @@ class Tabs extends Component {
                     <div className={'tabs-tab' + getActivityClass('Discussion')}
                         onClick={() => this.props.changeActive('Discussion')}>
                         <div className="tabs-icon-comment"><FaHome /> </div>
-                        Event
+                        EVENT
                     </div>
                     <div className={'tabs-tab' + getActivityClass('Guests')}
                         onClick={() => this.props.changeActive('Guests')}>
                         <div className="tabs-icon-users"><FaUsers /></div>
-                        Guests
+                        GUESTS
                     </div>
                 </div>
             </div>

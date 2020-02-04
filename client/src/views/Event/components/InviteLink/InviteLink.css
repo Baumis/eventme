@@ -1,0 +1,56 @@
+.invite-link {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+
+.invite-link-info {
+    display: flex;
+    text-align: center;
+    font-size: 18px;
+    color: #46494c;
+    padding-bottom: 20px;
+    font-weight: 500;
+    margin: 10px 0px 0px 0px;
+}
+
+.invite-link-row {
+    display: flex;
+    border: 2px solid #4c5c68;
+    border-radius: 5px;
+    height: 35px;
+}
+
+.invite-link-row input {
+    background: transparent;
+    border: none;
+    width: 100%;
+    color: rgb(70, 73, 76, 0.5);
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+.invite-link-copy-button {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background: #4c5c68;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    width: 55px;
+}
+
+.invite-link-button-row {
+    margin-top: 10px;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 450px) {
+    .invite-link {
+        width: 90vw;
+        margin: 20px 0px;
+    }
+}

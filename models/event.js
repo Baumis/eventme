@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const messageSchema = require('./messageSchema')
 const componentSchema = require('./componentSchema')
 const registrationSchema = require('./registrationSchema')
+const registrationQuestionSchema = require('./registrationQuestionSchema')
 
 const guestSchema = new mongoose.Schema({
     user: {
@@ -45,13 +46,13 @@ const eventSchema = new mongoose.Schema({
     background: {
         type: String,
         default: 'https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80',
-        maxlength: [2048, 'Url too long'],
-        match: [/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/, 'Background url not valid']
+        maxlength: [2048, 'Url too long']
     },
     guests: [guestSchema],
     components: [componentSchema],
     discussion: [messageSchema],
-    registrations: [registrationSchema]
+    registrations: [registrationSchema],
+    registrationQuestions: [registrationQuestionSchema]
 })
 
 eventSchema.statics.format = (event) => {
@@ -70,7 +71,8 @@ eventSchema.statics.format = (event) => {
 
         const formattedRegistration = {
             _id: registration._id,
-            user
+            user,
+            answers: registration.answers
         }
 
         return formattedRegistration
@@ -87,7 +89,8 @@ eventSchema.statics.format = (event) => {
         guests: event.guests,
         components: event.components,
         discussion: event.discussion,
-        registrations: formattedRegistrations
+        registrations: formattedRegistrations,
+        registrationQuestions: event.registrationQuestions
     }
     return formattedEvent
 }
@@ -117,7 +120,8 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
 
         const formattedRegistration = {
             _id: registration._id,
-            user
+            user,
+            answers: user._id && user._id.toString() === guestId ? registration.answers : []
         }
 
         return formattedRegistration
@@ -134,7 +138,8 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         guests: event.guests,
         components: formattedComponents,
         discussion: event.discussion,
-        registrations: formattedRegistrations
+        registrations: formattedRegistrations,
+        registrationQuestions: event.registrationQuestions
     }
     return formattedEvent
 }

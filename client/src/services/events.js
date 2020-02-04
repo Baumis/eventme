@@ -71,8 +71,8 @@ const addVoteToVoteComponent = async (id, componentId, optionId) => {
     return response.data
 }
 
-const addRegistration = async (id, name = undefined) => {
-    const response = await http.post(`${baseUrl}/${id}/registrations`, { name })
+const addRegistration = async (id, name = undefined, answers) => {
+    const response = await http.post(`${baseUrl}/${id}/registrations`, { name, answers })
     return response.data
 }
 

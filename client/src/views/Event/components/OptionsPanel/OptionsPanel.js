@@ -24,17 +24,21 @@ class OptionsPanel extends Component {
     }
 
     changeStartDate = (event) => {
-        this.props.EventStore.setValue(event.target.value, 'startDate')
-        if (moment(event.target.value).isAfter(this.props.EventStore.event.endDate)) {
-            this.props.EventStore.setValue(event.target.value, 'endDate')
+
+        const currentHours = new Date(this.props.EventStore.event.startDate).getHours()
+        const currentMinutes = new Date(this.props.EventStore.event.startDate).getMinutes()
+        const dateWithTime = new Date(event.target.value).setHours(currentHours, currentMinutes)
+
+        this.props.EventStore.setValue(dateWithTime, 'startDate')
+        if (moment(dateWithTime).isAfter(this.props.EventStore.event.endDate)) {
+            this.props.EventStore.setValue(dateWithTime, 'endDate')
         }
     }
 
-    changeEndDate = (event) => {
-        this.props.EventStore.setValue(event.target.value, 'endDate')
-        if (moment(event.target.value).isBefore(this.props.EventStore.event.startDate)) {
-            this.props.EventStore.setValue(event.target.value, 'startDate')
-        }
+    changeStartTime = (event) => {
+        const startTime = event.target.value.split(":")
+        const startDate = new Date(this.props.EventStore.event.startDate).setHours(startTime[0], startTime[1])
+        this.props.EventStore.setValue(startDate, 'startDate')
     }
 
     addInfoField = () => {
@@ -111,10 +115,10 @@ class OptionsPanel extends Component {
                             changeValue={this.changeStartDate}
                         />
                         <InputBlock
-                            type={'date'}
-                            label={'End date'}
-                            value={moment(this.props.EventStore.event.endDate).format('YYYY-MM-DD')}
-                            changeValue={this.changeEndDate}
+                            type={'time'}
+                            label={' '}
+                            value={moment(this.props.EventStore.event.startDate).format('HH:mm')}
+                            changeValue={this.changeStartTime}
                         />
                     </div>
                 </div>
@@ -122,5 +126,4 @@ class OptionsPanel extends Component {
         )
     }
 }
-
 export default inject('EventStore', 'VisibilityStore', 'UserStore')(observer(OptionsPanel))

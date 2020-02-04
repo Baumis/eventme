@@ -15,19 +15,19 @@ class ProfileTabs extends Component {
                     <div className={'profile-tabs-tab' + getActivityClass('MyEvents')}
                         onClick={() => this.props.changeActive('MyEvents')}>
                         {this.props.isOwner ?
-                            <div>My events</div>
+                            <div>MY EVENTS</div>
                             :
-                            <div>Events</div>
+                            <div>EVENTS</div>
                         }
                     </div>
                     <div className={'profile-tabs-tab' + getActivityClass('Invites')}
                         onClick={() => this.props.changeActive('Invites')}>
-                        Invites
+                        INVITES
                     </div>
                     {this.props.isOwner ?
                         <div className={'profile-tabs-tab' + getActivityClass('Settings')}
                             onClick={() => this.props.changeActive('Settings')}>
-                            Settings
+                            SETTINGS
                         </div>
                         : null}
                 </div>

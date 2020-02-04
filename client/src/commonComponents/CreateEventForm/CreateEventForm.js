@@ -3,51 +3,44 @@ import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './CreateEventForm.css'
 import moment from 'moment'
-import Spinner from '../Spinner/Spinner'
-import CreateInput from './CreateInput/CreateInput'
-import CreateTextArea from './CreateTextArea/CreateTextArea'
-import DefaultButtons from '../UniversalModal/DefaultButtons/DefaultButtons'
+import EventInformation from './EventInformation/EventInformation'
+import GuestInformation from './GuestInformation/GuestInformation'
 
 class CreateEventForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            eventName: '',
-            startDate: '',
-            endDate: '',
-            today: '',
-            description: '',
-            loading: false
+            page: 1,
+            information: {
+                eventName: '',
+                startDate: '',
+                startTime: '',
+                today: '',
+                description: ''
+            },
+            questions: []
         }
     }
 
     componentDidMount() {
         const today = moment(new Date()).format('YYYY-MM-DD')
         this.setState({
-            startDate: today,
-            endDate: today,
-            today: today
+            information: {
+                eventName: '',
+                startDate: today,
+                startTime: '',
+                today: today,
+                description: ''
+            }
         })
     }
 
-    changeStartDate = (event) => {
-        this.setState({ startDate: event.target.value })
-        if (moment(event.target.value).isAfter(this.state.endDate)) {
-            this.setState({ endDate: event.target.value })
-        }
+    setEventInformation = (information) => {
+        this.setState({ information: information })
     }
 
-    changeEndDate = (event) => {
-        this.setState({ endDate: event.target.value })
-        if (moment(event.target.value).isBefore(this.state.startDate)) {
-            this.setState({ startDate: event.target.value })
-        } else {
-
-        }
-    }
-
-    changeValue = (field, event) => {
-        this.setState({ [field]: event.target.value })
+    setGuestQuestions = (questions) => {
+        this.setState({ questions: questions })
     }
 
     create = async () => {
@@ -58,13 +51,19 @@ class CreateEventForm extends Component {
         }
 
         this.setState({ loading: true })
+
+        const startTime = this.state.information.startTime.split(":")
+        let startDate = new Date(this.state.information.startDate).setHours(startTime[0], startTime[1])
+
         const event = await this.props.EventStore.create({
-            label: this.state.eventName,
-            startDate: this.state.startDate,
-            endDate: this.state.endDate,
-            description: this.state.description
+            label: this.state.information.eventName,
+            startDate: startDate,
+            description: this.state.information.description,
+            registrationQuestions: this.state.questions
         })
+
         this.setState({ loading: false })
+
         event ?
             this.props.history.push(`/events/${event._id}`)
             :
@@ -76,49 +75,44 @@ class CreateEventForm extends Component {
             )
     }
 
+    changePage = (page) => {
+        this.setState({ page: page })
+    }
+
+    getPage = () => {
+        switch (this.state.page) {
+            case 1:
+                return <EventInformation
+                    changePage={this.changePage}
+                    setEventInformation={this.setEventInformation}
+                    negativeAction={this.props.negativeAction}
+                    negativeLabel={this.props.negativeLabel}
+                    information={this.state.information}
+                    setEventInformation={this.setEventInformation}
+                />
+            case 2:
+                return <GuestInformation
+                    changePage={this.changePage}
+                    setGuestQuestions={this.setGuestQuestions}
+                    create={this.create}
+                    questions={this.state.questions}
+                />
+            default:
+                return <EventInformation
+                    changePage={this.changePage}
+                    setEventInformation={this.setEventInformation}
+                    negativeAction={this.props.negativeAction}
+                    negativeLabel={this.props.negativeLabel}
+                    information={this.state.information}
+                    setEventInformation={this.setEventInformation}
+                />
+        }
+    }
+
     render() {
         return (
             <div className="create-event-form">
-                <div className="create-event-content">
-                    <CreateInput
-                        label={'EVENT NAME'}
-                        type={'text'}
-                        value={this.state.eventName}
-                        onChange={(event) => this.changeValue('eventName', event)}
-                    />
-                    <div className="create-event-row">
-                        <div className="create-event-row-left">
-                            <CreateInput
-                                label={'START DATE'}
-                                type={'date'}
-                                min={this.state.today}
-                                value={this.state.startDate}
-                                onChange={(event) => this.changeStartDate(event)}
-                            />
-                        </div>
-                        <div className="create-event-row-right">
-                            <CreateInput
-                                label={'END DATE'}
-                                type={'date'}
-                                min={this.state.today}
-                                value={this.state.endDate}
-                                onChange={(event) => this.changeEndDate(event)}
-                            />
-                        </div>
-                    </div>
-                    <CreateTextArea
-                        label={'DESCRIPTION'}
-                        value={this.state.description}
-                        onChange={(event) => this.changeValue('description', event)}
-                    />
-                    <DefaultButtons
-                        positiveLabel={'Create'}
-                        negativeLabel={this.props.negativeLabel}
-                        positiveAction={() => this.create()}
-                        negativeAction={this.props.negativeAction}
-                        showSpinner={this.state.loading}
-                    />
-                </div>
+                {this.getPage()}
             </div>
         )
     }

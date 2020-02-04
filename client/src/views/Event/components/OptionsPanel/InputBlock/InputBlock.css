@@ -16,7 +16,9 @@
   
   .inputLabel{
     display: flex;
-    padding: 10px;
+    padding: 0px;
+    height: 30px;
+    margin-left: 8px;
     color: #1985a1;
   }
   
@@ -25,6 +27,10 @@
   }
   
   .inputBlock input[type=date]::-webkit-clear-button {
+    display: none;
+  }
+
+  .inputBlock input[type=time]::-webkit-clear-button {
     display: none;
   }
   
@@ -37,4 +43,5 @@
       background: white;
       border: 1px solid #dddddd;
       color:rgba(0,0,0);
+      font-family: sans-serif;
   }

@@ -13,6 +13,7 @@ import NotFound from '../NotFound/NotFound'
 import EventContent from './components/EventContent/EventContent'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 import RegisterModal from './components/RegisterModal/RegisterModal'
+import InviteLink from './components/InviteLink/InviteLink'
 
 class Event extends Component {
 
@@ -23,6 +24,7 @@ class Event extends Component {
             showNewComponentModal: false,
             activeTab: 'Discussion',
             registerModal: false,
+            inviteLink: false,
             updater: null
         }
     }
@@ -30,7 +32,10 @@ class Event extends Component {
     async componentDidMount() {
         await this.props.EventStore.initializeEvent(this.props.eventId)
 
-        this.setState({ loading: false })
+        this.setState({
+            loading: false,
+            inviteLink: this.props.EventStore.event.registrations.length < 2
+        })
         this.startEventUpdater()
     }
 
@@ -89,6 +94,10 @@ class Event extends Component {
         this.setState({ showNewComponentModal: !this.state.showNewComponentModal })
     }
 
+    toggleInviteLink = () => {
+        this.setState({ inviteLink: !this.state.inviteLink })
+    }
+
     slidePanel = () => {
         this.props.VisibilityStore.slideOptionsPanel()
     }
@@ -120,6 +129,7 @@ class Event extends Component {
                         togglePanel={this.slidePanel}
                         isCreator={this.isCreator}
                         toggleRegisterModal={this.toggleRegisterModal}
+                        toggleInviteLink={this.toggleInviteLink}
                     />
                     <EventContent
                         isCreator={this.isCreator}
@@ -144,9 +154,15 @@ class Event extends Component {
                         </div>
                         : null
                     }
-                    {this.props.VisibilityStore.signModal ?
+                    {this.props.VisibilityStore.alert ?
+                        <Alert />
+                        : null
+                    }
+                    {this.state.inviteLink && this.isCreator() ?
                         <UniversalModal
-                            content={<SignModal />}
+                            content={<InviteLink
+                                toggleInviteLink={this.toggleInviteLink}
+                            />}
                         />
                         : null
                     }
@@ -160,8 +176,10 @@ class Event extends Component {
                         />
                         : null
                     }
-                    {this.props.VisibilityStore.alert ?
-                        <Alert />
+                    {this.props.VisibilityStore.signModal ?
+                        <UniversalModal
+                            content={<SignModal />}
+                        />
                         : null
                     }
                 </div>

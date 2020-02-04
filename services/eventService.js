@@ -76,6 +76,10 @@ exports.create = async (creatorId, eventObject) => {
         throw new Error('End Date must be greater than Start Date')
     }
 
+    if (!validators.validateRegistrationQuestions(eventObject.registrationQuestions)) {
+        throw new Error('RegistrationQuestions are not valid')
+    }
+
     const newEvent = new Event({
         label: eventObject.label,
         description: eventObject.description,
@@ -87,6 +91,7 @@ exports.create = async (creatorId, eventObject) => {
             user: creatorId,
             status: 'GOING'
         }],
+        registrationQuestions: eventObject.registrationQuestions,
         registrations: [{
             user: creatorId
         }]
@@ -131,6 +136,10 @@ exports.update = async (event, eventObject) => {
         throw new Error('End Date must be greater than Start Date')
     }
 
+    if (!validators.validateRegistrationQuestions(eventObject.registrationQuestions)) {
+        throw new Error('RegistrationQuestions are not valid')
+    }
+
     const componentPromises = []
 
     // Remove components
@@ -165,7 +174,8 @@ exports.update = async (event, eventObject) => {
         description: eventObject.description,
         startDate: startDate,
         endDate: endDate,
-        background: eventObject.background
+        background: eventObject.background,
+        registrationQuestions: eventObject.registrationQuestions
     }
 
     const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })
@@ -686,8 +696,17 @@ exports.removeAnswerFromFormComponent = async (id, componentId, questionId, user
         { ...options, arrayFilters: [{ 'question._id': mongoose.Types.ObjectId(questionId) }] })
 }
 
-exports.addRegistration = async (event, name, senderId) => {
-    const registration = {}
+exports.addRegistration = async (event, name, senderId, answers) => {
+    if (answers) {
+        for (let answer of answers) {
+            const questionExists = event.registrationQuestions.find(question => question._id.toString() === answer.questionId)
+            if (!questionExists) {
+                throw new Error('Question for provided answer does not exist')
+            }
+        }
+    }
+
+    const registration = { answers }
 
     if (senderId) {
         const oldRegistration = event.registrations.find(registration => {
@@ -729,6 +748,7 @@ exports.addRegistration = async (event, name, senderId) => {
         return populatedEvent
 
     } catch (exception) {
+        console.log('EXCEPTION:', exception)
         await session.abortTransaction()
         session.endSession()
         throw new Error('Could not add registration')

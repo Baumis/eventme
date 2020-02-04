@@ -9,7 +9,7 @@ const InputBlock = (props) => {
                 <div className="inputLabel">
                     <label>{props.label}</label>
                 </div>
-                <input type={props.type} value={props.value} onChange={props.changeValue}></input>
+                <input type={props.type} value={props.value} onChange={props.changeValue} required></input>
             </div>
         </div>
     )
