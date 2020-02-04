@@ -46,8 +46,7 @@ const eventSchema = new mongoose.Schema({
     background: {
         type: String,
         default: 'https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80',
-        maxlength: [2048, 'Url too long'],
-        match: [/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/, 'Background url not valid']
+        maxlength: [2048, 'Url too long']
     },
     guests: [guestSchema],
     components: [componentSchema],
