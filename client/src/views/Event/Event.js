@@ -151,9 +151,15 @@ class Event extends Component {
                         </div>
                         : null
                     }
-                    {this.props.VisibilityStore.signModal ?
+                    {this.props.VisibilityStore.alert ?
+                        <Alert />
+                        : null
+                    }
+                    {this.state.inviteLink && this.isCreator() ?
                         <UniversalModal
-                            content={<SignModal />}
+                            content={<InviteLink
+                                toggleInviteLink={this.toggleInviteLink}
+                            />}
                         />
                         : null
                     }
@@ -167,15 +173,9 @@ class Event extends Component {
                         />
                         : null
                     }
-                    {this.props.VisibilityStore.alert ?
-                        <Alert />
-                        : null
-                    }
-                    {this.state.inviteLink && this.isCreator() ?
+                    {this.props.VisibilityStore.signModal ?
                         <UniversalModal
-                            content={<InviteLink
-                                toggleInviteLink={this.toggleInviteLink}
-                            />}
+                            content={<SignModal />}
                         />
                         : null
                     }

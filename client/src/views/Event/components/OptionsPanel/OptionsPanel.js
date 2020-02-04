@@ -126,5 +126,4 @@ class OptionsPanel extends Component {
         )
     }
 }
-
 export default inject('EventStore', 'VisibilityStore', 'UserStore')(observer(OptionsPanel))
