@@ -8,7 +8,7 @@ const InformationPage = (props) => {
     return (
         <div className="information-page">
             <div className="information-page-icon">
-                <GiOwl />
+                <FaRocket />
             </div>
             <div className="information-page-title">
                 Create events fast.
