@@ -31,6 +31,12 @@ class EventStore {
     async joinEvent(eventId, alias, answers) {
         try {
             this.event = await eventService.addRegistration(eventId, alias, answers)
+            if (alias) {
+                const existing = localStorage.getItem('joinedEvents')
+                const joinedEvents = existing ? JSON.parse(existing) : []
+                joinedEvents.push(eventId)
+                localStorage.setItem('joinedEvents', JSON.stringify(joinedEvents))
+            }
             return this.event
         } catch (error) {
             return null

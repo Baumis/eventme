@@ -91,7 +91,10 @@ exports.create = async (creatorId, eventObject) => {
             user: creatorId,
             status: 'GOING'
         }],
-        registrationQuestions: eventObject.registrationQuestions
+        registrationQuestions: eventObject.registrationQuestions,
+        registrations: [{
+            user: creatorId
+        }]
     })
 
     const error = newEvent.validateSync()

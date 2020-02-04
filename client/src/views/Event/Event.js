@@ -55,9 +55,7 @@ class Event extends Component {
     startEventUpdater = () => {
         this.setState({
             updater: setInterval(() => {
-                if (this.isGuest()) {
                     this.props.EventStore.getEvent(this.props.EventStore.event._id)
-                }
             }, 20000)
         })
     }
@@ -78,8 +76,13 @@ class Event extends Component {
     }
 
     isGuest = () => {
-        if (!this.props.UserStore.currentUser || !this.props.EventStore.event) {
+        if (!this.props.EventStore.event) {
             return false
+        }
+        if (!this.props.UserStore.currentUser) {
+            const existing = localStorage.getItem('joinedEvents')
+            const joinedEvents = existing ? JSON.parse(existing) : []
+            return joinedEvents.includes(this.props.EventStore.event._id)
         }
         if (this.props.UserStore.currentUser._id === this.props.EventStore.event.creator._id) {
             return true
