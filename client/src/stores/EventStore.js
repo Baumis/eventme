@@ -8,7 +8,8 @@ class EventStore {
     async initializeEvent(eventId) {
         try {
             this.event = await eventService.getOne(eventId)
-            console.log('event initialized: ', toJS(this.event))
+            this.saved = true
+            //console.log('event initialized: ', toJS(this.event))
             return this.event
         } catch (error) {
             this.event = null
