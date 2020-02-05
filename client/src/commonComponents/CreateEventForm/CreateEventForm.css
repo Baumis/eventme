@@ -1,5 +1,6 @@
 .create-event-form{
     flex: 1;
+    width: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;

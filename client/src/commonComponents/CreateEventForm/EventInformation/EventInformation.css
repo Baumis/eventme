@@ -10,6 +10,7 @@
 }
 
 .event-information-row-right {
+    flex: 1;
     margin-left: 5px;
 }
 
@@ -32,5 +33,9 @@
 }
 
 @media only screen and (max-width: 450px) {
-    
+    .event-information-row {
+        display: flex;
+        max-width: 100%;
+        flex: 1;
+    }
 }
