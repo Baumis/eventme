@@ -25,6 +25,7 @@ const eventRouter = require('./routes/eventRouter')
 const userRouter = require('./routes/userRouter')
 const loginRouter = require('./routes/loginRouter')
 const logRouter = require('./routes/logRouter')
+const pictureRouter = require('./routes/pictureRouter')
 
 // Security middleware
 app.enable('trust proxy')
@@ -52,6 +53,7 @@ app.use('/api/events', eventRouter)
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/log', logRouter)
+app.use('/api/pictures', pictureRouter)
 
 // Rest of endpoints to react
 if (process.env.NODE_ENV === 'production') {

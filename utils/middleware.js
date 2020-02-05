@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const Event = require('../models/event')
+const User = require('../models/user')
 const roles = require('./roles')
 
 exports.extractToken = (request, response, next) => {
@@ -40,6 +41,21 @@ exports.extractEvent = async (request, response, next) => {
         }
 
         request.event = event
+        next()
+    } catch (exception) {
+        return response.status(400).json({ error: 'Malformatted id' })
+    }
+}
+
+exports.extractUser = async (request, response, next) => {
+    try {
+        const user = await User.findById(request.params.id)
+
+        if (user === null) {
+            return response.status(404).json({ error: 'User not found' })
+        }
+
+        request.user = user
         next()
     } catch (exception) {
         return response.status(400).json({ error: 'Malformatted id' })

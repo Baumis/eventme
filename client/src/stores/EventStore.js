@@ -1,5 +1,6 @@
 import { observable, decorate, action, runInAction, toJS } from 'mobx'
 import eventService from '../services/events'
+import pictureService from '../services/pictures'
 
 class EventStore {
     event = null
@@ -121,6 +122,16 @@ class EventStore {
         try {
             this.event = await eventService.addAnswersToFormComponent(this.event._id, componentId, answers)
             return this.event
+        } catch {
+            return null
+        }
+    }
+
+    async uploadEventBackground(file) {
+        try {
+            const picture = await pictureService.uploadEventBackground(this.event._id, file)
+            this.setValue(picture.secure_url, 'background')
+            return picture.secure_url
         } catch {
             return null
         }
