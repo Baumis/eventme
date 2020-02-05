@@ -77,7 +77,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 6px;
+  height: 28px;
   margin-bottom: 5px;
   margin-left: 12px;
   background: rgba(0,0,0,0.05);
