@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 import './OptionsPanel.css'
-import { FaAngleDoubleLeft } from 'react-icons/fa'
+import { FaAngleDoubleLeft, FaUpload } from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock/InputBlock'
 
@@ -107,6 +107,10 @@ class OptionsPanel extends Component {
                         value={this.props.EventStore.event.background}
                         changeValue={this.changeBackground}
                     />
+                    <div className="control-panel-upload" onClick={() => this.props.toggleInviteLink()}>
+                        <div className="control-panel-upload-icon">Upload</div>
+                        <FaUpload />
+                    </div>
                     <InputBlock
                         type={'date'}
                         label={'Start date'}
