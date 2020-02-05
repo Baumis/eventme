@@ -219,8 +219,11 @@ exports.findOrCreateGoogleUser = async (googleToken) => {
     const existingUser = await User.findOne({ userType: 'GOOGLE', externalId: googleUser.sub })
 
     if (existingUser) {
-        existingUser.avatar = googleUser.picture
-        return existingUser
+        if (existingUser.avatar !== googleUser.picture) {
+            return await User.findByIdAndUpdate(existingUser._id, { avatar: googleUser.picture })
+        } else {
+            return existingUser
+        }
     }
 
     const user = new User({
@@ -249,8 +252,11 @@ exports.findOrCreateFacebookUser = async (userId, facebookToken) => {
     const existingUser = await User.findOne({ userType: 'FACEBOOK', externalId: facebookUser.id })
 
     if (existingUser) {
-        existingUser.avatar = facebookUser.picture.data.url
-        return existingUser
+        if (existingUser.avatar !== facebookUser.picture.data.url) {
+            return await User.findByIdAndUpdate(existingUser._id, { avatar: facebookUser.picture.data.url })
+        } else {
+            return existingUser
+        }
     }
 
     const user = new User({
