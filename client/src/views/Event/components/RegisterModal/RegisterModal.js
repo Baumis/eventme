@@ -59,7 +59,7 @@ class RegisterModal extends Component {
     join = async () => {
         const alias = this.state.alias.length > 0 ? this.state.alias : undefined
 
-        if(alias && alias.length < 3) {
+        if (alias && alias.length < 3) {
             alert('Alias has to be at least 3 characters long')
             return
         }
@@ -114,7 +114,7 @@ class RegisterModal extends Component {
                         }
                         <div className="register-button-row">
                             <DefaultButtons
-                                negativeLabel={'back'}
+                                negativeLabel={this.props.EventStore.event.registrationQuestions.length < 1 ? '' : 'back'}
                                 negativeAction={() => this.setStep(this.state.step - 1)}
                             />
                             {this.readyToJoin() ?

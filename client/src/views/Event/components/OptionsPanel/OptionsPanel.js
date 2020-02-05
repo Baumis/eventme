@@ -103,24 +103,22 @@ class OptionsPanel extends Component {
                     />
                     <InputBlock
                         type={'text'}
-                        label={'Header background'}
+                        label={'Cover picture'}
                         value={this.props.EventStore.event.background}
                         changeValue={this.changeBackground}
                     />
-                    <div className="dateBlock">
-                        <InputBlock
-                            type={'date'}
-                            label={'Start date'}
-                            value={moment(this.props.EventStore.event.startDate).format('YYYY-MM-DD')}
-                            changeValue={this.changeStartDate}
-                        />
-                        <InputBlock
-                            type={'time'}
-                            label={' '}
-                            value={moment(this.props.EventStore.event.startDate).format('HH:mm')}
-                            changeValue={this.changeStartTime}
-                        />
-                    </div>
+                    <InputBlock
+                        type={'date'}
+                        label={'Start date'}
+                        value={moment(this.props.EventStore.event.startDate).format('YYYY-MM-DD')}
+                        changeValue={this.changeStartDate}
+                    />
+                    <InputBlock
+                        type={'time'}
+                        label={'Start time'}
+                        value={moment(this.props.EventStore.event.startDate).format('HH:mm')}
+                        changeValue={this.changeStartTime}
+                    />
                 </div>
             </div>
         )

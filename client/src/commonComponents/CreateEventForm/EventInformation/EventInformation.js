@@ -34,7 +34,7 @@ class EventInformation extends Component {
         return (
             <div className="event-information">
                 <CreateInput
-                    label={'EVENT NAME'}
+                    label={'Event name'}
                     type={'text'}
                     value={this.props.information.eventName}
                     onChange={(event) => this.changeValue('eventName', event)}
@@ -42,7 +42,7 @@ class EventInformation extends Component {
                 <div className="event-information-row">
                     <div className="event-information-row-left">
                         <CreateInput
-                            label={'START DATE'}
+                            label={'Start date'}
                             type={'date'}
                             min={this.props.information.today}
                             value={this.props.information.startDate}
@@ -51,7 +51,7 @@ class EventInformation extends Component {
                     </div>
                     <div className="event-information-row-right">
                         <CreateInput
-                            label={' '}
+                            label={'Start time'}
                             type={'time'}
                             min={this.props.information.today}
                             value={this.props.information.startTime}
@@ -60,7 +60,7 @@ class EventInformation extends Component {
                     </div>
                 </div>
                 <CreateTextArea
-                    label={'DESCRIPTION'}
+                    label={'description'}
                     value={this.props.information.description}
                     onChange={(event) => this.changeValue('description', event)}
                 />

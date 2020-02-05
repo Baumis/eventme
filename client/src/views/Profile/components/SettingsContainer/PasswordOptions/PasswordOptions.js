@@ -19,9 +19,9 @@ class PasswordOptions extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
-    alert = (message) => {
+    alert = (title, message) => {
         this.props.VisibilityStore.showAlert(
-            'Fail',
+            title,
             message,
             'OK',
             () => this.props.VisibilityStore.closeAlert()
@@ -33,11 +33,11 @@ class PasswordOptions extends Component {
             return
         }
         if (this.state.newPassword.length < 3) {
-            this.alert('Password has to be over 3 character long')
+            this.alert('Fail', 'Password has to be over 3 character long')
             return
         }
         if (this.state.newPasswordAgain !== this.state.newPassword) {
-            this.alert('Passwords are not matching')
+            this.alert('Fail', 'Passwords are not matching')
             return
         }
 
@@ -45,12 +45,7 @@ class PasswordOptions extends Component {
         this.setState({ loading: true })
         try {
             await this.props.UserStore.updatePassword(this.state.oldPassword, this.state.newPassword)
-            this.props.VisibilityStore.showAlert(
-                'Success',
-                'password has been changed',
-                'OK',
-                () => this.props.VisibilityStore.closeAlert()
-            )
+            this.alert('Success', 'password has been changed',)
             this.setState({
                 oldPassword: '',
                 newPassword: '',
@@ -58,9 +53,9 @@ class PasswordOptions extends Component {
             })
         } catch (error) {
             error.response.data.error === 'Password incorrect' ?
-                this.alert('Old password incorrect')
+                this.alert('Fail', 'Old password incorrect')
                 :
-                this.alert('password could not be saved')
+                this.alert('Fail', 'password could not be saved')
         }
         this.setState({ loading: false })
     }

@@ -1,20 +1,61 @@
-.SaveButton{
+.save-button-panel {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 95px;
-    height: 55px;
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
     position: fixed;
     z-index: 3;
-    right: 40px;
+    right: 20px;
     bottom: 30px;
-    background: rgba(46, 184, 46, 0.8);
+    transition: bottom 0.2s;
+    -webkit-box-shadow: 0px 0px 6px -1px rgb(69, 69, 69, 0.4);
+    -moz-box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
+    box-shadow: 0px 0px 6px -1px rgba(69,69,69,0.4);
+}
+
+.save-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    background: rgba(46, 184, 46, 1);
     border-radius: 5px;
     color:white;
-    transition: bottom 0.2s;
     cursor: pointer;
 }
 
-.SaveButton p{
+.save-button-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.save-button p{
+    padding-right: 3px;
+}
+
+.discard-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    background: #c74C3C;
+    border-radius: 5px;
+    color:white;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.discard-button-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.discard-button p{
     padding-right: 3px;
 }
