@@ -33,5 +33,16 @@
 }
 
 @media only screen and (max-width: 450px) {
-    
+    .event-information-row {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
+    .event-information-row-right {
+        margin-left: 0px;
+    }
+
+    .event-information-row-left {
+        margin-right: 0px;
+    }
 }

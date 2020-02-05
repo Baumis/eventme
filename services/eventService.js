@@ -70,7 +70,7 @@ exports.populate = async (event) => {
 
 exports.create = async (creatorId, eventObject) => {
     const startDate = eventObject.startDate ? new Date(eventObject.startDate) : new Date()
-    const endDate = eventObject.endDate ? new Date(eventObject.endDate) : new Date(startDate.getTime() + 1000 * 60 * 60 * 24)
+    const endDate = new Date(startDate.getTime() + 1000 * 60 * 60 * 24)
 
     if (!validators.validateDates(startDate, endDate)) {
         throw new Error('End Date must be greater than Start Date')
@@ -130,7 +130,7 @@ exports.create = async (creatorId, eventObject) => {
 
 exports.update = async (event, eventObject) => {
     const startDate = new Date(eventObject.startDate)
-    const endDate = new Date(eventObject.endDate)
+    const endDate =  new Date(startDate.getTime() + 1000 * 60 * 60 * 24)
 
     if (!validators.validateDates(startDate, endDate)) {
         throw new Error('End Date must be greater than Start Date')
