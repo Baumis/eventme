@@ -53,7 +53,7 @@ app.use('/api/events', eventRouter)
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/log', logRouter)
-app.use('/api/picture', pictureRouter)
+app.use('/api/pictures', pictureRouter)
 
 // Rest of endpoints to react
 if (process.env.NODE_ENV === 'production') {
