@@ -137,7 +137,7 @@ class GeneralOptions extends Component {
                         </label>
                         <input
                             type="file"
-                            style={{display: 'none'}}
+                            style={{ display: 'none' }}
                             id="upload-cover"
                             accept="image/*"
                             onChange={this.uploadCoverFile}
@@ -149,32 +149,37 @@ class GeneralOptions extends Component {
                         />
                     </div>
                 </div>
-                <div className="general-options-input">
-                    <div className="general-options-input-label">
-                        Avatar
+                {this.props.UserStore.currentUser.userType === 'GOOGLE' ||
+                    this.props.UserStore.currentUser.userType === 'FACEBOOK' ?
+                    null
+                    :
+                    <div className="general-options-input">
+                        <div className="general-options-input-label">
+                            Avatar
                     </div>
-                    <div className="general-options-input-input">
-                        <label htmlFor="upload-avatar" className="general-options-input-button">
-                            {this.state.uploadingAvatar ?
-                                <Spinner />
-                                :
-                                <div>Browse</div>
-                            }
-                        </label>
-                        <input
-                            type="file"
-                            id="upload-avatar"
-                            style={{display: 'none'}}
-                            accept="image/*"
-                            onChange={this.uploadAvatarFile}
-                        />
-                        <input
-                            name={'avatar'}
-                            value={this.state.userValues.avatar}
-                            onChange={this.changeUserValue}
-                        />
+                        <div className="general-options-input-input">
+                            <label htmlFor="upload-avatar" className="general-options-input-button">
+                                {this.state.uploadingAvatar ?
+                                    <Spinner />
+                                    :
+                                    <div>Browse</div>
+                                }
+                            </label>
+                            <input
+                                type="file"
+                                id="upload-avatar"
+                                style={{ display: 'none' }}
+                                accept="image/*"
+                                onChange={this.uploadAvatarFile}
+                            />
+                            <input
+                                name={'avatar'}
+                                value={this.state.userValues.avatar}
+                                onChange={this.changeUserValue}
+                            />
+                        </div>
                     </div>
-                </div>
+                }
                 <div className="general-options-button-row">
                     <div className="general-options-save-button" onClick={() => this.saveOptions()}>
                         {this.state.loading ?
