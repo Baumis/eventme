@@ -73,11 +73,11 @@
   cursor: pointer;
 }
 
-.control-panel-upload {
+.options-panel-upload {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px;
+  padding: 6px;
   margin-bottom: 5px;
   margin-left: 12px;
   background: rgba(0,0,0,0.05);
@@ -95,4 +95,8 @@
 
 .control-panel-upload-icon {
   padding-right: 3px;
+}
+
+#upload {
+  display: none;
 }

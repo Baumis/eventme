@@ -5,13 +5,30 @@ import './OptionsPanel.css'
 import { FaAngleDoubleLeft, FaUpload } from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock/InputBlock'
+import Spinner from '../../../../commonComponents/Spinner/Spinner'
 
 class OptionsPanel extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            deleted: false
+            deleted: false,
+            uploading: false
+        }
+    }
+
+    setFile = (event) => {
+        this.setState({ uploading: true })
+        const picture = this.props.EventStore.uploadEventBackground(event.target.files[0])
+        this.setState({ uploading: false })
+
+        if (!picture) {
+            this.props.VisibilityStore.showAlert(
+                'Fail',
+                `Uploading photo failed`,
+                'OK',
+                () => this.props.VisibilityStore.closeAlert()
+            )
         }
     }
 
@@ -107,10 +124,21 @@ class OptionsPanel extends Component {
                         value={this.props.EventStore.event.background}
                         changeValue={this.changeBackground}
                     />
-                    <div className="control-panel-upload" onClick={() => this.props.toggleInviteLink()}>
-                        <div className="control-panel-upload-icon">Upload</div>
-                        <FaUpload />
-                    </div>
+                    {this.state.uploading ?
+                        <div className="options-panel-upload">
+                            <Spinner />
+                        </div>
+                        :
+                        <label htmlFor="upload" className="options-panel-upload">
+                            Upload
+                        </label>
+                    }
+                    <input
+                        type="file"
+                        id="upload"
+                        accept="image/*"
+                        onChange={this.setFile}
+                    />
                     <InputBlock
                         type={'date'}
                         label={'Start date'}
