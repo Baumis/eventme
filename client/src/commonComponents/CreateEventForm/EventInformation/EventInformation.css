@@ -10,6 +10,7 @@
 }
 
 .event-information-row-right {
+    flex: 1;
     margin-left: 5px;
 }
 
