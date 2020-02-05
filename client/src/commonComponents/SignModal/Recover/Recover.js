@@ -24,13 +24,13 @@ class Recover extends Component {
     }
 
     onRecoveryFail = (message) => {
-        this.alert(message)
+        this.alert('Fail', message)
         this.setState({ username: '', email: '' })
     }
 
-    alert = (message) => {
+    alert = (title, message) => {
         this.props.VisibilityStore.showAlert(
-            'Fail',
+            title,
             message,
             'OK',
             () => this.props.VisibilityStore.closeAlert()
@@ -40,12 +40,12 @@ class Recover extends Component {
     resetPassword = async () => {
 
         if (this.state.username.length === 0) {
-            this.alert('Username can\'t be empty.')
+            this.alert('Fail','Username can\'t be empty.')
             return
         }
 
         if (this.state.email.length === 0) {
-            this.alert('Email can\'t be empty.')
+            this.alert('Fail', 'Email can\'t be empty.')
             return
         }
 
@@ -54,7 +54,7 @@ class Recover extends Component {
             await userService.resetPassword(this.state.username, this.state.email)
             this.setState({ loading: false })
             this.props.VisibilityStore.closeSignModal()
-            this.alert('Password reset successful. Check your email.')
+            this.alert('Success', 'Password reset successful. Check your email.')
         } catch (error) {
             this.setState({ loading: false })
             this.onRecoveryFail('Could not recover, try again!')

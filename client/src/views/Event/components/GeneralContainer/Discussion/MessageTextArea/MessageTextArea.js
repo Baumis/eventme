@@ -16,12 +16,7 @@ class MessageTextArea extends Component {
     post = async () => {
 
         if (!this.props.UserStore.currentUser) {
-            this.props.VisibilityStore.showAlert(
-                'Please sign in',
-                `Only guests with user accounts can post messages.`,
-                'OK',
-                () => this.props.VisibilityStore.closeAlert(),
-            )
+            this.props.VisibilityStore.showSignModal()
             return
         }
 
