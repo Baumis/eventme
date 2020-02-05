@@ -72,3 +72,27 @@
   padding: 10px;
   cursor: pointer;
 }
+
+.control-panel-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 5px;
+  margin-left: 12px;
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.07);
+  color: #46494c;
+  width: 80px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.control-panel-upload:hover {
+  background: rgba(0,0,0,0.09);
+}
+
+.control-panel-upload-icon {
+  padding-right: 3px;
+}
