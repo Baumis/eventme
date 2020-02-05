@@ -2,45 +2,65 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './SaveButton.css'
 import Spinner from '../../../../commonComponents/Spinner/Spinner'
-import { FaSave } from 'react-icons/fa'
+import { FaSave, FaTrashAlt } from 'react-icons/fa'
 
 class SaveButton extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            loading: false
+            saveing: false,
+            discarding: false
+        }
+    }
+
+    discardChanges = async () => {
+        this.setState({ discarding: true })
+        const response = await this.props.EventStore.initializeEvent(this.props.EventStore.event._id)
+        this.setState({ discarding: false })
+
+        if (!response) {
+            alert('Changes could not be discarded.')
         }
     }
 
     saveEvent = async () => {
-        this.setState({ loading: true })
+        this.setState({ saveing: true })
         const response = await this.props.EventStore.update()
 
-        this.setState({ loading: false })
+        this.setState({ saveing: false })
         if (!response) {
             alert('Event could not be changed.')
         }
     }
 
     render() {
-
-        if (this.state.loading) {
-            return (
-                <div className="SaveButton">
-                    <Spinner />
-                </div>
-            )
-        }
-
-        let bottomCSS = '-57px'
+        let bottomCSS = '-157px'
         if (!this.props.saved) {
-            bottomCSS = '30px'
+            bottomCSS = '10px'
         }
         return (
-            <div style={{ bottom: bottomCSS }} className="SaveButton" onClick={this.saveEvent}>
-                <p>Save</p>
-                <FaSave />
+            <div className="save-button-panel" style={{ bottom: bottomCSS }}>
+                <div className="discard-button" onClick={this.discardChanges}>
+                    {this.state.discarding ?
+                        <Spinner />
+                        :
+                        <div className="save-button-label">
+                            <p>Discard</p>
+                            <FaTrashAlt />
+                        </div>
+                    }
+                </div>
+                <div style={{ bottom: bottomCSS }} className="save-button" onClick={this.saveEvent}>
+                    {this.state.saveing ?
+                        <Spinner />
+                        :
+                        <div className="save-button-label">
+                            <p>Save</p>
+                            <FaSave />
+                        </div>
+                    }
+                </div>
             </div>
         )
     }
