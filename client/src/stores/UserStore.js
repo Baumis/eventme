@@ -1,6 +1,7 @@
 import { observable, decorate, action } from 'mobx'
 import userService from '../services/users'
 import loginService from '../services/login'
+import pictureService from '../services/pictures'
 
 class UserStore {
     currentUser = null
@@ -47,6 +48,23 @@ class UserStore {
 
     async updatePassword(oldPassword, newPassword) {
         await userService.updatePassword(this.currentUser._id, oldPassword, newPassword)
+    }
+
+    async uploadUserAvatar(file) {
+        try {
+            const picture = await pictureService.uploadUserAvatar(this.currentUser._id, file)
+            return picture.secure_url
+        } catch {
+            return null
+        }
+    }
+    async uploadUserCover(file) {
+        try {
+            const picture = await pictureService.uploadUserCover(this.currentUser._id, file)
+            return picture.secure_url
+        } catch {
+            return null
+        }
     }
 }
 

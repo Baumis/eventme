@@ -18,6 +18,10 @@ class OptionsPanel extends Component {
     }
 
     setFile = async (event) => {
+        if (this.state.uploading) {
+            return
+        }
+
         this.setState({ uploading: true })
         const picture = await this.props.EventStore.uploadEventBackground(event.target.files[0])
         this.setState({ uploading: false })
@@ -128,7 +132,7 @@ class OptionsPanel extends Component {
                         {this.state.uploading ?
                             <Spinner />
                             :
-                            <div>Upload</div>
+                            <div>Browse</div>
                         }
                     </label>
                     <input
