@@ -18,41 +18,24 @@ class EventControlPanel extends Component {
     render() {
         return (
             <div className="event-control-panel">
-                <div className="event-control-panel-label">
-                    {this.props.EventStore.event.label}
+                <div className="event-control-panel-title-row">
+                    <div className="event-control-panel-label">
+                        {this.props.EventStore.event.label}
+                    </div>
+                    <div className="event-control-panel-host">
+                        {`by ${this.props.EventStore.event.creator.name}`}
+                    </div>
                 </div>
                 <div className="event-control-panel-info-row">
                     <div className="event-control-panel-info-item">
                         <div className="event-control-panel-info-item-label">
                             <div className="event-control-panel-info-icon">
-                                <FaRegUser />
-                            </div>
-                            Host
-                        </div>
-                        <div className="event-control-panel-info-item-content">
-                            {this.props.EventStore.event.creator.name}
-                        </div>
-                    </div>
-                    <div className="event-control-panel-info-item">
-                        <div className="event-control-panel-info-item-label">
-                            <div className="event-control-panel-info-icon">
                                 <FaRegCalendarAlt />
                             </div>
-                            Date
+                            When?
                         </div>
                         <div className="event-control-panel-info-item-content">
-                            {moment(this.props.EventStore.event.startDate).format('D MMMM YYYY')}
-                        </div>
-                    </div>
-                    <div className="event-control-panel-info-item">
-                        <div className="event-control-panel-info-item-label">
-                            <div className="event-control-panel-info-icon">
-                                <FaRegClock />
-                            </div>
-                            Time
-                        </div>
-                        <div className="event-control-panel-info-item-content">
-                            {moment(this.props.EventStore.event.startDate).format('LT')}
+                            {`${moment(this.props.EventStore.event.startDate).format('D MMMM YYYY')} ${moment(this.props.EventStore.event.startDate).format('LT')}`}
                         </div>
                     </div>
                     {this.props.isCreator() ?
