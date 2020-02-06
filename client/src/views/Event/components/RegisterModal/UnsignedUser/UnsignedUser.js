@@ -4,12 +4,23 @@ import './UnsignedUser.css'
 import Spinner from '../../../../../commonComponents/Spinner/Spinner'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { FaFacebook } from 'react-icons/fa'
+import { FaFacebook, FaMask } from 'react-icons/fa'
 import { ReactComponent as GoogleLogo } from '../../../../../commonComponents/SignModal/SignIn/googleLogo.svg'
 import SignInput from '../../../../../commonComponents/SignModal/components/SignInput/SignInput'
 import { FaUser } from 'react-icons/fa'
 
 class UnsignedUser extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            showAlias: false
+        }
+    }
+
+    toggleAlias = () => {
+        this.setState({ showAlias: !this.state.showAlias })
+    }
 
     onSignInFail = (message) => {
         this.props.VisibilityStore.showAlert(
@@ -57,7 +68,7 @@ class UnsignedUser extends Component {
         return (
             <div className="unsigned-user">
                 <div className="unsigned-user-title">
-                    Join event with your preferable account.
+                    Join event with your preferable account
                 </div>
                 <div className="signin-social-accounts">
                     <div className="google-login-wrapper">
@@ -97,18 +108,31 @@ class UnsignedUser extends Component {
                 <div className="unsigned-user-title">
                     Or join with an alias.
                 </div>
-                <div className="unsigned-user-info">
-                    This name will appear in the guest list, but you will not be able to manage your events without an user account.
-                </div>
-                <SignInput
-                    label={''}
-                    secondLabel={''}
-                    change={this.props.changeAlias}
-                    value={this.props.alias}
-                    placeholder={'Full name'}
-                    type={'text'}
-                    icon={<FaUser />}
-                />
+                {!this.state.showAlias ?
+                    <div className="facebook-login-wrapper">
+                        <div className="unsigned-user-alias-button" onClick={() => this.toggleAlias()}>
+                            <div className="unsigned-user-alias-icon">
+                                <FaMask />
+                            </div>
+                            Alias
+                        </div>
+                    </div>
+                    :
+                    <div>
+                        <div className="unsigned-user-info">
+                            This name will appear in the guest list, but you will not be able to manage your events without an user account.
+                        </div>
+                        <SignInput
+                            label={''}
+                            secondLabel={''}
+                            change={this.props.changeAlias}
+                            value={this.props.alias}
+                            placeholder={'Full name'}
+                            type={'text'}
+                            icon={<FaUser />}
+                        />
+                    </div>
+                }
             </div>
         )
     }
