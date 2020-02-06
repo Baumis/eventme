@@ -7,6 +7,27 @@
     border-bottom-right-radius: 5px;
 }
 
+.event-control-panel-title-row {
+    display: flex;
+    align-items: center;
+    padding: 15px 0px 5px 0px;
+}
+
+.event-control-panel-label{
+    display: flex;
+    align-items: center;
+    margin: 0px 10px 0px 40px;
+    font-size: 27px;
+    color: rgba(76, 92, 104, 1);
+    font-weight: 600;
+}
+
+.event-control-panel-host {
+    color: rgb(70, 73, 76, 0.8);
+    margin: 0px 40px 0px 00px;
+    font-size: 15px;
+}
+
 .event-control-panel-info-row {
     display: flex;
     flex-wrap: wrap;
@@ -23,7 +44,6 @@
     font-size: 14px;
     margin: 0px 10px;
     padding: 0px 0px 10px 0px;
-    width: 125px;
     color: rgb(70, 73, 76, 0.8);
 }
 
@@ -55,16 +75,6 @@
     background-position:center center;
     border-radius: 50%;
     margin: 0px 5px 0px 0px;
-}
-
-.event-control-panel-label{
-    display: flex;
-    align-items: center;
-    margin: 20px 40px;
-    font-size: 27px;
-    color: rgba(76, 92, 104, 1);
-    font-weight: 600;
-    margin-bottom: 10px;
 }
 
 .event-control-panel-info-item-invite {
