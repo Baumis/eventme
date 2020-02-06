@@ -114,8 +114,8 @@ class RegisterModal extends Component {
                         }
                         <div className="register-button-row">
                             <DefaultButtons
-                                negativeLabel={this.props.EventStore.event.registrationQuestions.length < 1 ? '' : 'back'}
-                                negativeAction={() => this.setStep(this.state.step - 1)}
+                                negativeLabel={'back'}
+                                negativeAction={this.props.EventStore.event.registrationQuestions.length < 1 ? undefined : () => this.setStep(this.state.step - 1)}
                             />
                             {this.readyToJoin() ?
                                 <div className="register-button" onClick={this.join}>
