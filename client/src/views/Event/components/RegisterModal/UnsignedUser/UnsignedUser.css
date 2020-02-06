@@ -30,6 +30,30 @@
     cursor: pointer;
 }
 
+.unsigned-user-alias-button {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background: rgb(76, 92, 104, 1);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.unsigned-user-alias-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.unsigned-user-alias-button:hover {
+    background: #404e59;
+}
+
 .inviteowl-login:hover {
     background: #156e84;
 }
