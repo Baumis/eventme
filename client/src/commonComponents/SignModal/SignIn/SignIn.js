@@ -126,6 +126,7 @@ class SignIn extends Component {
                             fields="name,email,picture"
                             callback={this.facebookSignIn}
                             onFailure={() => this.onSignInFail('Could not sign in')}
+                            disableMobileRedirect={true}
                             render={renderProps => (
                                 <div className="facebook-login" onClick={renderProps.onClick}>
                                     <FaFacebook className="facebook-icon" />
