@@ -4,7 +4,7 @@ import './UnsignedUser.css'
 import Spinner from '../../../../../commonComponents/Spinner/Spinner'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { FaFacebook, FaMask } from 'react-icons/fa'
+import { FaFacebook, FaMask, FaExclamationTriangle } from 'react-icons/fa'
 import { ReactComponent as GoogleLogo } from '../../../../../commonComponents/SignModal/SignIn/googleLogo.svg'
 import SignInput from '../../../../../commonComponents/SignModal/components/SignInput/SignInput'
 import { FaUser } from 'react-icons/fa'
@@ -121,7 +121,10 @@ class UnsignedUser extends Component {
                     :
                     <div>
                         <div className="unsigned-user-info">
-                            This name will appear in the guest list, but you will not be able to manage your events without an user account.
+                            <span>
+                                <FaExclamationTriangle />
+                            </span>
+                            You can't post messages or get notified about new messages when using an alias. This name will just appear in the guestlist.
                         </div>
                         <SignInput
                             label={''}

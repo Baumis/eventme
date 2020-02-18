@@ -18,6 +18,11 @@
     margin-bottom: 10px;
 }
 
+.unsigned-user-info span{
+    color: orange;
+    margin-right: 5px;
+}
+
 .inviteowl-login {
     flex: 1;
     display: flex;
