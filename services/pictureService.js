@@ -5,6 +5,14 @@ exports.upload = async (publicId, fileBuffer) => {
     return picture
 }
 
+exports.deleteAllByUser = async (userId) => {
+    await cloudinary.api.delete_resources_by_prefix(`users/${userId}`)
+}
+
+exports.deleteAllByEvent = async (eventId) => {
+    await cloudinary.api.delete_resources_by_prefix(`events/${eventId}`)
+}
+
 const cloudinaryUploadStream = async (fileBuffer, options) => {
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(options, (error, result) => {

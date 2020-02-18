@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Event = require('../models/event')
 const User = require('../models/user')
 const userService = require('./userService')
+const pictureService = require('./pictureService')
 const validators = require('../utils/validators')
 
 exports.populate = async (event) => {
@@ -199,10 +200,13 @@ exports.delete = async (event) => {
             await userService.removeFromMyInvites(guest.user, event._id, options)
         }
 
+        await pictureService.deleteAllByEvent(event._id)
+
         await session.commitTransaction()
         session.endSession()
 
     } catch (exception) {
+        console.log(exception)
         await session.abortTransaction()
         session.endSession()
         throw new Error('Could not remove event')

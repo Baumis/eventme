@@ -3,7 +3,8 @@ const { OAuth2Client } = require('google-auth-library')
 const User = require('../models/user')
 const Event = require('../models/event')
 const eventService = require('./eventService')
-const emailService = require('../services/emailService')
+const emailService = require('./emailService')
+const pictureService = require('./pictureService')
 const axios = require('axios')
 
 exports.getOne = async (id) => {
@@ -149,6 +150,8 @@ exports.delete = async (id) => {
         }
 
         await User.findByIdAndDelete(user._id, options)
+
+        await pictureService.deleteAllByUser(user._id)
 
         await session.commitTransaction()
         session.endSession()
