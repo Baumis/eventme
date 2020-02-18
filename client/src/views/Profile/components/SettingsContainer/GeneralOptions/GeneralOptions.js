@@ -106,23 +106,18 @@ class GeneralOptions extends Component {
                         />
                     </div>
                 </div>
-                {this.props.UserStore.currentUser.userType === 'GOOGLE' ||
-                    this.props.UserStore.currentUser.userType === 'FACEBOOK' ?
-                    null
-                    :
-                    <div className="general-options-input">
-                        <div className="general-options-input-label">
-                            Email
+                <div className="general-options-input">
+                    <div className="general-options-input-label">
+                        Email
                         </div>
-                        <div className="general-options-input-input">
-                            <input
-                                name={'email'}
-                                value={this.state.userValues.email}
-                                onChange={this.changeUserValue}
-                            />
-                        </div>
+                    <div className="general-options-input-input">
+                        <input
+                            name={'email'}
+                            value={this.state.userValues.email}
+                            onChange={this.changeUserValue}
+                        />
                     </div>
-                }
+                </div>
                 <div className="general-options-input">
                     <div className="general-options-input-label">
                         Cover
