@@ -73,7 +73,7 @@ class UnsignedUser extends Component {
                 <div className="signin-social-accounts">
                     <div className="google-login-wrapper">
                         <GoogleLogin
-                            clientId="911838998946-ofev1jb8srpg1qjaak4st5j6huablfvl.apps.googleusercontent.com"
+                            clientId="629446459470-tm1sivu38dq611tlu5c4f9v9q54ijvgn.apps.googleusercontent.com"
                             buttonText="Sign in with Google"
                             onSuccess={this.googleSignIn}
                             onFailure={() => this.onSignInFail('Could not sign in')}
