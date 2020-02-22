@@ -1,16 +1,14 @@
 .register-results{
     display: flex;
     flex-direction: column;
-    flex: 1;
-    margin: 20px 0px;
+    margin: 0px 10px;
 }
 
 .register-results-question {
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 10px;
-    border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+    padding: 0px 0px;
     border-radius: 0px;
     font-weight: 500;
     font-size: 16px;
@@ -21,8 +19,14 @@
 
 .register-results-question-button {
     display: flex;
-    flex: 1;
+    align-items: center;
     justify-content: space-between;
-    align-content: center;
+    color: #46494c;
+    height: 35px;
+    font-size: 15px;
     cursor: pointer;
+    padding: 10px;
+    background: rgb(221, 221, 221, 0.5);
+    border: 1px solid rgb(221, 221, 221, 0.7);
+    border-radius: 5px;
 }

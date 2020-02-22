@@ -4,13 +4,14 @@
     background: transparent;
     color: rgba(0,0,0);
     font-size: 15px;
+    overflow: auto;
 }
 
 .event-guests-guest-row{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 22px 12px 22px;
+    padding: 12px 10px 12px 10px;
 }
 
 .event-guests-guest-avatar {
@@ -36,7 +37,7 @@
     display: flex;
     margin: 0px 10px;
     font-size: 16px;
-    color: black;
+    color: #46494c;
 }
 
 .event-guests-guest-name{

@@ -15,6 +15,7 @@ import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal
 import RegisterModal from './components/RegisterModal/RegisterModal'
 import InviteLink from './components/InviteLink/InviteLink'
 import GuestModal from './components/GuestContainer/GuestModal/GuestModal'
+import AnswerModal from './components/GuestContainer/RegisterResults/AnswerModal/AnswerModal'
 
 class Event extends Component {
 
@@ -27,6 +28,7 @@ class Event extends Component {
             registerModal: false,
             inviteLink: false,
             guestModal: false,
+            answerModal: null,
             updater: null
         }
     }
@@ -64,6 +66,10 @@ class Event extends Component {
 
     changeActive = (cathegory) => {
         this.setState({ activeTab: cathegory })
+    }
+
+    toggleAnswerModal = (value) => {
+        this.setState({ answerModal: value })
     }
 
     toggleGuestModal = () => {
@@ -145,6 +151,7 @@ class Event extends Component {
                         changeActive={this.changeActive}
                         isGuest={this.isGuest}
                         toggleGuestModal={this.toggleGuestModal}
+                        toggleAnswerModal={this.toggleAnswerModal}
                     />
                     {this.isCreator() ?
                         <div>
@@ -187,6 +194,15 @@ class Event extends Component {
                         <UniversalModal
                             content={<GuestModal
                                 toggleGuestModal={this.toggleGuestModal}
+                            />}
+                        />
+                        : null
+                    }
+                    {this.state.answerModal ?
+                        <UniversalModal
+                            content={<AnswerModal
+                                question={this.state.answerModal}
+                                toggleAnswerModal={this.toggleAnswerModal}
                             />}
                         />
                         : null

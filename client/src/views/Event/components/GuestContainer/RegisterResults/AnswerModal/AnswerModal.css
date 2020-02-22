@@ -1,17 +1,17 @@
-.guest-modal {
+.answer-modal {
     display: flex;
     flex-direction: column;
     width: 400px;
     height: 60vh;
 }
 
-.guest-modal-top-bar {
+.answer-modal-top-bar {
     display: flex;
     justify-content: flex-end;
     border-bottom: 1px solid rgba(69,69,69,0.2);
 }
 
-.guest-modal-back-button {
+.answer-modal-back-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,12 +26,19 @@
     transition: background 0.2s;
 }
 
-.guest-modal-search {
-    display: flex;
-    margin: 5px 18px;
+.answer-modal-question {
+    font-size: 18px;
+    color: #46494c;
+    font-weight: 600;
+    padding: 10px 12px;
 }
 
-.guest-modal-search input {
+.answer-modal-search {
+    display: flex;
+    margin: 5px 10px;
+}
+
+.answer-modal-search input {
     flex: 1;
     padding: 3px 5px;
     border-radius: 5px;
@@ -45,7 +52,7 @@
 }
 
 @media only screen and (max-width: 450px) {
-    .guest-modal {
+    .answer-modal {
         width: 95vw;
         height: 90vh;
         margin: 20px 0px;

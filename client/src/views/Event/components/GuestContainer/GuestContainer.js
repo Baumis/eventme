@@ -38,8 +38,10 @@ class GuestContainer extends Component {
                                 :
                                 'My answers'
                             }
-                            <RegistrationResults />
                         </div>
+                        <RegistrationResults
+                            toggleAnswerModal={this.props.toggleAnswerModal}
+                        />
                     </div>
                 </div>
             </div>
