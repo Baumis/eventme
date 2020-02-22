@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
-import './GuestList.css'
-import { FaUserTimes, FaSignOutAlt } from 'react-icons/fa'
+import { FaUserTimes, FaSignOutAlt, FaChevronRight } from 'react-icons/fa'
 
-class Guests extends Component {
+class GuestList extends Component {
 
     getAvatar = (avatar) => {
         if (!avatar) {
@@ -35,7 +34,7 @@ class Guests extends Component {
                 && this.props.EventStore.event.creator._id === this.props.UserStore.currentUser._id) {
                 return true
             }
-            if (this.props.UserStore.currentUser._id === guestId 
+            if (this.props.UserStore.currentUser._id === guestId
                 && this.props.EventStore.event.creator._id !== guestId) {
                 return true
             }
@@ -54,10 +53,17 @@ class Guests extends Component {
         return !id ? 'ghost-user ' : 'event-guests-guest-name'
     }
 
+    getAmountOfGuests = () => {
+        return this.props.EventStore.event.registrations.length > this.props.guestAmount ?
+            this.props.EventStore.event.registrations.slice(0, this.props.guestAmount)
+            :
+            this.props.EventStore.event.registrations
+    }
+
     render() {
         return (
             <div className="event-guests-list">
-                {this.props.EventStore.event.registrations.map((guest, i) =>
+                {this.getAmountOfGuests().map((guest, i) =>
                     <div className="event-guests-guest-row" key={i}>
                         <div className="event-guests-guest-wrapper" onClick={() => this.toProfile(guest.user._id)}>
                             <div style={this.getAvatar(guest.user.avatar)} className="event-guests-guest-avatar"> </div>
@@ -91,4 +97,4 @@ class Guests extends Component {
     }
 }
 
-export default withRouter(inject('EventStore', 'UserStore', 'VisibilityStore')(observer(Guests)))
+export default withRouter(inject('EventStore', 'UserStore', 'VisibilityStore')(observer(GuestList)))

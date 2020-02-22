@@ -78,3 +78,25 @@
 .event-guests-guest-remove:hover{
     color: rgb(70, 73, 76, 0.9);
 }
+
+.show-more-guests-button {
+    border-top: 1px solid rgb(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 22px 12px 22px;
+    color: rgb(70, 73, 76, 0.8);
+    cursor: pointer;
+}
+
+.show-more-guests-button:hover {
+    color: rgb(70, 73, 76, 1);
+}
+
+.show-more-guests-button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 3px;
+    font-size: 13px;
+}
