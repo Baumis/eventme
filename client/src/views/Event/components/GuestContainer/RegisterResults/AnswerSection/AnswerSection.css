@@ -1,13 +1,14 @@
 .answer-section {
     padding: 10px;
+    overflow: auto;
 }
 
 .answer {
     padding: 10px;
-    background: rgb(221, 221, 221, 0.5);
+    background: rgb(221, 221, 221, 0);
     border: 1px solid rgb(221, 221, 221, 0.7);
     border-radius: 5px;
-    margin: 5px 0px;   
+    margin: 05px 0px;   
 }
 
 .answers-user-info {
@@ -42,5 +43,7 @@
 
 .empty-answers{
     font-size: 14px;
+    padding: 10px;
+    margin: 10px;
     color: rgba(0,0,0,0.5);
 }

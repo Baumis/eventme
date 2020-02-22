@@ -25,22 +25,40 @@ class AnswerSection extends Component {
         return answers
     }
 
-    render() {
-
-        if (!this.props.show) {
-            return null
+    answersToShow = (answers) => {
+        if (!this.props.answerAmount) {
+            return answers
         }
+
+        return answers.length > this.props.answerAmount ?
+            answers.slice(0, this.props.answerAmount)
+            :
+            answers
+    }
+
+    filteredAnswers = (answers) => {
+        if (!this.props.filter) {
+            return answers
+        }
+
+        return answers.filter((answer) =>
+            answer.user.name.toLowerCase().includes(this.props.filter.toLowerCase())
+        )
+    }
+
+    render() {
 
         if (this.getAnswers().length < 1) {
             return (
                 <div className="answer empty-answers">
                     No answers to display.
-                </div>)
+                </div>
+            )
         }
 
         return (
             <div className="answer-section">
-                {this.getAnswers().map((answer, i) =>
+                {this.filteredAnswers(this.answersToShow(this.getAnswers())).map((answer, i) =>
                     <div className="answer" key={i}>
                         <div className="answers-user-info">
                             <div className="answers-user-avatar" style={this.getAvatar(answer.user)}>

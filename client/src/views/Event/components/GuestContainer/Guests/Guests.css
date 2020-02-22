@@ -1,0 +1,11 @@
+.show-more-guests-button:hover {
+    color: rgb(70, 73, 76, 1);
+}
+
+.show-more-guests-button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 3px;
+    font-size: 13px;
+}
