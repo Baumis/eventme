@@ -52,7 +52,11 @@ const eventSchema = new mongoose.Schema({
     components: [componentSchema],
     discussion: [messageSchema],
     registrations: [registrationSchema],
-    registrationQuestions: [registrationQuestionSchema]
+    registrationQuestions: [registrationQuestionSchema],
+    publicAnswers: {
+        type: Boolean,
+        default: true
+    }
 })
 
 eventSchema.statics.format = (event) => {
@@ -90,7 +94,8 @@ eventSchema.statics.format = (event) => {
         components: event.components,
         discussion: event.discussion,
         registrations: formattedRegistrations,
-        registrationQuestions: event.registrationQuestions
+        registrationQuestions: event.registrationQuestions,
+        publicAnswers: event.publicAnswers
     }
     return formattedEvent
 }
@@ -139,7 +144,8 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         components: formattedComponents,
         discussion: event.discussion,
         registrations: formattedRegistrations,
-        registrationQuestions: event.registrationQuestions
+        registrationQuestions: event.registrationQuestions,
+        publicAnswers: event.publicAnswers
     }
     return formattedEvent
 }

@@ -176,7 +176,8 @@ exports.update = async (event, eventObject) => {
         startDate: startDate,
         endDate: endDate,
         background: eventObject.background,
-        registrationQuestions: eventObject.registrationQuestions
+        registrationQuestions: eventObject.registrationQuestions,
+        publicAnswers: eventObject.publicAnswers
     }
 
     const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })
