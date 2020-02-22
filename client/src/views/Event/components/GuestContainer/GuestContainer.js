@@ -28,7 +28,7 @@ class GuestContainer extends Component {
                         </div>
                         <Guests
                             isCreator={this.props.isCreator()}
-                            filter={this.state.filter}
+                            toggleGuestModal={this.props.toggleGuestModal}
                         />
                     </div>
                     <div className="guests-columns-right">

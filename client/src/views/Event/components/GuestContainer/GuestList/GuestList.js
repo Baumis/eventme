@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
+import './GuestList.css'
 import { FaUserTimes, FaSignOutAlt, FaChevronRight } from 'react-icons/fa'
 
 class GuestList extends Component {
@@ -54,16 +55,31 @@ class GuestList extends Component {
     }
 
     getAmountOfGuests = () => {
+        if (!this.props.guestAmount) {
+            return this.props.EventStore.event.registrations
+        }
+
         return this.props.EventStore.event.registrations.length > this.props.guestAmount ?
             this.props.EventStore.event.registrations.slice(0, this.props.guestAmount)
             :
             this.props.EventStore.event.registrations
     }
 
+    filteredGuests = (guestList) => {
+        if (!this.props.filter) {
+            return guestList
+        }
+
+        return guestList.filter((guest) =>
+            guest.user.name.toLowerCase().includes(this.props.filter.toLowerCase())
+        )
+    }
+
     render() {
+        const registrationsToShow = this.filteredGuests(this.getAmountOfGuests())
         return (
             <div className="event-guests-list">
-                {this.getAmountOfGuests().map((guest, i) =>
+                {registrationsToShow.map((guest, i) =>
                     <div className="event-guests-guest-row" key={i}>
                         <div className="event-guests-guest-wrapper" onClick={() => this.toProfile(guest.user._id)}>
                             <div style={this.getAvatar(guest.user.avatar)} className="event-guests-guest-avatar"> </div>

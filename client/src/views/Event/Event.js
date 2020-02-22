@@ -14,6 +14,7 @@ import EventContent from './components/EventContent/EventContent'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 import RegisterModal from './components/RegisterModal/RegisterModal'
 import InviteLink from './components/InviteLink/InviteLink'
+import GuestModal from './components/GuestContainer/GuestModal/GuestModal'
 
 class Event extends Component {
 
@@ -25,6 +26,7 @@ class Event extends Component {
             activeTab: 'Discussion',
             registerModal: false,
             inviteLink: false,
+            guestModal: false,
             updater: null
         }
     }
@@ -55,13 +57,17 @@ class Event extends Component {
     startEventUpdater = () => {
         this.setState({
             updater: setInterval(() => {
-                    this.props.EventStore.getEvent(this.props.EventStore.event._id)
+                this.props.EventStore.getEvent(this.props.EventStore.event._id)
             }, 20000)
         })
     }
 
     changeActive = (cathegory) => {
         this.setState({ activeTab: cathegory })
+    }
+
+    toggleGuestModal = () => {
+        this.setState({ guestModal: !this.state.guestModal })
     }
 
     toggleRegisterModal = () => {
@@ -138,6 +144,7 @@ class Event extends Component {
                         active={this.state.activeTab}
                         changeActive={this.changeActive}
                         isGuest={this.isGuest}
+                        toggleGuestModal={this.toggleGuestModal}
                     />
                     {this.isCreator() ?
                         <div>
@@ -172,6 +179,14 @@ class Event extends Component {
                                 toggleRegisterModal={this.toggleRegisterModal}
                                 isGuest={this.isGuest}
                                 changeActive={this.changeActive}
+                            />}
+                        />
+                        : null
+                    }
+                    {this.state.guestModal ?
+                        <UniversalModal
+                            content={<GuestModal
+                                toggleGuestModal={this.toggleGuestModal}
                             />}
                         />
                         : null
