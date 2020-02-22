@@ -25,13 +25,13 @@ eventRouter.delete('/:id/guests/:userId', middleware.requireAuthentication, midd
 
 eventRouter.put('/:id/guests', middleware.requireAuthentication, eventController.joinEvent)
 
-eventRouter.post('/:id/discussion', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addMessage)
+eventRouter.post('/:id/discussion', middleware.requireAuthentication, eventController.addMessage)
 
-eventRouter.post('/:id/discussion/:messageId/comments', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addComment)
+eventRouter.post('/:id/discussion/:messageId/comments', middleware.requireAuthentication, eventController.addComment)
 
-eventRouter.delete('/:id/discussion/:messageId', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeMessage)
+eventRouter.delete('/:id/discussion/:messageId', middleware.requireAuthentication, eventController.removeMessage)
 
-eventRouter.delete('/:id/discussion/:messageId/comments/:commentId', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeComment)
+eventRouter.delete('/:id/discussion/:messageId/comments/:commentId', middleware.requireAuthentication, eventController.removeComment)
 
 eventRouter.post('/:id/components/:componentId/data/options/:optionId/votes', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addVoteToVoteComponent)
 
