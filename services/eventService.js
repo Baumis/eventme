@@ -95,7 +95,8 @@ exports.create = async (creatorId, eventObject) => {
         registrationQuestions: eventObject.registrationQuestions,
         registrations: [{
             user: creatorId
-        }]
+        }],
+        publicAnswers: eventObject.publicAnswers
     })
 
     const error = newEvent.validateSync()
@@ -176,7 +177,8 @@ exports.update = async (event, eventObject) => {
         startDate: startDate,
         endDate: endDate,
         background: eventObject.background,
-        registrationQuestions: eventObject.registrationQuestions
+        registrationQuestions: eventObject.registrationQuestions,
+        publicAnswers: eventObject.publicAnswers
     }
 
     const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })
