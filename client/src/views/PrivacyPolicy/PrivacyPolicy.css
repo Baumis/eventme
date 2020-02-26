@@ -6,12 +6,6 @@
 .privacy-policy-container {
     display: flex;
     justify-content: center;
-    padding-top: 50px;
-    min-height: 100vh;
-    background-image: url('../../assets/BerryBG.jpg');
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-position:center center;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }

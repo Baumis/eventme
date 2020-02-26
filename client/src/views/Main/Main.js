@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Main.css'
 import Navbar from '../../commonComponents/Navbar/Navbar'
+import Footer from '../../commonComponents/Footer/Footer'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 import MainHeader from './components/MainHeader/MainHeader'
@@ -25,6 +26,9 @@ class Main extends Component {
                     <Alert />
                     : null
                 }
+                <Footer 
+                    background={'white'}
+                />
             </div>
         )
     }
