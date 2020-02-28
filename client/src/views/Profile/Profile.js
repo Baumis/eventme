@@ -92,7 +92,9 @@ class Profile extends Component {
 
         return (
             <div className="profile">
-                <Navbar />
+                <Navbar
+                    staticColor={true}
+                />
                 <ProfileHeader
                     user={this.state.user}
                     toggleOptions={this.toggleUserOptionsModal}
@@ -111,12 +113,12 @@ class Profile extends Component {
                 {this.state.newEventModal ?
                     <UniversalModal
                         content={
-                        <div className="profile-create-form-wrapper">
-                            <CreateEventForm
-                                negativeAction={this.toggleNewEventModal}
-                                negativeLabel={'Close'}
-                            />
-                        </div>
+                            <div className="profile-create-form-wrapper">
+                                <CreateEventForm
+                                    negativeAction={this.toggleNewEventModal}
+                                    negativeLabel={'Close'}
+                                />
+                            </div>
                         }
                     />
                     : null}

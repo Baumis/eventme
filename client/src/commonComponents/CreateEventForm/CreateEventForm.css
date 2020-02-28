@@ -10,7 +10,6 @@
 
 @media only screen and (max-width: 450px) {
     .create-event-form {
-        border-radius: 0px;
         border: none;
         justify-content: center;
     }

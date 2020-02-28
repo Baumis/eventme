@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Main from './views/Main/Main'
 import Event from './views/Event/Event'
@@ -27,7 +28,7 @@ class App extends Component {
             return null
         }
         return (
-            <div>
+            <div className="App">
                 <Router>
                     <Switch>
                         <Route exact path="/" component={Main} />

@@ -133,7 +133,9 @@ class Event extends Component {
                     message='You have unsaved changes, are you sure you want to leave?'
                 />
                 <div className='Event'>
-                    <Navbar />
+                    <Navbar
+                        staticColor={true}
+                    />
                     <Header
                         activeTab={this.state.activeTab}
                         changeActive={this.changeActive}
