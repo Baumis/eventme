@@ -39,7 +39,7 @@ class Event extends Component {
 
         this.setState({
             loading: false,
-            inviteLink: this.props.EventStore.event.registrations.length < 2
+            inviteLink: this.props.EventStore.event ? this.props.EventStore.event.registrations.length < 2 : false
         })
         this.startEventUpdater()
     }
@@ -58,11 +58,13 @@ class Event extends Component {
     }
 
     startEventUpdater = () => {
-        this.setState({
-            updater: setInterval(() => {
-                this.props.EventStore.getEvent(this.props.EventStore.event._id)
-            }, 20000)
-        })
+        if (this.props.EventStore.event) {
+            this.setState({
+                updater: setInterval(() => {
+                    this.props.EventStore.getEvent(this.props.EventStore.event._id)
+                }, 20000)
+            })
+        }
     }
 
     changeActive = (cathegory) => {

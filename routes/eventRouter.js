@@ -43,4 +43,6 @@ eventRouter.post('/:id/registrations', eventController.addRegistration)
 
 eventRouter.delete('/:id/registrations/:registrationId', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeRegistration)
 
+eventRouter.put('/:id/urlmodifier', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR), eventController.changeUrlmodifier)
+
 module.exports = eventRouter

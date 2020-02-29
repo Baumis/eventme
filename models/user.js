@@ -57,26 +57,39 @@ const userSchema = new mongoose.Schema({
     myInvites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
 })
 
-userSchema.statics.format = (user) => ({
-    _id: user._id,
-    name: user.name,
-    username: user.username,
-    email: user.email,
-    emailVerified: user.emailVerified,
-    userType: user.userType,
-    avatar: user.avatar,
-    cover: user.cover,
-    myEvents: user.myEvents,
-    myInvites: user.myInvites
-})
+const formatEvents = (events) => {
+    return events.map(event => ({
+        _id: event._id,
+        label: event.label,
+        background: event.background,
+        url: '/events/' + event._id + event.urlmodifier
+    }))
+}
+
+userSchema.statics.format = (user) => {
+
+    const formattedUser = {
+        _id: user._id,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        emailVerified: user.emailVerified,
+        userType: user.userType,
+        avatar: user.avatar,
+        cover: user.cover,
+        myEvents: formatEvents(user.myEvents),
+        myInvites: formatEvents(user.myInvites)
+    }
+    return formattedUser
+}
 
 userSchema.statics.formatForGuest = (user) => ({
     _id: user._id,
     name: user.name,
     avatar: user.avatar,
     cover: user.cover,
-    myEvents: user.myEvents,
-    myInvites: user.myInvites
+    myEvents: formatEvents(user.myEvents),
+    myInvites: formatEvents(user.myInvites)
 })
 
 userSchema.statics.formatForGhost = (user) => ({

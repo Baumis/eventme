@@ -65,7 +65,7 @@ class CreateEventForm extends Component {
         this.setState({ loading: false })
 
         event ?
-            this.props.history.push(`/events/${event._id}`)
+            this.props.history.push(event.url)
             :
             this.props.VisibilityStore.showAlert(
                 'Creation failed',

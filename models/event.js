@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const helpers = require('../utils/helpers')
 const messageSchema = require('./messageSchema')
 const componentSchema = require('./componentSchema')
 const registrationSchema = require('./registrationSchema')
@@ -56,6 +57,15 @@ const eventSchema = new mongoose.Schema({
     publicAnswers: {
         type: Boolean,
         default: true
+    },
+    urlmodifier: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        minlength: 5,
+        maxlength: 5,
+        default: '0wl2o',
+        required: true
     }
 })
 
@@ -95,7 +105,8 @@ eventSchema.statics.format = (event) => {
         discussion: event.discussion,
         registrations: formattedRegistrations,
         registrationQuestions: event.registrationQuestions,
-        publicAnswers: event.publicAnswers
+        publicAnswers: event.publicAnswers,
+        url: '/events/' + event._id + event.urlmodifier
     }
     return formattedEvent
 }
@@ -145,7 +156,8 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         discussion: event.discussion,
         registrations: formattedRegistrations,
         registrationQuestions: event.registrationQuestions,
-        publicAnswers: event.publicAnswers
+        publicAnswers: event.publicAnswers,
+        url: '/events/' + event._id + event.urlmodifier
     }
     return formattedEvent
 }
