@@ -38,7 +38,7 @@ class Event extends Component {
 
         this.setState({
             loading: false,
-            inviteLink: this.props.EventStore.event.registrations.length < 2
+            inviteLink: this.props.EventStore.event ? this.props.EventStore.event.registrations.length < 2 : false
         })
         this.startEventUpdater()
     }
