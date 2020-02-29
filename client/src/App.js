@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Main from './views/Main/Main'
 import Event from './views/Event/Event'
 import Profile from './views/Profile/Profile'
 import NotFound from './views/NotFound/NotFound'
+import privacyPolicy from './views/PrivacyPolicy/PrivacyPolicy'
 
 
 class App extends Component {
@@ -26,10 +28,11 @@ class App extends Component {
             return null
         }
         return (
-            <div>
+            <div className="App">
                 <Router>
                     <Switch>
                         <Route exact path="/" component={Main} />
+                        <Route exact path="/privacy" component={privacyPolicy} />
                         <Route exact path="/events/:id" render={({ match }) => <Event eventId={match.params.id} />} />
                         <Route exact path="/profile/:id" render={({ match }) => <Profile profileId={match.params.id} />} />
                         <Route exact path="/profile/:id/verify/:token" render={({ match }) => <Profile profileId={match.params.id} verificationToken={match.params.token} />} />

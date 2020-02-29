@@ -4,9 +4,7 @@ import './UniversalModal.css'
 class UniversalModal extends Component {
 
     componentDidMount() {
-        if (this.props.open) {
-            document.body.style.overflow = 'hidden'
-        }
+        document.body.style.overflow = 'hidden'
     }
 
     componentWillUnmount() {

@@ -12,13 +12,13 @@
 }
 
 .information-page-icon {
-  color: #4c5c68;
+  color: #404e59;
   font-size: 35px;
 }
 
 .information-page-title {
   font-size: 38px;
-  color: #4c5c68;
+  color: #404e59;
   padding: 10px 10px;
   text-align: center;
   font-weight: 600;
@@ -37,7 +37,7 @@
   }
 
   .information-page-icon {
-    font-size: 40px;
+    font-size: 30px;
   }
 
   .information-page-title {

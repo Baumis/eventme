@@ -1,12 +1,12 @@
-.NotFound {
+.privacy-policy {
     display: flex;
     flex: 1;
     flex-direction: column;
 }
 
-.NotFound-container {
+.privacy-policy-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding-top: 60px;
+    padding-bottom: 30px;
 }

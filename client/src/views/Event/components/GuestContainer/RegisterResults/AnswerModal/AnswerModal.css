@@ -57,4 +57,7 @@
         height: 90vh;
         margin: 20px 0px;
     }
+    .answer-modal-top-bar {
+        margin: 0px 10px;
+    }
 }

@@ -8,6 +8,7 @@ import SaveButton from './components/SaveButton/SaveButton'
 import Alert from '../../commonComponents/Alert/Alert'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
+import Footer from '../../commonComponents/Footer/Footer'
 import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
 import EventContent from './components/EventContent/EventContent'
@@ -133,7 +134,9 @@ class Event extends Component {
                     message='You have unsaved changes, are you sure you want to leave?'
                 />
                 <div className='Event'>
-                    <Navbar />
+                    <Navbar
+                        staticColor={true}
+                    />
                     <Header
                         activeTab={this.state.activeTab}
                         changeActive={this.changeActive}
@@ -153,6 +156,7 @@ class Event extends Component {
                         toggleGuestModal={this.toggleGuestModal}
                         toggleAnswerModal={this.toggleAnswerModal}
                     />
+                    <Footer />
                     {this.isCreator() ?
                         <div>
                             <OptionsPanel />

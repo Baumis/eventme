@@ -1,0 +1,37 @@
+.footer {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    background: hsl(195, 15%, 98%);
+    min-height: 45px;
+    max-height: 45px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1024px;
+    width: 100%;
+}
+
+.footer-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 20px;
+    font-size: 14px;
+    color: rgb(76, 92, 104, 0.6);
+    cursor: pointer;
+}
+
+.footer-item:hover {
+    color: rgb(76, 92, 104, 0.8);
+}
+
+.footer-item-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 3px;
+}
