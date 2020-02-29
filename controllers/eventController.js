@@ -312,3 +312,17 @@ exports.removeRegistration = async (request, response) => {
         response.status(400).json({ error: exception.message })
     }
 }
+
+exports.changeUrlmodifyer = async (request, response) => {
+    try {
+        const event = await eventService.changeUrlmodifyer(request.event)
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(event))
+        } else {
+            response.json(Event.formatForGuest(event, request.senderId))
+        }
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}

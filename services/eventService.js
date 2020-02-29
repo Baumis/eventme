@@ -4,6 +4,7 @@ const User = require('../models/user')
 const userService = require('./userService')
 const pictureService = require('./pictureService')
 const validators = require('../utils/validators')
+const helpers = require('../utils/helpers')
 
 exports.populate = async (event) => {
 
@@ -132,7 +133,7 @@ exports.create = async (creatorId, eventObject) => {
 
 exports.update = async (event, eventObject) => {
     const startDate = new Date(eventObject.startDate)
-    const endDate =  new Date(startDate.getTime() + 1000 * 60 * 60 * 24)
+    const endDate = new Date(startDate.getTime() + 1000 * 60 * 60 * 24)
 
     if (!validators.validateDates(startDate, endDate)) {
         throw new Error('End Date must be greater than Start Date')
@@ -788,4 +789,11 @@ exports.removeRegistration = async (event, registration) => {
         session.endSession()
         throw new Error('Could not remove registration')
     }
+}
+
+exports.changeUrlmodifyer = async (event) => {
+    const newUrlModifyer = helpers.makeId(5)
+    const updatedEvent = await Event.findByIdAndUpdate(event._id, { urlmodifyer: newUrlModifyer }, { new: true })
+
+    return updatedEvent
 }
