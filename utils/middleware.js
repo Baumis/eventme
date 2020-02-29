@@ -36,15 +36,13 @@ exports.extractEvent = async (request, response, next) => {
     try {
         const id = request.params.id
         let event
-        
+
         if (request.method === 'GET' && request.url === '/') {
             event = await Event.findOne({ _id: id.slice(0, -5) })
             event = event.urlmodifier === id.slice(-5) ? event : null
         } else {
             event = await Event.findById(id)
         }
-            
-
 
         if (event === null) {
             return response.status(404).json({ error: 'Event not found' })
