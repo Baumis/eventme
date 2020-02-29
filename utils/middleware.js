@@ -39,7 +39,7 @@ exports.extractEvent = async (request, response, next) => {
         
         if (request.method === 'GET' && request.url === '/') {
             event = await Event.findOne({ _id: id.slice(0, -5) })
-            event = event.urlmodifyer === id.slice(-5) ? event : null
+            event = event.urlmodifier === id.slice(-5) ? event : null
         } else {
             event = await Event.findById(id)
         }

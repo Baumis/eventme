@@ -313,9 +313,9 @@ exports.removeRegistration = async (request, response) => {
     }
 }
 
-exports.changeUrlmodifyer = async (request, response) => {
+exports.changeUrlmodifier = async (request, response) => {
     try {
-        const event = await eventService.changeUrlmodifyer(request.event)
+        const event = await eventService.changeUrlmodifier(request.event)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(event))

@@ -58,7 +58,7 @@ const eventSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    urlmodifyer: {
+    urlmodifier: {
         type: String,
         trim: true,
         lowercase: true,
@@ -106,7 +106,7 @@ eventSchema.statics.format = (event) => {
         registrations: formattedRegistrations,
         registrationQuestions: event.registrationQuestions,
         publicAnswers: event.publicAnswers,
-        url: '/events/' + event._id + event.urlmodifyer
+        url: '/events/' + event._id + event.urlmodifier
     }
     return formattedEvent
 }
@@ -157,7 +157,7 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         registrations: formattedRegistrations,
         registrationQuestions: event.registrationQuestions,
         publicAnswers: event.publicAnswers,
-        url: '/events/' + event._id + event.urlmodifyer
+        url: '/events/' + event._id + event.urlmodifier
     }
     return formattedEvent
 }
