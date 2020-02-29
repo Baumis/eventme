@@ -57,11 +57,13 @@ class Event extends Component {
     }
 
     startEventUpdater = () => {
-        this.setState({
-            updater: setInterval(() => {
-                this.props.EventStore.getEvent(this.props.EventStore.event._id)
-            }, 20000)
-        })
+        if (this.props.EventStore.event) {
+            this.setState({
+                updater: setInterval(() => {
+                    this.props.EventStore.getEvent(this.props.EventStore.event._id)
+                }, 20000)
+            })
+        }
     }
 
     changeActive = (cathegory) => {

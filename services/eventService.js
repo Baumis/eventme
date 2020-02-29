@@ -97,7 +97,8 @@ exports.create = async (creatorId, eventObject) => {
         registrations: [{
             user: creatorId
         }],
-        publicAnswers: eventObject.publicAnswers
+        publicAnswers: eventObject.publicAnswers,
+        urlmodifyer: helpers.makeId(5)
     })
 
     const error = newEvent.validateSync()
@@ -795,5 +796,5 @@ exports.changeUrlmodifyer = async (event) => {
     const newUrlModifyer = helpers.makeId(5)
     const updatedEvent = await Event.findByIdAndUpdate(event._id, { urlmodifyer: newUrlModifyer }, { new: true })
 
-    return updatedEvent
+    return await this.populate(updatedEvent)
 }

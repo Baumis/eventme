@@ -22,7 +22,7 @@ class InviteLinkBlock extends Component {
                 <div className="invite-link-row">
                     <input
                         id="optionsPanelInviteUrl"
-                        value={`${window.location.origin}/events/${this.props.EventStore.event._id}`}
+                        value={window.location.origin + this.props.EventStore.event.url}
                         type="text"
                         readOnly
                     />
