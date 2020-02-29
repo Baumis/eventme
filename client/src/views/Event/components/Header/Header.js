@@ -13,21 +13,23 @@ class Header extends Component {
         }
         return (
             <div className="event-header">
-                {this.props.isCreator() ?
-                    <OptionsButton
-                        showPanel={this.props.togglePanel}
+                <div className="event-header-block">
+                    {this.props.isCreator() ?
+                        <OptionsButton
+                            showPanel={this.props.togglePanel}
+                        />
+                        : null}
+                    <div style={headerStyles} className="event-header-cover">
+                    </div>
+                    <EventControlPanel
+                        activeTab={this.props.activeTab}
+                        changeActive={this.props.changeActive}
+                        isGuest={this.props.isGuest}
+                        isCreator={this.props.isCreator}
+                        toggleRegisterModal={this.props.toggleRegisterModal}
+                        toggleInviteLink={this.props.toggleInviteLink}
                     />
-                    : null}
-                <div style={headerStyles} className="event-header-cover">
                 </div>
-                <EventControlPanel
-                    activeTab={this.props.activeTab}
-                    changeActive={this.props.changeActive}
-                    isGuest={this.props.isGuest}
-                    isCreator={this.props.isCreator}
-                    toggleRegisterModal={this.props.toggleRegisterModal}
-                    toggleInviteLink={this.props.toggleInviteLink}
-                />
             </div>
         )
     }

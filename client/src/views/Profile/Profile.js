@@ -5,6 +5,7 @@ import UserServices from '../../services/users'
 import ProfileHeader from './components/ProfileHeader/ProfileHeader'
 import ProfileContent from './components/ProfileContent/ProfileContent'
 import Navbar from '../../commonComponents/Navbar/Navbar'
+import Footer from '../../commonComponents/Footer/Footer'
 import CreateEventForm from '../../commonComponents/CreateEventForm/CreateEventForm'
 import UniversalModal from '../.././commonComponents/UniversalModal/UniversalModal'
 import NotFound from '../NotFound/NotFound'
@@ -110,6 +111,7 @@ class Profile extends Component {
                     newEvent={this.toggleNewEventModal}
                     activeTab={this.state.activeTab}
                 />
+                <Footer />
                 {this.state.newEventModal ?
                     <UniversalModal
                         content={

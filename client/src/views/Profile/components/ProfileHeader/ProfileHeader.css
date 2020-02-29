@@ -1,5 +1,11 @@
 .profile-header {
     display: flex;
+    justify-content: center;
+}
+
+.profile-header-block{
+    display: flex;
+    flex: 1;
     flex-direction: column-reverse;
     align-items: center;
     background: rgb(0,0,0, 0.5);
@@ -9,9 +15,10 @@
     background-size: cover;
     background-position:center center;
     min-height: 380px;
+    max-height: 380px;
     width: 100%;
     max-width: 1024px;
-    margin-top: 45px;
+    margin-top: 60px;
     border-radius: 6px;
     /*-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
@@ -19,7 +26,8 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    .profile-header {
+    .profile-header-block {
         border-radius: 0px;
+        margin-top: 45px;
     }
 }

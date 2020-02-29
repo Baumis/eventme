@@ -23,7 +23,10 @@ class NotFound extends Component {
     render() {
         return (
             <div className="NotFound">
-                <NavBar afterSign={this.afterSign} />
+                <NavBar
+                    afterSign={this.afterSign}
+                    staticColor={true}
+                />
                 <div className="NotFound-container">
                     <NotFoundMessage
                         title={this.props.title}

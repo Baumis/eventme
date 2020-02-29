@@ -7,6 +7,7 @@ import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal
 import Alert from '../../commonComponents/Alert/Alert'
 import TextContainer from './components/TextContainer/TextContainer'
 import PrivacyPolicyText from './components/InviteOwlPrivayPolicy/InviteOwlPrivacyPolicy'
+import Footer from '../../commonComponents/Footer/Footer'
 
 class PrivacyPolicy extends Component {
 
@@ -17,12 +18,16 @@ class PrivacyPolicy extends Component {
     render() {
         return (
             <div className="privacy-policy">
-                <NavBar afterSign={this.afterSign} />
+                <NavBar
+                    afterSign={this.afterSign}
+                    staticColor={true}
+                />
                 <div className="privacy-policy-container">
                     <TextContainer
                         message={< PrivacyPolicyText />}
                     />
                 </div>
+                <Footer />
                 {this.props.VisibilityStore.signModal ?
                     <UniversalModal
                         content={<SignModal />}

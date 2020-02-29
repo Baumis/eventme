@@ -1,11 +1,12 @@
 .privacy-policy {
     display: flex;
+    flex: 1;
     flex-direction: column;
 }
 
 .privacy-policy-container {
     display: flex;
     justify-content: center;
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 60px;
+    padding-bottom: 30px;
 }
