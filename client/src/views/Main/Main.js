@@ -26,9 +26,7 @@ class Main extends Component {
                     <Alert />
                     : null
                 }
-                <Footer 
-                    background={'white'}
-                />
+                <Footer />
             </div>
         )
     }

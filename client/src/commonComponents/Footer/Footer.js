@@ -1,10 +1,10 @@
 import React from 'react'
 import './Footer.css'
-import { FaEnvelope, FaFileAlt } from 'react-icons/fa'
+import { FaEnvelope } from 'react-icons/fa'
 
 const Footer = (props) => {
     return (
-        <div className="footer" style={{ background: props.background }}>
+        <div className="footer">
             <div className="footer-container">
                 <div className="footer-item">
                     <div className="footer-item-icon">
