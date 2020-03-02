@@ -21,7 +21,7 @@ class Footer extends Component {
                         <div className="footer-item-icon">
                             <FaEnvelope />
                         </div>
-                        support@inviteowl.com
+                        <a href="mailto:support@inviteowl.com">support@inviteowl.com</a>
                 </div>
                     <div className="footer-item">
                         <div onClick={() => this.toPrivacy()}>
