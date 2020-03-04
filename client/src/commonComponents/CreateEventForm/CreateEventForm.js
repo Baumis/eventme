@@ -75,14 +75,20 @@ class CreateEventForm extends Component {
             )
     }
 
-    changePage = (page) => {
-        this.setState({ page: page })
+    scrollPositionByPage = (page) => {
+        const parentWidth = document.getElementById("scrollableBanner").offsetWidth
+        document.getElementById("scrollableBanner").scrollLeft = parentWidth * page
     }
 
-    getPage = () => {
-        switch (this.state.page) {
-            case 1:
-                return <EventInformation
+    changePage = (page) => {
+        this.setState({ page: page })
+        this.scrollPositionByPage(page)
+    }
+
+    render() {
+        return (
+            <div className="create-event-form" id="scrollableBanner">
+                <EventInformation
                     changePage={this.changePage}
                     setEventInformation={this.setEventInformation}
                     negativeAction={this.props.negativeAction}
@@ -90,29 +96,12 @@ class CreateEventForm extends Component {
                     information={this.state.information}
                     setEventInformation={this.setEventInformation}
                 />
-            case 2:
-                return <GuestInformation
+                <GuestInformation
                     changePage={this.changePage}
                     setGuestQuestions={this.setGuestQuestions}
                     create={this.create}
                     questions={this.state.questions}
                 />
-            default:
-                return <EventInformation
-                    changePage={this.changePage}
-                    setEventInformation={this.setEventInformation}
-                    negativeAction={this.props.negativeAction}
-                    negativeLabel={this.props.negativeLabel}
-                    information={this.state.information}
-                    setEventInformation={this.setEventInformation}
-                />
-        }
-    }
-
-    render() {
-        return (
-            <div className="create-event-form">
-                {this.getPage()}
             </div>
         )
     }

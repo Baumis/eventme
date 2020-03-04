@@ -1,15 +1,15 @@
 .create-event-form{
-    flex: 1;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     background: transparent;
     border-radius: 5px;
     min-height: 360px;
+    width: 380px;
+    overflow: hidden;
 }
 
 @media only screen and (max-width: 450px) {
     .create-event-form {
+        width: 100%;
         border: none;
         justify-content: center;
     }

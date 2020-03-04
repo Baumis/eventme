@@ -21,6 +21,10 @@ input[type=date] {
   font-family: sans-serif;
 }
 
+input[type=time] {
+  font-family: sans-serif;
+}
+
 a {
   text-decoration: none;
 }
