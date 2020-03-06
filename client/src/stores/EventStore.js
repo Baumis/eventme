@@ -30,13 +30,13 @@ class EventStore {
         }
     }
 
-    async joinEvent(eventId, alias, answers) {
+    async joinEvent(alias, answers) {
         try {
-            this.event = await eventService.addRegistration(eventId, alias, answers)
+            this.event = await eventService.addRegistration(this.event._id, alias, answers)
             if (alias) {
                 const existing = localStorage.getItem('joinedEvents')
                 const joinedEvents = existing ? JSON.parse(existing) : []
-                joinedEvents.push(eventId)
+                joinedEvents.push(this.event._id)
                 localStorage.setItem('joinedEvents', JSON.stringify(joinedEvents))
             }
             return this.event
@@ -45,9 +45,9 @@ class EventStore {
         }
     }
 
-    async removeGuest(eventId, userId) {
+    async removeGuest(userId) {
         try {
-            this.event = await eventService.removeRegistration(eventId, userId)
+            this.event = await eventService.removeRegistration(this.event._id, userId)
             return this.event
         } catch (error) {
             return null
@@ -128,6 +128,15 @@ class EventStore {
         }
     }
 
+    async changeUrlmodifier() {
+        try {
+            this.event = await eventService.changeUrlmodifier(this.event._id)
+            return this.event
+        } catch {
+            return null
+        }
+    }
+
     setValue(value, field) {
         const newEvent = {
             ...this.event,
@@ -151,7 +160,8 @@ decorate(EventStore, {
     deleteMessage: action,
     postComment: action,
     deleteComment: action,
-    save: action
+    update: action,
+    changeUrlmodifier: action
 })
 
 export default new EventStore()

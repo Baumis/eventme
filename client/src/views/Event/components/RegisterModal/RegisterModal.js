@@ -65,9 +65,7 @@ class RegisterModal extends Component {
         }
 
         this.setState({ loading: true })
-        const response = await this.props.EventStore.joinEvent(
-            this.props.EventStore.event._id, alias, this.state.answers
-        )
+        const response = await this.props.EventStore.joinEvent(alias, this.state.answers)
         this.setState({ loading: false })
 
         if (!response) {
