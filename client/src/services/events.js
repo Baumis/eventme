@@ -41,16 +41,6 @@ const removeComment = async (id, messageId, commentId) => {
     return response.data
 }
 
-const addAnswersToFormComponent = async (id, componentId, answers) => {
-    const response = await http.post(`${baseUrl}/${id}/components/${componentId}/data/questions`, { answers })
-    return response.data
-}
-
-const addVoteToVoteComponent = async (id, componentId, optionId) => {
-    const response = await http.post(`${baseUrl}/${id}/components/${componentId}/data/options/${optionId}/votes`)
-    return response.data
-}
-
 const addRegistration = async (id, name = undefined, answers) => {
     const response = await http.post(`${baseUrl}/${id}/registrations`, { name, answers })
     return response.data
@@ -70,8 +60,6 @@ export default {
     addComment,
     removeMessage,
     removeComment,
-    addAnswersToFormComponent,
-    addVoteToVoteComponent,
     addRegistration,
     removeRegistration
 }

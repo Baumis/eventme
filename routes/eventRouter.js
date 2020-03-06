@@ -25,12 +25,6 @@ eventRouter.delete('/:id/discussion/:messageId', middleware.requireAuthenticatio
 
 eventRouter.delete('/:id/discussion/:messageId/comments/:commentId', middleware.requireAuthentication, eventController.removeComment)
 
-eventRouter.post('/:id/components/:componentId/data/options/:optionId/votes', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addVoteToVoteComponent)
-
-eventRouter.delete('/:id/components/:componentId/data/options/:optionId/votes/vote', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeVoteFromVoteComponent)
-
-eventRouter.post('/:id/components/:componentId/data/questions', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.addAnswersToFormComponent)
-
 eventRouter.post('/:id/registrations', eventController.addRegistration)
 
 eventRouter.delete('/:id/registrations/:registrationId', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeRegistration)

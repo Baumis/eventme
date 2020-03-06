@@ -118,15 +118,6 @@ class EventStore {
         }
     }
 
-    async addAnswersToFormComponent(componentId, answers) {
-        try {
-            this.event = await eventService.addAnswersToFormComponent(this.event._id, componentId, answers)
-            return this.event
-        } catch {
-            return null
-        }
-    }
-
     async uploadEventBackground(file) {
         try {
             const picture = await pictureService.uploadEventBackground(this.event._id, file)
@@ -147,71 +138,6 @@ class EventStore {
             this.saved = false
         })
     }
-
-    removeComponent(index) {
-        const event = { ...this.event }
-        event.components.splice(index, 1)
-
-        this.event = event
-        this.saved = false
-    }
-
-    createComponent(component) {
-        const event = { ...this.event }
-        event.components.push(component)
-
-        this.event = event
-        this.saved = false
-    }
-
-    editComponentData(index, data) {
-        const event = { ...this.event }
-        event.components[index].data = data
-
-        this.event = event
-        this.saved = false
-    }
-
-    moveComponentForward(index) {
-        const event = { ...this.event }
-        const copy = event.components[index]
-
-        if (event.components.length !== index + 1) {
-            event.components[index] = event.components[index + 1]
-            event.components[index + 1] = copy
-        } else {
-            event.components[index] = event.components[0]
-            event.components[0] = copy
-        }
-
-        this.event = event
-        this.saved = false
-    }
-
-    moveComponentBackward(index) {
-        const event = { ...this.event }
-        const copy = event.components[index]
-
-        if (index > 0) {
-            event.components[index] = event.components[index - 1]
-            event.components[index - 1] = copy
-        } else {
-            event.components[index] = event.components[event.components.length - 1]
-            event.components[event.components.length - 1] = copy
-        }
-
-        this.event = event
-        this.saved = false
-    }
-
-    async addVoteToVoteComponent(componentId, optionId) {
-        try {
-            this.event = await eventService.addVoteToVoteComponent(this.event._id, componentId, optionId)
-            return this.event
-        } catch {
-            return null
-        }
-    }
 }
 
 decorate(EventStore, {
@@ -225,10 +151,6 @@ decorate(EventStore, {
     deleteMessage: action,
     postComment: action,
     deleteComment: action,
-    getComponent: action,
-    addComponent: action,
-    addAnswersToFormComponent: action,
-    saveComponentData: action,
     save: action
 })
 

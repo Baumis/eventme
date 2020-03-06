@@ -1,5 +1,4 @@
 const Event = require('../models/event')
-
 const eventService = require('../services/eventService')
 const logService = require('../services/logService')
 const emailService = require('../services/emailService')
@@ -136,58 +135,6 @@ exports.removeComment = async (request, response) => {
         }
 
         const updatedEvent = await eventService.removeComment(request.event, request.params.messageId, request.params.commentId)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(updatedEvent))
-        } else {
-            response.json(Event.formatForGuest(updatedEvent, request.senderId))
-        }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.addVoteToVoteComponent = async (request, response) => {
-    try {
-        const { componentId, optionId } = request.params
-        const userId = request.senderId
-
-        const updatedEvent = await eventService.addVoteToVoteComponent(request.event, componentId, optionId, userId)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(updatedEvent))
-        } else {
-            response.json(Event.formatForGuest(updatedEvent, request.senderId))
-        }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.removeVoteFromVoteComponent = async (request, response) => {
-    try {
-        const { id, componentId, optionId } = request.params
-        const userId = request.senderId
-
-        const updatedEvent = await eventService.removeVoteFromVoteComponent(id, componentId, optionId, userId)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(updatedEvent))
-        } else {
-            response.json(Event.formatForGuest(updatedEvent, request.senderId))
-        }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.addAnswersToFormComponent = async (request, response) => {
-    try {
-        const { componentId } = request.params
-        const userId = request.senderId
-        const answers = request.body.answers
-
-        const updatedEvent = await eventService.addAnswersToFormComponent(request.event, componentId, answers, userId)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
