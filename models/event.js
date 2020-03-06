@@ -1,23 +1,7 @@
 const mongoose = require('mongoose')
-const helpers = require('../utils/helpers')
 const messageSchema = require('./messageSchema')
-const componentSchema = require('./componentSchema')
 const registrationSchema = require('./registrationSchema')
 const registrationQuestionSchema = require('./registrationQuestionSchema')
-
-const guestSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User',
-        required: true
-    },
-    status: {
-        type: String,
-        enum: ['GOING', 'PENDING', 'DECLINED', 'MABYE'],
-        default: 'PENDING',
-        required: [true, 'Status required']
-    },
-    _id: false
-})
 
 const eventSchema = new mongoose.Schema({
     label: {
@@ -49,8 +33,6 @@ const eventSchema = new mongoose.Schema({
         default: 'https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80',
         maxlength: [2048, 'Url too long']
     },
-    guests: [guestSchema],
-    components: [componentSchema],
     discussion: [messageSchema],
     registrations: [registrationSchema],
     registrationQuestions: [registrationQuestionSchema],
@@ -100,27 +82,16 @@ eventSchema.statics.format = (event) => {
         endDate: event.endDate,
         creator: event.creator,
         background: event.background,
-        guests: event.guests,
-        components: event.components,
         discussion: event.discussion,
         registrations: formattedRegistrations,
         registrationQuestions: event.registrationQuestions,
         publicAnswers: event.publicAnswers,
-        url: '/events/' + event._id + event.urlmodifier
+        url: event._id + event.urlmodifier
     }
     return formattedEvent
 }
 
 eventSchema.statics.formatForGuest = (event, guestId) => {
-    const formattedComponents = event.components.map(component => {
-        if (component.type === 'FORM') {
-            component.data.questions = component.data.questions.map(question => {
-                question.answers = question.answers.filter(answer => answer.user._id.toString() === guestId)
-                return question
-            })
-        }
-        return component
-    })
 
     const formattedRegistrations = event.registrations.map(registration => {
         let user
@@ -151,13 +122,11 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         endDate: event.endDate,
         creator: event.creator,
         background: event.background,
-        guests: event.guests,
-        components: formattedComponents,
         discussion: event.discussion,
         registrations: formattedRegistrations,
         registrationQuestions: event.registrationQuestions,
         publicAnswers: event.publicAnswers,
-        url: '/events/' + event._id + event.urlmodifier
+        url: event._id + event.urlmodifier
     }
     return formattedEvent
 }

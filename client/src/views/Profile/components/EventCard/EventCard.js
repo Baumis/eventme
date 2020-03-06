@@ -9,7 +9,7 @@ const EventCard = (props) => {
     }
 
     const toEvent = (id) => {
-        props.history.push(props.event.url)
+        props.history.push('/events/' + props.event.url)
     }
 
     return (

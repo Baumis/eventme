@@ -1,5 +1,4 @@
 const Event = require('../models/event')
-
 const eventService = require('../services/eventService')
 const logService = require('../services/logService')
 const emailService = require('../services/emailService')
@@ -49,76 +48,6 @@ exports.delete = async (request, response) => {
         await eventService.delete(request.event)
 
         response.status(204).end()
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.addGuest = async (request, response) => {
-    try {
-        const userId = request.body.userId
-
-        const updatedEvent = await eventService.addGuest(request.event, userId)
-
-        logService.joinedEvent(userId, updatedEvent._id, updatedEvent.label)
-
-        response.json(Event.format(updatedEvent))
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.removeGuest = async (request, response) => {
-    try {
-        const userId = request.params.userId
-
-        if (request.senderRole !== roles.CREATOR && request.senderId !== userId) {
-            return response.status(403).json({ error: 'User does not have required permission' })
-        }
-
-        const updatedEvent = await eventService.removeGuest(request.event, userId)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(updatedEvent))
-        } else {
-            response.json(Event.formatForGuest(updatedEvent, request.senderId))
-        }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.joinEvent = async (request, response) => {
-    try {
-        const updatedEvent = await eventService.addGuest(request.event, request.senderId)
-
-        logService.joinedEvent(request.senderId, updatedEvent._id, updatedEvent.label)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(updatedEvent))
-        } else {
-            response.json(Event.formatForGuest(updatedEvent, request.senderId))
-        }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.setStatus = async (request, response) => {
-    try {
-        const userId = request.params.userId
-
-        if (request.senderRole !== roles.CREATOR && request.senderId !== userId) {
-            return response.status(403).json({ error: 'User does not have required permission' })
-        }
-
-        const updatedEvent = await eventService.setStatus(request.event, userId, request.body.newStatus)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(updatedEvent))
-        } else {
-            response.json(Event.formatForGuest(updatedEvent, request.senderId))
-        }
     } catch (exception) {
         response.status(400).json({ error: exception.message })
     }
@@ -206,58 +135,6 @@ exports.removeComment = async (request, response) => {
         }
 
         const updatedEvent = await eventService.removeComment(request.event, request.params.messageId, request.params.commentId)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(updatedEvent))
-        } else {
-            response.json(Event.formatForGuest(updatedEvent, request.senderId))
-        }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.addVoteToVoteComponent = async (request, response) => {
-    try {
-        const { componentId, optionId } = request.params
-        const userId = request.senderId
-
-        const updatedEvent = await eventService.addVoteToVoteComponent(request.event, componentId, optionId, userId)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(updatedEvent))
-        } else {
-            response.json(Event.formatForGuest(updatedEvent, request.senderId))
-        }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.removeVoteFromVoteComponent = async (request, response) => {
-    try {
-        const { id, componentId, optionId } = request.params
-        const userId = request.senderId
-
-        const updatedEvent = await eventService.removeVoteFromVoteComponent(id, componentId, optionId, userId)
-
-        if (request.senderRole === roles.CREATOR) {
-            response.json(Event.format(updatedEvent))
-        } else {
-            response.json(Event.formatForGuest(updatedEvent, request.senderId))
-        }
-    } catch (exception) {
-        response.status(400).json({ error: exception.message })
-    }
-}
-
-exports.addAnswersToFormComponent = async (request, response) => {
-    try {
-        const { componentId } = request.params
-        const userId = request.senderId
-        const answers = request.body.answers
-
-        const updatedEvent = await eventService.addAnswersToFormComponent(request.event, componentId, answers, userId)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))

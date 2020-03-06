@@ -16,7 +16,7 @@ class SaveButton extends Component {
 
     discardChanges = async () => {
         this.setState({ discarding: true })
-        const response = await this.props.EventStore.initializeEvent(this.props.EventStore.event._id)
+        const response = await this.props.EventStore.initializeEvent(this.props.EventStore.event.url)
         this.setState({ discarding: false })
 
         if (!response) {

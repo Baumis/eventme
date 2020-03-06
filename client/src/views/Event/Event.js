@@ -9,7 +9,6 @@ import Alert from '../../commonComponents/Alert/Alert'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import Navbar from '../../commonComponents/Navbar/Navbar'
 import Footer from '../../commonComponents/Footer/Footer'
-import NewComponentModal from './components/NewComponentModal/NewComponentModal'
 import NotFound from '../NotFound/NotFound'
 import EventContent from './components/EventContent/EventContent'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
@@ -24,7 +23,6 @@ class Event extends Component {
         super(props)
         this.state = {
             loading: true,
-            showNewComponentModal: false,
             activeTab: 'Discussion',
             registerModal: false,
             inviteLink: false,
@@ -35,8 +33,7 @@ class Event extends Component {
     }
 
     async componentDidMount() {
-        await this.props.EventStore.initializeEvent(this.props.eventId)
-
+        await this.props.EventStore.initializeEvent(this.props.eventUrl)
         this.setState({
             loading: false,
             inviteLink: this.props.EventStore.event ? this.props.EventStore.event.registrations.length < 2 : false
@@ -61,7 +58,7 @@ class Event extends Component {
         if (this.props.EventStore.event) {
             this.setState({
                 updater: setInterval(() => {
-                    this.props.EventStore.getEvent(this.props.EventStore.event._id)
+                    this.props.EventStore.getEvent(this.props.EventStore.event.url)
                 }, 20000)
             })
         }
@@ -103,10 +100,6 @@ class Event extends Component {
             return true
         }
         return this.props.EventStore.event.registrations.some(guest => guest.user._id === this.props.UserStore.currentUser._id)
-    }
-
-    toggleNewComponentModal = () => {
-        this.setState({ showNewComponentModal: !this.state.showNewComponentModal })
     }
 
     toggleInviteLink = () => {
@@ -151,7 +144,6 @@ class Event extends Component {
                     <EventContent
                         isCreator={this.isCreator}
                         activeTab={this.state.activeTab}
-                        toggleNewComponentModal={this.toggleNewComponentModal}
                         active={this.state.activeTab}
                         changeActive={this.changeActive}
                         isGuest={this.isGuest}
@@ -163,14 +155,6 @@ class Event extends Component {
                         <div>
                             <OptionsPanel />
                             <SaveButton save={this.save} saved={this.props.EventStore.saved} />
-                            {this.state.showNewComponentModal ?
-                                <UniversalModal
-                                    content={<NewComponentModal
-                                        close={this.toggleNewComponentModal}
-                                    />}
-                                />
-                                : null
-                            }
                         </div>
                         : null
                     }
