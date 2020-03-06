@@ -25,7 +25,7 @@ class GuestList extends Component {
     }
 
     removeProcess = (id) => {
-        this.props.EventStore.removeGuest(this.props.EventStore.event._id, id)
+        this.props.EventStore.removeGuest(id)
         this.props.VisibilityStore.closeAlert()
     }
 

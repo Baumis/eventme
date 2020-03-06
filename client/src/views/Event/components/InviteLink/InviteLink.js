@@ -1,16 +1,40 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { withRouter } from 'react-router-dom'
 import './InviteLink.css'
 import { FaCopy } from 'react-icons/fa'
 import DefaultButtons from '../../../../commonComponents/UniversalModal/DefaultButtons/DefaultButtons'
 
 class InviteLinkBlock extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: false
+        }
+    }
+
     copyLink = () => {
         const urlInput = document.getElementById('optionsPanelInviteUrl')
         urlInput.select()
         urlInput.setSelectionRange(0, 9999)
         document.execCommand('copy')
+    }
+
+    changeUrlmodifier = async () => {
+        if (!this.props.EventStore.saved) {
+            this.props.VisibilityStore.showAlert(
+                'Unsaved changes',
+                'Please save your event before changing the url.',
+                'OK',
+                () => this.props.VisibilityStore.closeAlert(),
+            )
+            return
+        }
+        this.setState({ loading: true })
+        const event = await this.props.EventStore.changeUrlmodifier()
+        this.props.history.push('/events/' + event.url)
+        this.setState({ loading: false })
     }
 
     render() {
@@ -32,6 +56,9 @@ class InviteLinkBlock extends Component {
                 </div>
                 <div className="invite-link-button-row">
                     <DefaultButtons
+                        showSpinner={this.state.loading}
+                        positiveLabel={'change'}
+                        positiveAction={this.changeUrlmodifier}
                         negativeLabel={'close'}
                         negativeAction={this.props.toggleInviteLink}
                     />
@@ -41,4 +68,4 @@ class InviteLinkBlock extends Component {
     }
 }
 
-export default inject('EventStore')(observer(InviteLinkBlock))
+export default withRouter(inject('EventStore', 'VisibilityStore')(observer(InviteLinkBlock)))

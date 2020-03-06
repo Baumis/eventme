@@ -51,6 +51,11 @@ const removeRegistration = async (id, registrationId) => {
     return response.data
 }
 
+const changeUrlmodifier = async (id) => {
+    const response = await http.put(`${baseUrl}/${id}/urlmodifier`)
+    return response.data
+}
+
 export default {
     getOne,
     create,
@@ -61,5 +66,6 @@ export default {
     removeMessage,
     removeComment,
     addRegistration,
-    removeRegistration
+    removeRegistration,
+    changeUrlmodifier
 }
