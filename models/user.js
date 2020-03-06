@@ -62,7 +62,7 @@ const formatEvents = (events) => {
         _id: event._id,
         label: event.label,
         background: event.background,
-        url: '/events/' + event._id + event.urlmodifier
+        url: event._id + event.urlmodifier
     }))
 }
 

@@ -36,7 +36,6 @@ class Event extends Component {
 
     async componentDidMount() {
         await this.props.EventStore.initializeEvent(this.props.eventUrl)
-
         this.setState({
             loading: false,
             inviteLink: this.props.EventStore.event ? this.props.EventStore.event.registrations.length < 2 : false
