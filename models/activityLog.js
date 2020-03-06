@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const logEntry = new mongoose.Schema({
     type: {
         type: String,
-        enum: ['JOINED_EVENT', 'LEFT_EVENT', 'CREATED_EVENT', 'UPDATED_EVENT', 'CHANGED_STATUS', 'DELETED_EVENT', 'WROTE_MESSAGE', 'DELETED_MESSAGE', 'WROTE_COMMENT', 'DELETED_COMMENT', 'CREATED_USER', 'UPDATED_USER'],
+        enum: ['JOINED_EVENT', 'LEFT_EVENT', 'CREATED_EVENT', 'UPDATED_EVENT', 'DELETED_EVENT', 'WROTE_MESSAGE', 'DELETED_MESSAGE', 'WROTE_COMMENT', 'DELETED_COMMENT', 'CREATED_USER', 'UPDATED_USER'],
         required: true
     },
     data: Object,

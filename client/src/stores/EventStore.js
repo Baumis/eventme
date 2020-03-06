@@ -6,9 +6,9 @@ class EventStore {
     event = null
     saved = true
 
-    async initializeEvent(eventId) {
+    async initializeEvent(eventUrl) {
         try {
-            this.event = await eventService.getOne(eventId)
+            this.event = await eventService.getOne(eventUrl)
             this.saved = true
             //console.log('event initialized: ', toJS(this.event))
             return this.event
@@ -18,10 +18,10 @@ class EventStore {
         }
     }
 
-    async getEvent(eventId) {
+    async getEvent(eventUrl) {
         if (this.saved) {
             try {
-                const event = await eventService.getOne(eventId)
+                const event = await eventService.getOne(eventUrl)
                 if (this.saved) {
                     this.event = event
 
@@ -146,14 +146,6 @@ class EventStore {
             this.event = newEvent
             this.saved = false
         })
-    }
-
-    getUserStatus(id) {
-        const guest = this.event.guests.find(guest => guest.user._id === id)
-        if (guest) {
-            return guest.status
-        }
-        return null
     }
 
     removeComponent(index) {

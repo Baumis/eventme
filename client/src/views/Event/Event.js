@@ -35,7 +35,7 @@ class Event extends Component {
     }
 
     async componentDidMount() {
-        await this.props.EventStore.initializeEvent(this.props.eventId)
+        await this.props.EventStore.initializeEvent(this.props.eventUrl)
 
         this.setState({
             loading: false,
@@ -61,7 +61,7 @@ class Event extends Component {
         if (this.props.EventStore.event) {
             this.setState({
                 updater: setInterval(() => {
-                    this.props.EventStore.getEvent(this.props.EventStore.event._id)
+                    this.props.EventStore.getEvent(this.props.EventStore.event.url)
                 }, 20000)
             })
         }

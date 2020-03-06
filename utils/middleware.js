@@ -81,8 +81,6 @@ exports.extractRole = async (request, response, next) => {
 
     if (event.creator.toString() === senderId) {
         request.senderRole = roles.CREATOR
-    } else if (event.guests.find(guest => guest.user.toString() === senderId)) {
-        request.senderRole = roles.GUEST
     } else if (event.registrations.find(registration => registration.user ? registration.user.toString() === senderId : false)) {
         request.senderRole = roles.GUEST
     } else {

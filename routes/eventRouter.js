@@ -17,14 +17,6 @@ eventRouter.put('/:id', middleware.requireAuthentication, middleware.requireRole
 
 eventRouter.delete('/:id', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR), eventController.delete)
 
-eventRouter.post('/:id/guests', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR), eventController.addGuest)
-
-eventRouter.put('/:id/guests/:userId', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.setStatus)
-
-eventRouter.delete('/:id/guests/:userId', middleware.requireAuthentication, middleware.requireRole(roles.CREATOR, roles.GUEST), eventController.removeGuest)
-
-eventRouter.put('/:id/guests', middleware.requireAuthentication, eventController.joinEvent)
-
 eventRouter.post('/:id/discussion', middleware.requireAuthentication, eventController.addMessage)
 
 eventRouter.post('/:id/discussion/:messageId/comments', middleware.requireAuthentication, eventController.addComment)

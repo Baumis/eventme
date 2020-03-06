@@ -9,7 +9,6 @@ const helpers = require('../utils/helpers')
 exports.populate = async (event) => {
 
     const populatedEvent = await event
-        .populate('guests.user', { _id: 1, name: 1, avatar: 1 })
         .populate('registrations.user', { _id: 1, name: 1, avatar: 1 })
         .execPopulate()
 
@@ -17,8 +16,8 @@ exports.populate = async (event) => {
         if (userId === null) {
             return null
         }
-        const guest = populatedEvent.guests.find(guest => guest.user._id.toString() === userId.toString())
-        return guest ? guest.user : await User.findById(userId, { _id: 1, name: 1, avatar: 1 })
+        const registration = populatedEvent.registrations.find(registration => registration.user ? registration.user._id.toString() === userId.toString() : false)
+        return registration ? registration.user : await User.findById(userId, { _id: 1, name: 1, avatar: 1 })
     }
 
     populatedEvent.creator = await getUser(populatedEvent.creator)
@@ -89,10 +88,6 @@ exports.create = async (creatorId, eventObject) => {
         endDate: endDate,
         creator: creatorId,
         background: eventObject.background,
-        guests: [{
-            user: creatorId,
-            status: 'GOING'
-        }],
         registrationQuestions: eventObject.registrationQuestions,
         registrations: [{
             user: creatorId
@@ -200,8 +195,10 @@ exports.delete = async (event) => {
 
         await userService.removeFromMyEvents(event.creator._id, event._id, options)
 
-        for (guest of event.guests) {
-            await userService.removeFromMyInvites(guest.user, event._id, options)
+        for (let registration of event.registrations) {
+            if (registration.user) {
+                await userService.removeFromMyInvites(registration.user, event._id, options)
+            }
         }
 
         await pictureService.deleteAllByEvent(event._id)
@@ -215,74 +212,6 @@ exports.delete = async (event) => {
         session.endSession()
         throw new Error('Could not remove event')
     }
-}
-
-exports.addGuest = async (event, guestId) => {
-    const guest = event.guests.find(guest => guest.user.toString() === guestId)
-
-    if (guest) {
-        throw new Error('User is already a guest')
-    }
-
-    const session = await Event.startSession()
-    session.startTransaction()
-    const options = { session }
-
-    try {
-        await userService.addToMyInvites(guestId, event._id, options)
-
-        const savedEvent = await this.addToGuests(event._id, guestId, options)
-
-        const populatedEvent = await this.populate(savedEvent)
-
-        await session.commitTransaction()
-        session.endSession()
-
-        return populatedEvent
-
-    } catch (exception) {
-        await session.abortTransaction()
-        session.endSession()
-        throw new Error('Could not add guest')
-    }
-}
-
-exports.removeGuest = async (event, guestId) => {
-
-    if (event.creator.toString() === guestId) {
-        throw new Error('Creator can not be removed')
-    }
-
-    const session = await Event.startSession()
-    session.startTransaction()
-    const options = { session }
-
-    try {
-        await userService.removeFromMyInvites(guestId, event._id, options)
-
-        const savedEvent = await this.removeFromGuests(event._id, guestId, options)
-
-        const populatedEvent = await this.populate(savedEvent)
-
-        await session.commitTransaction()
-        session.endSession()
-
-        return populatedEvent
-
-    } catch (exception) {
-        await session.abortTransaction()
-        session.endSession()
-        throw new Error('Could not remove guest')
-    }
-}
-
-exports.setStatus = async (event, guestId, status) => {
-    const savedEvent = await Event.findOneAndUpdate(
-        { _id: event._id, 'guests.user': guestId },
-        { $set: { 'guests.$.status': status } },
-        { new: true, runValidators: true })
-
-    return await this.populate(savedEvent)
 }
 
 exports.addMessage = async (event, author, message) => {
@@ -337,23 +266,6 @@ exports.removeComment = async (event, messageId, commentId) => {
         { arrayFilters: [{ 'comment._id': commentId }], new: true })
 
     return await this.populate(savedEvent)
-}
-
-exports.addToGuests = async (id, userId, options = {}) => {
-    const guest = {
-        user: userId,
-        status: 'PENDING'
-    }
-
-    options.new = true
-
-    return await Event.findByIdAndUpdate(id, { $addToSet: { guests: guest } }, options)
-}
-
-exports.removeFromGuests = async (id, userId, options = {}) => {
-    options.new = true
-
-    return await Event.findByIdAndUpdate(id, { $pull: { guests: { user: userId } } }, options)
 }
 
 exports.createComponent = async (id, type, data, position, options = {}) => {
@@ -789,6 +701,15 @@ exports.removeRegistration = async (event, registration) => {
         await session.abortTransaction()
         session.endSession()
         throw new Error('Could not remove registration')
+    }
+}
+
+exports.removeFromRegistrations = async (eventId, userId, options) => {
+    const event = await Event.findByIdAndUpdate(eventId,
+        { $pull: { registrations: { _id: userId } } }, options)
+
+    if (!event) {
+        throw Error('Malformatted id')
     }
 }
 

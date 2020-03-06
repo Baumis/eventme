@@ -139,14 +139,16 @@ exports.delete = async (id) => {
         const myEvents = await Promise.all(myEventsPromises)
 
         for (let myEvent of myEvents) {
-            for (let myEventGuest of myEvent.guests) {
-                await this.removeFromMyInvites(myEventGuest.user, myEvent._id, options)
+            for (let myEventRegistration of myEvent.registrations) {
+                if (myEventRegistration.user) {
+                    await this.removeFromMyInvites(myEventRegistration.user, myEvent._id, options)
+                }
             }
             await Event.findByIdAndDelete(myEvent._id, options)
         }
 
         for (let myInvite of user.myInvites) {
-            await eventService.removeFromGuests(myInvite, user._id, options)
+            await eventService.removeFromRegistrations(myInvite, user._id, options)
         }
 
         await User.findByIdAndDelete(user._id, options)

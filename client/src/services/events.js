@@ -1,8 +1,8 @@
 import http from './http'
 const baseUrl = '/api/events'
 
-const getOne = async (id) => {
-    const response = await http.get(`${baseUrl}/${id}`)
+const getOne = async (url) => {
+    const response = await http.get(`${baseUrl}/${url}`)
     return response.data
 }
 
@@ -18,26 +18,6 @@ const remove = async (id) => {
 
 const update = async (updatedObject) => {
     const response = await http.put(`${baseUrl}/${updatedObject._id}`, updatedObject)
-    return response.data
-}
-
-const addGuest = async (id, userId) => {
-    const response = await http.post(`${baseUrl}/${id}/guests`, { userId })
-    return response.data
-}
-
-const removeGuest = async (id, userId) => {
-    const response = await http.delete(`${baseUrl}/${id}/guests/${userId}`)
-    return response.data
-}
-
-const joinEvent = async (id) => {
-    const response = await http.put(`${baseUrl}/${id}/guests`)
-    return response.data
-}
-
-const changeStatus = async (id, userId, newStatus) => {
-    const response = await http.put(`${baseUrl}/${id}/guests/${userId}`, { newStatus })
     return response.data
 }
 
@@ -86,10 +66,6 @@ export default {
     create,
     remove,
     update,
-    addGuest,
-    removeGuest,
-    joinEvent,
-    changeStatus,
     addMessage,
     addComment,
     removeMessage,
