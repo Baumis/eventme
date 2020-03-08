@@ -5,6 +5,7 @@ import './OptionsPanel.css'
 import { FaAngleDoubleLeft, FaUpload } from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock/InputBlock'
+import TogglerBlock from './TogglerBlock/TogglerBlock'
 import Spinner from '../../../../commonComponents/Spinner/Spinner'
 
 class OptionsPanel extends Component {
@@ -62,20 +63,9 @@ class OptionsPanel extends Component {
         this.props.EventStore.setValue(startDate, 'startDate')
     }
 
-    addInfoField = () => {
-        this.props.EventStore.addInfoPanelValue()
-    }
-
-    deleteInfoField = (index) => {
-        this.props.EventStore.deleteInfoPanelValue(index)
-    }
-
-    changeFieldText = (event) => {
-        this.props.EventStore.changeInfoPanelText(event.target.value, event.target.name)
-    }
-
-    changeIcon = (icon, index) => {
-        this.props.EventStore.changeInfoPanelIcon(icon, index)
+    togglePublicAnswers = () => {
+        const newValue = !this.props.EventStore.event.publicAnswers
+        this.props.EventStore.setValue(newValue, 'publicAnswers')
     }
 
     slidePanel = () => {
@@ -152,6 +142,11 @@ class OptionsPanel extends Component {
                         label={'Start time'}
                         value={moment(this.props.EventStore.event.startDate).format('HH:mm')}
                         changeValue={this.changeStartTime}
+                    />
+                    <TogglerBlock
+                        label={'Public answers'}
+                        value={this.props.EventStore.event.publicAnswers}
+                        changeValue={this.togglePublicAnswers}
                     />
                 </div>
             </div>
