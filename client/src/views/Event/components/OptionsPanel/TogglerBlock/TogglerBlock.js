@@ -4,11 +4,19 @@ import './TogglerBlock.css'
 const TogglerBlock = (props) => {
     return (
         <div className="options-panel-content">
-            <div className="togglerBlock">
-                <div className="togglerLabel">
+            <div className="toggler-block">
+                <div className="toggler-block-label">
                     <label>{props.label}</label>
                 </div>
-                <input type={"checkbox"} checked={props.value} onChange={props.changeValue} required></input>
+                <div className="toggler-block-toggler-row">
+                    <label className="toggler-block-switch">
+                        <input type={"checkbox"} checked={props.value} onChange={props.changeValue}></input>
+                        <span className="switch-slider"></span>
+                    </label>
+                    <div className="toggler-block-description">
+                        {'Registartion answers can be read by everyone'}
+                    </div>
+                </div>
             </div>
         </div>
     )

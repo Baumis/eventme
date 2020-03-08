@@ -3,7 +3,7 @@
     flex: 1;
     align-items: center;
     justify-content: center;
-    background: hsl(195, 15%, 98%);
+    background: white;
     min-height: 45px;
     max-height: 45px;
 }
@@ -21,12 +21,12 @@
     align-items: center;
     margin: 0px 20px;
     font-size: 14px;
-    color: rgb(76, 92, 104, 0.6);
+    color: rgb(76, 92, 104, 0.8);
     cursor: pointer;
 }
 
 .footer-item:hover {
-    color: rgb(76, 92, 104, 0.8);
+    color: rgb(76, 92, 104, 1);
 }
 
 .footer-item-icon {
