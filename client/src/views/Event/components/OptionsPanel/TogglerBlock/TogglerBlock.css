@@ -29,7 +29,7 @@
 .toggler-block-switch {
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 50px;
   height: 26px;
 }
 
@@ -56,17 +56,17 @@
   position: absolute;
   border-radius: 5px;
   content: "";
-  height: 20px;
-  width: 19px;
+  height: 22px;
+  width: 22px;
   left: 1px;
-  bottom: 3px;
+  bottom: 2px;
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 input:checked + .switch-slider {
-  background-color: green;
+  background-color: rgb(0, 128, 0, 0.8);
 }
 
 input:checked + .switch-slider:before {
