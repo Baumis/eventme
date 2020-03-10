@@ -14,7 +14,7 @@ const TogglerBlock = (props) => {
                         <span className="switch-slider"></span>
                     </label>
                     <div className="toggler-block-description">
-                        {'Registartion answers can be read by everyone'}
+                        {props.info}
                     </div>
                 </div>
             </div>

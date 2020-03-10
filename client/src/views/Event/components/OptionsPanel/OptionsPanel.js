@@ -145,6 +145,7 @@ class OptionsPanel extends Component {
                     />
                     <TogglerBlock
                         label={'Public answers'}
+                        info={'Answers can be read by everyone.'}
                         value={this.props.EventStore.event.publicAnswers}
                         changeValue={this.togglePublicAnswers}
                     />

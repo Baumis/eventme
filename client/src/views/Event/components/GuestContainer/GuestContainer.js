@@ -31,18 +31,21 @@ class GuestContainer extends Component {
                             toggleGuestModal={this.props.toggleGuestModal}
                         />
                     </div>
-                    <div className="guests-columns-right">
-                        <div className="guest-title">
-                            {this.props.EventStore.event.publicAnswers || this.props.isCreator() ?
-                                'Answers'
-                                :
-                                'My answers'
-                            }
+                    {this.props.EventStore.event.registrationQuestions.length > 0 ?
+                        <div className="guests-columns-right">
+                            <div className="guest-title">
+                                {this.props.EventStore.event.publicAnswers || this.props.isCreator() ?
+                                    'Answers'
+                                    :
+                                    'My answers'
+                                }
+                            </div>
+                            <RegistrationResults
+                                toggleAnswerModal={this.props.toggleAnswerModal}
+                            />
+
                         </div>
-                        <RegistrationResults
-                            toggleAnswerModal={this.props.toggleAnswerModal}
-                        />
-                    </div>
+                        : null}
                 </div>
             </div>
         )

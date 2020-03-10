@@ -21,7 +21,19 @@ class InviteLinkBlock extends Component {
         document.execCommand('copy')
     }
 
+    confirmUrlChange = (guest) => {
+        this.props.VisibilityStore.showAlert(
+            'Confirm',
+            `Changeing the url will make the old url invalid.`,
+            'Change',
+            () => this.changeUrlmodifier(),
+            'Cancel',
+            () => this.props.VisibilityStore.closeAlert()
+        )
+    }
+
     changeUrlmodifier = async () => {
+        this.props.VisibilityStore.closeAlert()
         if (!this.props.EventStore.saved) {
             this.props.VisibilityStore.showAlert(
                 'Unsaved changes',
@@ -34,6 +46,12 @@ class InviteLinkBlock extends Component {
         this.setState({ loading: true })
         const event = await this.props.EventStore.changeUrlmodifier()
         this.props.history.push('/events/' + event.url)
+        this.props.VisibilityStore.showAlert(
+            'Success',
+            'The event url has been changed.',
+            'OK',
+            () => this.props.VisibilityStore.closeAlert(),
+        )
         this.setState({ loading: false })
     }
 
@@ -58,7 +76,7 @@ class InviteLinkBlock extends Component {
                     <DefaultButtons
                         showSpinner={this.state.loading}
                         positiveLabel={'change'}
-                        positiveAction={this.changeUrlmodifier}
+                        positiveAction={this.confirmUrlChange}
                         negativeLabel={'close'}
                         negativeAction={this.props.toggleInviteLink}
                     />
