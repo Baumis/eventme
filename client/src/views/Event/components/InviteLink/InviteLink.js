@@ -24,7 +24,7 @@ class InviteLinkBlock extends Component {
     confirmUrlChange = (guest) => {
         this.props.VisibilityStore.showAlert(
             'Confirm',
-            `Changeing the url will make the old url invalid.`,
+            `Changing the url will make the old url invalid.`,
             'Change',
             () => this.changeUrlmodifier(),
             'Cancel',
@@ -59,7 +59,7 @@ class InviteLinkBlock extends Component {
         return (
             <div className="invite-link">
                 <div className="invite-link-info">
-                    Invite guests by shareing this link to the event.
+                    Invite guests by sharing this link to the event.
                 </div>
                 <div className="invite-link-row">
                     <input
