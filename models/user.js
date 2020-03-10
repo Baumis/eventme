@@ -61,28 +61,26 @@ const formatEvents = (events) => {
     return events.map(event => ({
         _id: event._id,
         label: event.label,
+        creator: event.creator,
         background: event.background,
         url: event._id + event.urlmodifier,
-        startDate: event.startDate
+        startDate: event.startDate,
+        registrationAmount: event.registrations.length
     }))
 }
 
-userSchema.statics.format = (user) => {
-
-    const formattedUser = {
-        _id: user._id,
-        name: user.name,
-        username: user.username,
-        email: user.email,
-        emailVerified: user.emailVerified,
-        userType: user.userType,
-        avatar: user.avatar,
-        cover: user.cover,
-        myEvents: formatEvents(user.myEvents),
-        myInvites: formatEvents(user.myInvites)
-    }
-    return formattedUser
-}
+userSchema.statics.format = (user) => ({
+    _id: user._id,
+    name: user.name,
+    username: user.username,
+    email: user.email,
+    emailVerified: user.emailVerified,
+    userType: user.userType,
+    avatar: user.avatar,
+    cover: user.cover,
+    myEvents: formatEvents(user.myEvents),
+    myInvites: formatEvents(user.myInvites)
+})
 
 userSchema.statics.formatForGuest = (user) => ({
     _id: user._id,
