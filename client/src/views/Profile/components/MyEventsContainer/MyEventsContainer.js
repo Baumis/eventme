@@ -20,6 +20,9 @@ class MyEventsContainer extends Component {
                     {this.props.user.myEvents.map((event, i) => (
                         <EventCard key={i} event={event} />
                     ))}
+                    {this.props.user.myPastEvents.map((event, i) => (
+                        <EventCard key={i} event={event} />
+                    ))}
                 </div>
             </div >
         )

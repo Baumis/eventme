@@ -9,12 +9,15 @@ class InvitesContainer extends Component {
         return (
             <div className="event-container">
                 <div className="event-container-column">
-                    {this.props.user.myInvites.length === 0 ?
+                    {this.props.user.myInvites.length === 0 && this.props.user.myPastInvites === 0 ?
                         <div className="event-container-no-invites">
                             No invites
                         </div>
                         : null}
                     {this.props.user.myInvites.map((event, i) => (
+                        <EventCard key={i} event={event} />
+                    ))}
+                    {this.props.user.myPastInvites.map((event, i) => (
                         <EventCard key={i} event={event} />
                     ))}
                 </div>
