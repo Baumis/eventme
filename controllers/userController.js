@@ -28,7 +28,7 @@ exports.create = async (request, response) => {
 
         const token = User.generateToken(createdUser)
 
-        response.cookie('jwt', token, { expires: new Date(Date.now() + 86400000), httpOnly: true })
+        response.cookie('jwt', token, { expires: new Date(Date.now() + 604800000), httpOnly: true })
         response.status(201).json(User.formatForLogin(createdUser))
     } catch (exception) {
         response.status(400).json({ error: exception.message })
