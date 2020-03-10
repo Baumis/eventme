@@ -14,8 +14,29 @@ exports.getOne = async (id) => {
 exports.getOnePopulated = async (id) => {
     return await User
         .findById(id)
-        .populate('myEvents', { _id: 1, label: 1, background: 1, urlmodifier: 1, startDate: 1 })
-        .populate('myInvites', { _id: 1, label: 1, background: 1, urlmodifier: 1, startDate: 1 })
+        .populate({
+            path: 'myEvents',
+            populate: { path: 'creator', select: '_id name avatar' },
+        })
+        .populate({
+            path: 'myInvites',
+            populate: { path: 'creator', select: '_id name avatar' },
+        })
+}
+
+exports.populate = async (user) => {
+    const populatedUser = await user
+        .populate({
+            path: 'myEvents',
+            populate: { path: 'creator', select: '_id name avatar' },
+        })
+        .populate({
+            path: 'myInvites',
+            populate: { path: 'creator', select: '_id name avatar' },
+        })
+        .execPopulate()
+    
+    return populatedUser
 }
 
 exports.create = async (userObject) => {
@@ -81,10 +102,7 @@ exports.update = async (id, userObject) => {
         emailService.sendEmailVerification(savedUser)
     }
 
-    return await savedUser
-        .populate('myEvents', { _id: 1, label: 1, background: 1, urlmodifier: 1, startDate: 1 })
-        .populate('myInvites', { _id: 1, label: 1, background: 1, urlmodifier: 1, startDate: 1 })
-        .execPopulate()
+    return await this.populate(savedUser)
 }
 
 exports.updatePassword = async (id, newPassword) => {
@@ -104,10 +122,7 @@ exports.updatePassword = async (id, newPassword) => {
 
     const savedUser = await User.findByIdAndUpdate(id, { passwordHash }, { new: true, runValidators: true })
 
-    return await savedUser
-        .populate('myEvents', { _id: 1, label: 1, background: 1, urlmodifier: 1, startDate: 1 })
-        .populate('myInvites', { _id: 1, label: 1, background: 1, urlmodifier: 1, startDate: 1 })
-        .execPopulate()
+    return await this.populate(savedUser)
 }
 
 exports.verifyEmail = async (id) => {
@@ -117,10 +132,7 @@ exports.verifyEmail = async (id) => {
 
     const savedUser = await User.findByIdAndUpdate(id, updateObject, { new: true, runValidators: true })
 
-    return await savedUser
-        .populate('myEvents', { _id: 1, label: 1, background: 1, urlmodifier: 1, startDate: 1 })
-        .populate('myInvites', { _id: 1, label: 1, background: 1, urlmodifier: 1, startDate: 1 })
-        .execPopulate()
+    return await this.populate(savedUser)
 }
 
 exports.delete = async (id) => {

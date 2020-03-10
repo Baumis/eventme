@@ -61,13 +61,24 @@ const formatEvents = (events) => {
     return events.map(event => ({
         _id: event._id,
         label: event.label,
+        creator: event.creator,
         background: event.background,
         url: event._id + event.urlmodifier,
-        startDate: event.startDate
+        startDate: event.startDate,
+        endDate: event.endDate,
+        registrationAmount: event.registrations.length
     }))
 }
 
 userSchema.statics.format = (user) => {
+    const oneWeekBack = new Date(new Date() - 1000 * 60 * 60 * 24 * 7)
+
+    const myEvents = formatEvents(user.myEvents)
+    const myCurrentEvents = myEvents.filter(event => event.endDate >= oneWeekBack)
+    const myPastEvents = myEvents.filter(event => event.endDate < oneWeekBack)
+    const myInvites = formatEvents(user.myInvites)
+    const myCurrentInvites = myInvites.filter(event => event.endDate >= oneWeekBack)
+    const myPastInvites = myInvites.filter(event => event.endDate < oneWeekBack)
 
     const formattedUser = {
         _id: user._id,
@@ -78,20 +89,36 @@ userSchema.statics.format = (user) => {
         userType: user.userType,
         avatar: user.avatar,
         cover: user.cover,
-        myEvents: formatEvents(user.myEvents),
-        myInvites: formatEvents(user.myInvites)
+        myEvents: myCurrentEvents,
+        myPastEvents: myPastEvents,
+        myInvites: myCurrentInvites,
+        myPastInvites: myPastInvites
     }
     return formattedUser
 }
 
-userSchema.statics.formatForGuest = (user) => ({
-    _id: user._id,
-    name: user.name,
-    avatar: user.avatar,
-    cover: user.cover,
-    myEvents: formatEvents(user.myEvents),
-    myInvites: formatEvents(user.myInvites)
-})
+userSchema.statics.formatForGuest = (user) => {
+    const oneWeekBack = new Date(new Date() - 1000 * 60 * 60 * 24 * 7)
+
+    const myEvents = formatEvents(user.myEvents)
+    const myCurrentEvents = myEvents.filter(event => event.endDate >= oneWeekBack)
+    const myPastEvents = myEvents.filter(event => event.endDate < oneWeekBack)
+    const myInvites = formatEvents(user.myInvites)
+    const myCurrentInvites = myInvites.filter(event => event.endDate >= oneWeekBack)
+    const myPastInvites = myInvites.filter(event => event.endDate < oneWeekBack)
+    
+    const formattedUser = {
+        _id: user._id,
+        name: user.name,
+        avatar: user.avatar,
+        cover: user.cover,
+        myEvents: myCurrentEvents,
+        myPastEvents: myPastEvents,
+        myInvites: myCurrentInvites,
+        myPastInvites: myPastInvites
+    }
+    return formattedUser
+}
 
 userSchema.statics.formatForGhost = (user) => ({
     _id: user._id,
@@ -110,7 +137,7 @@ userSchema.statics.formatForLogin = (user) => ({
     avatar: user.avatar
 })
 
-userSchema.statics.generateToken = (user, expiresIn = '1d') => {
+userSchema.statics.generateToken = (user, expiresIn = '7d') => {
     const userForToken = {
         email: user.email,
         id: user._id
