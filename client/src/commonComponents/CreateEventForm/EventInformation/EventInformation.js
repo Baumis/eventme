@@ -60,7 +60,7 @@ class EventInformation extends Component {
                     </div>
                 </div>
                 <CreateTextArea
-                    label={'description'}
+                    label={'Description'}
                     value={this.props.information.description}
                     onChange={(event) => this.changeValue('description', event)}
                 />

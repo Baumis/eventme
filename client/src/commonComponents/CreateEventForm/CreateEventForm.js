@@ -24,11 +24,12 @@ class CreateEventForm extends Component {
 
     componentDidMount() {
         const today = moment(new Date()).format('YYYY-MM-DD')
+        const tomorrow =  moment(new Date()).add(1,"days")
         this.setState({
             information: {
                 eventName: '',
-                startDate: today,
-                startTime: '',
+                startDate: moment(tomorrow).format('YYYY-MM-DD'),
+                startTime: '00:00',
                 today: today,
                 description: ''
             }
