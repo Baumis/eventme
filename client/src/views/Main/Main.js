@@ -26,6 +26,9 @@ class Main extends Component {
                     <Alert />
                     : null
                 }
+                <div className="main-filler">
+
+                </div >
                 <Footer />
             </div>
         )

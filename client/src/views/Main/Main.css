@@ -9,3 +9,8 @@
     display: flex;
     width: 900px;
 }
+
+.main-filler {
+    display: flex;
+    flex: 1;
+}
