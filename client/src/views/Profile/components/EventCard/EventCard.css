@@ -46,6 +46,7 @@
     .event-card {
         height: 100px;
         min-width: 110px;
+        margin: 10px 15px 0px 15px;
     }
 
     .event-card-picture-container {
