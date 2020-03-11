@@ -1,11 +1,9 @@
 body {
-  display: flex;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background: #f0f3f4;
   outline: none;
-  height: 100vh;
 }
 
 #root {
@@ -15,6 +13,11 @@ body {
 
 input {
   outline: none;
+  -webkit-appearance: none;
+}
+
+textarea {
+  -webkit-appearance: none;
 }
 
 input[type=date] {

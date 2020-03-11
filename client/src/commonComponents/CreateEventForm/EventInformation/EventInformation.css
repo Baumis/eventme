@@ -1,12 +1,11 @@
 .event-information {
     display: flex;
     flex-direction: column;
-    flex: 1
+    flex: 1;
 }
 
 .event-information-row {
     display: flex;
-    flex: 1;
 }
 
 .event-information-row-right {
@@ -35,7 +34,6 @@
 @media only screen and (max-width: 650px) {
     .event-information-row {
         display: flex;
-        flex: 1;
         flex-direction: column;
     }
     .event-information-row-right {
