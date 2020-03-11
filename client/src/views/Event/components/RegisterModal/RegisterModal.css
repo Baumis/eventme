@@ -37,10 +37,10 @@
 
 .register-button {
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
-    padding: 12px;
-    width: 92px;
+    padding: 10px;
     border-radius: 5px;
     background: #4c5c68;
     color: white;
