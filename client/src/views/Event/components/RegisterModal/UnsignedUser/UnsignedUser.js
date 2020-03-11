@@ -106,40 +106,44 @@ class UnsignedUser extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="unsigned-user-title">
-                    Or join with an alias.
-                </div>
-                {!this.state.showAlias ?
-                    <div className="facebook-login-wrapper">
-                        <div className="unsigned-user-alias-button" onClick={() => this.toggleAlias()}>
-                            <div className="unsigned-user-alias-icon">
-                                <FaMask />
-                            </div>
+                {this.props.EventStore.event.allowAlias ?
+                    <div>
+                        <div className="unsigned-user-title">
+                            Or join with an alias.
+                    </div>
+                        {!this.state.showAlias ?
+                            <div className="facebook-login-wrapper">
+                                <div className="unsigned-user-alias-button" onClick={() => this.toggleAlias()}>
+                                    <div className="unsigned-user-alias-icon">
+                                        <FaMask />
+                                    </div>
                             Alias
                         </div>
-                    </div>
-                    :
-                    <div>
-                        <div className="unsigned-user-info">
-                            <span>
-                                <FaExclamationTriangle />
-                            </span>
+                            </div>
+                            :
+                            <div>
+                                <div className="unsigned-user-info">
+                                    <span>
+                                        <FaExclamationTriangle />
+                                    </span>
                             You can't post messages or get notified about new messages when using an alias. This name will just appear in the guestlist.
                         </div>
-                        <SignInput
-                            label={''}
-                            secondLabel={''}
-                            change={this.props.changeAlias}
-                            value={this.props.alias}
-                            placeholder={'Full name'}
-                            type={'text'}
-                            icon={<FaUser />}
-                        />
+                                <SignInput
+                                    label={''}
+                                    secondLabel={''}
+                                    change={this.props.changeAlias}
+                                    value={this.props.alias}
+                                    placeholder={'Full name'}
+                                    type={'text'}
+                                    icon={<FaUser />}
+                                />
+                            </div>
+                        }
                     </div>
-                }
+                    : null}
             </div>
         )
     }
 }
 
-export default inject('UserStore', 'VisibilityStore')(observer(UnsignedUser))
+export default inject('EventStore', 'UserStore', 'VisibilityStore')(observer(UnsignedUser))

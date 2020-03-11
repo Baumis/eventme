@@ -39,7 +39,7 @@ exports.create = async (creatorId, eventObject) => {
             user: creatorId
         }],
         publicAnswers: eventObject.publicAnswers,
-        allowAlias: event.allowAlias,
+        allowAlias: eventObject.allowAlias,
         urlmodifier: helpers.makeId(5)
     })
 
@@ -94,7 +94,7 @@ exports.update = async (event, eventObject) => {
         background: eventObject.background,
         registrationQuestions: eventObject.registrationQuestions,
         publicAnswers: eventObject.publicAnswers,
-        allowAlias: event.allowAlias
+        allowAlias: eventObject.allowAlias
     }
 
     const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })

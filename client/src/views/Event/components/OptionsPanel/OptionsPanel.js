@@ -68,6 +68,11 @@ class OptionsPanel extends Component {
         this.props.EventStore.setValue(newValue, 'publicAnswers')
     }
 
+    toggleAllowAlias = () => {
+        const newValue = !this.props.EventStore.event.allowAlias
+        this.props.EventStore.setValue(newValue, 'allowAlias')
+    }
+
     slidePanel = () => {
         this.props.VisibilityStore.slideOptionsPanel()
     }
@@ -148,6 +153,12 @@ class OptionsPanel extends Component {
                         info={'Answers can be read by everyone.'}
                         value={this.props.EventStore.event.publicAnswers}
                         changeValue={this.togglePublicAnswers}
+                    />
+                    <TogglerBlock
+                        label={'Require account'}
+                        info={'Only allow users with accounts to join event.'}
+                        value={this.props.EventStore.event.allowAlias}
+                        changeValue={this.toggleAllowAlias}
                     />
                 </div>
             </div>
