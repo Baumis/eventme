@@ -40,6 +40,10 @@ const eventSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
+    allowAlias: {
+        type: Boolean,
+        default: true
+    },
     urlmodifier: {
         type: String,
         trim: true,
@@ -86,6 +90,7 @@ eventSchema.statics.format = (event) => {
         registrations: formattedRegistrations,
         registrationQuestions: event.registrationQuestions,
         publicAnswers: event.publicAnswers,
+        allowAlias: event.allowAlias,
         url: event._id + event.urlmodifier
     }
     return formattedEvent
@@ -126,6 +131,7 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         registrations: formattedRegistrations,
         registrationQuestions: event.registrationQuestions,
         publicAnswers: event.publicAnswers,
+        allowAlias: event.allowAlias,
         url: event._id + event.urlmodifier
     }
     return formattedEvent
