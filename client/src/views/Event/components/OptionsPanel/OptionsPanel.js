@@ -157,7 +157,7 @@ class OptionsPanel extends Component {
                     <TogglerBlock
                         label={'Require account'}
                         info={'Only allow users with accounts to join event.'}
-                        value={this.props.EventStore.event.allowAlias}
+                        value={!this.props.EventStore.event.allowAlias}
                         changeValue={this.toggleAllowAlias}
                     />
                 </div>

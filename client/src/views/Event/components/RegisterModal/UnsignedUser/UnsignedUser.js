@@ -1,26 +1,13 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './UnsignedUser.css'
-import Spinner from '../../../../../commonComponents/Spinner/Spinner'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { FaFacebook, FaMask, FaExclamationTriangle } from 'react-icons/fa'
+import { FaFacebook } from 'react-icons/fa'
 import { ReactComponent as GoogleLogo } from '../../../../../commonComponents/SignModal/SignIn/googleLogo.svg'
-import SignInput from '../../../../../commonComponents/SignModal/components/SignInput/SignInput'
-import { FaUser } from 'react-icons/fa'
+import AliasSection from './AliasSection'
 
 class UnsignedUser extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            showAlias: false
-        }
-    }
-
-    toggleAlias = () => {
-        this.setState({ showAlias: !this.state.showAlias })
-    }
 
     onSignInFail = (message) => {
         this.props.VisibilityStore.showAlert(
@@ -107,40 +94,12 @@ class UnsignedUser extends Component {
                     </div>
                 </div>
                 {this.props.EventStore.event.allowAlias ?
-                    <div>
-                        <div className="unsigned-user-title">
-                            Or join with an alias.
-                    </div>
-                        {!this.state.showAlias ?
-                            <div className="facebook-login-wrapper">
-                                <div className="unsigned-user-alias-button" onClick={() => this.toggleAlias()}>
-                                    <div className="unsigned-user-alias-icon">
-                                        <FaMask />
-                                    </div>
-                            Alias
-                        </div>
-                            </div>
-                            :
-                            <div>
-                                <div className="unsigned-user-info">
-                                    <span>
-                                        <FaExclamationTriangle />
-                                    </span>
-                            You can't post messages or get notified about new messages when using an alias. This name will just appear in the guestlist.
-                        </div>
-                                <SignInput
-                                    label={''}
-                                    secondLabel={''}
-                                    change={this.props.changeAlias}
-                                    value={this.props.alias}
-                                    placeholder={'Full name'}
-                                    type={'text'}
-                                    icon={<FaUser />}
-                                />
-                            </div>
-                        }
-                    </div>
-                    : null}
+                    <AliasSection
+                        alias={this.props.alias}
+                        changeAlias={this.props.changeAlias}
+                    />
+                    :
+                    null}
             </div>
         )
     }
