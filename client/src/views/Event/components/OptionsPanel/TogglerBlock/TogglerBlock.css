@@ -22,6 +22,7 @@
 }
 
 .toggler-block-description {
+  display: flex;
   font-size: 13px;
   margin: 0px 10px;
 }
@@ -29,7 +30,7 @@
 .toggler-block-switch {
   position: relative;
   display: inline-block;
-  width: 50px;
+  min-width: 50px;
   height: 26px;
 }
 
@@ -42,7 +43,7 @@
 .switch-slider {
   position: absolute;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 25px;
   top: 0;
   left: 0;
   right: 0;
@@ -54,7 +55,7 @@
 
 .switch-slider:before {
   position: absolute;
-  border-radius: 5px;
+  border-radius: 25px;
   content: "";
   height: 22px;
   width: 22px;

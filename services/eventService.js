@@ -39,6 +39,7 @@ exports.create = async (creatorId, eventObject) => {
             user: creatorId
         }],
         publicAnswers: eventObject.publicAnswers,
+        allowAlias: eventObject.allowAlias,
         urlmodifier: helpers.makeId(5)
     })
 
@@ -92,7 +93,8 @@ exports.update = async (event, eventObject) => {
         endDate: endDate,
         background: eventObject.background,
         registrationQuestions: eventObject.registrationQuestions,
-        publicAnswers: eventObject.publicAnswers
+        publicAnswers: eventObject.publicAnswers,
+        allowAlias: eventObject.allowAlias
     }
 
     const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })
@@ -210,7 +212,7 @@ exports.addRegistration = async (event, name, senderId, answers) => {
         }
 
         registration.user = senderId
-    } else if (name) {
+    } else if (event.allowAlias && name) {
         registration.name = name
     } else {
         throw new Error('Required information not provided')
