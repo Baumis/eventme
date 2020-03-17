@@ -29,53 +29,52 @@ class MessageCard extends Component {
         this.props.history.push(`/profile/${id}`)
     }
     render() {
+        if (!this.props.message.author) {
+            return null
+        }
+
         return (
             <div className="message-card">
-                {!this.props.message.author ?
-                    <div className="message-card-wrapper deleted">
-                        Message deleted
+                <div className="message-card-wrapper">
+                    <div className="message-card-avatar-section">
+                        <div style={this.getAvatar()} className="message-card-avatar"> </div>
+                    </div>
+                    <div className="message-card-info-section">
+                        <div className="message-card-header">
+                            <div className="message-card-time-author">
+                                <div className="message-card-author" onClick={() => this.toProfile(this.props.message.author._id)}>
+                                    {this.props.message.author.name}
+                                </div>
+                                <div className="message-card-time">
+                                    {Moment(this.props.message.time).format('D.MM.YY')}
+                                </div>
+                            </div>
+                            {this.props.isAuthor(this.props.message.author._id) ?
+                                <div className="message-card-delete" onClick={() => this.props.delete(this.props.message._id)}>
+                                    <FaTimes />
+                                </div>
+                                : null}
+                        </div>
+                        <div className="message-card-content">
+                            {this.props.message.content}
+                        </div>
+                        <div className="message-card-interaction">
+                            <div className="message-card-comment-button" onClick={() => this.toggleComments()}>
+                                {`comments (${this.props.message.comments.length})`}
+                            </div>
+                            {this.state.showComments ?
+                                <div>
+                                    <CommentSection
+                                        comments={this.props.message.comments}
+                                        messageId={this.props.message._id}
+                                        isAuthor={this.props.isAuthor}
+                                    />
+                                </div>
+                                : null
+                            }
+                        </div>
+                    </div>
                 </div>
-                    :
-                    <div className="message-card-wrapper">
-                        <div className="message-card-avatar-section">
-                            <div style={this.getAvatar()} className="message-card-avatar"> </div>
-                        </div>
-                        <div className="message-card-info-section">
-                            <div className="message-card-header">
-                                <div className="message-card-time-author">
-                                    <div className="message-card-author" onClick={() => this.toProfile(this.props.message.author._id)}>
-                                        {this.props.message.author.name}
-                                    </div>
-                                    <div className="message-card-time">
-                                        {Moment(this.props.message.time).format('D.MM.YY')}
-                                    </div>
-                                </div>
-                                {this.props.isAuthor(this.props.message.author._id) ?
-                                    <div className="message-card-delete" onClick={() => this.props.delete(this.props.message._id)}>
-                                        <FaTimes />
-                                    </div>
-                                    : null}
-                            </div>
-                            <div className="message-card-content">
-                                {this.props.message.content}
-                            </div>
-                            <div className="message-card-interaction">
-                                <div className="message-card-comment-button" onClick={() => this.toggleComments()}>
-                                    {`comments (${this.props.message.comments.length})`}
-                                </div>
-                                {this.state.showComments ?
-                                    <div>
-                                        <CommentSection
-                                            comments={this.props.message.comments}
-                                            messageId={this.props.message._id}
-                                            isAuthor={this.props.isAuthor}
-                                        />
-                                    </div>
-                                    : null
-                                }
-                            </div>
-                        </div>
-                    </div>}
             </div>
         )
     }
