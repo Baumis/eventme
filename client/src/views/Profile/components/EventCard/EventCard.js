@@ -1,6 +1,7 @@
 import React from 'react'
 import './EventCard.css'
 import { withRouter } from 'react-router-dom'
+import moment from 'moment'
 
 const EventCard = (props) => {
 
@@ -14,9 +15,24 @@ const EventCard = (props) => {
 
     return (
         <div className="event-card" onClick={() => toEvent()}>
-            <div className="event-card-picture-container" style={background}>
-                <div className="event-card-title">
-                    <p>{props.event.label}</p>
+            <div className="event-card-picture" style={background}>
+                <div className="event-card-content">
+                    <div className="event-card-date">
+                        <div className="event-card-month">
+                            {moment(props.event.startDate).format('MMM')}
+                        </div>
+                        <div className="event-card-day">
+                            {moment(props.event.startDate).format('DD')}
+                        </div>
+                    </div>
+                    <div className="event-card-title-and-host">
+                        <div className="event-card-title">
+                            {props.event.label}
+                        </div>
+                        <div className="event-card-host">
+                            {props.event.creator.name}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
