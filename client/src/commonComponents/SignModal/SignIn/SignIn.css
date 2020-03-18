@@ -5,11 +5,24 @@
 }
 
 .signin-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-size: 25px;
     color: #46494c;
-    padding-bottom: 20px;
+    padding: 10px 10px 10px 10px;
     font-weight: 600;
     text-align: start;
+}
+
+.signin-exit-icon{
+    color: #c5c3c6;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.signin-exit-icon:hover{
+    color: rgba(0,0,0,0.5);
 }
 
 .signin-info-text {

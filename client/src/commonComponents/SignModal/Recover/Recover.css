@@ -1,8 +1,22 @@
 .recover-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px 10px 10px;
     font-size: 25px;
     color: #46494c;
-    padding-bottom: 20px;
     font-weight: 600;
+}
+
+.recover-exit-icon{
+    padding: 10px;
+    color: #c5c3c6;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.recover-exit-icon:hover{
+    color: rgba(0,0,0,0.5);
 }
 
 .recover-button{

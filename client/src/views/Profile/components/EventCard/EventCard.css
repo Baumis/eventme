@@ -9,12 +9,9 @@
     overflow: hidden;
 }
 
-.event-card-picture-container {
+.event-card-picture {
     display: flex;
-    justify-content: center;
-    font-size: 22px;
-    text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-    flex-direction: column-reverse;
+    align-items: center;
     height: 150px;
     min-width: 150px;
     -webkit-transition: 0.4s ease;
@@ -24,24 +21,59 @@
     -o-background-size: cover;
     background-size: cover;
     background-position:center center;
+    -webkit-box-shadow: inset 200px 0px 166px 0px rgba(0,0,0,0.65);
+    -moz-box-shadow: inset 200px 0px 166px 0px rgba(0,0,0,0.65);
+    box-shadow: inset 200px 0px 166px 0px rgba(0,0,0,0.65);
 }
 
-.event-card-picture-container:hover {
-    -webkit-transform: scale(1.04);
-    transform: scale(1.04);
+.event-card-picture:hover {
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
 }
 
-.event-card-title {
+.event-card-content {
     display: flex;
-    justify-content: center;
+    margin: 0px 20px;
 }
 
-.event-card-title p {
-    margin: 0px;
-    padding: 10px;
+.event-card-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     color: white;
 }
 
+.event-card-month {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.event-card-day {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+.event-card-title-and-host {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    margin-left: 10px;
+}
+
+.event-card-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    line-height: 26px;
+}
+
+.event-card-host {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+}
 @media only screen and (max-width: 620px) {
     .event-card {
         height: 100px;
@@ -52,4 +84,26 @@
     .event-card-picture-container {
         height: 100px;
     }
+
+    .event-card-month {
+        font-size: 13px;
+        font-weight: 500;
+    }
+    
+    .event-card-day {
+        font-size: 23px;
+        font-weight: 500;
+    }
+    
+    .event-card-title {
+        display: flex;
+        font-size: 23px;
+        font-weight: 500;
+        color: white;
+    }
+
+    .event-card-host {
+        font-size: 13px;
+    }
+
 }

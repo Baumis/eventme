@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './SignModal.css'
-import { FaTimes } from 'react-icons/fa'
 import SignIn from './SignIn/SignIn'
 import SignUp from './SignUp/SignUp'
 import Recover from './Recover/Recover'
@@ -46,11 +45,6 @@ class SignModal extends Component {
     render() {
         return (
             <div className="sign-modal">
-                <div className="sign-modal-top-row">
-                    <div className="sign-modal-exit-icon" onClick={() => this.props.VisibilityStore.closeSignModal()}>
-                        <FaTimes />
-                    </div>
-                </div>
                 {this.getContent()}
             </div>
         )

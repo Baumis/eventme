@@ -13,18 +13,6 @@
     overflow: auto;
 }
 
-.sign-modal-exit-icon{
-    float: right;
-    padding: 10px;
-    color: #c5c3c6;
-    cursor: pointer;
-    font-size: 22px;
-}
-
-.sign-modal-exit-icon:hover{
-    color: rgba(0,0,0,0.5);
-}
-
 @media only screen and (max-width: 450px) {
     .sign-modal {
         width: 95vw;

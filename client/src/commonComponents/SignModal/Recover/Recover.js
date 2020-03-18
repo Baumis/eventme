@@ -4,6 +4,7 @@ import './Recover.css'
 import Spinner from '../../Spinner/Spinner'
 import userService from '../../../services/users'
 import SignInput from '../components/SignInput/SignInput'
+import { FaTimes } from 'react-icons/fa'
 
 class Recover extends Component {
     constructor(props) {
@@ -66,6 +67,9 @@ class Recover extends Component {
             <div className="signin-content">
                 <div className="recover-title">
                     Recover password
+                    <div className="recover-exit-icon" onClick={() => this.props.VisibilityStore.closeSignModal()}>
+                        <FaTimes />
+                    </div>
                 </div>
                 <div className="signDetails">
                     <SignInput

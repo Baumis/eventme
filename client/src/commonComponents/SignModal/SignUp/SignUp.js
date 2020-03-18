@@ -3,6 +3,8 @@ import { inject, observer } from 'mobx-react'
 import './SignUp.css'
 import Spinner from '../../Spinner/Spinner'
 import SignInput from '../components/SignInput/SignInput'
+import { FaTimes } from 'react-icons/fa'
+
 
 class SignUp extends Component {
     constructor(props) {
@@ -96,10 +98,13 @@ class SignUp extends Component {
             <div className="signin-content">
                 <div className="signup-title">
                     Sign up
+                    <div className="signup-exit-icon" onClick={() => this.props.VisibilityStore.closeSignModal()}>
+                        <FaTimes />
+                    </div>
                 </div>
                 <div className="signup-details">
                     <SignInput
-                        label={'First and last name'}
+                        label={'Full name / Company'}
                         change={(event) => this.changeStateValue('name', event)}
                         value={this.state.name}
                         type={'text'}

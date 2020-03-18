@@ -5,9 +5,8 @@ import Spinner from '../../Spinner/Spinner'
 import SignInput from '../components/SignInput/SignInput'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { FaFacebook } from 'react-icons/fa'
 import { ReactComponent as GoogleLogo } from './googleLogo.svg'
-import { FaUser, FaLock } from 'react-icons/fa'
+import { FaUser, FaLock, FaTimes, FaFacebook } from 'react-icons/fa'
 
 
 class SignIn extends Component {
@@ -104,6 +103,9 @@ class SignIn extends Component {
             <div className="signin-content">
                 <div className="signin-title">
                     Sign in
+                    <div className="signin-exit-icon" onClick={() => this.props.VisibilityStore.closeSignModal()}>
+                        <FaTimes />
+                    </div>
                 </div>
                 <div className="signin-social-accounts">
                     <div className="google-login-wrapper">
