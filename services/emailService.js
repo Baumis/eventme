@@ -50,7 +50,7 @@ exports.notifyAboutNewMessage = async (message, event) => {
         <h3>New message in ${event.label} discussion</h3>
         <p><b>From: </b>${message.author.name}</p>
         <p><b>Message: </b>${message.content}</p>
-        <a href="${config.baseUrl}/events/${event._id}">Go to ${event.label}</a>
+        <a href="${config.baseUrl}/events/${event._id}${event.urlmodifier}">Go to ${event.label}</a>
     `
 
     await this.sendSeparatedMails(emails, event.label, content)
