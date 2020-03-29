@@ -10,7 +10,7 @@
     align-items: center;
     height: 30px;
     margin-left: 8px;
-    color: #1985a1;
+    color: #19a45e;
     font-size: 14px;
     font-weight: 500;
 }
@@ -22,7 +22,7 @@
     font-size: 15px;
     padding: 3px 10px 3px 10px;
     background: white;
-    border: 1px solid #dddddd;
+    border: 1px solid #dadbdd;
     color:rgba(0,0,0);
     transition: border 0.2s;
 }
@@ -30,7 +30,7 @@
 
 .create-input input:focus{
     transition: border 0s;
-    border: 1px solid #1985a1;
+    border: 1px solid #19a45e;
 }
 
 .create-input input::placeholder{

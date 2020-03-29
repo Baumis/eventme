@@ -27,9 +27,9 @@
     padding: 12px;
     width: 62px;
     height: 12px;
-    border: 1px solid #4c5c68;
+    border: 1px solid #62646a;
     border-radius: 5px;
-    background: #4c5c68;
+    background: #62646a;
     color: white;
     margin: 10px 10px 0px 10px;
     cursor: pointer;
@@ -37,7 +37,7 @@
 }
 
 .default-buttons-positive-button:hover{
-    background: #404e59;
+    background: #494b50;
 }
 
 .default-buttons-negative-button:hover {
