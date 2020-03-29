@@ -1,7 +1,7 @@
 .settings-tabs {
     display: flex;
     flex-direction: column;
-    border-right: 1px solid rgba(69,69,69,0.2);
+    border-right: 1px solid #dadbdd;
     margin: 60px 0px 60px 0px;
     width: 130px;
 }
@@ -9,17 +9,17 @@
 .settings-tab {
     text-align: start;
     padding: 5px 30px 5px 30px;
-    color: rgba(76, 92, 104, 0.7);
+    color: #95979d;
     cursor: pointer;
 }
 
 .settings-tab:hover {
-    background: rgba(0,0,0,0.1);
+    background: rgb(218, 219, 221, 0.2);
 }
 
 .settings-tab-active {
     font-weight: 600;
-    color: rgba(76, 92, 104, 1);
+    color: #62646a;
 }
 
 @media only screen and (max-width: 620px){
