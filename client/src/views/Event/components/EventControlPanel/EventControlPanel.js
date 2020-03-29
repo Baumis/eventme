@@ -32,7 +32,7 @@ class EventControlPanel extends Component {
                             <div className="event-control-panel-info-icon">
                                 <FaRegCalendarAlt />
                             </div>
-                            When?
+                            Date
                         </div>
                         <div className="event-control-panel-info-item-content">
                             {`${moment(this.props.EventStore.event.startDate).format('D MMMM YYYY')} ${moment(this.props.EventStore.event.startDate).format('LT')}`}

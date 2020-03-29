@@ -65,7 +65,7 @@
 .comment-author {
     display: flex;
     font-weight: 500;
-    color: #1985a1;
+    color: #19a45e;
     cursor: pointer;
     word-break:white-space;
 }
@@ -86,7 +86,7 @@
     display: flex;
     justify-content: flex-start;
     text-align: start;
-    color: #46494c;
+    color: #62646a;
     padding: 5px 10px;
 }
 

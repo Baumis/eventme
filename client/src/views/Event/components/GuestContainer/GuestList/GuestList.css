@@ -44,7 +44,7 @@
     display: flex;
     margin: 0px 10px;
     font-size: 16px;
-    color: #1985a1;
+    color: #19a45e;
     cursor: pointer;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .show-more-guests-button {
-    border-top: 1px solid rgb(0, 0, 0, 0.1);
+    border-top: 1px solid #dadbdd;
     display: flex;
     align-items: center;
     justify-content: center;

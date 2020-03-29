@@ -22,7 +22,7 @@
     align-items: center;
     padding: 10px 0px 10px 0px;
     cursor: pointer;
-    color: gray;
+    color: #95979d;
     font-weight: 600;
     font-size: 12px;
     border-bottom: 2px solid transparent;
@@ -46,6 +46,6 @@
 }
 
 .active-tab {
-    color: rgba(76, 92, 104, 1);
-    border-bottom: 2px solid rgba(76, 92, 104, 1);
+    color: #62646a;
+    border-bottom: 2px solid #19a45e;
 }

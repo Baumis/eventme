@@ -6,6 +6,7 @@
     background: white;
     min-height: 45px;
     max-height: 45px;
+    border-top: 1px solid #dadbdd;
 }
 
 .footer-container {
