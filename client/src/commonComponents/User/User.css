@@ -1,6 +1,6 @@
 .user {
     display: flex;
-    color: #4c5c68;
+    color: #0e0e0f;
     align-items: center;
     justify-content: center;
 }
@@ -20,7 +20,7 @@
 
 .user a {
     text-decoration: none;
-    color: #4c5c68;
+    color: #0e0e0f;
 }
 
 .user-section-devider{
@@ -45,7 +45,7 @@
 
 .user-sign-button{
     padding: 5px;
-    color: #4c5c68;
+    color: #0e0e0f;
     margin: 5px;
     cursor: pointer;
 }

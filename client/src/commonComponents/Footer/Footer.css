@@ -22,12 +22,12 @@
     align-items: center;
     margin: 0px 20px;
     font-size: 14px;
-    color: rgb(76, 92, 104, 0.8);
+    color: #0e0e0f;
     cursor: pointer;
 }
 
 .footer-item:hover {
-    color: rgb(76, 92, 104, 1);
+    color: #0e0e0f;
 }
 
 .footer-item-icon {
