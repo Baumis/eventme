@@ -189,6 +189,10 @@ exports.removeComment = async (event, messageId, commentId) => {
 }
 
 exports.addRegistration = async (event, name, senderId, answers) => {
+    if (event.registrations.length >= event.registrationLimit) {
+        throw new Error('Event is full')
+    }
+
     if (answers) {
         for (let answer of answers) {
             const questionExists = event.registrationQuestions.find(question => question._id.toString() === answer.questionId)
