@@ -94,6 +94,7 @@ exports.update = async (event, eventObject) => {
         background: eventObject.background,
         registrationQuestions: eventObject.registrationQuestions,
         publicAnswers: eventObject.publicAnswers,
+        registrationLimit: eventObject.registrationLimit,
         allowAlias: eventObject.allowAlias
     }
 
