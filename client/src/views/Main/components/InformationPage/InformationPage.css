@@ -7,25 +7,24 @@
     background: #c5c3c6;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    background: #4c5c68;
     background: transparent;
 }
 
 .information-page-icon {
   color: #19a45e;
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .information-page-title {
   font-size: 38px;
   color: #0e0e0f;
-  padding: 10px 10px;
+  padding: 0px 10px 10px 10px;
   text-align: center;
   font-weight: 600;
 }
 
 .information-page-paragraph {
-  color: #62646a;
+  color: #95979d;
   font-size: 18px;
   padding: 0px 40px;
   text-align: center;

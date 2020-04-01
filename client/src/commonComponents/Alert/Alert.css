@@ -24,11 +24,11 @@
     font-weight: 600;
     font-size: 23px;
     margin: 5px 0px 15px 0px;
-    color: rgba(76, 92, 104, 1);
+    color: #0e0e0f;
 }
 
 .alert-message {
-    color: rgb(70, 73, 76, 0.8);
+    color: #95979d;
     font-size: 15px;
     margin: 0px 0px 10px 0px;
 }

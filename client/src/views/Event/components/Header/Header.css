@@ -33,5 +33,7 @@
     }
     .event-header-block {
         margin-top: 45px;
+        border: none;
+        border-bottom: 1px solid #dadbdd;
     }
 }
