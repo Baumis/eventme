@@ -8,6 +8,7 @@
 .site-logo p{
     color:#19a45e;
     font-size: 18px;
+    padding-top: 5px;
 }
 
 .inviteowl-logo {
@@ -18,6 +19,6 @@
     background-size: contain;
     background-position:center center;
     background-repeat: no-repeat;
-    width: 29px;
-    height: 29px;
+    width: 32px;
+    height: 32px;
 }
