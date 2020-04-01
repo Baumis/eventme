@@ -279,15 +279,6 @@ exports.removeRegistration = async (event, registration) => {
     }
 }
 
-exports.removeFromRegistrations = async (eventId, userId, options) => {
-    const event = await Event.findByIdAndUpdate(eventId,
-        { $pull: { registrations: { _id: userId } } }, options)
-
-    if (!event) {
-        throw Error('Malformatted id')
-    }
-}
-
 exports.changeUrlmodifier = async (event) => {
     const newUrlmodifier = helpers.makeId(5)
     const updatedEvent = await Event.findByIdAndUpdate(event._id, { urlmodifier: newUrlmodifier }, { new: true })
