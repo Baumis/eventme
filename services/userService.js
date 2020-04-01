@@ -35,7 +35,7 @@ exports.populate = async (user) => {
             populate: { path: 'creator', select: '_id name avatar' },
         })
         .execPopulate()
-    
+
     return populatedUser
 }
 
@@ -160,7 +160,8 @@ exports.delete = async (id) => {
         }
 
         for (let myInvite of user.myInvites) {
-            await eventService.removeFromRegistrations(myInvite, user._id, options)
+            await Event.findByIdAndUpdate(myInvite,
+                { $pull: { registrations: { _id: user._id } } }, options)
         }
 
         await User.findByIdAndDelete(user._id, options)

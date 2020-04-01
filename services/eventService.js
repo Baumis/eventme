@@ -94,6 +94,7 @@ exports.update = async (event, eventObject) => {
         background: eventObject.background,
         registrationQuestions: eventObject.registrationQuestions,
         publicAnswers: eventObject.publicAnswers,
+        registrationLimit: eventObject.registrationLimit,
         allowAlias: eventObject.allowAlias
     }
 
@@ -188,6 +189,10 @@ exports.removeComment = async (event, messageId, commentId) => {
 }
 
 exports.addRegistration = async (event, name, senderId, answers) => {
+    if (event.registrations.length >= event.registrationLimit) {
+        throw new Error('Event is full')
+    }
+
     if (answers) {
         for (let answer of answers) {
             const questionExists = event.registrationQuestions.find(question => question._id.toString() === answer.questionId)
@@ -271,15 +276,6 @@ exports.removeRegistration = async (event, registration) => {
         await session.abortTransaction()
         session.endSession()
         throw new Error('Could not remove registration')
-    }
-}
-
-exports.removeFromRegistrations = async (eventId, userId, options) => {
-    const event = await Event.findByIdAndUpdate(eventId,
-        { $pull: { registrations: { _id: userId } } }, options)
-
-    if (!event) {
-        throw Error('Malformatted id')
     }
 }
 
