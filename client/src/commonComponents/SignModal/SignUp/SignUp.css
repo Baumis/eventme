@@ -4,7 +4,7 @@
     justify-content: space-between;
     padding: 10px 10px 10px 10px;
     font-size: 25px;
-    color: #46494c;
+    color: #0e0e0f;
     font-weight: 600;
 }
 
@@ -25,7 +25,7 @@
     justify-content: center;
     height: 40px;
     border-radius: 5px;
-    background: #4c5c68;
+    background: #62646a;
     color: white;
     margin: 10px 0px 10px 0px;
     cursor: pointer;
@@ -33,10 +33,10 @@
 }
 
 .signup-button:hover{
-    background: #404e59;
+    background: #494b50;
 }
 
 .signin-info-text span {
-    color: #0000EE;
+    color: #6ce9d7;
     cursor: pointer;
 }

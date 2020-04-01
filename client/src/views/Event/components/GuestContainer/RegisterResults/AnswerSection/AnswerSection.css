@@ -5,8 +5,7 @@
 
 .answer {
     padding: 10px;
-    background: rgb(221, 221, 221, 0);
-    border: 1px solid rgb(221, 221, 221, 0.7);
+    border: 1px solid #dadbdd;
     border-radius: 5px;
     margin: 05px 0px;   
 }
@@ -14,7 +13,7 @@
 .answers-user-info {
     display: flex;
     font-size: 14px;
-    color: #1985a1;
+    color: #62646a;
 }
 
 .answers-user-avatar {

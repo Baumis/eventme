@@ -10,8 +10,15 @@
     background: transparent;
 }
 
+.information-page-icon-row {
+  display: flex;
+  align-items: flex-end;
+}
+
 .information-page-icon {
-  color: #19a45e;
+  display: flex;
+  color: #62646a;
+  padding: 0px 5px;
   font-size: 30px;
 }
 
@@ -36,7 +43,7 @@
   }
 
   .information-page-icon {
-    font-size: 30px;
+    font-size: 22px;
   }
 
   .information-page-title {

@@ -1,14 +1,15 @@
 import React from 'react'
 import './InformationPage.css'
 import { FaRocket } from 'react-icons/fa'
-import { GiOwl } from 'react-icons/gi'
 
 const InformationPage = (props) => {
 
     return (
         <div className="information-page">
-            <div className="information-page-icon">
-                <FaRocket />
+            <div className="information-page-icon-row">
+                <div className="information-page-icon">
+                    <FaRocket />
+                </div>
             </div>
             <div className="information-page-title">
                 Create events fast.
