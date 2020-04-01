@@ -73,6 +73,18 @@ class OptionsPanel extends Component {
         this.props.EventStore.setValue(newValue, 'allowAlias')
     }
 
+    changeRegistrationLimit = (event) => {
+        let value = event.target.value
+
+        if (event.target.value < 0) {
+            value = 0
+        } else if (event.target.value > 10000) {
+            value = 10000
+        }
+        
+        this.props.EventStore.setValue(value, 'registrationLimit')
+    }
+
     slidePanel = () => {
         this.props.VisibilityStore.slideOptionsPanel()
     }
@@ -159,6 +171,14 @@ class OptionsPanel extends Component {
                         info={'Only allow users with accounts to join event.'}
                         value={!this.props.EventStore.event.allowAlias}
                         changeValue={this.toggleAllowAlias}
+                    />
+                    <InputBlock
+                        type={'number'}
+                        label={'Guest limit'}
+                        min={0}
+                        max={10000}
+                        value={this.props.EventStore.event.registrationLimit}
+                        changeValue={this.changeRegistrationLimit}
                     />
                 </div>
             </div>
