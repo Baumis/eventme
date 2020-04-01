@@ -76,8 +76,10 @@ class OptionsPanel extends Component {
     changeRegistrationLimit = (event) => {
         let value = event.target.value
 
-        if (event.target.value < 0) {
-            value = 0
+        if (event.target.value == '') {
+            value = ''
+        } else if (event.target.value < 1) {
+            value = 1
         } else if (event.target.value > 10000) {
             value = 10000
         }

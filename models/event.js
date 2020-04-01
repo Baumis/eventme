@@ -46,7 +46,7 @@ const eventSchema = new mongoose.Schema({
     },
     registrationLimit: {
         type: Number,
-        min: 0,
+        min: 1,
         max: 10000,
         default: 100,
         required: true
