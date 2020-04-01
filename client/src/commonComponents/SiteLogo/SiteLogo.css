@@ -2,25 +2,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.site-logo p{
-    color:#1985a1;
-    font-size: 20px;
-    text-decoration: none;
     cursor: pointer;
 }
 
+.site-logo p{
+    color:#19a45e;
+    font-size: 18px;
+}
+
 .inviteowl-logo {
-    flex: 1;
-    background: url('../../assets/inviteowl_logo_green.png');
+    background: url('../../assets/owl_200x200_green.png');
     -webkit-background-size: contain;
     -moz-background-size: contain;
     -o-background-size: contain;
     background-size: contain;
     background-position:center center;
     background-repeat: no-repeat;
-    width: 120px;
+    width: 29px;
     height: 29px;
-    cursor: pointer;
 }
