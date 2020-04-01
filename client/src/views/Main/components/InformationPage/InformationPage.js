@@ -1,6 +1,6 @@
 import React from 'react'
 import './InformationPage.css'
-import { FaEnvelope, FaCalendarAlt, FaUserFriends } from 'react-icons/fa'
+import { FaRocket } from 'react-icons/fa'
 
 const InformationPage = (props) => {
 
@@ -8,13 +8,7 @@ const InformationPage = (props) => {
         <div className="information-page">
             <div className="information-page-icon-row">
                 <div className="information-page-icon">
-                    <FaEnvelope />
-                </div>
-                <div className="information-page-icon">
-                    <FaUserFriends />
-                </div>
-                <div className="information-page-icon">
-                    <FaCalendarAlt />
+                    <FaRocket />
                 </div>
             </div>
             <div className="information-page-title">

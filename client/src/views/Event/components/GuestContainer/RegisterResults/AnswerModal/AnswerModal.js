@@ -32,7 +32,7 @@ class AnswerModal extends Component {
                 <div className="answer-modal-search">
                     <input
                         value={this.state.filter}
-                        placeholder={"filter by name"}
+                        placeholder={"Filter by name"}
                         onChange={this.changeFilter}
                     />
                 </div>

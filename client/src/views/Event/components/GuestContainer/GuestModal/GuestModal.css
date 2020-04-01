@@ -33,12 +33,13 @@
 .guest-modal-search input {
     flex: 1;
     padding: 3px 5px;
-    border-radius: 5px;
+    border-radius: 0px;
     height: 25px;
     font-size: 14px;
     padding: 3px 10px 3px 10px;
     background: white;
-    border: 1px solid #dddddd;
+    border: none;
+    border-bottom: 1px solid #dadbdd;
     color:rgba(0,0,0);
     font-family: sans-serif;
 }
