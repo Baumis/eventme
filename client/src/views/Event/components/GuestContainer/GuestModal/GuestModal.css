@@ -8,6 +8,7 @@
 .guest-modal-top-bar {
     display: flex;
     justify-content: flex-end;
+    min-height: min-content;
 }
 
 .guest-modal-back-button {
@@ -28,6 +29,7 @@
 .guest-modal-search {
     display: flex;
     margin: 5px 18px;
+    min-height: min-content;
 }
 
 .guest-modal-search input {
