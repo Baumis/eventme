@@ -56,6 +56,11 @@ const changeUrlmodifier = async (id) => {
     return response.data
 }
 
+const updateAnswer = async (id, registrationId, questionId, content) => {
+    const response = await http.put(`${baseUrl}/${id}/registrations/${registrationId}/answers/${questionId}`, { content })
+    return response.data
+}
+
 export default {
     getOne,
     create,
@@ -67,5 +72,6 @@ export default {
     removeComment,
     addRegistration,
     removeRegistration,
-    changeUrlmodifier
+    changeUrlmodifier,
+    updateAnswer
 }
