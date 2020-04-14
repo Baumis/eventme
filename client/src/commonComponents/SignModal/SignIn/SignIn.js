@@ -80,7 +80,7 @@ class SignIn extends Component {
             }
 
         } catch (error) {
-            this.onSignInFail('Could not sign in')
+            this.onSignInFail('Could not sign in with google')
         }
     }
 
@@ -94,7 +94,7 @@ class SignIn extends Component {
             }
 
         } catch (error) {
-            this.onSignInFail('Could not sign in')
+            this.onSignInFail('Could not sign in with facebook')
         }
     }
 
@@ -113,7 +113,7 @@ class SignIn extends Component {
                             clientId="629446459470-tm1sivu38dq611tlu5c4f9v9q54ijvgn.apps.googleusercontent.com"
                             buttonText="Sign in with Google"
                             onSuccess={this.googleSignIn}
-                            onFailure={() => this.onSignInFail('Could not sign in')}
+                            onFailure={() => this.onSignInFail('Could not sign in with google')}
                             render={renderProps => (
                                 <div className="google-login" onClick={renderProps.onClick}>
                                     <GoogleLogo className="google-icon" />
@@ -127,7 +127,7 @@ class SignIn extends Component {
                             appId="494414091444821"
                             fields="name,email,picture"
                             callback={this.facebookSignIn}
-                            onFailure={() => this.onSignInFail('Could not sign in')}
+                            onFailure={() => this.onSignInFail('Could not sign in with facebook')}
                             disableMobileRedirect={true}
                             render={renderProps => (
                                 <div className="facebook-login" onClick={renderProps.onClick}>
