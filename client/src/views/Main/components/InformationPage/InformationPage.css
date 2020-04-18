@@ -18,7 +18,7 @@
 .information-page-icon {
   display: flex;
   color: #62646a;
-  padding: 0px 5px;
+  padding: 10px 5px;
   font-size: 30px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .information-page-paragraph {
-  color: #95979d;
+  color: #62646a;
   font-size: 18px;
   padding: 0px 40px;
   text-align: center;
