@@ -51,7 +51,7 @@
 }
 
 @media only screen and (max-width: 610px) {
-    .content-container-info-block{
-        margin: 10px;
+    .content-container-info-row{
+        margin: 10px 0px 10px 0px;
     }
 }
