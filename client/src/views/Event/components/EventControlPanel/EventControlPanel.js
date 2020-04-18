@@ -15,6 +15,46 @@ class EventControlPanel extends Component {
         return { backgroundImage: `url(${avatar})` }
     }
 
+    renderJoinInviteStatus = () => {
+        const creator = this.props.isCreator()
+        const guest = this.props.isGuest()
+        const full = this.props.EventStore.event.registrations.length >= this.props.EventStore.event.registrationLimit
+
+        if (creator) {
+            return (
+                <div className="event-control-panel-info-item-invite" onClick={() => this.props.toggleInviteLink()}>
+                    Invite
+                </div>
+            )
+        } else if (!guest && !full) {
+            return (
+                <div className="event-control-panel-info-item">
+                    <JoinEventButton
+                        toggleRegisterModal={this.props.toggleRegisterModal}
+                    />
+                </div>
+            )
+        } else if (!guest && full) {
+            return (
+                <div className="event-control-panel-info-item">
+                    <div className="event-control-panel-info-item-label">
+                        Status
+                    </div>
+                    Event full
+                </div>
+            )
+        } else if (guest) {
+            return (
+                <div className="event-control-panel-info-item">
+                    <div className="event-control-panel-info-item-label">
+                        Status
+                    </div>
+                    Joined
+                </div>
+            )
+        }
+    }
+
     render() {
         return (
             <div className="event-control-panel">
@@ -38,24 +78,7 @@ class EventControlPanel extends Component {
                             {`${moment(this.props.EventStore.event.startDate).format('D MMMM YYYY')} ${moment(this.props.EventStore.event.startDate).format('LT')}`}
                         </div>
                     </div>
-                    {this.props.isCreator() ?
-                        <div className="event-control-panel-info-item-invite" onClick={() => this.props.toggleInviteLink()}>
-                            Invite
-                         </div>
-                        : !this.props.isGuest() ?
-                            <div className="event-control-panel-info-item">
-                                <JoinEventButton
-                                    toggleRegisterModal={this.props.toggleRegisterModal}
-                                />
-                            </div>
-                            :
-                            <div className="event-control-panel-info-item">
-                                <div className="event-control-panel-info-item-label">
-                                    Status
-                                </div>
-                                Joined
-                            </div>
-                    }
+                    {this.renderJoinInviteStatus()}
                 </div>
                 <Tabs
                     active={this.props.activeTab}
