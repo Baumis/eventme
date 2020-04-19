@@ -7,8 +7,10 @@
 
 .site-logo p{
     color:#19a45e;
-    font-size: 18px;
+    font-size: 19px;
     padding-top: 5px;
+    font-family: 'Raleway';
+    margin-left: -2px;
 }
 
 .inviteowl-logo {
