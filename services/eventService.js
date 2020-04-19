@@ -285,3 +285,35 @@ exports.changeUrlmodifier = async (event) => {
 
     return await this.populate(updatedEvent)
 }
+
+exports.updateAnswer = async (event, registrationId, questionId, content) => {
+    const registration = event.registrations.find(registration => registration._id.toString() === registrationId)
+
+    if (!registration) {
+        throw new Error('Malformatted registration id')
+    }
+
+    const question = event.registrationQuestions.find(question => question._id.toString() === questionId)
+
+    if (!question) {
+        throw new Error('Malformatted question id')
+    }
+
+    const answer = registration.answers.find(answer => answer.questionId.toString() === questionId)
+
+    if (answer) {
+        const updatedEvent = await Event.findOneAndUpdate(
+            { _id: event._id, 'registrations._id': registration._id },
+            { $set: { 'registrations.$.answers.$[answer].content': content } },
+            { arrayFilters: [{ 'answer.questionId': questionId }], new: true })
+
+        return await this.populate(updatedEvent)
+    } else {
+        const updatedEvent = await Event.findOneAndUpdate(
+            { _id: event._id, 'registrations._id': registration._id },
+            { $push: { 'registrations.$.answers': { questionId, content } } },
+            { new: true })
+
+        return await this.populate(updatedEvent)
+    }
+}

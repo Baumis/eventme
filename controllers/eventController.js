@@ -171,7 +171,7 @@ exports.removeRegistration = async (request, response) => {
         const registration = request.event.registrations.find(registration => registration._id.toString() === registrationId)
 
         if (!registration) {
-            response.status(400).json({ error: 'Malformatted registration id' })
+            return response.status(400).json({ error: 'Malformatted registration id' })
         }
 
         if (request.senderRole !== roles.CREATOR && request.senderId !== registration.user.toString()) {
@@ -193,6 +193,34 @@ exports.removeRegistration = async (request, response) => {
 exports.changeUrlmodifier = async (request, response) => {
     try {
         const event = await eventService.changeUrlmodifier(request.event)
+
+        if (request.senderRole === roles.CREATOR) {
+            response.json(Event.format(event))
+        } else {
+            response.json(Event.formatForGuest(event, request.senderId))
+        }
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
+exports.updateAnswer = async (request, response) => {
+    try {
+        const registrationId = request.params.registrationId
+        const questionId = request.params.questionId
+        const content = request.body.content
+
+        const registration = request.event.registrations.find(registration => registration._id.toString() === registrationId)
+
+        if (!registration) {
+            return response.status(400).json({ error: 'Malformatted registration id' })
+        }
+
+        if (request.senderRole !== roles.CREATOR && request.senderId !== registration.user.toString()) {
+            return response.status(403).json({ error: 'User does not have required permission' })
+        }
+
+        const event = await eventService.updateAnswer(request.event, registrationId, questionId, content)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(event))
