@@ -8,7 +8,7 @@ class ProfileHeader extends Component {
 
     getCover = () => {
         if (!this.props.UserStore.currentUser.cover) {
-            return null
+            return { backgroundImage: `url(${require('../../../../assets/cover.jpg')})` }
         }
         return ({
             backgroundImage: `url(${this.props.user.cover})`

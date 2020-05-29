@@ -30,7 +30,6 @@ const eventSchema = new mongoose.Schema({
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     background: {
         type: String,
-        default: 'https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80',
         maxlength: [2048, 'Url too long']
     },
     discussion: [messageSchema],
@@ -72,7 +71,7 @@ eventSchema.statics.format = (event) => {
         } else {
             user = {
                 name: registration.name,
-                avatar: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+                avatar: null
             }
         }
 
@@ -114,7 +113,7 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         } else {
             user = {
                 name: registration.name,
-                avatar: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+                avatar: null
             }
         }
 

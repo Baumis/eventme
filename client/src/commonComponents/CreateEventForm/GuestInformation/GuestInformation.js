@@ -54,7 +54,7 @@ class GuestInformation extends Component {
                 </div>
                 <div className="guest-information-questions">
                     {this.props.questions.map((question, i) =>
-                        <div className="guest-information-question">
+                        <div key={i} className="guest-information-question">
                             <CreateInput
                                 label={''}
                                 type={'text'}
