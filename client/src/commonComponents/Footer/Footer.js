@@ -15,7 +15,7 @@ class Footer extends Component {
 
     render() {
         return (
-            <div className="footer">
+            <div className="footer" style={this.props.style}>
                 <div className="footer-container">
                     <div className="footer-item">
                         <div className="footer-item-icon">

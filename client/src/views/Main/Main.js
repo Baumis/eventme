@@ -31,7 +31,7 @@ class Main extends Component {
                 <div className="main-filler">
 
                 </div >
-                <Footer />
+                <Footer style={{ background: '#f7f7f8', border: 'none' }} />
             </div>
         )
     }
