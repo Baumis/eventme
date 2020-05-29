@@ -6,6 +6,7 @@
     background: white;
     min-height: 45px;
     max-height: 45px;
+    border-top: 1px solid #dadbdd;
 }
 
 .footer-container {
@@ -21,12 +22,12 @@
     align-items: center;
     margin: 0px 20px;
     font-size: 14px;
-    color: rgb(76, 92, 104, 0.8);
+    color: #62646a;
     cursor: pointer;
 }
 
 .footer-item:hover {
-    color: rgb(76, 92, 104, 1);
+    color: #62646a;
 }
 
 .footer-item-icon {

@@ -30,7 +30,7 @@ class GuestModal extends Component {
                 <div className="guest-modal-search">
                     <input
                         value={this.state.filter}
-                        placeholder={"filter"}
+                        placeholder={"Filter by name"}
                         onChange={this.changeFilter}
                     />
                 </div>

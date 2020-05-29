@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: 25px;
-    color: #46494c;
+    color: #0e0e0f;
     padding: 10px 10px 10px 10px;
     font-weight: 600;
     text-align: start;
@@ -30,12 +30,6 @@
     font-size: 14px;
 }
 
-.signin-info-text span {
-    color: #1985a1;
-    font-size: 14px;
-    cursor: pointer;
-}
-
 .signin-social-accounts {
     display: flex;
     flex-direction: column;
@@ -53,7 +47,7 @@
     justify-content: center;
     height: 40px;
     border-radius: 5px;
-    background: #4c5c68;
+    background: #62646a;
     color: white;
     margin: 10px 0px 10px 0px;
     cursor: pointer;
@@ -61,7 +55,7 @@
 }
 
 .signin-button:hover{
-    background: #404e59;
+    background: #494b50;
 }
 
 .google-login-wrapper {
@@ -78,7 +72,7 @@
     align-items: center;
     color: rgba(0, 0, 0, .54);
     background-color: #ffffff;
-    border: 1px solid #c5c3c6;
+    border: 1px solid #dadbdd;
     border-radius: 5px;
     transition: background 0.2s;
     cursor: pointer;
@@ -107,7 +101,6 @@
     align-items: center;
     color: white;
     background-color: #4267b2;
-    border: 1px solid #c5c3c6;
     border-radius: 5px;
     transition: background 0.2s;
     cursor: pointer;

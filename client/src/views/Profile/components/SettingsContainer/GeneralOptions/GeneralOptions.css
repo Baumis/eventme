@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    color: #1985a1;
+    color: #19a45e;
     font-size: 16px;
     padding: 20px 0px 15px 0px;
 }
@@ -23,7 +23,7 @@
     height: 30px;
     font-size: 15px;
     background: transparent;
-    border: 1px solid #dddddd;
+    border: 1px solid #dadbdd;
     color:#46494c;
     transition: border 0.2s;
 }
@@ -32,7 +32,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #4c5c68;
+    background: #95979d;
     color: white;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
@@ -43,7 +43,7 @@
 }
 
 .general-options-input-button:hover{
-    background: #404e59;
+    background: #7a7d85;
 }
 
 .general-options-input input{
@@ -55,7 +55,7 @@
 }
 
 .general-options-input-input:focus-within{
-    border: 1px solid #1985a1;
+    border: 1px solid #19a45e;
 }
 
 .general-options-button-row{
@@ -72,7 +72,7 @@
     height: 12px;
     width: 60px;
     border-radius: 5px;
-    background: #4c5c68;
+    background: #62646a;
     color: white;
     transition: background 0.2s;
     margin-bottom: 10px;
@@ -80,5 +80,5 @@
 }
 
 .general-options-save-button:hover{
-    background: #404e59;
+    background: #494b50;
 }

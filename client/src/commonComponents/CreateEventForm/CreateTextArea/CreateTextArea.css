@@ -9,7 +9,7 @@
 .create-textarea-label{
     display: flex;
     padding: 10px;
-    color: #1985a1;
+    color: #19a45e;
     font-size: 14px;
     font-weight: 500;
 }
@@ -22,7 +22,7 @@
 .create-textarea textarea {
     border-radius: 5px;
     width: 100%;
-    border: 1px solid #dddddd;
+    border: 1px solid #dadbdd;
     box-sizing: border-box;
     padding: 10px;
     outline: none;
@@ -38,7 +38,7 @@
 
 .create-textarea-area:focus{
     transition: border 0s;
-    border: 1px solid #1985a1;
+    border: 1px solid #19a45e;
 }
 
 .create-textarea-area::placeholder{

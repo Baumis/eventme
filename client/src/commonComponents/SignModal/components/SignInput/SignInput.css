@@ -1,12 +1,12 @@
 .sign-input-label-row{
     display: flex;
-    padding: 3px 0px;
+    padding: 5px 5px;
     justify-content: space-between;
-    color: #1985a1;
+    color: #19a45e;
 }
 
 .sign-input-second-label{
-    color: #1985a1;
+    color: #19a45e;
     font-size: 14px;
     cursor: pointer;
 }
@@ -24,7 +24,7 @@
     align-items: center;
     border: none;
     height: 38px;
-    border: 1px solid #c5c3c6;
+    border: 1px solid #dadbdd;
     border-radius: 5px;
     background: transparent;
     color: #46494c;
@@ -35,7 +35,7 @@
 .sign-input-icon {
     display: flex;
     margin: 0px 5px;
-    color: rgb(70, 73, 76, 0.7);
+    color: #95979d;
 }
 
 .sign-input input{
@@ -49,7 +49,7 @@
 
 .sign-input-input-container:focus-within{
     transition: border 0s;
-    border: 1px solid #1985a1;
+    border: 1px solid #19a45e;
 }
 
 .sign-input input:focus + .sign-input-icon {

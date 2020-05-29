@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './ContentContainer.css'
-import { FaLink, FaPuzzlePiece, FaUser } from 'react-icons/fa'
+import { FaLink, FaComments, FaUser } from 'react-icons/fa'
 
 class ContentContainer extends Component {
 
@@ -18,10 +18,10 @@ class ContentContainer extends Component {
                     </div>
                     <div className="content-container-info-block">
                         <div className="content-container-title-row">
-                            <FaPuzzlePiece />
-                            <h1>Edit</h1>
+                            <FaComments />
+                            <h1>Interact</h1>
                         </div>
-                        <p>Create events fast and customize them with our simple editor.</p>
+                        <p>Keep guests up to date with the chat enabled by the events page.</p>
                     </div>
                     <div className="content-container-info-block">
                         <div className="content-container-title-row">

@@ -14,8 +14,9 @@ class SiteLogo extends Component {
 
     render() {
         return (
-            <div className="site-logo">
-                <div className="inviteowl-logo" onClick={() => this.toMain()}></div>
+            <div className="site-logo" onClick={() => this.toMain()}>
+                <div className="inviteowl-logo"></div>
+                <p>InviteOwl</p>
             </div>
         )
     }

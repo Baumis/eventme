@@ -5,8 +5,13 @@ import moment from 'moment'
 
 const EventCard = (props) => {
 
-    const background = {
-        backgroundImage: 'url(' + props.event.background + ')'
+    const getCover = () => {
+        if (!props.event.background) {
+            return { backgroundImage: `url(${require('../../../../assets/event_cover.jpg')})` }
+        }
+        return ({
+            backgroundImage: `url(${props.event.background})`
+        })
     }
 
     const toEvent = (id) => {
@@ -15,7 +20,7 @@ const EventCard = (props) => {
 
     return (
         <div className="event-card" onClick={() => toEvent()}>
-            <div className="event-card-picture" style={background}>
+            <div className="event-card-picture" style={getCover()}>
                 <div className="event-card-content">
                     <div className="event-card-date">
                         <div className="event-card-month">

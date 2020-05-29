@@ -7,6 +7,7 @@ import SignModal from '../../commonComponents/SignModal/SignModal'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 import MainHeader from './components/MainHeader/MainHeader'
 import Alert from '../../commonComponents/Alert/Alert'
+import ContentContainer from './components/ContentContainer/ContentContainer'
 
 class Main extends Component {
 
@@ -17,6 +18,7 @@ class Main extends Component {
                     staticColor={true}
                 />
                 <MainHeader />
+                <ContentContainer />
                 {this.props.VisibilityStore.signModal ?
                     <UniversalModal
                         content={<SignModal />}

@@ -21,16 +21,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #46494c;
     height: 35px;
     font-size: 15px;
     cursor: pointer;
     padding: 10px;
-    background: rgb(221, 221, 221, 0.5);
-    border: 1px solid rgb(221, 221, 221, 0.7);
+    background: rgb(221, 221, 221, 0.2);
+    border: 1px solid rgb(149, 151, 157, 0.2);
+    color: #62646a;
     border-radius: 5px;
 }
 
 .register-results-question-button:hover {
-    background: rgb(221, 221, 221, 0.8);
+    background: rgb(221, 221, 221, 0.4);
 }

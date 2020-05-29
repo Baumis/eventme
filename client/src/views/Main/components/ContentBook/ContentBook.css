@@ -20,10 +20,8 @@
     -moz-box-sizing: border-box;
     padding: 35px;
     margin: 35px;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
     background: rgb(255, 255, 255, 1);
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
     border-radius: 5px;
 }
 

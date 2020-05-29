@@ -6,7 +6,7 @@ class AnswerSection extends Component {
 
     getAvatar = (user) => {
         if (!user.avatar) {
-            return null
+            return { backgroundImage: `url(${require('../../../../../../assets/avatar.png')})` }
         }
         return { backgroundImage: `url(${user.avatar})` }
     }

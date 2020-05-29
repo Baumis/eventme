@@ -7,25 +7,31 @@
     background: #c5c3c6;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    background: #4c5c68;
     background: transparent;
 }
 
+.information-page-icon-row {
+  display: flex;
+  align-items: flex-end;
+}
+
 .information-page-icon {
-  color: #404e59;
+  display: flex;
+  color: #62646a;
+  padding: 10px 5px;
   font-size: 35px;
 }
 
 .information-page-title {
   font-size: 38px;
-  color: #404e59;
-  padding: 10px 10px;
+  color: #0e0e0f;
+  padding: 0px 10px 10px 10px;
   text-align: center;
   font-weight: 600;
 }
 
 .information-page-paragraph {
-  color: rgb(76, 92, 104, 0.8);
+  color: #62646a;
   font-size: 18px;
   padding: 0px 40px;
   text-align: center;
@@ -37,7 +43,8 @@
   }
 
   .information-page-icon {
-    font-size: 30px;
+    padding: 5px 5px;
+    font-size: 25px;
   }
 
   .information-page-title {

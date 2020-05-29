@@ -8,7 +8,7 @@ const Comment = (props) => {
 
     const getAvatar = () => {
         if (!props.comment.author.avatar) {
-            return null
+            return { backgroundImage: `url(${require('../../../../../../../../assets/avatar.png')})` }
         }
         return { backgroundImage: `url(${props.comment.author.avatar})` }
     }

@@ -6,11 +6,16 @@ import './Header.css'
 
 class Header extends Component {
 
-    render() {
-        const headerStyles = {
-            color: 'white',
-            backgroundImage: 'url(' + this.props.EventStore.event.background + ')'
+    getCover = () => {
+        if (!this.props.EventStore.event.background) {
+            return { backgroundImage: `url(${require('../../../../assets/event_cover.jpg')})` }
         }
+        return ({
+            backgroundImage: `url(${this.props.EventStore.event.background})`
+        })
+    }
+
+    render() {
         return (
             <div className="event-header">
                 <div className="event-header-block">
@@ -19,7 +24,7 @@ class Header extends Component {
                             showPanel={this.props.togglePanel}
                         />
                         : null}
-                    <div style={headerStyles} className="event-header-cover">
+                    <div style={this.getCover()} className="event-header-cover">
                     </div>
                     <EventControlPanel
                         activeTab={this.props.activeTab}

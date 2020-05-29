@@ -8,13 +8,6 @@ import JoinEventButton from '../JoinEventButton/JoinEventButton'
 
 class EventControlPanel extends Component {
 
-    getAvatar = (avatar) => {
-        if (!avatar) {
-            return null
-        }
-        return { backgroundImage: `url(${avatar})` }
-    }
-
     renderJoinInviteStatus = () => {
         const creator = this.props.isCreator()
         const guest = this.props.isGuest()
@@ -72,7 +65,7 @@ class EventControlPanel extends Component {
                             <div className="event-control-panel-info-icon">
                                 <FaRegCalendarAlt />
                             </div>
-                            When?
+                            Date
                         </div>
                         <div className="event-control-panel-info-item-content">
                             {`${moment(this.props.EventStore.event.startDate).format('D MMMM YYYY')} ${moment(this.props.EventStore.event.startDate).format('LT')}`}

@@ -3,9 +3,9 @@ import './ProfileCard.css'
 
 const ProfileCard = (props) => {
 
-    const avatar = () => {
+    const getAvatar = () => {
         if (!props.user.avatar) {
-            return null
+            return { backgroundImage: `url(${require('../../../../../assets/avatar.png')})` }
         }
         return (
             { backgroundImage: `url(${props.user.avatar})` }
@@ -15,7 +15,7 @@ const ProfileCard = (props) => {
     return (
         <div className="profile-row">
             < div className="profile-row-content">
-                <div style={avatar()} className="profile-avatar"></div>
+                <div style={getAvatar()} className="profile-avatar"></div>
                 <div className="profile-name">
                     <h2>{props.user.name}</h2>
                 </div>

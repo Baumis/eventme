@@ -94,7 +94,7 @@ class Recover extends Component {
                         </div>
                     }
                 </div>
-                <div className="recover-info-text">
+                <div className="signin-info-text">
                     Back to <span onClick={() => this.props.changeTab('SignIn')} >Sign in</span>.
                 </div>
             </div>

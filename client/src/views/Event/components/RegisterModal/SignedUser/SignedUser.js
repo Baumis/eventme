@@ -12,7 +12,7 @@ class SignedUser extends Component {
 
     getAvatar = (avatar) => {
         if (!avatar) {
-            return null
+            return { backgroundImage: `url(${require('../../../../../assets/avatar.png')})` }
         }
         return { backgroundImage: `url(${avatar})` }
     }
