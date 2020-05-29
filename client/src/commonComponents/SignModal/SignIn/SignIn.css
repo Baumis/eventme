@@ -30,12 +30,6 @@
     font-size: 14px;
 }
 
-.signin-info-text span {
-    color: #1985a1;
-    font-size: 14px;
-    cursor: pointer;
-}
-
 .signin-social-accounts {
     display: flex;
     flex-direction: column;

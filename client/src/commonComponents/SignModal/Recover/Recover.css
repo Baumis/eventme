@@ -39,8 +39,3 @@
 .recover-info-text {
     color: rgba(0,0,0,0.6);
 }
-
-.recover-info-text span {
-    color: #6ce9d7;
-    cursor: pointer;
-}
