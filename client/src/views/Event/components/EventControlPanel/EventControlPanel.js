@@ -8,13 +8,6 @@ import JoinEventButton from '../JoinEventButton/JoinEventButton'
 
 class EventControlPanel extends Component {
 
-    getAvatar = (avatar) => {
-        if (!avatar) {
-            return null
-        }
-        return { backgroundImage: `url(${avatar})` }
-    }
-
     renderJoinInviteStatus = () => {
         const creator = this.props.isCreator()
         const guest = this.props.isGuest()

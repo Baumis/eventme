@@ -20,7 +20,7 @@ class MessageCard extends Component {
 
     getAvatar = () => {
         if (!this.props.message.author.avatar) {
-            return null
+            return { backgroundImage: `url(${require('../../../../../../assets/avatar.png')})` }
         }
         return { backgroundImage: `url(${this.props.message.author.avatar})` }
     }

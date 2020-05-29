@@ -59,11 +59,8 @@ class MessageTextArea extends Component {
     }
 
     getAvatar = () => {
-        if (!this.props.UserStore.currentUser) {
-            return null
-        }
-        if (!this.props.UserStore.currentUser.avatar) {
-            return null
+        if (!this.props.UserStore.currentUser || !this.props.UserStore.currentUser.avatar) {
+            return { backgroundImage: `url(${require('../../../../../../assets/avatar.png')})` }
         }
         return { backgroundImage: `url(${this.props.UserStore.currentUser.avatar})` }
     }
