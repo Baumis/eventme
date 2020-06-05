@@ -63,6 +63,11 @@ class OptionsPanel extends Component {
         this.props.EventStore.setValue(startDate, 'startDate')
     }
 
+    togglePublic = () => {
+        const newValue = !this.props.EventStore.event.public
+        this.props.EventStore.setValue(newValue, 'public')
+    }
+
     togglePublicAnswers = () => {
         const newValue = !this.props.EventStore.event.publicAnswers
         this.props.EventStore.setValue(newValue, 'publicAnswers')
@@ -125,6 +130,12 @@ class OptionsPanel extends Component {
                     <div className="DeleteEventButton" onClick={() => this.deleteEvent()}>
                         {'Delete event'}
                     </div>
+                    <TogglerBlock
+                        label={'Public event'}
+                        info={'Can be searched and found on profiles.'}
+                        value={this.props.EventStore.event.public}
+                        changeValue={this.togglePublic}
+                    />
                     <InputBlock
                         type={'text'}
                         label={'Title'}

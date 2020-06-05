@@ -40,7 +40,8 @@ exports.create = async (creatorId, eventObject) => {
         }],
         publicAnswers: eventObject.publicAnswers,
         allowAlias: eventObject.allowAlias,
-        urlmodifier: helpers.makeId(5)
+        urlmodifier: helpers.makeId(5),
+        public: eventObject.public
     })
 
     const error = newEvent.validateSync()
@@ -95,7 +96,8 @@ exports.update = async (event, eventObject) => {
         registrationQuestions: eventObject.registrationQuestions,
         publicAnswers: eventObject.publicAnswers,
         registrationLimit: eventObject.registrationLimit,
-        allowAlias: eventObject.allowAlias
+        allowAlias: eventObject.allowAlias,
+        public: eventObject.public
     }
 
     const savedEvent = await Event.findByIdAndUpdate(event._id, updateObject, { new: true, runValidators: true })
