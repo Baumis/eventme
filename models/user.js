@@ -114,7 +114,7 @@ userSchema.statics.formatForGuest = (user) => {
     const myCurrentInvites = myInvites.filter(event => event.endDate >= oneWeekBack)
     const myPastInvites = myInvites.filter(event => event.endDate < oneWeekBack)
     myPastInvites.sort((a, b) => b.startDate - a.startDate)
-    
+
     const formattedUser = {
         _id: user._id,
         name: user.name,
