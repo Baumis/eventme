@@ -33,6 +33,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={Main} />
                         <Route exact path="/privacy" component={privacyPolicy} />
+                        <Route exact path="/search" component={privacyPolicy} />
                         <Route exact path="/events/:url" render={({ match }) => <Event eventUrl={match.params.url} />} />
                         <Route exact path="/profile/:id" render={({ match }) => <Profile profileId={match.params.id} />} />
                         <Route exact path="/profile/:id/verify/:token" render={({ match }) => <Profile profileId={match.params.id} verificationToken={match.params.token} />} />
