@@ -7,7 +7,7 @@ import ProfileTabs from '../ProfileTabs/ProfileTabs'
 class ProfileHeader extends Component {
 
     getCover = () => {
-        if (!this.props.UserStore.currentUser.cover) {
+        if (!this.props.user.cover) {
             return { backgroundImage: `url(${require('../../../../assets/cover.jpg')})` }
         }
         return ({
