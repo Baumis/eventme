@@ -8,6 +8,7 @@ import Navbar from '../../commonComponents/Navbar/Navbar'
 import Footer from '../../commonComponents/Footer/Footer'
 import CreateEventForm from '../../commonComponents/CreateEventForm/CreateEventForm'
 import UniversalModal from '../.././commonComponents/UniversalModal/UniversalModal'
+import SignModal from '../../commonComponents/SignModal/SignModal'
 import NotFound from '../NotFound/NotFound'
 import Alert from '../../commonComponents/Alert/Alert'
 
@@ -76,6 +77,10 @@ class Profile extends Component {
         return user
     }
 
+    afterSign = () => {
+        this.getUserInformation()
+    }
+
     render() {
 
         if (this.state.loading) {
@@ -95,6 +100,7 @@ class Profile extends Component {
             <div className="profile">
                 <Navbar
                     staticColor={true}
+                    afterSign={this.afterSign}
                 />
                 <ProfileHeader
                     user={this.state.user}
@@ -112,6 +118,11 @@ class Profile extends Component {
                     activeTab={this.state.activeTab}
                 />
                 <Footer />
+                {this.props.VisibilityStore.signModal ?
+                    <UniversalModal
+                        content={<SignModal />}
+                    />
+                    : null}
                 {this.state.newEventModal ?
                     <UniversalModal
                         content={

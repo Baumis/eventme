@@ -9,9 +9,11 @@ class User extends Component {
         this.props.VisibilityStore.showSignModal(this.props.afterSign)
     }
 
-    signOut = () => {
-        this.props.UserStore.signOut()
-        this.props.history.push('/')
+    signOut = async () => {
+        await this.props.UserStore.signOut()
+        if (this.props.afterSign) {
+            this.props.afterSign()
+        }
     }
 
     getAvatar = () => {
