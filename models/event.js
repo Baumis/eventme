@@ -58,6 +58,10 @@ const eventSchema = new mongoose.Schema({
         maxlength: 5,
         default: '0wl2o',
         required: true
+    },
+    public: {
+        type: Boolean,
+        default: true
     }
 })
 
@@ -98,7 +102,8 @@ eventSchema.statics.format = (event) => {
         publicAnswers: event.publicAnswers,
         allowAlias: event.allowAlias,
         registrationLimit: event.registrationLimit,
-        url: event._id + event.urlmodifier
+        url: event._id + event.urlmodifier,
+        public: event.public
     }
     return formattedEvent
 }
@@ -140,7 +145,8 @@ eventSchema.statics.formatForGuest = (event, guestId) => {
         publicAnswers: event.publicAnswers,
         allowAlias: event.allowAlias,
         registrationLimit: event.registrationLimit,
-        url: event._id + event.urlmodifier
+        url: event._id + event.urlmodifier,
+        public: event.public
     }
     return formattedEvent
 }

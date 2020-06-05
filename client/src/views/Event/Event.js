@@ -110,6 +110,10 @@ class Event extends Component {
         this.props.VisibilityStore.slideOptionsPanel()
     }
 
+    afterSign = async () => {
+        await this.props.EventStore.getEvent(this.props.EventStore.event.url)
+    }
+
     render() {
         if (this.state.loading) {
             return null
@@ -131,6 +135,7 @@ class Event extends Component {
                 <div className='Event'>
                     <Navbar
                         staticColor={true}
+                        afterSign={this.afterSign}
                     />
                     <Header
                         activeTab={this.state.activeTab}

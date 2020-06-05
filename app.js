@@ -23,6 +23,7 @@ const app = express()
 // Route modules
 const eventRouter = require('./routes/eventRouter')
 const userRouter = require('./routes/userRouter')
+const searchRouter = require('./routes/searchRouter')
 const loginRouter = require('./routes/loginRouter')
 const logRouter = require('./routes/logRouter')
 const pictureRouter = require('./routes/pictureRouter')
@@ -54,6 +55,7 @@ app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/log', logRouter)
 app.use('/api/pictures', pictureRouter)
+app.use('/api/search', searchRouter)
 
 // Rest of endpoints to react
 if (process.env.NODE_ENV === 'production') {

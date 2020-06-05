@@ -65,8 +65,13 @@ const formatEvents = (events) => {
         url: event._id + event.urlmodifier,
         startDate: event.startDate,
         endDate: event.endDate,
-        registrationAmount: event.registrations.length
+        registrationAmount: event.registrations.length,
+        public: event.public
     }))
+}
+
+const formatAndFilterEvents = (events) => {
+    return formatEvents(events).filter(event => event.public)
 }
 
 userSchema.statics.format = (user) => {
@@ -101,15 +106,15 @@ userSchema.statics.format = (user) => {
 userSchema.statics.formatForGuest = (user) => {
     const oneWeekBack = new Date(new Date() - 1000 * 60 * 60 * 24 * 7)
 
-    const myEvents = formatEvents(user.myEvents)
+    const myEvents = formatAndFilterEvents(user.myEvents)
     const myCurrentEvents = myEvents.filter(event => event.endDate >= oneWeekBack)
     const myPastEvents = myEvents.filter(event => event.endDate < oneWeekBack)
     myPastEvents.sort((a, b) => b.startDate - a.startDate)
-    const myInvites = formatEvents(user.myInvites)
+    const myInvites = formatAndFilterEvents(user.myInvites)
     const myCurrentInvites = myInvites.filter(event => event.endDate >= oneWeekBack)
     const myPastInvites = myInvites.filter(event => event.endDate < oneWeekBack)
     myPastInvites.sort((a, b) => b.startDate - a.startDate)
-    
+
     const formattedUser = {
         _id: user._id,
         name: user.name,
