@@ -1,26 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import './SearchBar.css'
 
 const SearchBar = (props) => {
     const [inputValue, setInputValue] = useState('')
+    const [typeTimeout, setTypeTimeout] = useState(null)
 
-    const inputRef = useRef(inputValue);
-    useEffect(() => {
-        document.addEventListener('keydown', handleKey)
-        return () => document.removeEventListener('keydown', handleKey)
-    }, [inputValue])
+    const changeInputValue = (event) => {
+        clearTimeout(typeTimeout)
 
-    const handleKey = (event) => {
-        if (event.keyCode === 13) {
-            search(inputRef.current)
-        }
+        setInputValue(event.target.value)
+        setTypeTimeout(setTimeout(search, 500))
     }
 
     const search = () => {
-        if (inputValue.length < 1) {
-            return
+        if (inputValue.length > 0) {
+            props.search(inputValue)
         }
-        props.search(inputValue)
     }
 
     return (
@@ -31,12 +26,9 @@ const SearchBar = (props) => {
             <div className="search-input-row">
                 <input
                     value={inputValue}
-                    onChange={(event) => setInputValue(event.target.value)}
+                    onChange={changeInputValue}
                     placeholder={"Search"}
                 />
-                <div className="searchbar-button" onClick={() => search(inputValue)}>
-                    Search
-            </div>
             </div>
         </div>
     )

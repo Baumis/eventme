@@ -28,7 +28,7 @@ const SearchResults = (props) => {
                     <div className="result-list">
                         <div className="result-title">Events</div>
                         {props.results.events.map(event =>
-                            <EventCard event={event} />
+                            <EventCard event={event} key={event._id} />
                         )}
                     </div>
                 }
@@ -36,7 +36,7 @@ const SearchResults = (props) => {
                     <div className="result-list">
                         <div className="result-title">Profiles</div>
                         {props.results.users.map(user =>
-                            <div className="profile-result" onClick={() => toProfile(user._id)}>
+                            <div className="profile-result" onClick={() => toProfile(user._id)} key={user._id}>
                                 <div style={getAvatar(user.avatar)} className="profile-result-avatar"> </div>
                                 <div>{user.name}</div>
                             </div>

@@ -3,9 +3,9 @@
     flex-direction: column;
     margin-top: 45px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     padding: 20px 0px;
-    height: 25vh;
+    height: 18vh;
 }
 
 .search-serachbar-title {
