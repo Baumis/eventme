@@ -6,6 +6,7 @@ import Footer from '../../commonComponents/Footer/Footer'
 import Alert from '../../commonComponents/Alert/Alert'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
+import SearchService from '../../services/search';
 
 class Search extends Component {
 
@@ -13,12 +14,20 @@ class Search extends Component {
         super(props)
         this.state = {
             results: { events: [], users: [] },
-            searching: true
+            searching: false
         }
     }
 
-    search = (parameter) => {
-        //make apicall
+    search = async (parameter) => {
+        console.log(parameter)
+        this.setState({ searching: true })
+        const results = await SearchService.getAll(parameter, 10)
+        this.setState({ searching: false })
+
+        if(results){
+            this.setState({results: results})
+        }
+
     }
 
     render() {

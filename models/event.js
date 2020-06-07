@@ -157,7 +157,8 @@ eventSchema.statics.formatForGhost = (event) => ({
     startDate: event.startDate,
     endDate: event.endDate,
     creator: event.creator,
-    background: event.background
+    background: event.background,
+    url: event._id + event.urlmodifier
 })
 
 const Event = mongoose.model('Event', eventSchema)

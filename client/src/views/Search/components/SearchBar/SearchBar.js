@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './SearchBar.css'
-import { propTypes } from 'mobx-react'
 
 const SearchBar = (props) => {
     const [inputValue, setInputValue] = useState('')
 
+    const inputRef = useRef(inputValue);
     useEffect(() => {
         document.addEventListener('keydown', handleKey)
         return () => document.removeEventListener('keydown', handleKey)
-    }, [])
+    }, [inputValue])
 
     const handleKey = (event) => {
         if (event.keyCode === 13) {
-            props.search(inputValue)
+            search(inputRef.current)
         }
+    }
+
+    const search = () => {
+        if (inputValue.length < 1) {
+            return
+        }
+        props.search(inputValue)
     }
 
     return (
@@ -25,9 +32,9 @@ const SearchBar = (props) => {
                 <input
                     value={inputValue}
                     onChange={(event) => setInputValue(event.target.value)}
-                    placeholder={"search"}
+                    placeholder={"Search"}
                 />
-                <div className="searchbar-button" onClick={() => props.search(inputValue)}>
+                <div className="searchbar-button" onClick={() => search(inputValue)}>
                     Search
             </div>
             </div>

@@ -8,11 +8,13 @@ exports.getAll = async (keyword, limit) => {
         throw new Error('Keyword is not valid')
     }
 
+    keyword = keyword.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")
+
     const usersPromise = User
         .find({ name: new RegExp(keyword, 'i') })
         .limit(Number(limit))
     const eventsPromise = Event
-        .find({ label: new RegExp(keyword, 'i') })
+        .find({ label: new RegExp(keyword, 'i'), public: true })
         .limit(Number(limit))
 
     const promises = await Promise.all([usersPromise, eventsPromise])
