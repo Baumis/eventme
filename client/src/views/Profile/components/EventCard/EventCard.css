@@ -9,6 +9,10 @@
     overflow: hidden;
 }
 
+.small-card {
+    height: 100px;
+}
+
 .event-card-picture {
     display: flex;
     align-items: center;

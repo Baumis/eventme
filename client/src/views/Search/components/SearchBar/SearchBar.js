@@ -1,37 +1,51 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react'
 import './SearchBar.css'
+import { FaSearch } from 'react-icons/fa'
+import { renderReporter } from 'mobx-react'
 
-const SearchBar = (props) => {
-    const [inputValue, setInputValue] = useState('')
-    const [typeTimeout, setTypeTimeout] = useState(null)
+class SearchBar extends Component {
 
-    const changeInputValue = (event) => {
-        clearTimeout(typeTimeout)
-
-        setInputValue(event.target.value)
-        setTypeTimeout(setTimeout(search, 500))
-    }
-
-    const search = () => {
-        if (inputValue.length > 0) {
-            props.search(inputValue)
+    constructor(props) {
+        super(props)
+        this.state = {
+            typeTimeout: null,
+            inputValue: ''
         }
     }
 
-    return (
-        <div className="search-searchbar">
-            <div className="search-serachbar-title">
-                Search events and profiles.
+    changeInputValue = (event) => {
+        clearTimeout(this.state.typeTimeout)
+
+        this.setState({
+            inputValue: event.target.value,
+            typeTimeout: setTimeout(this.search, 800)
+        })
+    }
+
+    search = () => {
+        if (this.state.inputValue.length > 0) {
+            this.props.search(this.state.inputValue)
+        }
+    }
+    render() {
+        return (
+            <div className="search-searchbar">
+                <div className="search-serachbar-title">
+                    Search events and profiles.
             </div>
-            <div className="search-input-row">
-                <input
-                    value={inputValue}
-                    onChange={changeInputValue}
-                    placeholder={"Search"}
-                />
+                <div className="search-input-row">
+                    <div className="search-input">
+                        <div className="search-serachbar-icon"><FaSearch /></div>
+                        <input
+                            value={this.state.inputValue}
+                            onChange={this.changeInputValue}
+                            placeholder={"Search"}
+                        />
+                    </div>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default SearchBar

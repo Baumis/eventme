@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './SearchResults.css'
 import { withRouter } from 'react-router-dom'
 import Spinner from '../../../../commonComponents/Spinner/Spinner'
-import EventCard from '../../../Profile/components/EventCard/EventCard'
+import EventCard from '../../../../views/Profile/components/EventCard/EventCard'
 
 const SearchResults = (props) => {
 
@@ -17,6 +17,10 @@ const SearchResults = (props) => {
         return <div className="search-results"> <Spinner /> </div>
     }
 
+    const getCardMode = () => {
+        return props.results.users.length > 0
+    }
+
     const toProfile = (id) => {
         props.history.push(`/profile/${id}`)
     } 
@@ -28,7 +32,7 @@ const SearchResults = (props) => {
                     <div className="result-list">
                         <div className="result-title">Events</div>
                         {props.results.events.map(event =>
-                            <EventCard event={event} key={event._id} />
+                            <EventCard smallCard={getCardMode()} event={event} key={event._id} />
                         )}
                     </div>
                 }

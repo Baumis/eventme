@@ -14,12 +14,16 @@ const EventCard = (props) => {
         })
     }
 
+    const getCardModeClass = () => {
+        return props.smallCard ? "small-card" : undefined
+    }
+
     const toEvent = () => {
         props.history.push('/events/' +  props.event.url)
     }
 
     return (
-        <div className="event-card" onClick={() => toEvent()}>
+        <div className={`event-card  ${getCardModeClass()}`} style={props.style} onClick={() => toEvent()}>
             <div className="event-card-picture" style={getCover()}>
                 <div className="event-card-content">
                     <div className="event-card-date">
