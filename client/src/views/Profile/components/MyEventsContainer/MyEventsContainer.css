@@ -12,6 +12,13 @@
     flex-direction: column;
 }
 
+.events-title {
+    font-size: 18px;
+    color: #0e0e0f;
+    margin: 20px 30px 10px 30px;
+    font-weight: 600;
+}
+
 .event-container-new-button {
     display: flex;
     justify-content: center;
@@ -39,6 +46,10 @@
 
 @media only screen and (max-width: 620px) {
     .event-container-new-button {
+        margin: 10px 15px 10px 15px;
+    }
+
+    .events-title {
         margin: 10px 15px 10px 15px;
     }
 }

@@ -17,9 +17,15 @@ class MyEventsContainer extends Component {
                         </div>
                         : null
                     }
+                    {this.props.user.myEvents.length > 0 &&
+                        <div className="events-title">Active events</div>
+                    }
                     {this.props.user.myEvents.map((event, i) => (
                         <EventCard key={i} event={event} />
                     ))}
+                    {this.props.user.myPastEvents.length > 0 &&
+                    <div className="events-title">Past events</div>
+                    }  
                     {this.props.user.myPastEvents.map((event, i) => (
                         <EventCard key={i} event={event} />
                     ))}
