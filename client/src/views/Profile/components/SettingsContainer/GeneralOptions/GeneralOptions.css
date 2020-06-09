@@ -54,6 +54,16 @@
     margin: 3px 10px;
 }
 
+.general-options-input textarea{
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 15px;
+    margin: 3px 10px;
+    resize: none;
+    font-family: 'raleway', sans-serif;
+}
+
 .general-options-input-input:focus-within{
     border: 1px solid #19a45e;
 }

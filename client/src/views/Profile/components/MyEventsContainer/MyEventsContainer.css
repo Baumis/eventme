@@ -19,6 +19,10 @@
     font-weight: 600;
 }
 
+.about-profile-content {
+    margin: 0px 30px 15px 30px;
+}
+
 .event-container-new-button {
     display: flex;
     justify-content: center;

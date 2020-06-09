@@ -8,6 +8,14 @@ class MyEventsContainer extends Component {
     render() {
         return (
             <div className="event-container">
+                {this.props.user.description &&
+                    <div className="about-profile">
+                        <div className="events-title">About</div>
+                        <div className="about-profile-content">
+                            {this.props.user.description}
+                        </div>
+                    </div>
+                }
                 <div className="event-container-column">
                     {this.props.isOwner ?
                         <div className="event-container-new-button"
@@ -24,8 +32,8 @@ class MyEventsContainer extends Component {
                         <EventCard key={i} event={event} />
                     ))}
                     {this.props.user.myPastEvents.length > 0 &&
-                    <div className="events-title">Past events</div>
-                    }  
+                        <div className="events-title">Past events</div>
+                    }
                     {this.props.user.myPastEvents.map((event, i) => (
                         <EventCard key={i} event={event} />
                     ))}
