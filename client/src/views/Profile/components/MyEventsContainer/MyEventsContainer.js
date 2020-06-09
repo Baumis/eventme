@@ -6,6 +6,7 @@ import EventCard from '../EventCard/EventCard'
 class MyEventsContainer extends Component {
 
     render() {
+        console.log(this.props.user.description)
         return (
             <div className="event-container">
                 {this.props.user.description &&
