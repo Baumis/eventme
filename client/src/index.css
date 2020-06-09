@@ -18,6 +18,7 @@ input {
 
 textarea {
   -webkit-appearance: none;
+  outline: none;
 }
 
 input[type=date] {

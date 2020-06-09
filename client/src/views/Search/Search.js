@@ -6,7 +6,9 @@ import Footer from '../../commonComponents/Footer/Footer'
 import Alert from '../../commonComponents/Alert/Alert'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
-import SearchService from '../../services/search';
+import SearchService from '../../services/search'
+import UniversalModal from '../.././commonComponents/UniversalModal/UniversalModal'
+import SignModal from '../../commonComponents/SignModal/SignModal'
 
 class Search extends Component {
 
@@ -24,8 +26,8 @@ class Search extends Component {
         const results = await SearchService.getAll(parameter, 10)
         this.setState({ searching: false })
 
-        if(results){
-            this.setState({results: results})
+        if (results) {
+            this.setState({ results: results })
         }
 
     }
@@ -47,6 +49,11 @@ class Search extends Component {
                 <Footer />
                 {this.props.VisibilityStore.alert ?
                     <Alert />
+                    : null}
+                {this.props.VisibilityStore.signModal ?
+                    <UniversalModal
+                        content={<SignModal />}
+                    />
                     : null}
             </div>
         )
