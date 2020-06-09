@@ -49,6 +49,11 @@ const userSchema = new mongoose.Schema({
         maxlength: [2048, 'Url too long'],
         match: [/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/, 'Cover url not valid']
     },
+    description: {
+        type: String,
+        default: '',
+        maxlength: [10000, 'Description too long']
+    },
     passwordHash: {
         type: String
     },
@@ -95,6 +100,7 @@ userSchema.statics.format = (user) => {
         userType: user.userType,
         avatar: user.avatar,
         cover: user.cover,
+        description: user.description,
         myEvents: myCurrentEvents,
         myPastEvents: myPastEvents,
         myInvites: myCurrentInvites,
@@ -120,6 +126,7 @@ userSchema.statics.formatForGuest = (user) => {
         name: user.name,
         avatar: user.avatar,
         cover: user.cover,
+        description: user.description,
         myEvents: myCurrentEvents,
         myPastEvents: myPastEvents,
         myInvites: myCurrentInvites,
