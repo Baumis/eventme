@@ -37,6 +37,16 @@
   text-align: center;
 }
 
+.information-page-search-button {
+  display: flex;
+  padding: 10px;
+  color: white;
+  background: #19a45e;
+  margin: 18px 0px 0px 0px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 610px) {
   .information-page {
     height: 300px;

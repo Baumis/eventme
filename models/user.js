@@ -131,8 +131,7 @@ userSchema.statics.formatForGuest = (user) => {
 userSchema.statics.formatForGhost = (user) => ({
     _id: user._id,
     name: user.name,
-    avatar: user.avatar,
-    cover: user.cover,
+    avatar: user.avatar
 })
 
 userSchema.statics.formatForLogin = (user) => ({
