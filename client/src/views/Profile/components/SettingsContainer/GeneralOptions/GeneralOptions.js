@@ -175,6 +175,19 @@ class GeneralOptions extends Component {
                         </div>
                     </div>
                 }
+                <div className="general-options-input">
+                    <div className="general-options-input-label">
+                        Description
+                        </div>
+                    <div style={{height: 'auto'}}className="general-options-input-input">
+                        <textarea
+                            name={'description'}
+                            value={this.state.userValues.description}
+                            onChange={this.changeUserValue}
+                            rows={4}
+                        />
+                    </div>
+                </div>
                 <div className="general-options-button-row">
                     <div className="general-options-save-button" onClick={() => this.saveOptions()}>
                         {this.state.loading ?
