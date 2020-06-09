@@ -87,7 +87,8 @@ exports.update = async (id, userObject) => {
         name: userObject.name,
         email: userObject.email,
         avatar: userObject.avatar,
-        cover: userObject.cover
+        cover: userObject.cover,
+        description: userObject.description
     }
 
     const emailChanged = user.email !== updateObject.email
