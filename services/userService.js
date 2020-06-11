@@ -238,8 +238,10 @@ exports.findOrCreateGoogleUser = async (googleToken) => {
     const existingUser = await User.findOne({ userType: 'GOOGLE', externalId: googleUser.sub })
 
     if (existingUser) {
-        if (existingUser.avatar !== googleUser.picture) {
-            return await User.findByIdAndUpdate(existingUser._id, { avatar: googleUser.picture })
+        const newPicture = googleUser.picture.slice(0, googleUser.picture.lastIndexOf('=')) + '=s200-c'
+
+        if (existingUser.avatar !== newPicture) {
+            return await User.findByIdAndUpdate(existingUser._id, { avatar: newPicture })
         } else {
             return existingUser
         }
