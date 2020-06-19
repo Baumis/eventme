@@ -22,9 +22,6 @@ class NewEventForm extends Component {
                     staticColor={true}
                 />
                 <div className="new-event-form-content">
-                    <div className="new-event-form-title">
-                        New Event
-                        </div>
                     <div className="new-event-form-wrapper">
                         <CreateEventForm />
                     </div>
