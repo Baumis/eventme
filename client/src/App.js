@@ -7,8 +7,8 @@ import Event from './views/Event/Event'
 import Search from './views/Search/Search'
 import Profile from './views/Profile/Profile'
 import NotFound from './views/NotFound/NotFound'
-import privacyPolicy from './views/PrivacyPolicy/PrivacyPolicy'
-
+import PrivacyPolicy from './views/PrivacyPolicy/PrivacyPolicy'
+import NewEventForm from './views/NewEventForm/NewEventForm'
 
 class App extends Component {
 
@@ -33,7 +33,8 @@ class App extends Component {
                 <Router>
                     <Switch>
                         <Route exact path="/" component={Main} />
-                        <Route exact path="/privacy" component={privacyPolicy} />
+                        <Route exact path="/privacy" component={PrivacyPolicy} />
+                        <Route exact path="/create" component={NewEventForm} />
                         <Route exact path="/search" component={Search} />
                         <Route exact path="/events/:url" render={({ match }) => <Event eventUrl={match.params.url} />} />
                         <Route exact path="/profile/:id" render={({ match }) => <Profile profileId={match.params.id} />} />
