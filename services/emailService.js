@@ -47,13 +47,16 @@ exports.notifyAboutNewMessage = async (message, event) => {
     const guestsWithVerifiedEmail = await User.find({ _id: { $in: guestIds }, emailVerified: true })
     const emails = guestsWithVerifiedEmail.map(guest => guest.email)
     const content = `
-        <h3>New message in ${event.label} discussion</h3>
-        <p><b>From: </b>${message.author.name}</p>
-        <p><b>Message: </b>${message.content}</p>
-        <a href="${config.baseUrl}/events/${event._id}${event.urlmodifier}">Go to ${event.label}</a>
+            <h2 style="color:#0e0e0f;">New message in ${event.label} discussion</h2>
+            <p style="color:#19a45e; margin-bottom: 0px;">From</p>
+            <p style="color:#62646a; margin-top: 3px;">${message.author.name}</p>
+            <p style="color:#19a45e; margin-bottom: 0px;">Message</p>
+            <p style="color:#62646a; margin-top: 3px;">${message.content}</p>
+            <p style="color:#19a45e; margin-bottom: 0px;">Go to event</p>
+            <a style="margin-top: 3px;" href="${config.baseUrl}/events/${event._id}${event.urlmodifier}">${config.baseUrl}/events/${event._id}${event.urlmodifier}</a>
     `
 
-    await this.sendSeparatedMails(emails, event.label, content)
+    await this.sendSeparatedMails(emails, event.label, template(content))
 }
 
 exports.sendEmailVerification = async (user) => {
@@ -62,19 +65,37 @@ exports.sendEmailVerification = async (user) => {
     const verificationUrl = `${config.baseUrl}/profile/${user._id}/verify/${emailVerificationToken}`
 
     const content = `
-        <h3>Click the link to verify your email</h3>
-        <a href="${verificationUrl}">Verify email</a>
+        <h2 style="color:#0e0e0f;">Email verification</h2>
+        <p style="color:#19a45e; margin-bottom: 0px;">Verify by clicking the link</p>
+        <a style="margin-top: 3px;" href="${verificationUrl}">${verificationUrl}</a>
     `
 
-    await this.sendMail(user.email, 'Please verify your email', content)
+    await this.sendMail(user.email, 'Please verify your email', template(content))
 }
 
 exports.sendNewPassword = async (user, newPassword) => {
     const content = `
-        <h3>Your new password</h3>
-        <p>${newPassword}</p>
-        <p>Remember to change the password in your profile</p>
+        <h2 style="color:#0e0e0f;">A new password for your account has been requested</h2>
+        <p style="color:#19a45e; margin-bottom: 0px;">New password</p>
+        <p style="color:#62646a; margin-top: 3px;">${newPassword}</p>
+        <p style="color:#19a45e; margin-bottom: 0px;">PS</p>
+        <p style="color:#62646a; margin-top: 3px;">Remember to change the password in your profile</p>
     `
 
-    await this.sendMail(user.email, 'Password reseted', content)
+    await this.sendMail(user.email, 'Password reseted', template(content))
+}
+
+template = (content) => {
+    return `
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <div style="display:flex; background:#f7f7f8; font-family:'raleway',sans-serif;">
+        <div style="background:white; padding:20px; margin:20px; flex:1; border-radius:5px; width: 100%;">
+            <div style="display: flex; align-items: center;">
+                <img style="height: 32px;" src="https://www.inviteowl.com/owl_200x200_green.ico">
+                <div style="color:#19a45e; font-size: 19px; margin-top: 5px;">InviteOwl</div>
+            </div>
+            ${content}
+        </div>
+    </div>
+    `
 }
