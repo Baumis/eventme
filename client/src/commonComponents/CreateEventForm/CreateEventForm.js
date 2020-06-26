@@ -60,7 +60,7 @@ class CreateEventForm extends Component {
             label: this.state.information.eventName,
             startDate: startDate,
             description: this.state.information.description,
-            registrationQuestions: this.state.questions
+            registrationQuestions: this.state.questions.filter(question => question.data.content.length > 0)
         })
 
         this.setState({ loading: false })
