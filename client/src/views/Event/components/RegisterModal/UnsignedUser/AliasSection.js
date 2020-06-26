@@ -20,7 +20,7 @@ class AliasSection extends Component {
         return (
             <div>
                 <div className="unsigned-user-title">
-                    Or join with an alias.
+                    Or leave your name on the list.
                     </div>
                 {!this.state.showAlias ?
                     <div className="facebook-login-wrapper">

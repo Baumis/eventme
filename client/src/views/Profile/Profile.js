@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './Profile.css'
+import { withRouter } from 'react-router-dom'
 import UserServices from '../../services/users'
 import ProfileHeader from './components/ProfileHeader/ProfileHeader'
 import ProfileContent from './components/ProfileContent/ProfileContent'
@@ -66,7 +67,11 @@ class Profile extends Component {
     }
 
     toggleNewEventModal = () => {
-        this.setState({ newEventModal: !this.state.newEventModal })
+        if (window.innerWidth < 650) {
+            this.props.history.push(`/create`)
+        } else {
+            this.setState({ newEventModal: !this.state.newEventModal })
+        }
     }
 
     saveUserValues = async (userValues) => {
@@ -143,4 +148,4 @@ class Profile extends Component {
     }
 }
 
-export default inject('UserStore', 'VisibilityStore')(observer(Profile))
+export default withRouter(inject('UserStore', 'VisibilityStore')(observer(Profile)))
