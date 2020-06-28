@@ -1,8 +1,8 @@
 .new-event-form {
     display: flex;
     flex: 1;
-    flex-direction: column;
     min-height: 100vh;
+    flex-direction: column;
 }
 
 .new-event-form-title {
@@ -14,23 +14,39 @@
 
 .new-event-form-content {
     display: flex;
-    flex: 1;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 60px;
-    padding-bottom: 35px;
+    flex: 1;
 }
 
-.new-event-form-wrapper {
+.new-event-paper {
+    max-width: 700px;
+    width: 100%;
     background: white;
-    padding: 25px;
-    border-radius: 5px;
-    width: 350px;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
+    padding:  25px 40px;
+    margin: 60px 0px 20px 0px;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
+}
+
+.new-event-form-create-button {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: #62646a;
+    color: white;
+    font-size: 16px;
+    padding: 15px;
+    margin: 20px 0px 10px 0px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.new-event-form-create-button:hover {
+    background: #494b50;
 }
 
 @media only screen and (max-width: 350px) {
