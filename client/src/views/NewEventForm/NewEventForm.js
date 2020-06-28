@@ -54,6 +54,16 @@ class NewEventForm extends Component {
 
     create = async () => {
 
+        if(this.state.information.eventName.length < 1){
+            this.props.VisibilityStore.showAlert(
+                'The event must have a name.',
+                'The name can not be empty.',
+                'OK',
+                () => this.props.VisibilityStore.closeAlert()
+            )
+            return
+        }
+
         if (this.props.UserStore.currentUser === null) {
             this.props.VisibilityStore.showSignModal(this.create)
             return
