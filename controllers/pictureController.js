@@ -5,7 +5,7 @@ exports.uploadEventBackground = async (request, response) => {
         const event = request.event
         let publicId = 'events/' + event._id
         const cloudinaryBaseUrl = 'https://res.cloudinary.com/inviteowl/image/upload/'
-        const currentBackground = event.background
+        const currentBackground = event.background || ''
 
         if (currentBackground.startsWith(cloudinaryBaseUrl) && currentBackground.includes(publicId + '/picture1')) {
             publicId = publicId + '/picture2'
