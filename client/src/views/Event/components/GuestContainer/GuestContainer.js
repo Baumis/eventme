@@ -18,7 +18,6 @@ class GuestContainer extends Component {
     }
 
     displayAnswerSection = () => {
-        console.log("currentUser = " + this.props.UserStore.currentUser)
         if (this.props.EventStore.event.registrationQuestions.length < 1) return false
         if (this.props.EventStore.event.publicAnswers) return true
         if (this.props.UserStore.currentUser && this.props.isGuest()) return true
