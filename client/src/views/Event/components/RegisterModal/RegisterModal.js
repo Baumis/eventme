@@ -41,7 +41,6 @@ class RegisterModal extends Component {
     scrollPositionByStep = (step) => {
         const parentWidth = document.getElementById("xScroller").parentElement.clientWidth
         document.getElementById("xScroller").scrollLeft = parentWidth * step
-        console.log(parentWidth * step)
     }
 
     setStep = (step) => {
