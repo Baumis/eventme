@@ -51,6 +51,14 @@ class UnsignedUser extends Component {
         this.props.VisibilityStore.showSignModal()
     }
 
+    onGoogleFail = (response) => {
+        if (response.error === 'idpiframe_initialization_failed') {
+            this.googleFailMessage = response.details
+        } else {
+            this.onSignInFail('Could not sign in with google')
+        }
+    }
+
     render() {
         return (
             <div className="unsigned-user">
@@ -63,9 +71,9 @@ class UnsignedUser extends Component {
                             clientId="629446459470-tm1sivu38dq611tlu5c4f9v9q54ijvgn.apps.googleusercontent.com"
                             buttonText="Sign in with Google"
                             onSuccess={this.googleSignIn}
-                            onFailure={() => this.onSignInFail('Could not sign in with google')}
+                            onFailure={(response) => this.onGoogleFail(response)}
                             render={renderProps => (
-                                <div className="google-login" onClick={renderProps.onClick}>
+                                <div className="google-login" onClick={() => !!this.googleFailMessage ? this.onSignInFail(this.googleFailMessage) : renderProps.onClick()}>
                                     <GoogleLogo className="google-icon" />
                                     Google
                                 </div>
