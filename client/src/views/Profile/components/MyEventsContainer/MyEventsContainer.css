@@ -24,6 +24,24 @@
     white-space: pre-wrap;
 }
 
+.no-events {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0px;
+    color: #62646a;
+}
+
+.no-events-icon {
+    font-size: 23px;
+    color: #19a45e;
+}
+
+.no-events-text {
+    margin: 0px 5px;
+}
+
 .event-container-new-button {
     display: flex;
     justify-content: center;

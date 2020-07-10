@@ -13,6 +13,7 @@ const EventContent = (props) => {
                 :
                 <GuestContainer
                     isCreator={props.isCreator}
+                    isGuest={props.isGuest}
                     toggleGuestModal={props.toggleGuestModal}
                     toggleAnswerModal={props.toggleAnswerModal}
                 />

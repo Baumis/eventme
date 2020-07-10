@@ -29,13 +29,15 @@ class AnswerModal extends Component {
                 <div className="answer-modal-question">
                     {this.props.question.data.content}
                 </div>
-                <div className="answer-modal-search">
-                    <input
-                        value={this.state.filter}
-                        placeholder={"Filter by name"}
-                        onChange={this.changeFilter}
-                    />
-                </div>
+                {this.props.EventStore.event.publicAnswers || this.props.isCreator() ?
+                    <div className="answer-modal-search">
+                        <input
+                            value={this.state.filter}
+                            placeholder={"Filter by name"}
+                            onChange={this.changeFilter}
+                        />
+                    </div>
+                :null}
                 <AnswerSection
                     question={this.props.question}
                     filter={this.state.filter}
