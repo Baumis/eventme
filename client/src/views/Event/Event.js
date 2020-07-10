@@ -198,6 +198,7 @@ class Event extends Component {
                             content={<AnswerModal
                                 question={this.state.answerModal}
                                 toggleAnswerModal={this.toggleAnswerModal}
+                                isCreator={this.isCreator}
                             />}
                         />
                         : null

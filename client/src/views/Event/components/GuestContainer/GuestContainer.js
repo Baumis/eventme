@@ -17,6 +17,14 @@ class GuestContainer extends Component {
         this.setState({ filter: status })
     }
 
+    displayAnswerSection = () => {
+        console.log("currentUser = " + this.props.UserStore.currentUser)
+        if (this.props.EventStore.event.registrationQuestions.length < 1) return false
+        if (this.props.EventStore.event.publicAnswers) return true
+        if (this.props.UserStore.currentUser && this.props.isGuest()) return true
+        return false;
+    }
+
     render() {
         return (
             <div className="guests-content">
@@ -31,7 +39,7 @@ class GuestContainer extends Component {
                             toggleGuestModal={this.props.toggleGuestModal}
                         />
                     </div>
-                    {this.props.EventStore.event.registrationQuestions.length > 0 ?
+                    {this.displayAnswerSection() ?
                         <div className="guests-columns-right">
                             <div className="guest-title">
                                 {this.props.EventStore.event.publicAnswers || this.props.isCreator() ?
@@ -43,13 +51,12 @@ class GuestContainer extends Component {
                             <RegistrationResults
                                 toggleAnswerModal={this.props.toggleAnswerModal}
                             />
-
                         </div>
-                        : null}
+                    :null}
                 </div>
             </div>
         )
     }
 }
 
-export default inject('EventStore')(observer(GuestContainer))
+export default inject('EventStore', 'UserStore')(observer(GuestContainer))
