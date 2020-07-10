@@ -1,6 +1,5 @@
 .create-textarea{
     display: flex;
-    flex: 1;
     flex-direction: column;
     padding: 10px 0px;
     color: #46494c;
