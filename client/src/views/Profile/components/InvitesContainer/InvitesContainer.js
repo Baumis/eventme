@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './InvitesContainer.css'
 import EventCard from '../EventCard/EventCard'
+import { FaCalendarTimes } from 'react-icons/fa'
 
 class InvitesContainer extends Component {
 
@@ -9,9 +10,10 @@ class InvitesContainer extends Component {
         return (
             <div className="event-container">
                 <div className="event-container-column">
-                    {this.props.user.myInvites.length === 0 && this.props.user.myPastInvites === 0 ?
-                        <div className="event-container-no-invites">
-                            No invites
+                    {this.props.user.myInvites.length === 0 && this.props.user.myPastInvites.length === 0 ?
+                        <div className="no-events">
+                            <div className="no-events-icon"> <FaCalendarTimes /> </div>
+                            <div className="no-events-text">No invites to display</div>
                         </div>
                         : null}
                     {this.props.user.myInvites.length > 0 &&
