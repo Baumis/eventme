@@ -3,6 +3,7 @@
     flex-direction: column;
     padding: 10px 0px;
     color: #46494c;
+    flex: 1;
 }
 
 .create-input-label{
