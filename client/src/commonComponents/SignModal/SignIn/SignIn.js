@@ -10,6 +10,9 @@ import { FaUser, FaLock, FaTimes, FaFacebook } from 'react-icons/fa'
 
 
 class SignIn extends Component {
+
+    googleFailMessage = null
+
     constructor(props) {
         super(props)
         this.state = {
@@ -18,7 +21,6 @@ class SignIn extends Component {
             password: ''
         }
     }
-
 
     componentDidMount() {
         document.addEventListener('keydown', this.handleKey)
@@ -98,6 +100,14 @@ class SignIn extends Component {
         }
     }
 
+    onGoogleFail = (response) => {
+        if (response.error === 'idpiframe_initialization_failed') {
+            this.googleFailMessage = response.details
+        } else {
+            this.onSignInFail('Could not sign in with google')
+        }
+    }
+
     render() {
         return (
             <div className="signin-content">
@@ -113,9 +123,9 @@ class SignIn extends Component {
                             clientId="629446459470-tm1sivu38dq611tlu5c4f9v9q54ijvgn.apps.googleusercontent.com"
                             buttonText="Sign in with Google"
                             onSuccess={this.googleSignIn}
-                            onFailure={() => this.onSignInFail('Could not sign in with google')}
+                            onFailure={(response) => this.onGoogleFail(response)}
                             render={renderProps => (
-                                <div className="google-login" onClick={renderProps.onClick}>
+                                <div className="google-login" onClick={() => !!this.googleFailMessage ? this.onSignInFail(this.googleFailMessage) : renderProps.onClick()}>
                                     <GoogleLogo className="google-icon" />
                                     Sign in with Google
                                 </div>
