@@ -48,7 +48,7 @@
 @media only screen and (max-width: 450px) {
     .guest-modal {
         width: 95vw;
-        height: 90vh;
+        height: 80vh;
         margin: 20px 0px;
     }
     .guest-modal-top-bar {
