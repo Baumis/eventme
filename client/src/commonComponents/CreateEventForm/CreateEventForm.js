@@ -11,6 +11,7 @@ class CreateEventForm extends Component {
         super(props)
         this.state = {
             page: 1,
+            firstPageHeight: null,
             information: {
                 eventName: '',
                 startDate: '',
@@ -77,7 +78,8 @@ class CreateEventForm extends Component {
     }
 
     changePage = (page) => {
-        this.setState({ page: page })
+        const pageHeight = page === 2 ? document.getElementById('create-event-form-body').clientHeight : 'auto'
+        this.setState({ page: page, firstPageHeight: pageHeight })
     }
 
     getPage = () => {
@@ -112,7 +114,7 @@ class CreateEventForm extends Component {
 
     render() {
         return (
-            <div className="create-event-form">
+            <div id="create-event-form-body" className="create-event-form" style={{minHeight: this.state.firstPageHeight}}>
                 {this.getPage()}
             </div>
         )
