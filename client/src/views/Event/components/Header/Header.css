@@ -8,7 +8,6 @@
     flex: 1;
     flex-direction: column;
     max-width: 1024px;
-    min-height: 450px;
     margin-top: 60px;
     background: rgb(255, 255, 255, 0.8);
     border-radius: 5px;
@@ -25,6 +24,7 @@
     background-position:center center;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    min-height: 400px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -35,5 +35,11 @@
         margin-top: 45px;
         border: none;
         border-bottom: 1px solid #dadbdd;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .event-header-cover {
+        min-height: 264px;
     }
 }
