@@ -9,6 +9,7 @@ import SearchResults from './components/SearchResults/SearchResults'
 import SearchService from '../../services/search'
 import UniversalModal from '../.././commonComponents/UniversalModal/UniversalModal'
 import SignModal from '../../commonComponents/SignModal/SignModal'
+import { Helmet } from 'react-helmet'
 
 class Search extends Component {
 
@@ -36,6 +37,14 @@ class Search extends Component {
 
         return (
             <div className="search">
+                <Helmet>
+                    <title>Search</title>
+                    <meta property="og:title" content="Search"/>
+                    <meta name="description"
+                        content="This is a search engine for events and profiles listed on InviteOwl."/>
+                    <meta property="og:description" content="This is a search engine for events and profiles listed on InviteOwl."/>
+                    <meta property="og:url" content="https://www.inviteowl.com/search"/>
+                </Helmet>
                 <Navbar
                     staticColor={true}
                 />

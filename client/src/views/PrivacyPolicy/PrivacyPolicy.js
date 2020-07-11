@@ -8,6 +8,7 @@ import Alert from '../../commonComponents/Alert/Alert'
 import TextContainer from './components/TextContainer/TextContainer'
 import PrivacyPolicyText from './components/InviteOwlPrivayPolicy/InviteOwlPrivacyPolicy'
 import Footer from '../../commonComponents/Footer/Footer'
+import { Helmet } from 'react-helmet'
 
 class PrivacyPolicy extends Component {
 
@@ -18,6 +19,14 @@ class PrivacyPolicy extends Component {
     render() {
         return (
             <div className="privacy-policy">
+                <Helmet>
+                    <title>Privacy Policy</title>
+                    <meta property="og:title" content="Privacy Policy"/>
+                    <meta name="description"
+                        content="This privacy policy explains how InviteOwl uses the personal data we collect from you when you use our website."/>
+                    <meta property="og:description" content="This privacy policy explains how InviteOwl uses the personal data we collect."/>
+                    <meta property="og:url" content="https://www.inviteowl.com/privacy"/>
+                </Helmet>
                 <NavBar
                     afterSign={this.afterSign}
                     staticColor={true}

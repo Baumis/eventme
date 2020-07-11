@@ -16,6 +16,7 @@ import RegisterModal from './components/RegisterModal/RegisterModal'
 import InviteLink from './components/InviteLink/InviteLink'
 import GuestModal from './components/GuestContainer/GuestModal/GuestModal'
 import AnswerModal from './components/GuestContainer/RegisterResults/AnswerModal/AnswerModal'
+import { Helmet } from 'react-helmet'
 
 class Event extends Component {
 
@@ -133,6 +134,14 @@ class Event extends Component {
                     message='You have unsaved changes, are you sure you want to leave?'
                 />
                 <div className='Event'>
+                    <Helmet>
+                        <title>{this.props.EventStore.event.label}</title>
+                        <meta property="og:title" content={this.props.EventStore.event.label}/>
+                        <meta name="description"
+                            content={this.props.EventStore.event.description}/>
+                        <meta property="og:description" content={this.props.EventStore.event.description}/>
+                        <meta property="og:url" content={"https://www.inviteowl.com/events/" + this.props.eventUrl}/>
+                    </Helmet>
                     <Navbar
                         staticColor={true}
                         afterSign={this.afterSign}

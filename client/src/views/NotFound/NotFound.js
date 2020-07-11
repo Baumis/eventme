@@ -6,6 +6,7 @@ import NotFoundMessage from './components/NotFoundMessage/NotFoundMessage'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
 import Alert from '../../commonComponents/Alert/Alert'
+import { Helmet } from 'react-helmet'
 
 class NotFound extends Component {
 
@@ -23,6 +24,14 @@ class NotFound extends Component {
     render() {
         return (
             <div className="NotFound">
+                <Helmet>
+                        <title>{this.props.title}</title>
+                        <meta property="og:title" content={this.props.title}/>
+                        <meta name="description"
+                            content={this.props.message}/>
+                        <meta property="og:description" content={this.props.message}/>
+                        <meta property="og:url" content="https://www.inviteowl.com/"/>
+                    </Helmet>
                 <NavBar
                     afterSign={this.afterSign}
                     staticColor={true}

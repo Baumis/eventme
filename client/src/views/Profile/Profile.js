@@ -12,6 +12,7 @@ import UniversalModal from '../.././commonComponents/UniversalModal/UniversalMod
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import NotFound from '../NotFound/NotFound'
 import Alert from '../../commonComponents/Alert/Alert'
+import { Helmet } from 'react-helmet'
 
 class Profile extends Component {
 
@@ -103,6 +104,14 @@ class Profile extends Component {
 
         return (
             <div className="profile">
+                <Helmet>
+                    <title>{this.state.user.name}</title>
+                    <meta property="og:title" content={this.state.user.name}/>
+                    <meta name="description"
+                        content={this.state.user.description}/>
+                    <meta property="og:description" content={this.state.user.description}/>
+                    <meta property="og:url" content={"https://www.inviteowl.com/profile/" + this.props.profileId}/>
+                </Helmet>
                 <Navbar
                     staticColor={true}
                     afterSign={this.afterSign}
