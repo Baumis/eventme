@@ -15,6 +15,10 @@ exports.populate = async (event) => {
     return populatedEvent
 }
 
+exports.getOne = async (id) => {
+    return await Event.findById(id)
+}
+
 exports.create = async (creatorId, eventObject) => {
     const startDate = eventObject.startDate ? new Date(eventObject.startDate) : new Date()
     const endDate = new Date(startDate.getTime() + 1000 * 60 * 60 * 24)

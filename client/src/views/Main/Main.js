@@ -17,10 +17,10 @@ class Main extends Component {
             <div className="Main">
                 <Helmet>
                     <title>InviteOwl Events - Create, host and attend events</title>
-                    <meta property="og:title" content="InviteOwl Events"/>
+                    <meta property="og:title" content="InviteOwl Events - Create, host and attend events"/>
                     <meta name="description"
                         content="Create an event in 5 seconds with InviteOwl using local, Google or Facebook account. Invite guests by sharing a link. Manage all events in one place."/>
-                    <meta property="og:description" content="Create your event and invite your friends using various accounts."/>
+                    <meta property="og:description" content="Create an event in 5 seconds with InviteOwl using local, Google or Facebook account. Invite guests by sharing a link. Manage all events in one place."/>
                     <meta property="og:url" content="https://www.inviteowl.com/"/>
                 </Helmet>
                 <Navbar

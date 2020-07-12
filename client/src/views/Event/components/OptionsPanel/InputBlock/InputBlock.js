@@ -5,9 +5,9 @@ const InputBlock = (props) => {
 
     const renderInput = () => {
         if (props.type === 'number') {
-            return <input type={props.type} value={props.value} onChange={props.changeValue} min={props.min} max={props.max} required></input>
+            return <input type={props.type} value={props.value || ''} onChange={props.changeValue} min={props.min} max={props.max} required></input>
         } else {
-            return <input type={props.type} value={props.value} onChange={props.changeValue} required></input>
+            return <input type={props.type} value={props.value || ''} onChange={props.changeValue} required></input>
         }
     }
 
