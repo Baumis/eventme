@@ -108,8 +108,12 @@ class GeneralOptions extends Component {
                 </div>
                 <div className="general-options-input">
                     <div className="general-options-input-label">
-                        Email
-                        </div>
+                        Email { this.state.userValues.emailVerified ?
+                            <div className="general-options-input-verified"> (verified)</div>
+                            :
+                            <div className="general-options-input-unverified"> (not verified)</div>
+                        }
+                    </div>
                     <div className="general-options-input-input">
                         <input
                             name={'email'}

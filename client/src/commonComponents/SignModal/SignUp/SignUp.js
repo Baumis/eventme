@@ -77,7 +77,7 @@ class SignUp extends Component {
             this.props.closeModal()
             this.props.VisibilityStore.showAlert(
                 'Account created',
-                'You will receive an verification email in 1-10 minutes.',
+                'You will receive an verification email in 1-10 minutes. Remember to check your spam folder.',
                 'OK',
                 () => this.props.VisibilityStore.closeAlert()
             )
