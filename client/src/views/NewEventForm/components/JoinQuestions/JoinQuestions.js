@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './JoinQuestions.css'
 import CreateInput from '../../../../commonComponents/CreateEventForm/CreateInput/CreateInput'
-import { FaTrash } from 'react-icons/fa'
+import { FaTrash, FaPlus } from 'react-icons/fa'
 
 class JoinQuestions extends Component {
     constructor(props) {
@@ -71,7 +71,8 @@ class JoinQuestions extends Component {
                 </div>
                 <div className="join-questions-add-buttons">
                     <div className={"join-questions-add-question " + this.getButtonClass()} onClick={this.addNewQuestion}>
-                        Add question
+                        Question
+                        <div className="join-question-add-icon"><FaPlus /></div>
                     </div>
                 </div>
             </div>

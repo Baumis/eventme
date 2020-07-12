@@ -65,6 +65,14 @@
     cursor: pointer;
 }
 
+.join-question-add-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 0px 0px 5px;
+    font-size: 12px;
+}
+
 .add-question-disabled {
     background: rgba(0,0,0,0.02);
     border: 1px solid rgba(0,0,0,0.07);
