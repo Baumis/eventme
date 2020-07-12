@@ -36,7 +36,8 @@
     .profile-header {
         border-radius: 0px;
         margin-top: 45px;
-        border: none;
+        border-right: none;
+        border-left: none;
     }
 
     .profile-header-cover {
