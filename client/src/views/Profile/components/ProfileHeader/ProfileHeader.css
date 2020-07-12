@@ -42,5 +42,6 @@
 
     .profile-header-cover {
         border-radius: 0px;
+        min-height: 270px;
     }
 }
