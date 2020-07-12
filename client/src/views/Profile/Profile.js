@@ -111,7 +111,6 @@ class Profile extends Component {
                         content={this.state.user.description}/>
                     <meta property="og:description" content={this.state.user.description}/>
                     <meta property="og:url" content={"https://www.inviteowl.com/profile/" + this.props.profileId}/>
-                    <meta property="og:image" content="https://www.inviteowl.com/owl_382x200_green.png"/>
                 </Helmet>
                 <Navbar
                     staticColor={true}

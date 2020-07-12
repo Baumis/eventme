@@ -72,7 +72,6 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'developme
             data = data.replace(/\$OG_TITLE/g, 'InviteOwl Events - Create, host and attend events')
             data = data.replace(/\$OG_DESCRIPTION/g, 'Create an event in 5 seconds with InviteOwl using local, Google or Facebook account. Invite guests by sharing a link. Manage all events in one place.')
             data = data.replace(/\$OG_URL/g, 'https://www.inviteowl.com/')
-            data = data.replace(/\$OG_IMAGE/g, 'https://www.inviteowl.com/owl_382x200_green.png')
 
             response.send(data)
         })

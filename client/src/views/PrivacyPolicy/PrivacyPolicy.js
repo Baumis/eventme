@@ -26,7 +26,6 @@ class PrivacyPolicy extends Component {
                         content="This privacy policy explains how InviteOwl uses the personal data we collect from you when you use our website."/>
                     <meta property="og:description" content="This privacy policy explains how InviteOwl uses the personal data we collect."/>
                     <meta property="og:url" content="https://www.inviteowl.com/privacy"/>
-                    <meta property="og:image" content="https://www.inviteowl.com/owl_382x200_green.png"/>
                 </Helmet>
                 <NavBar
                     afterSign={this.afterSign}
