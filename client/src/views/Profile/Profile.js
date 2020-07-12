@@ -31,12 +31,6 @@ class Profile extends Component {
     async componentDidMount() {
         if (this.props.verificationToken) {
             await UserServices.verifyEmail(this.props.profileId, this.props.verificationToken)
-            this.props.VisibilityStore.showAlert(
-                'Success!',
-                'Your email has been verified',
-                'OK',
-                () => this.props.VisibilityStore.closeAlert()
-            )
             window.location.replace(`/profile/${this.props.profileId}`)
         } else {
             await this.getUserInformation()
