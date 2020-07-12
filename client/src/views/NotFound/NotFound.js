@@ -31,6 +31,7 @@ class NotFound extends Component {
                             content={this.props.message}/>
                         <meta property="og:description" content={this.props.message}/>
                         <meta property="og:url" content="https://www.inviteowl.com/"/>
+                        <meta property="og:image" content="https://www.inviteowl.com/owl_382x200_green.png"/>
                     </Helmet>
                 <NavBar
                     afterSign={this.afterSign}

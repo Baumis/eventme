@@ -25,6 +25,7 @@ class NewEventForm extends Component {
                         content="Create an event in 5 seconds with InviteOwl using local, Google or Facebook account. Invite guests by sharing a link. Manage all events in one place."/>
                     <meta property="og:description" content="Create your event and invite your friends using various accounts."/>
                     <meta property="og:url" content="https://www.inviteowl.com/create"/>
+                    <meta property="og:image" content="https://www.inviteowl.com/owl_382x200_green.png"/>
                 </Helmet>
                 <NavBar
                     afterSign={this.afterSign}

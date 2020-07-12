@@ -44,6 +44,7 @@ class Search extends Component {
                         content="This is a search engine for events and profiles listed on InviteOwl."/>
                     <meta property="og:description" content="This is a search engine for events and profiles listed on InviteOwl."/>
                     <meta property="og:url" content="https://www.inviteowl.com/search"/>
+                    <meta property="og:image" content="https://www.inviteowl.com/owl_382x200_green.png"/>
                 </Helmet>
                 <Navbar
                     staticColor={true}
