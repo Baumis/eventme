@@ -1,14 +1,26 @@
+.profile-header-container {
+    display: flex;
+    justify-content: center;
+}
+
 .profile-header {
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1024px;
     border-radius: 5px;
+    margin-top: 60px;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid #dadbdd;
 }
 
-.profile-header-block{
+.profile-header-cover{
     display: flex;
-    flex: 1;
-    flex-direction: column-reverse;
-    align-items: center;
+    z-index: 2;
+    width: 100%;
+    align-items: flex-end;
     background: rgb(0,0,0, 0.5);
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -16,16 +28,17 @@
     background-size: cover;
     background-position:center center;
     min-height: 380px;
-    max-height: 380px;
-    width: 100%;
-    max-width: 1024px;
-    margin-top: 60px;
-    border-bottom: 1px solid #dadbdd;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 @media only screen and (max-width: 1024px) {
-    .profile-header-block {
+    .profile-header {
         border-radius: 0px;
         margin-top: 45px;
+    }
+
+    .profile-header-cover {
+        border-radius: 0px;
     }
 }
