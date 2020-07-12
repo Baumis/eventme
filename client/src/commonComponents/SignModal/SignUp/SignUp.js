@@ -75,6 +75,12 @@ class SignUp extends Component {
         try {
             await this.props.UserStore.signUp(userObject)
             this.props.closeModal()
+            this.props.VisibilityStore.showAlert(
+                'Account created',
+                'You will receive an verification email in 1-10 minutes.',
+                'OK',
+                () => this.props.VisibilityStore.closeAlert()
+            )
 
             if (this.props.VisibilityStore.onSignSuccess) {
                 this.props.VisibilityStore.onSignSuccess()

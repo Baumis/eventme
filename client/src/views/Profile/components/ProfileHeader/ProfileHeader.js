@@ -17,17 +17,19 @@ class ProfileHeader extends Component {
 
     render() {
         return (
-            <div className="profile-header">
-                <div style={this.getCover()} className="profile-header-block">
+            <div className="profile-header-container">
+                <div className="profile-header">
+                    <div style={this.getCover()} className="profile-header-cover">
+                        <ProfileCard
+                            user={this.props.user}
+                            isOwner={this.props.isOwner}
+                            toggleOptions={this.props.toggleOptions}
+                        />
+                    </div>
                     <ProfileTabs
                         changeActive={this.props.changeActive}
                         active={this.props.active}
                         isOwner={this.props.isOwner}
-                    />
-                    <ProfileCard
-                        user={this.props.user}
-                        isOwner={this.props.isOwner}
-                        toggleOptions={this.props.toggleOptions}
                     />
                 </div>
             </div>
