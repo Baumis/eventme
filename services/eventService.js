@@ -239,7 +239,7 @@ exports.addRegistration = async (event, name, senderId, answers) => {
         }
 
         const savedEvent = await Event.findByIdAndUpdate(event._id,
-            { $push: { registrations: registration } },
+            { $push: { registrations: { $each: [registration], $position: 0} } },
             { ...options, new: true, runValidators: true })
 
         const populatedEvent = await this.populate(savedEvent)
