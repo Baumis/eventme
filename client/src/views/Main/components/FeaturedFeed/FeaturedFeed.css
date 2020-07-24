@@ -1,0 +1,28 @@
+.featured-feed {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 30px 0px;
+    background: white;
+}
+
+.featured-feed-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+}
+
+.featured-feed-title {
+    display: flex;
+    margin: 10px 30px;
+    font-size: 22px;
+    color: #0e0e0f;
+    font-weight: 600;
+}
+
+.featured-feed-icon {
+    margin-right: 5px;
+    color: #c74C3C;
+}

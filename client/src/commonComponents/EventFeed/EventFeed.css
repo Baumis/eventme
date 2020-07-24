@@ -1,0 +1,11 @@
+.event-feed {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}

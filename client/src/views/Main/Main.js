@@ -9,6 +9,8 @@ import MainHeader from './components/MainHeader/MainHeader'
 import Alert from '../../commonComponents/Alert/Alert'
 import ContentContainer from './components/ContentContainer/ContentContainer'
 import { Helmet } from 'react-helmet'
+import EventFeed from '../../commonComponents/EventFeed/EventFeed'
+import FeaturedFeed from './components/FeaturedFeed/FeaturedFeed'
 
 class Main extends Component {
 
@@ -27,6 +29,7 @@ class Main extends Component {
                     staticColor={true}
                 />
                 <MainHeader />
+                <FeaturedFeed />
                 <ContentContainer />
                 {this.props.VisibilityStore.signModal ?
                     <UniversalModal
@@ -40,7 +43,7 @@ class Main extends Component {
                 <div className="main-filler">
 
                 </div >
-                <Footer style={{ background: '#f7f7f8', border: 'none' }} />
+                <Footer style={{ background: 'white', border: 'none' }} />
             </div>
         )
     }
