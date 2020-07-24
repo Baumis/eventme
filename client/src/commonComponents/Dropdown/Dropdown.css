@@ -1,0 +1,33 @@
+.dropdown-button {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dddddd;
+    height: 33px;
+    width: 90px;
+    padding: 3px 10px 3px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown-value {
+    flex: 1
+}
+
+.dropdown-list {
+    position: absolute;
+    background: white;
+    min-width: 100px;
+    border: 1px solid #dddddd;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
+    border-radius: 5px;
+    padding: 5px 0px;
+}
+
+.dropdown-list-item {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.dropdown-list-item:hover {
+    background: rgba(0,0,0,0.02);
+}

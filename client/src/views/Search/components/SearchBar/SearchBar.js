@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './SearchBar.css'
-import { FaSearch } from 'react-icons/fa'
-import { renderReporter } from 'mobx-react'
+import { FaSearch, FaAngleDown } from 'react-icons/fa'
+import Dropdown from '../../../../commonComponents/Dropdown/Dropdown'
 
 class SearchBar extends Component {
 
@@ -9,17 +9,21 @@ class SearchBar extends Component {
         super(props)
         this.state = {
             typeTimeout: null,
-            inputValue: ''
+            inputValue: '',
+            searchType: 'event'
         }
     }
 
-    changeInputValue = (event) => {
+    changeInputValue = (value) => {
         clearTimeout(this.state.typeTimeout)
-
         this.setState({
-            inputValue: event.target.value,
+            inputValue: value,
             typeTimeout: setTimeout(this.search, 800)
         })
+    }
+
+    changeType = (value) => {
+        this.setState({ searchType: value })
     }
 
     search = () => {
@@ -27,20 +31,27 @@ class SearchBar extends Component {
             this.props.search(this.state.inputValue)
         }
     }
-    
+
     render() {
         return (
-            <div className="search-searchbar">
-                <div className="search-serachbar-title">
-                    Search events and profiles.
+            <div className="searchbar">
+                <div className="searchbar-container">
+                    <div className="serachbar-title">
+                        Search events and profiles.
             </div>
-                <div className="search-input-row">
-                    <div className="search-input">
-                        <div className="search-serachbar-icon"><FaSearch /></div>
-                        <input
-                            value={this.state.inputValue}
-                            onChange={this.changeInputValue}
-                            placeholder={"Search"}
+                    <div className="search-input-row">
+                        <div className="search-input">
+                            <div className="search-serachbar-icon"><FaSearch /></div>
+                            <input
+                                value={this.state.inputValue}
+                                onChange={(event) => this.changeInputValue(event.target.value)}
+                                placeholder={"Search"}
+                            />
+                        </div>
+                        <Dropdown
+                            value={this.state.searchType}
+                            items={['events', 'profiles']}
+                            setValue={this.changeType}
                         />
                     </div>
                 </div>
