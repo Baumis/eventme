@@ -33,7 +33,7 @@ const FeaturedFeed = (props) => {
                 <div className="featured-feed-icon">
                     <FaCalendarAlt />
                 </div>
-                    Featured events for you
+                    Upcomming events
                 </div>
                 <EventFeed
                     events={events}

@@ -6,6 +6,7 @@ import moment from 'moment'
 import CreateInput from '../CreateInput/CreateInput'
 import CreateTextArea from '../CreateTextArea/CreateTextArea'
 import DefaultButtons from '../../UniversalModal/DefaultButtons/DefaultButtons'
+import TogglerBlock from '../CreateToggler/CreateToggler'
 
 class EventInformation extends Component {
 
@@ -59,10 +60,15 @@ class EventInformation extends Component {
                         />
                     </div>
                 </div>
-                <CreateTextArea
-                    label={'Description'}
-                    value={this.props.information.description}
-                    onChange={(event) => this.changeValue('description', event)}
+                <CreateInput
+                    label={'Location'}
+                    type={'text'}
+                    value={this.props.information.location}
+                    onChange={(event) => this.changeValue('location', event)}
+                />
+                <TogglerBlock 
+                    label={'Public event'}
+                    info={'Public events can be found with the search. The event will also appear in the profiles of attending guests.'}
                 />
                 <div className="event-information-button-row">
                     <div className="event-information-status">

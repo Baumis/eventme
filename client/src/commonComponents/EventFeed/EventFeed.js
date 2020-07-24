@@ -25,7 +25,7 @@ const EventFeed = (props) => {
                 {props.events.length > 0 &&
                     <div className="event-list">
                         {props.events.map((event, index) =>
-                        <div>
+                        <div key={event._id}>
                             <EventCard event={event} key={event._id} />
                             {isDifferentDay(index) && 
                                 <FeedSplitter date={props.events[index + 1].startDate}/>

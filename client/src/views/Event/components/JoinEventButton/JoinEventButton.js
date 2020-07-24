@@ -20,7 +20,7 @@ class JoinEventModal extends Component {
         return (
             <div className="join-event-button-container">
                 <div className="join-event-button" onClick={() => this.join()}>
-                    {this.state.loading ? <Spinner /> : 'Join event'}
+                    {this.state.loading ? <Spinner /> : 'Attend event'}
                 </div>
             </div>
         )

@@ -21,7 +21,7 @@ class GuestInformation extends Component {
     }
 
     addNewQuestion = () => {
-        if (this.props.questions.length < 3) {
+        if (this.props.questions.length < 4) {
             const questionsClone = [... this.props.questions]
             questionsClone.push({
                 type: 'QUESTION',
@@ -40,7 +40,7 @@ class GuestInformation extends Component {
     }
 
     getButtonClass = () => {
-        return this.props.questions.length < 3 ? '' : ' add-question-disabled'
+        return this.props.questions.length < 4 ? '' : ' add-question-disabled'
     }
 
     render() {
