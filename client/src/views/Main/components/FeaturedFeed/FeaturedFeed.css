@@ -26,3 +26,9 @@
     margin-right: 5px;
     color: #c74C3C;
 }
+
+@media only screen and (max-width: 620px) {
+    .featured-feed-title {
+        margin: 10px 15px;
+    }
+}

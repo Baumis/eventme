@@ -1,0 +1,29 @@
+.feed-splitter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 30px;
+    margin-top: 10px;
+}
+
+.feed-splitter-line {
+    width: 100%;
+    flex: 1;
+    padding: 1px 0px;
+    background: #19a45e;
+}
+
+.feed-splitter-date {
+    padding: 0px 8px;
+    background: white;
+    margin-top: -13px;
+    color: #62646a;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 620px) {
+    .feed-splitter {
+        padding: 15px 15px;
+    }
+}

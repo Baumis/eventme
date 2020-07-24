@@ -15,10 +15,13 @@ const FeaturedFeed = (props) => {
 
     const fetchEvents = async () => {
         setLoading(true)
-        const results = await SearchService.getAll('a', 10)
+        const results = await SearchService.getAll('', 10)
         setLoading(false)
 
         if (results.events) {
+            const sortedByDate = results.events.sort((eventA, eventB) => {
+                return eventA < eventB
+            })
             setEvents(results.events)
         }
     }
@@ -35,6 +38,7 @@ const FeaturedFeed = (props) => {
                 <EventFeed
                     events={events}
                     loading={loading}
+                    renderSplitter
                 />
             </div>
         </div>
