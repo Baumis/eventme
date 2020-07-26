@@ -21,7 +21,11 @@ const FeaturedFeed = (props) => {
 
         if (results.events) {
             const srotedEvents = results.events.sort((eventA, eventB) => eventA.startDate < eventB.startDate)
-            const filteredByUpcomming = srotedEvents.filter(event => moment(event.startDate).isSameOrAfter(moment(new Date)))
+            const filteredByUpcomming = srotedEvents
+            
+            
+            
+             .filter(event => moment(event.startDate).isSameOrAfter(moment(new Date)))
             setEvents(filteredByUpcomming)
         }
     }

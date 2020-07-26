@@ -30,7 +30,7 @@ class InformationPage extends Component {
                 <div className="information-page-search-button"
                     onClick={this.toSearch}>
                     Search events and profiles
-            </div>
+                </div>
             </div>
         )
     }
