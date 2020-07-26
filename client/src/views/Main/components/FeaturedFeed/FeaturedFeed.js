@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import EventFeed from '../../../../commonComponents/EventFeed/EventFeed'
 import SearchService from '../../../../services/search'
 import { FaCalendarAlt } from 'react-icons/fa'
+import moment from 'moment'
 
 const FeaturedFeed = (props) => {
     const [loading, setLoading] = useState(false)
@@ -19,10 +20,9 @@ const FeaturedFeed = (props) => {
         setLoading(false)
 
         if (results.events) {
-            const sortedByDate = results.events.sort((eventA, eventB) => {
-                return eventA < eventB
-            })
-            setEvents(results.events)
+            const srotedEvents = results.events.sort((eventA, eventB) => eventA.startDate < eventB.startDate)
+            const filteredByUpcomming = srotedEvents.filter(event => moment(event.startDate).isSameOrAfter(moment(new Date)))
+            setEvents(filteredByUpcomming)
         }
     }
 

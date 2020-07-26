@@ -11,9 +11,10 @@ class SearchBar extends Component {
         this.state = {
             typeTimeout: null,
             inputValue: '',
-            searchType: 'event',
+            searchType: 'events',
             date: null,
-            location: ''
+            location: '',
+            cathegory: 'all'
         }
     }
 
@@ -57,21 +58,34 @@ class SearchBar extends Component {
                             setValue={this.changeType}
                         />
                     </div>
-                    <div className="searchbar-filter-row">
-                        <FilterInput 
-                            label={'Date'}
-                            type={'date'}
-                            value={this.state.date}
-                            onChange={(event) => this.setState({ date: event.target.value })}
-                        />
-                        <FilterInput 
-                            label={'Location'}
-                            type={'text'}
-                            value={this.state.location}
-                            onChange={(event) => this.setState({ location: event.target.value })}
-                            placeholder={'city, address'}
-                        />
-                    </div>
+                    {this.state.searchType === 'events' &&
+                        <div className="searchbar-filter-row">
+                            <FilterInput
+                                label={'Date'}
+                                type={'date'}
+                                value={this.state.date}
+                                onChange={(event) => this.setState({ date: event.target.value })}
+                            />
+                            <FilterInput
+                                label={'Location'}
+                                type={'text'}
+                                value={this.state.location}
+                                onChange={(event) => this.setState({ location: event.target.value })}
+                                placeholder={'city, address'}
+                            />
+                            <div className="searchbar-cathegory-select">
+                                <div className="searchbar-cathegory-label">
+                                    Cathegory
+                                </div>
+                                <Dropdown
+                                    value={this.state.cathegory}
+                                    items={['studies', 'all']}
+                                    setValue={(value) => this.setState({ cathegory: value })}
+                                    buttonStyle={{ height: '25px' }}
+                                />
+                            </div>
+                        </div>
+                    }
                     <div className="searchbar-button-row">
                         <div className="searchbar-submit-button" onClick={this.search}>
                             Search
