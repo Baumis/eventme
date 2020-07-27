@@ -21,7 +21,7 @@ class ContentContainer extends Component {
                             <FaComments />
                             <h1>Interact</h1>
                         </div>
-                        <p>Keep guests up to date with the chat enabled by the events page.</p>
+                        <p>Keep guests up to date with the discussion on the event page.</p>
                     </div>
                     <div className="content-container-info-block">
                         <div className="content-container-title-row">

@@ -42,7 +42,6 @@ const FeaturedFeed = (props) => {
                 <EventFeed
                     events={events}
                     loading={loading}
-                    renderSplitter
                 />
             </div>
         </div>
