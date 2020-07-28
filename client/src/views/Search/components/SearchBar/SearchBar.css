@@ -7,19 +7,23 @@
     padding: 20px 0px;
 }
 
-.searchbar-container {
-    background: white;
+.searchbar-content {
     width: 90vw;
     max-width: 820px;
+}
+
+.searchbar-container {
+    background: white;
     border-radius: 5px;
     border: 1px solid #dadbdd;
+    padding-bottom: 10px;
 }
 
 .serachbar-title {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 20px 20px 0px 20px;
+    margin: 20px 0px 20px 0px;
     max-width: 820px;
     font-size: 24px;
     color: #0e0e0f;
@@ -28,7 +32,8 @@
 .search-input-row {
     display: flex;
     align-items: center;
-    margin: 10px 20px 20px 20px;
+    flex-wrap: wrap;
+    margin: 0px 20px 0px 20px;
 }
 
 .search-input {
@@ -45,7 +50,7 @@
     font-family: sans-serif;
     transition: border-color 0.3s;
     align-items: center;
-    margin-right: 5px;
+    margin: 10px 5px 10px 0px;
 }
 
 .search-input input {
@@ -70,39 +75,60 @@
     transition: border-color 0s;
 }
 
+.searchbar-filter-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #dddddd;
+    height: 33px;
+    color: #0e0e0f;
+    width: 80px;
+    padding: 3px 10px 3px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 5px 10px 0px;
+}
+
+.filter-active {
+    border: 1px solid #19a45e;
+}
+
+.filter-text {
+    margin-right: 5px;
+}
+
 .searchbar-filter-row {
     display: flex;
-    margin: 0px 20px 20px 20px;
+    margin: 0px 20px 10px 20px;
+    flex-wrap: wrap;
 }
 
-.searchbar-button-row {
-    margin: 0px 20px 20px 20px
-}
-
-.searchbar-submit-button {
+.searchbar-tabs {
     display: flex;
-    align-items: center;
+    margin-bottom: 20px;
+}
+
+.searchbar-tab {
+    display: flex;
+    flex: 1;
     justify-content: center;
-    padding: 12px;
-    height: 12px;
-    border: 1px solid #62646a;
-    border-radius: 5px;
-    background: #62646a;
-    color: white;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.searchbar-submit-button:hover{
-    background: #494b50;
-}
-
-.searchbar-cathegory-label{
-    display: flex;
     align-items: center;
-    margin-left: 8px;
-    margin-bottom: 5px;
+    height: 50px;
+    border-bottom: 1px solid rgba(221, 221, 221, 0.7);
+    background: #dddddd;
+    cursor: pointer;
+}
+
+.searchbar-selected-tab {
     color: #19a45e;
-    font-size: 14px;
-    font-weight: 500;
+    border-bottom: none;
+    background: white;
+}
+
+.searchbar-tab-left {
+    border-top-left-radius: 5px;
+}
+
+.searchbar-tab-right {
+    border-top-right-radius: 5px;
 }
