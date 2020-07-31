@@ -61,12 +61,12 @@ const eventSchema = new mongoose.Schema({
     },
     public: {
         type: Boolean,
-        default: true
+        default: false
     }
-})
+}, { timestamps: true })
 
 eventSchema.statics.format = (event) => {
-    
+
     const formattedRegistrations = event.registrations.map(registration => {
         let user
 
