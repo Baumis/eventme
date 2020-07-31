@@ -27,6 +27,15 @@ class SearchBar extends Component {
 
     changeType = (value) => {
         this.setState({ searchType: value })
+        this.search()
+    }
+
+    changeDate = (date) => {
+        clearTimeout(this.state.typeTimeout)
+        this.setState({
+            date: date,
+            typeTimeout: setTimeout(this.search, 800)
+        })
     }
 
     toggleFilters = () => {
@@ -83,7 +92,7 @@ class SearchBar extends Component {
                                     label={'Date'}
                                     type={'date'}
                                     value={this.state.date}
-                                    onChange={(event) => this.setState({ date: event.target.value })}
+                                    onChange={(event) => this.changeDate(event.target.value)}
                                 />
                             </div>
                         }

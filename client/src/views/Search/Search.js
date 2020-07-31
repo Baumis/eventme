@@ -22,7 +22,6 @@ class Search extends Component {
     }
 
     search = async (parameter) => {
-        console.log(parameter)
         this.setState({ searching: true })
         const results = await SearchService.getAll(parameter, 10)
         this.setState({ searching: false })

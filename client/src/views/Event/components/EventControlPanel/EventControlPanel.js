@@ -68,7 +68,7 @@ class EventControlPanel extends Component {
                             Date
                         </div>
                         <div className="event-control-panel-info-item-content">
-                            {`${moment(this.props.EventStore.event.startDate).format('D MMMM YYYY')} ${moment(this.props.EventStore.event.startDate).format('LT')}`}
+                            {`${moment(this.props.EventStore.event.startDate).format('D MMMM YYYY')} ${moment(this.props.EventStore.event.startDate).format('HH:mm')}`}
                         </div>
                     </div>
                     {this.renderJoinInviteStatus()}
