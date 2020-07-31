@@ -16,24 +16,44 @@ class Search extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            results: { events: [], users: [] },
-            searching: false
+            events: [],
+            users: [],
+            searching: false,
+            searchTab: 'events'
         }
     }
 
-    search = async (parameter) => {
+    componentDidMount(){
+        this.searchEvents('', '', '')
+    }
+
+    setSearchTab = (searchTab) => {
+        this.setState({searchTab})
+    }
+
+    searchEvents = async (label, startDate, endDate) => {
         this.setState({ searching: true })
-        const results = await SearchService.getAll(parameter, 10)
+        const events = await SearchService.findEvents(label, startDate, endDate, 0, 10)
         this.setState({ searching: false })
 
-        if (results) {
-            this.setState({ results: results })
+        if (events) {
+            this.setState({ events })
+        }
+
+    }
+
+    searchUsers = async (name) => {
+        this.setState({ searching: true })
+        const users = await SearchService.findUsers(name, 0, 10)
+        this.setState({ searching: false })
+
+        if (users) {
+            this.setState({ users })
         }
 
     }
 
     render() {
-
         return (
             <div className="search">
                 <Helmet>
@@ -49,10 +69,16 @@ class Search extends Component {
                 />
                 <SearchBar
                     search={this.search}
+                    searchEvents={this.searchEvents}
+                    searchUsers={this.searchUsers}
+                    setSearchTab={this.setSearchTab}
+                    searchTab={this.state.searchTab}
                 />
                 <SearchResults
-                    results={this.state.results}
+                    events={this.state.events}
+                    users={this.state.users}
                     searching={this.state.searching}
+                    searchTab={this.state.searchTab}
                 />
                 <Footer />
                 {this.props.VisibilityStore.alert ?

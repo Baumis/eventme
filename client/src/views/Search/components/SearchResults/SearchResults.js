@@ -18,7 +18,7 @@ const SearchResults = (props) => {
     }
 
     const getCardMode = () => {
-        return props.results.users.length > 0
+        return props.users.length > 0
     }
 
     const toProfile = (id) => {
@@ -28,18 +28,17 @@ const SearchResults = (props) => {
     return (
         <div className="search-results">
             <div className="search-results-container">
-                {props.results.events.length > 0 &&
+                {props.searchTab === 'events' ?
                     <div className="result-list">
                         <div className="result-title">Events</div>
-                        {props.results.events.map(event =>
+                        {props.events.map(event =>
                             <EventCard smallCard={getCardMode()} event={event} key={event._id} />
                         )}
                     </div>
-                }
-                {props.results.users.length > 0 &&
+                    :
                     <div className="result-list">
                         <div className="result-title">Profiles</div>
-                        {props.results.users.map(user =>
+                        {props.users.map(user =>
                             <div className="profile-result" onClick={() => toProfile(user._id)} key={user._id}>
                                 <div style={getAvatar(user.avatar)} className="profile-result-avatar"> </div>
                                 <div>{user.name}</div>

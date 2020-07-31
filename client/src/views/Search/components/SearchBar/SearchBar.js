@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import './SearchBar.css'
 import { FaSearch, FaAngleDown, FaChevronUp, FaAngleUp, FaFilter } from 'react-icons/fa'
-import Dropdown from '../../../../commonComponents/Dropdown/Dropdown'
 import FilterInput from './FilterInput/FilterInput'
+import moment from 'moment'
 
 class SearchBar extends Component {
 
@@ -11,8 +11,7 @@ class SearchBar extends Component {
         this.state = {
             typeTimeout: null,
             inputValue: '',
-            searchType: 'events',
-            date: null,
+            date: '',
             displayFilters: false
         }
     }
@@ -25,8 +24,8 @@ class SearchBar extends Component {
         })
     }
 
-    changeType = (value) => {
-        this.setState({ searchType: value })
+    changeType = async (value) => {
+        await this.props.setSearchTab(value)
         this.search()
     }
 
@@ -43,13 +42,16 @@ class SearchBar extends Component {
     }
 
     search = () => {
-        if (this.state.inputValue.length > 0) {
-            this.props.search(this.state.inputValue)
+        console.log(new Date(this.state.date))
+        if(this.props.searchTab === 'events') {
+            this.props.searchEvents(this.state.inputValue, this.state.date, moment(this.state.date).add(1, 'days').format('YYYY-MM-DD'))
+        } else {
+            this.props.searchUsers(this.state.inputValue)   
         }
     }
 
     tabClassByState = (tab) => {
-        return this.state.searchType === tab ?
+        return this.props.searchTab === tab ?
             'searchbar-tab searchbar-selected-tab'
             : 'searchbar-tab'
     }
@@ -76,17 +78,17 @@ class SearchBar extends Component {
                                 <input
                                     value={this.state.inputValue}
                                     onChange={(event) => this.changeInputValue(event.target.value)}
-                                    placeholder={`search ${this.state.searchType}`}
+                                    placeholder={`search ${this.props.searchTab}`}
                                 />
                             </div>
-                            {this.state.searchType === 'events' &&
+                            {this.props.searchTab === 'events' &&
                                 <div className={`searchbar-filter-button ${this.state.displayFilters ? 'filter-active': ''}`} onClick={this.toggleFilters}>
                                     <div className="filter-text"> filters </div>
                                     <FaFilter style={{color: this.state.displayFilters ? '#19a45e': ''}}/>
                                 </div>
                             }
                         </div>
-                        {this.state.searchType === 'events' && this.state.displayFilters &&
+                        {this.props.searchTab === 'events' && this.state.displayFilters &&
                             <div className="searchbar-filter-row">
                                 <FilterInput
                                     label={'Date'}

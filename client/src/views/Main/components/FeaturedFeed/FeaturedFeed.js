@@ -4,11 +4,11 @@ import { withRouter } from 'react-router-dom'
 import EventFeed from '../../../../commonComponents/EventFeed/EventFeed'
 import SearchService from '../../../../services/search'
 import { FaCalendarAlt } from 'react-icons/fa'
-import moment from 'moment'
 
 const FeaturedFeed = (props) => {
     const [loading, setLoading] = useState(false)
     const [events, setEvents] = useState([])
+    const [page, setPage] = useState(0)
 
     useEffect(() => {
         fetchEvents()
@@ -16,11 +16,12 @@ const FeaturedFeed = (props) => {
 
     const fetchEvents = async () => {
         setLoading(true)
-        const results = await SearchService.getAll('', 10)
+        const results = await SearchService.findUpcomingEvents(page, 8)
         setLoading(false)
 
-        if (results.events) {
-            setEvents(results.events)
+        if (results) {
+            setEvents(events.concat(results))
+            setPage(page + 1)
         }
     }
 
@@ -28,20 +29,22 @@ const FeaturedFeed = (props) => {
         <div className="featured-feed">
             <div className="featured-feed-container">
                 <div className="featured-feed-title">
-                <div className="featured-feed-icon">
-                    <FaCalendarAlt />
-                </div>
+                    <div className="featured-feed-icon">
+                        <FaCalendarAlt />
+                    </div>
                     Upcomming events
                 </div>
                 <EventFeed
                     events={events}
                     loading={loading}
                 />
-                <div className="load-more-row">
-                    <div className="load-more-button">
-                        Load more
+                {!loading &&
+                    <div className="load-more-row">
+                        <div className="load-more-button" onClick={fetchEvents}>
+                            Load more
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     )
