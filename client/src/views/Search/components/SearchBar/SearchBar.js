@@ -13,8 +13,6 @@ class SearchBar extends Component {
             inputValue: '',
             searchType: 'events',
             date: null,
-            location: '',
-            cathegory: 'all',
             displayFilters: false
         }
     }
@@ -86,13 +84,6 @@ class SearchBar extends Component {
                                     type={'date'}
                                     value={this.state.date}
                                     onChange={(event) => this.setState({ date: event.target.value })}
-                                />
-                                <FilterInput
-                                    label={'Location'}
-                                    type={'text'}
-                                    value={this.state.location}
-                                    onChange={(event) => this.setState({ location: event.target.value })}
-                                    placeholder={'city, address'}
                                 />
                             </div>
                         }
