@@ -27,6 +27,20 @@
     color: #c74C3C;
 }
 
+.load-more-row {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px 10px 0px;
+}
+
+.load-more-button {
+    cursor: pointer;
+    color: #46494c;
+    border: 1px solid #46494c;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 @media only screen and (max-width: 620px) {
     .featured-feed-title {
         margin: 10px 15px;

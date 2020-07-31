@@ -20,13 +20,7 @@ const FeaturedFeed = (props) => {
         setLoading(false)
 
         if (results.events) {
-            const srotedEvents = results.events.sort((eventA, eventB) => eventA.startDate < eventB.startDate)
-            const filteredByUpcomming = srotedEvents
-            
-            
-            
-             .filter(event => moment(event.startDate).isSameOrAfter(moment(new Date)))
-            setEvents(filteredByUpcomming)
+            setEvents(results.events)
         }
     }
 
@@ -43,6 +37,11 @@ const FeaturedFeed = (props) => {
                     events={events}
                     loading={loading}
                 />
+                <div className="load-more-row">
+                    <div className="load-more-button">
+                        Load more
+                    </div>
+                </div>
             </div>
         </div>
     )
