@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'
 import './Navigation.css'
-import { FaRocket, FaSearch } from 'react-icons/fa'
+import { FaRocket, FaSearch, FaFeatherAlt } from 'react-icons/fa'
 
 class Navigation extends Component {
 
@@ -15,7 +15,7 @@ class Navigation extends Component {
 
     scrollToCreate = () => {
         const createSection = document.getElementById('create-event-section').offsetTop
-        window.scroll({left: 0, top: createSection, behavior: 'smooth'})
+        window.scroll({ left: 0, top: createSection, behavior: 'smooth' })
     }
 
     render() {
@@ -25,33 +25,23 @@ class Navigation extends Component {
                     <div className="navigation-column">
                         <div className="navigation-icon-row">
                             <div className="navigation-icon">
-                                <FaRocket />
+                                <FaFeatherAlt />
                             </div>
                         </div>
                         <div className="navigation-title">
-                            Create events.
+                            Events made easy.
                             </div>
                         <div className="navigation-paragraph">
-                            Fill out the short form to create a new event. Invite guests by sharing the link to the event page.
-                            </div>
-                        <div className="navigation-button" onClick={this.scrollToCreate}>
-                            Create event
+                            
+Every event needs a page. Inviteowl makes page creation quick and event sharing easy.
                         </div>
-                    </div >
-                    <div className="navigation-column">
-                        <div className="navigation-icon-row">
-                            <div className="navigation-icon">
-                                <FaSearch />
+                        <div className="navigation-buttons">
+                            <div className="navigation-button" onClick={this.scrollToCreate}>
+                                Create event
                             </div>
-                        </div>
-                        <div className="navigation-title">
-                            Find events and organizers.
+                            <div className="navigation-button navigation-button-search" onClick={this.toSearch}>
+                                Search events
                             </div>
-                        <div className="navigation-paragraph">
-                            Fill out the short form to create a new event. Invite guests by sharing the link to the event page.
-                            </div>
-                        <div className="navigation-button navigation-button-search" onClick={this.toSearch}>
-                            Search events
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,7 @@
 
 .navigation-content {
     display: flex;
+    justify-content: center;
     width: 95vw;
     max-width: 1024px;
 }
@@ -20,6 +21,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 400px;
     background: #c5c3c6;
     background: transparent;
 }
@@ -37,9 +39,9 @@
 }
   
 .navigation-title {
-    font-size: 32px;
+    font-size: 35px;
     color: #0e0e0f;
-    padding: 0px 10px 10px 10px;
+    padding: 0px 0px 15px 0px;
     text-align: center;
     font-weight: 600;
 }
@@ -47,22 +49,30 @@
 .navigation-paragraph {
     color: #62646a;
     font-size: 18px;
-    padding: 0px 40px;
     text-align: center;
 }
   
+.navigation-buttons {
+  display: flex;
+}
+
 .navigation-button {
     display: flex;
+    justify-content: center;
     padding: 10px;
     color: white;
     background: #19a45e;
-    margin: 18px 0px 0px 0px;
+    margin: 20px 0px 0px 0px;
     border-radius: 5px;
+    width: 130px;
     cursor: pointer;
 }
 
 .navigation-button-search {
-    background: #62646a;
+    background: transparent;
+    border: 1px solid #62646a;
+    color: #62646a;
+    margin-left: 10px;
 }
   
   @media only screen and (max-width: 610px) {
