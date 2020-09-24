@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
-import './MainHeader.css'
+import './CreateEvent.css'
 import ContentBook from '../ContentBook/ContentBook'
 
-class MainHeader extends Component {
+class CreateEvent extends Component {
 
     goToProfile = () => {
         if (this.props.UserStore.currentUser === null) {
@@ -16,11 +16,11 @@ class MainHeader extends Component {
 
     render() {
         return (
-            <div className="main-header">
+            <div className="create-event" id="create-event-section">
                 <ContentBook />
             </div>
         )
     }
 }
 
-export default withRouter(inject('UserStore', 'VisibilityStore')(observer(MainHeader)))
+export default withRouter(inject('UserStore', 'VisibilityStore')(observer(CreateEvent)))

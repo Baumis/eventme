@@ -17,7 +17,7 @@ class CreateEventForm extends Component {
                 startDate: '',
                 startTime: '',
                 today: '',
-                description: ''
+                public: false
             },
             questions: []
         }
@@ -32,7 +32,7 @@ class CreateEventForm extends Component {
                 startDate: moment(tomorrow).format('YYYY-MM-DD'),
                 startTime: '00:00',
                 today: today,
-                description: ''
+                public: false
             }
         })
     }
@@ -60,7 +60,7 @@ class CreateEventForm extends Component {
         const event = await this.props.EventStore.create({
             label: this.state.information.eventName,
             startDate: startDate,
-            description: this.state.information.description,
+            public: this.state.information.public,
             registrationQuestions: this.state.questions.filter(question => question.data.content.length > 0)
         })
 

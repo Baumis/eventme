@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom'
 import './EventInformation.css'
 import moment from 'moment'
 import CreateInput from '../CreateInput/CreateInput'
-import CreateTextArea from '../CreateTextArea/CreateTextArea'
 import DefaultButtons from '../../UniversalModal/DefaultButtons/DefaultButtons'
+import TogglerBlock from '../CreateToggler/CreateToggler'
 
 class EventInformation extends Component {
 
@@ -27,6 +27,12 @@ class EventInformation extends Component {
     changeValue = (field, event) => {
         const informationCopy = { ...this.props.information }
         informationCopy[field] = event.target.value
+        this.props.setEventInformation(informationCopy)
+    }
+
+    togglePublic = () => {
+        const informationCopy = { ...this.props.information }
+        informationCopy.public = !this.props.information.public
         this.props.setEventInformation(informationCopy)
     }
 
@@ -59,10 +65,11 @@ class EventInformation extends Component {
                         />
                     </div>
                 </div>
-                <CreateTextArea
-                    label={'Description'}
-                    value={this.props.information.description}
-                    onChange={(event) => this.changeValue('description', event)}
+                <TogglerBlock 
+                    label={'Public event'}
+                    info={'Public events can be found with the search. The event will also appear in the profiles of attending guests.'}
+                    changeValue={() => this.togglePublic()}
+                    value={this.props.information.public}
                 />
                 <div className="event-information-button-row">
                     <div className="event-information-status">

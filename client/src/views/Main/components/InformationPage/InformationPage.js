@@ -23,14 +23,10 @@ class InformationPage extends Component {
                 </div>
                 <div className="information-page-title">
                     Create events fast.
-            </div>
+                </div>
                 <div className="information-page-paragraph">
                     Fill out the short form to create a new event. Invite guests by sharing the link to the event page.
-            </div>
-                <div className="information-page-search-button"
-                    onClick={this.toSearch}>
-                    Search events and profiles
-            </div>
+                </div>
             </div>
         )
     }

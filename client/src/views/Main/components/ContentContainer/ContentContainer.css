@@ -1,8 +1,8 @@
 .content-container{
     display: flex;
     justify-content: center;
+    background: transparent;
     background: white;
-    margin-top: -45px;
 }
 
 .content-container-info-row {

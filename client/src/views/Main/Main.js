@@ -5,10 +5,12 @@ import Navbar from '../../commonComponents/Navbar/Navbar'
 import Footer from '../../commonComponents/Footer/Footer'
 import SignModal from '../../commonComponents/SignModal/SignModal'
 import UniversalModal from '../../commonComponents/UniversalModal/UniversalModal'
-import MainHeader from './components/MainHeader/MainHeader'
 import Alert from '../../commonComponents/Alert/Alert'
 import ContentContainer from './components/ContentContainer/ContentContainer'
 import { Helmet } from 'react-helmet'
+import FeaturedFeed from './components/FeaturedFeed/FeaturedFeed'
+import CreateEvent from './components/CreateEvent/CreateEvent'
+import Navigation from './components/Navigation/Navigation'
 
 class Main extends Component {
 
@@ -26,7 +28,9 @@ class Main extends Component {
                 <Navbar
                     staticColor={true}
                 />
-                <MainHeader />
+                <Navigation />
+                <FeaturedFeed />
+                <CreateEvent />
                 <ContentContainer />
                 {this.props.VisibilityStore.signModal ?
                     <UniversalModal
@@ -40,7 +44,7 @@ class Main extends Component {
                 <div className="main-filler">
 
                 </div >
-                <Footer style={{ background: '#f7f7f8', border: 'none' }} />
+                <Footer style={{ background: 'transparent', border: 'none' }} />
             </div>
         )
     }

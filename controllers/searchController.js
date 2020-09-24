@@ -14,3 +14,46 @@ exports.getAll = async (request, response) => {
         response.status(400).json({ error: exception.message })
     }
 }
+
+exports.findEvents = async (request, response) => {
+    try {
+        const label = request.query.label
+        const startDate = request.query.startDate
+        const endDate = request.query.endDate
+        const page =  request.query.page
+        const limit =  request.query.limit
+
+        const events = await searchService.findEvents(label, startDate, endDate, page, limit)
+
+        response.json(events.map(Event.formatForGhost))
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
+exports.findUpcomingEvents = async (request, response) => {
+    try {
+        const page =  request.query.page
+        const limit =  request.query.limit
+
+        const events = await searchService.findUpcomingEvents(page, limit)
+
+        response.json(events.map(Event.formatForGhost))
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })
+    }
+}
+
+exports.findUsers = async (request, response) => {
+    try {
+        const name = request.query.name
+        const page =  request.query.page
+        const limit =  request.query.limit
+
+        const users = await searchService.findUsers(name, page, limit)
+
+        response.json(users.map(User.formatForGhost))
+    } catch (exception) {
+        response.status(400).json({ error: exception.message })   
+    }
+}
