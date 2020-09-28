@@ -5,13 +5,20 @@ import './About.css'
 const About = (props) => {
     const [isOpen, setIsOpen] = useState(false)
 
+    useEffect(() => {
+        const height = document.getElementById('about-text').clientHeight;
+        if(height < 80) {
+            setIsOpen(true)
+        }
+    },[])
+
     return (
         <div className="about">
-            <div className="about-text" style={{maxHeight: isOpen ? '10000px' : '80px'}}>
+            <div className="about-text" style={{maxHeight: isOpen ? '10000px' : '80px'}} id="about-text">
                 {props.description}
             </div>
-            {props.description.length > 0 && !isOpen && <div className="about-text-fader"></div>}
-            {props.description.length > 0 && !isOpen && 
+            { !isOpen && <div className="about-text-fader"></div>}
+            { !isOpen && 
             <div className="about-show-more" onClick={() => setIsOpen(!isOpen)} id={"about-text"}>
                 show more
             </div>
