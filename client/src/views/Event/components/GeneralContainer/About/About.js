@@ -10,8 +10,8 @@ const About = (props) => {
             <div className="about-text" style={{maxHeight: isOpen ? '10000px' : '80px'}}>
                 {props.description}
             </div>
-            {!isOpen && <div className="about-text-fader"></div>}
-            { !isOpen && 
+            {props.description.length > 0 && !isOpen && <div className="about-text-fader"></div>}
+            {props.description.length > 0 && !isOpen && 
             <div className="about-show-more" onClick={() => setIsOpen(!isOpen)} id={"about-text"}>
                 show more
             </div>
