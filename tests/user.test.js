@@ -4,7 +4,6 @@ const app = require('../app')
 const config = require('../utils/config')
 const User = require('../models/user')
 const Event = require('../models/user')
-const ActivityLog = require('../models/activityLog')
 const testUtils = require('./testUtils')
 
 const api = supertest(app)
@@ -26,7 +25,6 @@ beforeAll(async () => {
 beforeEach(async () => {
     await User.deleteMany({})
     await Event.deleteMany({})
-    await ActivityLog.deleteMany({})
 
     const res = await api
         .post('/api/users')

@@ -1,6 +1,5 @@
 const User = require('../models/user')
 const userService = require('../services/userService')
-const logService = require('../services/logService')
 const emailService = require('../services/emailService')
 const jwt = require('jsonwebtoken')
 
@@ -21,8 +20,6 @@ exports.getOne = async (request, response) => {
 exports.create = async (request, response) => {
     try {
         const createdUser = await userService.create(request.body)
-
-        await logService.create(createdUser._id)
 
         await emailService.sendEmailVerification(createdUser)
 
@@ -124,8 +121,6 @@ exports.delete = async (request, response) => {
         }
 
         await userService.delete(request.params.id)
-
-        await logService.delete(request.params.id)
 
         response.status(204).end()
     } catch (exception) {
