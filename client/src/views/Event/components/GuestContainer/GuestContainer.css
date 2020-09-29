@@ -26,10 +26,27 @@
 }
 
 .guest-title {
+    display: flex;
     font-size: 18px;
     color: #0e0e0f;
     margin: 20px 20px 10px 20px;
     font-weight: 600;
+}
+
+.quest-title-edit-questions {
+    padding: 0px 5px;
+    color: rgba(76, 92, 104, 0.5);
+    font-size: 21px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.quest-title-edit-questions:hover {
+    color: rgba(76, 92, 104, 0.9);
+}
+
+.guest-green-icon {
+    color: #19a45e;
 }
 
 .guest-title span{

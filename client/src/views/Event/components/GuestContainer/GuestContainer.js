@@ -3,18 +3,20 @@ import { inject, observer } from 'mobx-react'
 import './GuestContainer.css'
 import Guests from './Guests/Guests'
 import RegistrationResults from './RegisterResults/RegisterResults'
+import { FaCheck, FaEdit } from 'react-icons/fa'
 
 class GuestContainer extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            filter: 'ALL'
+            editable: false,
+
         }
     }
 
-    changeFilter = (status) => {
-        this.setState({ filter: status })
+    toggleEditable = () => {
+        this.setState({ editable: !this.state.editable })
     }
 
     displayAnswerSection = () => {
@@ -46,9 +48,19 @@ class GuestContainer extends Component {
                                     :
                                     'My answers'
                                 }
+                                {this.props.isCreator() &&
+                                <div className="quest-title-edit-questions" onClick={this.toggleEditable}>
+                                    {this.state.editable ?
+                                        <div className="guest-green-icon"><FaCheck /></div>
+                                        :
+                                        <FaEdit />
+                                    }
+                                </div>
+                                }
                             </div>
                             <RegistrationResults
                                 toggleAnswerModal={this.props.toggleAnswerModal}
+                                editable={this.state.editable}
                             />
                         </div>
                     :null}
