@@ -1,0 +1,53 @@
+.shadow-card {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 30px 0px 30px;
+    height: 150px;
+    min-width: 150px;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.shadow-small-card {
+    height: 100px;
+}
+
+.shadow-card-picture {
+    flex: 1;
+    background-color: #62646a;
+    animation-name: loadingColor;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+@media only screen and (max-width: 620px) {
+    .shadow-card {
+        height: 100px;
+        min-width: 110px;
+        margin: 10px 15px 0px 15px;
+    }
+}
+
+@-webkit-keyframes loadingColor {
+    0% {
+      background-color: #62646a;
+    }
+    50% {
+      background-color: #888a91;
+    }
+    100% {
+      background-color: #62646a;
+    }
+}
+@keyframes loadingColor {
+    0% {
+      background-color: #62646a;
+    }
+    50% {
+      background-color: #888a91;
+    }
+    100% {
+      background-color: #62646a;
+    }
+}

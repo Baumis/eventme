@@ -5,6 +5,7 @@ import Spinner from '../Spinner/Spinner'
 import EventCard from '../../views/Profile/components/EventCard/EventCard'
 import moment from 'moment'
 import FeedSplitter from './FeedSplitter'
+import ShadowCard from './ShadowCard'
 
 const EventFeed = (props) => {
 
@@ -29,7 +30,15 @@ const EventFeed = (props) => {
                     )}
                 </div>
             }
-            {props.loading && <div className="event-feed-loader"> <Spinner /> </div>}
+            {props.loading && props.events.length > 0 && <div className="event-feed-loader"> <Spinner /> </div>}
+            {props.loading && props.events.length == 0 && 
+            <div className="event-list">
+                <ShadowCard />
+                <ShadowCard />
+                <ShadowCard />
+                <ShadowCard />
+            </div>
+            }
         </div>
     )
 }
