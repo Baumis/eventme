@@ -11,13 +11,13 @@
 
 .answers-user-info {
     display: flex;
-    font-size: 14px;
+    font-size: 16px;
     color: #62646a;
 }
 
 .answers-user-avatar {
-    min-width: 30px;
-    height: 30px;
+    min-width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: #dddddd;
     -webkit-background-size: cover;
@@ -33,10 +33,10 @@
 }
 
 .answers-user-content {
-    font-size: 14px;
+    font-size: 15px;
     color: black;
-    padding-left: 40px;
-    margin-top: -10px;
+    padding-left: 50px;
+    margin-top: -18px;
 }
 
 .empty-answers{
