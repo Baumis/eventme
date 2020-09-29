@@ -1,6 +1,5 @@
 const Event = require('../models/event')
 const eventService = require('../services/eventService')
-const logService = require('../services/logService')
 const emailService = require('../services/emailService')
 
 const roles = require('../utils/roles')
@@ -24,8 +23,6 @@ exports.getOne = async (request, response) => {
 exports.create = async (request, response) => {
     try {
         const createdEvent = await eventService.create(request.senderId, request.body)
-
-        logService.createdEvent(request.senderId, createdEvent._id, createdEvent.label)
 
         response.status(201).json(Event.format(createdEvent))
     } catch (exception) {
@@ -59,7 +56,6 @@ exports.addMessage = async (request, response) => {
 
         const message = updatedEvent.discussion.find(message => message.author._id.toString() === request.senderId && message.content === request.body.message)
 
-        logService.wroteMessage(request.senderId, updatedEvent._id, updatedEvent.label, message._id, message.content)
         emailService.notifyAboutNewMessage(message, request.event)
 
         if (request.senderRole === roles.CREATOR) {
@@ -79,8 +75,6 @@ exports.addComment = async (request, response) => {
         const message = updatedEvent.discussion.find(message => message._id.toString() === request.params.messageId)
 
         const comment = message.comments.slice().reverse().find(comment => comment.author._id.toString() === request.senderId && comment.content === request.body.comment)
-
-        logService.wroteComment(request.senderId, updatedEvent._id, updatedEvent.label, message._id, comment._id, comment.content)
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))
@@ -149,10 +143,6 @@ exports.removeComment = async (request, response) => {
 exports.addRegistration = async (request, response) => {
     try {
         const updatedEvent = await eventService.addRegistration(request.event, request.body.name, request.senderId, request.body.answers)
-
-        if (request.senderId) {
-            logService.joinedEvent(request.senderId, updatedEvent._id, updatedEvent.label)
-        }
 
         if (request.senderRole === roles.CREATOR) {
             response.json(Event.format(updatedEvent))

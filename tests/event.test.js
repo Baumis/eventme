@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const app = require('../app')
 const config = require('../utils/config')
 const User = require('../models/user')
-const ActivityLog = require('../models/activityLog')
 const Event = require('../models/event')
 const testUtils = require('./testUtils')
 
@@ -32,7 +31,6 @@ beforeAll(async () => {
 beforeEach(async () => {
     await User.deleteMany({})
     await Event.deleteMany({})
-    await ActivityLog.deleteMany({})
 
     const res = await api
         .post('/api/users')
