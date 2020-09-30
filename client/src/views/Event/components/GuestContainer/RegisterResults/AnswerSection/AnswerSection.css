@@ -4,9 +4,45 @@
 }
 
 .answer {
+    display: flex;
     padding: 10px;
     border-radius: 5px;
     margin: 05px 0px;   
+}
+
+.answer-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.answer-content input {
+    border: none;
+    border: 1px solid #19a45e;
+    border-radius: 5px;
+    padding: 10px 8px;
+    width: 100%;
+    font-size: 15px;
+}
+
+.answer-edit-controls {
+    display: flex;
+}
+
+.answer-edit-check {
+    color:#19a45e;
+    cursor: pointer;
+    margin: 0px 5px;
+}
+
+.answer-edit {
+    padding: 0px 10px;
+    cursor: pointer;
+    color: rgba(76, 92, 104, 0.9);
+}
+
+.answer-edit:hover{
+    color: rgba(76, 92, 104, 1);
 }
 
 .answers-user-info {

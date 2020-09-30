@@ -1,8 +1,44 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { FaCheck, FaPen, FaTimes } from 'react-icons/fa'
+import Spinner from '../../../../../../commonComponents/Spinner/Spinner'
 import './AnswerSection.css'
 
 class AnswerSection extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            editableIndex: null,
+            editedValue: '',
+            loadingEdit: false
+        }
+    }
+
+    setEditableIndex = (index, content) => {
+        if (index === this.state.editableIndex) {
+            this.setState({ editableIndex: null, })
+        } else {
+            this.setState({ editableIndex: index, editedValue: content})
+        }
+    }
+
+    editAnswer = (event) => {
+        this.setState({editedValue: event.target.value})
+    }
+
+    submitEditedAnswer = (answer) => {
+        this.setState({loadingEdit: true})
+        const registration = this.props.EventStore.event.registrations.find(registration => registration.user._id === answer.user._id )
+        const response = this.props.EventStore.updateAnswer(registration._id, this.props.question._id, this.state.editedValue )
+        this.setState({loadingEdit: false})
+
+        if(response) {
+            this.setState({editableIndex: null})
+        }else {
+
+        }
+    }
 
     getAvatar = (user) => {
         if (!user.avatar) {
@@ -60,16 +96,42 @@ class AnswerSection extends Component {
             <div className="answer-section">
                 {this.filteredAnswers(this.answersToShow(this.getAnswers())).map((answer, i) =>
                     <div className="answer" key={i}>
-                        <div className="answers-user-info">
-                            <div className="answers-user-avatar" style={this.getAvatar(answer.user)}>
+                        <div className="answer-content">
+                            <div className="answers-user-info">
+                                <div className="answers-user-avatar" style={this.getAvatar(answer.user)}>
+                                </div>
+                                <div className="answers-user-name">
+                                    {answer.user.name}
+                                </div>
                             </div>
-                            <div className="answers-user-name">
-                                {answer.user.name}
+                            {this.state.editableIndex === i && !this.state.loadingEdit ?
+                                <div className="answers-user-content">
+                                    <input
+                                        value={this.state.editedValue}
+                                        onChange={this.editAnswer}
+                                    />
+                                </div>
+                                :
+                                <div className="answers-user-content">
+                                    {answer.content}
+                                </div>
+                            }
+                            {this.state.loadingEdit && <div><Spinner/></div>}
+                        </div>
+                        {this.state.editableIndex === i ?
+                            <div className="answer-edit-controls">
+                                <div className="answer-edit-check" onClick={() => this.submitEditedAnswer(answer)}>
+                                    <FaCheck />
+                                </div>
+                                <div className="answer-edit" onClick={() => this.setEditableIndex(i, answer.content)}>
+                                    <FaTimes />
+                                </div>
                             </div>
-                        </div>
-                        <div className="answers-user-content">
-                            {answer.content}
-                        </div>
+                            :
+                            <div className="answer-edit" onClick={() => this.setEditableIndex(i, answer.content)}>
+                                <FaPen />
+                            </div>
+                        }
                     </div>
                 )}
             </div>
