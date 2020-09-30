@@ -140,7 +140,7 @@ class EventStore {
     async updateAnswer(registrationId, questionId, content) {
         try {
             const updatedEvent = await eventService.updateAnswer(this.event._id, registrationId, questionId, content)
-            const eventClone = { ... this.event}
+            const eventClone = JSON.parse(JSON.stringify(this.event))
             eventClone.registrations = updatedEvent.registrations
             this.event = eventClone
             return this.event

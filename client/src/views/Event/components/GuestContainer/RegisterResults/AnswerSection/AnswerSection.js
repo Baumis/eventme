@@ -11,7 +11,7 @@ class AnswerSection extends Component {
         this.state = {
             editableIndex: null,
             editedValue: '',
-            loadingEdit: false
+            loadingIndex: null
         }
     }
 
@@ -19,23 +19,23 @@ class AnswerSection extends Component {
         if (index === this.state.editableIndex) {
             this.setState({ editableIndex: null, })
         } else {
-            this.setState({ editableIndex: index, editedValue: content})
+            this.setState({ editableIndex: index, editedValue: content })
         }
     }
 
     editAnswer = (event) => {
-        this.setState({editedValue: event.target.value})
+        this.setState({ editedValue: event.target.value })
     }
 
-    submitEditedAnswer = (answer) => {
-        this.setState({loadingEdit: true})
-        const registration = this.props.EventStore.event.registrations.find(registration => registration.user._id === answer.user._id )
-        const response = this.props.EventStore.updateAnswer(registration._id, this.props.question._id, this.state.editedValue )
-        this.setState({loadingEdit: false})
+    submitEditedAnswer = async (answer, index) => {
+        this.setState({ loadingIndex: index })
+        const registration = this.props.EventStore.event.registrations.find(registration => registration.user._id === answer.user._id)
+        const response = await this.props.EventStore.updateAnswer(registration._id, this.props.question._id, this.state.editedValue)
+        this.setState({ loadingIndex: null })
 
-        if(response) {
-            this.setState({editableIndex: null})
-        }else {
+        if (response) {
+            this.setState({ editableIndex: null })
+        } else {
 
         }
     }
@@ -82,6 +82,29 @@ class AnswerSection extends Component {
         )
     }
 
+    renderContent = (answer, index) => {
+        if (this.state.loadingIndex === index) {
+            return <div className="answers-user-content"><Spinner /></div>
+        }
+
+        if (this.state.editableIndex === index && !this.state.loadingIndex) {
+            return (
+                <div className="answers-user-content">
+                    <input
+                        value={this.state.editedValue}
+                        onChange={this.editAnswer}
+                    />
+                </div>
+            )
+        } else {
+            return (
+                <div className="answers-user-content">
+                    {answer.content}
+                </div>
+            )
+        }
+    }
+
     render() {
 
         if (this.getAnswers().length < 1) {
@@ -104,23 +127,11 @@ class AnswerSection extends Component {
                                     {answer.user.name}
                                 </div>
                             </div>
-                            {this.state.editableIndex === i && !this.state.loadingEdit ?
-                                <div className="answers-user-content">
-                                    <input
-                                        value={this.state.editedValue}
-                                        onChange={this.editAnswer}
-                                    />
-                                </div>
-                                :
-                                <div className="answers-user-content">
-                                    {answer.content}
-                                </div>
-                            }
-                            {this.state.loadingEdit && <div><Spinner/></div>}
+                            {this.renderContent(answer, i)}
                         </div>
                         {this.state.editableIndex === i ?
                             <div className="answer-edit-controls">
-                                <div className="answer-edit-check" onClick={() => this.submitEditedAnswer(answer)}>
+                                <div className="answer-edit-check" onClick={() => this.submitEditedAnswer(answer, i)}>
                                     <FaCheck />
                                 </div>
                                 <div className="answer-edit" onClick={() => this.setEditableIndex(i, answer.content)}>
