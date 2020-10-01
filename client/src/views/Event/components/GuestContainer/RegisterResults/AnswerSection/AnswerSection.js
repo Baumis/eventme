@@ -99,7 +99,7 @@ class AnswerSection extends Component {
         } else {
             return (
                 <div className="answers-user-content">
-                    {answer.content}
+                    {answer.content.length > 0 ? answer.content : <div className="answers-user-content-empty">no answer</div>}
                 </div>
             )
         }

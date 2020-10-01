@@ -16,6 +16,10 @@
     flex-direction: column;
 }
 
+.answers-user-content-empty {
+    color: #dadbdd;
+}
+
 .answer-content input {
     border: none;
     border: 1px solid #19a45e;
