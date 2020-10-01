@@ -29,8 +29,7 @@ class AnswerSection extends Component {
 
     submitEditedAnswer = async (answer, index) => {
         this.setState({ loadingIndex: index })
-        const registration = this.props.EventStore.event.registrations.find(registration => registration.user._id === answer.user._id)
-        const response = await this.props.EventStore.updateAnswer(registration._id, this.props.question._id, this.state.editedValue)
+        const response = await this.props.EventStore.updateAnswer(answer.registrationId, this.props.question._id, this.state.editedValue)
         this.setState({ loadingIndex: null })
 
         if (response) {
@@ -53,6 +52,7 @@ class AnswerSection extends Component {
             const answer = registration.answers.find(answer => answer.questionId === this.props.question._id)
             if (answer) {
                 answers.push({
+                    registrationId: registration._id,
                     user: registration.user,
                     content: answer.content
                 })
@@ -105,6 +105,33 @@ class AnswerSection extends Component {
         }
     }
 
+    renderEditControls = (answer, index) => {
+        if (!this.props.UserStore.currentUser) {
+            return
+        }
+
+        if (!this.props.isCreator && answer.user._id !== this.props.UserStore.currentUser._id) {
+            return
+        }
+
+        if (this.state.editableIndex === index) {
+            return (<div className="answer-edit-controls">
+                <div className="answer-edit-check" onClick={() => this.submitEditedAnswer(answer, index)}>
+                    <FaCheck />
+                </div>
+                <div className="answer-edit" onClick={() => this.setEditableIndex(index, answer.content)}>
+                    <FaTimes />
+                </div>
+            </div>)
+        } else {
+            return (
+                <div className="answer-edit" onClick={() => this.setEditableIndex(index, answer.content)}>
+                    <FaPen />
+                </div>
+            )
+        }
+    }
+
     render() {
 
         if (this.getAnswers().length < 1) {
@@ -129,20 +156,7 @@ class AnswerSection extends Component {
                             </div>
                             {this.renderContent(answer, i)}
                         </div>
-                        {this.state.editableIndex === i ?
-                            <div className="answer-edit-controls">
-                                <div className="answer-edit-check" onClick={() => this.submitEditedAnswer(answer, i)}>
-                                    <FaCheck />
-                                </div>
-                                <div className="answer-edit" onClick={() => this.setEditableIndex(i, answer.content)}>
-                                    <FaTimes />
-                                </div>
-                            </div>
-                            :
-                            <div className="answer-edit" onClick={() => this.setEditableIndex(i, answer.content)}>
-                                <FaPen />
-                            </div>
-                        }
+                        {this.renderEditControls(answer, i)}
                     </div>
                 )}
             </div>
@@ -150,4 +164,4 @@ class AnswerSection extends Component {
     }
 }
 
-export default inject('EventStore')(observer(AnswerSection))
+export default inject('EventStore', 'UserStore')(observer(AnswerSection))

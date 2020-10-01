@@ -39,6 +39,7 @@ class AnswerModal extends Component {
                     </div>
                 :null}
                 <AnswerSection
+                    isCreator={this.props.isCreator()}
                     question={this.props.question}
                     filter={this.state.filter}
                 />
