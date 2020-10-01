@@ -19,6 +19,12 @@ class RegisterModal extends Component {
         }
     }
 
+    componentDidMount() {
+        const questionIds = this.props.EventStore.event.registrationQuestions.map(registrationQuestion => registrationQuestion._id)
+        const answers = questionIds.map(questionId => ({ questionId, content: '' }))
+        this.setState({ answers })
+    }
+
     answerQuestion = (questionId, answer) => {
         const answers = [...this.state.answers]
         const targetAnswer = answers.find(answer => answer.questionId === questionId)
