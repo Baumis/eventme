@@ -1,8 +1,43 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { FaCheck, FaPen, FaTimes } from 'react-icons/fa'
+import Spinner from '../../../../../../commonComponents/Spinner/Spinner'
 import './AnswerSection.css'
 
 class AnswerSection extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            editableIndex: null,
+            editedValue: '',
+            loadingIndex: null
+        }
+    }
+
+    setEditableIndex = (index, content) => {
+        if (index === this.state.editableIndex) {
+            this.setState({ editableIndex: null, })
+        } else {
+            this.setState({ editableIndex: index, editedValue: content })
+        }
+    }
+
+    editAnswer = (event) => {
+        this.setState({ editedValue: event.target.value })
+    }
+
+    submitEditedAnswer = async (answer, index) => {
+        this.setState({ loadingIndex: index })
+        const response = await this.props.EventStore.updateAnswer(answer.registrationId, this.props.question._id, this.state.editedValue)
+        this.setState({ loadingIndex: null })
+
+        if (response) {
+            this.setState({ editableIndex: null })
+        } else {
+
+        }
+    }
 
     getAvatar = (user) => {
         if (!user.avatar) {
@@ -17,6 +52,7 @@ class AnswerSection extends Component {
             const answer = registration.answers.find(answer => answer.questionId === this.props.question._id)
             if (answer) {
                 answers.push({
+                    registrationId: registration._id,
                     user: registration.user,
                     content: answer.content
                 })
@@ -46,6 +82,56 @@ class AnswerSection extends Component {
         )
     }
 
+    renderContent = (answer, index) => {
+        if (this.state.loadingIndex === index) {
+            return <div className="answers-user-content"><Spinner /></div>
+        }
+
+        if (this.state.editableIndex === index && !this.state.loadingIndex) {
+            return (
+                <div className="answers-user-content">
+                    <input
+                        value={this.state.editedValue}
+                        onChange={this.editAnswer}
+                    />
+                </div>
+            )
+        } else {
+            return (
+                <div className="answers-user-content">
+                    {answer.content}
+                </div>
+            )
+        }
+    }
+
+    renderEditControls = (answer, index) => {
+        if (!this.props.UserStore.currentUser) {
+            return
+        }
+
+        if (!this.props.isCreator && answer.user._id !== this.props.UserStore.currentUser._id) {
+            return
+        }
+
+        if (this.state.editableIndex === index) {
+            return (<div className="answer-edit-controls">
+                <div className="answer-edit-check" onClick={() => this.submitEditedAnswer(answer, index)}>
+                    <FaCheck />
+                </div>
+                <div className="answer-edit" onClick={() => this.setEditableIndex(index, answer.content)}>
+                    <FaTimes />
+                </div>
+            </div>)
+        } else {
+            return (
+                <div className="answer-edit" onClick={() => this.setEditableIndex(index, answer.content)}>
+                    <FaPen />
+                </div>
+            )
+        }
+    }
+
     render() {
 
         if (this.getAnswers().length < 1) {
@@ -60,16 +146,17 @@ class AnswerSection extends Component {
             <div className="answer-section">
                 {this.filteredAnswers(this.answersToShow(this.getAnswers())).map((answer, i) =>
                     <div className="answer" key={i}>
-                        <div className="answers-user-info">
-                            <div className="answers-user-avatar" style={this.getAvatar(answer.user)}>
+                        <div className="answer-content">
+                            <div className="answers-user-info">
+                                <div className="answers-user-avatar" style={this.getAvatar(answer.user)}>
+                                </div>
+                                <div className="answers-user-name">
+                                    {answer.user.name}
+                                </div>
                             </div>
-                            <div className="answers-user-name">
-                                {answer.user.name}
-                            </div>
+                            {this.renderContent(answer, i)}
                         </div>
-                        <div className="answers-user-content">
-                            {answer.content}
-                        </div>
+                        {this.renderEditControls(answer, i)}
                     </div>
                 )}
             </div>
@@ -77,4 +164,4 @@ class AnswerSection extends Component {
     }
 }
 
-export default inject('EventStore')(observer(AnswerSection))
+export default inject('EventStore', 'UserStore')(observer(AnswerSection))
