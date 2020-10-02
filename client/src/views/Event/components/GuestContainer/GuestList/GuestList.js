@@ -35,10 +35,6 @@ class GuestList extends Component {
                 && this.props.EventStore.event.creator._id === this.props.UserStore.currentUser._id) {
                 return true
             }
-            if (this.props.UserStore.currentUser._id === guestId
-                && this.props.EventStore.event.creator._id !== guestId) {
-                return true
-            }
         }
         return false
     }

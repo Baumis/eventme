@@ -51,8 +51,8 @@
     align-items: center;
     width: 60px;
     border-radius: 5px;
-    background: #62646a;
-    color: white;
+    border: 1px solid #62646a;
+    color: #62646a;
     border-radius: 5px;
     height: 32px;
     margin-left: 5px;
@@ -60,9 +60,8 @@
 }
 
 .text-area-send-button-disabled {
-    background: rgb(98, 100, 106, 0.8);
-    border: none;
-    color: white;
+    border: 1px solid rgb(98, 100, 106, 0.8);
+    color: rgb(98, 100, 106, 0.8);
     cursor: default;
 }
 

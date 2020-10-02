@@ -10,7 +10,7 @@
 .event-control-panel-title-row {
     display: flex;
     align-items: center;
-    padding: 25px 0px 5px 40px;
+    margin: 25px 25px 5px 40px;
     flex-wrap: wrap;
 }
 
@@ -83,10 +83,27 @@
     justify-content: center;
     align-items: center;
     padding: 8px;
+    margin: 0px 10px;
     margin-bottom: 10px;
     background: #f1f1f3;
     border: 1px solid #dadbdd;
     color: #62646a;
+    width: 80px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.event-control-panel-info-item-leave {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    margin: 0px 10px;
+    margin-bottom: 10px;
+    background: white;
+    border: 1px solid #dadbdd;
+    color: #c74C3C;
     width: 80px;
     font-size: 14px;
     border-radius: 5px;

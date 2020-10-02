@@ -47,8 +47,8 @@
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    background: #62646a;
-    color: white;
+    border: 1px solid #19a45e;
+    color: #62646a;
     font-size: 16px;
     width: 120px;
     height: 40px;
@@ -58,7 +58,7 @@
 }
 
 .event-container-new-button:hover{
-    background: #494b50;
+    background: #f1f1f3;
 }
 
 @media only screen and (max-width: 900px) {

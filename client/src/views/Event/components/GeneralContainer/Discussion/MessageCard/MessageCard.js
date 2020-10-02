@@ -46,7 +46,7 @@ class MessageCard extends Component {
                                     {this.props.message.author.name}
                                 </div>
                                 <div className="message-card-time">
-                                    {Moment(this.props.message.time).format('D.MM.YY')}
+                                    {Moment(this.props.message.time).format('DD.MM.YY')}
                                 </div>
                             </div>
                             {this.props.isAuthor(this.props.message.author._id) ?

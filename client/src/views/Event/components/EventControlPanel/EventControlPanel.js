@@ -2,11 +2,29 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EventControlPanel.css'
 import Tabs from '../Tabs/Tabs'
-import { FaRegCalendarAlt, FaRegClock, FaRegUser } from 'react-icons/fa'
+import { FaEye, FaKey, FaLock, FaLockOpen, FaRegCalendarAlt, FaRegEye } from 'react-icons/fa'
 import moment from 'moment'
 import JoinEventButton from '../JoinEventButton/JoinEventButton'
 
 class EventControlPanel extends Component {
+
+    removeRegistration = (user) => {
+        console.log(user)
+        this.props.VisibilityStore.showAlert(
+            'Confirm',
+            `Do you want to remove ${user.name} from the guestlist?`,
+            'Remove',
+            () => this.removeProcess(user._id),
+            'Cancel',
+            () => this.props.VisibilityStore.closeAlert()
+        )
+    }
+
+    removeProcess = (id) => {
+        const registration = this.props.EventStore.event.registrations.find(guest => guest.user._id === id)
+        this.props.EventStore.removeGuest(registration._id)
+        this.props.VisibilityStore.closeAlert()
+    }
 
     renderJoinInviteStatus = () => {
         const creator = this.props.isCreator()
@@ -38,11 +56,8 @@ class EventControlPanel extends Component {
             )
         } else if (guest) {
             return (
-                <div className="event-control-panel-info-item">
-                    <div className="event-control-panel-info-item-label">
-                        Status
-                    </div>
-                    Joined
+                <div className="event-control-panel-info-item-leave" onClick={() => this.removeRegistration(this.props.UserStore.currentUser)}>
+                    Leave event
                 </div>
             )
         }
@@ -71,6 +86,21 @@ class EventControlPanel extends Component {
                             {`${moment(this.props.EventStore.event.startDate).format('D MMMM YYYY')} ${moment(this.props.EventStore.event.startDate).format('HH:mm')}`}
                         </div>
                     </div>
+                    <div className="event-control-panel-info-item">
+                        <div className="event-control-panel-info-item-label">
+                            <div className="event-control-panel-info-icon">
+                                <FaRegEye />
+                            </div>
+                            Visibility
+                        </div>
+                        <div className="event-control-panel-info-item-content">
+                            {this.props.EventStore.event.public ?
+                        'public event'
+                        :    
+                        'private event'
+                        }
+                        </div>
+                    </div>
                     {this.renderJoinInviteStatus()}
                 </div>
                 <Tabs
@@ -83,4 +113,4 @@ class EventControlPanel extends Component {
 
 }
 
-export default inject('EventStore')(observer(EventControlPanel))
+export default inject('EventStore', 'VisibilityStore', 'UserStore')(observer(EventControlPanel))
