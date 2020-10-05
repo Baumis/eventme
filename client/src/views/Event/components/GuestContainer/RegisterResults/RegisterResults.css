@@ -40,6 +40,37 @@
     font-size: 15px;
 }
 
+.remove-question-button {
+    margin: 0px 5px 0px 10px;
+    color: #c74C3C;
+    font-size: 18px;
+}
+
+.register-results-add-question-row {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.register-results-add-question {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    border: 2px solid #dadbdd;
+    color: #dadbdd;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register-results-add-question:hover {
+    border: 2px solid #bdbec2;
+    color: #bdbec2;
+}
+
 .register-results-question-button:hover {
     background: rgb(221, 221, 221, 0.4);
 }
