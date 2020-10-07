@@ -9,7 +9,6 @@ import JoinEventButton from '../JoinEventButton/JoinEventButton'
 class EventControlPanel extends Component {
 
     removeRegistration = (user) => {
-        console.log(user)
         this.props.VisibilityStore.showAlert(
             'Confirm',
             `Do you want to remove ${user.name} from the guestlist?`,
@@ -55,11 +54,24 @@ class EventControlPanel extends Component {
                 </div>
             )
         } else if (guest) {
-            return (
-                <div className="event-control-panel-info-item-leave" onClick={() => this.removeRegistration(this.props.UserStore.currentUser)}>
-                    Leave event
-                </div>
-            )
+            if (!this.props.UserStore.currentUser) {
+                return (
+                    <div className="event-control-panel-info-item">
+                        <div className="event-control-panel-info-item-label">
+                            Status
+                        </div>
+                        <div className="event-control-panel-info-item-content">
+                            Joined
+                        </div>
+                    </div>
+                )
+            } else {
+                return (
+                    <div className="event-control-panel-info-item-leave" onClick={() => this.removeRegistration(this.props.UserStore.currentUser)}>
+                        Leave event
+                    </div>
+                )
+            }
         }
     }
 
@@ -95,10 +107,10 @@ class EventControlPanel extends Component {
                         </div>
                         <div className="event-control-panel-info-item-content">
                             {this.props.EventStore.event.public ?
-                        'public event'
-                        :    
-                        'private event'
-                        }
+                                'public event'
+                                :
+                                'private event'
+                            }
                         </div>
                     </div>
                     {this.renderJoinInviteStatus()}
