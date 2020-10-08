@@ -44,6 +44,9 @@ Every event needs a page. Inviteowl makes page creation quick and event sharing 
                             </div>
                         </div>
                     </div>
+                    <div className="navigation-column" style={{marginLeft: '20px'}}>
+                    <div className="navigation-example" style={{backgroundImage: `url(${require('../../../../assets/Pizzaevent2.png')})` }}></div>
+                    </div>
                 </div>
             </div>
         )

@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 45px;
-    height: 400px;
+    margin: 95px 0px 45px 0px;
     width: 100%;
     background: #f7f7f8;
 }
@@ -73,6 +73,16 @@
     border: 1px solid #62646a;
     color: #62646a;
     margin-left: 10px;
+}
+
+.navigation-example {
+  width: 450px;
+  height: 450px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position:center center;
 }
   
   @media only screen and (max-width: 610px) {
