@@ -95,6 +95,13 @@ class AnswerSection extends Component {
                 </div>
             )
         } else {
+            if (!this.props.EventStore.event.publicAnswers && !this.props.isCreator && answer.user._id !== this.props.UserStore.currentUser._id) {
+                return (
+                    <div className="answers-user-content">
+                        <div className="answers-user-content-empty">hidden answer</div>
+                    </div>
+                )
+            }
             return (
                 <div className="answers-user-content">
                     {answer.content.length > 0 ? answer.content : <div className="answers-user-content-empty">no answer</div>}
