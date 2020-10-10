@@ -114,6 +114,10 @@
   .navigation-example {
     width: 290px;
     height: 260px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
   
   .navigation-title {

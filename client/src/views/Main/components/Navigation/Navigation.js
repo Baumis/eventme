@@ -18,14 +18,6 @@ class Navigation extends Component {
         window.scroll({ left: 0, top: createSection, behavior: 'smooth' })
     }
 
-    getPicture = () => {
-        if(window.innerWidth > 600){
-            return `url(${require('../../../../assets/FinalPizzaEvent.png')})`;
-        } else {
-            return `url(${require('../../../../assets/FinalPizzaEventSmall.png')})`;
-        }
-    }
-
     render() {
         return (
             <div className="main-navigation">
@@ -53,7 +45,7 @@ Every event needs a page. Inviteowl makes page creation quick and event sharing 
                         </div>
                     </div>
                     <div className="navigation-picture-column">
-                    <div className="navigation-example" style={{backgroundImage: this.getPicture() }}></div>
+                    <div className="navigation-example" style={{backgroundImage: `url(${require('../../../../assets/FinalPizzaEvent.png')})` }}></div>
                     </div>
                 </div>
             </div>
