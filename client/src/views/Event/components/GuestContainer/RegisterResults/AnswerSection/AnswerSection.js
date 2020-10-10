@@ -50,13 +50,11 @@ class AnswerSection extends Component {
         const answers = []
         this.props.EventStore.event.registrations.forEach(registration => {
             const answer = registration.answers.find(answer => answer.questionId === this.props.question._id)
-            if (answer) {
-                answers.push({
-                    registrationId: registration._id,
-                    user: registration.user,
-                    content: answer.content
-                })
-            }
+            answers.push({
+                registrationId: registration._id,
+                user: registration.user,
+                content: answer ? answer.content : ''
+            })
         })
         return answers
     }
