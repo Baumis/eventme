@@ -22,7 +22,7 @@ class Navigation extends Component {
         return (
             <div className="main-navigation">
                 <div className="navigation-content">
-                    <div className="navigation-column">
+                    <div className="navigation-text-column">
                         <div className="navigation-icon-row">
                             <div className="navigation-icon">
                                 <FaFeatherAlt />
@@ -43,6 +43,9 @@ Every event needs a page. Inviteowl makes page creation quick and event sharing 
                                 Search events
                             </div>
                         </div>
+                    </div>
+                    <div className="navigation-picture-column">
+                    <div className="navigation-example" style={{backgroundImage: `url(${require('../../../../assets/FinalPizzaEvent.png')})` }}></div>
                     </div>
                 </div>
             </div>
