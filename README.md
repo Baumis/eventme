@@ -1,4 +1,6 @@
-# Eventme
+# InviteOwl
+
+https://www.inviteowl.com/
 
 ## Development
 
