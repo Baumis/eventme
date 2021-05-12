@@ -10,7 +10,7 @@ class InformationPage extends Component {
         if (this.props.VisibilityStore.signModal) {
             this.props.VisibilityStore.closeSignModal()
         }
-        this.props.history.push(`/search`)
+        this.props.history.push('/search')
     }
 
     render() {

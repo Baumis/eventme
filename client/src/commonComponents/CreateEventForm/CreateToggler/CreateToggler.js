@@ -9,7 +9,7 @@ const CreateToggler = (props) => {
             </div>
             <div className="create-toggler-row">
                 <label className="create-toggler-switch">
-                    <input type={"checkbox"} checked={props.value} onChange={props.changeValue}></input>
+                    <input type={'checkbox'} checked={props.value} onChange={props.changeValue}></input>
                     <span className="switch-slider"></span>
                 </label>
                 <div className="create-toggler-description">

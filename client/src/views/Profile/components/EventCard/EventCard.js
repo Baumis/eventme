@@ -2,12 +2,13 @@ import React from 'react'
 import './EventCard.css'
 import { withRouter } from 'react-router-dom'
 import moment from 'moment'
+import EventCoverPic from '../../../../assets/event_cover.jpg'
 
 const EventCard = (props) => {
 
     const getCover = () => {
         if (!props.event.background) {
-            return { backgroundImage: `url(${require('../../../../assets/event_cover.jpg')})` }
+            return { backgroundImage: `url(${EventCoverPic})` }
         }
         return ({
             backgroundImage: `url(${props.event.background})`
@@ -15,7 +16,7 @@ const EventCard = (props) => {
     }
 
     const getCardModeClass = () => {
-        return props.smallCard ? "small-card" : undefined
+        return props.smallCard ? 'small-card' : undefined
     }
 
     const toEvent = () => {

@@ -73,7 +73,7 @@ class UnsignedUser extends Component {
                             onSuccess={this.googleSignIn}
                             onFailure={(response) => this.onGoogleFail(response)}
                             render={renderProps => (
-                                <div className="google-login" onClick={() => !!this.googleFailMessage ? this.onSignInFail(this.googleFailMessage) : renderProps.onClick()}>
+                                <div className="google-login" onClick={() => this.googleFailMessage ? this.onSignInFail(this.googleFailMessage) : renderProps.onClick()}>
                                     <GoogleLogo className="google-icon" />
                                     Google
                                 </div>

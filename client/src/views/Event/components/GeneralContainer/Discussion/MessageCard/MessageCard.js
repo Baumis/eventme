@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { FaTimes } from 'react-icons/fa'
 import CommentSection from './CommentSection/CommentSection'
 import Moment from 'moment'
+import AvatarPic from '../../../../../../assets/avatar.png'
 
 class MessageCard extends Component {
 
@@ -20,7 +21,7 @@ class MessageCard extends Component {
 
     getAvatar = () => {
         if (!this.props.message.author.avatar) {
-            return { backgroundImage: `url(${require('../../../../../../assets/avatar.png')})` }
+            return { backgroundImage: `url(${AvatarPic})` }
         }
         return { backgroundImage: `url(${this.props.message.author.avatar})` }
     }

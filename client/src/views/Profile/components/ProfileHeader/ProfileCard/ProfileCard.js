@@ -1,11 +1,12 @@
 import React from 'react'
 import './ProfileCard.css'
+import AvatarPic from '../../../../../assets/avatar.png'
 
 const ProfileCard = (props) => {
 
     const getAvatar = () => {
         if (!props.user.avatar) {
-            return { backgroundImage: `url(${require('../../../../../assets/avatar.png')})` }
+            return { backgroundImage: `url(${AvatarPic})` }
         }
         return (
             { backgroundImage: `url(${props.user.avatar})` }

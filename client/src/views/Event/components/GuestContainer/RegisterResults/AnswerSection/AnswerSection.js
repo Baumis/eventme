@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { FaCheck, FaPen, FaTimes } from 'react-icons/fa'
 import Spinner from '../../../../../../commonComponents/Spinner/Spinner'
 import './AnswerSection.css'
+import AvatarPic from '../../../../../../assets/avatar.png'
 
 class AnswerSection extends Component {
 
@@ -34,14 +35,12 @@ class AnswerSection extends Component {
 
         if (response) {
             this.setState({ editableIndex: null })
-        } else {
-
         }
     }
 
     getAvatar = (user) => {
         if (!user.avatar) {
-            return { backgroundImage: `url(${require('../../../../../../assets/avatar.png')})` }
+            return { backgroundImage: `url(${AvatarPic})` }
         }
         return { backgroundImage: `url(${user.avatar})` }
     }

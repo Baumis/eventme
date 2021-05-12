@@ -21,7 +21,8 @@ module.exports = {
     "rules": {
         "indent": [
             "error",
-            4
+            4,
+            { "SwitchCase": 1 }
         ],
         "quotes": [
             "error",
@@ -32,6 +33,7 @@ module.exports = {
             "never"
         ],
         "eqeqeq": "error",
+        "no-useless-escape": 0,
         "no-trailing-spaces": "error",
         "object-curly-spacing": [
             "error", "always"
@@ -44,7 +46,7 @@ module.exports = {
     },
     "settings": {
         "react": {
-          "version": "detect"
+            "version": "detect"
         }
     }
 };

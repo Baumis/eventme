@@ -21,7 +21,7 @@ class AliasSection extends Component {
             <div>
                 <div className="unsigned-user-title">
                     Or leave your name on the list.
-                    </div>
+                </div>
                 {!this.state.showAlias ?
                     <div className="facebook-login-wrapper">
                         <div className="unsigned-user-alias-button" onClick={this.toggleAlias}>
@@ -37,7 +37,7 @@ class AliasSection extends Component {
                             <span>
                                 <FaExclamationTriangle />
                             </span>
-                            You can't post messages or get notified about new messages when using an alias. This name will just appear in the guestlist.
+                            You can not post messages or get notified about new messages when using an alias. This name will just appear in the guestlist.
                         </div>
                         <SignInput
                             label={''}

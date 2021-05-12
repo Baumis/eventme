@@ -15,12 +15,12 @@ class Alert extends Component {
                     <div className="alert-message">
                         {this.props.VisibilityStore.alertMessage}
                     </div>
-                        <DefaultButtons 
-                            positiveLabel={this.props.VisibilityStore.alertPositiveLabel}
-                            negativeLabel={this.props.VisibilityStore.alertNegativeLabel}
-                            positiveAction={this.props.VisibilityStore.alertPositiveAction}
-                            negativeAction={this.props.VisibilityStore.alertNegativeAction}
-                        />
+                    <DefaultButtons
+                        positiveLabel={this.props.VisibilityStore.alertPositiveLabel}
+                        negativeLabel={this.props.VisibilityStore.alertNegativeLabel}
+                        positiveAction={this.props.VisibilityStore.alertPositiveAction}
+                        negativeAction={this.props.VisibilityStore.alertNegativeAction}
+                    />
                 </div>
             </div>
         )

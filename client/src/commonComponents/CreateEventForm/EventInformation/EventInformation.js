@@ -65,7 +65,7 @@ class EventInformation extends Component {
                         />
                     </div>
                 </div>
-                <TogglerBlock 
+                <TogglerBlock
                     label={'Public event'}
                     info={'Public events can be found with the search. The event will also appear in the profiles of attending guests.'}
                     changeValue={() => this.togglePublic()}
@@ -73,7 +73,7 @@ class EventInformation extends Component {
                 />
                 <div className="event-information-button-row">
                     <div className="event-information-status">
-                        {`1/2`}
+                        {'1/2'}
                     </div>
                     <DefaultButtons
                         positiveLabel={'Next'}

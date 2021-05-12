@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './SearchBar.css'
-import { FaSearch, FaAngleDown, FaChevronUp, FaAngleUp, FaFilter } from 'react-icons/fa'
+import { FaSearch, FaFilter } from 'react-icons/fa'
 import FilterInput from './FilterInput/FilterInput'
 import moment from 'moment'
 
@@ -43,10 +43,10 @@ class SearchBar extends Component {
 
     search = () => {
         console.log(new Date(this.state.date))
-        if(this.props.searchTab === 'events') {
+        if (this.props.searchTab === 'events') {
             this.props.searchEvents(this.state.inputValue, this.state.date, moment(this.state.date).add(1, 'days').format('YYYY-MM-DD'))
         } else {
-            this.props.searchUsers(this.state.inputValue)   
+            this.props.searchUsers(this.state.inputValue)
         }
     }
 
@@ -67,7 +67,7 @@ class SearchBar extends Component {
                         <div className="searchbar-tabs">
                             <div className={`${this.tabClassByState('events')} searchbar-tab-left`} onClick={() => this.changeType('events')}>
                                 Events
-                        </div>
+                            </div>
                             <div className={`${this.tabClassByState('profiles')} searchbar-tab-right`} onClick={() => this.changeType('profiles')}>
                                 Profiles
                             </div>
@@ -82,9 +82,9 @@ class SearchBar extends Component {
                                 />
                             </div>
                             {this.props.searchTab === 'events' &&
-                                <div className={`searchbar-filter-button ${this.state.displayFilters ? 'filter-active': ''}`} onClick={this.toggleFilters}>
+                                <div className={`searchbar-filter-button ${this.state.displayFilters ? 'filter-active' : ''}`} onClick={this.toggleFilters}>
                                     <div className="filter-text"> filters </div>
-                                    <FaFilter style={{color: this.state.displayFilters ? '#19a45e': ''}}/>
+                                    <FaFilter style={{ color: this.state.displayFilters ? '#19a45e' : '' }} />
                                 </div>
                             }
                         </div>

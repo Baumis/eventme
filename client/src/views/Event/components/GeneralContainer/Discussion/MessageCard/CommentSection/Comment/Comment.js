@@ -3,12 +3,13 @@ import './Comment.css'
 import Moment from 'moment'
 import { withRouter } from 'react-router-dom'
 import { FaTimes } from 'react-icons/fa'
+import AvatarPic from '../../../../../../../../assets/avatar.png'
 
 const Comment = (props) => {
 
     const getAvatar = () => {
         if (!props.comment.author.avatar) {
-            return { backgroundImage: `url(${require('../../../../../../../../assets/avatar.png')})` }
+            return { backgroundImage: `url(${AvatarPic})` }
         }
         return { backgroundImage: `url(${props.comment.author.avatar})` }
     }

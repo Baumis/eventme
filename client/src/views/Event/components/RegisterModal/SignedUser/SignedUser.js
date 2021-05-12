@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './SignedUser.css'
+import AvatarPic from '../../../../../assets/avatar.png'
 
 class SignedUser extends Component {
 
@@ -12,7 +13,7 @@ class SignedUser extends Component {
 
     getAvatar = (avatar) => {
         if (!avatar) {
-            return { backgroundImage: `url(${require('../../../../../assets/avatar.png')})` }
+            return { backgroundImage: `url(${AvatarPic})` }
         }
         return { backgroundImage: `url(${avatar})` }
     }

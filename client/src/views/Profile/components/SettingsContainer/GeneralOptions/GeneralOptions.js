@@ -32,7 +32,7 @@ class GeneralOptions extends Component {
         } else {
             this.props.VisibilityStore.showAlert(
                 'Fail',
-                `Uploading photo failed`,
+                'Uploading photo failed',
                 'OK',
                 () => this.props.VisibilityStore.closeAlert()
             )
@@ -55,7 +55,7 @@ class GeneralOptions extends Component {
         } else {
             this.props.VisibilityStore.showAlert(
                 'Fail',
-                `Uploading photo failed`,
+                'Uploading photo failed',
                 'OK',
                 () => this.props.VisibilityStore.closeAlert()
             )
@@ -108,7 +108,7 @@ class GeneralOptions extends Component {
                 </div>
                 <div className="general-options-input">
                     <div className="general-options-input-label">
-                        Email { this.state.userValues.emailVerified ?
+                        Email {this.state.userValues.emailVerified ?
                             <div className="general-options-input-verified"> (verified)</div>
                             :
                             <div className="general-options-input-unverified"> (not verified)</div>
@@ -155,7 +155,7 @@ class GeneralOptions extends Component {
                     <div className="general-options-input">
                         <div className="general-options-input-label">
                             Avatar
-                    </div>
+                        </div>
                         <div className="general-options-input-input">
                             <label htmlFor="upload-avatar" className="general-options-input-button">
                                 {this.state.uploadingAvatar ?
@@ -182,8 +182,8 @@ class GeneralOptions extends Component {
                 <div className="general-options-input">
                     <div className="general-options-input-label">
                         Description
-                        </div>
-                    <div style={{height: 'auto'}}className="general-options-input-input">
+                    </div>
+                    <div style={{ height: 'auto' }} className="general-options-input-input">
                         <textarea
                             name={'description'}
                             value={this.state.userValues.description}

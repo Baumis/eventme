@@ -5,7 +5,7 @@ import EventFeed from '../../../../commonComponents/EventFeed/EventFeed'
 import SearchService from '../../../../services/search'
 import { FaCalendarAlt } from 'react-icons/fa'
 
-const FeaturedFeed = (props) => {
+const FeaturedFeed = () => {
     const [loading, setLoading] = useState(false)
     const [events, setEvents] = useState([])
     const [page, setPage] = useState(0)

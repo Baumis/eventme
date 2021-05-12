@@ -3,12 +3,13 @@ import { inject, observer } from 'mobx-react'
 import './ProfileHeader.css'
 import ProfileCard from './ProfileCard/ProfileCard'
 import ProfileTabs from '../ProfileTabs/ProfileTabs'
+import CoverPic from '../../../../assets/cover.jpg'
 
 class ProfileHeader extends Component {
 
     getCover = () => {
         if (!this.props.user.cover) {
-            return { backgroundImage: `url(${require('../../../../assets/cover.jpg')})` }
+            return { backgroundImage: `url(${CoverPic})` }
         }
         return ({
             backgroundImage: `url(${this.props.user.cover})`

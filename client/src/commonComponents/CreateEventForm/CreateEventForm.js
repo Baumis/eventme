@@ -25,7 +25,7 @@ class CreateEventForm extends Component {
 
     componentDidMount() {
         const today = moment(new Date()).format('YYYY-MM-DD')
-        const tomorrow =  moment(new Date()).add(1,"days")
+        const tomorrow = moment(new Date()).add(1, 'days')
         this.setState({
             information: {
                 eventName: '',
@@ -54,7 +54,7 @@ class CreateEventForm extends Component {
 
         this.setState({ loading: true })
 
-        const startTime = this.state.information.startTime.split(":")
+        const startTime = this.state.information.startTime.split(':')
         let startDate = new Date(this.state.information.startDate).setHours(startTime[0], startTime[1])
 
         const event = await this.props.EventStore.create({
@@ -91,7 +91,6 @@ class CreateEventForm extends Component {
                     negativeAction={this.props.negativeAction}
                     negativeLabel={this.props.negativeLabel}
                     information={this.state.information}
-                    setEventInformation={this.setEventInformation}
                 />
             case 2:
                 return <GuestInformation
@@ -107,14 +106,13 @@ class CreateEventForm extends Component {
                     negativeAction={this.props.negativeAction}
                     negativeLabel={this.props.negativeLabel}
                     information={this.state.information}
-                    setEventInformation={this.setEventInformation}
                 />
         }
     }
 
     render() {
         return (
-            <div id="create-event-form-body" className="create-event-form" style={{minHeight: this.state.firstPageHeight}}>
+            <div id="create-event-form-body" className="create-event-form" style={{ minHeight: this.state.firstPageHeight }}>
                 {this.getPage()}
             </div>
         )

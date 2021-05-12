@@ -266,14 +266,14 @@ exports.findOrCreateGoogleUser = async (googleToken) => {
 }
 
 exports.findOrCreateFacebookUser = async (userId, facebookToken) => {
-    const response = await axios.get(`https://graph.facebook.com/${userId}?fields=id,name,email,picture.width(720).height(720)&access_token=${facebookToken}`)
+    const response = await axios.get(`https://graph.facebook.com/${userId}?fields=id,name,email&access_token=${facebookToken}`)
     const facebookUser = response.data
 
     const existingUser = await User.findOne({ userType: 'FACEBOOK', externalId: facebookUser.id })
 
     if (existingUser) {
         if (existingUser.avatar !== facebookUser.picture.data.url) {
-            return await User.findByIdAndUpdate(existingUser._id, { avatar: facebookUser.picture.data.url })
+            return await User.findByIdAndUpdate(existingUser._id, { avatar: `http://graph.facebook.com/${userId}/picture?type=large&width=400&height=400` })
         } else {
             return existingUser
         }
@@ -285,7 +285,7 @@ exports.findOrCreateFacebookUser = async (userId, facebookToken) => {
         name: facebookUser.name,
         email: facebookUser.email,
         emailVerified: true,
-        avatar: facebookUser.picture.data.url
+        avatar: `http://graph.facebook.com/${userId}/picture?type=large&width=400&height=400`
     })
 
     const error = user.validateSync()

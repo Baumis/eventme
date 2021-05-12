@@ -3,12 +3,13 @@ import { inject, observer } from 'mobx-react'
 import EventControlPanel from '../EventControlPanel/EventControlPanel'
 import OptionsButton from '../OptionsButton/OptionsButton'
 import './Header.css'
+import EventCoverPic from '../../../../assets/event_cover.jpg'
 
 class Header extends Component {
 
     getCover = () => {
         if (!this.props.EventStore.event.background) {
-            return { backgroundImage: `url(${require('../../../../assets/event_cover.jpg')})` }
+            return { backgroundImage: `url(${EventCoverPic})` }
         }
         return ({
             backgroundImage: `url(${this.props.EventStore.event.background})`

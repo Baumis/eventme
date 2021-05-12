@@ -7,12 +7,12 @@ const Dropdown = (props) => {
 
     const displayList = () => {
         setOpen(true)
-        document.addEventListener("click", hideList)
+        document.addEventListener('click', hideList)
     }
 
     const hideList = () => {
         setOpen(false)
-        document.removeEventListener("click", hideList)
+        document.removeEventListener('click', hideList)
     }
 
     return (

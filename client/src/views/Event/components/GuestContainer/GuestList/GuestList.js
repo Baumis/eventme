@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './GuestList.css'
-import { FaUserTimes, FaSignOutAlt, FaChevronRight } from 'react-icons/fa'
+import { FaUserTimes, FaSignOutAlt } from 'react-icons/fa'
+import AvatarPic from '../../../../../assets/avatar.png'
 
 class GuestList extends Component {
 
     getAvatar = (avatar) => {
         if (!avatar) {
-            return { backgroundImage: `url(${require('../../../../../assets/avatar.png')})` }
+            return { backgroundImage: `url(${AvatarPic})` }
         }
         return { backgroundImage: `url(${avatar})` }
     }

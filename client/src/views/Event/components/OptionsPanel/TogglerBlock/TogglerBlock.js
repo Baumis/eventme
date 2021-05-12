@@ -10,7 +10,7 @@ const TogglerBlock = (props) => {
                 </div>
                 <div className="toggler-block-toggler-row">
                     <label className="toggler-block-switch">
-                        <input type={"checkbox"} checked={props.value} onChange={props.changeValue}></input>
+                        <input type={'checkbox'} checked={props.value} onChange={props.changeValue}></input>
                         <span className="switch-slider"></span>
                     </label>
                     <div className="toggler-block-description">

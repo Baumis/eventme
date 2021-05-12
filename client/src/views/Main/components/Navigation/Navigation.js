@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { inject, observer } from 'mobx-react'
+import { inject } from 'mobx-react'
 import './Navigation.css'
-import { FaRocket, FaSearch, FaFeatherAlt } from 'react-icons/fa'
+import { FaFeatherAlt } from 'react-icons/fa'
+import FinalPizzaEvent from '../../../../assets/FinalPizzaEvent.png'
 
 class Navigation extends Component {
 
@@ -10,7 +11,7 @@ class Navigation extends Component {
         if (this.props.VisibilityStore.signModal) {
             this.props.VisibilityStore.closeSignModal()
         }
-        this.props.history.push(`/search`)
+        this.props.history.push('/search')
     }
 
     scrollToCreate = () => {
@@ -30,10 +31,10 @@ class Navigation extends Component {
                         </div>
                         <div className="navigation-title">
                             Events made easy.
-                            </div>
+                        </div>
                         <div className="navigation-paragraph">
-                            
-Every event needs a page. Inviteowl makes page creation quick and event sharing easy.
+
+                            Every event needs a page. Inviteowl makes page creation quick and event sharing easy.
                         </div>
                         <div className="navigation-buttons">
                             <div className="navigation-button" onClick={this.scrollToCreate}>
@@ -45,7 +46,7 @@ Every event needs a page. Inviteowl makes page creation quick and event sharing 
                         </div>
                     </div>
                     <div className="navigation-picture-column">
-                    <div className="navigation-example" style={{backgroundImage: `url(${require('../../../../assets/FinalPizzaEvent.png')})` }}></div>
+                        <div className="navigation-example" style={{ backgroundImage: `url(${FinalPizzaEvent})` }}></div>
                     </div>
                 </div>
             </div>

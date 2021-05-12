@@ -1,7 +1,7 @@
 import React from 'react'
 import './InviteOwlPrivacyPolicy.css'
 
-const InviteOwlPrivacyPolicy = (props) => {
+const InviteOwlPrivacyPolicy = () => {
     return (
         <div className="invite-owl-privacy-policy">
             <h1>InviteOwl Privacy Policy</h1>

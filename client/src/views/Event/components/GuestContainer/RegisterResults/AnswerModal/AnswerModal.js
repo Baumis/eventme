@@ -9,7 +9,7 @@ class AnswerModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            filter: ""
+            filter: ''
         }
     }
 
@@ -33,11 +33,11 @@ class AnswerModal extends Component {
                     <div className="answer-modal-search">
                         <input
                             value={this.state.filter}
-                            placeholder={"Filter by name"}
+                            placeholder={'Filter by name'}
                             onChange={this.changeFilter}
                         />
                     </div>
-                :null}
+                    : null}
                 <AnswerSection
                     isCreator={this.props.isCreator()}
                     question={this.props.question}

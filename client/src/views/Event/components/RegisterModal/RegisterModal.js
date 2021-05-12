@@ -13,7 +13,7 @@ class RegisterModal extends Component {
         super(props)
         this.state = {
             loading: false,
-            alias: "",
+            alias: '',
             step: 0,
             answers: []
         }
@@ -45,8 +45,8 @@ class RegisterModal extends Component {
     }
 
     scrollPositionByStep = (step) => {
-        const parentWidth = document.getElementById("xScroller").parentElement.clientWidth
-        document.getElementById("xScroller").scrollLeft = parentWidth * step
+        const parentWidth = document.getElementById('xScroller').parentElement.clientWidth
+        document.getElementById('xScroller').scrollLeft = parentWidth * step
     }
 
     setStep = (step) => {
@@ -90,7 +90,7 @@ class RegisterModal extends Component {
                         Close
                     </div>
                 </div>
-                <div className="register-content" id={"xScroller"}>
+                <div className="register-content" id={'xScroller'}>
                     {this.props.EventStore.event.registrationQuestions.map((question, i) =>
                         <div className="register-part" key={i}>
                             <RegisterQuestion
@@ -126,7 +126,7 @@ class RegisterModal extends Component {
                                     {!this.state.loading ?
                                         <div>
                                             Join event
-                                </div>
+                                        </div>
                                         :
                                         <Spinner />
                                     }

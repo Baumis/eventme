@@ -10,7 +10,7 @@ class Footer extends Component {
         if (this.props.VisibilityStore.signModal) {
             this.props.VisibilityStore.closeSignModal()
         }
-        this.props.history.push(`/privacy`)
+        this.props.history.push('/privacy')
     }
 
     render() {
@@ -22,11 +22,11 @@ class Footer extends Component {
                             <FaEnvelope />
                         </div>
                         <a href="mailto:support@inviteowl.com">support@inviteowl.com</a>
-                </div>
+                    </div>
                     <div className="footer-item">
                         <div onClick={() => this.toPrivacy()}>
                             Privacy Policy
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>

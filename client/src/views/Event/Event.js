@@ -140,7 +140,7 @@ class Event extends Component {
                         <meta name="description"
                             content={this.props.EventStore.event.description}/>
                         <meta property="og:description" content={this.props.EventStore.event.description}/>
-                        <meta property="og:url" content={"https://www.inviteowl.com/events/" + this.props.eventUrl}/>
+                        <meta property="og:url" content={'https://www.inviteowl.com/events/' + this.props.eventUrl}/>
                     </Helmet>
                     <Navbar
                         staticColor={true}

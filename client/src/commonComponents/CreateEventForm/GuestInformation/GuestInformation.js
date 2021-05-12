@@ -69,13 +69,13 @@ class GuestInformation extends Component {
                     )}
                 </div>
                 <div className="guest-information-add-buttons">
-                    <div className={"guest-information-add-question " + this.getButtonClass()} onClick={this.addNewQuestion}>
+                    <div className={'guest-information-add-question ' + this.getButtonClass()} onClick={this.addNewQuestion}>
                         Add question
                     </div>
                 </div>
                 <div className="guest-information-button-row">
                     <div className="guest-information-status">
-                        {`2/2`}
+                        {'2/2'}
                     </div>
                     <DefaultButtons
                         positiveLabel={'Create'}

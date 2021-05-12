@@ -15,7 +15,7 @@ class RegisterResults extends Component {
     askToRemove = (index) => {
         this.props.VisibilityStore.showAlert(
             'Confirm',
-            `Do you want to remove this question? You will lose all the answers to the question.`,
+            'Do you want to remove this question? You will lose all the answers to the question.',
             'Remove',
             () => this.removeQuestion(index),
             'Cancel',
@@ -32,7 +32,7 @@ class RegisterResults extends Component {
 
     addQuestion = () => {
         const eventQuestions = [... this.props.EventStore.event.registrationQuestions]
-        eventQuestions.push({data:{content: ""}, type: "QUESTION"})
+        eventQuestions.push({ data: { content: '' }, type: 'QUESTION' })
         this.props.EventStore.setValue(eventQuestions, 'registrationQuestions')
     }
 
@@ -70,7 +70,7 @@ class RegisterResults extends Component {
                     <div className="register-results-add-question-row" onClick={this.addQuestion}>
                         <div className="register-results-add-question">
                             +
-                        </div> 
+                        </div>
                     </div>
                 }
             </div>

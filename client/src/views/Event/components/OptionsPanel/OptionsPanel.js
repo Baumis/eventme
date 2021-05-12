@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 import './OptionsPanel.css'
-import { FaAngleDoubleLeft, FaUpload } from 'react-icons/fa'
+import { FaAngleDoubleLeft } from 'react-icons/fa'
 import moment from 'moment'
 import InputBlock from './InputBlock/InputBlock'
 import TogglerBlock from './TogglerBlock/TogglerBlock'
@@ -30,7 +30,7 @@ class OptionsPanel extends Component {
         if (!picture) {
             this.props.VisibilityStore.showAlert(
                 'Fail',
-                `Uploading photo failed`,
+                'Uploading photo failed',
                 'OK',
                 () => this.props.VisibilityStore.closeAlert()
             )
@@ -58,7 +58,7 @@ class OptionsPanel extends Component {
     }
 
     changeStartTime = (event) => {
-        const startTime = event.target.value.split(":")
+        const startTime = event.target.value.split(':')
         const startDate = new Date(this.props.EventStore.event.startDate).setHours(startTime[0], startTime[1])
         this.props.EventStore.setValue(startDate, 'startDate')
     }
@@ -81,14 +81,14 @@ class OptionsPanel extends Component {
     changeRegistrationLimit = (event) => {
         let value = event.target.value
 
-        if (event.target.value == '') {
+        if (event.target.value === '') {
             value = ''
         } else if (event.target.value < 1) {
             value = 1
         } else if (event.target.value > 10000) {
             value = 10000
         }
-        
+
         this.props.EventStore.setValue(value, 'registrationLimit')
     }
 

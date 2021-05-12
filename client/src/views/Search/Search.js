@@ -23,12 +23,12 @@ class Search extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.searchEvents('', '', '')
     }
 
     setSearchTab = (searchTab) => {
-        this.setState({searchTab})
+        this.setState({ searchTab })
     }
 
     searchEvents = async (label, startDate, endDate) => {
@@ -58,11 +58,11 @@ class Search extends Component {
             <div className="search">
                 <Helmet>
                     <title>Search</title>
-                    <meta property="og:title" content="Search"/>
+                    <meta property="og:title" content="Search" />
                     <meta name="description"
-                        content="This is a search engine for events and profiles listed on InviteOwl."/>
-                    <meta property="og:description" content="This is a search engine for events and profiles listed on InviteOwl."/>
-                    <meta property="og:url" content="https://www.inviteowl.com/search"/>
+                        content="This is a search engine for events and profiles listed on InviteOwl." />
+                    <meta property="og:description" content="This is a search engine for events and profiles listed on InviteOwl." />
+                    <meta property="og:url" content="https://www.inviteowl.com/search" />
                 </Helmet>
                 <Navbar
                     staticColor={true}

@@ -11,8 +11,8 @@ const SettingsContainer = (props) => {
 
     useEffect(() => {
         updateScreenSize()
-        window.addEventListener("resize", updateScreenSize)
-        return () => window.removeEventListener("resize", updateScreenSize)
+        window.addEventListener('resize', updateScreenSize)
+        return () => window.removeEventListener('resize', updateScreenSize)
     })
 
     const updateScreenSize = () => {

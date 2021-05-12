@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import './User.css'
+import AvatarPic from '../../assets/avatar.png'
 
 class User extends Component {
 
@@ -18,7 +19,7 @@ class User extends Component {
 
     getAvatar = () => {
         if (!this.props.UserStore.currentUser.avatar) {
-            return { backgroundImage: `url(${require('../../assets/avatar.png')})` }
+            return { backgroundImage: `url(${AvatarPic})` }
         }
         return { backgroundImage: `url(${this.props.UserStore.currentUser.avatar})` }
     }

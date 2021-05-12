@@ -9,7 +9,7 @@ class SiteLogo extends Component {
         if(this.props.VisibilityStore.signModal){
             this.props.VisibilityStore.closeSignModal()
         }
-        this.props.history.push(`/`)
+        this.props.history.push('/')
     }
 
     render() {

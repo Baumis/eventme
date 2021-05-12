@@ -6,7 +6,7 @@ import GuestContainer from '../GuestContainer/GuestContainer'
 const EventContent = (props) => {
     return (
         <div className="event-content">
-            {props.activeTab === "Discussion" ?
+            {props.activeTab === 'Discussion' ?
                 <GeneralContainer
                     isCreator={props.isCreator}
                 />

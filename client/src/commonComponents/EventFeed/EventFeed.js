@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './EventFeed.css'
 import { withRouter } from 'react-router-dom'
 import Spinner from '../Spinner/Spinner'

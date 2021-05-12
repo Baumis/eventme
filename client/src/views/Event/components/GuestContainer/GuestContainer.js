@@ -23,7 +23,7 @@ class GuestContainer extends Component {
         if (this.props.EventStore.event.registrationQuestions.length < 1) return false
         if (this.props.EventStore.event.publicAnswers) return true
         if (this.props.UserStore.currentUser && this.props.isGuest()) return true
-        return false;
+        return false
     }
 
     render() {
@@ -49,13 +49,13 @@ class GuestContainer extends Component {
                                     'My answers'
                                 }
                                 {this.props.isCreator() &&
-                                <div className="quest-title-edit-questions" onClick={this.toggleEditable}>
-                                    {this.state.editable ?
-                                        <div className="guest-green-icon"><FaCheck /></div>
-                                        :
-                                        <FaEdit />
-                                    }
-                                </div>
+                                    <div className="quest-title-edit-questions" onClick={this.toggleEditable}>
+                                        {this.state.editable ?
+                                            <div className="guest-green-icon"><FaCheck /></div>
+                                            :
+                                            <FaEdit />
+                                        }
+                                    </div>
                                 }
                             </div>
                             <RegistrationResults
@@ -63,7 +63,7 @@ class GuestContainer extends Component {
                                 editable={this.state.editable}
                             />
                         </div>
-                    :null}
+                        : null}
                 </div>
             </div>
         )

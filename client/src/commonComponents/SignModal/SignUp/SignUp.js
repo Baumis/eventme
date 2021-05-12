@@ -138,7 +138,7 @@ class SignUp extends Component {
                         :
                         <div>
                             Sign up
-                            </div>
+                        </div>
                     }
                 </div>
                 <div className="signin-info-text">

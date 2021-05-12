@@ -11,7 +11,7 @@ class ContentBook extends Component {
             <div className="content-book">
                 <div className="content-book-page">
                     <div className="content-book-form-wrapper">
-                    <CreateEventForm />
+                        <CreateEventForm />
                     </div>
                 </div>
                 <div className="content-book-devider"></div>

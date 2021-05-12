@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './CommentInput.css'
 import Spinner from '../../../../../../../../commonComponents/Spinner/Spinner'
+import AvatarPic from '../../../../../../../../assets/avatar.png'
 
 class CommentInput extends Component {
 
@@ -45,15 +46,15 @@ class CommentInput extends Component {
 
     getAvatar = () => {
         if (!this.props.UserStore.currentUser.avatar) {
-            return { backgroundImage: `url(${require('../../../../../../../../assets/avatar.png')})` }
+            return { backgroundImage: `url(${AvatarPic})` }
         }
         return { backgroundImage: `url(${this.props.UserStore.currentUser.avatar})` }
     }
 
     sendButtonClass = () => {
-        let className = "comment-input-send-button"
+        let className = 'comment-input-send-button'
         if (this.state.commentInput.length === 0) {
-            className += " comment-input-send-button-disabled"
+            className += ' comment-input-send-button-disabled'
         }
         return className
     }

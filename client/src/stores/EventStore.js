@@ -1,4 +1,4 @@
-import { observable, decorate, action, runInAction, toJS } from 'mobx'
+import { observable, decorate, action, runInAction } from 'mobx'
 import eventService from '../services/events'
 import pictureService from '../services/pictures'
 
@@ -10,7 +10,6 @@ class EventStore {
         try {
             this.event = await eventService.getOne(eventUrl)
             this.saved = true
-            //console.log('event initialized: ', toJS(this.event))
             return this.event
         } catch (error) {
             this.event = null
@@ -26,7 +25,9 @@ class EventStore {
                     this.event = event
 
                 }
-            } catch (error) { }
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 

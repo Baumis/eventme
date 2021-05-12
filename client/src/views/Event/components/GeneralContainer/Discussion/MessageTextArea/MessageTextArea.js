@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './MessageTextArea.css'
 import Spinner from '../../../../../../commonComponents/Spinner/Spinner'
+import AvatarPic from '../../../../../../assets/avatar.png'
 
 class MessageTextArea extends Component {
 
@@ -60,15 +61,15 @@ class MessageTextArea extends Component {
 
     getAvatar = () => {
         if (!this.props.UserStore.currentUser || !this.props.UserStore.currentUser.avatar) {
-            return { backgroundImage: `url(${require('../../../../../../assets/avatar.png')})` }
+            return { backgroundImage: `url(${AvatarPic})` }
         }
         return { backgroundImage: `url(${this.props.UserStore.currentUser.avatar})` }
     }
 
     sendButtonClass = () => {
-        let className = "text-area-send-button"
+        let className = 'text-area-send-button'
         if (this.state.messageInput.length === 0) {
-            className += " text-area-send-button-disabled"
+            className += ' text-area-send-button-disabled'
         }
         return className
     }

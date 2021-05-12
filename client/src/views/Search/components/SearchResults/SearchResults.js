@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './SearchResults.css'
 import { withRouter } from 'react-router-dom'
 import Spinner from '../../../../commonComponents/Spinner/Spinner'
 import EventCard from '../../../../views/Profile/components/EventCard/EventCard'
+import AvatarPic from '../../../../assets/avatar.png'
 
 const SearchResults = (props) => {
 
     const getAvatar = (avatar) => {
         if (!avatar) {
-            return { backgroundImage: `url(${require('../../../../assets/avatar.png')})` }
+            return { backgroundImage: `url(${AvatarPic})` }
         }
         return { backgroundImage: `url(${avatar})` }
     }
@@ -23,7 +24,7 @@ const SearchResults = (props) => {
 
     const toProfile = (id) => {
         props.history.push(`/profile/${id}`)
-    } 
+    }
 
     return (
         <div className="search-results">

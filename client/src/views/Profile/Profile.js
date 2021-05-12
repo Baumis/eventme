@@ -69,7 +69,7 @@ class Profile extends Component {
 
     toggleNewEventModal = () => {
         if (window.innerWidth < 650) {
-            this.props.history.push(`/create`)
+            this.props.history.push('/create')
         } else {
             this.setState({ newEventModal: !this.state.newEventModal })
         }
@@ -110,7 +110,7 @@ class Profile extends Component {
                     <meta name="description"
                         content={this.state.user.description}/>
                     <meta property="og:description" content={this.state.user.description}/>
-                    <meta property="og:url" content={"https://www.inviteowl.com/profile/" + this.props.profileId}/>
+                    <meta property="og:url" content={'https://www.inviteowl.com/profile/' + this.props.profileId}/>
                 </Helmet>
                 <Navbar
                     staticColor={true}
@@ -122,7 +122,6 @@ class Profile extends Component {
                     changeActive={this.changeActive}
                     active={this.state.activeTab}
                     isOwner={this.isOwner()}
-                    active={this.state.activeTab}
                 />
                 <ProfileContent
                     user={this.state.user}

@@ -17,7 +17,6 @@ class NotFound extends Component {
     }
 
     afterSign = () => {
-        console.log("after sign got executed")
         window.location.reload()
     }
 
@@ -25,13 +24,13 @@ class NotFound extends Component {
         return (
             <div className="NotFound">
                 <Helmet>
-                        <title>{this.props.title}</title>
-                        <meta property="og:title" content={this.props.title}/>
-                        <meta name="description"
-                            content={this.props.message}/>
-                        <meta property="og:description" content={this.props.message}/>
-                        <meta property="og:url" content="https://www.inviteowl.com/"/>
-                    </Helmet>
+                    <title>{this.props.title}</title>
+                    <meta property="og:title" content={this.props.title} />
+                    <meta name="description"
+                        content={this.props.message} />
+                    <meta property="og:description" content={this.props.message} />
+                    <meta property="og:url" content="https://www.inviteowl.com/" />
+                </Helmet>
                 <NavBar
                     afterSign={this.afterSign}
                     staticColor={true}

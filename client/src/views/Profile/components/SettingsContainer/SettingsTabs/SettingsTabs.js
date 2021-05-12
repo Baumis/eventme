@@ -9,10 +9,10 @@ const SettingsTabs = (props) => {
 
     return (
         <div className="settings-tabs">
-            <div className={"settings-tab " + getActivityClass('general')} onClick={() => props.setTab('general')}>
+            <div className={'settings-tab ' + getActivityClass('general')} onClick={() => props.setTab('general')}>
                 General
             </div>
-            <div className={"settings-tab " + getActivityClass('password')} onClick={() => props.setTab('password')}>
+            <div className={'settings-tab ' + getActivityClass('password')} onClick={() => props.setTab('password')}>
                 Password
             </div>
         </div>

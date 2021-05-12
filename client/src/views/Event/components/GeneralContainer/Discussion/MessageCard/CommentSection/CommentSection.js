@@ -21,10 +21,10 @@ class CommentSection extends Component {
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="comment-section">
-                {this.props.comments.map((comment,i)=> 
+                {this.props.comments.map((comment, i) =>
                     <Comment
                         key={i}
                         comment={comment}
@@ -33,7 +33,7 @@ class CommentSection extends Component {
                     />
                 )}
                 <div className="comment-section-input">
-                    <CommentInput 
+                    <CommentInput
                         messageId={this.props.messageId}
                     />
                 </div>

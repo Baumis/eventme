@@ -10,7 +10,7 @@ class GuestModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            filter: ""
+            filter: ''
         }
     }
 
@@ -30,7 +30,7 @@ class GuestModal extends Component {
                 <div className="guest-modal-search">
                     <input
                         value={this.state.filter}
-                        placeholder={"Filter by name"}
+                        placeholder={'Filter by name'}
                         onChange={this.changeFilter}
                     />
                 </div>

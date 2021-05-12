@@ -29,7 +29,7 @@ class AboutEditor extends Component {
                     <div className="about-editor-textarea">
                         <textarea
                             value={this.state.description}
-                            className={"about-editor-textarea-area"}
+                            className={'about-editor-textarea-area'}
                             onChange={this.changeDescription}
                         />
                     </div>

@@ -21,10 +21,10 @@ class InviteLinkBlock extends Component {
         document.execCommand('copy')
     }
 
-    confirmUrlChange = (guest) => {
+    confirmUrlChange = () => {
         this.props.VisibilityStore.showAlert(
             'Confirm',
-            `Changing the url will make the old url invalid.`,
+            'Changing the url will make the old url invalid.',
             'Change',
             () => this.changeUrlmodifier(),
             'Cancel',

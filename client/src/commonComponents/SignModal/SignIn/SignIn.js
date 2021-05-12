@@ -125,7 +125,7 @@ class SignIn extends Component {
                             onSuccess={this.googleSignIn}
                             onFailure={(response) => this.onGoogleFail(response)}
                             render={renderProps => (
-                                <div className="google-login" onClick={() => !!this.googleFailMessage ? this.onSignInFail(this.googleFailMessage) : renderProps.onClick()}>
+                                <div className="google-login" onClick={() => this.googleFailMessage ? this.onSignInFail(this.googleFailMessage) : renderProps.onClick()}>
                                     <GoogleLogo className="google-icon" />
                                     Sign in with Google
                                 </div>
@@ -181,7 +181,7 @@ class SignIn extends Component {
                     </div>
                 </div>
                 <div className="signin-info-text">
-                    Don't have an account? <span onClick={() => this.props.changeTab('SignUp')} >Create one.</span>
+                    No existing account? <span onClick={() => this.props.changeTab('SignUp')} >Create one.</span>
                 </div>
                 <div className="signin-info-text">
                     Forgot password? <span onClick={() => this.props.changeTab('Recovery')} >Recover.</span>

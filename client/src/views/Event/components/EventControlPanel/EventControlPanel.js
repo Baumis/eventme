@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import './EventControlPanel.css'
 import Tabs from '../Tabs/Tabs'
-import { FaEye, FaKey, FaLock, FaLockOpen, FaRegCalendarAlt, FaRegEye } from 'react-icons/fa'
+import { FaRegCalendarAlt, FaRegEye } from 'react-icons/fa'
 import moment from 'moment'
 import JoinEventButton from '../JoinEventButton/JoinEventButton'
 
