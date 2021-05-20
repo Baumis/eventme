@@ -11,7 +11,7 @@ exports.getAll = async (keyword, limit) => {
     keyword = keyword.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")
 
     const usersPromise = User
-        .find({ name: new RegExp(keyword, 'i') })
+        .find({ name: new RegExp(keyword, 'i'), public: true })
         .limit(Number(limit))
     const eventsPromise = Event
         .find({ label: new RegExp(keyword, 'i'), public: true })
@@ -93,7 +93,7 @@ exports.findUsers = async (name, page, limit) => {
     const keyword = name.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")
 
     const users = await User
-        .find({ name: new RegExp(keyword, 'i') })
+        .find({ name: new RegExp(keyword, 'i'), public: true })
         .sort({ name: 1 })
         .skip(page * limit)
         .limit(Number(limit))

@@ -8,6 +8,16 @@ const userSchema = new mongoose.Schema({
         default: 'LOCAL',
         required: [true, 'User type required']
     },
+    userPlan: {
+        type: String,
+        enum: ['FREE', 'PREMIUM'],
+        default: 'FREE',
+        required: [true, 'User plan required']
+    },
+    public: {
+        type: Boolean,
+        default: false
+    },
     externalId: {
         type: String
     },
@@ -98,6 +108,7 @@ userSchema.statics.format = (user) => {
         email: user.email,
         emailVerified: user.emailVerified,
         userType: user.userType,
+        userPlan: user.userPlan,
         avatar: user.avatar,
         cover: user.cover,
         description: user.description,
@@ -147,6 +158,7 @@ userSchema.statics.formatForLogin = (user) => ({
     email: user.email,
     emailVerified: user.emailVerified,
     userType: user.userType,
+    userPlan: user.userPlan,
     cover: user.cover,
     avatar: user.avatar
 })
